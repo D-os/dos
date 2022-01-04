@@ -1,0 +1,3 @@
+[submodule "tools/tc-build"]
+	path = tools/tc-build
+	url = git@github.com:ClangBuiltLinux/tc-build.git
