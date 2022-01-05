@@ -1,3 +1,6 @@
 [submodule "tools/tc-build"]
 	path = tools/tc-build
 	url = git@github.com:ClangBuiltLinux/tc-build.git
+[submodule "external/llvm-project"]
+	path = external/llvm-project
+	url = git@github.com:llvm/llvm-project.git
