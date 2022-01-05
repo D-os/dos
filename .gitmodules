@@ -4,3 +4,6 @@
 [submodule "external/llvm-project"]
 	path = external/llvm-project
 	url = git@github.com:llvm/llvm-project.git
+[submodule "external/linux"]
+	path = external/linux
+	url = git@github.com:torvalds/linux.git
