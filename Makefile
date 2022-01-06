@@ -10,7 +10,7 @@ BUILD_DIR := $(OUT_DIR)/build
 toolchain: $(TC_DIR)/install/bin
 
 $(TC_DIR)/install/bin: tools/tc-build/build-llvm.py
-	tools/tc-build/build-llvm.py --llvm-folder=$(ROOT_DIR)/external/llvm-project --no-update --build-folder=$(TC_DIR)/build --install-folder=$(TC_DIR)/install
+	tools/tc-build/build-llvm.py --show-build-commands --targets=X86 --llvm-folder=$(ROOT_DIR)/external/llvm-project --no-update --build-folder=$(TC_DIR)/build --install-folder=$(TC_DIR)/install --clang-vendor=""
 
 bzImage: $(BUILD_DIR)/linux/arch/x86/boot/bzImage
 
