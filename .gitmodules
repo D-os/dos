@@ -10,3 +10,6 @@
 [submodule "external/musl"]
 	path = external/musl
 	url = git://git.musl-libc.org/musl
+[submodule "external/fish-shell"]
+	path = external/fish-shell
+	url = git@github.com:fish-shell/fish-shell.git
