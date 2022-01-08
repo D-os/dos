@@ -16,3 +16,6 @@
 [submodule "external/pcre"]
 	path = external/pcre
 	url = https://android.googlesource.com/platform/external/pcre
+[submodule "external/kernel-headers"]
+	path = external/kernel-headers
+	url = git@github.com:sabotage-linux/kernel-headers.git
