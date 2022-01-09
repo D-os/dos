@@ -6,24 +6,47 @@ TC_DIR := $(OUT_DIR)/tc
 BUILD_DIR := $(OUT_DIR)/build
 SYSROOT_DIR := $(OUT_DIR)/sysroot
 
+LLVM_TARGET_TAG := llvmorg-11.1.0
+
 .PHONY: toolchain bzImage clean
 
 clean:
 	rm -rf $(OUT_DIR)
 
-toolchain: $(TC_DIR)/install/bin
+toolchain-host: $(TC_DIR)/host/bin
 
-$(TC_DIR)/install/bin: tools/tc-build/build-llvm.py
-	tools/tc-build/build-llvm.py --show-build-commands --targets=X86 --llvm-folder=$(ROOT_DIR)/external/llvm-project --no-update --build-folder=$(TC_DIR)/build --install-folder=$(TC_DIR)/install --clang-vendor=""
+$(TC_DIR)/host/bin: tools/tc-build/build-llvm.py
+	git submodule update --force external/llvm-project
+	tools/tc-build/build-llvm.py --show-build-commands --targets="AArch64;X86" \
+		--llvm-folder=$(ROOT_DIR)/external/llvm-project --no-update \
+		--build-folder=$(TC_DIR)/build --install-folder=$(TC_DIR)/host \
+		--clang-vendor=D/os --build-stage1-only --install-stage1-only
+
+toolchain-target: $(TC_DIR)/target/bin
+
+$(TC_DIR)/target/bin: $(TC_DIR)/host/bin
+	cd external/llvm-project && git reset --hard $(LLVM_TARGET_TAG) \
+		&& patch -N -p1 < ../../tools/clang-support-expanding-target-triple-in-sysroot-pat.patch
+	mkdir -p $(TC_DIR)/build/target
+	cd $(TC_DIR)/build/target && ln -sf ../../../../tools/Makefile.litecross ./Makefile
+	cd $(TC_DIR)/build/target && PATH=$(TC_DIR)/host/bin:${PATH} CC=clang CXX=clang++ $(MAKE)  \
+		LLVM_CCACHE_BUILD=ON \
+		LLVM_CONFIG=CLANG_VENDOR=D/os \
+		LLVM_VER=$(LLVM_TARGET_TAG:llvmorg-%=%) \
+		LINUX_SRCDIR=$(ROOT_DIR)/external/kernel-headers \
+		LLVM_SRCDIR=$(ROOT_DIR)/external/llvm-project \
+		MUSL_SRCDIR=$(ROOT_DIR)/external/musl \
+		OUTPUT=$(TC_DIR)/target all install
+	git submodule update --force external/llvm-project
 
 musl:
 	rm -rf $(BUILD_DIR)/musl $(SYSROOT_DIR)
 	mkdir -p $(BUILD_DIR)/musl
-	cd $(BUILD_DIR)/musl && CC=clang ../../../external/musl/configure --prefix=/usr --disable-static
-	cd $(BUILD_DIR)/musl && DESTDIR=$(SYSROOT_DIR) make -j install
+	cd $(BUILD_DIR)/musl && CC=$(TC_DIR)/target/bin/x86_64-linux-musl-clang ../../../../external/musl/configure --prefix=/ --disable-static
+	cd $(BUILD_DIR)/musl && DESTDIR=$(SYSROOT_DIR) $(MAKE) -j install
 
 bzImage: $(BUILD_DIR)/linux/arch/x86/boot/bzImage
 
-$(BUILD_DIR)/linux/arch/x86/boot/bzImage: external/linux/Makefile $(TC_DIR)/install/bin
-	PATH=$(TC_DIR)/install/bin:${PATH} $(MAKE) -j -C external/linux LLVM=1 ARCH=x86_64 O=$(BUILD_DIR)/linux defconfig bzImage
+$(BUILD_DIR)/linux/arch/x86/boot/bzImage: external/linux/Makefile $(TC_DIR)/host/bin
+	PATH=$(TC_DIR)/host/bin:${PATH} $(MAKE) -j -C external/linux LLVM=1 ARCH=x86_64 O=$(BUILD_DIR)/linux defconfig bzImage
 

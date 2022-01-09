@@ -1,0 +1,39 @@
+From f0ecb3850d7825cd967d22c09ed73d990605c70b Mon Sep 17 00:00:00 2001
+From: Patrick Oppenlander <patrick.oppenlander@gmail.com>
+Date: Mon, 11 Jan 2021 10:39:27 +1100
+Subject: [PATCH 3/3] clang: support expanding target triple in sysroot path
+
+This allows clang to switch sysroot (or, more usefully, default sysroot)
+based on target triple.
+
+For example, configuring with
+
+-DDEFAULT_SYSROOT=../TARGET
+
+will automatically select a target specific sysroot one level up from
+the clang binary location.
+---
+ clang/lib/Driver/Driver.cpp | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/clang/lib/Driver/Driver.cpp b/clang/lib/Driver/Driver.cpp
+index ece8222dcf24..8a3b068d86b9 100644
+--- a/clang/lib/Driver/Driver.cpp
++++ b/clang/lib/Driver/Driver.cpp
+@@ -1121,6 +1121,13 @@ Compilation *Driver::BuildCompilation(ArrayRef<const char *> ArgList) {
+                     .Default(SaveTempsCwd);
+   }
+ 
++  // expand TARGET in sysroot path
++  if (!SysRoot.empty()) {
++    size_t pos{0};
++    while ((pos = SysRoot.find("TARGET", pos)) != std::string::npos)
++      SysRoot.replace(pos, 6, TargetTriple);
++  }
++
+   setLTOMode(Args);
+ 
+   // Process -fembed-bitcode= flags.
+-- 
+2.30.0
+

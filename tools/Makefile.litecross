@@ -1,0 +1,177 @@
+# Author: Patrick Oppenlander : https://www.openwall.com/lists/musl/2021/01/11/1 : 0001-clang-support.patch
+# D/os adaptation: Tomasz Sterna
+
+PM := $(shell grep -c processor /proc/cpuinfo)
+
+OUTPUT = $(CURDIR)/output
+
+LLVM_SRCDIR = LLVM_SRCDIR_not_set
+MUSL_SRCDIR = MUSL_SRCDIR_not_set
+
+TARGETS = \
+	aarch64-linux-musleabi \
+	x86_64-linux-musl \
+	# end
+
+DEFAULT_TARGET = x86_64-linux-musl
+
+TOOLS = \
+	llvm-ar \
+	llvm-nm \
+	llvm-objcopy \
+	llvm-objdump \
+	llvm-ranlib \
+	llvm-size \
+	llvm-strip \
+	# end
+
+-include config.mak
+
+# TODO: determine LLVM_TARGETS_TO_BUILD from TARGETS?
+FULL_LLVM_CONFIG = $(LLVM_CONFIG) \
+	-DCLANG_DEFAULT_CXX_STDLIB=libc++ \
+	-DCLANG_DEFAULT_LINKER=lld \
+	-DCLANG_DEFAULT_OBJCOPY=llvm-objcopy \
+	-DCLANG_DEFAULT_RTLIB=compiler-rt \
+	-DCMAKE_BUILD_TYPE=MinSizeRel \
+	-DCMAKE_INSTALL_PREFIX=/clang \
+	-DDEFAULT_SYSROOT=../../TARGET \
+	-DLLVM_BUILTIN_TARGETS='$(subst $(subst ,, ),;,$(TARGETS))' \
+	-DLLVM_DEFAULT_TARGET_TRIPLE=$(DEFAULT_TARGET) \
+	-DLLVM_DISTRIBUTION_COMPONENTS='clang;lld;LTO;$(subst $(subst ,, ),;,$(TOOLS))' \
+	-DLLVM_ENABLE_PROJECTS='clang;lld' \
+	-DLLVM_ENABLE_RUNTIMES='compiler-rt;libcxx;libcxxabi;libunwind' \
+	-DLLVM_INSTALL_TOOLCHAIN_ONLY=ON \
+	-DLLVM_RUNTIME_TARGETS='$(subst $(subst ,, ),;,$(TARGETS))' \
+	-DLLVM_TARGETS_TO_BUILD='AArch64;X86' \
+	$(foreach t,$(TARGETS),-DBUILTINS_$(t)_CMAKE_SYSROOT=$(CURDIR)/obj_sysroot/$(t)) \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_CMAKE_CXX_FLAGS='-L$(CURDIR)/obj_musl/$(t)/lib -B$(CURDIR)/obj_musl/$(t)/lib -Qunused-arguments') \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_CMAKE_C_FLAGS='-L$(CURDIR)/obj_musl/$(t)/lib -B$(CURDIR)/obj_musl/$(t)/lib -Qunused-arguments') \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_CMAKE_SYSROOT=$(CURDIR)/obj_sysroot/$(t)) \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_COMPILER_RT_BUILD_LIBFUZZER=OFF) \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_COMPILER_RT_BUILD_SANITIZERS=OFF) \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_COMPILER_RT_BUILD_XRAY=OFF) \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_LIBCXXABI_USE_COMPILER_RT=ON) \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_LIBCXXABI_USE_LLVM_UNWINDER=ON) \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_LIBCXX_HAS_MUSL_LIBC=ON) \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_LIBCXX_USE_COMPILER_RT=ON) \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_LIBUNWIND_USE_COMPILER_RT=ON) \
+	# end
+
+all: llvm musl
+
+install: install-llvm install-musl install-kernel-headers install-configs install-symlinks
+
+llvm: | obj_llvm/.lc_built_3
+musl: | $(foreach t,$(TARGETS),obj_musl/$(t)/.lc_built)
+install-musl: $(foreach t,$(TARGETS),install-musl_$(t))
+install-kernel-headers: $(foreach t,$(TARGETS),install-kernel-headers_$(t))
+install-configs: $(foreach t,$(TARGETS),install-configs_$(t))
+install-symlinks: $(foreach t,$(TARGETS),install-symlinks_$(t))
+
+.PHONY: all llvm musl install-llvm install-musl install-kernel-headers install-configs install-symlinks clean
+
+src_llvm: | $(LLVM_SRCDIR)
+	ln -sf $(LLVM_SRCDIR) $@
+
+src_musl: | $(MUSL_SRCDIR)
+	ln -sf $(MUSL_SRCDIR) $@
+
+src_kernel_headers: | $(LINUX_SRCDIR)
+	ln -sf "$(LINUX_SRCDIR)" $@
+
+%/:
+	mkdir -p $@
+
+obj_llvm/.lc_configured: | obj_llvm/ src_llvm
+	cd obj_llvm && cmake -G "Unix Makefiles" -Wno-dev $(FULL_LLVM_CONFIG) ../src_llvm/llvm
+	touch $@
+
+obj_llvm/.lc_built_1: | obj_llvm/.lc_configured
+	cd obj_llvm && $(MAKE) -j$(PM) distribution
+	touch $@
+
+obj_musl/%/.lc_configured: | obj_musl/%/ src_musl obj_llvm/.lc_built_1
+	cd obj_musl/$* && ../../src_musl/configure \
+		--prefix= \
+		--target=$* \
+		--disable-wrapper \
+		LIBCC=../../obj_llvm/lib/clang/$(LLVM_VER)/lib/$*/libclang_rt.builtins.a \
+		CC="../../obj_llvm/bin/clang --target=$*" \
+		$(MUSL_CONFIG)
+	touch $@
+
+obj_sysroot/%/.lc_headers: | obj_sysroot/ obj_musl/%/.lc_configured
+	cd obj_musl/$* && $(MAKE) DESTDIR=$(CURDIR)/obj_sysroot/$* install-headers
+	touch $@
+
+obj_llvm/.lc_built_2: | $(foreach t,$(TARGETS),obj_sysroot/$(t)/.lc_headers)
+	cd obj_llvm && $(MAKE) -j$(PM) builtins
+	touch $@
+
+obj_musl/%/.lc_built: | obj_musl/%/.lc_configured obj_llvm/.lc_built_2
+	cd obj_musl/$* && $(MAKE) AR=../../obj_llvm/bin/llvm-ar \
+				  RANLIB=../../obj_llvm/bin/llvm-ranlib
+	touch $@
+
+obj_sysroot/%/.lc_crt_workaround:
+	# Some configure tests for llvm runtimes fail without crtbegin and
+	# crtend files in the sysroot. The runtimes build generates these files
+	# leading to a chicken-egg problem.
+	mkdir -p obj_sysroot/$*/lib
+	cd obj_sysroot/$*/lib && touch crtbeginT.o crtbeginS.o crtbegin.o crtend.o crtendS.o
+	touch $@
+
+obj_kernel_headers/%/.lc_built: | src_kernel_headers
+	mkdir -p $(CURDIR)/obj_kernel_headers/$*/staged
+	cd src_kernel_headers && $(MAKE) ARCH=$(call fn_linux_arch,$*) O=$(CURDIR)/obj_kernel_headers/$* INSTALL_HDR_PATH=$(CURDIR)/obj_kernel_headers/$*/staged headers_install
+	find obj_kernel_headers/$*/staged/include '(' -name .install -o -name ..install.cmd ')' -exec rm {} +
+	touch $@
+
+obj_sysroot/%/.lc_linux_headers: | obj_kernel_headers/%/.lc_built
+	mkdir -p obj_sysroot/$*/include
+	cp -R obj_kernel_headers/$*/staged/include/* obj_sysroot/$*/include
+
+obj_llvm/.lc_built_3: | $(foreach t,$(TARGETS),obj_musl/$(t)/.lc_built \
+					       obj_sysroot/$(t)/.lc_crt_workaround \
+					       obj_sysroot/$(t)/.lc_linux_headers)
+	cd obj_llvm && $(MAKE) -j$(PM) runtimes
+	touch $@
+
+install-llvm: | obj_llvm/.lc_built_3
+	# -j1 because there's a broken dependency in the llvm build somewhere
+	#  which often results in missing c++ libraries for some targets
+	cd obj_llvm && $(MAKE) -j1 DESTDIR=$(DESTDIR)$(OUTPUT) install-distribution install-builtins install-runtimes
+
+install-musl_%: | obj_musl/%/.lc_built
+	cd obj_musl/$* && $(MAKE) $(MUSL_VARS) DESTDIR=$(DESTDIR)$(OUTPUT)/$* install
+
+install-kernel-headers_%: | obj_kernel_headers/%/.lc_built
+	mkdir -p $(DESTDIR)$(OUTPUT)/$*/include
+	cp -R obj_kernel_headers/$*/staged/include/* $(DESTDIR)$(OUTPUT)/$*/include
+
+install-configs_%: | $(DESDIR)$(OUTPUT)/clang/bin/
+	echo "--target=$*" > $(DESTDIR)$(OUTPUT)/clang/bin/$*-clang.cfg
+	echo "--target=$* -lc++abi -lunwind" > $(DESTDIR)$(OUTPUT)/clang/bin/$*-clang++.cfg
+
+install-symlinks_%: | $(DESTDIR)$(OUTPUT)/bin/
+	cd $(DESTDIR)$(OUTPUT)/bin && ln -sf ../clang/bin/clang $*-clang
+	cd $(DESTDIR)$(OUTPUT)/bin && ln -sf ../clang/bin/clang++ $*-clang++
+	cd $(DESTDIR)$(OUTPUT)/bin && ln -sf ../clang/bin/clang-cpp $*-clang-cpp
+	cd $(DESTDIR)$(OUTPUT)/bin && ln -sf ../clang/bin/ld.lld $*-ld
+	$(foreach t,$(TOOLS),cd $(DESTDIR)$(OUTPUT)/bin && ln -sf ../clang/bin/$(t) $*-$(subst llvm-,,$(t);))
+
+clean:
+	rm -rf src_* obj_*
+
+# $(call fn_linux_arch,target-triple)
+#     Determine linux architecture from target triple
+ifeq ($(LINUX_SRCDIR),)
+$(error LINUX_SRCDIR is required for llvm libc++ build)
+endif
+LINUX_ARCH_LIST := $(sort $(notdir $(wildcard $(LINUX_SRCDIR)/arch/*)))
+fn_target_arch = $(firstword $(subst -, ,$(1)))
+fn_target_arch_mangled = $(patsubst i%86,x86,$(patsubst aarch64%,arm64%,$(call fn_target_arch,$(1))))
+fn_linux_arch = $(lastword $(foreach a,$(LINUX_ARCH_LIST),$(if $(filter $(a)%,$(call fn_target_arch_mangled,$(1))),$(a))))
+
+.SECONDARY:
