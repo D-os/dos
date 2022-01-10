@@ -19,3 +19,6 @@
 [submodule "external/kernel-headers"]
 	path = external/kernel-headers
 	url = git@github.com:sabotage-linux/kernel-headers.git
+[submodule "system/core"]
+	path = system/core
+	url = https://android.googlesource.com/platform/system/core
