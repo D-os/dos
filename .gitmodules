@@ -22,3 +22,6 @@
 [submodule "system/core"]
 	path = system/core
 	url = https://android.googlesource.com/platform/system/core
+[submodule "external/samurai"]
+	path = external/samurai
+	url = git@github.com:michaelforney/samurai.git
