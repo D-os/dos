@@ -8,7 +8,7 @@ SYSROOT_DIR := $(OUT_DIR)/sysroot
 
 LLVM_TARGET_TAG := llvmorg-11.1.0
 
-.PHONY: toolchain samurai bzImage clean
+.PHONY: toolchain samurai kati bzImage clean
 
 clean:
 	rm -rf $(OUT_DIR)
@@ -47,6 +47,14 @@ $(TC_DIR)/host/bin/samu: $(TC_DIR)/host/bin
 	PATH=$(TC_DIR)/host/bin:${PATH} CC=clang $(MAKE) \
 		-C external/samurai PREFIX=/ DESTDIR=$(TC_DIR)/host MANDIR=/man install clean
 	ln -sf ./samu $(TC_DIR)/host/bin/ninja
+
+kati: $(TC_DIR)/host/bin/ckati
+
+$(TC_DIR)/host/bin/ckati: $(TC_DIR)/host/bin
+	PATH=$(TC_DIR)/host/bin:${PATH} CXX=clang++ $(MAKE) -j \
+		KATI_INTERMEDIATES_PATH=$(TC_DIR)/build/kati KATI_BIN_PATH=$(TC_DIR)/host/bin \
+		-C external/kati -f Makefile.ckati $(TC_DIR)/host/bin/ckati
+	ln -sf ./ckati $(TC_DIR)/host/bin/kati
 
 musl:
 	rm -rf $(BUILD_DIR)/musl $(SYSROOT_DIR)
