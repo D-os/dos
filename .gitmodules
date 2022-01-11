@@ -25,3 +25,6 @@
 [submodule "external/samurai"]
 	path = external/samurai
 	url = git@github.com:michaelforney/samurai.git
+[submodule "external/kati"]
+	path = external/kati
+	url = git@github.com:google/kati.git
