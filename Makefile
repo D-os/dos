@@ -8,7 +8,7 @@ SYSROOT_DIR := $(OUT_DIR)/sysroot
 
 LLVM_TARGET_TAG := llvmorg-11.1.0
 
-.PHONY: toolchain bzImage clean
+.PHONY: toolchain samurai bzImage clean
 
 clean:
 	rm -rf $(OUT_DIR)
@@ -29,7 +29,7 @@ $(TC_DIR)/target/bin: $(TC_DIR)/host/bin
 		&& patch -N -p1 < ../../tools/clang-support-expanding-target-triple-in-sysroot-pat.patch
 	mkdir -p $(TC_DIR)/build/target
 	cd $(TC_DIR)/build/target && ln -sf ../../../../tools/Makefile.litecross ./Makefile
-	cd $(TC_DIR)/build/target && PATH=$(TC_DIR)/host/bin:${PATH} CC=clang CXX=clang++ $(MAKE)  \
+	cd $(TC_DIR)/build/target && PATH=$(TC_DIR)/host/bin:${PATH} CC=clang CXX=clang++ $(MAKE) \
 		LLVM_CCACHE_BUILD=ON \
 		LLVM_CONFIG=CLANG_VENDOR=D/os \
 		LLVM_VER=$(LLVM_TARGET_TAG:llvmorg-%=%) \
@@ -38,6 +38,15 @@ $(TC_DIR)/target/bin: $(TC_DIR)/host/bin
 		MUSL_SRCDIR=$(ROOT_DIR)/external/musl \
 		OUTPUT=$(TC_DIR)/target all install
 	git submodule update --force external/llvm-project
+
+samurai: $(TC_DIR)/host/bin/samu
+
+$(TC_DIR)/host/bin/samu: $(TC_DIR)/host/bin
+	PATH=$(TC_DIR)/host/bin:${PATH} CC=clang $(MAKE) -j \
+		-C external/samurai PREFIX=/ DESTDIR=$(TC_DIR)/host MANDIR=/man
+	PATH=$(TC_DIR)/host/bin:${PATH} CC=clang $(MAKE) \
+		-C external/samurai PREFIX=/ DESTDIR=$(TC_DIR)/host MANDIR=/man install clean
+	ln -sf ./samu $(TC_DIR)/host/bin/ninja
 
 musl:
 	rm -rf $(BUILD_DIR)/musl $(SYSROOT_DIR)
