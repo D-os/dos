@@ -56,12 +56,6 @@ $(TC_DIR)/host/bin/ckati: $(TC_DIR)/host/bin
 		-C external/kati -f Makefile.ckati $(TC_DIR)/host/bin/ckati
 	ln -sf ./ckati $(TC_DIR)/host/bin/kati
 
-musl:
-	rm -rf $(BUILD_DIR)/musl $(SYSROOT_DIR)
-	mkdir -p $(BUILD_DIR)/musl
-	cd $(BUILD_DIR)/musl && CC=$(TC_DIR)/target/bin/x86_64-linux-musl-clang ../../../../external/musl/configure --prefix=/ --disable-static
-	cd $(BUILD_DIR)/musl && DESTDIR=$(SYSROOT_DIR) $(MAKE) -j install
-
 bzImage: $(BUILD_DIR)/linux/arch/x86/boot/bzImage
 
 $(BUILD_DIR)/linux/arch/x86/boot/bzImage: external/linux/Makefile $(TC_DIR)/host/bin
