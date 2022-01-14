@@ -28,3 +28,6 @@
 [submodule "external/kati"]
 	path = external/kati
 	url = git@github.com:google/kati.git
+[submodule "external/mold"]
+	path = external/mold
+	url = git@github.com:rui314/mold.git
