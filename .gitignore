@@ -1,3 +1,4 @@
 /out/
-.ninja_log
 /config.mak
+.ninja_log
+.ninja_deps

@@ -8,7 +8,9 @@ SYSROOT_DIR := $(OUT_DIR)/sysroot
 
 LLVM_TARGET_TAG := llvmorg-11.1.0
 
-.PHONY: toolchain samurai kati bzImage clean
+.PHONY: toolchain toolchain-host toolchain-target samurai kati bzImage clean
+
+toolchain: toolchain-host toolchain-target samurai kati
 
 clean:
 	rm -rf $(OUT_DIR)
