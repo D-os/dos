@@ -4,6 +4,11 @@
 
 Dee Operating System
 
+## Mission statement
+
+Build operating system for workplace computers,
+using best available open source components.
+
 ## Building
 
 ```sh
