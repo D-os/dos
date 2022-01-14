@@ -8,7 +8,7 @@ SYSROOT_DIR := $(OUT_DIR)/sysroot
 
 LLVM_TARGET_TAG := llvmorg-11.1.0
 
-.PHONY: toolchain toolchain-host toolchain-target samurai kati bzImage clean
+.PHONY: toolchain toolchain-host toolchain-target mold samurai kati bzImage clean
 
 toolchain: toolchain-host toolchain-target samurai kati
 
@@ -26,7 +26,7 @@ $(TC_DIR)/host/bin: tools/tc-build/build-llvm.py
 
 toolchain-target: $(TC_DIR)/target/bin
 
-$(TC_DIR)/target/bin: $(TC_DIR)/host/bin
+$(TC_DIR)/target/bin: $(TC_DIR)/host/bin $(TC_DIR)/host/bin/mold
 	cd external/llvm-project && git reset --hard $(LLVM_TARGET_TAG) \
 		&& patch -N -p1 < ../../tools/clang-support-expanding-target-triple-in-sysroot-pat.patch
 	mkdir -p $(TC_DIR)/build/target
@@ -40,6 +40,14 @@ $(TC_DIR)/target/bin: $(TC_DIR)/host/bin
 		MUSL_SRCDIR=$(ROOT_DIR)/external/musl \
 		OUTPUT=$(TC_DIR)/target all install
 	git submodule update --force external/llvm-project
+
+mold: $(TC_DIR)/host/bin/mold
+
+$(TC_DIR)/host/bin/mold: $(TC_DIR)/host/bin
+	PATH=$(TC_DIR)/host/bin:${PATH} CXX=clang++ $(MAKE) -j \
+		-C external/mold PREFIX=/ DESTDIR=$(TC_DIR)/host MANDIR=/man
+	PATH=$(TC_DIR)/host/bin:${PATH} CXX=clang++ $(MAKE) \
+		-C external/mold PREFIX=/ DESTDIR=$(TC_DIR)/host MANDIR=/man install clean
 
 samurai: $(TC_DIR)/host/bin/samu
 
