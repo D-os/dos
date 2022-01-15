@@ -31,3 +31,6 @@
 [submodule "external/mold"]
 	path = external/mold
 	url = git@github.com:rui314/mold.git
+[submodule "system/libbase"]
+	path = system/libbase
+	url = https://android.googlesource.com/platform/system/libbase
