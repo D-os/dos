@@ -1,0 +1,9 @@
+cxx = $CXX -std=c++17
+cxxflags = -Wall -Werror
+
+includes = -Isystem/libbase/include
+
+rule cxx
+  command = $cxx $cxxflags $includes -c $in -o $out
+
+build out/build/init/obj/main.o: cxx system/core/init/main.cpp
