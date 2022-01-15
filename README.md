@@ -13,5 +13,5 @@ using best available open source components.
 
 ```sh
 make
-out/tc/host/bin/ninja
+PATH=$PWD/out/tc/host/bin:$PATH ninja
 ```
