@@ -32,8 +32,7 @@ $(TC_DIR)/target/bin: $(TC_DIR)/host/bin $(TC_DIR)/host/bin/mold
 	mkdir -p $(TC_DIR)/build/target
 	cd $(TC_DIR)/build/target && ln -sf ../../../../tools/Makefile.litecross ./Makefile
 	cd $(TC_DIR)/build/target && PATH=$(TC_DIR)/host/bin:${PATH} CC=clang CXX=clang++ $(MAKE) \
-		LLVM_CCACHE_BUILD=ON \
-		LLVM_CONFIG=CLANG_VENDOR=D/os \
+		LLVM_CONFIG='-DCLANG_VENDOR=D/os -DLLVM_CCACHE_BUILD=ON' \
 		LLVM_VER=$(LLVM_TARGET_TAG:llvmorg-%=%) \
 		LINUX_SRCDIR=$(ROOT_DIR)/external/kernel-headers \
 		LLVM_SRCDIR=$(ROOT_DIR)/external/llvm-project \
