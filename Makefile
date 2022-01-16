@@ -6,8 +6,6 @@ TC_DIR := $(OUT_DIR)/tc
 BUILD_DIR := $(OUT_DIR)/build
 SYSROOT_DIR := $(OUT_DIR)/sysroot
 
-LLVM_TARGET_TAG := llvmorg-11.1.0
-
 .PHONY: toolchain toolchain-host toolchain-target mold samurai kati bzImage clean
 
 toolchain: toolchain-host toolchain-target samurai kati
@@ -15,34 +13,30 @@ toolchain: toolchain-host toolchain-target samurai kati
 clean:
 	rm -rf $(OUT_DIR)
 
-toolchain-host: $(TC_DIR)/host/bin
+toolchain-host: | $(TC_DIR)/host/bin
 
 $(TC_DIR)/host/bin: tools/tc-build/build-llvm.py
-	git submodule update --force external/llvm-project
 	tools/tc-build/build-llvm.py --show-build-commands --targets="AArch64;X86" \
 		--llvm-folder=$(ROOT_DIR)/external/llvm-project --no-update \
 		--build-folder=$(TC_DIR)/build --install-folder=$(TC_DIR)/host \
 		--clang-vendor=D/os --build-stage1-only --install-stage1-only
 
-toolchain-target: $(TC_DIR)/target/bin
+toolchain-target: | $(TC_DIR)/target/bin
 
-$(TC_DIR)/target/bin: $(TC_DIR)/host/bin $(TC_DIR)/host/bin/mold
-	cd external/llvm-project && git reset --hard $(LLVM_TARGET_TAG) \
-		&& patch -N -p1 < ../../tools/clang-support-expanding-target-triple-in-sysroot-pat.patch
+$(TC_DIR)/target/bin: $(TC_DIR)/host/bin/mold | $(TC_DIR)/host/bin
 	mkdir -p $(TC_DIR)/build/target
 	cd $(TC_DIR)/build/target && ln -sf ../../../../tools/Makefile.litecross ./Makefile
 	cd $(TC_DIR)/build/target && PATH=$(TC_DIR)/host/bin:${PATH} CC=clang CXX=clang++ $(MAKE) \
 		LLVM_CONFIG='-DCLANG_VENDOR=D/os -DLLVM_CCACHE_BUILD=ON' \
-		LLVM_VER=$(LLVM_TARGET_TAG:llvmorg-%=%) \
+		LLVM_VER='14.0.0' \
 		LINUX_SRCDIR=$(ROOT_DIR)/external/kernel-headers \
 		LLVM_SRCDIR=$(ROOT_DIR)/external/llvm-project \
 		MUSL_SRCDIR=$(ROOT_DIR)/external/musl \
 		OUTPUT=$(TC_DIR)/target all install
-	git submodule update --force external/llvm-project
 
 mold: $(TC_DIR)/host/bin/mold
 
-$(TC_DIR)/host/bin/mold: $(TC_DIR)/host/bin
+$(TC_DIR)/host/bin/mold: | $(TC_DIR)/host/bin
 	PATH=$(TC_DIR)/host/bin:${PATH} CXX=clang++ $(MAKE) -j \
 		-C external/mold PREFIX=/ DESTDIR=$(TC_DIR)/host MANDIR=/man
 	PATH=$(TC_DIR)/host/bin:${PATH} CXX=clang++ $(MAKE) \
@@ -50,7 +44,7 @@ $(TC_DIR)/host/bin/mold: $(TC_DIR)/host/bin
 
 samurai: $(TC_DIR)/host/bin/samu
 
-$(TC_DIR)/host/bin/samu: $(TC_DIR)/host/bin
+$(TC_DIR)/host/bin/samu: | $(TC_DIR)/host/bin
 	PATH=$(TC_DIR)/host/bin:${PATH} CC=clang $(MAKE) -j \
 		-C external/samurai PREFIX=/ DESTDIR=$(TC_DIR)/host MANDIR=/man
 	PATH=$(TC_DIR)/host/bin:${PATH} CC=clang $(MAKE) \
@@ -59,7 +53,7 @@ $(TC_DIR)/host/bin/samu: $(TC_DIR)/host/bin
 
 kati: $(TC_DIR)/host/bin/ckati
 
-$(TC_DIR)/host/bin/ckati: $(TC_DIR)/host/bin
+$(TC_DIR)/host/bin/ckati: | $(TC_DIR)/host/bin
 	PATH=$(TC_DIR)/host/bin:${PATH} CXX=clang++ $(MAKE) -j \
 		KATI_INTERMEDIATES_PATH=$(TC_DIR)/build/kati KATI_BIN_PATH=$(TC_DIR)/host/bin \
 		-C external/kati -f Makefile.ckati $(TC_DIR)/host/bin/ckati

@@ -9,11 +9,11 @@ LLVM_SRCDIR = LLVM_SRCDIR_not_set
 MUSL_SRCDIR = MUSL_SRCDIR_not_set
 
 TARGETS = \
-	aarch64-linux-musleabi \
-	x86_64-linux-musl \
+	aarch64-unknown-linux-musleabi \
+	x86_64-unknown-linux-musl \
 	# end
 
-DEFAULT_TARGET = x86_64-linux-musl
+DEFAULT_TARGET = x86_64-unknown-linux-musl
 
 TOOLS = \
 	llvm-ar \
@@ -35,7 +35,6 @@ FULL_LLVM_CONFIG = $(LLVM_CONFIG) \
 	-DCLANG_DEFAULT_RTLIB=compiler-rt \
 	-DCMAKE_BUILD_TYPE=MinSizeRel \
 	-DCMAKE_INSTALL_PREFIX=/clang \
-	-DDEFAULT_SYSROOT=../../TARGET \
 	-DLLVM_BUILTIN_TARGETS='$(subst $(subst ,, ),;,$(TARGETS))' \
 	-DLLVM_DEFAULT_TARGET_TRIPLE=$(DEFAULT_TARGET) \
 	-DLLVM_DISTRIBUTION_COMPONENTS='clang;lld;LTO;$(subst $(subst ,, ),;,$(TOOLS))' \
@@ -51,6 +50,7 @@ FULL_LLVM_CONFIG = $(LLVM_CONFIG) \
 	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_COMPILER_RT_BUILD_LIBFUZZER=OFF) \
 	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_COMPILER_RT_BUILD_SANITIZERS=OFF) \
 	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_COMPILER_RT_BUILD_XRAY=OFF) \
+	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_COMPILER_RT_BUILD_MEMPROF=OFF) \
 	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_LIBCXXABI_USE_COMPILER_RT=ON) \
 	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_LIBCXXABI_USE_LLVM_UNWINDER=ON) \
 	$(foreach t,$(TARGETS),-DRUNTIMES_$(t)_LIBCXX_HAS_MUSL_LIBC=ON) \

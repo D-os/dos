@@ -1,2 +1,3 @@
 - Do not require having ninja installed on host
   - Build samurai for tc/host first
+- Provide archived out/tc downloads?
