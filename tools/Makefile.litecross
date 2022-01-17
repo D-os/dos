@@ -141,7 +141,7 @@ obj_llvm/.lc_built_3: | $(foreach t,$(TARGETS),obj_musl/$(t)/.lc_built \
 install-llvm: | obj_llvm/.lc_built_3
 	# -j1 because there's a broken dependency in the llvm build somewhere
 	#  which often results in missing c++ libraries for some targets
-	cd obj_llvm && $(MAKE) -j1 DESTDIR=$(DESTDIR)$(OUTPUT) install-distribution install-builtins install-runtimes
+	cd obj_llvm && $(MAKE) -j1 DESTDIR=$(DESTDIR)$(OUTPUT) install-distribution install-builtins install-runtimes install-clang-resource-headers
 
 install-musl_%: | obj_musl/%/.lc_built
 	cd obj_musl/$* && $(MAKE) $(MUSL_VARS) DESTDIR=$(DESTDIR)$(OUTPUT)/$* install

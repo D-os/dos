@@ -62,11 +62,13 @@ $(TC_DIR)/host/bin/ckati: | $(TC_DIR)/host/bin
 libcxx:
 	rm -rf out/build/libcxx
 	PATH=$(TC_DIR)/target/bin:${PATH} cmake -G Ninja \
+		--toolchain $(ROOT_DIR)/tools/CMake.toolchain \
 		-S external/llvm-project/runtimes -B out/build/libcxx \
-		-DCMAKE_C_COMPILER=x86_64-linux-musl-clang -DCMAKE_CXX_COMPILER=x86_64-linux-musl-clang++ \
 		-DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
+		-DLIBCXX_HAS_MUSL_LIBC=ON \
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=out/sysroot \
 		-DLIBCXX_ENABLE_SHARED=YES -DLIBCXX_ENABLE_STATIC=NO -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=NO
+#	PATH=$(TC_DIR)/host/bin:${PATH} ninja install
 
 bzImage: $(BUILD_DIR)/linux/arch/x86/boot/bzImage
 
