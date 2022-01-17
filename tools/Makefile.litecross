@@ -1,7 +1,7 @@
 # Author: Patrick Oppenlander : https://www.openwall.com/lists/musl/2021/01/11/1 : 0001-clang-support.patch
 # D/os adaptation: Tomasz Sterna
 
-PM := $(shell grep -c processor /proc/cpuinfo)
+NINJA = ninja
 
 OUTPUT = $(CURDIR)/output
 
@@ -24,8 +24,6 @@ TOOLS = \
 	llvm-size \
 	llvm-strip \
 	# end
-
--include config.mak
 
 # TODO: determine LLVM_TARGETS_TO_BUILD from TARGETS?
 FULL_LLVM_CONFIG = $(LLVM_CONFIG) \
@@ -84,11 +82,11 @@ src_kernel_headers: | $(LINUX_SRCDIR)
 	mkdir -p $@
 
 obj_llvm/.lc_configured: | obj_llvm/ src_llvm
-	cd obj_llvm && cmake -G "Unix Makefiles" -Wno-dev $(FULL_LLVM_CONFIG) ../src_llvm/llvm
+	cd obj_llvm && cmake -GNinja -Wno-dev $(FULL_LLVM_CONFIG) ../src_llvm/llvm
 	touch $@
 
 obj_llvm/.lc_built_1: | obj_llvm/.lc_configured
-	cd obj_llvm && $(MAKE) -j$(PM) distribution
+	cd obj_llvm && $(NINJA) distribution
 	touch $@
 
 obj_musl/%/.lc_configured: | obj_musl/%/ src_musl obj_llvm/.lc_built_1
@@ -106,7 +104,7 @@ obj_sysroot/%/.lc_headers: | obj_sysroot/ obj_musl/%/.lc_configured
 	touch $@
 
 obj_llvm/.lc_built_2: | $(foreach t,$(TARGETS),obj_sysroot/$(t)/.lc_headers)
-	cd obj_llvm && $(MAKE) -j$(PM) builtins
+	cd obj_llvm && $(NINJA) builtins
 	touch $@
 
 obj_musl/%/.lc_built: | obj_musl/%/.lc_configured obj_llvm/.lc_built_2
@@ -135,13 +133,13 @@ obj_sysroot/%/.lc_linux_headers: | obj_kernel_headers/%/.lc_built
 obj_llvm/.lc_built_3: | $(foreach t,$(TARGETS),obj_musl/$(t)/.lc_built \
 					       obj_sysroot/$(t)/.lc_crt_workaround \
 					       obj_sysroot/$(t)/.lc_linux_headers)
-	cd obj_llvm && $(MAKE) -j$(PM) runtimes
+	cd obj_llvm && $(NINJA) runtimes
 	touch $@
 
 install-llvm: | obj_llvm/.lc_built_3
 	# -j1 because there's a broken dependency in the llvm build somewhere
 	#  which often results in missing c++ libraries for some targets
-	cd obj_llvm && $(MAKE) -j1 DESTDIR=$(DESTDIR)$(OUTPUT) install-distribution install-builtins install-runtimes install-clang-resource-headers
+	cd obj_llvm && DESTDIR=$(DESTDIR)$(OUTPUT) $(NINJA) -j1 install-distribution install-builtins install-runtimes install-clang-resource-headers
 
 install-musl_%: | obj_musl/%/.lc_built
 	cd obj_musl/$* && $(MAKE) $(MUSL_VARS) DESTDIR=$(DESTDIR)$(OUTPUT)/$* install
@@ -173,5 +171,3 @@ LINUX_ARCH_LIST := $(sort $(notdir $(wildcard $(LINUX_SRCDIR)/arch/*)))
 fn_target_arch = $(firstword $(subst -, ,$(1)))
 fn_target_arch_mangled = $(patsubst i%86,x86,$(patsubst aarch64%,arm64%,$(call fn_target_arch,$(1))))
 fn_linux_arch = $(lastword $(foreach a,$(LINUX_ARCH_LIST),$(if $(filter $(a)%,$(call fn_target_arch_mangled,$(1))),$(a))))
-
-.SECONDARY:

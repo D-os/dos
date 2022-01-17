@@ -12,6 +12,8 @@ EOF
 
 trap 'rm out/tc/target/x86_64-unknown-linux-musl/tc-test' EXIT
 
+file out/tc/target/x86_64-unknown-linux-musl/tc-test
+
 if out/tc/target/x86_64-unknown-linux-musl/tc-test 2>/dev/null; then
     echo "FAILED: Should not run on native"
     exit 1

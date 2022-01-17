@@ -23,7 +23,7 @@ $(TC_DIR)/host/bin: tools/tc-build/build-llvm.py
 
 toolchain-target: | $(TC_DIR)/target/bin
 
-$(TC_DIR)/target/bin: $(TC_DIR)/host/bin/mold | $(TC_DIR)/host/bin
+$(TC_DIR)/target/bin: | $(TC_DIR)/host/bin/mold $(TC_DIR)/host/bin/ckati $(TC_DIR)/host/bin/samu
 	mkdir -p $(TC_DIR)/build/target
 	cd $(TC_DIR)/build/target && ln -sf ../../../../tools/Makefile.litecross ./Makefile
 	cd $(TC_DIR)/build/target && PATH=$(TC_DIR)/host/bin:${PATH} CC=clang CXX=clang++ $(MAKE) \
@@ -68,7 +68,7 @@ libcxx:
 		-DLIBCXX_HAS_MUSL_LIBC=ON \
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=out/sysroot \
 		-DLIBCXX_ENABLE_SHARED=YES -DLIBCXX_ENABLE_STATIC=NO -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=NO
-#	PATH=$(TC_DIR)/host/bin:${PATH} ninja install
+	cd out/build/libcxx && PATH=$(TC_DIR)/host/bin:${PATH} ninja install
 
 bzImage: $(BUILD_DIR)/linux/arch/x86/boot/bzImage
 
