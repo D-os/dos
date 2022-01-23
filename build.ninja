@@ -1,6 +1,6 @@
-CC = out/tc/target/bin/x86_64-linux-musl-clang
-CXX = out/tc/target/bin/x86_64-linux-musl-clang++
+CC = out/tc/target/bin/x86_64-unknown-linux-musl-clang
+CXX = out/tc/target/bin/x86_64-unknown-linux-musl-clang++
 
 subninja build/build-musl.ninja
-subninja out/build/libcxx/build.ninja
+# subninja out/build/libcxx/build.ninja
 subninja build/build-init.ninja
