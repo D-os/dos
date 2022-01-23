@@ -10,6 +10,8 @@ SYSROOT_DIR := $(OUT_DIR)/sysroot
 
 toolchain: toolchain-host toolchain-target samurai kati
 
+sysroot: $(SYSROOT_DIR) libc libcxx
+
 clean:
 	rm -rf $(OUT_DIR)
 
@@ -59,16 +61,30 @@ $(TC_DIR)/host/bin/ckati: | $(TC_DIR)/host/bin
 		-C external/kati -f Makefile.ckati $(TC_DIR)/host/bin/ckati
 	ln -sf ./ckati $(TC_DIR)/host/bin/kati
 
-libcxx:
-	rm -rf out/build/libcxx
+$(SYSROOT_DIR):
+	mkdir -p $(SYSROOT_DIR)
+
+libc: $(SYSROOT_DIR)/lib/libc.so
+
+$(SYSROOT_DIR)/lib/libc.so: $(SYSROOT_DIR)
+	rm -rf $(BUILD_DIR)/musl
+	mkdir -p $(BUILD_DIR)/musl
+	cd $(BUILD_DIR)/musl && CC=$(TC_DIR)/target/bin/x86_64-unknown-linux-musl-clang \
+		../../../external/musl/configure --prefix=/ --disable-static
+	cd $(BUILD_DIR)/musl && DESTDIR=$(SYSROOT_DIR) $(MAKE) -j install
+
+libcxx: $(SYSROOT_DIR)/lib/libc++.so
+
+$(SYSROOT_DIR)/lib/libc++.so: $(SYSROOT_DIR) $(SYSROOT_DIR)/lib/libc.so
+	rm -rf $(BUILD_DIR)/libcxx
 	PATH=$(TC_DIR)/target/bin:${PATH} cmake -G Ninja \
 		--toolchain $(ROOT_DIR)/tools/CMake.toolchain \
-		-S external/llvm-project/runtimes -B out/build/libcxx \
+		-S external/llvm-project/runtimes -B $(BUILD_DIR)/libcxx \
 		-DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
-		-DLIBCXX_HAS_MUSL_LIBC=ON \
-		-DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=out/sysroot \
+		-DLIBCXX_HAS_MUSL_LIBC=ON -DLLVM_CCACHE_BUILD=ON \
+		-DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=$(SYSROOT_DIR) \
 		-DLIBCXX_ENABLE_SHARED=YES -DLIBCXX_ENABLE_STATIC=NO -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=NO
-	cd out/build/libcxx && PATH=$(TC_DIR)/host/bin:${PATH} ninja install
+	cd $(BUILD_DIR)/libcxx && PATH=$(TC_DIR)/host/bin:${PATH} ninja install
 
 bzImage: $(BUILD_DIR)/linux/arch/x86/boot/bzImage
 

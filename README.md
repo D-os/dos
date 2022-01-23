@@ -12,6 +12,6 @@ using best available open source components.
 ## Building
 
 ```sh
-make
+make toolchain sysroot
 PATH=$PWD/out/tc/host/bin:$PATH ninja
 ```
