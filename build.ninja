@@ -1,5 +1,12 @@
+BUILDROOT = out/build
 SYSROOT = out/sysroot
-CC = out/tc/target/bin/x86_64-unknown-linux-musl-clang --sysroot=$SYSROOT
-CXX = out/tc/target/bin/x86_64-unknown-linux-musl-clang++ --sysroot=$SYSROOT
+TARGET = x86_64-unknown-linux-musl
+CC = out/tc/target/bin/${TARGET}-clang --sysroot=$SYSROOT
+CXX = out/tc/target/bin/${TARGET}-clang++ --sysroot=$SYSROOT
+AR = out/tc/target/bin/${TARGET}-ar
+INCLUDES = -Iout/tc/target/${TARGET}/include
 
+HOSTCC = out/tc/host/bin/clang
+
+subninja build/libcap.ninja
 subninja build/init.ninja
