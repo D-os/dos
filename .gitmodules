@@ -34,3 +34,6 @@
 [submodule "system/libbase"]
 	path = system/libbase
 	url = https://android.googlesource.com/platform/system/libbase
+[submodule "external/libcap"]
+	path = external/libcap
+	url = https://android.googlesource.com/platform/external/libcap
