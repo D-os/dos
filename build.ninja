@@ -4,7 +4,6 @@ TARGET = x86_64-unknown-linux-musl
 CC = out/tc/target/bin/${TARGET}-clang --sysroot=$SYSROOT
 CXX = out/tc/target/bin/${TARGET}-clang++ --sysroot=$SYSROOT
 AR = out/tc/target/bin/${TARGET}-ar
-INCLUDES = -Iout/tc/target/${TARGET}/include
 
 HOSTCC = out/tc/host/bin/clang
 

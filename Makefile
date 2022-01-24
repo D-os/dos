@@ -10,7 +10,7 @@ SYSROOT_DIR := $(OUT_DIR)/sysroot
 
 toolchain: toolchain-host toolchain-target samurai kati
 
-sysroot: $(SYSROOT_DIR) libc libcxx
+sysroot: $(SYSROOT_DIR) libc kernel-headers libcxx
 
 clean:
 	rm -rf $(OUT_DIR)
@@ -85,6 +85,11 @@ $(SYSROOT_DIR)/lib/libc++.so: $(SYSROOT_DIR) $(SYSROOT_DIR)/lib/libc.so
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=$(SYSROOT_DIR) \
 		-DLIBCXX_ENABLE_SHARED=YES -DLIBCXX_ENABLE_STATIC=NO -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=NO
 	cd $(BUILD_DIR)/libcxx && PATH=$(TC_DIR)/host/bin:${PATH} ninja install
+
+kernel-headers: $(SYSROOT_DIR)/include/linux
+
+$(SYSROOT_DIR)/include/linux:
+	$(MAKE) -C external/kernel-headers ARCH=x86_64 prefix= DESTDIR=$(SYSROOT_DIR) install
 
 bzImage: $(BUILD_DIR)/linux/arch/x86/boot/bzImage
 

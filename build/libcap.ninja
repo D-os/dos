@@ -1,6 +1,6 @@
 cc = $CC -fPIC -g
 cflags = -Wno-pointer-arith -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-result -Wno-unused-variable -Wno-shift-op-parentheses
-includes = $INCLUDES -Iexternal/libcap/libcap/include -I$BUILDROOT/libcap
+includes = -Iexternal/libcap/libcap/include -I$BUILDROOT/libcap
 
 rule cc
   command = $cc $cflags $includes -c $in -o $out
