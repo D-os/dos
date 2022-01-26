@@ -40,3 +40,6 @@
 [submodule "external/protobuf"]
 	path = external/protobuf
 	url = https://android.googlesource.com/platform/external/protobuf
+[submodule "external/zlib"]
+	path = external/zlib
+	url = https://android.googlesource.com/platform/external/zlib
