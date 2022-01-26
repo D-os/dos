@@ -20,7 +20,7 @@ rule so
 build $BUILDROOT/libcap/libcap.so.2.48: so $BUILDROOT/libcap/cap_alloc.o $BUILDROOT/libcap/cap_proc.o $BUILDROOT/libcap/cap_extint.o $BUILDROOT/libcap/cap_flag.o $BUILDROOT/libcap/cap_text.o $BUILDROOT/libcap/cap_file.o
 
 rule ln
-  command = /bin/sh -c 'ln -sf "$$(basename $in)" "$out"'
+  command = ln -sf $$(basename $in) $out
 build $BUILDROOT/libcap/libcap.so.2: ln $BUILDROOT/libcap/libcap.so.2.48
 build $BUILDROOT/libcap/libcap.so: ln $BUILDROOT/libcap/libcap.so.2
 
