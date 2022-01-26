@@ -1,0 +1,26 @@
+cc = $CC -fPIC -g
+cflags = -DHAVE_HIDDEN -DZLIB_CONST -DX86_NOT_WINDOWS -DADLER32_SIMD_SSSE3 -mpclmul -DCRC32_SIMD_SSE42_PCLMUL -DINFLATE_CHUNK_READ_64LE -Wall -Werror -Wno-unused -Wno-unused-parameter
+includes = #-Iexternal/libcap/libcap/include -I$BUILDROOT/libcap
+
+rule cc
+  command = $cc $cflags $includes -c $in -o $out
+build $BUILDROOT/zlib/target/adler32.o: cc external/zlib/adler32.c
+build $BUILDROOT/zlib/target/compress.o: cc external/zlib/compress.c
+build $BUILDROOT/zlib/target/cpu_features.o: cc external/zlib/cpu_features.c
+build $BUILDROOT/zlib/target/crc32.o: cc external/zlib/crc32.c
+build $BUILDROOT/zlib/target/deflate.o: cc external/zlib/deflate.c
+build $BUILDROOT/zlib/target/gzclose.o: cc external/zlib/gzclose.c
+build $BUILDROOT/zlib/target/gzlib.o: cc external/zlib/gzlib.c
+build $BUILDROOT/zlib/target/gzread.o: cc external/zlib/gzread.c
+build $BUILDROOT/zlib/target/gzwrite.o: cc external/zlib/gzwrite.c
+build $BUILDROOT/zlib/target/infback.o: cc external/zlib/infback.c
+build $BUILDROOT/zlib/target/inffast.o: cc external/zlib/inffast.c
+build $BUILDROOT/zlib/target/inflate.o: cc external/zlib/inflate.c
+build $BUILDROOT/zlib/target/inftrees.o: cc external/zlib/inftrees.c
+build $BUILDROOT/zlib/target/trees.o: cc external/zlib/trees.c
+build $BUILDROOT/zlib/target/uncompr.o: cc external/zlib/uncompr.c
+build $BUILDROOT/zlib/target/zutil.o: cc external/zlib/zutil.c
+build $BUILDROOT/zlib/target/crc_folding.o: cc external/zlib/crc_folding.c
+build $BUILDROOT/zlib/target/fill_window_sse.o: cc external/zlib/fill_window_sse.c
+build $BUILDROOT/zlib/target/adler32_simd.o: cc external/zlib/adler32_simd.c
+build $BUILDROOT/zlib/target/crc32_simd.o: cc external/zlib/crc32_simd.c
