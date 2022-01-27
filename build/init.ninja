@@ -1,9 +1,24 @@
 cxx = $CXX -std=c++17
-cxxflags = -Wall -Werror
+cxxflags = -Wall -Werror -Wno-shift-op-parentheses -Wno-bitwise-op-parentheses
 
-includes = -Isystem/libbase/include
+includes = -Isystem/libbase/include -Isystem/core/include -Iexternal/protobuf/src -I$BUILDROOT/init/proto
+
+# rule m.host_init_verifier_linux_glibc_x86_64.protoc_subcontext.proto
+#     command = out/soong/host/linux-x86/bin/aprotoc --cpp_out=lite:out/soong/.intermediates/system/core/init/host_init_verifier/linux_glibc_x86_64/gen/proto --dependency_out=out/soong/.intermediates/system/core/init/host_init_verifier/linux_glibc_x86_64/gen/proto/system/core/init/subcontext.pb.d -I . system/core/init/subcontext.proto && out/soong/host/linux-x86/bin/dep_fixer out/soong/.intermediates/system/core/init/host_init_verifier/linux_glibc_x86_64/gen/proto/system/core/init/subcontext.pb.d # hash of input list: 7d5dfc470cfdcb0e991578722258749ae7fdc6d06f4c22a22f73d1df3c95cca2
+# 
+# build $
+#         out/soong/.intermediates/system/core/init/host_init_verifier/linux_glibc_x86_64/gen/proto/system/core/init/subcontext.pb.cc | $
+#         out/soong/.intermediates/system/core/init/host_init_verifier/linux_glibc_x86_64/gen/proto/system/core/init/subcontext.pb.h: m.host_init_verifier_linux_glibc_x86_64.protoc_subcontext.proto | $
+#         out/soong/host/linux-x86/bin/aprotoc out/soong/host/linux-x86/bin/dep_fixer $
+#         system/core/init/subcontext.proto
+#     depfile = out/soong/.intermediates/system/core/init/host_init_verifier/linux_glibc_x86_64/gen/proto/system/core/init/subcontext.pb.d
+#     deps = gcc
+#     description = ${m.host_init_verifier_linux_glibc_x86_64.moduleDesc}protoc subcontext.proto${m.host_init_verifier_linux_glibc_x86_64.moduleDescSuffix}
+rule protoc
+  command = out/tc/host/bin/protoc --cpp_out=lite:$BUILDROOT/init/proto --dependency_out=$out -I . $in #&& out/soong/host/linux-x86/bin/dep_fixer out/soong/.intermediates/system/core/init/host_init_verifier/linux_glibc_x86_64/gen/proto/system/core/init/subcontext.pb.d
+build $BUILDROOT/init/proto/system/core/init/subcontext.pb.d | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc: protoc system/core/init/subcontext.proto | out/tc/host/bin/protoc
 
 rule cxx
   command = $cxx $cxxflags $includes -c $in -o $out
 
-build out/build/init/obj/main.o: cxx system/core/init/main.cpp
+build $BUILDROOT/init/obj/main.o: cxx system/core/init/main.cpp | $SYSROOT/include/sys/capability.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
