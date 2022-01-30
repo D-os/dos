@@ -6,7 +6,7 @@ TC_DIR := $(OUT_DIR)/tc
 BUILD_DIR := $(OUT_DIR)/build
 SYSROOT_DIR := $(OUT_DIR)/sysroot
 
-.PHONY: toolchain toolchain-host toolchain-target mold samurai kati bzImage clean
+.PHONY: toolchain toolchain-host toolchain-target mold samurai kati bzImage compdb clean
 
 toolchain: toolchain-host toolchain-target samurai kati
 
@@ -96,3 +96,5 @@ bzImage: $(BUILD_DIR)/linux/arch/x86/boot/bzImage
 $(BUILD_DIR)/linux/arch/x86/boot/bzImage: external/linux/Makefile $(TC_DIR)/host/bin
 	PATH=$(TC_DIR)/host/bin:${PATH} $(MAKE) -j -C external/linux LLVM=1 ARCH=x86_64 O=$(BUILD_DIR)/linux defconfig bzImage
 
+compdb:
+	ninja -t compdb > build/compile_commands.json

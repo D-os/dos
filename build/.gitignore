@@ -1,3 +1,4 @@
 /.kati_stamp*
 /env*.sh
 /ninja*.sh
+/compile_commands.json

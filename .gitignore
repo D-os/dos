@@ -2,3 +2,4 @@
 /config.mak
 .ninja_log
 .ninja_deps
+/.cache/
