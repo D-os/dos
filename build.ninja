@@ -1,8 +1,8 @@
 BUILDROOT = out/build
 SYSROOT = out/sysroot
 TARGET = x86_64-unknown-linux-musl
-CC = out/tc/target/bin/${TARGET}-clang --sysroot=$SYSROOT
-CXX = out/tc/target/bin/${TARGET}-clang++ --sysroot=$SYSROOT
+CC = out/tc/target/bin/${TARGET}-clang --sysroot=$SYSROOT -I$SYSROOT/include
+CXX = out/tc/target/bin/${TARGET}-clang++ --sysroot=$SYSROOT -I$SYSROOT/include -nostdinc++ -I$SYSROOT/include/c++/v1
 AR = out/tc/target/bin/${TARGET}-ar
 
 HOSTCC = out/tc/host/bin/clang
