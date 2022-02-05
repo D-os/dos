@@ -9,6 +9,17 @@ Dee Operating System
 Build operating system for workplace computers,
 using best available open source components.
 
+### Goals
+
+- developer friendly
+- reasonably unix-compliant
+- lean base system
+
+### Non-goals
+
+- LSB compliance
+- applications distribution
+
 ## Building
 
 ```sh
