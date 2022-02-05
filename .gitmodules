@@ -43,3 +43,6 @@
 [submodule "external/zlib"]
 	path = external/zlib
 	url = https://android.googlesource.com/platform/external/zlib
+[submodule "system/logging"]
+	path = system/logging
+	url = https://android.googlesource.com/platform/system/logging
