@@ -33,7 +33,7 @@
 	url = git@github.com:rui314/mold.git
 [submodule "system/libbase"]
 	path = system/libbase
-	url = https://android.googlesource.com/platform/system/libbase
+	url = https://github.com/D-os/system_libbase.git
 [submodule "external/libcap"]
 	path = external/libcap
 	url = https://android.googlesource.com/platform/external/libcap

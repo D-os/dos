@@ -1,0 +1,50 @@
+cxx = $CXX -std=c++17 -fPIC -g
+cxxflags = -Wall -Werror -Wextra -D_FILE_OFFSET_BITS=64 -Wexit-time-destructors -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses -Wno-sign-compare
+includes = -Isystem/libbase/include -Isystem/bioniccompat/include
+libs = -llog
+
+rule cxx
+  command = $cxx $cxxflags $includes -c $in -o $out
+
+build $BUILDROOT/libbase/abi_compatibility.o: cxx system/libbase/abi_compatibility.cpp
+build $BUILDROOT/libbase/chrono_utils.o: cxx system/libbase/chrono_utils.cpp
+build $BUILDROOT/libbase/cmsg.o: cxx system/libbase/cmsg.cpp
+build $BUILDROOT/libbase/file.o: cxx system/libbase/file.cpp
+build $BUILDROOT/libbase/hex.o: cxx system/libbase/hex.cpp
+build $BUILDROOT/libbase/logging.o: cxx system/libbase/logging.cpp
+build $BUILDROOT/libbase/mapped_file.o: cxx system/libbase/mapped_file.cpp
+build $BUILDROOT/libbase/parsebool.o: cxx system/libbase/parsebool.cpp
+build $BUILDROOT/libbase/parsenetaddress.o: cxx system/libbase/parsenetaddress.cpp
+build $BUILDROOT/libbase/posix_strerror_r.o: cxx system/libbase/posix_strerror_r.cpp
+build $BUILDROOT/libbase/process.o: cxx system/libbase/process.cpp
+build $BUILDROOT/libbase/properties.o: cxx system/libbase/properties.cpp
+build $BUILDROOT/libbase/stringprintf.o: cxx system/libbase/stringprintf.cpp
+build $BUILDROOT/libbase/strings.o: cxx system/libbase/strings.cpp
+build $BUILDROOT/libbase/threads.o: cxx system/libbase/threads.cpp
+build $BUILDROOT/libbase/test_utils.o: cxx system/libbase/test_utils.cpp
+build $BUILDROOT/libbase/errors_unix.o: cxx system/libbase/errors_unix.cpp
+
+rule ar
+  command = $AR rcs $out $in
+build $BUILDROOT/libbase/libbase.a: ar $
+  $BUILDROOT/libbase/abi_compatibility.o $
+  $BUILDROOT/libbase/chrono_utils.o $
+  $BUILDROOT/libbase/cmsg.o $
+  $BUILDROOT/libbase/file.o $
+  $BUILDROOT/libbase/hex.o $
+  $BUILDROOT/libbase/logging.o $
+  $BUILDROOT/libbase/mapped_file.o $
+  $BUILDROOT/libbase/parsebool.o $
+  $BUILDROOT/libbase/parsenetaddress.o $
+  $BUILDROOT/libbase/posix_strerror_r.o $
+  $BUILDROOT/libbase/process.o $
+  $BUILDROOT/libbase/properties.o $
+  $BUILDROOT/libbase/stringprintf.o $
+  $BUILDROOT/libbase/strings.o $
+  $BUILDROOT/libbase/threads.o $
+  $BUILDROOT/libbase/test_utils.o $
+  $BUILDROOT/libbase/errors_unix.o $
+
+rule so
+  command = $LINKER $libs -Wl,-x -shared -g -L$BUILDROOT/libbase -Wl,-soname,libbase.so -o $out $in
+build $BUILDROOT/libbase/libbase.so: so $BUILDROOT/libbase/libbase.a

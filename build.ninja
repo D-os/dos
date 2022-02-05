@@ -1,8 +1,9 @@
 BUILDROOT = out/build
 SYSROOT = out/sysroot
 TARGET = x86_64-unknown-linux-musl
-CC = out/tc/target/bin/${TARGET}-clang --sysroot=$SYSROOT -I$SYSROOT/include
-CXX = out/tc/target/bin/${TARGET}-clang++ --sysroot=$SYSROOT -I$SYSROOT/include -nostdinc++ -I$SYSROOT/include/c++/v1
+CC = out/tc/target/bin/${TARGET}-clang -nostdinc -isystem $SYSROOT/include
+CXX = out/tc/target/bin/${TARGET}-clang++ -nostdinc -cxx-isystem $SYSROOT/include/c++/v1 -cxx-isystem $SYSROOT/include
+LINKER = out/tc/target/bin/${TARGET}-clang -isysroot $SYSROOT
 AR = out/tc/target/bin/${TARGET}-ar
 
 HOSTCC = out/tc/host/bin/clang
@@ -10,6 +11,8 @@ HOSTCXX = out/tc/host/bin/clang++
 
 rule copy
   command = mkdir -p $$(basename $out) && cp -f $in $out
+
+subninja build/libbase.ninja
 
 subninja build/protobuf.ninja
 build out/tc/host/bin/protoc: copy $BUILDROOT/protobuf/aprotoc
