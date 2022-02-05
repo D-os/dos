@@ -1,0 +1,51 @@
+cc = $CC -fPIC -g
+cxx = $CXX -std=c++17 -fPIC -g
+cxxflags = -Wno-exit-time-destructors
+includes = -Isystem/core/libcutils/include -Isystem/libbase/include -Isystem/logging/liblog/include -Isystem/bioniccompat/include
+libs = -L$BUILDROOT/liblog -llog
+
+build $BUILDROOT/libcutils/config_utils.o: cxx system/core/libcutils/config_utils.cpp
+build $BUILDROOT/libcutils/iosched_policy.o: cxx system/core/libcutils/iosched_policy.cpp
+build $BUILDROOT/libcutils/load_file.o: cxx system/core/libcutils/load_file.cpp
+build $BUILDROOT/libcutils/native_handle.o: cxx system/core/libcutils/native_handle.cpp
+build $BUILDROOT/libcutils/properties.o: cxx system/core/libcutils/properties.cpp
+build $BUILDROOT/libcutils/record_stream.o: cxx system/core/libcutils/record_stream.cpp
+build $BUILDROOT/libcutils/strlcpy.o: cc system/core/libcutils/strlcpy.c
+build $BUILDROOT/libcutils/threads.o: cxx system/core/libcutils/threads.cpp
+build $BUILDROOT/libcutils/fs.o: cxx system/core/libcutils/fs.cpp
+build $BUILDROOT/libcutils/hashmap.o: cxx system/core/libcutils/hashmap.cpp
+build $BUILDROOT/libcutils/multiuser.o: cxx system/core/libcutils/multiuser.cpp
+build $BUILDROOT/libcutils/str_parms.o: cxx system/core/libcutils/str_parms.cpp
+build $BUILDROOT/libcutils/android_reboot.o: cxx system/core/libcutils/android_reboot.cpp
+build $BUILDROOT/libcutils/ashmem-dev.o: cxx system/core/libcutils/ashmem-dev.cpp
+build $BUILDROOT/libcutils/canned_fs_config.o: cxx system/core/libcutils/canned_fs_config.cpp
+build $BUILDROOT/libcutils/fs_config.o: cxx system/core/libcutils/fs_config.cpp
+build $BUILDROOT/libcutils/klog.o: cxx system/core/libcutils/klog.cpp
+build $BUILDROOT/libcutils/partition_utils.o: cxx system/core/libcutils/partition_utils.cpp
+build $BUILDROOT/libcutils/qtaguid.o: cxx system/core/libcutils/qtaguid.cpp
+build $BUILDROOT/libcutils/trace-dev.o: cxx system/core/libcutils/trace-dev.cpp
+build $BUILDROOT/libcutils/uevent.o: cxx system/core/libcutils/uevent.cpp
+
+build $BUILDROOT/libcutils/libcutils.a: ar $
+  $BUILDROOT/libcutils/config_utils.o $
+  $BUILDROOT/libcutils/iosched_policy.o $
+  $BUILDROOT/libcutils/load_file.o $
+  $BUILDROOT/libcutils/native_handle.o $
+  $BUILDROOT/libcutils/properties.o $
+  $BUILDROOT/libcutils/record_stream.o $
+  $BUILDROOT/libcutils/strlcpy.o $
+  $BUILDROOT/libcutils/threads.o $
+  $BUILDROOT/libcutils/fs.o $
+  $BUILDROOT/libcutils/hashmap.o $
+  $BUILDROOT/libcutils/multiuser.o $
+  $BUILDROOT/libcutils/str_parms.o $
+  $BUILDROOT/libcutils/android_reboot.o $
+  $BUILDROOT/libcutils/canned_fs_config.o $
+  $BUILDROOT/libcutils/fs_config.o $
+  $BUILDROOT/libcutils/klog.o $
+  $BUILDROOT/libcutils/partition_utils.o $
+  $BUILDROOT/libcutils/qtaguid.o $
+  $BUILDROOT/libcutils/trace-dev.o $
+  $BUILDROOT/libcutils/uevent.o $
+
+build $BUILDROOT/libcutils/libcutils.so: so $BUILDROOT/libcutils/libcutils.a | $BUILDROOT/liblog/liblog.so

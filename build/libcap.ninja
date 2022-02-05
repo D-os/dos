@@ -11,13 +11,9 @@ build $BUILDROOT/libcap/cap_flag.o: cc external/libcap/libcap/cap_flag.c | $BUIL
 build $BUILDROOT/libcap/cap_proc.o: cc external/libcap/libcap/cap_proc.c | $BUILDROOT/libcap/cap_names.h
 build $BUILDROOT/libcap/cap_text.o: cc external/libcap/libcap/cap_text.c | $BUILDROOT/libcap/cap_names.h
 
-rule ar
-  command = $AR rcs $out $in
 build $BUILDROOT/libcap/libcap.a: ar $BUILDROOT/libcap/cap_alloc.o $BUILDROOT/libcap/cap_proc.o $BUILDROOT/libcap/cap_extint.o $BUILDROOT/libcap/cap_flag.o $BUILDROOT/libcap/cap_text.o $BUILDROOT/libcap/cap_file.o
 
-rule so
-  command = $CC -Wl,-x -shared -g -L$BUILDROOT/libcap -Wl,-soname,libcap.so.2 -o $out $in
-build $BUILDROOT/libcap/libcap.so.2.48: so $BUILDROOT/libcap/cap_alloc.o $BUILDROOT/libcap/cap_proc.o $BUILDROOT/libcap/cap_extint.o $BUILDROOT/libcap/cap_flag.o $BUILDROOT/libcap/cap_text.o $BUILDROOT/libcap/cap_file.o
+build $BUILDROOT/libcap/libcap.so.2.48: so $BUILDROOT/libcap/libcap.a
 
 rule ln
   command = ln -sf $$(basename $in) $out

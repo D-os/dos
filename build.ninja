@@ -1,18 +1,37 @@
 BUILDROOT = out/build
 SYSROOT = out/sysroot
 TARGET = x86_64-unknown-linux-musl
-CC = out/tc/target/bin/${TARGET}-clang -nostdinc -isystem $SYSROOT/include
-CXX = out/tc/target/bin/${TARGET}-clang++ -nostdinc -cxx-isystem $SYSROOT/include/c++/v1 -cxx-isystem $SYSROOT/include
+CC = out/tc/target/bin/${TARGET}-clang -isystem $SYSROOT/include
+CXX = out/tc/target/bin/${TARGET}-clang++ -nostdinc++ -cxx-isystem $SYSROOT/include/c++/v1 -cxx-isystem $SYSROOT/include
 LINKER = out/tc/target/bin/${TARGET}-clang -isysroot $SYSROOT
 AR = out/tc/target/bin/${TARGET}-ar
 
 HOSTCC = out/tc/host/bin/clang
 HOSTCXX = out/tc/host/bin/clang++
 
+rule cc
+  depfile = $out.d
+  command = $cc -MD -MF $out.d $cflags $includes -c $in -o $out
+
+rule cxx
+  depfile = $out.d
+  command = $cxx -MD -MF $out.d $cxxflags $includes -c $in -o $out
+
+rule ar
+  command = $AR rcs $out $in
+
+rule so
+  command = $LINKER $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out $in
+
+rule link
+  command = $LINKER $in -o $out
+
 rule copy
   command = mkdir -p $$(basename $out) && cp -f $in $out
 
 subninja build/libbase.ninja
+subninja build/libcutils.ninja
+subninja build/liblog.ninja
 
 subninja build/protobuf.ninja
 build out/tc/host/bin/protoc: copy $BUILDROOT/protobuf/aprotoc

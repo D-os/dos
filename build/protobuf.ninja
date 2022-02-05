@@ -166,8 +166,6 @@ build $BUILDROOT/protobuf/ruby_generator.o: hostcxx external/protobuf/src/google
 build $BUILDROOT/protobuf/subprocess.o: hostcxx external/protobuf/src/google/protobuf/compiler/subprocess.cc
 build $BUILDROOT/protobuf/zip_writer.o: hostcxx external/protobuf/src/google/protobuf/compiler/zip_writer.cc
 
-rule ar
-  command = $AR rcs $out $in
 build $BUILDROOT/protobuf/libprotoc.a: ar $
   $BUILDROOT/protobuf/any_lite.o $
   $BUILDROOT/protobuf/arena.o $

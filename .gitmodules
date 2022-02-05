@@ -21,7 +21,7 @@
 	url = git@github.com:sabotage-linux/kernel-headers.git
 [submodule "system/core"]
 	path = system/core
-	url = https://android.googlesource.com/platform/system/core
+	url = https://github.com/D-os/system_core.git
 [submodule "external/samurai"]
 	path = external/samurai
 	url = git@github.com:michaelforney/samurai.git

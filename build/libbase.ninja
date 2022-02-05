@@ -1,6 +1,7 @@
 cxx = $CXX -std=c++17 -fPIC -g
-cxxflags = -Wall -Werror -Wextra -D_FILE_OFFSET_BITS=64 -Wexit-time-destructors -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses -Wno-sign-compare
-includes = -Isystem/libbase/include -Isystem/bioniccompat/include
+cxxflags = -Wall -Werror -Wextra -D_FILE_OFFSET_BITS=64 $
+  -Wexit-time-destructors -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses -Wno-sign-compare -Wno-c99-designator
+includes = -Isystem/libbase/include -Isystem/bioniccompat/include -Isystem/logging/liblog/include
 libs = -llog
 
 rule cxx
@@ -24,8 +25,6 @@ build $BUILDROOT/libbase/threads.o: cxx system/libbase/threads.cpp
 build $BUILDROOT/libbase/test_utils.o: cxx system/libbase/test_utils.cpp
 build $BUILDROOT/libbase/errors_unix.o: cxx system/libbase/errors_unix.cpp
 
-rule ar
-  command = $AR rcs $out $in
 build $BUILDROOT/libbase/libbase.a: ar $
   $BUILDROOT/libbase/abi_compatibility.o $
   $BUILDROOT/libbase/chrono_utils.o $
@@ -45,6 +44,4 @@ build $BUILDROOT/libbase/libbase.a: ar $
   $BUILDROOT/libbase/test_utils.o $
   $BUILDROOT/libbase/errors_unix.o $
 
-rule so
-  command = $LINKER $libs -Wl,-x -shared -g -L$BUILDROOT/libbase -Wl,-soname,libbase.so -o $out $in
 build $BUILDROOT/libbase/libbase.so: so $BUILDROOT/libbase/libbase.a
