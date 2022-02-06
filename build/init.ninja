@@ -18,18 +18,27 @@ cxxflags = $
   -DWORLD_WRITABLE_KMSG=1 $
   -DDUMP_ON_UMOUNT_FAILURE=1 $
   -DSHUTDOWN_ZERO_TIMEOUT=1 $
+  -Wno-c99-designator $
   -D_LIBCPP_ENABLE_THREAD_SAFETY_ANNOTATIONS
 
-includes = -Isystem/libbase/include -Isystem/core/include -Iexternal/protobuf/src -I$BUILDROOT/init/proto -Isystem/bioniccompat/include
-libs = -lbacktrace -lbase -lbootloader_message -lcutils -ldl -lext4_utils -lfs_mgr -lgsi -lhidl-gen-utils -lkeyutils -llog -llogwrap -llp -lprocessgroup -lprocessgroup_setup -lselinux -lutils
+includes = $
+  -Isystem/libbase/include $
+  -Isystem/core/include $
+  -Isystem/core/libprocessgroup/include $
+  -Isystem/core/libprocessgroup/setup/include $
+  -Iexternal/protobuf/src $
+  -I$BUILDROOT/init/proto $
+  -Isystem/bioniccompat/include $
+  -Isystem/core/fs_mgr/include_fstab $
+  -Isystem/core/libmodprobe/include $
+
+#libs = -lbacktrace -lbase -lbootloader_message -lcutils -ldl -lext4_utils -lfs_mgr -lgsi -lhidl-gen-utils -lkeyutils -llog -llogwrap -llp -lprocessgroup -lprocessgroup_setup -lselinux -lutils
+libs = -L$SYSROOT/lib -lbase -lcutils -ldl -llog
 
 rule protoc
   command = out/tc/host/bin/protoc --cpp_out=lite:$BUILDROOT/init/proto --dependency_out=$out -I . $in #&& out/soong/host/linux-x86/bin/dep_fixer out/soong/.intermediates/system/core/init/host_init_verifier/linux_glibc_x86_64/gen/proto/system/core/init/subcontext.pb.d
 build $BUILDROOT/init/proto/system/core/init/subcontext.pb.d | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc: protoc system/core/init/subcontext.proto | out/tc/host/bin/protoc
-
-rule cxx
-  depfile = $out.d
-  command = $cxx -MD -MF $out.d $cxxflags $includes -c $in -o $out
+build $BUILDROOT/init/proto/system/core/init/property_service.pb.d | $BUILDROOT/init/proto/system/core/init/property_service.pb.h $BUILDROOT/init/proto/system/core/init/property_service.pb.cc: protoc system/core/init/property_service.proto | out/tc/host/bin/protoc
 
 build $BUILDROOT/init/obj/subcontext.pb.o: cxx $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc
   cxxflags = $cxxflags -Wno-unused-command-line-argument
@@ -63,7 +72,7 @@ build $BUILDROOT/init/obj/first_stage_console.o: cxx system/core/init/first_stag
 build $BUILDROOT/init/obj/first_stage_init.o: cxx system/core/init/first_stage_init.cpp
 build $BUILDROOT/init/obj/first_stage_mount.o: cxx system/core/init/first_stage_mount.cpp
 build $BUILDROOT/init/obj/fscrypt_init_extensions.o: cxx system/core/init/fscrypt_init_extensions.cpp
-build $BUILDROOT/init/obj/init.o: cxx system/core/init/init.cpp
+build $BUILDROOT/init/obj/init.o: cxx system/core/init/init.cpp | $BUILDROOT/init/proto/system/core/init/property_service.pb.h
 build $BUILDROOT/init/obj/lmkd_service.o: cxx system/core/init/lmkd_service.cpp
 build $BUILDROOT/init/obj/modalias_handler.o: cxx system/core/init/modalias_handler.cpp
 build $BUILDROOT/init/obj/mount_handler.o: cxx system/core/init/mount_handler.cpp
@@ -84,18 +93,16 @@ build $BUILDROOT/init/obj/uevent_listener.o: cxx system/core/init/uevent_listene
 build $BUILDROOT/init/obj/ueventd.o: cxx system/core/init/ueventd.cpp
 build $BUILDROOT/init/obj/ueventd_parser.o: cxx system/core/init/ueventd_parser.cpp
 
-rule ar
-  command = $AR rcs $out $in
 build $BUILDROOT/init/obj/libinit.a: ar $
   $BUILDROOT/init/obj/init.o $
+  $BUILDROOT/init/obj/ueventd.o $
   $BUILDROOT/init/obj/subcontext.pb.o
 
 # init_second_stage
 build $BUILDROOT/init/obj/main.o: cxx system/core/init/main.cpp | $SYSROOT/include/sys/capability.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 
-rule link
-  command = $CXX $in -o $out
-build $BUILDROOT/init/obj/init: link $BUILDROOT/init/obj/libinit.a $BUILDROOT/init/obj/main.o
+build $BUILDROOT/init/obj/init: link $BUILDROOT/init/obj/libinit.a $BUILDROOT/init/obj/main.o $
+  | $SYSROOT/lib/libbase.so $SYSROOT/lib/libcutils.so $SYSROOT/lib/liblog.so
 
 # symlink init as ueventd
 

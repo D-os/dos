@@ -2,7 +2,7 @@ cc = $CC -fPIC -g
 cxx = $CXX -std=c++17 -fPIC -g
 cxxflags = -Wno-exit-time-destructors
 includes = -Isystem/core/libcutils/include -Isystem/libbase/include -Isystem/logging/liblog/include -Isystem/bioniccompat/include
-libs = -L$BUILDROOT/liblog -llog
+libs = -L$SYSROOT/lib -llog
 
 build $BUILDROOT/libcutils/config_utils.o: cxx system/core/libcutils/config_utils.cpp
 build $BUILDROOT/libcutils/iosched_policy.o: cxx system/core/libcutils/iosched_policy.cpp
@@ -48,4 +48,4 @@ build $BUILDROOT/libcutils/libcutils.a: ar $
   $BUILDROOT/libcutils/trace-dev.o $
   $BUILDROOT/libcutils/uevent.o $
 
-build $BUILDROOT/libcutils/libcutils.so: so $BUILDROOT/libcutils/libcutils.a | $BUILDROOT/liblog/liblog.so
+build $BUILDROOT/libcutils/libcutils.so: so $BUILDROOT/libcutils/libcutils.a | $SYSROOT/lib/liblog.so

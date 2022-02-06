@@ -2,7 +2,7 @@ cxx = $CXX -std=c++17 -fPIC -g
 cxxflags = -Wall -Werror -Wextra -D_FILE_OFFSET_BITS=64 $
   -Wexit-time-destructors -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses -Wno-sign-compare -Wno-c99-designator
 includes = -Isystem/libbase/include -Isystem/bioniccompat/include -Isystem/logging/liblog/include
-libs = -llog
+libs = -L$SYSROOT/lib -llog
 
 rule cxx
   command = $cxx $cxxflags $includes -c $in -o $out
@@ -44,4 +44,4 @@ build $BUILDROOT/libbase/libbase.a: ar $
   $BUILDROOT/libbase/test_utils.o $
   $BUILDROOT/libbase/errors_unix.o $
 
-build $BUILDROOT/libbase/libbase.so: so $BUILDROOT/libbase/libbase.a
+build $BUILDROOT/libbase/libbase.so: so $BUILDROOT/libbase/libbase.a | $SYSROOT/lib/liblog.so

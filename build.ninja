@@ -24,18 +24,19 @@ rule so
   command = $LINKER $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out $in
 
 rule link
-  command = $LINKER $in -o $out
+  command = $LINKER $libs $in -o $out
 
 rule copy
   command = mkdir -p $$(basename $out) && cp -f $in $out
 
 subninja build/libbase.ninja
+build $SYSROOT/lib/libbase.so: copy $BUILDROOT/libbase/libbase.so
 subninja build/libcutils.ninja
+build $SYSROOT/lib/libcutils.so: copy $BUILDROOT/libcutils/libcutils.so
 subninja build/liblog.ninja
-
+build $SYSROOT/lib/liblog.so: copy $BUILDROOT/liblog/liblog.so
 subninja build/protobuf.ninja
 build out/tc/host/bin/protoc: copy $BUILDROOT/protobuf/aprotoc
-
 subninja build/libcap.ninja
 build $SYSROOT/include/sys/capability.h: copy external/libcap/libcap/include/sys/capability.h
 
