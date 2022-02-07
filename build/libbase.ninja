@@ -44,4 +44,4 @@ build $BUILDROOT/libbase/libbase.a: ar $
   $BUILDROOT/libbase/test_utils.o $
   $BUILDROOT/libbase/errors_unix.o $
 
-build $BUILDROOT/libbase/libbase.so: so $BUILDROOT/libbase/libbase.a | $SYSROOT/lib/liblog.so
+build $BUILDROOT/libbase/libbase.so: soa $BUILDROOT/libbase/libbase.a | $SYSROOT/lib/liblog.so

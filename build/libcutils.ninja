@@ -48,4 +48,4 @@ build $BUILDROOT/libcutils/libcutils.a: ar $
   $BUILDROOT/libcutils/trace-dev.o $
   $BUILDROOT/libcutils/uevent.o $
 
-build $BUILDROOT/libcutils/libcutils.so: so $BUILDROOT/libcutils/libcutils.a | $SYSROOT/lib/liblog.so
+build $BUILDROOT/libcutils/libcutils.so: soa $BUILDROOT/libcutils/libcutils.a | $SYSROOT/lib/liblog.so

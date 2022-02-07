@@ -23,6 +23,9 @@ rule ar
 rule so
   command = $LINKER $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out $in
 
+rule soa
+  command = $LINKER $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out -Wl,--whole-archive $in -Wl,--no-whole-archive
+
 rule link
   command = $LINKER $libs $in -o $out
 

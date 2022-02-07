@@ -20,4 +20,4 @@ build $BUILDROOT/liblog/liblog.a: ar $
   $BUILDROOT/liblog/logprint.o $
   $BUILDROOT/liblog/properties.o $
 
-build $BUILDROOT/liblog/liblog.so: so $BUILDROOT/liblog/liblog.a
+build $BUILDROOT/liblog/liblog.so: soa $BUILDROOT/liblog/liblog.a
