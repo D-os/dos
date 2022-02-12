@@ -1,4 +1,4 @@
-cxx = $CXX -std=c++17
+cxx = $CXX -std=c++20 -fPIC -g
 
 cxxflags = $
   -DLOG_UEVENTS=0 $
@@ -19,24 +19,27 @@ cxxflags = $
   -DDUMP_ON_UMOUNT_FAILURE=1 $
   -DSHUTDOWN_ZERO_TIMEOUT=1 $
   -Wno-c99-designator $
+  -Wno-deprecated-pragma $
+  -Wno-deprecated-declarations $
   -D_LIBCPP_ENABLE_THREAD_SAFETY_ANNOTATIONS
 
 includes = $
+  -I$BUILDROOT/init/proto $
   -Isystem/libbase/include $
   -Isystem/core/include $
+  -I system/core/fs_mgr/include $
+  -Isystem/core/fs_mgr/include_fstab $
+  -Isystem/core/libcutils/include $
+  -Isystem/core/libmodprobe/include $
   -Isystem/core/libprocessgroup/include $
   -Isystem/core/libprocessgroup/setup/include $
-  -Iexternal/protobuf/src $
-  -I$BUILDROOT/init/proto $
   -Isystem/bioniccompat/include $
-  -Isystem/core/fs_mgr/include_fstab $
-  -Isystem/core/libmodprobe/include $
+  -Isystem/androidcompat/sysprop/public/include $
+  -Iexternal/protobuf/src $
 
 #libs = -lbacktrace -lbase -lbootloader_message -lcutils -ldl -lext4_utils -lfs_mgr -lgsi -lhidl-gen-utils -lkeyutils -llog -llogwrap -llp -lprocessgroup -lprocessgroup_setup -lselinux -lutils
 libs = -L$SYSROOT/lib -lbase -lcutils -ldl -llog
 
-rule protoc
-  command = out/tc/host/bin/protoc --cpp_out=lite:$BUILDROOT/init/proto --dependency_out=$out -I . $in #&& out/soong/host/linux-x86/bin/dep_fixer out/soong/.intermediates/system/core/init/host_init_verifier/linux_glibc_x86_64/gen/proto/system/core/init/subcontext.pb.d
 build $BUILDROOT/init/proto/system/core/init/subcontext.pb.d | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc: protoc system/core/init/subcontext.proto | out/tc/host/bin/protoc
 build $BUILDROOT/init/proto/system/core/init/property_service.pb.d | $BUILDROOT/init/proto/system/core/init/property_service.pb.h $BUILDROOT/init/proto/system/core/init/property_service.pb.cc: protoc system/core/init/property_service.proto | out/tc/host/bin/protoc
 
@@ -65,7 +68,7 @@ build $BUILDROOT/init/obj/util.o: cxx system/core/init/util.cpp
 # init_device_sources = [
 build $BUILDROOT/init/obj/block_dev_initializer.o: cxx system/core/init/block_dev_initializer.cpp
 build $BUILDROOT/init/obj/bootchart.o: cxx system/core/init/bootchart.cpp
-build $BUILDROOT/init/obj/builtins.o: cxx system/core/init/builtins.cpp
+build $BUILDROOT/init/obj/builtins.o: cxx system/core/init/builtins.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.d
 build $BUILDROOT/init/obj/devices.o: cxx system/core/init/devices.cpp
 build $BUILDROOT/init/obj/firmware_handler.o: cxx system/core/init/firmware_handler.cpp
 build $BUILDROOT/init/obj/first_stage_console.o: cxx system/core/init/first_stage_console.cpp
@@ -94,6 +97,8 @@ build $BUILDROOT/init/obj/ueventd.o: cxx system/core/init/ueventd.cpp
 build $BUILDROOT/init/obj/ueventd_parser.o: cxx system/core/init/ueventd_parser.cpp
 
 build $BUILDROOT/init/obj/libinit.a: ar $
+  $BUILDROOT/init/obj/subcontext.o $
+  $BUILDROOT/init/obj/builtins.o $
   $BUILDROOT/init/obj/init.o $
   $BUILDROOT/init/obj/ueventd.o $
   $BUILDROOT/init/obj/subcontext.pb.o
