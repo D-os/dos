@@ -23,6 +23,6 @@ using best available open source components.
 ## Building
 
 ```sh
-make toolchain sysroot
+make toolchain sysroot compdb
 PATH=$PWD/out/tc/host/bin:$PATH ninja
 ```
