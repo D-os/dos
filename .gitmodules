@@ -46,3 +46,6 @@
 [submodule "system/logging"]
 	path = system/logging
 	url = https://android.googlesource.com/platform/system/logging
+[submodule "system/vold"]
+	path = system/vold
+	url = https://android.googlesource.com/platform/system/vold
