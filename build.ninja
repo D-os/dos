@@ -54,4 +54,6 @@ subninja build/libmodprobe.ninja
 
 subninja build/fs_mgr.ninja
 
+subninja build/jsoncpp.ninja
+
 subninja build/init.ninja

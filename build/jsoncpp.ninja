@@ -1,0 +1,17 @@
+cxx = $CXX -std=c++20 -fPIC -g
+cxxflags = -DJSON_USE_EXCEPTION=0 -DJSONCPP_NO_LOCALE_SUPPORT -Wall -Werror -Wno-implicit-fallthrough
+includes = -Iexternal/jsoncpp/include
+
+rule cxx
+  command = $cxx $cxxflags $includes -c $in -o $out
+
+build $BUILDROOT/jsoncpp/json_reader.o: cxx external/jsoncpp/src/lib_json/json_reader.cpp
+build $BUILDROOT/jsoncpp/json_value.o: cxx external/jsoncpp/src/lib_json/json_value.cpp
+build $BUILDROOT/jsoncpp/json_writer.o: cxx external/jsoncpp/src/lib_json/json_writer.cpp
+
+build $BUILDROOT/jsoncpp/libjsoncpp.a: ar $
+  $BUILDROOT/jsoncpp/json_reader.o $
+  $BUILDROOT/jsoncpp/json_value.o $
+  $BUILDROOT/jsoncpp/json_writer.o $
+
+build $BUILDROOT/jsoncpp/libjsoncpp.so: soa $BUILDROOT/jsoncpp/libjsoncpp.a
