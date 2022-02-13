@@ -1,9 +1,6 @@
-cc = $CC -fPIC -g
 cflags = -Wno-pointer-arith -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-result -Wno-unused-variable -Wno-shift-op-parentheses
 includes = -Iexternal/libcap/libcap/include -I$BUILDROOT/libcap
 
-rule cc
-  command = $cc $cflags $includes -c $in -o $out
 build $BUILDROOT/libcap/cap_alloc.o: cc external/libcap/libcap/cap_alloc.c | $BUILDROOT/libcap/cap_names.h
 build $BUILDROOT/libcap/cap_extint.o: cc external/libcap/libcap/cap_extint.c | $BUILDROOT/libcap/cap_names.h
 build $BUILDROOT/libcap/cap_file.o: cc external/libcap/libcap/cap_file.c | $BUILDROOT/libcap/cap_names.h
@@ -26,6 +23,7 @@ build $BUILDROOT/libcap/cap_names.list.h: generate_cap_names_list out/tc/target/
 
 rule hostcc
   command = $HOSTCC -I$BUILDROOT/libcap $in -o $out
+  description = [HOST] CC $out
 build $BUILDROOT/libcap/_makenames: hostcc external/libcap/libcap/_makenames.c | $BUILDROOT/libcap/cap_names.list.h
 
 rule makenames

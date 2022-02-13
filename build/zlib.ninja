@@ -1,9 +1,6 @@
-cc = $CC -fPIC -g
 cflags = -DHAVE_HIDDEN -DZLIB_CONST -DX86_NOT_WINDOWS -DADLER32_SIMD_SSSE3 -mpclmul -DCRC32_SIMD_SSE42_PCLMUL -DINFLATE_CHUNK_READ_64LE -Wall -Werror -Wno-unused -Wno-unused-parameter
 includes = #-Iexternal/libcap/libcap/include -I$BUILDROOT/libcap
 
-rule cc
-  command = $cc $cflags $includes -c $in -o $out
 build $BUILDROOT/zlib/target/adler32.o: cc external/zlib/adler32.c
 build $BUILDROOT/zlib/target/compress.o: cc external/zlib/compress.c
 build $BUILDROOT/zlib/target/cpu_features.o: cc external/zlib/cpu_features.c

@@ -3,6 +3,7 @@ includes = -Iexternal/protobuf/src -Iexternal/protobuf/config
 
 rule hostcxx
   command = $HOSTCXX -fPIC -g $cflags $includes -c $in -o $out
+  description = [HOST] CXX $out
 
 build $BUILDROOT/protobuf/any_lite.o: hostcxx external/protobuf/src/google/protobuf/any_lite.cc
 build $BUILDROOT/protobuf/arena.o: hostcxx external/protobuf/src/google/protobuf/arena.cc
@@ -333,6 +334,7 @@ build $BUILDROOT/protobuf/main.o: hostcxx external/protobuf/src/google/protobuf/
 
 rule hostld
   command = $HOSTCXX $ldFlags $in -o $out
+  description = [HOST] LINK $out
 
 build $BUILDROOT/protobuf/aprotoc: hostld $BUILDROOT/protobuf/main.o $BUILDROOT/protobuf/libprotoc.a
   ldFlags = -Wl,--no-undefined -ldl -lpthread -lm -lrt -lz -pie

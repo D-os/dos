@@ -1,6 +1,4 @@
-cc = $CC -fPIC -g
-cxx = $CXX -std=c++20 -fPIC -g
-cxxflags = -Wno-exit-time-destructors
+cxxflags = -Wno-exit-time-destructors -Wno-deprecated-pragma
 includes = -Isystem/core/libcutils/include -Isystem/libbase/include -Isystem/logging/liblog/include
 libs = -L$SYSROOT/lib -llog
 

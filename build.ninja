@@ -11,26 +11,33 @@ HOSTCXX = out/tc/host/bin/clang++
 
 rule cc
   depfile = $out.d
-  command = $cc -MD -MF $out.d $cflags $includes -c $in -o $out
+  command = $CC -fPIC -g -MD -MF $out.d $cflags $includes -c $in -o $out
+  description = CC $out
 
 rule cxx
   depfile = $out.d
-  command = $cxx -MD -MF $out.d $cxxflags $includes -c $in -o $out
+  command = $CXX -std=c++20 -fPIC -g -MD -MF $out.d $cxxflags $includes -c $in -o $out
+  description = CXX $out
 
 rule ar
   command = $AR rcs $out $in
+  description = CXX $out
 
 rule so
   command = $LINKER $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out $in
+  description = SO $out
 
 rule soa
   command = $LINKER $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out -Wl,--whole-archive $in -Wl,--no-whole-archive
+  description = SO(.a) $out
 
 rule link
   command = $LINKER $libs $in -o $out
+  description = LINK $out
 
 rule copy
   command = mkdir -p $$(basename $out) && cp -f $in $out
+  description = COPY $out <- $in
 
 subninja build/libbase.ninja
 build $SYSROOT/lib/libbase.so: copy $BUILDROOT/libbase/libbase.so
