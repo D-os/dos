@@ -49,3 +49,6 @@
 [submodule "system/vold"]
 	path = system/vold
 	url = https://android.googlesource.com/platform/system/vold
+[submodule "system/extras"]
+	path = system/extras
+	url = https://android.googlesource.com/platform/system/extras
