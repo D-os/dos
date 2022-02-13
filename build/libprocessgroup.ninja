@@ -1,0 +1,20 @@
+cxx = $CXX -std=c++20 -fPIC -g
+cxxflags = -Wall -Werror -Wexit-time-destructors -Wno-inconsistent-missing-override -Wno-c99-designator
+includes = -Isystem/core/libprocessgroup/include -Isystem/core/libprocessgroup/cgrouprc/include $
+  -Isystem/libbase/include -Isystem/core/libcutils/include
+libs = -L$SYSROOT/lib -lbase -lcgrouprc
+rule cxx
+  command = $cxx $cxxflags $includes -c $in -o $out
+
+build $BUILDROOT/libprocessgroup/cgroup_map.o: cxx system/core/libprocessgroup/cgroup_map.cpp
+build $BUILDROOT/libprocessgroup/processgroup.o: cxx system/core/libprocessgroup/processgroup.cpp
+build $BUILDROOT/libprocessgroup/sched_policy.o: cxx system/core/libprocessgroup/sched_policy.cpp
+build $BUILDROOT/libprocessgroup/task_profiles.o: cxx system/core/libprocessgroup/task_profiles.cpp
+
+build $BUILDROOT/libprocessgroup/libprocessgroup.so: so $
+  $BUILDROOT/jsoncpp/libjsoncpp.a $
+  $BUILDROOT/libprocessgroup/cgroup_map.o $
+  $BUILDROOT/libprocessgroup/processgroup.o $
+  $BUILDROOT/libprocessgroup/sched_policy.o $
+  $BUILDROOT/libprocessgroup/task_profiles.o $
+  | $SYSROOT/lib/libbase.so $SYSROOT/lib/libcutils.so $SYSROOT/lib/libcgrouprc.so

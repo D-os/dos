@@ -52,6 +52,13 @@ build $SYSROOT/include/sys/capability.h: copy external/libcap/libcap/include/sys
 
 subninja build/libmodprobe.ninja
 
+subninja build/libcgrouprc_format.ninja
+
+subninja build/libcgrouprc.ninja
+build $SYSROOT/lib/libcgrouprc.so: copy $BUILDROOT/libcgrouprc/libcgrouprc.so
+
+subninja build/libprocessgroup.ninja
+
 subninja build/fs_mgr.ninja
 
 subninja build/jsoncpp.ninja
