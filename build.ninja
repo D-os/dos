@@ -1,8 +1,8 @@
 BUILDROOT = out/build
 SYSROOT = out/sysroot
 TARGET = x86_64-unknown-linux-musl
-CC = out/tc/target/bin/${TARGET}-clang -isystem $SYSROOT/include
-CXX = out/tc/target/bin/${TARGET}-clang++ -nostdinc++ -cxx-isystem $SYSROOT/include/c++/v1 -cxx-isystem $SYSROOT/include
+CC = out/tc/target/bin/${TARGET}-clang -isystem $SYSROOT/include -Isystem/bioniccompat/include
+CXX = out/tc/target/bin/${TARGET}-clang++ -nostdinc++ -cxx-isystem $SYSROOT/include/c++/v1 -cxx-isystem $SYSROOT/include -Isystem/bioniccompat/include
 LINKER = out/tc/target/bin/${TARGET}-clang -isysroot $SYSROOT
 AR = out/tc/target/bin/${TARGET}-ar
 
@@ -50,5 +50,6 @@ rule protoc
 subninja build/libcap.ninja
 build $SYSROOT/include/sys/capability.h: copy external/libcap/libcap/include/sys/capability.h
 
+subninja build/fs_mgr.ninja
 
 subninja build/init.ninja

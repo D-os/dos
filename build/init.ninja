@@ -33,7 +33,6 @@ includes = $
   -Isystem/core/libmodprobe/include $
   -Isystem/core/libprocessgroup/include $
   -Isystem/core/libprocessgroup/setup/include $
-  -Isystem/bioniccompat/include $
   -Isystem/androidcompat/sysprop/public/include $
   -Iexternal/protobuf/src $
 

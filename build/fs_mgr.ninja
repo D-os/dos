@@ -1,0 +1,65 @@
+cc = $CC -fPIC -g
+cxx = $CXX -std=c++20 -fPIC -g
+cxxflags = -Wall -Werror -Wno-inconsistent-missing-override -D_FILE_OFFSET_BITS=64 -DALLOW_ADBD_DISABLE_VERITY=1 -DNO_SKIP_MOUNT
+includes = $
+  -Isystem/core/fs_mgr/include $
+  -Isystem/core/fs_mgr/include_fstab $
+  -Isystem/core/fs_mgr/libdm/include $
+  -Isystem/core/fs_mgr/liblp/include $
+  -Isystem/core/fs_mgr/libstorage_literals $
+  -Isystem/core/libcutils/include $
+  -Isystem/libbase/include $
+  -Isystem/logging/liblog/include $
+  -Isystem/logging/logwrapper/include $
+  -Isystem/extras/ext4_utils/include $
+  -Isystem/vold
+libs = -L$SYSROOT/lib -llog
+
+build $BUILDROOT/fs_mgr/blockdev.o: cxx system/core/fs_mgr/blockdev.cpp
+build $BUILDROOT/fs_mgr/file_wait.o: cxx system/core/fs_mgr/file_wait.cpp
+build $BUILDROOT/fs_mgr/fs_mgr.o: cxx system/core/fs_mgr/fs_mgr.cpp
+build $BUILDROOT/fs_mgr/fs_mgr_format.o: cxx system/core/fs_mgr/fs_mgr_format.cpp
+build $BUILDROOT/fs_mgr/fs_mgr_dm_linear.o: cxx system/core/fs_mgr/fs_mgr_dm_linear.cpp
+build $BUILDROOT/fs_mgr/fs_mgr_overlayfs.o: cxx system/core/fs_mgr/fs_mgr_overlayfs.cpp
+build $BUILDROOT/fs_mgr/fs_mgr_roots.o: cxx system/core/fs_mgr/fs_mgr_roots.cpp
+build $BUILDROOT/fs_mgr/fs_mgr_vendor_overlay.o: cxx system/core/fs_mgr/fs_mgr_vendor_overlay.cpp
+
+build $BUILDROOT/fs_mgr/fs_mgr_fstab.o: cxx system/core/fs_mgr/fs_mgr_fstab.cpp
+build $BUILDROOT/fs_mgr/fs_mgr_boot_config.o: cxx system/core/fs_mgr/fs_mgr_boot_config.cpp
+build $BUILDROOT/fs_mgr/fs_mgr_slotselect.o: cxx system/core/fs_mgr/fs_mgr_slotselect.cpp
+
+# Two variants of libfs_mgr are provided: libfs_mgr and libfs_mgr_binder.
+# Use libfs_mgr in recovery, first-stage-init, or when libfiemap or overlayfs
+# is not used.
+#
+# Use libfs_mgr_binder when not in recovery/first-stage init, or when overlayfs
+# or libfiemap is needed. In this case, libfiemap will proxy over binder to
+# gsid.
+# Do not ever allow this library to be vendor_available as a shared library.
+# It does not have a stable interface.
+build $BUILDROOT/fs_mgr/libfs_mgr.so: soa $
+  $BUILDROOT/fs_mgr/blockdev.o $
+  $BUILDROOT/fs_mgr/file_wait.o $
+  $BUILDROOT/fs_mgr/fs_mgr.o $
+  $BUILDROOT/fs_mgr/fs_mgr_format.o $
+  $BUILDROOT/fs_mgr/fs_mgr_dm_linear.o $
+  $BUILDROOT/fs_mgr/fs_mgr_overlayfs.o $
+  $BUILDROOT/fs_mgr/fs_mgr_roots.o $
+  $BUILDROOT/fs_mgr/fs_mgr_vendor_overlay.o $
+  | $SYSROOT/lib/liblog.so
+
+# Do not ever make this a shared library as long as it is vendor_available.
+# It does not have a stable interface.
+build $BUILDROOT/fs_mgr/libfstab.a: ar $
+  $BUILDROOT/fs_mgr/blockdev.o $
+  $BUILDROOT/fs_mgr/file_wait.o $
+  $BUILDROOT/fs_mgr/fs_mgr.o $
+  $BUILDROOT/fs_mgr/fs_mgr_format.o $
+  $BUILDROOT/fs_mgr/fs_mgr_dm_linear.o $
+  $BUILDROOT/fs_mgr/fs_mgr_overlayfs.o $
+  $BUILDROOT/fs_mgr/fs_mgr_roots.o $
+  $BUILDROOT/fs_mgr/fs_mgr_vendor_overlay.o $
+  $BUILDROOT/fs_mgr/fs_mgr_fstab.o $
+  $BUILDROOT/fs_mgr/fs_mgr_boot_config.o $
+  $BUILDROOT/fs_mgr/fs_mgr_slotselect.o $
+

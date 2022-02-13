@@ -1,7 +1,7 @@
-cxx = $CXX -std=c++17 -fPIC -g
+cxx = $CXX -std=c++20 -fPIC -g
 cxxflags = -Wall -Werror -Wextra -D_FILE_OFFSET_BITS=64 $
   -Wexit-time-destructors -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses -Wno-sign-compare -Wno-c99-designator
-includes = -Isystem/libbase/include -Isystem/bioniccompat/include -Isystem/logging/liblog/include
+includes = -Isystem/libbase/include -Isystem/logging/liblog/include
 libs = -L$SYSROOT/lib -llog
 
 rule cxx
