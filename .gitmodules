@@ -52,3 +52,6 @@
 [submodule "system/extras"]
 	path = system/extras
 	url = https://github.com/D-os/system_extras.git
+[submodule "external/jsoncpp"]
+	path = external/jsoncpp
+	url = https://android.googlesource.com/platform/external/jsoncpp
