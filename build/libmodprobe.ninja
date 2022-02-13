@@ -1,0 +1,11 @@
+cxx = $CXX -std=c++20 -fPIC -g
+cxxflags = -Werror
+includes = -Isystem/core/libmodprobe/include -Isystem/libbase/include
+
+build $BUILDROOT/libmodprobe/libmodprobe.o: cxx system/core/libmodprobe/libmodprobe.cpp
+build $BUILDROOT/libmodprobe/libmodprobe_ext.o: cxx system/core/libmodprobe/libmodprobe_ext.cpp
+
+build $BUILDROOT/libmodprobe/libmodprobe.a: ar $
+  $BUILDROOT/libmodprobe/libmodprobe.o $
+  $BUILDROOT/libmodprobe/libmodprobe_ext.o $
+

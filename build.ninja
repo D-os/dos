@@ -50,6 +50,8 @@ rule protoc
 subninja build/libcap.ninja
 build $SYSROOT/include/sys/capability.h: copy external/libcap/libcap/include/sys/capability.h
 
+subninja build/libmodprobe.ninja
+
 subninja build/fs_mgr.ninja
 
 subninja build/init.ninja
