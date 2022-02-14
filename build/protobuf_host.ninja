@@ -1,0 +1,340 @@
+cflags = -DHAVE_ZLIB=1 -Wno-unused-const-variable -Wno-error=user-defined-warnings -Wall -Werror -Wno-unused-function -Wno-sign-compare -Wno-unused-parameter -Wno-sign-promo -Wno-inconsistent-missing-override
+includes = -Iexternal/protobuf/src -Iexternal/protobuf/config
+
+rule hostcxx
+  command = $HOSTCXX -fPIC -g $cflags $includes -c $in -o $out
+  description = [HOST] CXX $out
+
+build $BUILDROOT/_host/protobuf/any_lite.o: hostcxx external/protobuf/src/google/protobuf/any_lite.cc
+build $BUILDROOT/_host/protobuf/arena.o: hostcxx external/protobuf/src/google/protobuf/arena.cc
+build $BUILDROOT/_host/protobuf/extension_set.o: hostcxx external/protobuf/src/google/protobuf/extension_set.cc
+build $BUILDROOT/_host/protobuf/generated_enum_util.o: hostcxx external/protobuf/src/google/protobuf/generated_enum_util.cc
+build $BUILDROOT/_host/protobuf/generated_message_table_driven_lite.o: hostcxx external/protobuf/src/google/protobuf/generated_message_table_driven_lite.cc
+build $BUILDROOT/_host/protobuf/generated_message_util.o: hostcxx external/protobuf/src/google/protobuf/generated_message_util.cc
+build $BUILDROOT/_host/protobuf/implicit_weak_message.o: hostcxx external/protobuf/src/google/protobuf/implicit_weak_message.cc
+build $BUILDROOT/_host/protobuf/coded_stream.o: hostcxx external/protobuf/src/google/protobuf/io/coded_stream.cc
+build $BUILDROOT/_host/protobuf/io_win32.o: hostcxx external/protobuf/src/google/protobuf/io/io_win32.cc
+build $BUILDROOT/_host/protobuf/strtod.o: hostcxx external/protobuf/src/google/protobuf/io/strtod.cc
+build $BUILDROOT/_host/protobuf/zero_copy_stream.o: hostcxx external/protobuf/src/google/protobuf/io/zero_copy_stream.cc
+build $BUILDROOT/_host/protobuf/zero_copy_stream_impl.o: hostcxx external/protobuf/src/google/protobuf/io/zero_copy_stream_impl.cc
+build $BUILDROOT/_host/protobuf/zero_copy_stream_impl_lite.o: hostcxx external/protobuf/src/google/protobuf/io/zero_copy_stream_impl_lite.cc
+build $BUILDROOT/_host/protobuf/message_lite.o: hostcxx external/protobuf/src/google/protobuf/message_lite.cc
+build $BUILDROOT/_host/protobuf/parse_context.o: hostcxx external/protobuf/src/google/protobuf/parse_context.cc
+build $BUILDROOT/_host/protobuf/repeated_field.o: hostcxx external/protobuf/src/google/protobuf/repeated_field.cc
+build $BUILDROOT/_host/protobuf/bytestream.o: hostcxx external/protobuf/src/google/protobuf/stubs/bytestream.cc
+build $BUILDROOT/_host/protobuf/common.o: hostcxx external/protobuf/src/google/protobuf/stubs/common.cc
+build $BUILDROOT/_host/protobuf/int128.o: hostcxx external/protobuf/src/google/protobuf/stubs/int128.cc
+build $BUILDROOT/_host/protobuf/status.o: hostcxx external/protobuf/src/google/protobuf/stubs/status.cc
+build $BUILDROOT/_host/protobuf/statusor.o: hostcxx external/protobuf/src/google/protobuf/stubs/statusor.cc
+build $BUILDROOT/_host/protobuf/stringpiece.o: hostcxx external/protobuf/src/google/protobuf/stubs/stringpiece.cc
+build $BUILDROOT/_host/protobuf/stringprintf.o: hostcxx external/protobuf/src/google/protobuf/stubs/stringprintf.cc
+build $BUILDROOT/_host/protobuf/structurally_valid.o: hostcxx external/protobuf/src/google/protobuf/stubs/structurally_valid.cc
+build $BUILDROOT/_host/protobuf/strutil.o: hostcxx external/protobuf/src/google/protobuf/stubs/strutil.cc
+build $BUILDROOT/_host/protobuf/time.o: hostcxx external/protobuf/src/google/protobuf/stubs/time.cc
+build $BUILDROOT/_host/protobuf/wire_format_lite.o: hostcxx external/protobuf/src/google/protobuf/wire_format_lite.cc
+build $BUILDROOT/_host/protobuf/any.o: hostcxx external/protobuf/src/google/protobuf/any.cc
+build $BUILDROOT/_host/protobuf/any.pb.o: hostcxx external/protobuf/src/google/protobuf/any.pb.cc
+build $BUILDROOT/_host/protobuf/api.pb.o: hostcxx external/protobuf/src/google/protobuf/api.pb.cc
+build $BUILDROOT/_host/protobuf/importer.o: hostcxx external/protobuf/src/google/protobuf/compiler/importer.cc
+build $BUILDROOT/_host/protobuf/parser.o: hostcxx external/protobuf/src/google/protobuf/compiler/parser.cc
+build $BUILDROOT/_host/protobuf/descriptor.o: hostcxx external/protobuf/src/google/protobuf/descriptor.cc
+build $BUILDROOT/_host/protobuf/descriptor.pb.o: hostcxx external/protobuf/src/google/protobuf/descriptor.pb.cc
+build $BUILDROOT/_host/protobuf/descriptor_database.o: hostcxx external/protobuf/src/google/protobuf/descriptor_database.cc
+build $BUILDROOT/_host/protobuf/duration.pb.o: hostcxx external/protobuf/src/google/protobuf/duration.pb.cc
+build $BUILDROOT/_host/protobuf/dynamic_message.o: hostcxx external/protobuf/src/google/protobuf/dynamic_message.cc
+build $BUILDROOT/_host/protobuf/empty.pb.o: hostcxx external/protobuf/src/google/protobuf/empty.pb.cc
+build $BUILDROOT/_host/protobuf/extension_set_heavy.o: hostcxx external/protobuf/src/google/protobuf/extension_set_heavy.cc
+build $BUILDROOT/_host/protobuf/field_mask.pb.o: hostcxx external/protobuf/src/google/protobuf/field_mask.pb.cc
+build $BUILDROOT/_host/protobuf/generated_message_reflection.o: hostcxx external/protobuf/src/google/protobuf/generated_message_reflection.cc
+build $BUILDROOT/_host/protobuf/generated_message_table_driven.o: hostcxx external/protobuf/src/google/protobuf/generated_message_table_driven.cc
+build $BUILDROOT/_host/protobuf/gzip_stream.o: hostcxx external/protobuf/src/google/protobuf/io/gzip_stream.cc
+build $BUILDROOT/_host/protobuf/printer.o: hostcxx external/protobuf/src/google/protobuf/io/printer.cc
+build $BUILDROOT/_host/protobuf/tokenizer.o: hostcxx external/protobuf/src/google/protobuf/io/tokenizer.cc
+build $BUILDROOT/_host/protobuf/map_field.o: hostcxx external/protobuf/src/google/protobuf/map_field.cc
+build $BUILDROOT/_host/protobuf/message.o: hostcxx external/protobuf/src/google/protobuf/message.cc
+build $BUILDROOT/_host/protobuf/reflection_ops.o: hostcxx external/protobuf/src/google/protobuf/reflection_ops.cc
+build $BUILDROOT/_host/protobuf/service.o: hostcxx external/protobuf/src/google/protobuf/service.cc
+build $BUILDROOT/_host/protobuf/source_context.pb.o: hostcxx external/protobuf/src/google/protobuf/source_context.pb.cc
+build $BUILDROOT/_host/protobuf/struct.pb.o: hostcxx external/protobuf/src/google/protobuf/struct.pb.cc
+build $BUILDROOT/_host/protobuf/mathlimits.o: hostcxx external/protobuf/src/google/protobuf/stubs/mathlimits.cc
+build $BUILDROOT/_host/protobuf/substitute.o: hostcxx external/protobuf/src/google/protobuf/stubs/substitute.cc
+build $BUILDROOT/_host/protobuf/text_format.o: hostcxx external/protobuf/src/google/protobuf/text_format.cc
+build $BUILDROOT/_host/protobuf/timestamp.pb.o: hostcxx external/protobuf/src/google/protobuf/timestamp.pb.cc
+build $BUILDROOT/_host/protobuf/type.pb.o: hostcxx external/protobuf/src/google/protobuf/type.pb.cc
+build $BUILDROOT/_host/protobuf/unknown_field_set.o: hostcxx external/protobuf/src/google/protobuf/unknown_field_set.cc
+build $BUILDROOT/_host/protobuf/delimited_message_util.o: hostcxx external/protobuf/src/google/protobuf/util/delimited_message_util.cc
+build $BUILDROOT/_host/protobuf/field_comparator.o: hostcxx external/protobuf/src/google/protobuf/util/field_comparator.cc
+build $BUILDROOT/_host/protobuf/field_mask_util.o: hostcxx external/protobuf/src/google/protobuf/util/field_mask_util.cc
+build $BUILDROOT/_host/protobuf/datapiece.o: hostcxx external/protobuf/src/google/protobuf/util/internal/datapiece.cc
+build $BUILDROOT/_host/protobuf/default_value_objectwriter.o: hostcxx external/protobuf/src/google/protobuf/util/internal/default_value_objectwriter.cc
+build $BUILDROOT/_host/protobuf/error_listener.o: hostcxx external/protobuf/src/google/protobuf/util/internal/error_listener.cc
+build $BUILDROOT/_host/protobuf/field_mask_utility.o: hostcxx external/protobuf/src/google/protobuf/util/internal/field_mask_utility.cc
+build $BUILDROOT/_host/protobuf/json_escaping.o: hostcxx external/protobuf/src/google/protobuf/util/internal/json_escaping.cc
+build $BUILDROOT/_host/protobuf/json_objectwriter.o: hostcxx external/protobuf/src/google/protobuf/util/internal/json_objectwriter.cc
+build $BUILDROOT/_host/protobuf/json_stream_parser.o: hostcxx external/protobuf/src/google/protobuf/util/internal/json_stream_parser.cc
+build $BUILDROOT/_host/protobuf/object_writer.o: hostcxx external/protobuf/src/google/protobuf/util/internal/object_writer.cc
+build $BUILDROOT/_host/protobuf/proto_writer.o: hostcxx external/protobuf/src/google/protobuf/util/internal/proto_writer.cc
+build $BUILDROOT/_host/protobuf/protostream_objectsource.o: hostcxx external/protobuf/src/google/protobuf/util/internal/protostream_objectsource.cc
+build $BUILDROOT/_host/protobuf/protostream_objectwriter.o: hostcxx external/protobuf/src/google/protobuf/util/internal/protostream_objectwriter.cc
+build $BUILDROOT/_host/protobuf/type_info.o: hostcxx external/protobuf/src/google/protobuf/util/internal/type_info.cc
+build $BUILDROOT/_host/protobuf/type_info_test_helper.o: hostcxx external/protobuf/src/google/protobuf/util/internal/type_info_test_helper.cc
+build $BUILDROOT/_host/protobuf/utility.o: hostcxx external/protobuf/src/google/protobuf/util/internal/utility.cc
+build $BUILDROOT/_host/protobuf/json_util.o: hostcxx external/protobuf/src/google/protobuf/util/json_util.cc
+build $BUILDROOT/_host/protobuf/message_differencer.o: hostcxx external/protobuf/src/google/protobuf/util/message_differencer.cc
+build $BUILDROOT/_host/protobuf/time_util.o: hostcxx external/protobuf/src/google/protobuf/util/time_util.cc
+build $BUILDROOT/_host/protobuf/type_resolver_util.o: hostcxx external/protobuf/src/google/protobuf/util/type_resolver_util.cc
+build $BUILDROOT/_host/protobuf/wire_format.o: hostcxx external/protobuf/src/google/protobuf/wire_format.cc
+build $BUILDROOT/_host/protobuf/wrappers.pb.o: hostcxx external/protobuf/src/google/protobuf/wrappers.pb.cc
+build $BUILDROOT/_host/protobuf/code_generator.o: hostcxx external/protobuf/src/google/protobuf/compiler/code_generator.cc
+build $BUILDROOT/_host/protobuf/command_line_interface.o: hostcxx external/protobuf/src/google/protobuf/compiler/command_line_interface.cc
+build $BUILDROOT/_host/protobuf/cpp_enum.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_enum.cc
+build $BUILDROOT/_host/protobuf/cpp_enum_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_enum_field.cc
+build $BUILDROOT/_host/protobuf/cpp_extension.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_extension.cc
+build $BUILDROOT/_host/protobuf/cpp_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_field.cc
+build $BUILDROOT/_host/protobuf/cpp_file.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_file.cc
+build $BUILDROOT/_host/protobuf/cpp_generator.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_generator.cc
+build $BUILDROOT/_host/protobuf/cpp_helpers.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_helpers.cc
+build $BUILDROOT/_host/protobuf/cpp_map_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_map_field.cc
+build $BUILDROOT/_host/protobuf/cpp_message.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_message.cc
+build $BUILDROOT/_host/protobuf/cpp_message_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_message_field.cc
+build $BUILDROOT/_host/protobuf/cpp_padding_optimizer.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_padding_optimizer.cc
+build $BUILDROOT/_host/protobuf/cpp_primitive_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_primitive_field.cc
+build $BUILDROOT/_host/protobuf/cpp_service.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_service.cc
+build $BUILDROOT/_host/protobuf/cpp_string_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/cpp/cpp_string_field.cc
+build $BUILDROOT/_host/protobuf/csharp_doc_comment.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_doc_comment.cc
+build $BUILDROOT/_host/protobuf/csharp_enum.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_enum.cc
+build $BUILDROOT/_host/protobuf/csharp_enum_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_enum_field.cc
+build $BUILDROOT/_host/protobuf/csharp_field_base.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_field_base.cc
+build $BUILDROOT/_host/protobuf/csharp_generator.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_generator.cc
+build $BUILDROOT/_host/protobuf/csharp_helpers.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_helpers.cc
+build $BUILDROOT/_host/protobuf/csharp_map_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_map_field.cc
+build $BUILDROOT/_host/protobuf/csharp_message.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_message.cc
+build $BUILDROOT/_host/protobuf/csharp_message_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_message_field.cc
+build $BUILDROOT/_host/protobuf/csharp_primitive_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_primitive_field.cc
+build $BUILDROOT/_host/protobuf/csharp_reflection_class.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_reflection_class.cc
+build $BUILDROOT/_host/protobuf/csharp_repeated_enum_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_repeated_enum_field.cc
+build $BUILDROOT/_host/protobuf/csharp_repeated_message_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_repeated_message_field.cc
+build $BUILDROOT/_host/protobuf/csharp_repeated_primitive_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_repeated_primitive_field.cc
+build $BUILDROOT/_host/protobuf/csharp_source_generator_base.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_source_generator_base.cc
+build $BUILDROOT/_host/protobuf/csharp_wrapper_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/csharp/csharp_wrapper_field.cc
+build $BUILDROOT/_host/protobuf/java_context.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_context.cc
+build $BUILDROOT/_host/protobuf/java_doc_comment.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_doc_comment.cc
+build $BUILDROOT/_host/protobuf/java_enum.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_enum.cc
+build $BUILDROOT/_host/protobuf/java_enum_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_enum_field.cc
+build $BUILDROOT/_host/protobuf/java_enum_field_lite.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_enum_field_lite.cc
+build $BUILDROOT/_host/protobuf/java_enum_lite.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_enum_lite.cc
+build $BUILDROOT/_host/protobuf/java_extension.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_extension.cc
+build $BUILDROOT/_host/protobuf/java_extension_lite.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_extension_lite.cc
+build $BUILDROOT/_host/protobuf/java_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_field.cc
+build $BUILDROOT/_host/protobuf/java_file.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_file.cc
+build $BUILDROOT/_host/protobuf/java_generator.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_generator.cc
+build $BUILDROOT/_host/protobuf/java_generator_factory.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_generator_factory.cc
+build $BUILDROOT/_host/protobuf/java_helpers.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_helpers.cc
+build $BUILDROOT/_host/protobuf/java_map_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_map_field.cc
+build $BUILDROOT/_host/protobuf/java_map_field_lite.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_map_field_lite.cc
+build $BUILDROOT/_host/protobuf/java_message.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_message.cc
+build $BUILDROOT/_host/protobuf/java_message_builder.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_message_builder.cc
+build $BUILDROOT/_host/protobuf/java_message_builder_lite.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_message_builder_lite.cc
+build $BUILDROOT/_host/protobuf/java_message_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_message_field.cc
+build $BUILDROOT/_host/protobuf/java_message_field_lite.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_message_field_lite.cc
+build $BUILDROOT/_host/protobuf/java_message_lite.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_message_lite.cc
+build $BUILDROOT/_host/protobuf/java_name_resolver.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_name_resolver.cc
+build $BUILDROOT/_host/protobuf/java_primitive_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_primitive_field.cc
+build $BUILDROOT/_host/protobuf/java_primitive_field_lite.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_primitive_field_lite.cc
+build $BUILDROOT/_host/protobuf/java_service.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_service.cc
+build $BUILDROOT/_host/protobuf/java_shared_code_generator.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_shared_code_generator.cc
+build $BUILDROOT/_host/protobuf/java_string_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_string_field.cc
+build $BUILDROOT/_host/protobuf/java_string_field_lite.o: hostcxx external/protobuf/src/google/protobuf/compiler/java/java_string_field_lite.cc
+build $BUILDROOT/_host/protobuf/js_generator.o: hostcxx external/protobuf/src/google/protobuf/compiler/js/js_generator.cc
+build $BUILDROOT/_host/protobuf/well_known_types_embed.o: hostcxx external/protobuf/src/google/protobuf/compiler/js/well_known_types_embed.cc
+build $BUILDROOT/_host/protobuf/objectivec_enum.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_enum.cc
+build $BUILDROOT/_host/protobuf/objectivec_enum_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_enum_field.cc
+build $BUILDROOT/_host/protobuf/objectivec_extension.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_extension.cc
+build $BUILDROOT/_host/protobuf/objectivec_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_field.cc
+build $BUILDROOT/_host/protobuf/objectivec_file.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_file.cc
+build $BUILDROOT/_host/protobuf/objectivec_generator.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_generator.cc
+build $BUILDROOT/_host/protobuf/objectivec_helpers.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_helpers.cc
+build $BUILDROOT/_host/protobuf/objectivec_map_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_map_field.cc
+build $BUILDROOT/_host/protobuf/objectivec_message.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_message.cc
+build $BUILDROOT/_host/protobuf/objectivec_message_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_message_field.cc
+build $BUILDROOT/_host/protobuf/objectivec_oneof.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_oneof.cc
+build $BUILDROOT/_host/protobuf/objectivec_primitive_field.o: hostcxx external/protobuf/src/google/protobuf/compiler/objectivec/objectivec_primitive_field.cc
+build $BUILDROOT/_host/protobuf/php_generator.o: hostcxx external/protobuf/src/google/protobuf/compiler/php/php_generator.cc
+build $BUILDROOT/_host/protobuf/plugin.o: hostcxx external/protobuf/src/google/protobuf/compiler/plugin.cc
+build $BUILDROOT/_host/protobuf/plugin.pb.o: hostcxx external/protobuf/src/google/protobuf/compiler/plugin.pb.cc
+build $BUILDROOT/_host/protobuf/python_generator.o: hostcxx external/protobuf/src/google/protobuf/compiler/python/python_generator.cc
+build $BUILDROOT/_host/protobuf/ruby_generator.o: hostcxx external/protobuf/src/google/protobuf/compiler/ruby/ruby_generator.cc
+build $BUILDROOT/_host/protobuf/subprocess.o: hostcxx external/protobuf/src/google/protobuf/compiler/subprocess.cc
+build $BUILDROOT/_host/protobuf/zip_writer.o: hostcxx external/protobuf/src/google/protobuf/compiler/zip_writer.cc
+
+build $BUILDROOT/_host/protobuf/libprotoc.a: ar $
+  $BUILDROOT/_host/protobuf/any_lite.o $
+  $BUILDROOT/_host/protobuf/arena.o $
+  $BUILDROOT/_host/protobuf/extension_set.o $
+  $BUILDROOT/_host/protobuf/generated_enum_util.o $
+  $BUILDROOT/_host/protobuf/generated_message_table_driven_lite.o $
+  $BUILDROOT/_host/protobuf/generated_message_util.o $
+  $BUILDROOT/_host/protobuf/implicit_weak_message.o $
+  $BUILDROOT/_host/protobuf/coded_stream.o $
+  $BUILDROOT/_host/protobuf/io_win32.o $
+  $BUILDROOT/_host/protobuf/strtod.o $
+  $BUILDROOT/_host/protobuf/zero_copy_stream.o $
+  $BUILDROOT/_host/protobuf/zero_copy_stream_impl.o $
+  $BUILDROOT/_host/protobuf/zero_copy_stream_impl_lite.o $
+  $BUILDROOT/_host/protobuf/message_lite.o $
+  $BUILDROOT/_host/protobuf/parse_context.o $
+  $BUILDROOT/_host/protobuf/repeated_field.o $
+  $BUILDROOT/_host/protobuf/bytestream.o $
+  $BUILDROOT/_host/protobuf/common.o $
+  $BUILDROOT/_host/protobuf/int128.o $
+  $BUILDROOT/_host/protobuf/status.o $
+  $BUILDROOT/_host/protobuf/statusor.o $
+  $BUILDROOT/_host/protobuf/stringpiece.o $
+  $BUILDROOT/_host/protobuf/stringprintf.o $
+  $BUILDROOT/_host/protobuf/structurally_valid.o $
+  $BUILDROOT/_host/protobuf/strutil.o $
+  $BUILDROOT/_host/protobuf/time.o $
+  $BUILDROOT/_host/protobuf/wire_format_lite.o $
+  $BUILDROOT/_host/protobuf/any.o $
+  $BUILDROOT/_host/protobuf/any.pb.o $
+  $BUILDROOT/_host/protobuf/api.pb.o $
+  $BUILDROOT/_host/protobuf/importer.o $
+  $BUILDROOT/_host/protobuf/parser.o $
+  $BUILDROOT/_host/protobuf/descriptor.o $
+  $BUILDROOT/_host/protobuf/descriptor.pb.o $
+  $BUILDROOT/_host/protobuf/descriptor_database.o $
+  $BUILDROOT/_host/protobuf/duration.pb.o $
+  $BUILDROOT/_host/protobuf/dynamic_message.o $
+  $BUILDROOT/_host/protobuf/empty.pb.o $
+  $BUILDROOT/_host/protobuf/extension_set_heavy.o $
+  $BUILDROOT/_host/protobuf/field_mask.pb.o $
+  $BUILDROOT/_host/protobuf/generated_message_reflection.o $
+  $BUILDROOT/_host/protobuf/generated_message_table_driven.o $
+  $BUILDROOT/_host/protobuf/gzip_stream.o $
+  $BUILDROOT/_host/protobuf/printer.o $
+  $BUILDROOT/_host/protobuf/tokenizer.o $
+  $BUILDROOT/_host/protobuf/map_field.o $
+  $BUILDROOT/_host/protobuf/message.o $
+  $BUILDROOT/_host/protobuf/reflection_ops.o $
+  $BUILDROOT/_host/protobuf/service.o $
+  $BUILDROOT/_host/protobuf/source_context.pb.o $
+  $BUILDROOT/_host/protobuf/struct.pb.o $
+  $BUILDROOT/_host/protobuf/mathlimits.o $
+  $BUILDROOT/_host/protobuf/substitute.o $
+  $BUILDROOT/_host/protobuf/text_format.o $
+  $BUILDROOT/_host/protobuf/timestamp.pb.o $
+  $BUILDROOT/_host/protobuf/type.pb.o $
+  $BUILDROOT/_host/protobuf/unknown_field_set.o $
+  $BUILDROOT/_host/protobuf/delimited_message_util.o $
+  $BUILDROOT/_host/protobuf/field_comparator.o $
+  $BUILDROOT/_host/protobuf/field_mask_util.o $
+  $BUILDROOT/_host/protobuf/datapiece.o $
+  $BUILDROOT/_host/protobuf/default_value_objectwriter.o $
+  $BUILDROOT/_host/protobuf/error_listener.o $
+  $BUILDROOT/_host/protobuf/field_mask_utility.o $
+  $BUILDROOT/_host/protobuf/json_escaping.o $
+  $BUILDROOT/_host/protobuf/json_objectwriter.o $
+  $BUILDROOT/_host/protobuf/json_stream_parser.o $
+  $BUILDROOT/_host/protobuf/object_writer.o $
+  $BUILDROOT/_host/protobuf/proto_writer.o $
+  $BUILDROOT/_host/protobuf/protostream_objectsource.o $
+  $BUILDROOT/_host/protobuf/protostream_objectwriter.o $
+  $BUILDROOT/_host/protobuf/type_info.o $
+  $BUILDROOT/_host/protobuf/type_info_test_helper.o $
+  $BUILDROOT/_host/protobuf/utility.o $
+  $BUILDROOT/_host/protobuf/json_util.o $
+  $BUILDROOT/_host/protobuf/message_differencer.o $
+  $BUILDROOT/_host/protobuf/time_util.o $
+  $BUILDROOT/_host/protobuf/type_resolver_util.o $
+  $BUILDROOT/_host/protobuf/wire_format.o $
+  $BUILDROOT/_host/protobuf/wrappers.pb.o $
+  $BUILDROOT/_host/protobuf/code_generator.o $
+  $BUILDROOT/_host/protobuf/command_line_interface.o $
+  $BUILDROOT/_host/protobuf/cpp_enum.o $
+  $BUILDROOT/_host/protobuf/cpp_enum_field.o $
+  $BUILDROOT/_host/protobuf/cpp_extension.o $
+  $BUILDROOT/_host/protobuf/cpp_field.o $
+  $BUILDROOT/_host/protobuf/cpp_file.o $
+  $BUILDROOT/_host/protobuf/cpp_generator.o $
+  $BUILDROOT/_host/protobuf/cpp_helpers.o $
+  $BUILDROOT/_host/protobuf/cpp_map_field.o $
+  $BUILDROOT/_host/protobuf/cpp_message.o $
+  $BUILDROOT/_host/protobuf/cpp_message_field.o $
+  $BUILDROOT/_host/protobuf/cpp_padding_optimizer.o $
+  $BUILDROOT/_host/protobuf/cpp_primitive_field.o $
+  $BUILDROOT/_host/protobuf/cpp_service.o $
+  $BUILDROOT/_host/protobuf/cpp_string_field.o $
+  $BUILDROOT/_host/protobuf/csharp_doc_comment.o $
+  $BUILDROOT/_host/protobuf/csharp_enum.o $
+  $BUILDROOT/_host/protobuf/csharp_enum_field.o $
+  $BUILDROOT/_host/protobuf/csharp_field_base.o $
+  $BUILDROOT/_host/protobuf/csharp_generator.o $
+  $BUILDROOT/_host/protobuf/csharp_helpers.o $
+  $BUILDROOT/_host/protobuf/csharp_map_field.o $
+  $BUILDROOT/_host/protobuf/csharp_message.o $
+  $BUILDROOT/_host/protobuf/csharp_message_field.o $
+  $BUILDROOT/_host/protobuf/csharp_primitive_field.o $
+  $BUILDROOT/_host/protobuf/csharp_reflection_class.o $
+  $BUILDROOT/_host/protobuf/csharp_repeated_enum_field.o $
+  $BUILDROOT/_host/protobuf/csharp_repeated_message_field.o $
+  $BUILDROOT/_host/protobuf/csharp_repeated_primitive_field.o $
+  $BUILDROOT/_host/protobuf/csharp_source_generator_base.o $
+  $BUILDROOT/_host/protobuf/csharp_wrapper_field.o $
+  $BUILDROOT/_host/protobuf/java_context.o $
+  $BUILDROOT/_host/protobuf/java_doc_comment.o $
+  $BUILDROOT/_host/protobuf/java_enum.o $
+  $BUILDROOT/_host/protobuf/java_enum_field.o $
+  $BUILDROOT/_host/protobuf/java_enum_field_lite.o $
+  $BUILDROOT/_host/protobuf/java_enum_lite.o $
+  $BUILDROOT/_host/protobuf/java_extension.o $
+  $BUILDROOT/_host/protobuf/java_extension_lite.o $
+  $BUILDROOT/_host/protobuf/java_field.o $
+  $BUILDROOT/_host/protobuf/java_file.o $
+  $BUILDROOT/_host/protobuf/java_generator.o $
+  $BUILDROOT/_host/protobuf/java_generator_factory.o $
+  $BUILDROOT/_host/protobuf/java_helpers.o $
+  $BUILDROOT/_host/protobuf/java_map_field.o $
+  $BUILDROOT/_host/protobuf/java_map_field_lite.o $
+  $BUILDROOT/_host/protobuf/java_message.o $
+  $BUILDROOT/_host/protobuf/java_message_builder.o $
+  $BUILDROOT/_host/protobuf/java_message_builder_lite.o $
+  $BUILDROOT/_host/protobuf/java_message_field.o $
+  $BUILDROOT/_host/protobuf/java_message_field_lite.o $
+  $BUILDROOT/_host/protobuf/java_message_lite.o $
+  $BUILDROOT/_host/protobuf/java_name_resolver.o $
+  $BUILDROOT/_host/protobuf/java_primitive_field.o $
+  $BUILDROOT/_host/protobuf/java_primitive_field_lite.o $
+  $BUILDROOT/_host/protobuf/java_service.o $
+  $BUILDROOT/_host/protobuf/java_shared_code_generator.o $
+  $BUILDROOT/_host/protobuf/java_string_field.o $
+  $BUILDROOT/_host/protobuf/java_string_field_lite.o $
+  $BUILDROOT/_host/protobuf/js_generator.o $
+  $BUILDROOT/_host/protobuf/well_known_types_embed.o $
+  $BUILDROOT/_host/protobuf/objectivec_enum.o $
+  $BUILDROOT/_host/protobuf/objectivec_enum_field.o $
+  $BUILDROOT/_host/protobuf/objectivec_extension.o $
+  $BUILDROOT/_host/protobuf/objectivec_field.o $
+  $BUILDROOT/_host/protobuf/objectivec_file.o $
+  $BUILDROOT/_host/protobuf/objectivec_generator.o $
+  $BUILDROOT/_host/protobuf/objectivec_helpers.o $
+  $BUILDROOT/_host/protobuf/objectivec_map_field.o $
+  $BUILDROOT/_host/protobuf/objectivec_message.o $
+  $BUILDROOT/_host/protobuf/objectivec_message_field.o $
+  $BUILDROOT/_host/protobuf/objectivec_oneof.o $
+  $BUILDROOT/_host/protobuf/objectivec_primitive_field.o $
+  $BUILDROOT/_host/protobuf/php_generator.o $
+  $BUILDROOT/_host/protobuf/plugin.o $
+  $BUILDROOT/_host/protobuf/plugin.pb.o $
+  $BUILDROOT/_host/protobuf/python_generator.o $
+  $BUILDROOT/_host/protobuf/ruby_generator.o $
+  $BUILDROOT/_host/protobuf/subprocess.o $
+  $BUILDROOT/_host/protobuf/zip_writer.o $
+
+build $BUILDROOT/_host/protobuf/main.o: hostcxx external/protobuf/src/google/protobuf/compiler/main.cc
+
+rule hostld
+  command = $HOSTCXX $ldFlags $in -o $out
+  description = [HOST] LINK $out
+
+build $BUILDROOT/_host/protobuf/aprotoc: hostld $BUILDROOT/_host/protobuf/main.o $BUILDROOT/_host/protobuf/libprotoc.a
+  ldFlags = -Wl,--no-undefined -ldl -lpthread -lm -lrt -lz -pie
