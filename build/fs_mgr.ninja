@@ -41,9 +41,7 @@ build $BUILDROOT/fs_mgr/libfs_mgr.so: soa $
   $BUILDROOT/fs_mgr/fs_mgr.o $
   $BUILDROOT/fs_mgr/fs_mgr_format.o $
   $BUILDROOT/fs_mgr/fs_mgr_dm_linear.o $
-  $BUILDROOT/fs_mgr/fs_mgr_overlayfs.o $
   $BUILDROOT/fs_mgr/fs_mgr_roots.o $
-  $BUILDROOT/fs_mgr/fs_mgr_vendor_overlay.o $
   | $SYSROOT/lib/liblog.so
 
 # Do not ever make this a shared library as long as it is vendor_available.
@@ -54,9 +52,7 @@ build $BUILDROOT/fs_mgr/libfstab.a: ar $
   $BUILDROOT/fs_mgr/fs_mgr.o $
   $BUILDROOT/fs_mgr/fs_mgr_format.o $
   $BUILDROOT/fs_mgr/fs_mgr_dm_linear.o $
-  $BUILDROOT/fs_mgr/fs_mgr_overlayfs.o $
   $BUILDROOT/fs_mgr/fs_mgr_roots.o $
-  $BUILDROOT/fs_mgr/fs_mgr_vendor_overlay.o $
   $BUILDROOT/fs_mgr/fs_mgr_fstab.o $
   $BUILDROOT/fs_mgr/fs_mgr_boot_config.o $
   $BUILDROOT/fs_mgr/fs_mgr_slotselect.o $

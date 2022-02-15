@@ -23,19 +23,17 @@ cxxflags = $
 
 includes = $
   -I$BUILDROOT/init/proto $
-  -Isystem/libbase/include $
   -Isystem/core/include $
-  -I system/core/fs_mgr/include $
+  -Isystem/core/fs_mgr/include $
   -Isystem/core/fs_mgr/include_fstab $
   -Isystem/core/libcutils/include $
   -Isystem/core/libmodprobe/include $
   -Isystem/core/libprocessgroup/include $
   -Isystem/core/libprocessgroup/setup/include $
+  -Isystem/libbase/include $
+  -Isystem/logging/liblog/include $
   -Isystem/androidcompat/sysprop/public/include $
   -Iexternal/protobuf/src $
-
-#libs = -lbacktrace -lbase -lbootloader_message -lcutils -ldl -lext4_utils -lfs_mgr -lgsi -lhidl-gen-utils -lkeyutils -llog -llogwrap -llp -lprocessgroup -lprocessgroup_setup -lselinux -lutils
-libs = -L$SYSROOT/lib -lbase -lcutils -ldl -llog
 
 build $BUILDROOT/init/proto/system/core/init/subcontext.pb.d | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc: protoc system/core/init/subcontext.proto | out/tc/host/bin/protoc
 build $BUILDROOT/init/proto/system/core/init/property_service.pb.d | $BUILDROOT/init/proto/system/core/init/property_service.pb.h $BUILDROOT/init/proto/system/core/init/property_service.pb.cc: protoc system/core/init/property_service.proto | out/tc/host/bin/protoc
@@ -44,9 +42,9 @@ build $BUILDROOT/init/obj/subcontext.pb.o: cxx $BUILDROOT/init/proto/system/core
   cxxflags = $cxxflags -Wno-unused-command-line-argument
 
 # init_common_sources = [
-build $BUILDROOT/init/obj/action.o: cxx system/core/init/action.cpp
-build $BUILDROOT/init/obj/action_manager.o: cxx system/core/init/action_manager.cpp
-build $BUILDROOT/init/obj/action_parser.o: cxx system/core/init/action_parser.cpp
+build $BUILDROOT/init/obj/action.o: cxx system/core/init/action.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
+build $BUILDROOT/init/obj/action_manager.o: cxx system/core/init/action_manager.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
+build $BUILDROOT/init/obj/action_parser.o: cxx system/core/init/action_parser.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/capabilities.o: cxx system/core/init/capabilities.cpp
 build $BUILDROOT/init/obj/epoll.o: cxx system/core/init/epoll.cpp
 build $BUILDROOT/init/obj/import_parser.o: cxx system/core/init/import_parser.cpp
@@ -55,31 +53,31 @@ build $BUILDROOT/init/obj/keychords.o: cxx system/core/init/keychords.cpp
 build $BUILDROOT/init/obj/parser.o: cxx system/core/init/parser.cpp
 build $BUILDROOT/init/obj/property_type.o: cxx system/core/init/property_type.cpp
 build $BUILDROOT/init/obj/rlimit_parser.o: cxx system/core/init/rlimit_parser.cpp
-build $BUILDROOT/init/obj/service.o: cxx system/core/init/service.cpp
-build $BUILDROOT/init/obj/service_list.o: cxx system/core/init/service_list.cpp
+build $BUILDROOT/init/obj/service.o: cxx system/core/init/service.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
+build $BUILDROOT/init/obj/service_list.o: cxx system/core/init/service_list.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/service_parser.o: cxx system/core/init/service_parser.cpp
 build $BUILDROOT/init/obj/service_utils.o: cxx system/core/init/service_utils.cpp
-build $BUILDROOT/init/obj/subcontext.o: cxx system/core/init/subcontext.cpp
+build $BUILDROOT/init/obj/subcontext.o: cxx system/core/init/subcontext.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/tokenizer.o: cxx system/core/init/tokenizer.cpp
 build $BUILDROOT/init/obj/util.o: cxx system/core/init/util.cpp
 # init_device_sources = [
 build $BUILDROOT/init/obj/block_dev_initializer.o: cxx system/core/init/block_dev_initializer.cpp
 build $BUILDROOT/init/obj/bootchart.o: cxx system/core/init/bootchart.cpp
-build $BUILDROOT/init/obj/builtins.o: cxx system/core/init/builtins.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.d
+build $BUILDROOT/init/obj/builtins.o: cxx system/core/init/builtins.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/devices.o: cxx system/core/init/devices.cpp
 build $BUILDROOT/init/obj/firmware_handler.o: cxx system/core/init/firmware_handler.cpp
 build $BUILDROOT/init/obj/first_stage_console.o: cxx system/core/init/first_stage_console.cpp
 build $BUILDROOT/init/obj/first_stage_init.o: cxx system/core/init/first_stage_init.cpp
 build $BUILDROOT/init/obj/first_stage_mount.o: cxx system/core/init/first_stage_mount.cpp
 build $BUILDROOT/init/obj/fscrypt_init_extensions.o: cxx system/core/init/fscrypt_init_extensions.cpp
-build $BUILDROOT/init/obj/init.o: cxx system/core/init/init.cpp | $BUILDROOT/init/proto/system/core/init/property_service.pb.h
+build $BUILDROOT/init/obj/init.o: cxx system/core/init/init.cpp | $BUILDROOT/init/proto/system/core/init/property_service.pb.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/lmkd_service.o: cxx system/core/init/lmkd_service.cpp
 build $BUILDROOT/init/obj/modalias_handler.o: cxx system/core/init/modalias_handler.cpp
 build $BUILDROOT/init/obj/mount_handler.o: cxx system/core/init/mount_handler.cpp
 build $BUILDROOT/init/obj/mount_namespace.o: cxx system/core/init/mount_namespace.cpp
 build $BUILDROOT/init/obj/persistent_properties.o: cxx system/core/init/persistent_properties.cpp
 build $BUILDROOT/init/obj/persistent_properties.pr.o: cxx system/core/init/persistent_properties.proto
-build $BUILDROOT/init/obj/property_service.o: cxx system/core/init/property_service.cpp
+build $BUILDROOT/init/obj/property_service.o: cxx system/core/init/property_service.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/property_service.pr.o: cxx system/core/init/property_service.proto
 build $BUILDROOT/init/obj/reboot.o: cxx system/core/init/reboot.cpp
 build $BUILDROOT/init/obj/reboot_utils.o: cxx system/core/init/reboot_utils.cpp
@@ -93,20 +91,123 @@ build $BUILDROOT/init/obj/uevent_listener.o: cxx system/core/init/uevent_listene
 build $BUILDROOT/init/obj/ueventd.o: cxx system/core/init/ueventd.cpp
 build $BUILDROOT/init/obj/ueventd_parser.o: cxx system/core/init/ueventd_parser.cpp
 
+build $BUILDROOT/init/obj/InitProperties.sysprop.o: cxx system/androidcompat/sysprop/InitProperties.sysprop.cpp
+
 build $BUILDROOT/init/obj/libinit.a: ar $
+  $BUILDROOT/init/obj/subcontext.pb.o $
+  $BUILDROOT/init/obj/action.o $
+  $BUILDROOT/init/obj/action_manager.o $
+  $BUILDROOT/init/obj/action_parser.o $
+  $BUILDROOT/init/obj/capabilities.o $
+  $BUILDROOT/init/obj/import_parser.o $
+  $BUILDROOT/init/obj/service_list.o $
+  $BUILDROOT/init/obj/service_utils.o $
   $BUILDROOT/init/obj/subcontext.o $
+  $BUILDROOT/init/obj/tokenizer.o $
+  $BUILDROOT/init/obj/parser.o $
+  $BUILDROOT/init/obj/rlimit_parser.o $
+  $BUILDROOT/init/obj/service.o $
+  $BUILDROOT/init/obj/util.o $
+  $BUILDROOT/init/obj/bootchart.o $
   $BUILDROOT/init/obj/builtins.o $
+  $BUILDROOT/init/obj/devices.o $
+  $BUILDROOT/init/obj/firmware_handler.o $
+  $BUILDROOT/init/obj/first_stage_init.o $
   $BUILDROOT/init/obj/init.o $
+  $BUILDROOT/init/obj/modalias_handler.o $
+  $BUILDROOT/init/obj/mount_namespace.o $
+  $BUILDROOT/init/obj/reboot_utils.o $
+  $BUILDROOT/init/obj/uevent_listener.o $
   $BUILDROOT/init/obj/ueventd.o $
-  $BUILDROOT/init/obj/subcontext.pb.o
+  $BUILDROOT/init/obj/ueventd_parser.o $
 
 # init_second_stage
 build $BUILDROOT/init/obj/main.o: cxx system/core/init/main.cpp | $SYSROOT/include/sys/capability.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 
-build $BUILDROOT/init/obj/init: link $BUILDROOT/init/obj/libinit.a $BUILDROOT/init/obj/main.o $
-  | $SYSROOT/lib/libbase.so $SYSROOT/lib/libcutils.so $SYSROOT/lib/liblog.so
+# whole_static_libs: [
+#     "libcap",
+#     "com.android.sysprop.apex",
+#     "com.android.sysprop.init",
+# ],
 
-# symlink init as ueventd
+#  static_libs: [
+#      "libavb",
+#      "libc++fs",
+#      "libcgrouprc_format",
+#      "liblmkd_utils",
+#      "libmodprobe",
+#      "libprocinfo",
+#      "libprotobuf-cpp-lite",
+#      "libpropertyinfoserializer",
+#      "libpropertyinfoparser",
+#      "libsnapshot_cow",
+#      "libsnapshot_init",
+#      "libxml2",
+#      "lib_apex_manifest_proto_lite",
+#      "update_metadata-protos",
+#  ],
+
+# shared_libs: [
+#     "libbacktrace",
+#     "libbase",
+#     "libbootloader_message",
+#     "libcutils",
+#     "libdl",
+#     "libext4_utils",
+#     "libfs_mgr",
+#     "libgsi",
+#     "libhidl-gen-utils",
+#     "libkeyutils",
+#     "liblog",
+#     "liblogwrap",
+#     "liblp",
+#     "libprocessgroup",
+#     "libprocessgroup_setup",
+#     "libselinux",
+#     "libutils",
+# ],
+libs = -L$SYSROOT/lib $
+  -lc++ $
+  -lunwind $
+  -lbase $
+  -lcutils $
+  -ldl $
+  -lext4_utils $
+  -lfs_mgr $
+  -llog $
+  -llogwrap $
+  -lprocessgroup $
+  -lprocessgroup_setup $
+  -lutils $
+
+rule link
+  description = LINK $out
+  command = $LINKER $libs -o $out $
+    -Wl,--whole-archive $
+      $BUILDROOT/libcap/libcap.a $
+      $BUILDROOT/init/obj/InitProperties.sysprop.o $
+    -Wl,--no-whole-archive $
+    $in
+
+build $BUILDROOT/init/obj/init: link $
+  $BUILDROOT/init/obj/libinit.a $
+  $BUILDROOT/init/obj/main.o $
+  $BUILDROOT/bioniccompat/fts.o $
+  | $BUILDROOT/libcap/libcap.a $
+    $BUILDROOT/init/obj/InitProperties.sysprop.o $
+    $SYSROOT/lib/libunwind.so $
+    $SYSROOT/lib/libbase.so $
+    $SYSROOT/lib/libcutils.so $
+    $SYSROOT/lib/libdl.so $
+    $SYSROOT/lib/libext4_utils.so $
+    $SYSROOT/lib/libfs_mgr.so $
+    $SYSROOT/lib/liblog.so $
+    $SYSROOT/lib/liblogwrap.so $
+    $SYSROOT/lib/libprocessgroup.so $
+    $SYSROOT/lib/libprocessgroup_setup.so $
+    $SYSROOT/lib/libutils.so $
+
+# symlinks: ["ueventd"],
 
 # init_first_stage ...
 

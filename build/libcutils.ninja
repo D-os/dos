@@ -24,6 +24,8 @@ build $BUILDROOT/libcutils/qtaguid.o: cxx system/core/libcutils/qtaguid.cpp
 build $BUILDROOT/libcutils/trace-dev.o: cxx system/core/libcutils/trace-dev.cpp
 build $BUILDROOT/libcutils/uevent.o: cxx system/core/libcutils/uevent.cpp
 
+build $BUILDROOT/bioniccompat/fts.o: cc system/bioniccompat/fts.c
+
 build $BUILDROOT/libcutils/libcutils.a: ar $
   $BUILDROOT/libcutils/config_utils.o $
   $BUILDROOT/libcutils/iosched_policy.o $
@@ -45,5 +47,6 @@ build $BUILDROOT/libcutils/libcutils.a: ar $
   $BUILDROOT/libcutils/qtaguid.o $
   $BUILDROOT/libcutils/trace-dev.o $
   $BUILDROOT/libcutils/uevent.o $
+  $BUILDROOT/bioniccompat/fts.o
 
 build $BUILDROOT/libcutils/libcutils.so: soa $BUILDROOT/libcutils/libcutils.a | $SYSROOT/lib/liblog.so
