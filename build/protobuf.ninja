@@ -1,0 +1,63 @@
+cxxflags = -Wall -Werror -Wno-unused-function -Wno-sign-compare -Wno-unused-parameter -Wno-sign-promo $
+  -Wno-unused-const-variable -Wno-error=user-defined-warnings -Wno-deprecated-pragma
+includes = -Iexternal/protobuf/android -Iexternal/protobuf/src
+libs = -L$SYSROOT/lib -llog
+
+build $BUILDROOT/protobuf/any_lite.o: cxx external/protobuf/src/google/protobuf/any_lite.cc
+build $BUILDROOT/protobuf/arena.o: cxx external/protobuf/src/google/protobuf/arena.cc
+build $BUILDROOT/protobuf/extension_set.o: cxx external/protobuf/src/google/protobuf/extension_set.cc
+build $BUILDROOT/protobuf/generated_enum_util.o: cxx external/protobuf/src/google/protobuf/generated_enum_util.cc
+build $BUILDROOT/protobuf/generated_message_table_driven_lite.o: cxx external/protobuf/src/google/protobuf/generated_message_table_driven_lite.cc
+build $BUILDROOT/protobuf/generated_message_util.o: cxx external/protobuf/src/google/protobuf/generated_message_util.cc
+build $BUILDROOT/protobuf/implicit_weak_message.o: cxx external/protobuf/src/google/protobuf/implicit_weak_message.cc
+build $BUILDROOT/protobuf/coded_stream.o: cxx external/protobuf/src/google/protobuf/io/coded_stream.cc
+build $BUILDROOT/protobuf/io_win32.o: cxx external/protobuf/src/google/protobuf/io/io_win32.cc
+build $BUILDROOT/protobuf/strtod.o: cxx external/protobuf/src/google/protobuf/io/strtod.cc
+build $BUILDROOT/protobuf/zero_copy_stream.o: cxx external/protobuf/src/google/protobuf/io/zero_copy_stream.cc
+build $BUILDROOT/protobuf/zero_copy_stream_impl.o: cxx external/protobuf/src/google/protobuf/io/zero_copy_stream_impl.cc
+build $BUILDROOT/protobuf/zero_copy_stream_impl_lite.o: cxx external/protobuf/src/google/protobuf/io/zero_copy_stream_impl_lite.cc
+build $BUILDROOT/protobuf/message_lite.o: cxx external/protobuf/src/google/protobuf/message_lite.cc
+build $BUILDROOT/protobuf/parse_context.o: cxx external/protobuf/src/google/protobuf/parse_context.cc
+build $BUILDROOT/protobuf/repeated_field.o: cxx external/protobuf/src/google/protobuf/repeated_field.cc
+build $BUILDROOT/protobuf/bytestream.o: cxx external/protobuf/src/google/protobuf/stubs/bytestream.cc
+build $BUILDROOT/protobuf/common.o: cxx external/protobuf/src/google/protobuf/stubs/common.cc
+build $BUILDROOT/protobuf/int128.o: cxx external/protobuf/src/google/protobuf/stubs/int128.cc
+build $BUILDROOT/protobuf/status.o: cxx external/protobuf/src/google/protobuf/stubs/status.cc
+build $BUILDROOT/protobuf/statusor.o: cxx external/protobuf/src/google/protobuf/stubs/statusor.cc
+build $BUILDROOT/protobuf/stringpiece.o: cxx external/protobuf/src/google/protobuf/stubs/stringpiece.cc
+build $BUILDROOT/protobuf/stringprintf.o: cxx external/protobuf/src/google/protobuf/stubs/stringprintf.cc
+build $BUILDROOT/protobuf/structurally_valid.o: cxx external/protobuf/src/google/protobuf/stubs/structurally_valid.cc
+build $BUILDROOT/protobuf/strutil.o: cxx external/protobuf/src/google/protobuf/stubs/strutil.cc
+build $BUILDROOT/protobuf/time.o: cxx external/protobuf/src/google/protobuf/stubs/time.cc
+build $BUILDROOT/protobuf/wire_format_lite.o: cxx external/protobuf/src/google/protobuf/wire_format_lite.cc
+
+build $BUILDROOT/protobuf/libprotobuf-cpp-lite.a: ar $
+  $BUILDROOT/protobuf/any_lite.o $
+  $BUILDROOT/protobuf/arena.o $
+  $BUILDROOT/protobuf/extension_set.o $
+  $BUILDROOT/protobuf/generated_enum_util.o $
+  $BUILDROOT/protobuf/generated_message_table_driven_lite.o $
+  $BUILDROOT/protobuf/generated_message_util.o $
+  $BUILDROOT/protobuf/implicit_weak_message.o $
+  $BUILDROOT/protobuf/coded_stream.o $
+  $BUILDROOT/protobuf/io_win32.o $
+  $BUILDROOT/protobuf/strtod.o $
+  $BUILDROOT/protobuf/zero_copy_stream.o $
+  $BUILDROOT/protobuf/zero_copy_stream_impl.o $
+  $BUILDROOT/protobuf/zero_copy_stream_impl_lite.o $
+  $BUILDROOT/protobuf/message_lite.o $
+  $BUILDROOT/protobuf/parse_context.o $
+  $BUILDROOT/protobuf/repeated_field.o $
+  $BUILDROOT/protobuf/bytestream.o $
+  $BUILDROOT/protobuf/common.o $
+  $BUILDROOT/protobuf/int128.o $
+  $BUILDROOT/protobuf/status.o $
+  $BUILDROOT/protobuf/statusor.o $
+  $BUILDROOT/protobuf/stringpiece.o $
+  $BUILDROOT/protobuf/stringprintf.o $
+  $BUILDROOT/protobuf/structurally_valid.o $
+  $BUILDROOT/protobuf/strutil.o $
+  $BUILDROOT/protobuf/time.o $
+  $BUILDROOT/protobuf/wire_format_lite.o $
+
+build $BUILDROOT/protobuf/libprotobuf-cpp-lite.so: soa $BUILDROOT/protobuf/libprotobuf-cpp-lite.a

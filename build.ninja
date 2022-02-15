@@ -75,3 +75,4 @@ subninja build/init.ninja
 
 subninja build/jsoncpp.ninja
 
+subninja build/protobuf.ninja
