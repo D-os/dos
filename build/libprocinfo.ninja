@@ -1,0 +1,8 @@
+cxxflags = -Wall -Werror -Wextra
+includes = -Isystem/libprocinfo/include -Isystem/libbase/include
+
+build $BUILDROOT/libprocinfo/process.o: cxx system/libprocinfo/process.cpp
+
+build $BUILDROOT/libprocinfo/libprocinfo.a: ar $
+  $BUILDROOT/libprocinfo/process.o $
+
