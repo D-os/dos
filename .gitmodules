@@ -55,3 +55,6 @@
 [submodule "external/jsoncpp"]
 	path = external/jsoncpp
 	url = https://android.googlesource.com/platform/external/jsoncpp
+[submodule "system/libprocinfo"]
+	path = system/libprocinfo
+	url = https://android.googlesource.com/platform/system/libprocinfo
