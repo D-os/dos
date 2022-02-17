@@ -69,6 +69,9 @@ subninja build/libmodprobe.ninja
 subninja build/libprocessgroup.ninja
 build $SYSROOT/lib/libprocessgroup.so: copy $BUILDROOT/libprocessgroup/libprocessgroup.so
 
+subninja build/libprocessgroup_setup.ninja
+build $SYSROOT/lib/libprocessgroup_setup.so: copy $BUILDROOT/libprocessgroup_setup/libprocessgroup_setup.so
+
 subninja build/libprocinfo.ninja
 
 subninja build/fs_mgr.ninja
