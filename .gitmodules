@@ -45,7 +45,7 @@
 	url = https://android.googlesource.com/platform/external/zlib
 [submodule "system/logging"]
 	path = system/logging
-	url = https://android.googlesource.com/platform/system/logging
+	url = https://github.com/D-os/system_logging.git
 [submodule "system/vold"]
 	path = system/vold
 	url = https://android.googlesource.com/platform/system/vold
