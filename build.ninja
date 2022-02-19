@@ -78,6 +78,9 @@ subninja build/libpropertyinfoparser.ninja
 
 subninja build/libpropertyinfoserializer.ninja
 
+subninja build/logwrapper.ninja
+build $SYSROOT/lib/liblogwrap.so: copy $BUILDROOT/logwrapper/liblogwrap.so
+
 subninja build/fs_mgr.ninja
 
 subninja build/init.ninja

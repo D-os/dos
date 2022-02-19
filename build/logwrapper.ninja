@@ -1,0 +1,15 @@
+cxxflags = -Werror -Wno-c99-designator
+includes = -Isystem/logging/logwrapper/include $
+  -Isystem/core/libcutils/include $
+  -Isystem/logging/liblog/include $
+  -Isystem/libbase/include
+libs = -L$SYSROOT/lib -lcutils -llog
+
+build $BUILDROOT/logwrapper/logwrap.o: cxx system/logging/logwrapper/logwrap.cpp
+build $BUILDROOT/logwrapper/logwrapper.o: cxx system/logging/logwrapper/logwrapper.cpp
+
+build $BUILDROOT/logwrapper/liblogwrap.a: ar $BUILDROOT/logwrapper/logwrap.o
+
+build $BUILDROOT/logwrapper/liblogwrap.so: so $BUILDROOT/logwrapper/logwrap.o
+
+build $BUILDROOT/logwrapper/logwrapper: link $BUILDROOT/logwrapper/logwrap.o $BUILDROOT/logwrapper/logwrapper.o
