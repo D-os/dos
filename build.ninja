@@ -74,6 +74,10 @@ build $SYSROOT/lib/libprocessgroup_setup.so: copy $BUILDROOT/libprocessgroup_set
 
 subninja build/libprocinfo.ninja
 
+subninja build/libpropertyinfoparser.ninja
+
+subninja build/libpropertyinfoserializer.ninja
+
 subninja build/fs_mgr.ninja
 
 subninja build/init.ninja

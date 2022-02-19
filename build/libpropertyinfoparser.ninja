@@ -1,0 +1,8 @@
+cxxflags = -Wall -Wextra -Werror
+includes = -Isystem/core/property_service/libpropertyinfoparser/include
+
+build $BUILDROOT/property_service/libpropertyinfoparser/property_info_parser.o: cxx system/core/property_service/libpropertyinfoparser/property_info_parser.cpp
+
+build $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a: ar $
+  $BUILDROOT/property_service/libpropertyinfoparser/property_info_parser.o $
+

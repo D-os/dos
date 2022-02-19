@@ -1,0 +1,16 @@
+cxxflags = -Wall -Wextra -Werror
+includes = -Isystem/core/property_service/libpropertyinfoserializer/include -Isystem/core/property_service/libpropertyinfoparser/include $
+  -Isystem/libbase/include
+libs = -L$SYSROOT/lib -lbase
+
+build $BUILDROOT/property_service/libpropertyinfoserializer/property_info_file.o: cxx  system/core/property_service/libpropertyinfoserializer/property_info_file.cpp
+build $BUILDROOT/property_service/libpropertyinfoserializer/property_info_serializer.o: cxx  system/core/property_service/libpropertyinfoserializer/property_info_serializer.cpp
+build $BUILDROOT/property_service/libpropertyinfoserializer/trie_builder.o: cxx  system/core/property_service/libpropertyinfoserializer/trie_builder.cpp
+build $BUILDROOT/property_service/libpropertyinfoserializer/trie_serializer.o: cxx  system/core/property_service/libpropertyinfoserializer/trie_serializer.cpp
+
+build $BUILDROOT/libpropertyinfoserializer/libpropertyinfoserializer.a: ar $
+  $BUILDROOT/property_service/libpropertyinfoserializer/property_info_file.o $
+  $BUILDROOT/property_service/libpropertyinfoserializer/property_info_serializer.o $
+  $BUILDROOT/property_service/libpropertyinfoserializer/trie_builder.o $
+  $BUILDROOT/property_service/libpropertyinfoserializer/trie_serializer.o $
+
