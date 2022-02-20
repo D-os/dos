@@ -1,0 +1,26 @@
+cxxflags = -Wall -Werror -Wextra
+includes = -Isystem/bioniccompat/bionic/libc/system_properties/include $
+  -Isystem/bioniccompat/bionic/libc -Isystem/bioniccompat/bionic/libc/async_safe/include $
+  -Isystem/logging/liblog/include $
+  -Isystem/core/property_service/libpropertyinfoparser/include $
+
+build $BUILDROOT/libsystemproperties/context_node.o: cxx system/bioniccompat/bionic/libc/system_properties/context_node.cpp
+build $BUILDROOT/libsystemproperties/contexts_split.o: cxx system/bioniccompat/bionic/libc/system_properties/contexts_split.cpp
+build $BUILDROOT/libsystemproperties/contexts_serialized.o: cxx system/bioniccompat/bionic/libc/system_properties/contexts_serialized.cpp
+build $BUILDROOT/libsystemproperties/prop_area.o: cxx system/bioniccompat/bionic/libc/system_properties/prop_area.cpp
+build $BUILDROOT/libsystemproperties/prop_info.o: cxx system/bioniccompat/bionic/libc/system_properties/prop_info.cpp
+build $BUILDROOT/libsystemproperties/system_properties.o: cxx system/bioniccompat/bionic/libc/system_properties/system_properties.cpp
+
+build $BUILDROOT/libsystemproperties/libsystemproperties.a: ar $
+  $BUILDROOT/libsystemproperties/context_node.o $
+  $BUILDROOT/libsystemproperties/contexts_split.o $
+  $BUILDROOT/libsystemproperties/contexts_serialized.o $
+  $BUILDROOT/libsystemproperties/prop_area.o $
+  $BUILDROOT/libsystemproperties/prop_info.o $
+  $BUILDROOT/libsystemproperties/system_properties.o $
+
+# 
+# build $BUILDROOT/system_properties/system_properties.a: ar $
+#   $BUILDROOT/system_properties/system_property_api.o $
+#   $BUILDROOT/system_properties/system_property_set.o $
+
