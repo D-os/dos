@@ -1,0 +1,16 @@
+cxxflags = -Werror -fno-strict-aliasing -DREAL_UUID
+includes = -Isystem/extras/ext4_utils/include $
+  -Isystem/libbase/include
+libs = -L$SYSROOT/lib -lbase -lext2_uuid
+
+build $BUILDROOT/ext4_utils/ext4_utils.o: cxx system/extras/ext4_utils/ext4_utils.cpp
+build $BUILDROOT/ext4_utils/wipe.o: cxx system/extras/ext4_utils/wipe.cpp
+build $BUILDROOT/ext4_utils/ext4_sb.o: cxx system/extras/ext4_utils/ext4_sb.cpp
+
+build $BUILDROOT/ext4_utils/libext4_utils.a: ar $
+  $BUILDROOT/ext4_utils/ext4_utils.o $
+  $BUILDROOT/ext4_utils/wipe.o $
+  $BUILDROOT/ext4_utils/ext4_sb.o $
+
+build $BUILDROOT/ext4_utils/libext4_utils.so: soa $BUILDROOT/ext4_utils/libext4_utils.a $
+  | $SYSROOT/lib/libbase.so $SYSROOT/lib/libext2_uuid.so
