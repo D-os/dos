@@ -10,6 +10,8 @@ build $BUILDROOT/logwrapper/logwrapper.o: cxx system/logging/logwrapper/logwrapp
 
 build $BUILDROOT/logwrapper/liblogwrap.a: ar $BUILDROOT/logwrapper/logwrap.o
 
-build $BUILDROOT/logwrapper/liblogwrap.so: so $BUILDROOT/logwrapper/logwrap.o
+build $BUILDROOT/logwrapper/liblogwrap.so: so $BUILDROOT/logwrapper/logwrap.o $
+  | $SYSROOT/lib/libcutils.so $SYSROOT/lib/liblog.so
 
-build $BUILDROOT/logwrapper/logwrapper: link $BUILDROOT/logwrapper/logwrap.o $BUILDROOT/logwrapper/logwrapper.o
+build $BUILDROOT/logwrapper/logwrapper: link $BUILDROOT/logwrapper/logwrap.o $BUILDROOT/logwrapper/logwrapper.o $
+  | $SYSROOT/lib/libcutils.so $SYSROOT/lib/liblog.so
