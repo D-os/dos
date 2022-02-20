@@ -61,3 +61,6 @@
 [submodule "system/bioniccompat/bionic"]
 	path = system/bioniccompat/bionic
 	url = https://github.com/D-os/bionic.git
+[submodule "external/e2fsprogs"]
+	path = external/e2fsprogs
+	url = https://android.googlesource.com/platform/external/e2fsprogs
