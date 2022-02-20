@@ -60,4 +60,4 @@
 	url = https://android.googlesource.com/platform/system/libprocinfo
 [submodule "system/bioniccompat/bionic"]
 	path = system/bioniccompat/bionic
-	url = https://android.googlesource.com/platform/bionic
+	url = https://github.com/D-os/bionic.git
