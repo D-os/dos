@@ -30,21 +30,32 @@ includes = $
   -Isystem/core/libmodprobe/include $
   -Isystem/core/libprocessgroup/include $
   -Isystem/core/libprocessgroup/setup/include $
+  -Isystem/core/property_service/libpropertyinfoparser/include $
+  -Isystem/core/property_service/libpropertyinfoserializer/include $
   -Isystem/libbase/include $
   -Isystem/logging/liblog/include $
+  -Isystem/logging/logwrapper/include $
   -Isystem/androidcompat/sysprop/public/include $
   -Iexternal/protobuf/src $
 
 build $BUILDROOT/init/proto/system/core/init/subcontext.pb.d | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc: protoc system/core/init/subcontext.proto | out/tc/host/bin/protoc
+build $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.d | $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.h $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.cc: protoc system/core/init/persistent_properties.proto | out/tc/host/bin/protoc
 build $BUILDROOT/init/proto/system/core/init/property_service.pb.d | $BUILDROOT/init/proto/system/core/init/property_service.pb.h $BUILDROOT/init/proto/system/core/init/property_service.pb.cc: protoc system/core/init/property_service.proto | out/tc/host/bin/protoc
 
 build $BUILDROOT/init/obj/subcontext.pb.o: cxx $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc
   cxxflags = $cxxflags -Wno-unused-command-line-argument
+build $BUILDROOT/init/obj/persistent_properties.pr.o: cxx $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.cc
+  cxxflags = $cxxflags -Wno-unused-command-line-argument
+build $BUILDROOT/init/obj/property_service.pr.o: cxx $BUILDROOT/init/proto/system/core/init/property_service.pb.cc
+  cxxflags = $cxxflags -Wno-unused-command-line-argument
 
 # init_common_sources = [
-build $BUILDROOT/init/obj/action.o: cxx system/core/init/action.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
-build $BUILDROOT/init/obj/action_manager.o: cxx system/core/init/action_manager.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
-build $BUILDROOT/init/obj/action_parser.o: cxx system/core/init/action_parser.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
+build $BUILDROOT/init/obj/action.o: cxx system/core/init/action.cpp $
+  | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
+build $BUILDROOT/init/obj/action_manager.o: cxx system/core/init/action_manager.cpp $
+  | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
+build $BUILDROOT/init/obj/action_parser.o: cxx system/core/init/action_parser.cpp $
+  | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/capabilities.o: cxx system/core/init/capabilities.cpp
 build $BUILDROOT/init/obj/epoll.o: cxx system/core/init/epoll.cpp
 build $BUILDROOT/init/obj/import_parser.o: cxx system/core/init/import_parser.cpp
@@ -53,32 +64,39 @@ build $BUILDROOT/init/obj/keychords.o: cxx system/core/init/keychords.cpp
 build $BUILDROOT/init/obj/parser.o: cxx system/core/init/parser.cpp
 build $BUILDROOT/init/obj/property_type.o: cxx system/core/init/property_type.cpp
 build $BUILDROOT/init/obj/rlimit_parser.o: cxx system/core/init/rlimit_parser.cpp
-build $BUILDROOT/init/obj/service.o: cxx system/core/init/service.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
-build $BUILDROOT/init/obj/service_list.o: cxx system/core/init/service_list.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
+build $BUILDROOT/init/obj/service.o: cxx system/core/init/service.cpp $
+  | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
+build $BUILDROOT/init/obj/service_list.o: cxx system/core/init/service_list.cpp $
+  | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/service_parser.o: cxx system/core/init/service_parser.cpp
 build $BUILDROOT/init/obj/service_utils.o: cxx system/core/init/service_utils.cpp
-build $BUILDROOT/init/obj/subcontext.o: cxx system/core/init/subcontext.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
+build $BUILDROOT/init/obj/subcontext.o: cxx system/core/init/subcontext.cpp $
+  | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/tokenizer.o: cxx system/core/init/tokenizer.cpp
 build $BUILDROOT/init/obj/util.o: cxx system/core/init/util.cpp
 # init_device_sources = [
 build $BUILDROOT/init/obj/block_dev_initializer.o: cxx system/core/init/block_dev_initializer.cpp
 build $BUILDROOT/init/obj/bootchart.o: cxx system/core/init/bootchart.cpp
-build $BUILDROOT/init/obj/builtins.o: cxx system/core/init/builtins.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
+build $BUILDROOT/init/obj/builtins.o: cxx system/core/init/builtins.cpp $
+  | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/devices.o: cxx system/core/init/devices.cpp
 build $BUILDROOT/init/obj/firmware_handler.o: cxx system/core/init/firmware_handler.cpp
 build $BUILDROOT/init/obj/first_stage_console.o: cxx system/core/init/first_stage_console.cpp
 build $BUILDROOT/init/obj/first_stage_init.o: cxx system/core/init/first_stage_init.cpp
 build $BUILDROOT/init/obj/first_stage_mount.o: cxx system/core/init/first_stage_mount.cpp
 build $BUILDROOT/init/obj/fscrypt_init_extensions.o: cxx system/core/init/fscrypt_init_extensions.cpp
-build $BUILDROOT/init/obj/init.o: cxx system/core/init/init.cpp | $BUILDROOT/init/proto/system/core/init/property_service.pb.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
+build $BUILDROOT/init/obj/init.o: cxx system/core/init/init.cpp $
+  | $BUILDROOT/init/proto/system/core/init/property_service.pb.h $
+    $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/lmkd_service.o: cxx system/core/init/lmkd_service.cpp
 build $BUILDROOT/init/obj/modalias_handler.o: cxx system/core/init/modalias_handler.cpp
 build $BUILDROOT/init/obj/mount_handler.o: cxx system/core/init/mount_handler.cpp
 build $BUILDROOT/init/obj/mount_namespace.o: cxx system/core/init/mount_namespace.cpp
 build $BUILDROOT/init/obj/persistent_properties.o: cxx system/core/init/persistent_properties.cpp
-build $BUILDROOT/init/obj/persistent_properties.pr.o: cxx system/core/init/persistent_properties.proto
-build $BUILDROOT/init/obj/property_service.o: cxx system/core/init/property_service.cpp | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
-build $BUILDROOT/init/obj/property_service.pr.o: cxx system/core/init/property_service.proto
+build $BUILDROOT/init/obj/property_service.o: cxx system/core/init/property_service.cpp $
+  | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h $
+    $BUILDROOT/init/proto/system/core/init/property_service.pb.h $
+    $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.h
 build $BUILDROOT/init/obj/reboot.o: cxx system/core/init/reboot.cpp
 build $BUILDROOT/init/obj/reboot_utils.o: cxx system/core/init/reboot_utils.cpp
 build $BUILDROOT/init/obj/security.o: cxx system/core/init/security.cpp
@@ -99,8 +117,10 @@ build $BUILDROOT/init/obj/libinit.a: ar $
   $BUILDROOT/init/obj/action_manager.o $
   $BUILDROOT/init/obj/action_parser.o $
   $BUILDROOT/init/obj/capabilities.o $
+  $BUILDROOT/init/obj/epoll.o $
   $BUILDROOT/init/obj/import_parser.o $
   $BUILDROOT/init/obj/service_list.o $
+  $BUILDROOT/init/obj/service_parser.o $
   $BUILDROOT/init/obj/service_utils.o $
   $BUILDROOT/init/obj/subcontext.o $
   $BUILDROOT/init/obj/tokenizer.o $
@@ -108,15 +128,27 @@ build $BUILDROOT/init/obj/libinit.a: ar $
   $BUILDROOT/init/obj/rlimit_parser.o $
   $BUILDROOT/init/obj/service.o $
   $BUILDROOT/init/obj/util.o $
+  $BUILDROOT/init/obj/block_dev_initializer.o $
   $BUILDROOT/init/obj/bootchart.o $
   $BUILDROOT/init/obj/builtins.o $
   $BUILDROOT/init/obj/devices.o $
   $BUILDROOT/init/obj/firmware_handler.o $
+  $BUILDROOT/init/obj/first_stage_console.o $
   $BUILDROOT/init/obj/first_stage_init.o $
+  $BUILDROOT/init/obj/first_stage_mount.o $
   $BUILDROOT/init/obj/init.o $
   $BUILDROOT/init/obj/modalias_handler.o $
+  $BUILDROOT/init/obj/mount_handler.o $
   $BUILDROOT/init/obj/mount_namespace.o $
+  $BUILDROOT/init/obj/persistent_properties.pr.o $
+  $BUILDROOT/init/obj/persistent_properties.o $
+  $BUILDROOT/init/obj/property_service.pr.o $
+  $BUILDROOT/init/obj/property_service.o $
+  $BUILDROOT/init/obj/reboot.o $
   $BUILDROOT/init/obj/reboot_utils.o $
+  $BUILDROOT/init/obj/security.o $
+  $BUILDROOT/init/obj/sigchld_handler.o $
+  $BUILDROOT/init/obj/switch_root.o $
   $BUILDROOT/init/obj/uevent_listener.o $
   $BUILDROOT/init/obj/ueventd.o $
   $BUILDROOT/init/obj/ueventd_parser.o $
@@ -171,14 +203,12 @@ libs = -L$SYSROOT/lib $
   -lunwind $
   -lbase $
   -lcutils $
-  -ldl $
   -lext4_utils $
   -lfs_mgr $
   -llog $
   -llogwrap $
   -lprocessgroup $
   -lprocessgroup_setup $
-  -lutils $
 
 rule link
   description = LINK $out
@@ -193,19 +223,24 @@ build $BUILDROOT/init/obj/init: link $
   $BUILDROOT/init/obj/libinit.a $
   $BUILDROOT/init/obj/main.o $
   $BUILDROOT/bioniccompat/fts.o $
+  $BUILDROOT/libcgrouprc_format/libcgrouprc_format.a $
+  $BUILDROOT/libmodprobe/libmodprobe.a $
+  $BUILDROOT/libprocinfo/libprocinfo.a $
+  $BUILDROOT/protobuf/libprotobuf-cpp-lite.a $
+  $BUILDROOT/libpropertyinfoserializer/libpropertyinfoserializer.a $
+  $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a $
+  $BUILDROOT/libsystemproperties/libsystemproperties.a $
   | $BUILDROOT/libcap/libcap.a $
     $BUILDROOT/init/obj/InitProperties.sysprop.o $
     $SYSROOT/lib/libunwind.so $
     $SYSROOT/lib/libbase.so $
     $SYSROOT/lib/libcutils.so $
-    $SYSROOT/lib/libdl.so $
     $SYSROOT/lib/libext4_utils.so $
     $SYSROOT/lib/libfs_mgr.so $
     $SYSROOT/lib/liblog.so $
     $SYSROOT/lib/liblogwrap.so $
     $SYSROOT/lib/libprocessgroup.so $
     $SYSROOT/lib/libprocessgroup_setup.so $
-    $SYSROOT/lib/libutils.so $
 
 # symlinks: ["ueventd"],
 

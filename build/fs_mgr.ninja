@@ -11,7 +11,6 @@ includes = $
   -Isystem/logging/logwrapper/include $
   -Isystem/extras/ext4_utils/include $
   -Isystem/vold
-libs = -L$SYSROOT/lib -llog
 
 build $BUILDROOT/fs_mgr/blockdev.o: cxx system/core/fs_mgr/blockdev.cpp
 build $BUILDROOT/fs_mgr/file_wait.o: cxx system/core/fs_mgr/file_wait.cpp
@@ -35,24 +34,24 @@ build $BUILDROOT/fs_mgr/fs_mgr_slotselect.o: cxx system/core/fs_mgr/fs_mgr_slots
 # gsid.
 # Do not ever allow this library to be vendor_available as a shared library.
 # It does not have a stable interface.
-build $BUILDROOT/fs_mgr/libfs_mgr.so: soa $
+build $BUILDROOT/fs_mgr/libfs_mgr.so: so $
   $BUILDROOT/fs_mgr/blockdev.o $
   $BUILDROOT/fs_mgr/file_wait.o $
   $BUILDROOT/fs_mgr/fs_mgr.o $
   $BUILDROOT/fs_mgr/fs_mgr_format.o $
-  $BUILDROOT/fs_mgr/fs_mgr_dm_linear.o $
   $BUILDROOT/fs_mgr/fs_mgr_roots.o $
-  | $SYSROOT/lib/liblog.so
+  | $BUILDROOT/fs_mgr/libfstab.a $
+    $SYSROOT/lib/libbase.so $
+    $SYSROOT/lib/libcutils.so $
+    $SYSROOT/lib/liblog.so
+  libs = -L$SYSROOT/lib -lbase -lcutils -llog $
+    -Wl,--whole-archive $
+      $BUILDROOT/fs_mgr/libfstab.a $
+    -Wl,--no-whole-archive
 
 # Do not ever make this a shared library as long as it is vendor_available.
 # It does not have a stable interface.
 build $BUILDROOT/fs_mgr/libfstab.a: ar $
-  $BUILDROOT/fs_mgr/blockdev.o $
-  $BUILDROOT/fs_mgr/file_wait.o $
-  $BUILDROOT/fs_mgr/fs_mgr.o $
-  $BUILDROOT/fs_mgr/fs_mgr_format.o $
-  $BUILDROOT/fs_mgr/fs_mgr_dm_linear.o $
-  $BUILDROOT/fs_mgr/fs_mgr_roots.o $
   $BUILDROOT/fs_mgr/fs_mgr_fstab.o $
   $BUILDROOT/fs_mgr/fs_mgr_boot_config.o $
   $BUILDROOT/fs_mgr/fs_mgr_slotselect.o $
