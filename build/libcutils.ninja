@@ -75,4 +75,32 @@ build $BUILDROOT/libcutils/libcutils.a: ar $
   $BUILDROOT/bioniccompat/system_property_api.o $
   $BUILDROOT/bioniccompat/system_property_set.o $
 
-build $BUILDROOT/libcutils/libcutils.so: soa $BUILDROOT/libcutils/libcutils.a | $SYSROOT/lib/liblog.so
+rule soa
+  description = SO(.a) $out
+  command = $LINKER $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out $
+    -Wl,--whole-archive $
+      $BUILDROOT/libcutils/libcutils_sockets.a $
+      $in $
+    -Wl,--no-whole-archive
+
+build $BUILDROOT/libcutils/libcutils.so: soa $BUILDROOT/libcutils/libcutils.a $
+  | $BUILDROOT/libcutils/libcutils_sockets.a $
+    $SYSROOT/lib/liblog.so
+
+build $BUILDROOT/libcutils/android_get_control_file.o: cxx system/core/libcutils/android_get_control_file.cpp
+build $BUILDROOT/libcutils/socket_inaddr_any_server_unix.o: cxx system/core/libcutils/socket_inaddr_any_server_unix.cpp
+build $BUILDROOT/libcutils/socket_local_client_unix.o: cxx system/core/libcutils/socket_local_client_unix.cpp
+build $BUILDROOT/libcutils/socket_local_server_unix.o: cxx system/core/libcutils/socket_local_server_unix.cpp
+build $BUILDROOT/libcutils/socket_network_client_unix.o: cxx system/core/libcutils/socket_network_client_unix.cpp
+build $BUILDROOT/libcutils/sockets_unix.o: cxx system/core/libcutils/sockets_unix.cpp
+
+build $BUILDROOT/libcutils/libcutils_sockets.a: ar $
+  $BUILDROOT/libcutils/android_get_control_file.o $
+  $BUILDROOT/libcutils/socket_inaddr_any_server_unix.o $
+  $BUILDROOT/libcutils/socket_local_client_unix.o $
+  $BUILDROOT/libcutils/socket_local_server_unix.o $
+  $BUILDROOT/libcutils/socket_network_client_unix.o $
+  $BUILDROOT/libcutils/sockets_unix.o $
+
+build $BUILDROOT/libcutils/libcutils_sockets.so: soa $BUILDROOT/libcutils/libcutils_sockets.a | $SYSROOT/lib/libbase.so
+  libs = -L$SYSROOT/lib -lbase
