@@ -61,6 +61,9 @@ subninja build/libcgrouprc_format.ninja
 subninja build/libcutils.ninja
 build $SYSROOT/lib/libcutils.so: copy $BUILDROOT/libcutils/libcutils.so
 
+subninja build/libext2_uuid.ninja
+build $SYSROOT/lib/libext2_uuid.so: copy $BUILDROOT/libext2_uuid/libext2_uuid.so
+
 subninja build/liblog.ninja
 build $SYSROOT/lib/liblog.so: copy $BUILDROOT/liblog/liblog.so
 

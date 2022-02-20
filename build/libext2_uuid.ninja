@@ -1,0 +1,28 @@
+cflags = -Wall -Werror -Wno-pointer-arith -Wno-unused-function -Wno-unused-parameter
+includes = -Iexternal/e2fsprogs/lib
+libs = -L$SYSROOT/lib -ldl
+
+build $BUILDROOT/libext2_uuid/clear.o: cc external/e2fsprogs/lib/uuid/clear.c
+build $BUILDROOT/libext2_uuid/compare.o: cc external/e2fsprogs/lib/uuid/compare.c
+build $BUILDROOT/libext2_uuid/copy.o: cc external/e2fsprogs/lib/uuid/copy.c
+build $BUILDROOT/libext2_uuid/gen_uuid.o: cc external/e2fsprogs/lib/uuid/gen_uuid.c
+build $BUILDROOT/libext2_uuid/isnull.o: cc external/e2fsprogs/lib/uuid/isnull.c
+build $BUILDROOT/libext2_uuid/pack.o: cc external/e2fsprogs/lib/uuid/pack.c
+build $BUILDROOT/libext2_uuid/parse.o: cc external/e2fsprogs/lib/uuid/parse.c
+build $BUILDROOT/libext2_uuid/unpack.o: cc external/e2fsprogs/lib/uuid/unpack.c
+build $BUILDROOT/libext2_uuid/unparse.o: cc external/e2fsprogs/lib/uuid/unparse.c
+build $BUILDROOT/libext2_uuid/uuid_time.o: cc external/e2fsprogs/lib/uuid/uuid_time.c
+
+build $BUILDROOT/libext2_uuid/libext2_uuid.a: ar $
+  $BUILDROOT/libext2_uuid/clear.o $
+  $BUILDROOT/libext2_uuid/compare.o $
+  $BUILDROOT/libext2_uuid/copy.o $
+  $BUILDROOT/libext2_uuid/gen_uuid.o $
+  $BUILDROOT/libext2_uuid/isnull.o $
+  $BUILDROOT/libext2_uuid/pack.o $
+  $BUILDROOT/libext2_uuid/parse.o $
+  $BUILDROOT/libext2_uuid/unpack.o $
+  $BUILDROOT/libext2_uuid/unparse.o $
+  $BUILDROOT/libext2_uuid/uuid_time.o $
+
+build $BUILDROOT/libext2_uuid/libext2_uuid.so: soa $BUILDROOT/libext2_uuid/libext2_uuid.a
