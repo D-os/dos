@@ -58,3 +58,6 @@
 [submodule "system/libprocinfo"]
 	path = system/libprocinfo
 	url = https://android.googlesource.com/platform/system/libprocinfo
+[submodule "system/bioniccompat/bionic"]
+	path = system/bioniccompat/bionic
+	url = https://android.googlesource.com/platform/bionic
