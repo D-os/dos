@@ -15,6 +15,9 @@ echo chrooting into $DIR
 mkdir -p $DIR/proc
 mkdir -p $DIR/sys
 mkdir -p $DIR/dev
+mkdir -p $DIR/mnt
+mkdir -p $DIR/debug_ramdisk
+mkdir -p $DIR/second_stage_resources
 
 mkdir -p $DIR/etc
 cp /etc/resolv.conf $DIR/etc
