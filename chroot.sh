@@ -1,31 +1,27 @@
 #!/bin/sh
 #
 ## chroot into a rootfs for the same architecture
-## usage: sudo ./chroot.sh ROOTDIR
+## usage: sudo ./chroot.sh ROOTDIR [COMMAND]
 
-if [ ! -d "$1" ]; then
-    sed -n '/^## /{s/^## //p}' $0
-    exit 1
+DIR=$1
+CMD=$2
+
+if [ ! -d "$DIR" ]; then
+  sed -n '/^## /{s/^## //p}' $0
+  exit 1
 fi
 
-echo chrooting into $1
-mkdir -p $1/proc
-mkdir -p $1/sys
-mkdir -p $1/dev
+echo chrooting into $DIR
+mkdir -p $DIR/proc
+mkdir -p $DIR/sys
+mkdir -p $DIR/dev
 
-mkdir -p $1/etc
-cp /etc/resolv.conf $1/etc
+mkdir -p $DIR/etc
+cp /etc/resolv.conf $DIR/etc
 
-mount --bind /proc $1/proc
-mount --bind /sys $1/sys
-mount --bind /dev $1/dev
-mount --bind /dev/pts $1/dev/pts
+chroot $DIR ${CMD:=/bin/init}
 
-chroot $1 /bin/bash
+sleep 1s
+grep -o "[^ ]*$DIR[^ ]*" /proc/self/mountinfo | sort -r | xargs umount -R
 
-umount $1/dev/pts
-umount $1/dev
-umount $1/sys
-umount $1/proc || umount -lf $1/proc
-
-rm $1/etc/resolv.conf
+rm $DIR/etc/resolv.conf
