@@ -64,3 +64,6 @@
 [submodule "external/e2fsprogs"]
 	path = external/e2fsprogs
 	url = https://android.googlesource.com/platform/external/e2fsprogs
+[submodule "external/zen-kernel"]
+	path = external/zen-kernel
+	url = git@github.com:zen-kernel/zen-kernel.git
