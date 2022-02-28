@@ -22,7 +22,7 @@ using best available open source components.
 
 ## Building
 
-See [`tools/tc-build/README.md`](tools/tc-build/README.md) for a list of required host tools.
+See `tools/tc-build/README.md` for a list of required host tools.
 
 ```sh
 make toolchain sysroot compdb
