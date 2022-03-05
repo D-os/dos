@@ -27,6 +27,6 @@ using best available open source components.
 See `tools/tc-build/README.md` for a list of required host tools.
 
 ```sh
-make toolchain sysroot compdb
+make toolchain sysroot compdb kernel kernel_modules
 PATH=$PWD/out/tc/host/bin:$PATH ninja
 ```
