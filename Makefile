@@ -96,18 +96,18 @@ $(SYSROOT_DIR)/include/linux:
 
 kernel: $(BUILD_DIR)/linux/arch/x86/boot/bzImage
 
-$(BUILD_DIR)/linux/arch/x86/boot/bzImage: external/zen-kernel/Makefile $(TC_DIR)/host/bin build/linux/config
+$(BUILD_DIR)/linux/arch/x86/boot/bzImage: external/linux/Makefile $(TC_DIR)/host/bin build/linux/config
 	mkdir -p $(BUILD_DIR)/linux
 	cp -f build/linux/config $(BUILD_DIR)/linux/.config
 	PATH=$(TC_DIR)/host/bin:${PATH} $(MAKE) -j`nproc` \
-		-C external/zen-kernel LLVM=1 ARCH=x86_64 O=$(BUILD_DIR)/linux olddefconfig kvm_guest.config bzImage
+		-C external/linux LLVM=1 ARCH=x86_64 O=$(BUILD_DIR)/linux olddefconfig kvm_guest.config bzImage
 	diff -u build/linux/config $(BUILD_DIR)/linux/.config || :
 
 kernel_modules: $(SYSROOT_DIR)/lib/modules
 
 $(SYSROOT_DIR)/lib/modules: $(BUILD_DIR)/linux/arch/x86/boot/bzImage
 	PATH=$(TC_DIR)/host/bin:${PATH} $(MAKE) -j`nproc` \
-		-C external/zen-kernel LLVM=1 ARCH=x86_64 O=$(BUILD_DIR)/linux modules
+		-C external/linux LLVM=1 ARCH=x86_64 O=$(BUILD_DIR)/linux modules
 	PATH=$(TC_DIR)/host/bin:${PATH} $(MAKE) \
-		-C external/zen-kernel LLVM=1 ARCH=x86_64 O=$(BUILD_DIR)/linux \
+		-C external/linux LLVM=1 ARCH=x86_64 O=$(BUILD_DIR)/linux \
 		INSTALL_MOD_PATH=$(SYSROOT_DIR) INSTALL_MOD_STRIP=1 modules_install

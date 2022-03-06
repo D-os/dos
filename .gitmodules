@@ -4,9 +4,6 @@
 [submodule "external/llvm-project"]
 	path = external/llvm-project
 	url = git@github.com:llvm/llvm-project.git
-[submodule "external/linux"]
-	path = external/linux
-	url = git@github.com:torvalds/linux.git
 [submodule "external/musl"]
 	path = external/musl
 	url = git://git.musl-libc.org/musl
@@ -64,6 +61,6 @@
 [submodule "external/e2fsprogs"]
 	path = external/e2fsprogs
 	url = https://android.googlesource.com/platform/external/e2fsprogs
-[submodule "external/zen-kernel"]
-	path = external/zen-kernel
+[submodule "external/linux"]
+	path = external/linux
 	url = git@github.com:zen-kernel/zen-kernel.git
