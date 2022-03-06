@@ -1,0 +1,28 @@
+# to list the contents of generated initramfs use:
+# cpio -civt < out/build/initramfs
+
+rule timestamp
+  command = git show --pretty=format:%at --abbrev-commit $$(git rev-list -n 1 HEAD $in) | head -n 1 > $out
+  description = [HOST] TS $out
+
+build $BUILDROOT/initramfs.timestamp: timestamp build/initramfs.ninja
+
+rule gen_dep
+  command = echo "$BUILDROOT/initramfs: \\" > $out && sed -n -e '/^file/{s/[^ ]\+//;s/[^ ]\+//;s/ \+\([^ ]\+\).*/  \1 \\/;p}' $in >> $out
+  description = [HOST] GEN.d $out
+
+build $BUILDROOT/initramfs.d: gen_dep build/linux/initramfs
+
+rule gen_init_cpio
+  command = $BUILDROOT/linux/usr/gen_init_cpio -t $$(<$out.timestamp) $in > $out
+  description = [HOST] CPIO $out
+
+build $BUILDROOT/initramfs: gen_init_cpio build/linux/initramfs | $BUILDROOT/initramfs.timestamp || $BUILDROOT/initramfs.d
+  depfile = $BUILDROOT/initramfs.d
+
+rule gzip
+  command = gzip -c $in > $out
+  description = [HOST] GZIP $out
+
+build $BUILDROOT/initramfs.gz: gzip $BUILDROOT/initramfs
+

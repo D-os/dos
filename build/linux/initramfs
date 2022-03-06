@@ -1,0 +1,4 @@
+dir /lib 755 0 0
+slink /lib/ld-musl-x86_64.so.1 /lib/libc.so 777 0 0
+file /lib/libc.so out/sysroot/lib/libc.so 0755 0 0
+file /init out/build/init/obj/init 0755 0 0 /ueventd

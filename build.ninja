@@ -98,3 +98,8 @@ build $SYSROOT/bin/init: copy $BUILDROOT/init/obj/init
 subninja build/jsoncpp.ninja
 
 subninja build/protobuf.ninja
+
+subninja build/initramfs.ninja
+build initramfs: phony $BUILDROOT/initramfs.gz
+
+default initramfs
