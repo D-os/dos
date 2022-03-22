@@ -36,6 +36,7 @@ includes = $
   -Isystem/logging/liblog/include $
   -Isystem/logging/logwrapper/include $
   -Isystem/androidcompat/sysprop/public/include $
+  -Iexternal/libcap/libcap/include $
   -Iexternal/protobuf/src $
 
 build $BUILDROOT/init/proto/system/core/init/subcontext.pb.d | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc: protoc system/core/init/subcontext.proto | out/tc/host/bin/protoc
@@ -68,7 +69,8 @@ build $BUILDROOT/init/obj/service.o: cxx system/core/init/service.cpp $
   | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/service_list.o: cxx system/core/init/service_list.cpp $
   | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
-build $BUILDROOT/init/obj/service_parser.o: cxx system/core/init/service_parser.cpp
+build $BUILDROOT/init/obj/service_parser.o: cxx system/core/init/service_parser.cpp $
+  | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
 build $BUILDROOT/init/obj/service_utils.o: cxx system/core/init/service_utils.cpp
 build $BUILDROOT/init/obj/subcontext.o: cxx system/core/init/subcontext.cpp $
   | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h
