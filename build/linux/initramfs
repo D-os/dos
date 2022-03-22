@@ -4,3 +4,5 @@ dir /sys 755 0 0
 dir /mnt 755 0 0
 dir /debug_ramdisk 755 0 0
 dir /second_stage_resources 755 0 0
+dir /lib 755 0 0
+dir /lib/modules 755 0 0
