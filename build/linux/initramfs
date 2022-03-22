@@ -1,1 +1,6 @@
 file /init out/build/init/obj/init_first_stage 0755 0 0 /ueventd
+dir /proc 755 0 0
+dir /sys 755 0 0
+dir /mnt 755 0 0
+dir /debug_ramdisk 755 0 0
+dir /second_stage_resources 755 0 0
