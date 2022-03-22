@@ -25,6 +25,13 @@ build $BUILDROOT/fs_mgr/fs_mgr_fstab.o: cxx system/core/fs_mgr/fs_mgr_fstab.cpp
 build $BUILDROOT/fs_mgr/fs_mgr_boot_config.o: cxx system/core/fs_mgr/fs_mgr_boot_config.cpp
 build $BUILDROOT/fs_mgr/fs_mgr_slotselect.o: cxx system/core/fs_mgr/fs_mgr_slotselect.cpp
 
+build $BUILDROOT/fs_mgr/libfs_mgr.a: ar $
+  $BUILDROOT/fs_mgr/blockdev.o $
+  $BUILDROOT/fs_mgr/file_wait.o $
+  $BUILDROOT/fs_mgr/fs_mgr.o $
+  $BUILDROOT/fs_mgr/fs_mgr_format.o $
+  $BUILDROOT/fs_mgr/fs_mgr_roots.o $
+
 # Two variants of libfs_mgr are provided: libfs_mgr and libfs_mgr_binder.
 # Use libfs_mgr in recovery, first-stage-init, or when libfiemap or overlayfs
 # is not used.
@@ -34,12 +41,8 @@ build $BUILDROOT/fs_mgr/fs_mgr_slotselect.o: cxx system/core/fs_mgr/fs_mgr_slots
 # gsid.
 # Do not ever allow this library to be vendor_available as a shared library.
 # It does not have a stable interface.
-build $BUILDROOT/fs_mgr/libfs_mgr.so: so $
-  $BUILDROOT/fs_mgr/blockdev.o $
-  $BUILDROOT/fs_mgr/file_wait.o $
-  $BUILDROOT/fs_mgr/fs_mgr.o $
-  $BUILDROOT/fs_mgr/fs_mgr_format.o $
-  $BUILDROOT/fs_mgr/fs_mgr_roots.o $
+build $BUILDROOT/fs_mgr/libfs_mgr.so: soa $
+  $BUILDROOT/fs_mgr/libfs_mgr.a $
   | $BUILDROOT/fs_mgr/libfstab.a $
     $SYSROOT/lib/libbase.so $
     $SYSROOT/lib/libcutils.so $

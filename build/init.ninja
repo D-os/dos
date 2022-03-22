@@ -108,6 +108,7 @@ build $BUILDROOT/init/obj/switch_root.o: cxx system/core/init/switch_root.cpp
 build $BUILDROOT/init/obj/uevent_listener.o: cxx system/core/init/uevent_listener.cpp
 build $BUILDROOT/init/obj/ueventd.o: cxx system/core/init/ueventd.cpp
 build $BUILDROOT/init/obj/ueventd_parser.o: cxx system/core/init/ueventd_parser.cpp
+build $BUILDROOT/init/obj/first_stage_main.o: cxx system/core/init/first_stage_main.cpp
 
 build $BUILDROOT/init/obj/InitProperties.sysprop.o: cxx system/androidcompat/sysprop/InitProperties.sysprop.cpp
 
@@ -245,4 +246,60 @@ build $BUILDROOT/init/obj/init: link $
 # symlinks: ["ueventd"],
 
 # init_first_stage ...
+
+rule linkstatic
+  description = LINK $out
+  command = out/tc/target/bin/${TARGET}-clang++ -isysroot $SYSROOT -nostdlib -static $
+  -Wl,--gc-sections -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--build-id=md5 $
+  -Wl,--warn-shared-textrel -Wl,--fatal-warnings -Wl,--no-undefined-version $
+  -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_stripped.a $
+  -Wl,--exclude-libs,libunwind_llvm.a -Wl,--exclude-libs,libunwind.a $
+  -Wl,--icf=safe -fuse-ld=lld -Wl,--hash-style=gnu -m64 $
+  -o $out $in
+
+build $BUILDROOT/init/obj/init_first_stage: linkstatic $
+  out/tc/target/$TARGET/lib/Scrt1.o $
+  out/tc/target/$TARGET/lib/libc.a $
+  out/tc/target/clang/lib/$TARGET/libc++.a $
+  $BUILDROOT/init/obj/libinit.a $
+  $BUILDROOT/init/obj/first_stage_main.o $
+  $BUILDROOT/libbase/libbase.a $
+  $BUILDROOT/libmodprobe/libmodprobe.a $
+  $BUILDROOT/libcap/libcap.a $
+  $BUILDROOT/liblog/liblog.a $
+  $BUILDROOT/libcutils/libcutils.a $
+  $BUILDROOT/fs_mgr/libfs_mgr.a $
+  $BUILDROOT/fs_mgr/libfstab.a $
+  $BUILDROOT/libsystemproperties/libsystemproperties.a $
+  $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a $
+  $BUILDROOT/ext4_utils/libext4_utils.a $
+  $BUILDROOT/logwrapper/liblogwrap.a $
+  $BUILDROOT/libcutils/libcutils_sockets.a $
+
+#  $BUILDROOT/libc++fs/libc++fs.a $
+#  $BUILDROOT/libfs_avb/libfs_avb.a $
+#  $BUILDROOT/libfs_mgr/libfs_mgr.a $
+#  $BUILDROOT/libfec/libfec.a $
+#  $BUILDROOT/libfec_rs/libfec_rs.a $
+#  $BUILDROOT/libsquashfs_utils/libsquashfs_utils.a $
+#  $BUILDROOT/libcrypto_utils/libcrypto_utils.a $
+#  $BUILDROOT/libavb/libavb.a $
+#  $BUILDROOT/liblp/liblp.a $
+#  $BUILDROOT/libcutils/libcutils.a $
+#  $BUILDROOT/libbase/libbase.a $
+#  $BUILDROOT/liblog/liblog.a $
+#  $BUILDROOT/libcrypto_static/libcrypto_static.a $
+#  $BUILDROOT/libselinux/libselinux.a $
+#  $BUILDROOT/libcap/libcap.a $
+#  $BUILDROOT/libgsi/libgsi.a $
+#  $BUILDROOT/liblzma/liblzma.a $
+#  $BUILDROOT/libunwindstack_no_dex/libunwindstack_no_dex.a $
+#  $BUILDROOT/libbacktrace_no_dex/libbacktrace_no_dex.a $
+#  $BUILDROOT/libmodprobe/libmodprobe.a $
+#  $BUILDROOT/libext2_uuid/libext2_uuid.a $
+#  $BUILDROOT/libprotobuf-cpp-lite/libprotobuf-cpp-lite.a $
+#  $BUILDROOT/libsnapshot_cow/libsnapshot_cow.a $
+#  $BUILDROOT/libsnapshot_init/libsnapshot_init.a $
+#  $BUILDROOT/update_metadata-protos/update_metadata-protos.a $
+#  $BUILDROOT/libprocinfo/libprocinfo.a $
 

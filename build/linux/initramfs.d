@@ -1,3 +1,2 @@
 out/build/initramfs: \
-  out/sysroot/lib/libc.so \
-  out/build/init/obj/init \
+  out/build/init/obj/init_first_stage \
