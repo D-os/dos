@@ -1,4 +1,4 @@
-file /init out/build/init/obj/init_first_stage 0755 0 0 /ueventd
+file /init out/build/init/obj/init_first_stage.stripped 0755 0 0 /ueventd
 dir /proc 755 0 0
 dir /sys 755 0 0
 dir /mnt 755 0 0

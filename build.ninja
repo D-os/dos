@@ -5,6 +5,7 @@ CC = out/tc/target/bin/${TARGET}-clang -isystem $SYSROOT/include -Isystem/bionic
 CXX = out/tc/target/bin/${TARGET}-clang++ -nostdinc++ -cxx-isystem $SYSROOT/include/c++/v1 -cxx-isystem $SYSROOT/include -Isystem/bioniccompat/include
 LINKER = out/tc/target/bin/${TARGET}-clang -isysroot $SYSROOT
 AR = out/tc/target/bin/${TARGET}-ar
+STRIP = out/tc/target/bin/${TARGET}-strip
 
 HOSTCC = out/tc/host/bin/clang
 HOSTCXX = out/tc/host/bin/clang++
@@ -32,8 +33,12 @@ rule soa
   description = SO(.a) $out
 
 rule link
-  command = $LINKER $libs $in -o $out
+  command = $LINKER $libs -o $out $in
   description = LINK $out
+
+rule strip
+  command = $STRIP --strip-all -o $out $in
+  description = STRIP $out
 
 rule copy
   command = mkdir -p $$(dirname $out) && cp -f $in $out

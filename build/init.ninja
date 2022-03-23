@@ -305,3 +305,4 @@ build $BUILDROOT/init/obj/init_first_stage: linkstatic $
 #  $BUILDROOT/update_metadata-protos/update_metadata-protos.a $
 #  $BUILDROOT/libprocinfo/libprocinfo.a $
 
+build $BUILDROOT/init/obj/init_first_stage.stripped: strip $BUILDROOT/init/obj/init_first_stage
