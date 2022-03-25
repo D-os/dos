@@ -26,6 +26,8 @@ using best available open source components.
 
 See `tools/tc-build/README.md` for a list of required host tools.
 
+> :warning: This repository makes heavy use of git submodules, so you need to `git clone --recursive`
+
 ```sh
 make toolchain sysroot compdb kernel kernel_modules
 PATH=$PWD/out/tc/host/bin:$PATH ninja
