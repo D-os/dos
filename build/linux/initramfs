@@ -6,3 +6,5 @@ dir /debug_ramdisk 755 0 0
 dir /second_stage_resources 755 0 0
 dir /lib 755 0 0
 dir /lib/modules 755 0 0
+file /fstab.qemu build/linux/fstab.qemu 0644 0 0
+dir /system 755 0 0
