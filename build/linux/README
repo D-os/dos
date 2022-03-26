@@ -1,4 +1,16 @@
-Source: https://github.com/archlinux/svntogit-packages/tree/packages/linux-zen/trunk @2783670
+Kernel build is based on:
+https://github.com/archlinux/svntogit-packages/tree/packages/linux-zen/trunk @2783670
+
+# NOTES
 
 Listing content of built initramfs:
-cpio -civt < out/build/initramfs
+
+    cpio -civt < out/build/initramfs
+
+initramfs contains toybox binary, symlinked as /bin/sh
+(Downloaded from https://landley.net/toybox/bin/)
+
+You can add `rdinit=/bin/sh` to kernel cmdline (in qemu.sh) to boot to shell.
+Then run the following oneliner to get all shell commands working:
+
+    cd /bin; for i in $(./toybox); do ./toybox ln -s toybox $i; done
