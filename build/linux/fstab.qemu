@@ -1,3 +1,3 @@
 #<src>                                                  <mnt_point>         <type>    <mnt_flags and options>                              <fs_mgr_flags>
-/dev/sda1                                               /system             ext4      ro,barrier=1                                         wait,first_stage_mount
+/dev/vda                                                /system             ext4      ro,barrier=1                                         wait,first_stage_mount
 /dev/block/mtdblock1                                    /data               ext4      noatime,nosuid,nodev,barrier=1,nomblk_io_submit      wait,check,latemount
