@@ -64,3 +64,6 @@
 [submodule "external/linux"]
 	path = external/linux
 	url = git@github.com:zen-kernel/zen-kernel.git
+[submodule "external/kmod"]
+	path = external/kmod
+	url = https://android.googlesource.com/platform/external/kmod
