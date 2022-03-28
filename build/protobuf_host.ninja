@@ -1,9 +1,15 @@
-cflags = -DHAVE_ZLIB=1 -Wno-unused-const-variable -Wno-error=user-defined-warnings -Wall -Werror -Wno-unused-function -Wno-sign-compare -Wno-unused-parameter -Wno-sign-promo -Wno-inconsistent-missing-override
+cxxflags = $
+  -DHAVE_ZLIB=1 $
+  -Wno-unused-const-variable $
+  -Wno-error=user-defined-warnings $
+  -Wall $
+  -Werror $
+  -Wno-unused-function $
+  -Wno-sign-compare $
+  -Wno-unused-parameter $
+  -Wno-sign-promo $
+  -Wno-inconsistent-missing-override
 includes = -Iexternal/protobuf/src -Iexternal/protobuf/config
-
-rule hostcxx
-  command = $HOSTCXX -fPIC -g $cflags $includes -c $in -o $out
-  description = [HOST] CXX $out
 
 build $BUILDROOT/_host/protobuf/any_lite.o: hostcxx external/protobuf/src/google/protobuf/any_lite.cc
 build $BUILDROOT/_host/protobuf/arena.o: hostcxx external/protobuf/src/google/protobuf/arena.cc
@@ -332,9 +338,5 @@ build $BUILDROOT/_host/protobuf/libprotoc.a: ar $
 
 build $BUILDROOT/_host/protobuf/main.o: hostcxx external/protobuf/src/google/protobuf/compiler/main.cc
 
-rule hostld
-  command = $HOSTCXX $ldFlags $in -o $out
-  description = [HOST] LINK $out
-
 build $BUILDROOT/_host/protobuf/aprotoc: hostld $BUILDROOT/_host/protobuf/main.o $BUILDROOT/_host/protobuf/libprotoc.a
-  ldFlags = -Wl,--no-undefined -ldl -lpthread -lm -lrt -lz -pie
+  ldflags = -Wl,--no-undefined -ldl -lpthread -lm -lrt -lz -pie

@@ -1,0 +1,76 @@
+cflags = $
+  -include config.h $
+  -ffunction-sections $
+  -fdata-sections $
+  -Wall $
+  -Werror $
+  -Wno-format $
+  -Wno-unused-parameter $
+  -Wno-unused-variable $
+  -Dsecure_getenv=getenv $
+  -DHAVE_CONFIG_H $
+  -DANOTHER_BRICK_IN_THE $
+  -DSYSCONFDIR=\"/tmp\" $
+  -UNDEBUG $
+  -DHAVE_DECL_STRNDUPA
+includes = -Iexternal/kmod -Iexternal/kmod/port-gnu
+
+build $BUILDROOT/_host/kmod/libkmod.o: hostcc external/kmod/libkmod/libkmod.c
+build $BUILDROOT/_host/kmod/libkmod-builtin.o: hostcc external/kmod/libkmod/libkmod-builtin.c
+build $BUILDROOT/_host/kmod/libkmod-file.o: hostcc external/kmod/libkmod/libkmod-file.c
+build $BUILDROOT/_host/kmod/libkmod-module.o: hostcc external/kmod/libkmod/libkmod-module.c
+build $BUILDROOT/_host/kmod/libkmod-config.o: hostcc external/kmod/libkmod/libkmod-config.c
+build $BUILDROOT/_host/kmod/libkmod-index.o: hostcc external/kmod/libkmod/libkmod-index.c
+build $BUILDROOT/_host/kmod/libkmod-elf.o: hostcc external/kmod/libkmod/libkmod-elf.c
+build $BUILDROOT/_host/kmod/libkmod-list.o: hostcc external/kmod/libkmod/libkmod-list.c
+build $BUILDROOT/_host/kmod/libkmod-signature.o: hostcc external/kmod/libkmod/libkmod-signature.c
+build $BUILDROOT/_host/kmod/array.o: hostcc external/kmod/shared/array.c
+build $BUILDROOT/_host/kmod/scratchbuf.o: hostcc external/kmod/shared/scratchbuf.c
+build $BUILDROOT/_host/kmod/util.o: hostcc external/kmod/shared/util.c
+build $BUILDROOT/_host/kmod/hash.o: hostcc external/kmod/shared/hash.c
+build $BUILDROOT/_host/kmod/strbuf.o: hostcc external/kmod/shared/strbuf.c
+
+build $BUILDROOT/_host/kmod/libkmod.a: hostar $
+  $BUILDROOT/_host/kmod/libkmod.o $
+  $BUILDROOT/_host/kmod/libkmod-builtin.o $
+  $BUILDROOT/_host/kmod/libkmod-file.o $
+  $BUILDROOT/_host/kmod/libkmod-module.o $
+  $BUILDROOT/_host/kmod/libkmod-config.o $
+  $BUILDROOT/_host/kmod/libkmod-index.o $
+  $BUILDROOT/_host/kmod/libkmod-elf.o $
+  $BUILDROOT/_host/kmod/libkmod-list.o $
+  $BUILDROOT/_host/kmod/libkmod-signature.o $
+  $BUILDROOT/_host/kmod/array.o $
+  $BUILDROOT/_host/kmod/scratchbuf.o $
+  $BUILDROOT/_host/kmod/util.o $
+  $BUILDROOT/_host/kmod/hash.o $
+  $BUILDROOT/_host/kmod/strbuf.o $
+
+build $BUILDROOT/_host/kmod/tools/port.o: hostcc external/kmod/tools/port.c
+build $BUILDROOT/_host/kmod/tools/depmod.o: hostcc external/kmod/tools/depmod.c
+build $BUILDROOT/_host/kmod/tools/kmod.o: hostcc external/kmod/tools/kmod.c
+build $BUILDROOT/_host/kmod/tools/modinfo.o: hostcc external/kmod/tools/modinfo.c
+build $BUILDROOT/_host/kmod/tools/rmmod.o: hostcc external/kmod/tools/rmmod.c
+build $BUILDROOT/_host/kmod/tools/insert.o: hostcc external/kmod/tools/insert.c
+build $BUILDROOT/_host/kmod/tools/log.o: hostcc external/kmod/tools/log.c
+build $BUILDROOT/_host/kmod/tools/modprobe.o: hostcc external/kmod/tools/modprobe.c
+build $BUILDROOT/_host/kmod/tools/static-nodes.o: hostcc external/kmod/tools/static-nodes.c
+build $BUILDROOT/_host/kmod/tools/insmod.o: hostcc external/kmod/tools/insmod.c
+build $BUILDROOT/_host/kmod/tools/lsmod.o: hostcc external/kmod/tools/lsmod.c
+build $BUILDROOT/_host/kmod/tools/remove.o: hostcc external/kmod/tools/remove.c
+
+build $BUILDROOT/_host/kmod/depmod: hostld $
+  $BUILDROOT/_host/kmod/tools/port.o $
+  $BUILDROOT/_host/kmod/tools/depmod.o $
+  $BUILDROOT/_host/kmod/tools/kmod.o $
+  $BUILDROOT/_host/kmod/tools/modinfo.o $
+  $BUILDROOT/_host/kmod/tools/rmmod.o $
+  $BUILDROOT/_host/kmod/tools/insert.o $
+  $BUILDROOT/_host/kmod/tools/log.o $
+  $BUILDROOT/_host/kmod/tools/modprobe.o $
+  $BUILDROOT/_host/kmod/tools/static-nodes.o $
+  $BUILDROOT/_host/kmod/tools/insmod.o $
+  $BUILDROOT/_host/kmod/tools/lsmod.o $
+  $BUILDROOT/_host/kmod/tools/remove.o $
+  $BUILDROOT/_host/kmod/libkmod.a
+  ldflags = -Wl,--no-undefined -pie

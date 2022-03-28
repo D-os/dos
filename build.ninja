@@ -9,6 +9,7 @@ STRIP = out/tc/target/bin/${TARGET}-strip
 
 HOSTCC = out/tc/host/bin/clang
 HOSTCXX = out/tc/host/bin/clang++
+HOSTAR = out/tc/host/bin/llvm-ar
 
 rule cc
   depfile = $out.d
@@ -22,7 +23,7 @@ rule cxx
 
 rule ar
   command = $AR rcs $out $in
-  description = CXX $out
+  description = AR $out
 
 rule so
   command = $LINKER $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out $in
@@ -44,12 +45,31 @@ rule copy
   command = mkdir -p $$(dirname $out) && cp -f $in $out
   description = COPY $out <- $in
 
+rule hostcc
+  command = $HOSTCC -fPIC -g $cflags $includes -c $in -o $out
+  description = [HOST] CC $out
+
+rule hostcxx
+  command = $HOSTCXX -fPIC -g $cxxflags $includes -c $in -o $out
+  description = [HOST] CXX $out
+
+rule hostar
+  command = $HOSTAR rcs $out $in
+  description = [HOST] AR $out
+
+rule hostld
+  command = $HOSTCXX $ldflags $in -o $out
+  description = [HOST] LINK $out
+
 
 subninja build/protobuf_host.ninja
 build out/tc/host/bin/protoc: copy $BUILDROOT/_host/protobuf/aprotoc
 rule protoc
   command = out/tc/host/bin/protoc --cpp_out=lite:$BUILDROOT/init/proto --dependency_out=$out -I . $in #&& out/soong/host/linux-x86/bin/dep_fixer out/soong/.intermediates/system/core/init/host_init_verifier/linux_glibc_x86_64/gen/proto/system/core/init/subcontext.pb.d
   generator = out/tc/host/bin/protoc
+
+subninja build/kmod.ninja
+build out/tc/host/bin/depmod: copy $BUILDROOT/_host/kmod/depmod
 
 
 subninja build/libbase.ninja
