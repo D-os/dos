@@ -1,14 +1,14 @@
 # to list the contents of generated initramfs use:
-# cpio -civt < out/build/initramfs
+# zcat out/build/initramfs/initramfs.gz | cpio -civt
 
 rule timestamp
   command = git show --pretty=format:%at --abbrev-commit $$(git rev-list -n 1 HEAD $in) | head -n 1 > $out
   description = [HOST] TS $out
 
-build $BUILDROOT/initramfs.timestamp: timestamp build/initramfs.ninja
+build $BUILDROOT/initramfs/initramfs.timestamp: timestamp build/initramfs.ninja
 
 rule gen_dep
-  command = echo "$BUILDROOT/initramfs: \\" > $out && sed -n -e '/^file/{s/[^ ]\+//;s/[^ ]\+//;s/ \+\([^ ]\+\).*/  \1 \\/;p}' $in >> $out
+  command = echo "$BUILDROOT/initramfs/initramfs: \\" > $out && sed -n -e '/^file/{s/[^ ]\+//;s/[^ ]\+//;s/ \+\([^ ]\+\).*/  \1 \\/;p}' $in >> $out
   description = [HOST] GEN.d $out
 
 build build/linux/initramfs.d: gen_dep build/linux/initramfs
@@ -17,12 +17,26 @@ rule gen_init_cpio
   command = $BUILDROOT/linux/usr/gen_init_cpio -t $$(<$out.timestamp) $in > $out
   description = [HOST] CPIO $out
 
-build $BUILDROOT/initramfs: gen_init_cpio build/linux/initramfs | $BUILDROOT/initramfs.timestamp build/linux/initramfs.d
+build $BUILDROOT/initramfs/initramfs: gen_init_cpio build/linux/initramfs $
+  | $BUILDROOT/linux/usr/gen_init_cpio $BUILDROOT/initramfs/initramfs.timestamp build/linux/initramfs.d $
+    $BUILDROOT/initramfs/lib/modules/0.0/modules.dep
   depfile = build/linux/initramfs.d
+
+rule copy_modules
+  command = tools/copy-initramfs-modules.sh $in $KERNEL_VERSION $out
+  description = [HOST] STAGE MODULES $out
+
+build $BUILDROOT/initramfs/lib/modules/0.0: copy_modules build/linux/modules.load | $SYSROOT/lib/modules/$KERNEL_VERSION
+
+rule depmod
+  command = out/tc/host/bin/depmod -a -b $BUILDROOT/initramfs 0.0
+  description = [HOST] DEPMOD $out
+
+build $BUILDROOT/initramfs/lib/modules/0.0/modules.dep: depmod | out/tc/host/bin/depmod || $BUILDROOT/initramfs/lib/modules/0.0
 
 rule gzip
   command = gzip -c $in > $out
   description = [HOST] GZIP $out
 
-build $BUILDROOT/initramfs.gz: gzip $BUILDROOT/initramfs
+build $BUILDROOT/initramfs/initramfs.gz: gzip $BUILDROOT/initramfs/initramfs
 

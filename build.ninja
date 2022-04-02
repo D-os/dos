@@ -7,6 +7,8 @@ LINKER = out/tc/target/bin/${TARGET}-clang -isysroot $SYSROOT
 AR = out/tc/target/bin/${TARGET}-ar
 STRIP = out/tc/target/bin/${TARGET}-strip
 
+KERNEL_VERSION = 5.16.11-zen-gfbc389882a61
+
 HOSTCC = out/tc/host/bin/clang
 HOSTCXX = out/tc/host/bin/clang++
 HOSTAR = out/tc/host/bin/llvm-ar
@@ -125,6 +127,6 @@ subninja build/jsoncpp.ninja
 subninja build/protobuf.ninja
 
 subninja build/initramfs.ninja
-build initramfs: phony $BUILDROOT/initramfs.gz
+build initramfs: phony $BUILDROOT/initramfs/initramfs.gz
 
 default initramfs

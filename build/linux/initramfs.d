@@ -1,5 +1,16 @@
-out/build/initramfs: \
+out/build/initramfs/initramfs: \
   out/build/init/obj/init_first_stage.stripped \
+  build/linux/modules.load \
+  out/build/initramfs/lib/modules/0.0/modules.alias \
+  out/build/initramfs/lib/modules/0.0/modules.dep \
+  out/build/initramfs/lib/modules/0.0/modules.softdep \
+  out/build/initramfs/lib/modules/0.0/crc16.ko \
+  out/build/initramfs/lib/modules/0.0/crc32c_generic.ko \
+  out/build/initramfs/lib/modules/0.0/crc32c-intel.ko \
+  out/build/initramfs/lib/modules/0.0/ext4.ko \
+  out/build/initramfs/lib/modules/0.0/jbd2.ko \
+  out/build/initramfs/lib/modules/0.0/libcrc32c.ko \
+  out/build/initramfs/lib/modules/0.0/mbcache.ko \
   build/linux/fstab.qemu \
   tools/toybox-x86_64 \
   build/linux/first_stage.sh \
