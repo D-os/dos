@@ -1,4 +1,4 @@
-- put statically linked /system/bin/e2fsck in systemimg
+- put statically linked /system/bin/e2fsck in system.img
 [   15.306211] init: [libfs_mgr]Filesystem on /dev/vda was not cleanly shutdown; state flags: 0x1, incompat feature flags: 0x2c6
 [   15.306812] EXT4-fs (vda): Ignoring removed nomblk_io_submit option
 [   15.309096] EXT4-fs (vda): recovery complete

@@ -1,0 +1,39 @@
+IMAGE_SIZE = 1G
+SYSTEMDIR = $BUILDROOT/system
+
+rule mkfs
+  command = truncate -s $IMAGE_SIZE $out && mke2fs -q -t ext4 -L / -E root_owner=0:0 -d $in $out
+  description = [HOST] MKFS $out
+
+build $BUILDROOT/system.img: mkfs $SYSTEMDIR | $
+  $SYSTEMDIR/dev $
+  $SYSTEMDIR/proc $
+  $SYSTEMDIR/sys $
+  $SYSTEMDIR/mnt $
+  $SYSTEMDIR/debug_ramdisk $
+  $SYSTEMDIR/second_stage_resources $
+  $SYSTEMDIR/lib $
+  $SYSTEMDIR/lib/modules $
+  $SYSTEMDIR/system/bin/init $
+
+rule mkdir
+  command = mkdir -p $out
+  description = MKDIR $out
+
+build $SYSTEMDIR: mkdir
+build $SYSTEMDIR/dev: mkdir
+build $SYSTEMDIR/proc: mkdir
+build $SYSTEMDIR/sys: mkdir
+build $SYSTEMDIR/mnt: mkdir
+build $SYSTEMDIR/debug_ramdisk: mkdir
+build $SYSTEMDIR/second_stage_resources: mkdir
+
+rule sync
+  command = mkdir -p $out && for SOURCE in $source; do cp -a $$SOURCE $out; done
+  description = SYNC $out <- $source
+
+build $SYSTEMDIR/lib: sync
+  source = out/sysroot/lib/*.so*
+build $SYSTEMDIR/lib/modules: sync
+  source = out/sysroot/lib/modules/*
+build $SYSTEMDIR/system/bin/init: copy $BUILDROOT/init/obj/init

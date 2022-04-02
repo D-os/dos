@@ -129,7 +129,7 @@ subninja build/protobuf.ninja
 subninja build/initramfs.ninja
 build initramfs: phony $BUILDROOT/initramfs.gz
 
-subninja build/systemimg.ninja
-build systemimg: phony $BUILDROOT/systemimg.raw
+subninja build/system_img.ninja
+build system.img: phony $BUILDROOT/system.img
 
-default initramfs systemimg
+default initramfs system.img
