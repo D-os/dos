@@ -1,5 +1,5 @@
 # to list the contents of generated initramfs use:
-# zcat out/build/initramfs/initramfs.gz | cpio -civt
+# zcat out/build/initramfs.gz | cpio -civt
 
 rule timestamp
   command = git show --pretty=format:%at --abbrev-commit $$(git rev-list -n 1 HEAD $in) | head -n 1 > $out
@@ -38,5 +38,5 @@ rule gzip
   command = gzip -c $in > $out
   description = [HOST] GZIP $out
 
-build $BUILDROOT/initramfs/initramfs.gz: gzip $BUILDROOT/initramfs/initramfs
+build $BUILDROOT/initramfs.gz: gzip $BUILDROOT/initramfs/initramfs
 

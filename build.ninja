@@ -127,6 +127,9 @@ subninja build/jsoncpp.ninja
 subninja build/protobuf.ninja
 
 subninja build/initramfs.ninja
-build initramfs: phony $BUILDROOT/initramfs/initramfs.gz
+build initramfs: phony $BUILDROOT/initramfs.gz
 
-default initramfs
+subninja build/systemimg.ninja
+build systemimg: phony $BUILDROOT/systemimg.raw
+
+default initramfs systemimg

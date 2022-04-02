@@ -6,7 +6,7 @@ https://github.com/archlinux/svntogit-packages/tree/packages/linux-zen/trunk @27
 Listing content of built initramfs:
 
     cpio -civt < out/build/initramfs/initramfs
-    zcat out/build/initramfs/initramfs.gz | cpio -civt
+    zcat out/build/initramfs.gz | cpio -civt
 
 initramfs contains toybox binary, symlinked as /bin/sh
 (Downloaded from https://landley.net/toybox/bin/)

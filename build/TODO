@@ -1,0 +1,11 @@
+- put statically linked /system/bin/e2fsck in systemimg
+[   15.306211] init: [libfs_mgr]Filesystem on /dev/vda was not cleanly shutdown; state flags: 0x1, incompat feature flags: 0x2c6
+[   15.306812] EXT4-fs (vda): Ignoring removed nomblk_io_submit option
+[   15.309096] EXT4-fs (vda): recovery complete
+[   15.309619] EXT4-fs (vda): mounted filesystem with ordered data mode. Opts: errors=remount-ro,nomblk_io_submit. Quota mode: none.
+[   15.310133] init: [libfs_mgr]check_fs(): mount(/dev/vda,/system,ext4)=0: No error information
+[   15.311064] init: [libfs_mgr]check_fs(): unmount(/system) succeeded
+[   15.311330] init: [libfs_mgr]Not running /system/bin/e2fsck on /dev/vda (executable not in system image)
+[   15.312314] EXT4-fs (vda): mounted filesystem with ordered data mode. Opts: barrier=1. Quota mode: none.
+[   15.312709] init: [libfs_mgr]__mount(source=/dev/vda,target=/system,type=ext4)=0: No error information
+[   15.313141] init: Switching root to '/system'

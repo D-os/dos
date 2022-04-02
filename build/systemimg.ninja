@@ -1,0 +1,7 @@
+IMAGE_SIZE = 1G
+
+rule mkfs
+  command = truncate -s $IMAGE_SIZE $out && mke2fs -q -t ext4 -L SYSTEM -E root_owner=0:0 -d $in $out
+  description = [HOST] MKFS $out
+
+build $BUILDROOT/systemimg.raw: mkfs $BUILDROOT/system
