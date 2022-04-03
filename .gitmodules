@@ -67,3 +67,6 @@
 [submodule "external/kmod"]
 	path = external/kmod
 	url = https://android.googlesource.com/platform/external/kmod
+[submodule "external/mksh"]
+	path = external/mksh
+	url = https://android.googlesource.com/platform/external/mksh
