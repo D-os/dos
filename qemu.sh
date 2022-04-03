@@ -1,6 +1,6 @@
 cd $(dirname $0)/out
 IMG=tmp.img
-CMDLINE="loglevel=7 console=ttyS0 androidboot.fstab_suffix=qemu androidboot.first_stage_console=1"
+CMDLINE="loglevel=7 console=ttyS0 printk.devkmsg=on androidboot.fstab_suffix=qemu androidboot.first_stage_console=0"
 # BIOS="-bios /usr/share/edk2/ovmf/OVMF_CODE.fd"
 SYSTEM_IMG=build/system.img
 trap 'rm $IMG' 1 2 3 15
