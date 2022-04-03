@@ -1,3 +1,15 @@
+- generate build.prop
+  (ATM we have a basic placeholder copied from android-12 build)
+[    0.431790] init: Setting product property ro.product.brand to 'Android' (from ro.product.system.brand)
+[    0.432207] init: Setting product property ro.product.device to 'generic' (from ro.product.system.device)
+[    0.432614] init: Setting product property ro.product.manufacturer to 'Android' (from ro.product.system.manufacturer)
+[    0.433076] init: Setting product property ro.product.model to 'mainline' (from ro.product.system.model)
+[    0.433491] init: Setting product property ro.product.name to 'mainline' (from ro.product.system.name)
+[    0.433896] init: Setting property 'ro.build.fingerprint' to 'Android/mainline/generic:12/SQ1D.211205.016.A5/eng.smoku.20220103.065544:eng/test-keys'
+[    0.434471] init: Setting property 'ro.product.cpu.abilist' to 'x86_64,x86'
+[    0.434762] init: Setting property 'ro.product.cpu.abilist32' to 'x86'
+[    0.435047] init: Setting property 'ro.product.cpu.abilist64' to 'x86_64'
+
 - put statically linked /system/bin/e2fsck in system.img
 [   15.306211] init: [libfs_mgr]Filesystem on /dev/vda was not cleanly shutdown; state flags: 0x1, incompat feature flags: 0x2c6
 [   15.306812] EXT4-fs (vda): Ignoring removed nomblk_io_submit option

@@ -15,6 +15,7 @@ build $BUILDROOT/system.img: mkfs $SYSTEMDIR | $
   $SYSTEMDIR/lib $
   $SYSTEMDIR/lib/modules $
   $SYSTEMDIR/system/bin/init $
+  $SYSTEMDIR/system/build.prop $
 
 rule mkdir
   command = mkdir -p $out
@@ -37,3 +38,4 @@ build $SYSTEMDIR/lib: sync
 build $SYSTEMDIR/lib/modules: sync
   source = out/sysroot/lib/modules/*
 build $SYSTEMDIR/system/bin/init: copy $BUILDROOT/init/obj/init
+build $SYSTEMDIR/system/build.prop: copy build/conf/build.prop
