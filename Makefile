@@ -111,3 +111,4 @@ $(SYSROOT_DIR)/lib/modules: $(BUILD_DIR)/linux/arch/x86/boot/bzImage
 	PATH=$(TC_DIR)/host/bin:${PATH} $(MAKE) \
 		-C external/linux LLVM=1 ARCH=x86_64 O=$(BUILD_DIR)/linux \
 		INSTALL_MOD_PATH=$(SYSROOT_DIR) INSTALL_MOD_STRIP=1 modules_install
+	rm $(SYSROOT_DIR)/lib/modules/*/{source,build}
