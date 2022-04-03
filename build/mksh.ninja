@@ -1,0 +1,121 @@
+cflags = $
+  -Wall $
+  -Werror $
+  -Wno-deprecated-declarations $
+  -fno-asynchronous-unwind-tables $
+  -fno-strict-aliasing $
+  -fwrapv $
+  -DDEBUG_LEAKS $
+  -DMKSH_ASSUME_UTF8 $
+  -DMKSH_DONT_EMIT_IDSTRING $
+  -DKSH_VERSIONNAME_VENDOR_EXT='" D/os"' $
+  -DMKSH_BUILDSH $
+  -D_GNU_SOURCE $
+  -DSETUID_CAN_FAIL_WITH_EAGAIN $
+  -DHAVE_STRING_POOLING=1 $
+  -DHAVE_ATTRIBUTE_BOUNDED=1 $
+  -DHAVE_ATTRIBUTE_FORMAT=1 $
+  -DHAVE_ATTRIBUTE_NORETURN=1 $
+  -DHAVE_ATTRIBUTE_PURE=1 $
+  -DHAVE_ATTRIBUTE_UNUSED=1 $
+  -DHAVE_ATTRIBUTE_USED=1 $
+  -DHAVE_SYS_TIME_H=1 $
+  -DHAVE_TIME_H=1 $
+  -DHAVE_BOTH_TIME_H=1 $
+  -DHAVE_SYS_BSDTYPES_H=0 $
+  -DHAVE_SYS_FILE_H=1 $
+  -DHAVE_SYS_MKDEV_H=0 $
+  -DHAVE_SYS_MMAN_H=1 $
+  -DHAVE_SYS_PARAM_H=1 $
+  -DHAVE_SYS_RESOURCE_H=1 $
+  -DHAVE_SYS_SELECT_H=1 $
+  -DHAVE_SYS_SYSMACROS_H=1 $
+  -DHAVE_BSTRING_H=0 $
+  -DHAVE_GRP_H=1 $
+  -DHAVE_IO_H=0 $
+  -DHAVE_LIBGEN_H=1 $
+  -DHAVE_LIBUTIL_H=0 $
+  -DHAVE_PATHS_H=1 $
+  -DHAVE_STDINT_H=1 $
+  -DHAVE_STRINGS_H=1 $
+  -DHAVE_TERMIOS_H=1 $
+  -DHAVE_ULIMIT_H=0 $
+  -DHAVE_VALUES_H=0 $
+  -DHAVE_CAN_INTTYPES=1 $
+  -DHAVE_CAN_UCBINTS=1 $
+  -DHAVE_CAN_INT8TYPE=1 $
+  -DHAVE_CAN_UCBINT8=1 $
+  -DHAVE_RLIM_T=1 $
+  -DHAVE_SIG_T=1 $
+  -DHAVE_SYS_ERRLIST=0 $
+  -DHAVE_SYS_SIGNAME=0 $
+  -DHAVE_SYS_SIGLIST=0 $
+  -DHAVE_FLOCK=1 $
+  -DHAVE_LOCK_FCNTL=1 $
+  -DHAVE_GETRUSAGE=1 $
+  -DHAVE_GETSID=1 $
+  -DHAVE_GETTIMEOFDAY=1 $
+  -DHAVE_KILLPG=1 $
+  -DHAVE_MEMMOVE=1 $
+  -DHAVE_MKNOD=0 $
+  -DHAVE_MMAP=1 $
+  -DHAVE_FTRUNCATE=1 $
+  -DHAVE_NICE=1 $
+  -DHAVE_REVOKE=0 $
+  -DHAVE_SETLOCALE_CTYPE=1 $
+  -DHAVE_LANGINFO_CODESET=1 $
+  -DHAVE_SELECT=1 $
+  -DHAVE_SETRESUGID=1 $
+  -DHAVE_SETGROUPS=1 $
+  -DHAVE_STRERROR=1 $
+  -DHAVE_STRSIGNAL=0 $
+  -DHAVE_STRLCPY=0 $
+  -DHAVE_FLOCK_DECL=1 $
+  -DHAVE_REVOKE_DECL=1 $
+  -DHAVE_SYS_ERRLIST_DECL=0 $
+  -DHAVE_SYS_SIGLIST_DECL=1 $
+  -DHAVE_PERSISTENT_HISTORY=0 $
+  -DMKSH_NO_SIGSETJMP=1 $
+  -DMKSH_BUILD_R=592 $
+  -DMKSH_DEFAULT_PROFILEDIR=\"/system/etc\" $
+  -DMKSHRC_PATH=\"/system/etc/mkshrc\" $
+  -DMKSH_DEFAULT_EXECSHELL=\"/system/bin/sh\" $
+  -DMKSH_DEFAULT_TMPDIR=\"/data/local\" $
+
+includes = -Isystem/androidcompat
+
+build $BUILDROOT/mksh/lalloc.o: cc external/mksh/src/lalloc.c
+build $BUILDROOT/mksh/edit.o: cc external/mksh/src/edit.c
+build $BUILDROOT/mksh/eval.o: cc external/mksh/src/eval.c
+build $BUILDROOT/mksh/exec.o: cc external/mksh/src/exec.c
+build $BUILDROOT/mksh/expr.o: cc external/mksh/src/expr.c
+build $BUILDROOT/mksh/funcs.o: cc external/mksh/src/funcs.c
+build $BUILDROOT/mksh/histrap.o: cc external/mksh/src/histrap.c
+build $BUILDROOT/mksh/jobs.o: cc external/mksh/src/jobs.c
+build $BUILDROOT/mksh/lex.o: cc external/mksh/src/lex.c
+build $BUILDROOT/mksh/main.o: cc external/mksh/src/main.c
+build $BUILDROOT/mksh/misc.o: cc external/mksh/src/misc.c
+build $BUILDROOT/mksh/shf.o: cc external/mksh/src/shf.c
+build $BUILDROOT/mksh/strlcpy.o: cc external/mksh/src/strlcpy.c
+build $BUILDROOT/mksh/syn.o: cc external/mksh/src/syn.c
+build $BUILDROOT/mksh/tree.o: cc external/mksh/src/tree.c
+build $BUILDROOT/mksh/var.o: cc external/mksh/src/var.c
+
+build $BUILDROOT/mksh/sh: link $
+  $BUILDROOT/mksh/lalloc.o $
+  $BUILDROOT/mksh/edit.o $
+  $BUILDROOT/mksh/eval.o $
+  $BUILDROOT/mksh/exec.o $
+  $BUILDROOT/mksh/expr.o $
+  $BUILDROOT/mksh/funcs.o $
+  $BUILDROOT/mksh/histrap.o $
+  $BUILDROOT/mksh/jobs.o $
+  $BUILDROOT/mksh/lex.o $
+  $BUILDROOT/mksh/main.o $
+  $BUILDROOT/mksh/misc.o $
+  $BUILDROOT/mksh/shf.o $
+  $BUILDROOT/mksh/strlcpy.o $
+  $BUILDROOT/mksh/syn.o $
+  $BUILDROOT/mksh/tree.o $
+  $BUILDROOT/mksh/var.o $
+

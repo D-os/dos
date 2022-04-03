@@ -24,6 +24,8 @@ build $BUILDROOT/system.img: mkfs $SYSTEMDIR | $
   $SYSTEMDIR/system/etc/ueventd.rc $
   $SYSTEMDIR/etc/passwd $
   $SYSTEMDIR/etc/group $
+  $SYSTEMDIR/system/bin/sh $
+  $SYSTEMDIR/system/etc/mkshrc $
 
 rule mkdir
   command = mkdir -p $out
@@ -60,3 +62,5 @@ build $SYSTEMDIR/system/etc/init/hw/init.rc: copy build/conf/init.rc
 build $SYSTEMDIR/system/etc/ueventd.rc: copy build/conf/ueventd.rc
 build $SYSTEMDIR/etc/passwd: copy build/conf/passwd
 build $SYSTEMDIR/etc/group: copy build/conf/group
+build $SYSTEMDIR/system/bin/sh: copy $BUILDROOT/mksh/sh
+build $SYSTEMDIR/system/etc/mkshrc: copy external/mksh/mkshrc
