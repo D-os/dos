@@ -1,0 +1,4 @@
+root:x:0:
+# libcutils/include/private/android_filesystem_config.h
+system:x:1000:
+shell:x:2000:

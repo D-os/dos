@@ -19,6 +19,11 @@ build $BUILDROOT/system.img: mkfs $SYSTEMDIR | $
   $SYSTEMDIR/system/build.prop $
   $SYSTEMDIR/apex $
   $SYSTEMDIR/linkerconfig $
+  $SYSTEMDIR/etc/cgroups.json $
+  $SYSTEMDIR/system/etc/init/hw/init.rc $
+  $SYSTEMDIR/system/etc/ueventd.rc $
+  $SYSTEMDIR/etc/passwd $
+  $SYSTEMDIR/etc/group $
 
 rule mkdir
   command = mkdir -p $out
@@ -50,3 +55,8 @@ build $SYSTEMDIR/system/bin/init: copy $BUILDROOT/init/obj/init
 build $SYSTEMDIR/system/bin/ueventd: symlink
   target = init
 build $SYSTEMDIR/system/build.prop: copy build/conf/build.prop
+build $SYSTEMDIR/etc/cgroups.json: copy build/conf/cgroups.json
+build $SYSTEMDIR/system/etc/init/hw/init.rc: copy build/conf/init.rc
+build $SYSTEMDIR/system/etc/ueventd.rc: copy build/conf/ueventd.rc
+build $SYSTEMDIR/etc/passwd: copy build/conf/passwd
+build $SYSTEMDIR/etc/group: copy build/conf/group
