@@ -35,9 +35,9 @@ rule sync
   command = mkdir -p $out && for SOURCE in $source; do cp -a $$SOURCE $out; done
   description = SYNC $out <- $source
 
-rule symlink
-  command = ln -sf $target $out
-  description = LN $out -> $target
+rule hardlink
+  command = ln -f $in $out
+  description = LN $out -> $in
 
 build $SYSTEMDIR: mkdir
 build $SYSTEMDIR/dev: mkdir
@@ -54,8 +54,7 @@ build $SYSTEMDIR/lib: sync
 build $SYSTEMDIR/lib/modules: sync
   source = out/sysroot/lib/modules/*
 build $SYSTEMDIR/system/bin/init: copy $BUILDROOT/init/obj/init
-build $SYSTEMDIR/system/bin/ueventd: symlink
-  target = init
+build $SYSTEMDIR/system/bin/ueventd: hardlink $SYSTEMDIR/system/bin/init
 build $SYSTEMDIR/system/build.prop: copy build/conf/build.prop
 build $SYSTEMDIR/etc/cgroups.json: copy build/conf/cgroups.json
 build $SYSTEMDIR/system/etc/init/hw/init.rc: copy build/conf/init.rc
