@@ -73,3 +73,6 @@
 [submodule "external/toybox"]
 	path = external/toybox
 	url = https://android.googlesource.com/platform/external/toybox
+[submodule "external/boringssl"]
+	path = external/boringssl
+	url = https://android.googlesource.com/platform/external/boringssl
