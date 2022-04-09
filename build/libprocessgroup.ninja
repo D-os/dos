@@ -1,7 +1,7 @@
 cxxflags = -Wall -Werror -Wexit-time-destructors -Wno-inconsistent-missing-override -Wno-c99-designator
 includes = -Isystem/core/libprocessgroup/include -Isystem/core/libprocessgroup/cgrouprc/include $
   -Isystem/libbase/include -Isystem/core/libcutils/include -Iexternal/jsoncpp/include
-libs = -L$SYSROOT/lib -lbase -lcgrouprc
+libs = -lbase -lcgrouprc
 
 build $BUILDROOT/libprocessgroup/cgroup_map.o: cxx system/core/libprocessgroup/cgroup_map.cpp
 build $BUILDROOT/libprocessgroup/processgroup.o: cxx system/core/libprocessgroup/processgroup.cpp

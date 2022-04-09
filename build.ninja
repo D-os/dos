@@ -28,15 +28,15 @@ rule ar
   description = AR $out
 
 rule so
-  command = $LINKER $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out $in
+  command = $LINKER -L$SYSROOT/lib $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out $in
   description = SO $out
 
 rule soa
-  command = $LINKER $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out -Wl,--whole-archive $in -Wl,--no-whole-archive
+  command = $LINKER -L$SYSROOT/lib $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out -Wl,--whole-archive $in -Wl,--no-whole-archive
   description = SO(.a) $out
 
 rule link
-  command = $LINKER $libs -o $out $in
+  command = $LINKER -L$SYSROOT/lib $libs -o $out $in
   description = LINK $out
 
 rule strip
@@ -133,5 +133,7 @@ build initramfs: phony $BUILDROOT/initramfs.gz
 
 subninja build/system_img.ninja
 build system.img: phony $BUILDROOT/system.img
+
+subninja build/toybox.ninja
 
 default initramfs system.img

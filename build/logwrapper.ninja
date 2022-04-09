@@ -3,7 +3,7 @@ includes = -Isystem/logging/logwrapper/include $
   -Isystem/core/libcutils/include $
   -Isystem/logging/liblog/include $
   -Isystem/libbase/include
-libs = -L$SYSROOT/lib -lcutils -llog
+libs = -lcutils -llog
 
 build $BUILDROOT/logwrapper/logwrap.o: cxx system/logging/logwrapper/logwrap.cpp
 build $BUILDROOT/logwrapper/logwrapper.o: cxx system/logging/logwrapper/logwrapper.cpp

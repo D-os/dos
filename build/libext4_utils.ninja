@@ -1,7 +1,7 @@
 cxxflags = -Werror -fno-strict-aliasing -DREAL_UUID
 includes = -Isystem/extras/ext4_utils/include $
   -Isystem/libbase/include
-libs = -L$SYSROOT/lib -lbase -lext2_uuid
+libs = -lbase -lext2_uuid
 
 build $BUILDROOT/ext4_utils/ext4_utils.o: cxx system/extras/ext4_utils/ext4_utils.cpp
 build $BUILDROOT/ext4_utils/wipe.o: cxx system/extras/ext4_utils/wipe.cpp

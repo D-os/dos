@@ -201,7 +201,7 @@ build $BUILDROOT/init/obj/main.o: cxx system/core/init/main.cpp | $SYSROOT/inclu
 #     "libselinux",
 #     "libutils",
 # ],
-libs = -L$SYSROOT/lib $
+libs = $
   -lc++ $
   -lunwind $
   -lbase $

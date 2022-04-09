@@ -1,6 +1,6 @@
 cflags = -Wall -Werror -Wno-pointer-arith -Wno-unused-function -Wno-unused-parameter
 includes = -Iexternal/e2fsprogs/lib
-libs = -L$SYSROOT/lib -ldl
+libs = -ldl
 
 build $BUILDROOT/libext2_uuid/clear.o: cc external/e2fsprogs/lib/uuid/clear.c
 build $BUILDROOT/libext2_uuid/compare.o: cc external/e2fsprogs/lib/uuid/compare.c

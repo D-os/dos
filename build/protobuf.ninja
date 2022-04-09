@@ -1,7 +1,7 @@
 cxxflags = -Wall -Werror -Wno-unused-function -Wno-sign-compare -Wno-unused-parameter -Wno-sign-promo $
   -Wno-unused-const-variable -Wno-error=user-defined-warnings -Wno-deprecated-pragma
 includes = -Iexternal/protobuf/android -Iexternal/protobuf/src
-libs = -L$SYSROOT/lib -llog
+libs = -llog
 
 build $BUILDROOT/protobuf/any_lite.o: cxx external/protobuf/src/google/protobuf/any_lite.cc
 build $BUILDROOT/protobuf/arena.o: cxx external/protobuf/src/google/protobuf/arena.cc

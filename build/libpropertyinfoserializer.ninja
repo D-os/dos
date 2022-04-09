@@ -1,7 +1,7 @@
 cxxflags = -Wall -Wextra -Werror
 includes = -Isystem/core/property_service/libpropertyinfoserializer/include -Isystem/core/property_service/libpropertyinfoparser/include $
   -Isystem/libbase/include
-libs = -L$SYSROOT/lib -lbase
+libs = -lbase
 
 build $BUILDROOT/property_service/libpropertyinfoserializer/property_info_file.o: cxx  system/core/property_service/libpropertyinfoserializer/property_info_file.cpp
 build $BUILDROOT/property_service/libpropertyinfoserializer/property_info_serializer.o: cxx  system/core/property_service/libpropertyinfoserializer/property_info_serializer.cpp

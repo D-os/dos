@@ -1,6 +1,6 @@
 cxxflags = -Wno-exit-time-destructors -Wno-deprecated-pragma
 includes = -Isystem/core/libcutils/include -Isystem/libbase/include -Isystem/logging/liblog/include
-libs = -L$SYSROOT/lib -llog
+libs = -llog
 
 build $BUILDROOT/libcutils/config_utils.o: cxx system/core/libcutils/config_utils.cpp
 build $BUILDROOT/libcutils/iosched_policy.o: cxx system/core/libcutils/iosched_policy.cpp
@@ -77,7 +77,7 @@ build $BUILDROOT/libcutils/libcutils.a: ar $
 
 rule soa
   description = SO(.a) $out
-  command = $LINKER $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out $
+  command = $LINKER -L$SYSROOT/lib $libs -Wl,-x -shared -g -L$$(dirname $out) -Wl,-soname,$$(basename $out) -o $out $
     -Wl,--whole-archive $
       $BUILDROOT/libcutils/libcutils_sockets.a $
       $in $
@@ -103,4 +103,4 @@ build $BUILDROOT/libcutils/libcutils_sockets.a: ar $
   $BUILDROOT/libcutils/sockets_unix.o $
 
 build $BUILDROOT/libcutils/libcutils_sockets.so: soa $BUILDROOT/libcutils/libcutils_sockets.a | $SYSROOT/lib/libbase.so
-  libs = -L$SYSROOT/lib -lbase
+  libs = -lbase

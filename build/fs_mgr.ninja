@@ -47,7 +47,7 @@ build $BUILDROOT/fs_mgr/libfs_mgr.so: soa $
     $SYSROOT/lib/libbase.so $
     $SYSROOT/lib/libcutils.so $
     $SYSROOT/lib/liblog.so
-  libs = -L$SYSROOT/lib -lbase -lcutils -llog $
+  libs = -lbase -lcutils -llog $
     -Wl,--whole-archive $
       $BUILDROOT/fs_mgr/libfstab.a $
     -Wl,--no-whole-archive
