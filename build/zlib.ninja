@@ -1,23 +1,61 @@
-cflags = -DHAVE_HIDDEN -DZLIB_CONST -DX86_NOT_WINDOWS -DADLER32_SIMD_SSSE3 -mpclmul -DCRC32_SIMD_SSE42_PCLMUL -DINFLATE_CHUNK_READ_64LE -Wall -Werror -Wno-unused -Wno-unused-parameter
-includes = #-Iexternal/libcap/libcap/include -I$BUILDROOT/libcap
+cflags = $
+  -DX86_NOT_WINDOWS $
+  -DADLER32_SIMD_SSSE3 $
+  -mpclmul $
+  -mssse3 $
+  -DCRC32_SIMD_SSE42_PCLMUL $
+  -DINFLATE_CHUNK_READ_64LE $
+  -DHAVE_HIDDEN $
+  -DZLIB_CONST $
+  -O3 $
+  -Wall $
+  -Werror $
+  -Wno-unused $
+  -Wno-unused-parameter $
 
-build $BUILDROOT/zlib/target/adler32.o: cc external/zlib/adler32.c
-build $BUILDROOT/zlib/target/compress.o: cc external/zlib/compress.c
-build $BUILDROOT/zlib/target/cpu_features.o: cc external/zlib/cpu_features.c
-build $BUILDROOT/zlib/target/crc32.o: cc external/zlib/crc32.c
-build $BUILDROOT/zlib/target/deflate.o: cc external/zlib/deflate.c
-build $BUILDROOT/zlib/target/gzclose.o: cc external/zlib/gzclose.c
-build $BUILDROOT/zlib/target/gzlib.o: cc external/zlib/gzlib.c
-build $BUILDROOT/zlib/target/gzread.o: cc external/zlib/gzread.c
-build $BUILDROOT/zlib/target/gzwrite.o: cc external/zlib/gzwrite.c
-build $BUILDROOT/zlib/target/infback.o: cc external/zlib/infback.c
-build $BUILDROOT/zlib/target/inffast.o: cc external/zlib/inffast.c
-build $BUILDROOT/zlib/target/inflate.o: cc external/zlib/inflate.c
-build $BUILDROOT/zlib/target/inftrees.o: cc external/zlib/inftrees.c
-build $BUILDROOT/zlib/target/trees.o: cc external/zlib/trees.c
-build $BUILDROOT/zlib/target/uncompr.o: cc external/zlib/uncompr.c
-build $BUILDROOT/zlib/target/zutil.o: cc external/zlib/zutil.c
-build $BUILDROOT/zlib/target/crc_folding.o: cc external/zlib/crc_folding.c
-build $BUILDROOT/zlib/target/fill_window_sse.o: cc external/zlib/fill_window_sse.c
-build $BUILDROOT/zlib/target/adler32_simd.o: cc external/zlib/adler32_simd.c
-build $BUILDROOT/zlib/target/crc32_simd.o: cc external/zlib/crc32_simd.c
+includes = -Iexternal/zlib
+
+build $BUILDROOT/zlib/adler32_simd.o: cc external/zlib/adler32_simd.c
+build $BUILDROOT/zlib/crc32_simd.o: cc external/zlib/crc32_simd.c
+build $BUILDROOT/zlib/crc_folding.o: cc external/zlib/crc_folding.c
+build $BUILDROOT/zlib/fill_window_sse.o: cc external/zlib/fill_window_sse.c
+build $BUILDROOT/zlib/adler32.o: cc external/zlib/adler32.c
+build $BUILDROOT/zlib/compress.o: cc external/zlib/compress.c
+build $BUILDROOT/zlib/cpu_features.o: cc external/zlib/cpu_features.c
+build $BUILDROOT/zlib/crc32.o: cc external/zlib/crc32.c
+build $BUILDROOT/zlib/deflate.o: cc external/zlib/deflate.c
+build $BUILDROOT/zlib/gzclose.o: cc external/zlib/gzclose.c
+build $BUILDROOT/zlib/gzlib.o: cc external/zlib/gzlib.c
+build $BUILDROOT/zlib/gzread.o: cc external/zlib/gzread.c
+build $BUILDROOT/zlib/gzwrite.o: cc external/zlib/gzwrite.c
+build $BUILDROOT/zlib/infback.o: cc external/zlib/infback.c
+build $BUILDROOT/zlib/inffast.o: cc external/zlib/inffast.c
+build $BUILDROOT/zlib/inflate.o: cc external/zlib/inflate.c
+build $BUILDROOT/zlib/inftrees.o: cc external/zlib/inftrees.c
+build $BUILDROOT/zlib/trees.o: cc external/zlib/trees.c
+build $BUILDROOT/zlib/uncompr.o: cc external/zlib/uncompr.c
+build $BUILDROOT/zlib/zutil.o: cc external/zlib/zutil.c
+
+build $BUILDROOT/zlib/libz.a: ar $
+  $BUILDROOT/zlib/adler32_simd.o $
+  $BUILDROOT/zlib/crc32_simd.o $
+  $BUILDROOT/zlib/crc_folding.o $
+  $BUILDROOT/zlib/fill_window_sse.o $
+  $BUILDROOT/zlib/adler32.o $
+  $BUILDROOT/zlib/compress.o $
+  $BUILDROOT/zlib/cpu_features.o $
+  $BUILDROOT/zlib/crc32.o $
+  $BUILDROOT/zlib/deflate.o $
+  $BUILDROOT/zlib/gzclose.o $
+  $BUILDROOT/zlib/gzlib.o $
+  $BUILDROOT/zlib/gzread.o $
+  $BUILDROOT/zlib/gzwrite.o $
+  $BUILDROOT/zlib/infback.o $
+  $BUILDROOT/zlib/inffast.o $
+  $BUILDROOT/zlib/inflate.o $
+  $BUILDROOT/zlib/inftrees.o $
+  $BUILDROOT/zlib/trees.o $
+  $BUILDROOT/zlib/uncompr.o $
+  $BUILDROOT/zlib/zutil.o $
+
+build $BUILDROOT/zlib/libz.so: soa $BUILDROOT/zlib/libz.a

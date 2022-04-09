@@ -136,4 +136,7 @@ build system.img: phony $BUILDROOT/system.img
 
 subninja build/toybox.ninja
 
+subninja build/zlib.ninja
+build $SYSROOT/lib/libz.so: copy $BUILDROOT/zlib/libz.so
+
 default initramfs system.img
