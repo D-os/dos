@@ -1,0 +1,383 @@
+cflags = $
+  -Os $
+  -Wall $
+  -Werror $
+  -Wno-char-subscripts $
+  -Wno-deprecated-declarations $
+  -Wno-missing-field-initializers $
+  -Wno-pointer-arith $
+  -Wno-sign-compare $
+  -Wno-string-plus-int $
+  -Wno-unused-parameter $
+  -Wno-unused-variable $
+  -funsigned-char $
+  -ffunction-sections $
+  -fdata-sections $
+  -fno-asynchronous-unwind-tables $
+  -DTOYBOX_VENDOR=\"-dos\" $
+  -D__BIONIC__=1 $
+
+includes = -Iexternal/toybox -Iexternal/toybox/android/device -Isystem/logging/liblog/include
+libs = -lcrypto -lz -llog -lprocessgroup
+
+# all_srcs
+build $BUILDROOT/toybox/args.o: cc external/toybox/lib/args.c
+build $BUILDROOT/toybox/commas.o: cc external/toybox/lib/commas.c
+build $BUILDROOT/toybox/dirtree.o: cc external/toybox/lib/dirtree.c
+build $BUILDROOT/toybox/env.o: cc external/toybox/lib/env.c
+build $BUILDROOT/toybox/lib.o: cc external/toybox/lib/lib.c
+build $BUILDROOT/toybox/llist.o: cc external/toybox/lib/llist.c
+build $BUILDROOT/toybox/net.o: cc external/toybox/lib/net.c
+build $BUILDROOT/toybox/portability.o: cc external/toybox/lib/portability.c
+build $BUILDROOT/toybox/tty.o: cc external/toybox/lib/tty.c
+build $BUILDROOT/toybox/utf8.o: cc external/toybox/lib/utf8.c
+build $BUILDROOT/toybox/xwrap.o: cc external/toybox/lib/xwrap.c
+build $BUILDROOT/toybox/main.o: cc external/toybox/main.c
+build $BUILDROOT/toybox/gzip.o: cc external/toybox/toys/lsb/gzip.c
+build $BUILDROOT/toybox/hostname.o: cc external/toybox/toys/lsb/hostname.c
+build $BUILDROOT/toybox/md5sum.o: cc external/toybox/toys/lsb/md5sum.c
+build $BUILDROOT/toybox/mktemp.o: cc external/toybox/toys/lsb/mktemp.c
+build $BUILDROOT/toybox/seq.o: cc external/toybox/toys/lsb/seq.c
+build $BUILDROOT/toybox/microcom.o: cc external/toybox/toys/net/microcom.c
+build $BUILDROOT/toybox/dos2unix.o: cc external/toybox/toys/other/dos2unix.c
+build $BUILDROOT/toybox/readlink.o: cc external/toybox/toys/other/readlink.c
+build $BUILDROOT/toybox/setsid.o: cc external/toybox/toys/other/setsid.c
+build $BUILDROOT/toybox/stat.o: cc external/toybox/toys/other/stat.c
+build $BUILDROOT/toybox/timeout.o: cc external/toybox/toys/other/timeout.c
+build $BUILDROOT/toybox/truncate.o: cc external/toybox/toys/other/truncate.c
+build $BUILDROOT/toybox/which.o: cc external/toybox/toys/other/which.c
+build $BUILDROOT/toybox/xxd.o: cc external/toybox/toys/other/xxd.c
+build $BUILDROOT/toybox/yes.o: cc external/toybox/toys/other/yes.c
+build $BUILDROOT/toybox/dd.o: cc external/toybox/toys/pending/dd.c
+build $BUILDROOT/toybox/diff.o: cc external/toybox/toys/pending/diff.c
+build $BUILDROOT/toybox/expr.o: cc external/toybox/toys/pending/expr.c
+build $BUILDROOT/toybox/getopt.o: cc external/toybox/toys/pending/getopt.c
+build $BUILDROOT/toybox/tr.o: cc external/toybox/toys/pending/tr.c
+build $BUILDROOT/toybox/basename.o: cc external/toybox/toys/posix/basename.c
+build $BUILDROOT/toybox/cat.o: cc external/toybox/toys/posix/cat.c
+build $BUILDROOT/toybox/chmod.o: cc external/toybox/toys/posix/chmod.c
+build $BUILDROOT/toybox/cmp.o: cc external/toybox/toys/posix/cmp.c
+build $BUILDROOT/toybox/comm.o: cc external/toybox/toys/posix/comm.c
+build $BUILDROOT/toybox/cp.o: cc external/toybox/toys/posix/cp.c
+build $BUILDROOT/toybox/cpio.o: cc external/toybox/toys/posix/cpio.c
+build $BUILDROOT/toybox/cut.o: cc external/toybox/toys/posix/cut.c
+build $BUILDROOT/toybox/date.o: cc external/toybox/toys/posix/date.c
+build $BUILDROOT/toybox/dirname.o: cc external/toybox/toys/posix/dirname.c
+build $BUILDROOT/toybox/du.o: cc external/toybox/toys/posix/du.c
+build $BUILDROOT/toybox/echo.o: cc external/toybox/toys/posix/echo.c
+build $BUILDROOT/toybox/posix_env.o: cc external/toybox/toys/posix/env.c
+build $BUILDROOT/toybox/find.o: cc external/toybox/toys/posix/find.c
+build $BUILDROOT/toybox/getconf.o: cc external/toybox/toys/posix/getconf.c
+build $BUILDROOT/toybox/grep.o: cc external/toybox/toys/posix/grep.c
+build $BUILDROOT/toybox/head.o: cc external/toybox/toys/posix/head.c
+build $BUILDROOT/toybox/id.o: cc external/toybox/toys/posix/id.c
+build $BUILDROOT/toybox/ln.o: cc external/toybox/toys/posix/ln.c
+build $BUILDROOT/toybox/ls.o: cc external/toybox/toys/posix/ls.c
+build $BUILDROOT/toybox/mkdir.o: cc external/toybox/toys/posix/mkdir.c
+build $BUILDROOT/toybox/nl.o: cc external/toybox/toys/posix/nl.c
+build $BUILDROOT/toybox/od.o: cc external/toybox/toys/posix/od.c
+build $BUILDROOT/toybox/paste.o: cc external/toybox/toys/posix/paste.c
+build $BUILDROOT/toybox/patch.o: cc external/toybox/toys/posix/patch.c
+build $BUILDROOT/toybox/printf.o: cc external/toybox/toys/posix/printf.c
+build $BUILDROOT/toybox/pwd.o: cc external/toybox/toys/posix/pwd.c
+build $BUILDROOT/toybox/rm.o: cc external/toybox/toys/posix/rm.c
+build $BUILDROOT/toybox/rmdir.o: cc external/toybox/toys/posix/rmdir.c
+build $BUILDROOT/toybox/sed.o: cc external/toybox/toys/posix/sed.c
+build $BUILDROOT/toybox/sleep.o: cc external/toybox/toys/posix/sleep.c
+build $BUILDROOT/toybox/sort.o: cc external/toybox/toys/posix/sort.c
+build $BUILDROOT/toybox/tail.o: cc external/toybox/toys/posix/tail.c
+build $BUILDROOT/toybox/tar.o: cc external/toybox/toys/posix/tar.c
+build $BUILDROOT/toybox/tee.o: cc external/toybox/toys/posix/tee.c
+build $BUILDROOT/toybox/test.o: cc external/toybox/toys/posix/test.c
+build $BUILDROOT/toybox/touch.o: cc external/toybox/toys/posix/touch.c
+build $BUILDROOT/toybox/true.o: cc external/toybox/toys/posix/true.c
+build $BUILDROOT/toybox/uname.o: cc external/toybox/toys/posix/uname.c
+build $BUILDROOT/toybox/uniq.o: cc external/toybox/toys/posix/uniq.c
+build $BUILDROOT/toybox/wc.o: cc external/toybox/toys/posix/wc.c
+build $BUILDROOT/toybox/xargs.o: cc external/toybox/toys/posix/xargs.c
+# linux_srcs
+build $BUILDROOT/toybox/ps.o: cc external/toybox/toys/posix/ps.c
+build $BUILDROOT/toybox/taskset.o: cc external/toybox/toys/other/taskset.c
+# device_srcs
+#build $BUILDROOT/toybox/getenforce.o: cc external/toybox/toys/android/getenforce.c
+#build $BUILDROOT/toybox/load_policy.o: cc external/toybox/toys/android/load_policy.c
+build $BUILDROOT/toybox/log.o: cc external/toybox/toys/android/log.c
+build $BUILDROOT/toybox/restorecon.o: cc external/toybox/toys/android/restorecon.c
+#build $BUILDROOT/toybox/runcon.o: cc external/toybox/toys/android/runcon.c
+build $BUILDROOT/toybox/sendevent.o: cc external/toybox/toys/android/sendevent.c
+#build $BUILDROOT/toybox/setenforce.o: cc external/toybox/toys/android/setenforce.c
+build $BUILDROOT/toybox/dmesg.o: cc external/toybox/toys/lsb/dmesg.c
+build $BUILDROOT/toybox/killall.o: cc external/toybox/toys/lsb/killall.c
+build $BUILDROOT/toybox/mknod.o: cc external/toybox/toys/lsb/mknod.c
+build $BUILDROOT/toybox/mount.o: cc external/toybox/toys/lsb/mount.c
+build $BUILDROOT/toybox/pidof.o: cc external/toybox/toys/lsb/pidof.c
+build $BUILDROOT/toybox/sync.o: cc external/toybox/toys/lsb/sync.c
+build $BUILDROOT/toybox/umount.o: cc external/toybox/toys/lsb/umount.c
+build $BUILDROOT/toybox/ifconfig.o: cc external/toybox/toys/net/ifconfig.c
+build $BUILDROOT/toybox/netcat.o: cc external/toybox/toys/net/netcat.c
+build $BUILDROOT/toybox/netstat.o: cc external/toybox/toys/net/netstat.c
+build $BUILDROOT/toybox/ping.o: cc external/toybox/toys/net/ping.c
+build $BUILDROOT/toybox/rfkill.o: cc external/toybox/toys/net/rfkill.c
+build $BUILDROOT/toybox/tunctl.o: cc external/toybox/toys/net/tunctl.c
+build $BUILDROOT/toybox/acpi.o: cc external/toybox/toys/other/acpi.c
+build $BUILDROOT/toybox/base64.o: cc external/toybox/toys/other/base64.c
+build $BUILDROOT/toybox/blkdiscard.o: cc external/toybox/toys/other/blkdiscard.c
+build $BUILDROOT/toybox/blkid.o: cc external/toybox/toys/other/blkid.c
+build $BUILDROOT/toybox/blockdev.o: cc external/toybox/toys/other/blockdev.c
+#build $BUILDROOT/toybox/chcon.o: cc external/toybox/toys/other/chcon.c
+build $BUILDROOT/toybox/chroot.o: cc external/toybox/toys/other/chroot.c
+build $BUILDROOT/toybox/chrt.o: cc external/toybox/toys/other/chrt.c
+build $BUILDROOT/toybox/clear.o: cc external/toybox/toys/other/clear.c
+build $BUILDROOT/toybox/devmem.o: cc external/toybox/toys/other/devmem.c
+build $BUILDROOT/toybox/fallocate.o: cc external/toybox/toys/other/fallocate.c
+build $BUILDROOT/toybox/flock.o: cc external/toybox/toys/other/flock.c
+build $BUILDROOT/toybox/fmt.o: cc external/toybox/toys/other/fmt.c
+build $BUILDROOT/toybox/free.o: cc external/toybox/toys/other/free.c
+build $BUILDROOT/toybox/freeramdisk.o: cc external/toybox/toys/other/freeramdisk.c
+build $BUILDROOT/toybox/fsfreeze.o: cc external/toybox/toys/other/fsfreeze.c
+build $BUILDROOT/toybox/fsync.o: cc external/toybox/toys/other/fsync.c
+build $BUILDROOT/toybox/help.o: cc external/toybox/toys/other/help.c
+build $BUILDROOT/toybox/hwclock.o: cc external/toybox/toys/other/hwclock.c
+build $BUILDROOT/toybox/i2ctools.o: cc external/toybox/toys/other/i2ctools.c
+build $BUILDROOT/toybox/inotifyd.o: cc external/toybox/toys/other/inotifyd.c
+build $BUILDROOT/toybox/insmod.o: cc external/toybox/toys/other/insmod.c
+build $BUILDROOT/toybox/ionice.o: cc external/toybox/toys/other/ionice.c
+build $BUILDROOT/toybox/losetup.o: cc external/toybox/toys/other/losetup.c
+build $BUILDROOT/toybox/lsattr.o: cc external/toybox/toys/other/lsattr.c
+build $BUILDROOT/toybox/lsmod.o: cc external/toybox/toys/other/lsmod.c
+build $BUILDROOT/toybox/lsusb.o: cc external/toybox/toys/other/lsusb.c
+build $BUILDROOT/toybox/makedevs.o: cc external/toybox/toys/other/makedevs.c
+build $BUILDROOT/toybox/mkswap.o: cc external/toybox/toys/other/mkswap.c
+build $BUILDROOT/toybox/modinfo.o: cc external/toybox/toys/other/modinfo.c
+build $BUILDROOT/toybox/mountpoint.o: cc external/toybox/toys/other/mountpoint.c
+build $BUILDROOT/toybox/nbd_client.o: cc external/toybox/toys/other/nbd_client.c
+build $BUILDROOT/toybox/nsenter.o: cc external/toybox/toys/other/nsenter.c
+build $BUILDROOT/toybox/partprobe.o: cc external/toybox/toys/other/partprobe.c
+build $BUILDROOT/toybox/pivot_root.o: cc external/toybox/toys/other/pivot_root.c
+build $BUILDROOT/toybox/pmap.o: cc external/toybox/toys/other/pmap.c
+build $BUILDROOT/toybox/printenv.o: cc external/toybox/toys/other/printenv.c
+build $BUILDROOT/toybox/pwdx.o: cc external/toybox/toys/other/pwdx.c
+build $BUILDROOT/toybox/readelf.o: cc external/toybox/toys/other/readelf.c
+build $BUILDROOT/toybox/rev.o: cc external/toybox/toys/other/rev.c
+build $BUILDROOT/toybox/rmmod.o: cc external/toybox/toys/other/rmmod.c
+build $BUILDROOT/toybox/rtcwake.o: cc external/toybox/toys/other/rtcwake.c
+build $BUILDROOT/toybox/setfattr.o: cc external/toybox/toys/other/setfattr.c
+build $BUILDROOT/toybox/swapoff.o: cc external/toybox/toys/other/swapoff.c
+build $BUILDROOT/toybox/swapon.o: cc external/toybox/toys/other/swapon.c
+build $BUILDROOT/toybox/sysctl.o: cc external/toybox/toys/other/sysctl.c
+build $BUILDROOT/toybox/tac.o: cc external/toybox/toys/other/tac.c
+build $BUILDROOT/toybox/uclampset.o: cc external/toybox/toys/other/uclampset.c
+build $BUILDROOT/toybox/uptime.o: cc external/toybox/toys/other/uptime.c
+build $BUILDROOT/toybox/usleep.o: cc external/toybox/toys/other/usleep.c
+build $BUILDROOT/toybox/uuidgen.o: cc external/toybox/toys/other/uuidgen.c
+build $BUILDROOT/toybox/vconfig.o: cc external/toybox/toys/other/vconfig.c
+build $BUILDROOT/toybox/vmstat.o: cc external/toybox/toys/other/vmstat.c
+build $BUILDROOT/toybox/watch.o: cc external/toybox/toys/other/watch.c
+build $BUILDROOT/toybox/getfattr.o: cc external/toybox/toys/pending/getfattr.c
+build $BUILDROOT/toybox/lsof.o: cc external/toybox/toys/pending/lsof.c
+build $BUILDROOT/toybox/modprobe.o: cc external/toybox/toys/pending/modprobe.c
+build $BUILDROOT/toybox/more.o: cc external/toybox/toys/pending/more.c
+build $BUILDROOT/toybox/stty.o: cc external/toybox/toys/pending/stty.c
+build $BUILDROOT/toybox/traceroute.o: cc external/toybox/toys/pending/traceroute.c
+build $BUILDROOT/toybox/vi.o: cc external/toybox/toys/pending/vi.c
+build $BUILDROOT/toybox/cal.o: cc external/toybox/toys/posix/cal.c
+build $BUILDROOT/toybox/chgrp.o: cc external/toybox/toys/posix/chgrp.c
+build $BUILDROOT/toybox/cksum.o: cc external/toybox/toys/posix/cksum.c
+build $BUILDROOT/toybox/df.o: cc external/toybox/toys/posix/df.c
+build $BUILDROOT/toybox/expand.o: cc external/toybox/toys/posix/expand.c
+build $BUILDROOT/toybox/false.o: cc external/toybox/toys/posix/false.c
+build $BUILDROOT/toybox/file.o: cc external/toybox/toys/posix/file.c
+build $BUILDROOT/toybox/iconv.o: cc external/toybox/toys/posix/iconv.c
+build $BUILDROOT/toybox/kill.o: cc external/toybox/toys/posix/kill.c
+build $BUILDROOT/toybox/mkfifo.o: cc external/toybox/toys/posix/mkfifo.c
+build $BUILDROOT/toybox/nice.o: cc external/toybox/toys/posix/nice.c
+build $BUILDROOT/toybox/nohup.o: cc external/toybox/toys/posix/nohup.c
+build $BUILDROOT/toybox/renice.o: cc external/toybox/toys/posix/renice.c
+build $BUILDROOT/toybox/split.o: cc external/toybox/toys/posix/split.c
+build $BUILDROOT/toybox/strings.o: cc external/toybox/toys/posix/strings.c
+build $BUILDROOT/toybox/time.o: cc external/toybox/toys/posix/time.c
+build $BUILDROOT/toybox/posix_tty.o: cc external/toybox/toys/posix/tty.c
+build $BUILDROOT/toybox/ulimit.o: cc external/toybox/toys/posix/ulimit.c
+build $BUILDROOT/toybox/unlink.o: cc external/toybox/toys/posix/unlink.c
+build $BUILDROOT/toybox/uudecode.o: cc external/toybox/toys/posix/uudecode.c
+build $BUILDROOT/toybox/uuencode.o: cc external/toybox/toys/posix/uuencode.c
+
+build $BUILDROOT/toybox/toybox: link $
+  $BUILDROOT/toybox/args.o $
+  $BUILDROOT/toybox/commas.o $
+  $BUILDROOT/toybox/dirtree.o $
+  $BUILDROOT/toybox/env.o $
+  $BUILDROOT/toybox/lib.o $
+  $BUILDROOT/toybox/llist.o $
+  $BUILDROOT/toybox/net.o $
+  $BUILDROOT/toybox/portability.o $
+  $BUILDROOT/toybox/tty.o $
+  $BUILDROOT/toybox/utf8.o $
+  $BUILDROOT/toybox/xwrap.o $
+  $BUILDROOT/toybox/main.o $
+  $BUILDROOT/toybox/gzip.o $
+  $BUILDROOT/toybox/hostname.o $
+  $BUILDROOT/toybox/md5sum.o $
+  $BUILDROOT/toybox/mktemp.o $
+  $BUILDROOT/toybox/seq.o $
+  $BUILDROOT/toybox/microcom.o $
+  $BUILDROOT/toybox/dos2unix.o $
+  $BUILDROOT/toybox/readlink.o $
+  $BUILDROOT/toybox/setsid.o $
+  $BUILDROOT/toybox/stat.o $
+  $BUILDROOT/toybox/timeout.o $
+  $BUILDROOT/toybox/truncate.o $
+  $BUILDROOT/toybox/which.o $
+  $BUILDROOT/toybox/xxd.o $
+  $BUILDROOT/toybox/yes.o $
+  $BUILDROOT/toybox/dd.o $
+  $BUILDROOT/toybox/diff.o $
+  $BUILDROOT/toybox/expr.o $
+  $BUILDROOT/toybox/getopt.o $
+  $BUILDROOT/toybox/tr.o $
+  $BUILDROOT/toybox/basename.o $
+  $BUILDROOT/toybox/cat.o $
+  $BUILDROOT/toybox/chmod.o $
+  $BUILDROOT/toybox/cmp.o $
+  $BUILDROOT/toybox/comm.o $
+  $BUILDROOT/toybox/cp.o $
+  $BUILDROOT/toybox/cpio.o $
+  $BUILDROOT/toybox/cut.o $
+  $BUILDROOT/toybox/date.o $
+  $BUILDROOT/toybox/dirname.o $
+  $BUILDROOT/toybox/du.o $
+  $BUILDROOT/toybox/echo.o $
+  $BUILDROOT/toybox/posix_env.o $
+  $BUILDROOT/toybox/find.o $
+  $BUILDROOT/toybox/getconf.o $
+  $BUILDROOT/toybox/grep.o $
+  $BUILDROOT/toybox/head.o $
+  $BUILDROOT/toybox/id.o $
+  $BUILDROOT/toybox/ln.o $
+  $BUILDROOT/toybox/ls.o $
+  $BUILDROOT/toybox/mkdir.o $
+  $BUILDROOT/toybox/nl.o $
+  $BUILDROOT/toybox/od.o $
+  $BUILDROOT/toybox/paste.o $
+  $BUILDROOT/toybox/patch.o $
+  $BUILDROOT/toybox/printf.o $
+  $BUILDROOT/toybox/pwd.o $
+  $BUILDROOT/toybox/rm.o $
+  $BUILDROOT/toybox/rmdir.o $
+  $BUILDROOT/toybox/sed.o $
+  $BUILDROOT/toybox/sleep.o $
+  $BUILDROOT/toybox/sort.o $
+  $BUILDROOT/toybox/tail.o $
+  $BUILDROOT/toybox/tar.o $
+  $BUILDROOT/toybox/tee.o $
+  $BUILDROOT/toybox/test.o $
+  $BUILDROOT/toybox/touch.o $
+  $BUILDROOT/toybox/true.o $
+  $BUILDROOT/toybox/uname.o $
+  $BUILDROOT/toybox/uniq.o $
+  $BUILDROOT/toybox/wc.o $
+  $BUILDROOT/toybox/xargs.o $
+  $BUILDROOT/toybox/ps.o $
+  $BUILDROOT/toybox/taskset.o $
+  $BUILDROOT/toybox/log.o $
+  $BUILDROOT/toybox/restorecon.o $
+  $BUILDROOT/toybox/sendevent.o $
+  $BUILDROOT/toybox/dmesg.o $
+  $BUILDROOT/toybox/killall.o $
+  $BUILDROOT/toybox/mknod.o $
+  $BUILDROOT/toybox/mount.o $
+  $BUILDROOT/toybox/pidof.o $
+  $BUILDROOT/toybox/sync.o $
+  $BUILDROOT/toybox/umount.o $
+  $BUILDROOT/toybox/ifconfig.o $
+  $BUILDROOT/toybox/netcat.o $
+  $BUILDROOT/toybox/netstat.o $
+  $BUILDROOT/toybox/ping.o $
+  $BUILDROOT/toybox/rfkill.o $
+  $BUILDROOT/toybox/tunctl.o $
+  $BUILDROOT/toybox/acpi.o $
+  $BUILDROOT/toybox/base64.o $
+  $BUILDROOT/toybox/blkdiscard.o $
+  $BUILDROOT/toybox/blkid.o $
+  $BUILDROOT/toybox/blockdev.o $
+  $BUILDROOT/toybox/chroot.o $
+  $BUILDROOT/toybox/chrt.o $
+  $BUILDROOT/toybox/clear.o $
+  $BUILDROOT/toybox/devmem.o $
+  $BUILDROOT/toybox/fallocate.o $
+  $BUILDROOT/toybox/flock.o $
+  $BUILDROOT/toybox/fmt.o $
+  $BUILDROOT/toybox/free.o $
+  $BUILDROOT/toybox/freeramdisk.o $
+  $BUILDROOT/toybox/fsfreeze.o $
+  $BUILDROOT/toybox/fsync.o $
+  $BUILDROOT/toybox/help.o $
+  $BUILDROOT/toybox/hwclock.o $
+  $BUILDROOT/toybox/i2ctools.o $
+  $BUILDROOT/toybox/inotifyd.o $
+  $BUILDROOT/toybox/insmod.o $
+  $BUILDROOT/toybox/ionice.o $
+  $BUILDROOT/toybox/losetup.o $
+  $BUILDROOT/toybox/lsattr.o $
+  $BUILDROOT/toybox/lsmod.o $
+  $BUILDROOT/toybox/lsusb.o $
+  $BUILDROOT/toybox/makedevs.o $
+  $BUILDROOT/toybox/mkswap.o $
+  $BUILDROOT/toybox/modinfo.o $
+  $BUILDROOT/toybox/mountpoint.o $
+  $BUILDROOT/toybox/nbd_client.o $
+  $BUILDROOT/toybox/nsenter.o $
+  $BUILDROOT/toybox/partprobe.o $
+  $BUILDROOT/toybox/pivot_root.o $
+  $BUILDROOT/toybox/pmap.o $
+  $BUILDROOT/toybox/printenv.o $
+  $BUILDROOT/toybox/pwdx.o $
+  $BUILDROOT/toybox/readelf.o $
+  $BUILDROOT/toybox/rev.o $
+  $BUILDROOT/toybox/rmmod.o $
+  $BUILDROOT/toybox/rtcwake.o $
+  $BUILDROOT/toybox/setfattr.o $
+  $BUILDROOT/toybox/swapoff.o $
+  $BUILDROOT/toybox/swapon.o $
+  $BUILDROOT/toybox/sysctl.o $
+  $BUILDROOT/toybox/tac.o $
+  $BUILDROOT/toybox/uclampset.o $
+  $BUILDROOT/toybox/uptime.o $
+  $BUILDROOT/toybox/usleep.o $
+  $BUILDROOT/toybox/uuidgen.o $
+  $BUILDROOT/toybox/vconfig.o $
+  $BUILDROOT/toybox/vmstat.o $
+  $BUILDROOT/toybox/watch.o $
+  $BUILDROOT/toybox/getfattr.o $
+  $BUILDROOT/toybox/lsof.o $
+  $BUILDROOT/toybox/modprobe.o $
+  $BUILDROOT/toybox/more.o $
+  $BUILDROOT/toybox/stty.o $
+  $BUILDROOT/toybox/traceroute.o $
+  $BUILDROOT/toybox/vi.o $
+  $BUILDROOT/toybox/cal.o $
+  $BUILDROOT/toybox/chgrp.o $
+  $BUILDROOT/toybox/cksum.o $
+  $BUILDROOT/toybox/df.o $
+  $BUILDROOT/toybox/expand.o $
+  $BUILDROOT/toybox/false.o $
+  $BUILDROOT/toybox/file.o $
+  $BUILDROOT/toybox/iconv.o $
+  $BUILDROOT/toybox/kill.o $
+  $BUILDROOT/toybox/mkfifo.o $
+  $BUILDROOT/toybox/nice.o $
+  $BUILDROOT/toybox/nohup.o $
+  $BUILDROOT/toybox/renice.o $
+  $BUILDROOT/toybox/split.o $
+  $BUILDROOT/toybox/strings.o $
+  $BUILDROOT/toybox/time.o $
+  $BUILDROOT/toybox/posix_tty.o $
+  $BUILDROOT/toybox/ulimit.o $
+  $BUILDROOT/toybox/unlink.o $
+  $BUILDROOT/toybox/uudecode.o $
+  $BUILDROOT/toybox/uuencode.o $
+| $SYSROOT/lib/libcrypto.so $
+  $SYSROOT/lib/libz.so $
+  $SYSROOT/lib/liblog.so $
+  $SYSROOT/lib/libprocessgroup.so $
+
