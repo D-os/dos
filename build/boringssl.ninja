@@ -1,0 +1,670 @@
+cflags = $
+  -fvisibility=hidden $
+  -DBORINGSSL_SHARED_LIBRARY $
+  -DBORINGSSL_ANDROID_SYSTEM $
+  -DOPENSSL_SMALL $
+  -Werror $
+  -Wno-unused-parameter $
+  -DBORINGSSL_IMPLEMENTATION $
+
+cppflags = $
+  -Wall $
+  -Werror $
+
+includes = -Iexternal/boringssl/src/include
+
+# libcrypto_sources
+build $BUILDROOT/boringssl/err_data.o: cc external/boringssl/err_data.c
+build $BUILDROOT/boringssl/a_bitstr.o: cc external/boringssl/src/crypto/asn1/a_bitstr.c
+build $BUILDROOT/boringssl/a_bool.o: cc external/boringssl/src/crypto/asn1/a_bool.c
+build $BUILDROOT/boringssl/a_d2i_fp.o: cc external/boringssl/src/crypto/asn1/a_d2i_fp.c
+build $BUILDROOT/boringssl/a_dup.o: cc external/boringssl/src/crypto/asn1/a_dup.c
+build $BUILDROOT/boringssl/a_enum.o: cc external/boringssl/src/crypto/asn1/a_enum.c
+build $BUILDROOT/boringssl/a_gentm.o: cc external/boringssl/src/crypto/asn1/a_gentm.c
+build $BUILDROOT/boringssl/a_i2d_fp.o: cc external/boringssl/src/crypto/asn1/a_i2d_fp.c
+build $BUILDROOT/boringssl/a_int.o: cc external/boringssl/src/crypto/asn1/a_int.c
+build $BUILDROOT/boringssl/a_mbstr.o: cc external/boringssl/src/crypto/asn1/a_mbstr.c
+build $BUILDROOT/boringssl/a_object.o: cc external/boringssl/src/crypto/asn1/a_object.c
+build $BUILDROOT/boringssl/a_octet.o: cc external/boringssl/src/crypto/asn1/a_octet.c
+build $BUILDROOT/boringssl/a_print.o: cc external/boringssl/src/crypto/asn1/a_print.c
+build $BUILDROOT/boringssl/a_strex.o: cc external/boringssl/src/crypto/asn1/a_strex.c
+build $BUILDROOT/boringssl/a_strnid.o: cc external/boringssl/src/crypto/asn1/a_strnid.c
+build $BUILDROOT/boringssl/a_time.o: cc external/boringssl/src/crypto/asn1/a_time.c
+build $BUILDROOT/boringssl/a_type.o: cc external/boringssl/src/crypto/asn1/a_type.c
+build $BUILDROOT/boringssl/a_utctm.o: cc external/boringssl/src/crypto/asn1/a_utctm.c
+build $BUILDROOT/boringssl/a_utf8.o: cc external/boringssl/src/crypto/asn1/a_utf8.c
+build $BUILDROOT/boringssl/asn1_lib.o: cc external/boringssl/src/crypto/asn1/asn1_lib.c
+build $BUILDROOT/boringssl/asn1_par.o: cc external/boringssl/src/crypto/asn1/asn1_par.c
+build $BUILDROOT/boringssl/asn_pack.o: cc external/boringssl/src/crypto/asn1/asn_pack.c
+build $BUILDROOT/boringssl/f_int.o: cc external/boringssl/src/crypto/asn1/f_int.c
+build $BUILDROOT/boringssl/f_string.o: cc external/boringssl/src/crypto/asn1/f_string.c
+build $BUILDROOT/boringssl/tasn_dec.o: cc external/boringssl/src/crypto/asn1/tasn_dec.c
+build $BUILDROOT/boringssl/tasn_enc.o: cc external/boringssl/src/crypto/asn1/tasn_enc.c
+build $BUILDROOT/boringssl/tasn_fre.o: cc external/boringssl/src/crypto/asn1/tasn_fre.c
+build $BUILDROOT/boringssl/tasn_new.o: cc external/boringssl/src/crypto/asn1/tasn_new.c
+build $BUILDROOT/boringssl/tasn_typ.o: cc external/boringssl/src/crypto/asn1/tasn_typ.c
+build $BUILDROOT/boringssl/tasn_utl.o: cc external/boringssl/src/crypto/asn1/tasn_utl.c
+build $BUILDROOT/boringssl/time_support.o: cc external/boringssl/src/crypto/asn1/time_support.c
+build $BUILDROOT/boringssl/base64.o: cc external/boringssl/src/crypto/base64/base64.c
+build $BUILDROOT/boringssl/bio.o: cc external/boringssl/src/crypto/bio/bio.c
+build $BUILDROOT/boringssl/bio_mem.o: cc external/boringssl/src/crypto/bio/bio_mem.c
+build $BUILDROOT/boringssl/connect.o: cc external/boringssl/src/crypto/bio/connect.c
+build $BUILDROOT/boringssl/fd.o: cc external/boringssl/src/crypto/bio/fd.c
+build $BUILDROOT/boringssl/file.o: cc external/boringssl/src/crypto/bio/file.c
+build $BUILDROOT/boringssl/hexdump.o: cc external/boringssl/src/crypto/bio/hexdump.c
+build $BUILDROOT/boringssl/pair.o: cc external/boringssl/src/crypto/bio/pair.c
+build $BUILDROOT/boringssl/printf.o: cc external/boringssl/src/crypto/bio/printf.c
+build $BUILDROOT/boringssl/socket.o: cc external/boringssl/src/crypto/bio/socket.c
+build $BUILDROOT/boringssl/socket_helper.o: cc external/boringssl/src/crypto/bio/socket_helper.c
+build $BUILDROOT/boringssl/blake2.o: cc external/boringssl/src/crypto/blake2/blake2.c
+build $BUILDROOT/boringssl/bn_asn1.o: cc external/boringssl/src/crypto/bn_extra/bn_asn1.c
+build $BUILDROOT/boringssl/convert.o: cc external/boringssl/src/crypto/bn_extra/convert.c
+build $BUILDROOT/boringssl/buf.o: cc external/boringssl/src/crypto/buf/buf.c
+build $BUILDROOT/boringssl/asn1_compat.o: cc external/boringssl/src/crypto/bytestring/asn1_compat.c
+build $BUILDROOT/boringssl/ber.o: cc external/boringssl/src/crypto/bytestring/ber.c
+build $BUILDROOT/boringssl/cbb.o: cc external/boringssl/src/crypto/bytestring/cbb.c
+build $BUILDROOT/boringssl/cbs.o: cc external/boringssl/src/crypto/bytestring/cbs.c
+build $BUILDROOT/boringssl/unicode.o: cc external/boringssl/src/crypto/bytestring/unicode.c
+build $BUILDROOT/boringssl/chacha.o: cc external/boringssl/src/crypto/chacha/chacha.c
+build $BUILDROOT/boringssl/cipher_extra.o: cc external/boringssl/src/crypto/cipher_extra/cipher_extra.c
+build $BUILDROOT/boringssl/derive_key.o: cc external/boringssl/src/crypto/cipher_extra/derive_key.c
+build $BUILDROOT/boringssl/e_aesccm.o: cc external/boringssl/src/crypto/cipher_extra/e_aesccm.c
+build $BUILDROOT/boringssl/e_aesctrhmac.o: cc external/boringssl/src/crypto/cipher_extra/e_aesctrhmac.c
+build $BUILDROOT/boringssl/e_aesgcmsiv.o: cc external/boringssl/src/crypto/cipher_extra/e_aesgcmsiv.c
+build $BUILDROOT/boringssl/e_chacha20poly1305.o: cc external/boringssl/src/crypto/cipher_extra/e_chacha20poly1305.c
+build $BUILDROOT/boringssl/e_des.o: cc external/boringssl/src/crypto/cipher_extra/e_des.c
+build $BUILDROOT/boringssl/e_null.o: cc external/boringssl/src/crypto/cipher_extra/e_null.c
+build $BUILDROOT/boringssl/e_rc2.o: cc external/boringssl/src/crypto/cipher_extra/e_rc2.c
+build $BUILDROOT/boringssl/e_rc4.o: cc external/boringssl/src/crypto/cipher_extra/e_rc4.c
+build $BUILDROOT/boringssl/e_tls.o: cc external/boringssl/src/crypto/cipher_extra/e_tls.c
+build $BUILDROOT/boringssl/tls_cbc.o: cc external/boringssl/src/crypto/cipher_extra/tls_cbc.c
+build $BUILDROOT/boringssl/cmac.o: cc external/boringssl/src/crypto/cmac/cmac.c
+build $BUILDROOT/boringssl/conf.o: cc external/boringssl/src/crypto/conf/conf.c
+build $BUILDROOT/boringssl/cpu_aarch64_apple.o: cc external/boringssl/src/crypto/cpu_aarch64_apple.c
+build $BUILDROOT/boringssl/cpu_aarch64_fuchsia.o: cc external/boringssl/src/crypto/cpu_aarch64_fuchsia.c
+build $BUILDROOT/boringssl/cpu_aarch64_linux.o: cc external/boringssl/src/crypto/cpu_aarch64_linux.c
+build $BUILDROOT/boringssl/cpu_aarch64_win.o: cc external/boringssl/src/crypto/cpu_aarch64_win.c
+build $BUILDROOT/boringssl/cpu_arm.o: cc external/boringssl/src/crypto/cpu_arm.c
+build $BUILDROOT/boringssl/cpu_arm_linux.o: cc external/boringssl/src/crypto/cpu_arm_linux.c
+build $BUILDROOT/boringssl/cpu_intel.o: cc external/boringssl/src/crypto/cpu_intel.c
+build $BUILDROOT/boringssl/cpu_ppc64le.o: cc external/boringssl/src/crypto/cpu_ppc64le.c
+build $BUILDROOT/boringssl/crypto.o: cc external/boringssl/src/crypto/crypto.c
+build $BUILDROOT/boringssl/curve25519.o: cc external/boringssl/src/crypto/curve25519/curve25519.c
+build $BUILDROOT/boringssl/spake25519.o: cc external/boringssl/src/crypto/curve25519/spake25519.c
+build $BUILDROOT/boringssl/des.o: cc external/boringssl/src/crypto/des/des.c
+build $BUILDROOT/boringssl/dh_asn1.o: cc external/boringssl/src/crypto/dh_extra/dh_asn1.c
+build $BUILDROOT/boringssl/params.o: cc external/boringssl/src/crypto/dh_extra/params.c
+build $BUILDROOT/boringssl/digest_extra.o: cc external/boringssl/src/crypto/digest_extra/digest_extra.c
+build $BUILDROOT/boringssl/dsa.o: cc external/boringssl/src/crypto/dsa/dsa.c
+build $BUILDROOT/boringssl/dsa_asn1.o: cc external/boringssl/src/crypto/dsa/dsa_asn1.c
+build $BUILDROOT/boringssl/ec_asn1.o: cc external/boringssl/src/crypto/ec_extra/ec_asn1.c
+build $BUILDROOT/boringssl/ec_derive.o: cc external/boringssl/src/crypto/ec_extra/ec_derive.c
+build $BUILDROOT/boringssl/hash_to_curve.o: cc external/boringssl/src/crypto/ec_extra/hash_to_curve.c
+build $BUILDROOT/boringssl/ecdh_extra.o: cc external/boringssl/src/crypto/ecdh_extra/ecdh_extra.c
+build $BUILDROOT/boringssl/ecdsa_asn1.o: cc external/boringssl/src/crypto/ecdsa_extra/ecdsa_asn1.c
+build $BUILDROOT/boringssl/engine.o: cc external/boringssl/src/crypto/engine/engine.c
+build $BUILDROOT/boringssl/err.o: cc external/boringssl/src/crypto/err/err.c
+build $BUILDROOT/boringssl/digestsign.o: cc external/boringssl/src/crypto/evp/digestsign.c
+build $BUILDROOT/boringssl/evp.o: cc external/boringssl/src/crypto/evp/evp.c
+build $BUILDROOT/boringssl/evp_asn1.o: cc external/boringssl/src/crypto/evp/evp_asn1.c
+build $BUILDROOT/boringssl/evp_ctx.o: cc external/boringssl/src/crypto/evp/evp_ctx.c
+build $BUILDROOT/boringssl/p_dsa_asn1.o: cc external/boringssl/src/crypto/evp/p_dsa_asn1.c
+build $BUILDROOT/boringssl/p_ec.o: cc external/boringssl/src/crypto/evp/p_ec.c
+build $BUILDROOT/boringssl/p_ec_asn1.o: cc external/boringssl/src/crypto/evp/p_ec_asn1.c
+build $BUILDROOT/boringssl/p_ed25519.o: cc external/boringssl/src/crypto/evp/p_ed25519.c
+build $BUILDROOT/boringssl/p_ed25519_asn1.o: cc external/boringssl/src/crypto/evp/p_ed25519_asn1.c
+build $BUILDROOT/boringssl/p_rsa.o: cc external/boringssl/src/crypto/evp/p_rsa.c
+build $BUILDROOT/boringssl/p_rsa_asn1.o: cc external/boringssl/src/crypto/evp/p_rsa_asn1.c
+build $BUILDROOT/boringssl/p_x25519.o: cc external/boringssl/src/crypto/evp/p_x25519.c
+build $BUILDROOT/boringssl/p_x25519_asn1.o: cc external/boringssl/src/crypto/evp/p_x25519_asn1.c
+build $BUILDROOT/boringssl/pbkdf.o: cc external/boringssl/src/crypto/evp/pbkdf.c
+build $BUILDROOT/boringssl/print.o: cc external/boringssl/src/crypto/evp/print.c
+build $BUILDROOT/boringssl/scrypt.o: cc external/boringssl/src/crypto/evp/scrypt.c
+build $BUILDROOT/boringssl/sign.o: cc external/boringssl/src/crypto/evp/sign.c
+build $BUILDROOT/boringssl/ex_data.o: cc external/boringssl/src/crypto/ex_data.c
+build $BUILDROOT/boringssl/fips_shared_support.o: cc external/boringssl/src/crypto/fipsmodule/fips_shared_support.c
+build $BUILDROOT/boringssl/hkdf.o: cc external/boringssl/src/crypto/hkdf/hkdf.c
+build $BUILDROOT/boringssl/hpke.o: cc external/boringssl/src/crypto/hpke/hpke.c
+build $BUILDROOT/boringssl/hrss.o: cc external/boringssl/src/crypto/hrss/hrss.c
+build $BUILDROOT/boringssl/lhash.o: cc external/boringssl/src/crypto/lhash/lhash.c
+build $BUILDROOT/boringssl/mem.o: cc external/boringssl/src/crypto/mem.c
+build $BUILDROOT/boringssl/obj.o: cc external/boringssl/src/crypto/obj/obj.c
+build $BUILDROOT/boringssl/obj_xref.o: cc external/boringssl/src/crypto/obj/obj_xref.c
+build $BUILDROOT/boringssl/pem_all.o: cc external/boringssl/src/crypto/pem/pem_all.c
+build $BUILDROOT/boringssl/pem_info.o: cc external/boringssl/src/crypto/pem/pem_info.c
+build $BUILDROOT/boringssl/pem_lib.o: cc external/boringssl/src/crypto/pem/pem_lib.c
+build $BUILDROOT/boringssl/pem_oth.o: cc external/boringssl/src/crypto/pem/pem_oth.c
+build $BUILDROOT/boringssl/pem_pk8.o: cc external/boringssl/src/crypto/pem/pem_pk8.c
+build $BUILDROOT/boringssl/pem_pkey.o: cc external/boringssl/src/crypto/pem/pem_pkey.c
+build $BUILDROOT/boringssl/pem_x509.o: cc external/boringssl/src/crypto/pem/pem_x509.c
+build $BUILDROOT/boringssl/pem_xaux.o: cc external/boringssl/src/crypto/pem/pem_xaux.c
+build $BUILDROOT/boringssl/pkcs7.o: cc external/boringssl/src/crypto/pkcs7/pkcs7.c
+build $BUILDROOT/boringssl/pkcs7_x509.o: cc external/boringssl/src/crypto/pkcs7/pkcs7_x509.c
+build $BUILDROOT/boringssl/p5_pbev2.o: cc external/boringssl/src/crypto/pkcs8/p5_pbev2.c
+build $BUILDROOT/boringssl/pkcs8.o: cc external/boringssl/src/crypto/pkcs8/pkcs8.c
+build $BUILDROOT/boringssl/pkcs8_x509.o: cc external/boringssl/src/crypto/pkcs8/pkcs8_x509.c
+build $BUILDROOT/boringssl/poly1305.o: cc external/boringssl/src/crypto/poly1305/poly1305.c
+build $BUILDROOT/boringssl/poly1305_arm.o: cc external/boringssl/src/crypto/poly1305/poly1305_arm.c
+build $BUILDROOT/boringssl/poly1305_vec.o: cc external/boringssl/src/crypto/poly1305/poly1305_vec.c
+build $BUILDROOT/boringssl/pool.o: cc external/boringssl/src/crypto/pool/pool.c
+build $BUILDROOT/boringssl/deterministic.o: cc external/boringssl/src/crypto/rand_extra/deterministic.c
+build $BUILDROOT/boringssl/forkunsafe.o: cc external/boringssl/src/crypto/rand_extra/forkunsafe.c
+build $BUILDROOT/boringssl/fuchsia.o: cc external/boringssl/src/crypto/rand_extra/fuchsia.c
+build $BUILDROOT/boringssl/passive.o: cc external/boringssl/src/crypto/rand_extra/passive.c
+build $BUILDROOT/boringssl/rand_extra.o: cc external/boringssl/src/crypto/rand_extra/rand_extra.c
+build $BUILDROOT/boringssl/windows.o: cc external/boringssl/src/crypto/rand_extra/windows.c
+build $BUILDROOT/boringssl/rc4.o: cc external/boringssl/src/crypto/rc4/rc4.c
+build $BUILDROOT/boringssl/refcount_c11.o: cc external/boringssl/src/crypto/refcount_c11.c
+build $BUILDROOT/boringssl/refcount_lock.o: cc external/boringssl/src/crypto/refcount_lock.c
+build $BUILDROOT/boringssl/rsa_asn1.o: cc external/boringssl/src/crypto/rsa_extra/rsa_asn1.c
+build $BUILDROOT/boringssl/rsa_print.o: cc external/boringssl/src/crypto/rsa_extra/rsa_print.c
+build $BUILDROOT/boringssl/siphash.o: cc external/boringssl/src/crypto/siphash/siphash.c
+build $BUILDROOT/boringssl/stack.o: cc external/boringssl/src/crypto/stack/stack.c
+build $BUILDROOT/boringssl/thread.o: cc external/boringssl/src/crypto/thread.c
+build $BUILDROOT/boringssl/thread_none.o: cc external/boringssl/src/crypto/thread_none.c
+build $BUILDROOT/boringssl/thread_pthread.o: cc external/boringssl/src/crypto/thread_pthread.c
+build $BUILDROOT/boringssl/thread_win.o: cc external/boringssl/src/crypto/thread_win.c
+build $BUILDROOT/boringssl/pmbtoken.o: cc external/boringssl/src/crypto/trust_token/pmbtoken.c
+build $BUILDROOT/boringssl/trust_token.o: cc external/boringssl/src/crypto/trust_token/trust_token.c
+build $BUILDROOT/boringssl/voprf.o: cc external/boringssl/src/crypto/trust_token/voprf.c
+build $BUILDROOT/boringssl/a_digest.o: cc external/boringssl/src/crypto/x509/a_digest.c
+build $BUILDROOT/boringssl/a_sign.o: cc external/boringssl/src/crypto/x509/a_sign.c
+build $BUILDROOT/boringssl/a_verify.o: cc external/boringssl/src/crypto/x509/a_verify.c
+build $BUILDROOT/boringssl/algorithm.o: cc external/boringssl/src/crypto/x509/algorithm.c
+build $BUILDROOT/boringssl/asn1_gen.o: cc external/boringssl/src/crypto/x509/asn1_gen.c
+build $BUILDROOT/boringssl/by_dir.o: cc external/boringssl/src/crypto/x509/by_dir.c
+build $BUILDROOT/boringssl/by_file.o: cc external/boringssl/src/crypto/x509/by_file.c
+build $BUILDROOT/boringssl/i2d_pr.o: cc external/boringssl/src/crypto/x509/i2d_pr.c
+build $BUILDROOT/boringssl/name_print.o: cc external/boringssl/src/crypto/x509/name_print.c
+build $BUILDROOT/boringssl/rsa_pss.o: cc external/boringssl/src/crypto/x509/rsa_pss.c
+build $BUILDROOT/boringssl/t_crl.o: cc external/boringssl/src/crypto/x509/t_crl.c
+build $BUILDROOT/boringssl/t_req.o: cc external/boringssl/src/crypto/x509/t_req.c
+build $BUILDROOT/boringssl/t_x509.o: cc external/boringssl/src/crypto/x509/t_x509.c
+build $BUILDROOT/boringssl/t_x509a.o: cc external/boringssl/src/crypto/x509/t_x509a.c
+build $BUILDROOT/boringssl/x509.o: cc external/boringssl/src/crypto/x509/x509.c
+build $BUILDROOT/boringssl/x509_att.o: cc external/boringssl/src/crypto/x509/x509_att.c
+build $BUILDROOT/boringssl/x509_cmp.o: cc external/boringssl/src/crypto/x509/x509_cmp.c
+build $BUILDROOT/boringssl/x509_d2.o: cc external/boringssl/src/crypto/x509/x509_d2.c
+build $BUILDROOT/boringssl/x509_def.o: cc external/boringssl/src/crypto/x509/x509_def.c
+build $BUILDROOT/boringssl/x509_ext.o: cc external/boringssl/src/crypto/x509/x509_ext.c
+build $BUILDROOT/boringssl/x509_lu.o: cc external/boringssl/src/crypto/x509/x509_lu.c
+build $BUILDROOT/boringssl/x509_obj.o: cc external/boringssl/src/crypto/x509/x509_obj.c
+build $BUILDROOT/boringssl/x509_req.o: cc external/boringssl/src/crypto/x509/x509_req.c
+build $BUILDROOT/boringssl/x509_set.o: cc external/boringssl/src/crypto/x509/x509_set.c
+build $BUILDROOT/boringssl/x509_trs.o: cc external/boringssl/src/crypto/x509/x509_trs.c
+build $BUILDROOT/boringssl/x509_txt.o: cc external/boringssl/src/crypto/x509/x509_txt.c
+build $BUILDROOT/boringssl/x509_v3.o: cc external/boringssl/src/crypto/x509/x509_v3.c
+build $BUILDROOT/boringssl/x509_vfy.o: cc external/boringssl/src/crypto/x509/x509_vfy.c
+build $BUILDROOT/boringssl/x509_vpm.o: cc external/boringssl/src/crypto/x509/x509_vpm.c
+build $BUILDROOT/boringssl/x509cset.o: cc external/boringssl/src/crypto/x509/x509cset.c
+build $BUILDROOT/boringssl/x509name.o: cc external/boringssl/src/crypto/x509/x509name.c
+build $BUILDROOT/boringssl/x509rset.o: cc external/boringssl/src/crypto/x509/x509rset.c
+build $BUILDROOT/boringssl/x509spki.o: cc external/boringssl/src/crypto/x509/x509spki.c
+build $BUILDROOT/boringssl/x_algor.o: cc external/boringssl/src/crypto/x509/x_algor.c
+build $BUILDROOT/boringssl/x_all.o: cc external/boringssl/src/crypto/x509/x_all.c
+build $BUILDROOT/boringssl/x_attrib.o: cc external/boringssl/src/crypto/x509/x_attrib.c
+build $BUILDROOT/boringssl/x_crl.o: cc external/boringssl/src/crypto/x509/x_crl.c
+build $BUILDROOT/boringssl/x_exten.o: cc external/boringssl/src/crypto/x509/x_exten.c
+build $BUILDROOT/boringssl/x_info.o: cc external/boringssl/src/crypto/x509/x_info.c
+build $BUILDROOT/boringssl/x_name.o: cc external/boringssl/src/crypto/x509/x_name.c
+build $BUILDROOT/boringssl/x_pkey.o: cc external/boringssl/src/crypto/x509/x_pkey.c
+build $BUILDROOT/boringssl/x_pubkey.o: cc external/boringssl/src/crypto/x509/x_pubkey.c
+build $BUILDROOT/boringssl/x_req.o: cc external/boringssl/src/crypto/x509/x_req.c
+build $BUILDROOT/boringssl/x_sig.o: cc external/boringssl/src/crypto/x509/x_sig.c
+build $BUILDROOT/boringssl/x_spki.o: cc external/boringssl/src/crypto/x509/x_spki.c
+build $BUILDROOT/boringssl/x_val.o: cc external/boringssl/src/crypto/x509/x_val.c
+build $BUILDROOT/boringssl/x_x509.o: cc external/boringssl/src/crypto/x509/x_x509.c
+build $BUILDROOT/boringssl/x_x509a.o: cc external/boringssl/src/crypto/x509/x_x509a.c
+build $BUILDROOT/boringssl/pcy_cache.o: cc external/boringssl/src/crypto/x509v3/pcy_cache.c
+build $BUILDROOT/boringssl/pcy_data.o: cc external/boringssl/src/crypto/x509v3/pcy_data.c
+build $BUILDROOT/boringssl/pcy_lib.o: cc external/boringssl/src/crypto/x509v3/pcy_lib.c
+build $BUILDROOT/boringssl/pcy_map.o: cc external/boringssl/src/crypto/x509v3/pcy_map.c
+build $BUILDROOT/boringssl/pcy_node.o: cc external/boringssl/src/crypto/x509v3/pcy_node.c
+build $BUILDROOT/boringssl/pcy_tree.o: cc external/boringssl/src/crypto/x509v3/pcy_tree.c
+build $BUILDROOT/boringssl/v3_akey.o: cc external/boringssl/src/crypto/x509v3/v3_akey.c
+build $BUILDROOT/boringssl/v3_akeya.o: cc external/boringssl/src/crypto/x509v3/v3_akeya.c
+build $BUILDROOT/boringssl/v3_alt.o: cc external/boringssl/src/crypto/x509v3/v3_alt.c
+build $BUILDROOT/boringssl/v3_bcons.o: cc external/boringssl/src/crypto/x509v3/v3_bcons.c
+build $BUILDROOT/boringssl/v3_bitst.o: cc external/boringssl/src/crypto/x509v3/v3_bitst.c
+build $BUILDROOT/boringssl/v3_conf.o: cc external/boringssl/src/crypto/x509v3/v3_conf.c
+build $BUILDROOT/boringssl/v3_cpols.o: cc external/boringssl/src/crypto/x509v3/v3_cpols.c
+build $BUILDROOT/boringssl/v3_crld.o: cc external/boringssl/src/crypto/x509v3/v3_crld.c
+build $BUILDROOT/boringssl/v3_enum.o: cc external/boringssl/src/crypto/x509v3/v3_enum.c
+build $BUILDROOT/boringssl/v3_extku.o: cc external/boringssl/src/crypto/x509v3/v3_extku.c
+build $BUILDROOT/boringssl/v3_genn.o: cc external/boringssl/src/crypto/x509v3/v3_genn.c
+build $BUILDROOT/boringssl/v3_ia5.o: cc external/boringssl/src/crypto/x509v3/v3_ia5.c
+build $BUILDROOT/boringssl/v3_info.o: cc external/boringssl/src/crypto/x509v3/v3_info.c
+build $BUILDROOT/boringssl/v3_int.o: cc external/boringssl/src/crypto/x509v3/v3_int.c
+build $BUILDROOT/boringssl/v3_lib.o: cc external/boringssl/src/crypto/x509v3/v3_lib.c
+build $BUILDROOT/boringssl/v3_ncons.o: cc external/boringssl/src/crypto/x509v3/v3_ncons.c
+build $BUILDROOT/boringssl/v3_ocsp.o: cc external/boringssl/src/crypto/x509v3/v3_ocsp.c
+build $BUILDROOT/boringssl/v3_pci.o: cc external/boringssl/src/crypto/x509v3/v3_pci.c
+build $BUILDROOT/boringssl/v3_pcia.o: cc external/boringssl/src/crypto/x509v3/v3_pcia.c
+build $BUILDROOT/boringssl/v3_pcons.o: cc external/boringssl/src/crypto/x509v3/v3_pcons.c
+build $BUILDROOT/boringssl/v3_pmaps.o: cc external/boringssl/src/crypto/x509v3/v3_pmaps.c
+build $BUILDROOT/boringssl/v3_prn.o: cc external/boringssl/src/crypto/x509v3/v3_prn.c
+build $BUILDROOT/boringssl/v3_purp.o: cc external/boringssl/src/crypto/x509v3/v3_purp.c
+build $BUILDROOT/boringssl/v3_skey.o: cc external/boringssl/src/crypto/x509v3/v3_skey.c
+build $BUILDROOT/boringssl/v3_utl.o: cc external/boringssl/src/crypto/x509v3/v3_utl.c
+# linux_x86_64
+build $BUILDROOT/boringssl/chacha-x86_64.o: cc external/boringssl/linux-x86_64/crypto/chacha/chacha-x86_64.S
+build $BUILDROOT/boringssl/aes128gcmsiv-x86_64.o: cc external/boringssl/linux-x86_64/crypto/cipher_extra/aes128gcmsiv-x86_64.S
+build $BUILDROOT/boringssl/chacha20_poly1305_x86_64.o: cc external/boringssl/linux-x86_64/crypto/cipher_extra/chacha20_poly1305_x86_64.S
+build $BUILDROOT/boringssl/trampoline-x86_64.o: cc external/boringssl/linux-x86_64/crypto/test/trampoline-x86_64.S
+build $BUILDROOT/boringssl/poly_rq_mul.o: cc external/boringssl/src/crypto/hrss/asm/poly_rq_mul.S
+# fips_fragments
+build $BUILDROOT/boringssl/aes.o: cc external/boringssl/src/crypto/fipsmodule/aes/aes.c
+build $BUILDROOT/boringssl/aes_nohw.o: cc external/boringssl/src/crypto/fipsmodule/aes/aes_nohw.c
+build $BUILDROOT/boringssl/key_wrap.o: cc external/boringssl/src/crypto/fipsmodule/aes/key_wrap.c
+build $BUILDROOT/boringssl/mode_wrappers.o: cc external/boringssl/src/crypto/fipsmodule/aes/mode_wrappers.c
+build $BUILDROOT/boringssl/add.o: cc external/boringssl/src/crypto/fipsmodule/bn/add.c
+build $BUILDROOT/boringssl/gcc.o: cc external/boringssl/src/crypto/fipsmodule/bn/asm/x86_64-gcc.c
+build $BUILDROOT/boringssl/bn.o: cc external/boringssl/src/crypto/fipsmodule/bn/bn.c
+build $BUILDROOT/boringssl/bytes.o: cc external/boringssl/src/crypto/fipsmodule/bn/bytes.c
+build $BUILDROOT/boringssl/cmp.o: cc external/boringssl/src/crypto/fipsmodule/bn/cmp.c
+build $BUILDROOT/boringssl/ctx.o: cc external/boringssl/src/crypto/fipsmodule/bn/ctx.c
+build $BUILDROOT/boringssl/div.o: cc external/boringssl/src/crypto/fipsmodule/bn/div.c
+build $BUILDROOT/boringssl/div_extra.o: cc external/boringssl/src/crypto/fipsmodule/bn/div_extra.c
+build $BUILDROOT/boringssl/exponentiation.o: cc external/boringssl/src/crypto/fipsmodule/bn/exponentiation.c
+build $BUILDROOT/boringssl/gcd.o: cc external/boringssl/src/crypto/fipsmodule/bn/gcd.c
+build $BUILDROOT/boringssl/gcd_extra.o: cc external/boringssl/src/crypto/fipsmodule/bn/gcd_extra.c
+build $BUILDROOT/boringssl/generic.o: cc external/boringssl/src/crypto/fipsmodule/bn/generic.c
+build $BUILDROOT/boringssl/jacobi.o: cc external/boringssl/src/crypto/fipsmodule/bn/jacobi.c
+build $BUILDROOT/boringssl/montgomery.o: cc external/boringssl/src/crypto/fipsmodule/bn/montgomery.c
+build $BUILDROOT/boringssl/montgomery_inv.o: cc external/boringssl/src/crypto/fipsmodule/bn/montgomery_inv.c
+build $BUILDROOT/boringssl/mul.o: cc external/boringssl/src/crypto/fipsmodule/bn/mul.c
+build $BUILDROOT/boringssl/prime.o: cc external/boringssl/src/crypto/fipsmodule/bn/prime.c
+build $BUILDROOT/boringssl/random.o: cc external/boringssl/src/crypto/fipsmodule/bn/random.c
+build $BUILDROOT/boringssl/rsaz_exp.o: cc external/boringssl/src/crypto/fipsmodule/bn/rsaz_exp.c
+build $BUILDROOT/boringssl/shift.o: cc external/boringssl/src/crypto/fipsmodule/bn/shift.c
+build $BUILDROOT/boringssl/sqrt.o: cc external/boringssl/src/crypto/fipsmodule/bn/sqrt.c
+build $BUILDROOT/boringssl/aead.o: cc external/boringssl/src/crypto/fipsmodule/cipher/aead.c
+build $BUILDROOT/boringssl/cipher.o: cc external/boringssl/src/crypto/fipsmodule/cipher/cipher.c
+build $BUILDROOT/boringssl/e_aes.o: cc external/boringssl/src/crypto/fipsmodule/cipher/e_aes.c
+build $BUILDROOT/boringssl/check.o: cc external/boringssl/src/crypto/fipsmodule/dh/check.c
+build $BUILDROOT/boringssl/dh.o: cc external/boringssl/src/crypto/fipsmodule/dh/dh.c
+build $BUILDROOT/boringssl/digest.o: cc external/boringssl/src/crypto/fipsmodule/digest/digest.c
+build $BUILDROOT/boringssl/digests.o: cc external/boringssl/src/crypto/fipsmodule/digest/digests.c
+build $BUILDROOT/boringssl/ec.o: cc external/boringssl/src/crypto/fipsmodule/ec/ec.c
+build $BUILDROOT/boringssl/ec_key.o: cc external/boringssl/src/crypto/fipsmodule/ec/ec_key.c
+build $BUILDROOT/boringssl/ec_montgomery.o: cc external/boringssl/src/crypto/fipsmodule/ec/ec_montgomery.c
+build $BUILDROOT/boringssl/felem.o: cc external/boringssl/src/crypto/fipsmodule/ec/felem.c
+build $BUILDROOT/boringssl/oct.o: cc external/boringssl/src/crypto/fipsmodule/ec/oct.c
+build $BUILDROOT/boringssl/64.o: cc external/boringssl/src/crypto/fipsmodule/ec/p224-64.c
+build $BUILDROOT/boringssl/x86_64.o: cc external/boringssl/src/crypto/fipsmodule/ec/p256-x86_64.c
+build $BUILDROOT/boringssl/p256.o: cc external/boringssl/src/crypto/fipsmodule/ec/p256.c
+build $BUILDROOT/boringssl/scalar.o: cc external/boringssl/src/crypto/fipsmodule/ec/scalar.c
+build $BUILDROOT/boringssl/simple.o: cc external/boringssl/src/crypto/fipsmodule/ec/simple.c
+build $BUILDROOT/boringssl/simple_mul.o: cc external/boringssl/src/crypto/fipsmodule/ec/simple_mul.c
+build $BUILDROOT/boringssl/util.o: cc external/boringssl/src/crypto/fipsmodule/ec/util.c
+build $BUILDROOT/boringssl/wnaf.o: cc external/boringssl/src/crypto/fipsmodule/ec/wnaf.c
+build $BUILDROOT/boringssl/ecdh.o: cc external/boringssl/src/crypto/fipsmodule/ecdh/ecdh.c
+build $BUILDROOT/boringssl/ecdsa.o: cc external/boringssl/src/crypto/fipsmodule/ecdsa/ecdsa.c
+build $BUILDROOT/boringssl/hmac.o: cc external/boringssl/src/crypto/fipsmodule/hmac/hmac.c
+build $BUILDROOT/boringssl/md4.o: cc external/boringssl/src/crypto/fipsmodule/md4/md4.c
+build $BUILDROOT/boringssl/md5.o: cc external/boringssl/src/crypto/fipsmodule/md5/md5.c
+build $BUILDROOT/boringssl/cbc.o: cc external/boringssl/src/crypto/fipsmodule/modes/cbc.c
+build $BUILDROOT/boringssl/cfb.o: cc external/boringssl/src/crypto/fipsmodule/modes/cfb.c
+build $BUILDROOT/boringssl/ctr.o: cc external/boringssl/src/crypto/fipsmodule/modes/ctr.c
+build $BUILDROOT/boringssl/gcm.o: cc external/boringssl/src/crypto/fipsmodule/modes/gcm.c
+build $BUILDROOT/boringssl/gcm_nohw.o: cc external/boringssl/src/crypto/fipsmodule/modes/gcm_nohw.c
+build $BUILDROOT/boringssl/ofb.o: cc external/boringssl/src/crypto/fipsmodule/modes/ofb.c
+build $BUILDROOT/boringssl/polyval.o: cc external/boringssl/src/crypto/fipsmodule/modes/polyval.c
+build $BUILDROOT/boringssl/ctrdrbg.o: cc external/boringssl/src/crypto/fipsmodule/rand/ctrdrbg.c
+build $BUILDROOT/boringssl/fork_detect.o: cc external/boringssl/src/crypto/fipsmodule/rand/fork_detect.c
+build $BUILDROOT/boringssl/rand.o: cc external/boringssl/src/crypto/fipsmodule/rand/rand.c
+build $BUILDROOT/boringssl/urandom.o: cc external/boringssl/src/crypto/fipsmodule/rand/urandom.c
+build $BUILDROOT/boringssl/blinding.o: cc external/boringssl/src/crypto/fipsmodule/rsa/blinding.c
+build $BUILDROOT/boringssl/padding.o: cc external/boringssl/src/crypto/fipsmodule/rsa/padding.c
+build $BUILDROOT/boringssl/rsa.o: cc external/boringssl/src/crypto/fipsmodule/rsa/rsa.c
+build $BUILDROOT/boringssl/rsa_impl.o: cc external/boringssl/src/crypto/fipsmodule/rsa/rsa_impl.c
+build $BUILDROOT/boringssl/fips.o: cc external/boringssl/src/crypto/fipsmodule/self_check/fips.c
+build $BUILDROOT/boringssl/self_check.o: cc external/boringssl/src/crypto/fipsmodule/self_check/self_check.c
+build $BUILDROOT/boringssl/altivec.o: cc external/boringssl/src/crypto/fipsmodule/sha/sha1-altivec.c
+build $BUILDROOT/boringssl/sha1.o: cc external/boringssl/src/crypto/fipsmodule/sha/sha1.c
+build $BUILDROOT/boringssl/sha256.o: cc external/boringssl/src/crypto/fipsmodule/sha/sha256.c
+build $BUILDROOT/boringssl/sha512.o: cc external/boringssl/src/crypto/fipsmodule/sha/sha512.c
+build $BUILDROOT/boringssl/kdf.o: cc external/boringssl/src/crypto/fipsmodule/tls/kdf.c
+# linux_x86_64
+build $BUILDROOT/boringssl/aesni-gcm-x86_64.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/aesni-gcm-x86_64.S
+build $BUILDROOT/boringssl/aesni-x86_64.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/aesni-x86_64.S
+build $BUILDROOT/boringssl/ghash-ssse3-x86_64.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/ghash-ssse3-x86_64.S
+build $BUILDROOT/boringssl/ghash-x86_64.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/ghash-x86_64.S
+build $BUILDROOT/boringssl/md5-x86_64.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/md5-x86_64.S
+build $BUILDROOT/boringssl/p256-x86_64-asm.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/p256-x86_64-asm.S
+build $BUILDROOT/boringssl/p256_beeu-x86_64-asm.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/p256_beeu-x86_64-asm.S
+build $BUILDROOT/boringssl/rdrand-x86_64.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/rdrand-x86_64.S
+build $BUILDROOT/boringssl/rsaz-avx2.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/rsaz-avx2.S
+build $BUILDROOT/boringssl/sha1-x86_64.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/sha1-x86_64.S
+build $BUILDROOT/boringssl/sha256-x86_64.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/sha256-x86_64.S
+build $BUILDROOT/boringssl/sha512-x86_64.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/sha512-x86_64.S
+build $BUILDROOT/boringssl/vpaes-x86_64.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/vpaes-x86_64.S
+build $BUILDROOT/boringssl/x86_64-mont.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/x86_64-mont.S
+build $BUILDROOT/boringssl/x86_64-mont5.o: cc external/boringssl/linux-x86_64/crypto/fipsmodule/x86_64-mont5.S
+
+build $BUILDROOT/boringssl/libcrypto.a: ar $
+  $BUILDROOT/boringssl/err_data.o $
+  $BUILDROOT/boringssl/a_bitstr.o $
+  $BUILDROOT/boringssl/a_bool.o $
+  $BUILDROOT/boringssl/a_d2i_fp.o $
+  $BUILDROOT/boringssl/a_dup.o $
+  $BUILDROOT/boringssl/a_enum.o $
+  $BUILDROOT/boringssl/a_gentm.o $
+  $BUILDROOT/boringssl/a_i2d_fp.o $
+  $BUILDROOT/boringssl/a_int.o $
+  $BUILDROOT/boringssl/a_mbstr.o $
+  $BUILDROOT/boringssl/a_object.o $
+  $BUILDROOT/boringssl/a_octet.o $
+  $BUILDROOT/boringssl/a_print.o $
+  $BUILDROOT/boringssl/a_strex.o $
+  $BUILDROOT/boringssl/a_strnid.o $
+  $BUILDROOT/boringssl/a_time.o $
+  $BUILDROOT/boringssl/a_type.o $
+  $BUILDROOT/boringssl/a_utctm.o $
+  $BUILDROOT/boringssl/a_utf8.o $
+  $BUILDROOT/boringssl/asn1_lib.o $
+  $BUILDROOT/boringssl/asn1_par.o $
+  $BUILDROOT/boringssl/asn_pack.o $
+  $BUILDROOT/boringssl/f_int.o $
+  $BUILDROOT/boringssl/f_string.o $
+  $BUILDROOT/boringssl/tasn_dec.o $
+  $BUILDROOT/boringssl/tasn_enc.o $
+  $BUILDROOT/boringssl/tasn_fre.o $
+  $BUILDROOT/boringssl/tasn_new.o $
+  $BUILDROOT/boringssl/tasn_typ.o $
+  $BUILDROOT/boringssl/tasn_utl.o $
+  $BUILDROOT/boringssl/time_support.o $
+  $BUILDROOT/boringssl/base64.o $
+  $BUILDROOT/boringssl/bio.o $
+  $BUILDROOT/boringssl/bio_mem.o $
+  $BUILDROOT/boringssl/connect.o $
+  $BUILDROOT/boringssl/fd.o $
+  $BUILDROOT/boringssl/file.o $
+  $BUILDROOT/boringssl/hexdump.o $
+  $BUILDROOT/boringssl/pair.o $
+  $BUILDROOT/boringssl/printf.o $
+  $BUILDROOT/boringssl/socket.o $
+  $BUILDROOT/boringssl/socket_helper.o $
+  $BUILDROOT/boringssl/blake2.o $
+  $BUILDROOT/boringssl/bn_asn1.o $
+  $BUILDROOT/boringssl/convert.o $
+  $BUILDROOT/boringssl/buf.o $
+  $BUILDROOT/boringssl/asn1_compat.o $
+  $BUILDROOT/boringssl/ber.o $
+  $BUILDROOT/boringssl/cbb.o $
+  $BUILDROOT/boringssl/cbs.o $
+  $BUILDROOT/boringssl/unicode.o $
+  $BUILDROOT/boringssl/chacha.o $
+  $BUILDROOT/boringssl/cipher_extra.o $
+  $BUILDROOT/boringssl/derive_key.o $
+  $BUILDROOT/boringssl/e_aesccm.o $
+  $BUILDROOT/boringssl/e_aesctrhmac.o $
+  $BUILDROOT/boringssl/e_aesgcmsiv.o $
+  $BUILDROOT/boringssl/e_chacha20poly1305.o $
+  $BUILDROOT/boringssl/e_des.o $
+  $BUILDROOT/boringssl/e_null.o $
+  $BUILDROOT/boringssl/e_rc2.o $
+  $BUILDROOT/boringssl/e_rc4.o $
+  $BUILDROOT/boringssl/e_tls.o $
+  $BUILDROOT/boringssl/tls_cbc.o $
+  $BUILDROOT/boringssl/cmac.o $
+  $BUILDROOT/boringssl/conf.o $
+  $BUILDROOT/boringssl/cpu_aarch64_apple.o $
+  $BUILDROOT/boringssl/cpu_aarch64_fuchsia.o $
+  $BUILDROOT/boringssl/cpu_aarch64_linux.o $
+  $BUILDROOT/boringssl/cpu_aarch64_win.o $
+  $BUILDROOT/boringssl/cpu_arm.o $
+  $BUILDROOT/boringssl/cpu_arm_linux.o $
+  $BUILDROOT/boringssl/cpu_intel.o $
+  $BUILDROOT/boringssl/cpu_ppc64le.o $
+  $BUILDROOT/boringssl/crypto.o $
+  $BUILDROOT/boringssl/curve25519.o $
+  $BUILDROOT/boringssl/spake25519.o $
+  $BUILDROOT/boringssl/des.o $
+  $BUILDROOT/boringssl/dh_asn1.o $
+  $BUILDROOT/boringssl/params.o $
+  $BUILDROOT/boringssl/digest_extra.o $
+  $BUILDROOT/boringssl/dsa.o $
+  $BUILDROOT/boringssl/dsa_asn1.o $
+  $BUILDROOT/boringssl/ec_asn1.o $
+  $BUILDROOT/boringssl/ec_derive.o $
+  $BUILDROOT/boringssl/hash_to_curve.o $
+  $BUILDROOT/boringssl/ecdh_extra.o $
+  $BUILDROOT/boringssl/ecdsa_asn1.o $
+  $BUILDROOT/boringssl/engine.o $
+  $BUILDROOT/boringssl/err.o $
+  $BUILDROOT/boringssl/digestsign.o $
+  $BUILDROOT/boringssl/evp.o $
+  $BUILDROOT/boringssl/evp_asn1.o $
+  $BUILDROOT/boringssl/evp_ctx.o $
+  $BUILDROOT/boringssl/p_dsa_asn1.o $
+  $BUILDROOT/boringssl/p_ec.o $
+  $BUILDROOT/boringssl/p_ec_asn1.o $
+  $BUILDROOT/boringssl/p_ed25519.o $
+  $BUILDROOT/boringssl/p_ed25519_asn1.o $
+  $BUILDROOT/boringssl/p_rsa.o $
+  $BUILDROOT/boringssl/p_rsa_asn1.o $
+  $BUILDROOT/boringssl/p_x25519.o $
+  $BUILDROOT/boringssl/p_x25519_asn1.o $
+  $BUILDROOT/boringssl/pbkdf.o $
+  $BUILDROOT/boringssl/print.o $
+  $BUILDROOT/boringssl/scrypt.o $
+  $BUILDROOT/boringssl/sign.o $
+  $BUILDROOT/boringssl/ex_data.o $
+  $BUILDROOT/boringssl/fips_shared_support.o $
+  $BUILDROOT/boringssl/hkdf.o $
+  $BUILDROOT/boringssl/hpke.o $
+  $BUILDROOT/boringssl/hrss.o $
+  $BUILDROOT/boringssl/lhash.o $
+  $BUILDROOT/boringssl/mem.o $
+  $BUILDROOT/boringssl/obj.o $
+  $BUILDROOT/boringssl/obj_xref.o $
+  $BUILDROOT/boringssl/pem_all.o $
+  $BUILDROOT/boringssl/pem_info.o $
+  $BUILDROOT/boringssl/pem_lib.o $
+  $BUILDROOT/boringssl/pem_oth.o $
+  $BUILDROOT/boringssl/pem_pk8.o $
+  $BUILDROOT/boringssl/pem_pkey.o $
+  $BUILDROOT/boringssl/pem_x509.o $
+  $BUILDROOT/boringssl/pem_xaux.o $
+  $BUILDROOT/boringssl/pkcs7.o $
+  $BUILDROOT/boringssl/pkcs7_x509.o $
+  $BUILDROOT/boringssl/p5_pbev2.o $
+  $BUILDROOT/boringssl/pkcs8.o $
+  $BUILDROOT/boringssl/pkcs8_x509.o $
+  $BUILDROOT/boringssl/poly1305.o $
+  $BUILDROOT/boringssl/poly1305_arm.o $
+  $BUILDROOT/boringssl/poly1305_vec.o $
+  $BUILDROOT/boringssl/pool.o $
+  $BUILDROOT/boringssl/deterministic.o $
+  $BUILDROOT/boringssl/forkunsafe.o $
+  $BUILDROOT/boringssl/fuchsia.o $
+  $BUILDROOT/boringssl/passive.o $
+  $BUILDROOT/boringssl/rand_extra.o $
+  $BUILDROOT/boringssl/windows.o $
+  $BUILDROOT/boringssl/rc4.o $
+  $BUILDROOT/boringssl/refcount_c11.o $
+  $BUILDROOT/boringssl/refcount_lock.o $
+  $BUILDROOT/boringssl/rsa_asn1.o $
+  $BUILDROOT/boringssl/rsa_print.o $
+  $BUILDROOT/boringssl/siphash.o $
+  $BUILDROOT/boringssl/stack.o $
+  $BUILDROOT/boringssl/thread.o $
+  $BUILDROOT/boringssl/thread_none.o $
+  $BUILDROOT/boringssl/thread_pthread.o $
+  $BUILDROOT/boringssl/thread_win.o $
+  $BUILDROOT/boringssl/pmbtoken.o $
+  $BUILDROOT/boringssl/trust_token.o $
+  $BUILDROOT/boringssl/voprf.o $
+  $BUILDROOT/boringssl/a_digest.o $
+  $BUILDROOT/boringssl/a_sign.o $
+  $BUILDROOT/boringssl/a_verify.o $
+  $BUILDROOT/boringssl/algorithm.o $
+  $BUILDROOT/boringssl/asn1_gen.o $
+  $BUILDROOT/boringssl/by_dir.o $
+  $BUILDROOT/boringssl/by_file.o $
+  $BUILDROOT/boringssl/i2d_pr.o $
+  $BUILDROOT/boringssl/name_print.o $
+  $BUILDROOT/boringssl/rsa_pss.o $
+  $BUILDROOT/boringssl/t_crl.o $
+  $BUILDROOT/boringssl/t_req.o $
+  $BUILDROOT/boringssl/t_x509.o $
+  $BUILDROOT/boringssl/t_x509a.o $
+  $BUILDROOT/boringssl/x509.o $
+  $BUILDROOT/boringssl/x509_att.o $
+  $BUILDROOT/boringssl/x509_cmp.o $
+  $BUILDROOT/boringssl/x509_d2.o $
+  $BUILDROOT/boringssl/x509_def.o $
+  $BUILDROOT/boringssl/x509_ext.o $
+  $BUILDROOT/boringssl/x509_lu.o $
+  $BUILDROOT/boringssl/x509_obj.o $
+  $BUILDROOT/boringssl/x509_req.o $
+  $BUILDROOT/boringssl/x509_set.o $
+  $BUILDROOT/boringssl/x509_trs.o $
+  $BUILDROOT/boringssl/x509_txt.o $
+  $BUILDROOT/boringssl/x509_v3.o $
+  $BUILDROOT/boringssl/x509_vfy.o $
+  $BUILDROOT/boringssl/x509_vpm.o $
+  $BUILDROOT/boringssl/x509cset.o $
+  $BUILDROOT/boringssl/x509name.o $
+  $BUILDROOT/boringssl/x509rset.o $
+  $BUILDROOT/boringssl/x509spki.o $
+  $BUILDROOT/boringssl/x_algor.o $
+  $BUILDROOT/boringssl/x_all.o $
+  $BUILDROOT/boringssl/x_attrib.o $
+  $BUILDROOT/boringssl/x_crl.o $
+  $BUILDROOT/boringssl/x_exten.o $
+  $BUILDROOT/boringssl/x_info.o $
+  $BUILDROOT/boringssl/x_name.o $
+  $BUILDROOT/boringssl/x_pkey.o $
+  $BUILDROOT/boringssl/x_pubkey.o $
+  $BUILDROOT/boringssl/x_req.o $
+  $BUILDROOT/boringssl/x_sig.o $
+  $BUILDROOT/boringssl/x_spki.o $
+  $BUILDROOT/boringssl/x_val.o $
+  $BUILDROOT/boringssl/x_x509.o $
+  $BUILDROOT/boringssl/x_x509a.o $
+  $BUILDROOT/boringssl/pcy_cache.o $
+  $BUILDROOT/boringssl/pcy_data.o $
+  $BUILDROOT/boringssl/pcy_lib.o $
+  $BUILDROOT/boringssl/pcy_map.o $
+  $BUILDROOT/boringssl/pcy_node.o $
+  $BUILDROOT/boringssl/pcy_tree.o $
+  $BUILDROOT/boringssl/v3_akey.o $
+  $BUILDROOT/boringssl/v3_akeya.o $
+  $BUILDROOT/boringssl/v3_alt.o $
+  $BUILDROOT/boringssl/v3_bcons.o $
+  $BUILDROOT/boringssl/v3_bitst.o $
+  $BUILDROOT/boringssl/v3_conf.o $
+  $BUILDROOT/boringssl/v3_cpols.o $
+  $BUILDROOT/boringssl/v3_crld.o $
+  $BUILDROOT/boringssl/v3_enum.o $
+  $BUILDROOT/boringssl/v3_extku.o $
+  $BUILDROOT/boringssl/v3_genn.o $
+  $BUILDROOT/boringssl/v3_ia5.o $
+  $BUILDROOT/boringssl/v3_info.o $
+  $BUILDROOT/boringssl/v3_int.o $
+  $BUILDROOT/boringssl/v3_lib.o $
+  $BUILDROOT/boringssl/v3_ncons.o $
+  $BUILDROOT/boringssl/v3_ocsp.o $
+  $BUILDROOT/boringssl/v3_pci.o $
+  $BUILDROOT/boringssl/v3_pcia.o $
+  $BUILDROOT/boringssl/v3_pcons.o $
+  $BUILDROOT/boringssl/v3_pmaps.o $
+  $BUILDROOT/boringssl/v3_prn.o $
+  $BUILDROOT/boringssl/v3_purp.o $
+  $BUILDROOT/boringssl/v3_skey.o $
+  $BUILDROOT/boringssl/v3_utl.o $
+  $BUILDROOT/boringssl/chacha-x86_64.o $
+  $BUILDROOT/boringssl/aes128gcmsiv-x86_64.o $
+  $BUILDROOT/boringssl/chacha20_poly1305_x86_64.o $
+  $BUILDROOT/boringssl/trampoline-x86_64.o $
+  $BUILDROOT/boringssl/poly_rq_mul.o $
+  $BUILDROOT/boringssl/aes.o $
+  $BUILDROOT/boringssl/aes_nohw.o $
+  $BUILDROOT/boringssl/key_wrap.o $
+  $BUILDROOT/boringssl/mode_wrappers.o $
+  $BUILDROOT/boringssl/add.o $
+  $BUILDROOT/boringssl/gcc.o $
+  $BUILDROOT/boringssl/bn.o $
+  $BUILDROOT/boringssl/bytes.o $
+  $BUILDROOT/boringssl/cmp.o $
+  $BUILDROOT/boringssl/ctx.o $
+  $BUILDROOT/boringssl/div.o $
+  $BUILDROOT/boringssl/div_extra.o $
+  $BUILDROOT/boringssl/exponentiation.o $
+  $BUILDROOT/boringssl/gcd.o $
+  $BUILDROOT/boringssl/gcd_extra.o $
+  $BUILDROOT/boringssl/generic.o $
+  $BUILDROOT/boringssl/jacobi.o $
+  $BUILDROOT/boringssl/montgomery.o $
+  $BUILDROOT/boringssl/montgomery_inv.o $
+  $BUILDROOT/boringssl/mul.o $
+  $BUILDROOT/boringssl/prime.o $
+  $BUILDROOT/boringssl/random.o $
+  $BUILDROOT/boringssl/rsaz_exp.o $
+  $BUILDROOT/boringssl/shift.o $
+  $BUILDROOT/boringssl/sqrt.o $
+  $BUILDROOT/boringssl/aead.o $
+  $BUILDROOT/boringssl/cipher.o $
+  $BUILDROOT/boringssl/e_aes.o $
+  $BUILDROOT/boringssl/check.o $
+  $BUILDROOT/boringssl/dh.o $
+  $BUILDROOT/boringssl/digest.o $
+  $BUILDROOT/boringssl/digests.o $
+  $BUILDROOT/boringssl/ec.o $
+  $BUILDROOT/boringssl/ec_key.o $
+  $BUILDROOT/boringssl/ec_montgomery.o $
+  $BUILDROOT/boringssl/felem.o $
+  $BUILDROOT/boringssl/oct.o $
+  $BUILDROOT/boringssl/64.o $
+  $BUILDROOT/boringssl/x86_64.o $
+  $BUILDROOT/boringssl/p256.o $
+  $BUILDROOT/boringssl/scalar.o $
+  $BUILDROOT/boringssl/simple.o $
+  $BUILDROOT/boringssl/simple_mul.o $
+  $BUILDROOT/boringssl/util.o $
+  $BUILDROOT/boringssl/wnaf.o $
+  $BUILDROOT/boringssl/ecdh.o $
+  $BUILDROOT/boringssl/ecdsa.o $
+  $BUILDROOT/boringssl/hmac.o $
+  $BUILDROOT/boringssl/md4.o $
+  $BUILDROOT/boringssl/md5.o $
+  $BUILDROOT/boringssl/cbc.o $
+  $BUILDROOT/boringssl/cfb.o $
+  $BUILDROOT/boringssl/ctr.o $
+  $BUILDROOT/boringssl/gcm.o $
+  $BUILDROOT/boringssl/gcm_nohw.o $
+  $BUILDROOT/boringssl/ofb.o $
+  $BUILDROOT/boringssl/polyval.o $
+  $BUILDROOT/boringssl/ctrdrbg.o $
+  $BUILDROOT/boringssl/fork_detect.o $
+  $BUILDROOT/boringssl/rand.o $
+  $BUILDROOT/boringssl/urandom.o $
+  $BUILDROOT/boringssl/blinding.o $
+  $BUILDROOT/boringssl/padding.o $
+  $BUILDROOT/boringssl/rsa.o $
+  $BUILDROOT/boringssl/rsa_impl.o $
+  $BUILDROOT/boringssl/fips.o $
+  $BUILDROOT/boringssl/altivec.o $
+  $BUILDROOT/boringssl/sha1.o $
+  $BUILDROOT/boringssl/sha256.o $
+  $BUILDROOT/boringssl/sha512.o $
+  $BUILDROOT/boringssl/kdf.o $
+  $BUILDROOT/boringssl/aesni-gcm-x86_64.o $
+  $BUILDROOT/boringssl/aesni-x86_64.o $
+  $BUILDROOT/boringssl/ghash-ssse3-x86_64.o $
+  $BUILDROOT/boringssl/ghash-x86_64.o $
+  $BUILDROOT/boringssl/md5-x86_64.o $
+  $BUILDROOT/boringssl/p256-x86_64-asm.o $
+  $BUILDROOT/boringssl/p256_beeu-x86_64-asm.o $
+  $BUILDROOT/boringssl/rdrand-x86_64.o $
+  $BUILDROOT/boringssl/rsaz-avx2.o $
+  $BUILDROOT/boringssl/sha1-x86_64.o $
+  $BUILDROOT/boringssl/sha256-x86_64.o $
+  $BUILDROOT/boringssl/sha512-x86_64.o $
+  $BUILDROOT/boringssl/vpaes-x86_64.o $
+  $BUILDROOT/boringssl/x86_64-mont.o $
+  $BUILDROOT/boringssl/x86_64-mont5.o $
+
+build $BUILDROOT/boringssl/libcrypto.so: soa $BUILDROOT/boringssl/libcrypto.a

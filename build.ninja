@@ -116,6 +116,9 @@ subninja build/libsystemproperties.ninja
 subninja build/logwrapper.ninja
 build $SYSROOT/lib/liblogwrap.so: copy $BUILDROOT/logwrapper/liblogwrap.so
 
+subninja build/boringssl.ninja
+build $SYSROOT/lib/libcrypto.so: copy $BUILDROOT/boringssl/libcrypto.so
+
 subninja build/fs_mgr.ninja
 build $SYSROOT/lib/libfs_mgr.so: copy $BUILDROOT/fs_mgr/libfs_mgr.so
 
