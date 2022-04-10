@@ -213,7 +213,7 @@ rule sync
 
 rule hardlink
   command = ln -f $in $out
-  description = LN $out -> $in
+  description = HARDLINK $out -> $in
 
 build $SYSTEMDIR: mkdir
 build $SYSTEMDIR/dev: mkdir

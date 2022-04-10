@@ -46,3 +46,5 @@ while read -r MODULE; do
   MODULE_PATH=$(find "$KERNEL_DIR" -name "$MODULE")
   copy_module "$MODULE_PATH"
 done <"$MODULES_LIST"
+
+touch "$MODULES_STAGING_DIR"

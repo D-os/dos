@@ -385,355 +385,355 @@ build $BUILDROOT/toybox/toybox: link $
 
 rule symlink
   command = ln -sf $target $out
-  description = SYM LN $out -> $target
+  description = SYMLINK $out -> $target
 
 build $SYSTEMDIR/bin/[: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/acpi: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/base64: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/basename: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/blockdev: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/cal: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/cat: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/chattr: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/chcon: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/chgrp: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/chmod: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/chown: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/chroot: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/chrt: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/cksum: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/clear: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/comm: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/cmp: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/cp: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/cpio: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/cut: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/date: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/dd: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/devmem: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/df: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/diff: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/dirname: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/dmesg: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/dos2unix: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/du: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/echo: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/egrep: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/env: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/expand: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/expr: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/fallocate: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/false: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/fgrep: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/file: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/find: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/flock: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/fmt: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/free: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/fsync: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/getconf: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/getenforce: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/grep: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/groups: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/gunzip: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/gzip: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/head: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/hostname: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/hwclock: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/i2cdetect: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/i2cdump: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/i2cget: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/i2cset: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/iconv: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/id: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/ifconfig: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/inotifyd: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/insmod: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/install: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/ionice: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/iorenice: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/kill: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/killall: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/load_policy: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/ln: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/log: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/logname: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/losetup: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/ls: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/lsattr: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/lsmod: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/lsof: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/lspci: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/lsusb: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/md5sum: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/mkdir: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/mkfifo: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/mknod: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/mkswap: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/mktemp: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/microcom: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/modinfo: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/more: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/mount: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/mountpoint: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/mv: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/nc: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/netcat: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/netstat: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/nice: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/nl: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/nohup: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/nproc: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/nsenter: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/od: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/paste: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/patch: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/pgrep: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/pidof: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/pkill: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/pmap: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/printenv: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/printf: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/ps: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/pwd: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/readelf: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/readlink: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/realpath: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/renice: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/restorecon: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/rm: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/rmdir: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/rmmod: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/rtcwake: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/runcon: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sed: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sendevent: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/seq: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/setenforce: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/setsid: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sha1sum: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sha224sum: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sha256sum: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sha384sum: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sha512sum: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sleep: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sort: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/split: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/stat: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/strings: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/stty: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/swapoff: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/swapon: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sync: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sysctl: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/tac: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/tail: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/tar: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/taskset: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/tee: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/test: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/time: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/timeout: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/top: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/touch: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/tr: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/true: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/truncate: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/tty: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/uclampset: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/ulimit: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/umount: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/uname: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/uniq: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/unix2dos: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/unlink: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/unshare: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/uptime: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/usleep: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/uudecode: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/uuencode: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/uuidgen: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/vmstat: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/watch: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/wc: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/which: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/whoami: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/xargs: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/xxd: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/yes: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/zcat: symlink
-  target = /system/bin/toybox
+  target = ../system/bin/toybox
