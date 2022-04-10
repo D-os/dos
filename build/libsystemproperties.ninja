@@ -19,8 +19,10 @@ build $BUILDROOT/libsystemproperties/libsystemproperties.a: ar $
   $BUILDROOT/libsystemproperties/prop_info.o $
   $BUILDROOT/libsystemproperties/system_properties.o $
 
-# 
-# build $BUILDROOT/system_properties/system_properties.a: ar $
-#   $BUILDROOT/system_properties/system_property_api.o $
-#   $BUILDROOT/system_properties/system_property_set.o $
-
+build $BUILDROOT/libsystemproperties/libsystemproperties.so: soa $
+  $BUILDROOT/libsystemproperties/libsystemproperties.a $
+  | $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a
+  libs = $
+    -Wl,--whole-archive $
+      $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a $
+    -Wl,--no-whole-archive

@@ -212,10 +212,11 @@ libs = $
   -llogwrap $
   -lprocessgroup $
   -lprocessgroup_setup $
+  -lsystemproperties $
 
 rule link
   description = LINK $out
-  command = $LINKER $libs -o $out $
+  command = $LINKER -L$SYSROOT/lib $libs -o $out $
     -Wl,--whole-archive $
       $BUILDROOT/libcap/libcap.a $
       $BUILDROOT/init/obj/InitProperties.sysprop.o $
@@ -231,8 +232,6 @@ build $BUILDROOT/init/obj/init: link $
   $BUILDROOT/libprocinfo/libprocinfo.a $
   $BUILDROOT/protobuf/libprotobuf-cpp-lite.a $
   $BUILDROOT/libpropertyinfoserializer/libpropertyinfoserializer.a $
-  $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a $
-  $BUILDROOT/libsystemproperties/libsystemproperties.a $
   | $BUILDROOT/libcap/libcap.a $
     $BUILDROOT/init/obj/InitProperties.sysprop.o $
     $SYSROOT/lib/libunwind.so $
@@ -244,6 +243,7 @@ build $BUILDROOT/init/obj/init: link $
     $SYSROOT/lib/liblogwrap.so $
     $SYSROOT/lib/libprocessgroup.so $
     $SYSROOT/lib/libprocessgroup_setup.so $
+    $SYSROOT/lib/libsystemproperties.so $
 
 # symlinks: ["ueventd"],
 

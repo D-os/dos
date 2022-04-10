@@ -112,6 +112,7 @@ subninja build/libpropertyinfoparser.ninja
 subninja build/libpropertyinfoserializer.ninja
 
 subninja build/libsystemproperties.ninja
+build $SYSROOT/lib/libsystemproperties.so: copy $BUILDROOT/libsystemproperties/libsystemproperties.so
 
 subninja build/logwrapper.ninja
 build $SYSROOT/lib/liblogwrap.so: copy $BUILDROOT/logwrapper/liblogwrap.so
