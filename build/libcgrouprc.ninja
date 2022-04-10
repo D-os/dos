@@ -1,7 +1,7 @@
 cxxflags = -Wall -Werror
 includes = -Isystem/core/libprocessgroup/include -Isystem/core/libprocessgroup/cgrouprc/include -Isystem/core/libprocessgroup/cgrouprc_format/include $
   -Isystem/libbase/include -Isystem/core/libcutils/include
-libs = -lbase -lcutils
+libs = -lc++ -lbase -lcutils
 
 build $BUILDROOT/libcgrouprc/cgroup_controller.o: cxx system/core/libprocessgroup/cgrouprc/cgroup_controller.cpp
 build $BUILDROOT/libcgrouprc/cgroup_file.o: cxx system/core/libprocessgroup/cgrouprc/cgroup_file.cpp

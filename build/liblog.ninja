@@ -1,6 +1,6 @@
 cxxflags = -Wall -Werror -Wextra -Wexit-time-destructors -DLIBLOG_LOG_TAG=1006 -DSNET_EVENT_LOG_TAG=1397638484 -Wno-c99-designator
 includes = -Isystem/logging/liblog/include -Isystem/libbase/include -Isystem/core/libcutils/include
-libs = -lstdc++
+libs = -lc++
 
 build $BUILDROOT/liblog/log_event_list.o: cxx system/logging/liblog/log_event_list.cpp
 build $BUILDROOT/liblog/log_event_write.o: cxx system/logging/liblog/log_event_write.cpp
