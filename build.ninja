@@ -139,6 +139,7 @@ subninja build/system_img.ninja
 build system.img: phony $BUILDROOT/system.img
 
 subninja build/toybox.ninja
+build $BUILDROOT/system/system/bin/toybox: copy $BUILDROOT/toybox/toybox
 
 subninja build/zlib.ninja
 build $SYSROOT/lib/libz.so: copy $BUILDROOT/zlib/libz.so
