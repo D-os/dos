@@ -225,10 +225,10 @@ build $SYSTEMDIR/second_stage_resources: mkdir
 build $SYSTEMDIR/apex: mkdir
 build $SYSTEMDIR/linkerconfig: mkdir
 
-build $SYSTEMDIR/lib: sync
-  source = out/sysroot/lib/*.so*
-build $SYSTEMDIR/lib/modules: sync
-  source = out/sysroot/lib/modules/*
+build $SYSTEMDIR/lib: sync | $SYSROOT/lib
+  source = $SYSROOT/lib/*.so*
+build $SYSTEMDIR/lib/modules: sync | $SYSROOT/lib/modules
+  source = $SYSROOT/lib/modules/*
 build $SYSTEMDIR/system/bin/init: copy $BUILDROOT/init/obj/init
 build $SYSTEMDIR/system/bin/ueventd: hardlink $SYSTEMDIR/system/bin/init
 build $SYSTEMDIR/system/build.prop: copy build/conf/build.prop
