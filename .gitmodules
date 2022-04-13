@@ -1,33 +1,33 @@
 [submodule "tools/tc-build"]
 	path = tools/tc-build
-	url = git@github.com:ClangBuiltLinux/tc-build.git
+	url = https://github.com/ClangBuiltLinux/tc-build.git
 [submodule "external/llvm-project"]
 	path = external/llvm-project
-	url = git@github.com:llvm/llvm-project.git
+	url = https://github.com/llvm/llvm-project.git
 [submodule "external/musl"]
 	path = external/musl
 	url = git://git.musl-libc.org/musl
 [submodule "external/fish-shell"]
 	path = external/fish-shell
-	url = git@github.com:fish-shell/fish-shell.git
+	url = https://github.com/fish-shell/fish-shell.git
 [submodule "external/pcre"]
 	path = external/pcre
 	url = https://android.googlesource.com/platform/external/pcre
 [submodule "external/kernel-headers"]
 	path = external/kernel-headers
-	url = git@github.com:sabotage-linux/kernel-headers.git
+	url = https://github.com/sabotage-linux/kernel-headers.git
 [submodule "system/core"]
 	path = system/core
 	url = https://github.com/D-os/system_core.git
 [submodule "external/samurai"]
 	path = external/samurai
-	url = git@github.com:michaelforney/samurai.git
+	url = https://github.com/michaelforney/samurai.git
 [submodule "external/kati"]
 	path = external/kati
-	url = git@github.com:google/kati.git
+	url = https://github.com/google/kati.git
 [submodule "external/mold"]
 	path = external/mold
-	url = git@github.com:rui314/mold.git
+	url = https://github.com/rui314/mold.git
 [submodule "system/libbase"]
 	path = system/libbase
 	url = https://github.com/D-os/system_libbase.git
@@ -63,7 +63,7 @@
 	url = https://android.googlesource.com/platform/external/e2fsprogs
 [submodule "external/linux"]
 	path = external/linux
-	url = git@github.com:zen-kernel/zen-kernel.git
+	url = https://github.com/zen-kernel/zen-kernel.git
 [submodule "external/kmod"]
 	path = external/kmod
 	url = https://android.googlesource.com/platform/external/kmod
@@ -76,3 +76,6 @@
 [submodule "external/boringssl"]
 	path = external/boringssl
 	url = https://android.googlesource.com/platform/external/boringssl
+[submodule "external/weston"]
+	path = external/weston
+	url = https://github.com/wayland-project/weston.git
