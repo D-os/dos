@@ -79,3 +79,6 @@
 [submodule "external/weston"]
 	path = external/weston
 	url = https://github.com/wayland-project/weston.git
+[submodule "external/wayland"]
+	path = external/wayland
+	url = git@github.com:wayland-project/wayland.git
