@@ -88,3 +88,6 @@
 [submodule "external/pixman"]
 	path = external/pixman
 	url = https://github.com/freedesktop/pixman.git
+[submodule "external/wayland-protocols"]
+	path = external/wayland-protocols
+	url = https://github.com/wayland-project/wayland-protocols.git
