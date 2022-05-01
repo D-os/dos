@@ -1,5 +1,4 @@
 IMAGE_SIZE = 1G
-SYSTEMDIR = $BUILDROOT/system
 
 rule mkfs
   command = truncate -s $IMAGE_SIZE $out && mke2fs -q -t ext4 -L / -E root_owner=0:0 -d $in $out

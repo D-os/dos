@@ -1,5 +1,3 @@
-SYSTEMDIR = $BUILDROOT/system
-
 cflags = $
   -Os $
   -Wall $

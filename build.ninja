@@ -1,3 +1,5 @@
+ninja_required_version = 1.8.2
+
 BUILDROOT = out/build
 SYSROOT = out/sysroot
 TARGET = x86_64-unknown-linux-musl
@@ -6,6 +8,8 @@ CXX = out/tc/target/bin/${TARGET}-clang++ -nostdinc++ -cxx-isystem $SYSROOT/incl
 LINKER = out/tc/target/bin/${TARGET}-clang -isysroot $SYSROOT
 AR = out/tc/target/bin/${TARGET}-ar
 STRIP = out/tc/target/bin/${TARGET}-strip
+
+SYSTEMDIR = $BUILDROOT/system
 
 KERNEL_VERSION = 5.16.11-zen-gfbc389882a61
 
