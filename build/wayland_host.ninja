@@ -1,0 +1,25 @@
+cflags = $
+  -fdiagnostics-color=always $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -Wextra $
+  -std=c99 $
+  -O2 $
+  -D_POSIX_C_SOURCE=200809L $
+  -Wno-unused-parameter $
+  -Wstrict-prototypes $
+  -Wmissing-prototypes $
+  -fvisibility=hidden $
+  -Wno-sign-compare
+
+includes = -Ibuild/wayland/src
+
+build $BUILDROOT/_host/wayland/wayland-util.o: hostcc external/wayland/src/wayland-util.c
+build $BUILDROOT/_host/wayland/scanner.o: hostcc external/wayland/src/scanner.c
+  cflags = $cflags -include build/wayland/config.h
+
+build $BUILDROOT/_host/wayland/wayland-scanner: hostld $
+  $BUILDROOT/_host/wayland/scanner.o $
+  $BUILDROOT/_host/wayland/wayland-util.o
+  ldflags = -lexpat -lm

@@ -1,0 +1,276 @@
+cflags = $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall -Winvalid-pch -Wextra -Wpedantic -std=gnu99 $
+  -Wmissing-prototypes $
+  -Wno-unused-parameter $
+  -Wno-shift-negative-value $
+  -Wno-missing-field-initializers $
+  -Wno-pedantic $
+  -Wundef $
+  -fvisibility=hidden $
+  -Wno-unused-but-set-variable $
+
+includes = -Iexternal/weston/include -Iexternal/weston -Ibuild/weston -I$BUILDROOT/protocol $
+  -Iexternal/pixman/pixman -Ibuild/pixman/src $
+  -Iexternal/libdrm/include/drm
+#libs = -lm -ldl
+
+build $BUILDROOT/weston/protocol/input-method-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/input-method/input-method-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/input-method-unstable-v1-server-protocol.h: wayland-scanner external/wayland-protocols/unstable/input-method/input-method-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/input-method-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/input-method/input-method-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/input-timestamps-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/input-timestamps/input-timestamps-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/input-timestamps-unstable-v1-server-protocol.h: wayland-scanner external/wayland-protocols/unstable/input-timestamps/input-timestamps-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/input-timestamps-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/input-timestamps/input-timestamps-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/ivi-application-client-protocol.h: wayland-scanner external/weston/protocol/ivi-application.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/ivi-application-server-protocol.h: wayland-scanner external/weston/protocol/ivi-application.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/ivi-application-protocol.c: wayland-scanner external/weston/protocol/ivi-application.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/ivi-hmi-controller-client-protocol.h: wayland-scanner external/weston/protocol/ivi-hmi-controller.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/ivi-hmi-controller-server-protocol.h: wayland-scanner external/weston/protocol/ivi-hmi-controller.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/ivi-hmi-controller-protocol.c: wayland-scanner external/weston/protocol/ivi-hmi-controller.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/fullscreen-shell-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/fullscreen-shell/fullscreen-shell-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/fullscreen-shell-unstable-v1-server-protocol.h: wayland-scanner external/wayland-protocols/unstable/fullscreen-shell/fullscreen-shell-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/fullscreen-shell-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/fullscreen-shell/fullscreen-shell-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-server-protocol.h: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/linux-explicit-synchronization-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/linux-explicit-synchronization/linux-explicit-synchronization-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/linux-explicit-synchronization-unstable-v1-server-protocol.h: wayland-scanner external/wayland-protocols/unstable/linux-explicit-synchronization/linux-explicit-synchronization-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/linux-explicit-synchronization-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/linux-explicit-synchronization/linux-explicit-synchronization-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/presentation-time-client-protocol.h: wayland-scanner external/wayland-protocols/stable/presentation-time/presentation-time.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/presentation-time-server-protocol.h: wayland-scanner external/wayland-protocols/stable/presentation-time/presentation-time.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/presentation-time-protocol.c: wayland-scanner external/wayland-protocols/stable/presentation-time/presentation-time.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/pointer-constraints/pointer-constraints-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-server-protocol.h: wayland-scanner external/wayland-protocols/unstable/pointer-constraints/pointer-constraints-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/pointer-constraints/pointer-constraints-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/relative-pointer/relative-pointer-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-server-protocol.h: wayland-scanner external/wayland-protocols/unstable/relative-pointer/relative-pointer-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/relative-pointer/relative-pointer-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/tablet-unstable-v2-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/tablet/tablet-unstable-v2.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/tablet-unstable-v2-server-protocol.h: wayland-scanner external/wayland-protocols/unstable/tablet/tablet-unstable-v2.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/tablet-unstable-v2-protocol.c: wayland-scanner external/wayland-protocols/unstable/tablet/tablet-unstable-v2.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/text-cursor-position-client-protocol.h: wayland-scanner external/weston/protocol/text-cursor-position.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/text-cursor-position-server-protocol.h: wayland-scanner external/weston/protocol/text-cursor-position.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/text-cursor-position-protocol.c: wayland-scanner external/weston/protocol/text-cursor-position.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/text-input-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/text-input/text-input-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/text-input-unstable-v1-server-protocol.h: wayland-scanner external/wayland-protocols/unstable/text-input/text-input-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/text-input-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/text-input/text-input-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/viewporter-client-protocol.h: wayland-scanner external/wayland-protocols/stable/viewporter/viewporter.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/viewporter-server-protocol.h: wayland-scanner external/wayland-protocols/stable/viewporter/viewporter.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/viewporter-protocol.c: wayland-scanner external/wayland-protocols/stable/viewporter/viewporter.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/weston-debug-client-protocol.h: wayland-scanner external/weston/protocol/weston-debug.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/weston-debug-server-protocol.h: wayland-scanner external/weston/protocol/weston-debug.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/weston-debug-protocol.c: wayland-scanner external/weston/protocol/weston-debug.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/weston-desktop-shell-client-protocol.h: wayland-scanner external/weston/protocol/weston-desktop-shell.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/weston-desktop-shell-server-protocol.h: wayland-scanner external/weston/protocol/weston-desktop-shell.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/weston-desktop-shell-protocol.c: wayland-scanner external/weston/protocol/weston-desktop-shell.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/weston-screenshooter-client-protocol.h: wayland-scanner external/weston/protocol/weston-screenshooter.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/weston-screenshooter-server-protocol.h: wayland-scanner external/weston/protocol/weston-screenshooter.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/weston-screenshooter-protocol.c: wayland-scanner external/weston/protocol/weston-screenshooter.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/weston-content-protection-client-protocol.h: wayland-scanner external/weston/protocol/weston-content-protection.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/weston-content-protection-server-protocol.h: wayland-scanner external/weston/protocol/weston-content-protection.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/weston-content-protection-protocol.c: wayland-scanner external/weston/protocol/weston-content-protection.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/weston-test-client-protocol.h: wayland-scanner external/weston/protocol/weston-test.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/weston-test-server-protocol.h: wayland-scanner external/weston/protocol/weston-test.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/weston-test-protocol.c: wayland-scanner external/weston/protocol/weston-test.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/weston-direct-display-client-protocol.h: wayland-scanner external/weston/protocol/weston-direct-display.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/weston-direct-display-server-protocol.h: wayland-scanner external/weston/protocol/weston-direct-display.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/weston-direct-display-protocol.c: wayland-scanner external/weston/protocol/weston-direct-display.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/xdg-output-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/xdg-output/xdg-output-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/xdg-output-unstable-v1-server-protocol.h: wayland-scanner external/wayland-protocols/unstable/xdg-output/xdg-output-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/xdg-output-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/xdg-output/xdg-output-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/xdg-shell/xdg-shell-unstable-v6.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-server-protocol.h: wayland-scanner external/wayland-protocols/unstable/xdg-shell/xdg-shell-unstable-v6.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-protocol.c: wayland-scanner external/wayland-protocols/unstable/xdg-shell/xdg-shell-unstable-v6.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/weston/protocol/xdg-shell-client-protocol.h: wayland-scanner external/wayland-protocols/stable/xdg-shell/xdg-shell.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/weston/protocol/xdg-shell-server-protocol.h: wayland-scanner external/wayland-protocols/stable/xdg-shell/xdg-shell.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+build $BUILDROOT/weston/protocol/xdg-shell-protocol.c: wayland-scanner external/wayland-protocols/stable/xdg-shell/xdg-shell.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+
+build $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-protocol.o: cc $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-protocol.c
+build $BUILDROOT/weston/protocol/linux-explicit-synchronization-unstable-v1-protocol.o: cc $BUILDROOT/weston/protocol/linux-explicit-synchronization-unstable-v1-protocol.c
+build $BUILDROOT/weston/protocol/input-method-unstable-v1-protocol.o: cc $BUILDROOT/weston/protocol/input-method-unstable-v1-protocol.c
+build $BUILDROOT/weston/protocol/input-timestamps-unstable-v1-protocol.o: cc $BUILDROOT/weston/protocol/input-timestamps-unstable-v1-protocol.c
+build $BUILDROOT/weston/protocol/presentation-time-protocol.o: cc $BUILDROOT/weston/protocol/presentation-time-protocol.c
+build $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-protocol.o: cc $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-protocol.c
+build $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-protocol.o: cc $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-protocol.c
+build $BUILDROOT/weston/protocol/weston-screenshooter-protocol.o: cc $BUILDROOT/weston/protocol/weston-screenshooter-protocol.c
+build $BUILDROOT/weston/protocol/text-cursor-position-protocol.o: cc $BUILDROOT/weston/protocol/text-cursor-position-protocol.c
+build $BUILDROOT/weston/protocol/text-input-unstable-v1-protocol.o: cc $BUILDROOT/weston/protocol/text-input-unstable-v1-protocol.c
+build $BUILDROOT/weston/protocol/weston-content-protection-protocol.o: cc $BUILDROOT/weston/protocol/weston-content-protection-protocol.c
+build $BUILDROOT/weston/protocol/viewporter-protocol.o: cc $BUILDROOT/weston/protocol/viewporter-protocol.c
+build $BUILDROOT/weston/protocol/xdg-output-unstable-v1-protocol.o: cc $BUILDROOT/weston/protocol/xdg-output-unstable-v1-protocol.c
+build $BUILDROOT/weston/protocol/weston-debug-protocol.o: cc $BUILDROOT/weston/protocol/weston-debug-protocol.c
+build $BUILDROOT/weston/protocol/weston-direct-display-protocol.o: cc $BUILDROOT/weston/protocol/weston-direct-display-protocol.c
+
+build $BUILDROOT/weston/libweston/animation.o: cc external/weston/libweston/animation.c
+build $BUILDROOT/weston/libweston/bindings.o: cc external/weston/libweston/bindings.c
+build $BUILDROOT/weston/libweston/clipboard.o: cc external/weston/libweston/clipboard.c
+build $BUILDROOT/weston/libweston/color.o: cc external/weston/libweston/color.c
+build $BUILDROOT/weston/libweston/color-noop.o: cc external/weston/libweston/color-noop.c
+build $BUILDROOT/weston/libweston/compositor.o: cc external/weston/libweston/compositor.c | $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/viewporter-server-protocol.h $BUILDROOT/weston/protocol/presentation-time-server-protocol.h $BUILDROOT/weston/protocol/xdg-output-unstable-v1-server-protocol.h
+build $BUILDROOT/weston/libweston/content-protection.o: cc external/weston/libweston/content-protection.c | $BUILDROOT/weston/protocol/weston-content-protection-server-protocol.h
+build $BUILDROOT/weston/libweston/data-device.o: cc external/weston/libweston/data-device.c
+build $BUILDROOT/weston/libweston/drm-formats.o: cc external/weston/libweston/drm-formats.c
+build $BUILDROOT/weston/libweston/input.o: cc external/weston/libweston/input.c | $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/input-timestamps-unstable-v1-server-protocol.h
+build $BUILDROOT/weston/libweston/linux-dmabuf.o: cc external/weston/libweston/linux-dmabuf.c | $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-server-protocol.h
+build $BUILDROOT/weston/libweston/linux-explicit-synchronization.o: cc external/weston/libweston/linux-explicit-synchronization.c | $BUILDROOT/weston/protocol/linux-explicit-synchronization-unstable-v1-server-protocol.h
+build $BUILDROOT/weston/libweston/linux-sync-file.o: cc external/weston/libweston/linux-sync-file.c
+build $BUILDROOT/weston/libweston/log.o: cc external/weston/libweston/log.c
+build $BUILDROOT/weston/libweston/noop-renderer.o: cc external/weston/libweston/noop-renderer.c
+build $BUILDROOT/weston/libweston/pixel-formats.o: cc external/weston/libweston/pixel-formats.c
+build $BUILDROOT/weston/libweston/pixman-renderer.o: cc external/weston/libweston/pixman-renderer.c
+build $BUILDROOT/weston/libweston/plugin-registry.o: cc external/weston/libweston/plugin-registry.c
+build $BUILDROOT/weston/libweston/screenshooter.o: cc external/weston/libweston/screenshooter.c
+build $BUILDROOT/weston/libweston/timeline.o: cc external/weston/libweston/timeline.c
+build $BUILDROOT/weston/libweston/weston-log-wayland.o: cc external/weston/libweston/weston-log-wayland.c | $BUILDROOT/weston/protocol/weston-debug-server-protocol.h
+build $BUILDROOT/weston/libweston/weston-log-file.o: cc external/weston/libweston/weston-log-file.c
+build $BUILDROOT/weston/libweston/weston-log-flight-rec.o: cc external/weston/libweston/weston-log-flight-rec.c
+build $BUILDROOT/weston/libweston/weston-log.o: cc external/weston/libweston/weston-log.c
+build $BUILDROOT/weston/libweston/weston-direct-display.o: cc external/weston/libweston/weston-direct-display.c | $BUILDROOT/weston/protocol/weston-direct-display-server-protocol.h
+
+build $BUILDROOT/weston/shared/config-parser.o: cc external/weston/shared/config-parser.c
+build $BUILDROOT/weston/shared/option-parser.o: cc external/weston/shared/option-parser.c
+build $BUILDROOT/weston/shared/signal.o: cc external/weston/shared/signal.c
+build $BUILDROOT/weston/shared/file-util.o: cc external/weston/shared/file-util.c
+build $BUILDROOT/weston/shared/os-compatibility.o: cc external/weston/shared/os-compatibility.c
+build $BUILDROOT/weston/shared/xalloc.o: cc external/weston/shared/xalloc.c
+build $BUILDROOT/weston/shared/matrix.o: cc external/weston/shared/matrix.c
+
+build $BUILDROOT/weston/shared/libshared.a: ar $
+  $BUILDROOT/weston/shared/config-parser.o $
+  $BUILDROOT/weston/shared/option-parser.o $
+  $BUILDROOT/weston/shared/signal.o $
+  $BUILDROOT/weston/shared/file-util.o $
+  $BUILDROOT/weston/shared/os-compatibility.o $
+  $BUILDROOT/weston/shared/xalloc.o $
+
+build $BUILDROOT/weston/libweston-11.so: so $
+  $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-protocol.o $
+  $BUILDROOT/weston/protocol/linux-explicit-synchronization-unstable-v1-protocol.o $
+  $BUILDROOT/weston/protocol/input-method-unstable-v1-protocol.o $
+  $BUILDROOT/weston/protocol/input-timestamps-unstable-v1-protocol.o $
+  $BUILDROOT/weston/protocol/presentation-time-protocol.o $
+  $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-protocol.o $
+  $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-protocol.o $
+  $BUILDROOT/weston/protocol/weston-screenshooter-protocol.o $
+  $BUILDROOT/weston/protocol/text-cursor-position-protocol.o $
+  $BUILDROOT/weston/protocol/text-input-unstable-v1-protocol.o $
+  $BUILDROOT/weston/protocol/weston-content-protection-protocol.o $
+  $BUILDROOT/weston/protocol/viewporter-protocol.o $
+  $BUILDROOT/weston/protocol/xdg-output-unstable-v1-protocol.o $
+  $BUILDROOT/weston/protocol/weston-debug-protocol.o $
+  $BUILDROOT/weston/protocol/weston-direct-display-protocol.o $
+  $BUILDROOT/weston/libweston/animation.o $
+  $BUILDROOT/weston/libweston/bindings.o $
+  $BUILDROOT/weston/libweston/clipboard.o $
+  $BUILDROOT/weston/libweston/color.o $
+  $BUILDROOT/weston/libweston/color-noop.o $
+  $BUILDROOT/weston/libweston/compositor.o $
+  $BUILDROOT/weston/libweston/content-protection.o $
+  $BUILDROOT/weston/libweston/data-device.o $
+  $BUILDROOT/weston/libweston/drm-formats.o $
+  $BUILDROOT/weston/libweston/input.o $
+  $BUILDROOT/weston/libweston/linux-dmabuf.o $
+  $BUILDROOT/weston/libweston/linux-explicit-synchronization.o $
+  $BUILDROOT/weston/libweston/linux-sync-file.o $
+  $BUILDROOT/weston/libweston/log.o $
+  $BUILDROOT/weston/libweston/noop-renderer.o $
+  $BUILDROOT/weston/libweston/pixel-formats.o $
+  $BUILDROOT/weston/libweston/pixman-renderer.o $
+  $BUILDROOT/weston/libweston/plugin-registry.o $
+  $BUILDROOT/weston/libweston/screenshooter.o $
+  $BUILDROOT/weston/libweston/timeline.o $
+  $BUILDROOT/weston/libweston/weston-log-wayland.o $
+  $BUILDROOT/weston/libweston/weston-log-file.o $
+  $BUILDROOT/weston/libweston/weston-log-flight-rec.o $
+  $BUILDROOT/weston/libweston/weston-log.o $
+  $BUILDROOT/weston/libweston/weston-direct-display.o $
+  $BUILDROOT/weston/shared/matrix.o $
+  | $
+  $SYSROOT/lib/libdl.a $
+  $SYSROOT/lib/libpixman-1.so $
+  $SYSROOT/lib/libwayland-client.so $
+  $SYSROOT/lib/libwayland-server.so $
+  $BUILDROOT/weston/shared/libshared.a
+  libs = -lm -ldl -Wl,--whole-archive $BUILDROOT/weston/shared/libshared.a -Wl,--no-whole-archive $
+    -lwayland-client -lwayland-server -lpixman-1
+
+#  | $
+#  $SYSROOT/lib/libEGL.so $
+#  $SYSROOT/lib/libdl.a $
+#  $SYSROOT/lib/libdrm.so $
+#  $SYSROOT/lib/libpixman-1.so $
+#  $SYSROOT/lib/libwayland-client.so $
+#  $SYSROOT/lib/libwayland-server.so $
+#  $SYSROOT/lib/libxkbcommon.so $
+#  $BUILDROOT/weston/shared/libshared.a
+#  libs = -lm -ldl -Wl,--whole-archive $BUILDROOT/weston/shared/libshared.a -Wl,--no-whole-archive $
+#    -lwayland-client -lwayland-server -lpixman-1 -ldrm -lxkbcommon -lEGL

@@ -28,7 +28,7 @@ rule cxx
   description = CXX $out
 
 rule ar
-  command = $AR rcs $out $in
+  command = $AR csrD $out $in
   description = AR $out
 
 rule so
@@ -60,7 +60,7 @@ rule hostcxx
   description = [HOST] CXX $out
 
 rule hostar
-  command = $HOSTAR rcs $out $in
+  command = $HOSTAR csrD $out $in
   description = [HOST] AR $out
 
 rule hostld
@@ -77,6 +77,13 @@ rule protoc
 
 subninja build/kmod.ninja
 build out/tc/host/bin/depmod: copy $BUILDROOT/_host/kmod/depmod
+
+subninja build/wayland_host.ninja
+build out/tc/host/bin/wayland-scanner: copy $BUILDROOT/_host/wayland/wayland-scanner
+rule wayland-scanner
+  command = out/tc/host/bin/wayland-scanner -s $type $in $out
+  generator = out/tc/host/bin/wayland-scanner
+  description = [HOST] WAYLAND SCANNER $out
 
 
 subninja build/libbase.ninja
@@ -107,6 +114,7 @@ build $SYSROOT/lib/liblog.so: copy $BUILDROOT/liblog/liblog.so
 subninja build/libmodprobe.ninja
 
 subninja build/pixman.ninja
+build $SYSROOT/lib/libpixman-1.so: copy $BUILDROOT/pixman/libpixman-1.so
 
 subninja build/libprocessgroup.ninja
 build $SYSROOT/lib/libprocessgroup.so: copy $BUILDROOT/libprocessgroup/libprocessgroup.so
@@ -151,6 +159,10 @@ subninja build/toybox.ninja
 build $BUILDROOT/system/system/bin/toybox: copy $BUILDROOT/toybox/toybox
 
 subninja build/wayland.ninja
+build $SYSROOT/lib/libwayland-client.so: copy $BUILDROOT/wayland/libwayland-client.so
+build $SYSROOT/lib/libwayland-server.so: copy $BUILDROOT/wayland/libwayland-server.so
+
+subninja build/weston.ninja
 
 subninja build/zlib.ninja
 build $SYSROOT/lib/libz.so: copy $BUILDROOT/zlib/libz.so

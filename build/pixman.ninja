@@ -14,7 +14,7 @@ cflags = $
   -Wno-expansion-to-defined $
   -Wno-unused-function $
 
-includes = -Ibuild/pixman
+includes = -Ibuild/pixman -Ibuild/pixman/src
 
 libs = -lm -pthread
 
