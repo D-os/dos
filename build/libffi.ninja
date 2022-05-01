@@ -1,0 +1,46 @@
+cflags = $
+  -Wall $
+  -Werror $
+  -Wno-error=incompatible-pointer-types $
+  -Wno-incompatible-pointer-types $
+  -Wno-deprecated-declarations $
+  -Wno-missing-field-initializers $
+  -Wno-null-pointer-arithmetic $
+  -Wno-pointer-arith $
+  -Wno-sign-compare $
+  -Wno-unused-parameter $
+  -Wno-unused-result $
+  -DHAVE_AS_X86_PCREL $
+  -DHAVE_AS_ASCII_PSEUDO_OP $
+  -Wno-unused-label $
+
+includes = -Iexternal/libffi/include -Ibuild/libffi -I$BUILDROOT/libffi
+
+build $BUILDROOT/libffi/closures.o: cc external/libffi/src/closures.c | $BUILDROOT/libffi/ffi_gen.h
+build $BUILDROOT/libffi/debug.o: cc external/libffi/src/debug.c | $BUILDROOT/libffi/ffi_gen.h
+build $BUILDROOT/libffi/java_raw_api.o: cc external/libffi/src/java_raw_api.c | $BUILDROOT/libffi/ffi_gen.h
+build $BUILDROOT/libffi/prep_cif.o: cc external/libffi/src/prep_cif.c | $BUILDROOT/libffi/ffi_gen.h
+build $BUILDROOT/libffi/raw_api.o: cc external/libffi/src/raw_api.c | $BUILDROOT/libffi/ffi_gen.h
+build $BUILDROOT/libffi/types.o: cc external/libffi/src/types.c | $BUILDROOT/libffi/ffi_gen.h
+build $BUILDROOT/libffi/x86/ffi64.o: cc external/libffi/src/x86/ffi64.c | $BUILDROOT/libffi/ffi_gen.h
+build $BUILDROOT/libffi/x86/ffiw64.o: cc external/libffi/src/x86/ffiw64.c | $BUILDROOT/libffi/ffi_gen.h
+build $BUILDROOT/libffi/x86/unix64.o: cc external/libffi/src/x86/unix64.S | $BUILDROOT/libffi/ffi_gen.h
+build $BUILDROOT/libffi/x86/win64.o: cc external/libffi/src/x86/win64.S | $BUILDROOT/libffi/ffi_gen.h
+
+build $BUILDROOT/libffi/libffi.a: ar $
+  $BUILDROOT/libffi/closures.o $
+  $BUILDROOT/libffi/debug.o $
+  $BUILDROOT/libffi/java_raw_api.o $
+  $BUILDROOT/libffi/prep_cif.o $
+  $BUILDROOT/libffi/raw_api.o $
+  $BUILDROOT/libffi/types.o $
+  $BUILDROOT/libffi/x86/ffi64.o $
+  $BUILDROOT/libffi/x86/ffiw64.o $
+  $BUILDROOT/libffi/x86/unix64.o $
+  $BUILDROOT/libffi/x86/win64.o $
+
+rule gen_ffi_header
+  command = build/libffi/gen_ffi_header.sh < $in > $out
+  description = [HOST] GEN $out
+
+build $BUILDROOT/libffi/ffi_gen.h: gen_ffi_header external/libffi/include/ffi.h.in

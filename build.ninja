@@ -94,6 +94,8 @@ build $SYSROOT/lib/libext2_uuid.so: copy $BUILDROOT/libext2_uuid/libext2_uuid.so
 subninja build/libext4_utils.ninja
 build $SYSROOT/lib/libext4_utils.so: copy $BUILDROOT/ext4_utils/libext4_utils.so
 
+subninja build/libffi.ninja
+
 subninja build/liblog.ninja
 build $SYSROOT/lib/liblog.so: copy $BUILDROOT/liblog/liblog.so
 
