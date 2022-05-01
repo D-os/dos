@@ -81,7 +81,10 @@
 	url = https://github.com/wayland-project/weston.git
 [submodule "external/wayland"]
 	path = external/wayland
-	url = git@github.com:wayland-project/wayland.git
+	url = https://github.com/wayland-project/wayland.git
 [submodule "external/libffi"]
 	path = external/libffi
-	url = git@github.com:libffi/libffi.git
+	url = https://github.com/libffi/libffi.git
+[submodule "external/pixman"]
+	path = external/pixman
+	url = https://github.com/freedesktop/pixman.git
