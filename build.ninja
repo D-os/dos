@@ -106,6 +106,8 @@ build $SYSROOT/lib/liblog.so: copy $BUILDROOT/liblog/liblog.so
 
 subninja build/libmodprobe.ninja
 
+subninja build/pixman.ninja
+
 subninja build/libprocessgroup.ninja
 build $SYSROOT/lib/libprocessgroup.so: copy $BUILDROOT/libprocessgroup/libprocessgroup.so
 

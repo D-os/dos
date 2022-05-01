@@ -1,0 +1,93 @@
+cflags = $
+  -DHAVE_CONFIG_H $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -O2 $
+  -Wdeclaration-after-statement $
+  -fno-strict-aliasing $
+  -fvisibility=hidden $
+  -Wundef $
+  -ftrapping-math $
+  -Wno-unused-local-typedefs $
+  -Wno-unused-const-variable $
+  -Wno-expansion-to-defined $
+  -Wno-unused-function $
+
+includes = -Ibuild/pixman
+
+libs = -lm -pthread
+
+build $BUILDROOT/pixman/pixman.o: cc external/pixman/pixman/pixman.c
+build $BUILDROOT/pixman/pixman-access.o: cc external/pixman/pixman/pixman-access.c
+build $BUILDROOT/pixman/pixman-access-accessors.o: cc external/pixman/pixman/pixman-access-accessors.c
+build $BUILDROOT/pixman/pixman-bits-image.o: cc external/pixman/pixman/pixman-bits-image.c
+build $BUILDROOT/pixman/pixman-combine32.o: cc external/pixman/pixman/pixman-combine32.c
+build $BUILDROOT/pixman/pixman-combine-float.o: cc external/pixman/pixman/pixman-combine-float.c
+build $BUILDROOT/pixman/pixman-conical-gradient.o: cc external/pixman/pixman/pixman-conical-gradient.c
+build $BUILDROOT/pixman/pixman-filter.o: cc external/pixman/pixman/pixman-filter.c
+build $BUILDROOT/pixman/pixman-x86.o: cc external/pixman/pixman/pixman-x86.c
+build $BUILDROOT/pixman/pixman-mips.o: cc external/pixman/pixman/pixman-mips.c
+build $BUILDROOT/pixman/pixman-arm.o: cc external/pixman/pixman/pixman-arm.c
+build $BUILDROOT/pixman/pixman-ppc.o: cc external/pixman/pixman/pixman-ppc.c
+build $BUILDROOT/pixman/pixman-edge.o: cc external/pixman/pixman/pixman-edge.c
+build $BUILDROOT/pixman/pixman-edge-accessors.o: cc external/pixman/pixman/pixman-edge-accessors.c
+build $BUILDROOT/pixman/pixman-fast-path.o: cc external/pixman/pixman/pixman-fast-path.c
+build $BUILDROOT/pixman/pixman-glyph.o: cc external/pixman/pixman/pixman-glyph.c
+build $BUILDROOT/pixman/pixman-general.o: cc external/pixman/pixman/pixman-general.c
+build $BUILDROOT/pixman/pixman-gradient-walker.o: cc external/pixman/pixman/pixman-gradient-walker.c
+build $BUILDROOT/pixman/pixman-image.o: cc external/pixman/pixman/pixman-image.c
+build $BUILDROOT/pixman/pixman-implementation.o: cc external/pixman/pixman/pixman-implementation.c
+build $BUILDROOT/pixman/pixman-linear-gradient.o: cc external/pixman/pixman/pixman-linear-gradient.c
+build $BUILDROOT/pixman/pixman-matrix.o: cc external/pixman/pixman/pixman-matrix.c
+build $BUILDROOT/pixman/pixman-noop.o: cc external/pixman/pixman/pixman-noop.c
+build $BUILDROOT/pixman/pixman-radial-gradient.o: cc external/pixman/pixman/pixman-radial-gradient.c
+build $BUILDROOT/pixman/pixman-region16.o: cc external/pixman/pixman/pixman-region16.c
+build $BUILDROOT/pixman/pixman-region32.o: cc external/pixman/pixman/pixman-region32.c
+build $BUILDROOT/pixman/pixman-solid-fill.o: cc external/pixman/pixman/pixman-solid-fill.c
+build $BUILDROOT/pixman/pixman-timer.o: cc external/pixman/pixman/pixman-timer.c
+build $BUILDROOT/pixman/pixman-trap.o: cc external/pixman/pixman/pixman-trap.c
+build $BUILDROOT/pixman/pixman-utils.o: cc external/pixman/pixman/pixman-utils.c
+
+build $BUILDROOT/pixman/pixman-mmx.o: cc external/pixman/pixman/pixman-mmx.c
+  cflags = $cflags -mmmx -Winline
+build $BUILDROOT/pixman/pixman-sse2.o: cc external/pixman/pixman/pixman-sse2.c
+  cflags = $cflags -msse2 -Winline
+build $BUILDROOT/pixman/pixman-ssse3.o: cc external/pixman/pixman/pixman-ssse3.c
+  cflags = $cflags -mssse3 -Winline
+
+build $BUILDROOT/pixman/libpixman-1.so: so $
+  $BUILDROOT/pixman/pixman.o $
+  $BUILDROOT/pixman/pixman-access.o $
+  $BUILDROOT/pixman/pixman-access-accessors.o $
+  $BUILDROOT/pixman/pixman-bits-image.o $
+  $BUILDROOT/pixman/pixman-combine32.o $
+  $BUILDROOT/pixman/pixman-combine-float.o $
+  $BUILDROOT/pixman/pixman-conical-gradient.o $
+  $BUILDROOT/pixman/pixman-filter.o $
+  $BUILDROOT/pixman/pixman-x86.o $
+  $BUILDROOT/pixman/pixman-mips.o $
+  $BUILDROOT/pixman/pixman-arm.o $
+  $BUILDROOT/pixman/pixman-ppc.o $
+  $BUILDROOT/pixman/pixman-edge.o $
+  $BUILDROOT/pixman/pixman-edge-accessors.o $
+  $BUILDROOT/pixman/pixman-fast-path.o $
+  $BUILDROOT/pixman/pixman-glyph.o $
+  $BUILDROOT/pixman/pixman-general.o $
+  $BUILDROOT/pixman/pixman-gradient-walker.o $
+  $BUILDROOT/pixman/pixman-image.o $
+  $BUILDROOT/pixman/pixman-implementation.o $
+  $BUILDROOT/pixman/pixman-linear-gradient.o $
+  $BUILDROOT/pixman/pixman-matrix.o $
+  $BUILDROOT/pixman/pixman-noop.o $
+  $BUILDROOT/pixman/pixman-radial-gradient.o $
+  $BUILDROOT/pixman/pixman-region16.o $
+  $BUILDROOT/pixman/pixman-region32.o $
+  $BUILDROOT/pixman/pixman-solid-fill.o $
+  $BUILDROOT/pixman/pixman-timer.o $
+  $BUILDROOT/pixman/pixman-trap.o $
+  $BUILDROOT/pixman/pixman-utils.o $
+  $BUILDROOT/pixman/pixman-mmx.o $
+  $BUILDROOT/pixman/pixman-sse2.o $
+  $BUILDROOT/pixman/pixman-ssse3.o $
+
