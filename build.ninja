@@ -69,6 +69,7 @@ build out/tc/host/bin/protoc: copy $BUILDROOT/_host/protobuf/aprotoc
 rule protoc
   command = out/tc/host/bin/protoc --cpp_out=lite:$BUILDROOT/init/proto --dependency_out=$out -I . $in #&& out/soong/host/linux-x86/bin/dep_fixer out/soong/.intermediates/system/core/init/host_init_verifier/linux_glibc_x86_64/gen/proto/system/core/init/subcontext.pb.d
   generator = out/tc/host/bin/protoc
+  description = [HOST] PROTOC $out
 
 subninja build/kmod.ninja
 build out/tc/host/bin/depmod: copy $BUILDROOT/_host/kmod/depmod
