@@ -1,0 +1,90 @@
+cflags = $
+  -fdiagnostics-color=always $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -Wextra $
+  -std=c99 $
+  -O2 $
+  -D_POSIX_C_SOURCE=200809L $
+  -Wno-unused-parameter $
+  -Wstrict-prototypes $
+  -Wmissing-prototypes $
+  -fvisibility=hidden $
+  -Wno-sign-compare
+
+includes = -Ibuild/wayland/src
+
+build $BUILDROOT/_host/wayland/wayland-util.o: hostcc external/wayland/src/wayland-util.c
+build $BUILDROOT/_host/wayland/scanner.o: hostcc external/wayland/src/scanner.c
+  cflags = $cflags -include build/wayland/config.h
+
+build $BUILDROOT/_host/wayland/wayland-scanner: hostld $
+  $BUILDROOT/_host/wayland/scanner.o $
+  $BUILDROOT/_host/wayland/wayland-util.o
+  ldflags = -lexpat -lm
+
+rule scanner
+  command = $BUILDROOT/_host/wayland/wayland-scanner -s $type $in $out
+  generator = $BUILDROOT/_host/wayland/wayland-scanner
+  description = [HOST] WAYLAND SCANNER $out
+
+build $BUILDROOT/wayland/wayland-server-protocol.h: scanner external/wayland/protocol/wayland.xml | $BUILDROOT/_host/wayland/wayland-scanner
+  type = server-header
+build $BUILDROOT/wayland/wayland-server-protocol-core.h: scanner external/wayland/protocol/wayland.xml | $BUILDROOT/_host/wayland/wayland-scanner
+  type = server-header -c
+build $BUILDROOT/wayland/wayland-client-protocol.h: scanner external/wayland/protocol/wayland.xml | $BUILDROOT/_host/wayland/wayland-scanner
+  type = client-header
+build $BUILDROOT/wayland/wayland-client-protocol-core.h: scanner external/wayland/protocol/wayland.xml | $BUILDROOT/_host/wayland/wayland-scanner
+  type = client-header -c
+build $BUILDROOT/wayland/wayland-protocol.c: scanner external/wayland/protocol/wayland.xml | $BUILDROOT/_host/wayland/wayland-scanner
+  type = public-code
+
+build $BUILDROOT/wayland/wayland-protocol.o: cc $BUILDROOT/wayland/wayland-protocol.c || $BUILDROOT/wayland/wayland-server-protocol-core.h $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/wayland/connection.o: cc external/wayland/src/connection.c
+build $BUILDROOT/wayland/wayland-os.o: cc external/wayland/src/wayland-os.c
+build $BUILDROOT/wayland/wayland-util.o: cc external/wayland/src/wayland-util.c
+build $BUILDROOT/wayland/wayland-server.o: cc external/wayland/src/wayland-server.c
+build $BUILDROOT/wayland/wayland-shm.o: cc external/wayland/src/wayland-shm.c
+build $BUILDROOT/wayland/event-loop.o: cc external/wayland/src/event-loop.c
+build $BUILDROOT/wayland/wayland-client.o: cc external/wayland/src/wayland-client.c
+
+build $BUILDROOT/wayland/libwayland-private.a: ar $
+  $BUILDROOT/wayland/connection.o $
+  $BUILDROOT/wayland/wayland-os.o $
+
+build $BUILDROOT/wayland/libwayland-util.a: ar $
+  $BUILDROOT/wayland/wayland-util.o $
+
+build $BUILDROOT/wayland/libwayland-server.so: so $
+  $BUILDROOT/wayland/wayland-protocol.o $
+  $BUILDROOT/wayland/wayland-server.o $
+  $BUILDROOT/wayland/wayland-shm.o $
+  $BUILDROOT/wayland/event-loop.o $
+  $BUILDROOT/wayland/libwayland-private.a $
+  $BUILDROOT/wayland/libwayland-util.a $
+  $BUILDROOT/libffi/libffi.a
+  libs = -lm -pthread -lrt
+
+build $BUILDROOT/wayland/libwayland-client.so: so $
+  $BUILDROOT/wayland/wayland-protocol.o $
+  $BUILDROOT/wayland/wayland-client.o $
+  $BUILDROOT/wayland/libwayland-private.a $
+  $BUILDROOT/wayland/libwayland-util.a $
+  $BUILDROOT/libffi/libffi.a
+  libs = -lm -pthread -lrt
+
+build $BUILDROOT/wayland/wayland-cursor.o: cc external/wayland/cursor/wayland-cursor.c
+build $BUILDROOT/wayland/os-compatibility.o: cc external/wayland/cursor/os-compatibility.c
+build $BUILDROOT/wayland/xcursor.o: cc external/wayland/cursor/xcursor.c
+
+build $BUILDROOT/wayland/libwayland-cursor.so: so $
+  $BUILDROOT/wayland/wayland-cursor.o $
+  $BUILDROOT/wayland/os-compatibility.o $
+  $BUILDROOT/wayland/xcursor.o
+  libs = $BUILDROOT/wayland/libwayland-client.so
+
+build $BUILDROOT/wayland/wayland-egl.o: cc external/wayland/egl/wayland-egl.c
+
+build $BUILDROOT/wayland/libwayland-egl.so: so $
+  $BUILDROOT/wayland/wayland-egl.o
