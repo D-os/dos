@@ -101,6 +101,7 @@ subninja build/libcutils.ninja
 build $SYSROOT/lib/libcutils.so: copy $BUILDROOT/libcutils/libcutils.so
 
 subninja build/libevdev.ninja
+build $SYSROOT/lib/libevdev.so: copy $BUILDROOT/libevdev/libevdev.so
 
 subninja build/libext2_uuid.ninja
 build $SYSROOT/lib/libext2_uuid.so: copy $BUILDROOT/libext2_uuid/libext2_uuid.so
@@ -131,6 +132,7 @@ subninja build/libsystemproperties.ninja
 build $SYSROOT/lib/libsystemproperties.so: copy $BUILDROOT/libsystemproperties/libsystemproperties.so
 
 subninja build/libxkbcommon.ninja
+build $SYSROOT/lib/libxkbcommon.so: copy $BUILDROOT/libxkbcommon/libxkbcommon.so
 
 subninja build/boringssl.ninja
 build $SYSROOT/lib/libcrypto.so: copy $BUILDROOT/boringssl/libcrypto.so

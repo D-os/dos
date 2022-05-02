@@ -10,9 +10,9 @@ cflags = $
   -fvisibility=hidden $
   -Wno-unused-but-set-variable $
 
-includes = -Iexternal/weston/include -Iexternal/weston -Ibuild/weston -I$BUILDROOT/protocol $
+includes = -Iexternal/weston/include -Iexternal/weston -Ibuild/weston -I$BUILDROOT/weston/protocol $
   -Iexternal/pixman/pixman -Ibuild/pixman/src $
-  -Iexternal/libdrm/include/drm
+  -Iexternal/libdrm/include/drm -Iexternal/libevdev
 #libs = -lm -ldl
 
 build $BUILDROOT/weston/protocol/input-method-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/input-method/input-method-unstable-v1.xml | out/tc/host/bin/wayland-scanner
@@ -259,9 +259,10 @@ build $BUILDROOT/weston/libweston-11.so: so $
   $SYSROOT/lib/libpixman-1.so $
   $SYSROOT/lib/libwayland-client.so $
   $SYSROOT/lib/libwayland-server.so $
+  $SYSROOT/lib/libxkbcommon.so $
   $BUILDROOT/weston/shared/libshared.a
   libs = -lm -ldl -Wl,--whole-archive $BUILDROOT/weston/shared/libshared.a -Wl,--no-whole-archive $
-    -lwayland-client -lwayland-server -lpixman-1
+    -lwayland-client -lwayland-server -lpixman-1 -lxkbcommon
 
 #  | $
 #  $SYSROOT/lib/libEGL.so $
@@ -274,3 +275,60 @@ build $BUILDROOT/weston/libweston-11.so: so $
 #  $BUILDROOT/weston/shared/libshared.a
 #  libs = -lm -ldl -Wl,--whole-archive $BUILDROOT/weston/shared/libshared.a -Wl,--no-whole-archive $
 #    -lwayland-client -lwayland-server -lpixman-1 -ldrm -lxkbcommon -lEGL
+
+build $BUILDROOT/weston/compositor/main.o: cc external/weston/compositor/main.c
+build $BUILDROOT/weston/compositor/text-backend.o: cc external/weston/compositor/text-backend.c | $BUILDROOT/weston/protocol/text-input-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/input-method-unstable-v1-server-protocol.h
+build $BUILDROOT/weston/compositor/weston-screenshooter.o: cc external/weston/compositor/weston-screenshooter.c | $BUILDROOT/weston/protocol/weston-screenshooter-server-protocol.h
+
+build $BUILDROOT/weston/libexec_weston.so: so $
+  $BUILDROOT/weston/protocol/text-input-unstable-v1-protocol.o $
+  $BUILDROOT/weston/protocol/input-method-unstable-v1-protocol.o $
+  $BUILDROOT/weston/protocol/weston-screenshooter-protocol.o $
+  $BUILDROOT/weston/compositor/main.o $
+  $BUILDROOT/weston/compositor/text-backend.o $
+  $BUILDROOT/weston/compositor/weston-screenshooter.o $
+  | $
+  $SYSROOT/lib/libdl.a $
+  $SYSROOT/lib/libevdev.so $
+  $SYSROOT/lib/libpixman-1.so $
+  $SYSROOT/lib/libwayland-client.so $
+  $SYSROOT/lib/libwayland-server.so $
+  $SYSROOT/lib/libxkbcommon.so $
+  $BUILDROOT/weston/libweston-11.so $
+  $BUILDROOT/weston/shared/libshared.a
+  libs = -lweston-11 -lwayland-client -lwayland-server -lpixman-1 -lxkbcommon -levdev
+
+#  | $
+#  $SYSROOT/lib/libdl.a $
+#  $SYSROOT/lib/libevdev.so $
+#  $SYSROOT/lib/libinput.so $
+#  $SYSROOT/lib/libpixman-1.so $
+#  $SYSROOT/lib/libwayland-client.so $
+#  $SYSROOT/lib/libwayland-server.so $
+#  $SYSROOT/lib/libxkbcommon.so $
+#  $BUILDROOT/weston/libweston-11.so $
+#  $BUILDROOT/weston/shared/libshared.a
+#  libs = -lweston-11 -lwayland-client -lwayland-server -lpixman-1 -lxkbcommon -linput -levdev
+
+
+build $BUILDROOT/weston/compositor/executable.o: cc external/weston/compositor/executable.c
+# ARGS = -Icompositor/weston.p -Icompositor -I../compositor -I. -I.. -Iinclude -I../include -I/usr/include/pixman-1 -fdiagnostics-color=always -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wextra -Wpedantic -std=gnu99 -g -Wmissing-prototypes -Wno-unused-parameter -Wno-shift-negative-value -Wno-missing-field-initializers -Wno-pedantic -Wundef -fvisibility=hidden
+
+build $BUILDROOT/weston/weston: link $
+  $BUILDROOT/weston/compositor/executable.o $
+  | $
+  $SYSROOT/lib/libpixman-1.so $
+  $SYSROOT/lib/libwayland-server.so $
+  $SYSROOT/lib/libxkbcommon.so $
+  $BUILDROOT/weston/libexec_weston.so $
+  $BUILDROOT/weston/libweston-11.so
+  libs = -Wl,-rpath-link,$BUILDROOT/weston $BUILDROOT/weston/libexec_weston.so $BUILDROOT/weston/libweston-11.so $
+    -lwayland-server -lpixman-1 -lxkbcommon
+
+#  | $
+#  $SYSROOT/lib/libpixman-1.so $
+#  $SYSROOT/lib/libwayland-server.so $
+#  $SYSROOT/lib/libxkbcommon.so $
+#  $BUILDROOT/weston/libexec_weston.so $
+#  $BUILDROOT/weston/libweston-11.so
+#  libs = -lwayland-server -lpixman-1 -lxkbcommon
