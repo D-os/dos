@@ -100,6 +100,8 @@ subninja build/libcgrouprc_format.ninja
 subninja build/libcutils.ninja
 build $SYSROOT/lib/libcutils.so: copy $BUILDROOT/libcutils/libcutils.so
 
+subninja build/libevdev.ninja
+
 subninja build/libext2_uuid.ninja
 build $SYSROOT/lib/libext2_uuid.so: copy $BUILDROOT/libext2_uuid/libext2_uuid.so
 
@@ -112,9 +114,6 @@ subninja build/liblog.ninja
 build $SYSROOT/lib/liblog.so: copy $BUILDROOT/liblog/liblog.so
 
 subninja build/libmodprobe.ninja
-
-subninja build/pixman.ninja
-build $SYSROOT/lib/libpixman-1.so: copy $BUILDROOT/pixman/libpixman-1.so
 
 subninja build/libprocessgroup.ninja
 build $SYSROOT/lib/libprocessgroup.so: copy $BUILDROOT/libprocessgroup/libprocessgroup.so
@@ -131,9 +130,6 @@ subninja build/libpropertyinfoserializer.ninja
 subninja build/libsystemproperties.ninja
 build $SYSROOT/lib/libsystemproperties.so: copy $BUILDROOT/libsystemproperties/libsystemproperties.so
 
-subninja build/logwrapper.ninja
-build $SYSROOT/lib/liblogwrap.so: copy $BUILDROOT/logwrapper/liblogwrap.so
-
 subninja build/boringssl.ninja
 build $SYSROOT/lib/libcrypto.so: copy $BUILDROOT/boringssl/libcrypto.so
 
@@ -145,7 +141,13 @@ build $SYSROOT/bin/init: copy $BUILDROOT/init/obj/init
 
 subninja build/jsoncpp.ninja
 
+subninja build/logwrapper.ninja
+build $SYSROOT/lib/liblogwrap.so: copy $BUILDROOT/logwrapper/liblogwrap.so
+
 subninja build/mksh.ninja
+
+subninja build/pixman.ninja
+build $SYSROOT/lib/libpixman-1.so: copy $BUILDROOT/pixman/libpixman-1.so
 
 subninja build/protobuf.ninja
 

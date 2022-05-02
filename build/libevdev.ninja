@@ -1,0 +1,23 @@
+cflags = $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -Wextra $
+  -std=gnu99 $
+  -Wno-unused-parameter $
+  -fvisibility=hidden $
+  -Wmissing-prototypes $
+  -Wstrict-prototypes $
+
+includes = -Iexternal/libevdev/include -Iexternal/libevdev -Ibuild/libevdev
+libs = -lrt
+
+build $BUILDROOT/libevdev/libevdev/libevdev-uinput.o: cc external/libevdev/libevdev/libevdev-uinput.c
+build $BUILDROOT/libevdev/libevdev/libevdev.o: cc external/libevdev/libevdev/libevdev.c
+build $BUILDROOT/libevdev/libevdev/libevdev-names.o: cc external/libevdev/libevdev/libevdev-names.c
+
+build $BUILDROOT/libevdev/libevdev.so: so $
+  $BUILDROOT/libevdev/libevdev/libevdev-uinput.o $
+  $BUILDROOT/libevdev/libevdev/libevdev.o $
+  $BUILDROOT/libevdev/libevdev/libevdev-names.o $
+
