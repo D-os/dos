@@ -97,3 +97,6 @@
 [submodule "external/libevdev"]
 	path = external/libevdev
 	url = https://github.com/freedesktop/libevdev.git
+[submodule "external/libxkbcommon"]
+	path = external/libxkbcommon
+	url = https://github.com/xkbcommon/libxkbcommon.git
