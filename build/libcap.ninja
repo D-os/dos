@@ -25,7 +25,9 @@ rule generate_cap_names_list
 
 build $BUILDROOT/libcap/cap_names.list.h: generate_cap_names_list out/tc/target/${TARGET}/include/linux/capability.h
 
-build $BUILDROOT/libcap/_makenames: hostcc external/libcap/libcap/_makenames.c | $BUILDROOT/libcap/cap_names.list.h
+build $BUILDROOT/libcap/_makenames.o: hostcc external/libcap/libcap/_makenames.c | $BUILDROOT/libcap/cap_names.list.h
+
+build $BUILDROOT/libcap/_makenames: hostld $BUILDROOT/libcap/_makenames.o
 
 rule makenames
   command = $BUILDROOT/libcap/_makenames > $out

@@ -51,6 +51,10 @@ rule copy
   command = mkdir -p $$(dirname $out) && cp -f $in $out
   description = COPY $out <- $in
 
+rule symlink
+  command = ln -sf $target $out
+  description = SYMLINK $out -> $target
+
 rule hostcc
   command = $HOSTCC -fPIC -g $cflags $includes -c $in -o $out
   description = [HOST] CC $out

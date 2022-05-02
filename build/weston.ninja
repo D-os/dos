@@ -296,7 +296,8 @@ build $BUILDROOT/weston/libexec_weston.so: so $
   $SYSROOT/lib/libxkbcommon.so $
   $BUILDROOT/weston/libweston-11.so $
   $BUILDROOT/weston/shared/libshared.a
-  libs = -lweston-11 -lwayland-client -lwayland-server -lpixman-1 -lxkbcommon -levdev
+  libs = -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
+    -lwayland-client -lwayland-server -lpixman-1 -lxkbcommon -levdev
 
 #  | $
 #  $SYSROOT/lib/libdl.a $
@@ -322,7 +323,7 @@ build $BUILDROOT/weston/weston: link $
   $SYSROOT/lib/libxkbcommon.so $
   $BUILDROOT/weston/libexec_weston.so $
   $BUILDROOT/weston/libweston-11.so
-  libs = -Wl,-rpath-link,$BUILDROOT/weston $BUILDROOT/weston/libexec_weston.so $BUILDROOT/weston/libweston-11.so $
+  libs = -Wl,-rpath,/system/lib -Wl,-rpath,/system/lib/weston $BUILDROOT/weston/libexec_weston.so $BUILDROOT/weston/libweston-11.so $
     -lwayland-server -lpixman-1 -lxkbcommon
 
 #  | $

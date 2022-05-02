@@ -381,10 +381,6 @@ build $BUILDROOT/toybox/toybox: link $
   $SYSROOT/lib/liblog.so $
   $SYSROOT/lib/libprocessgroup.so $
 
-rule symlink
-  command = ln -sf $target $out
-  description = SYMLINK $out -> $target
-
 build $SYSTEMDIR/bin/[: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/acpi: symlink

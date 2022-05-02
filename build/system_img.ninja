@@ -201,6 +201,10 @@ build $BUILDROOT/system.img: mkfs $SYSTEMDIR | $
   $SYSTEMDIR/bin/xxd $
   $SYSTEMDIR/bin/yes $
   $SYSTEMDIR/bin/zcat $
+  $SYSTEMDIR/bin/ldd $
+  $SYSTEMDIR/system/bin/weston $
+  $SYSTEMDIR/system/lib/libweston-11.so $
+  $SYSTEMDIR/system/lib/weston/libexec_weston.so $
 
 rule mkdir
   command = mkdir -p $out
@@ -224,6 +228,9 @@ build $SYSTEMDIR/second_stage_resources: mkdir
 build $SYSTEMDIR/apex: mkdir
 build $SYSTEMDIR/linkerconfig: mkdir
 
+build $SYSTEMDIR/bin/ldd: symlink
+  target = ../lib/ld-musl-x86_64.so.1
+
 build $SYSTEMDIR/lib: sync | $SYSROOT/lib
   source = $SYSROOT/lib/*.so*
 build $SYSTEMDIR/lib/modules: sync | $SYSROOT/lib/modules
@@ -238,3 +245,6 @@ build $SYSTEMDIR/etc/passwd: copy build/conf/passwd
 build $SYSTEMDIR/etc/group: copy build/conf/group
 build $SYSTEMDIR/system/bin/sh: copy $BUILDROOT/mksh/sh
 build $SYSTEMDIR/system/etc/mkshrc: copy external/mksh/mkshrc
+build $SYSTEMDIR/system/bin/weston: copy $BUILDROOT/weston/weston
+build $SYSTEMDIR/system/lib/libweston-11.so: copy $BUILDROOT/weston/libweston-11.so
+build $SYSTEMDIR/system/lib/weston/libexec_weston.so: copy $BUILDROOT/weston/libexec_weston.so
