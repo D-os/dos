@@ -130,6 +130,8 @@ subninja build/libpropertyinfoserializer.ninja
 subninja build/libsystemproperties.ninja
 build $SYSROOT/lib/libsystemproperties.so: copy $BUILDROOT/libsystemproperties/libsystemproperties.so
 
+subninja build/libxkbcommon.ninja
+
 subninja build/boringssl.ninja
 build $SYSROOT/lib/libcrypto.so: copy $BUILDROOT/boringssl/libcrypto.so
 

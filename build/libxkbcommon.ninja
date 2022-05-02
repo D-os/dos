@@ -1,0 +1,96 @@
+cflags = $
+  -fvisibility=hidden $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -Wextra $
+  -std=c11 $
+  -fno-strict-aliasing $
+  -fsanitize-undefined-trap-on-error $
+  -Wno-unused-parameter $
+  -Wno-missing-field-initializers $
+  -Wpointer-arith $
+  -Wmissing-declarations $
+  -Wformat=2 $
+  -Wstrict-prototypes $
+  -Wmissing-prototypes $
+  -Wnested-externs $
+  -Wbad-function-cast $
+  -Wshadow $
+  -Wdate-time $
+  -Wwrite-strings $
+
+includes = -Iexternal/libxkbcommon/include -Iexternal/libxkbcommon/src -Ibuild/libxkbcommon -I$BUILDROOT/libxkbcommon
+
+rule bison
+  command = /usr/bin/bison --defines=$BUILDROOT/libxkbcommon/parser.h -o $BUILDROOT/libxkbcommon/parser.c -p _xkbcommon_ $in
+  description = [HOST] BISON $out
+
+build $BUILDROOT/libxkbcommon/parser.c $BUILDROOT/libxkbcommon/parser.h: bison external/libxkbcommon/src/xkbcomp/parser.y | /usr/bin/bison
+
+build $BUILDROOT/libxkbcommon/generated_parser.o: cc $BUILDROOT/libxkbcommon/parser.c | $BUILDROOT/libxkbcommon/parser.h
+
+build $BUILDROOT/libxkbcommon/src_compose_parser.o: cc external/libxkbcommon/src/compose/parser.c
+build $BUILDROOT/libxkbcommon/src_compose_paths.o: cc external/libxkbcommon/src/compose/paths.c
+build $BUILDROOT/libxkbcommon/src_compose_state.o: cc external/libxkbcommon/src/compose/state.c
+build $BUILDROOT/libxkbcommon/src_compose_table.o: cc external/libxkbcommon/src/compose/table.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_action.o: cc external/libxkbcommon/src/xkbcomp/action.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_ast-build.o: cc external/libxkbcommon/src/xkbcomp/ast-build.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_compat.o: cc external/libxkbcommon/src/xkbcomp/compat.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_expr.o: cc external/libxkbcommon/src/xkbcomp/expr.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_include.o: cc external/libxkbcommon/src/xkbcomp/include.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_keycodes.o: cc external/libxkbcommon/src/xkbcomp/keycodes.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_keymap.o: cc external/libxkbcommon/src/xkbcomp/keymap.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_keymap-dump.o: cc external/libxkbcommon/src/xkbcomp/keymap-dump.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_keywords.o: cc external/libxkbcommon/src/xkbcomp/keywords.c | $BUILDROOT/libxkbcommon/parser.h
+build $BUILDROOT/libxkbcommon/src_xkbcomp_rules.o: cc external/libxkbcommon/src/xkbcomp/rules.c | $BUILDROOT/libxkbcommon/parser.h
+build $BUILDROOT/libxkbcommon/src_xkbcomp_scanner.o: cc external/libxkbcommon/src/xkbcomp/scanner.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_symbols.o: cc external/libxkbcommon/src/xkbcomp/symbols.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_types.o: cc external/libxkbcommon/src/xkbcomp/types.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_vmod.o: cc external/libxkbcommon/src/xkbcomp/vmod.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_xkbcomp.o: cc external/libxkbcommon/src/xkbcomp/xkbcomp.c
+build $BUILDROOT/libxkbcommon/src_atom.o: cc external/libxkbcommon/src/atom.c
+build $BUILDROOT/libxkbcommon/src_context.o: cc external/libxkbcommon/src/context.c
+build $BUILDROOT/libxkbcommon/src_context-priv.o: cc external/libxkbcommon/src/context-priv.c
+build $BUILDROOT/libxkbcommon/src_keysym.o: cc external/libxkbcommon/src/keysym.c
+build $BUILDROOT/libxkbcommon/src_keysym-utf.o: cc external/libxkbcommon/src/keysym-utf.c
+build $BUILDROOT/libxkbcommon/src_keymap.o: cc external/libxkbcommon/src/keymap.c
+build $BUILDROOT/libxkbcommon/src_keymap-priv.o: cc external/libxkbcommon/src/keymap-priv.c
+build $BUILDROOT/libxkbcommon/src_state.o: cc external/libxkbcommon/src/state.c
+build $BUILDROOT/libxkbcommon/src_text.o: cc external/libxkbcommon/src/text.c
+build $BUILDROOT/libxkbcommon/src_utf8.o: cc external/libxkbcommon/src/utf8.c
+build $BUILDROOT/libxkbcommon/src_utils.o: cc external/libxkbcommon/src/utils.c
+
+build $BUILDROOT/libxkbcommon/libxkbcommon.so: so $
+  $BUILDROOT/libxkbcommon/generated_parser.o $
+  $BUILDROOT/libxkbcommon/src_compose_parser.o $
+  $BUILDROOT/libxkbcommon/src_compose_paths.o $
+  $BUILDROOT/libxkbcommon/src_compose_state.o $
+  $BUILDROOT/libxkbcommon/src_compose_table.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_action.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_ast-build.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_compat.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_expr.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_include.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_keycodes.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_keymap.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_keymap-dump.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_keywords.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_rules.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_scanner.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_symbols.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_types.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_vmod.o $
+  $BUILDROOT/libxkbcommon/src_xkbcomp_xkbcomp.o $
+  $BUILDROOT/libxkbcommon/src_atom.o $
+  $BUILDROOT/libxkbcommon/src_context.o $
+  $BUILDROOT/libxkbcommon/src_context-priv.o $
+  $BUILDROOT/libxkbcommon/src_keysym.o $
+  $BUILDROOT/libxkbcommon/src_keysym-utf.o $
+  $BUILDROOT/libxkbcommon/src_keymap.o $
+  $BUILDROOT/libxkbcommon/src_keymap-priv.o $
+  $BUILDROOT/libxkbcommon/src_state.o $
+  $BUILDROOT/libxkbcommon/src_text.o $
+  $BUILDROOT/libxkbcommon/src_utf8.o $
+  $BUILDROOT/libxkbcommon/src_utils.o $
+
