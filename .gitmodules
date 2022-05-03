@@ -104,3 +104,6 @@
 	path = external/libinput
 	url = https://github.com/wayland-project/libinput.git
 	branch = main
+[submodule "external/mtdev"]
+	path = external/mtdev
+	url = http://bitmath.org/git/mtdev.git
