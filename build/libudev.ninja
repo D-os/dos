@@ -1,0 +1,21 @@
+cflags = $
+  -std=c99 -fPIC -pthread -D_XOPEN_SOURCE=700 $
+  -Wall -Wextra -Wpedantic -Wmissing-prototypes -Wstrict-prototypes $
+  -Wno-unused-parameter $
+
+#includes = -Iexternal/libudev/include/drm -Ibuild/libudev
+#libs = -lm
+
+build $BUILDROOT/libudev/udev.o: cc external/libudev/udev.c
+build $BUILDROOT/libudev/udev_list.o: cc external/libudev/udev_list.c
+build $BUILDROOT/libudev/udev_device.o: cc external/libudev/udev_device.c
+build $BUILDROOT/libudev/udev_monitor.o: cc external/libudev/udev_monitor.c
+build $BUILDROOT/libudev/udev_enumerate.o: cc external/libudev/udev_enumerate.c
+
+build $BUILDROOT/libudev/libudev.so: so $
+  $BUILDROOT/libudev/udev.o $
+  $BUILDROOT/libudev/udev_list.o $
+  $BUILDROOT/libudev/udev_device.o $
+  $BUILDROOT/libudev/udev_monitor.o $
+  $BUILDROOT/libudev/udev_enumerate.o $
+

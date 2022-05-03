@@ -141,6 +141,9 @@ subninja build/libpropertyinfoserializer.ninja
 subninja build/libsystemproperties.ninja
 build $SYSROOT/lib/libsystemproperties.so: copy $BUILDROOT/libsystemproperties/libsystemproperties.so
 
+subninja build/libudev.ninja
+build $SYSROOT/lib/libudev.so: copy $BUILDROOT/libudev/libudev.so
+
 subninja build/libxkbcommon.ninja
 build $SYSROOT/lib/libxkbcommon.so: copy $BUILDROOT/libxkbcommon/libxkbcommon.so
 
