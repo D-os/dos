@@ -1,0 +1,110 @@
+cflags = $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -Wextra $
+  -std=gnu99 $
+  -Wno-unused-parameter $
+  -Wmissing-prototypes $
+  -Wstrict-prototypes $
+  -Wundef $
+  -Wpointer-arith $
+  -Wuninitialized $
+  -Winit-self $
+  -Wstrict-prototypes $
+  -Wimplicit-fallthrough $
+  -Wredundant-decls $
+  -Wincompatible-pointer-types $
+  -Wformat=2 $
+  -Wno-missing-field-initializers $
+  -Wmissing-declarations $
+  -Wno-unused-function $
+  -fvisibility=hidden $
+
+includes = -Iexternal/libinput/include -Ibuild/libinput -Iexternal/libevdev
+
+build $BUILDROOT/libinput/src_filter.o: cc external/libinput/src/filter.c
+build $BUILDROOT/libinput/src_filter-flat.o: cc external/libinput/src/filter-flat.c
+build $BUILDROOT/libinput/src_filter-low-dpi.o: cc external/libinput/src/filter-low-dpi.c
+build $BUILDROOT/libinput/src_filter-mouse.o: cc external/libinput/src/filter-mouse.c
+build $BUILDROOT/libinput/src_filter-touchpad.o: cc external/libinput/src/filter-touchpad.c
+build $BUILDROOT/libinput/src_filter-touchpad-flat.o: cc external/libinput/src/filter-touchpad-flat.c
+build $BUILDROOT/libinput/src_filter-touchpad-x230.o: cc external/libinput/src/filter-touchpad-x230.c
+build $BUILDROOT/libinput/src_filter-tablet.o: cc external/libinput/src/filter-tablet.c
+build $BUILDROOT/libinput/src_filter-trackpoint.o: cc external/libinput/src/filter-trackpoint.c
+build $BUILDROOT/libinput/src_libinput.o: cc external/libinput/src/libinput.c
+build $BUILDROOT/libinput/src_libinput-private-config.o: cc external/libinput/src/libinput-private-config.c
+build $BUILDROOT/libinput/src_evdev.o: cc external/libinput/src/evdev.c
+build $BUILDROOT/libinput/src_evdev-debounce.o: cc external/libinput/src/evdev-debounce.c
+build $BUILDROOT/libinput/src_evdev-fallback.o: cc external/libinput/src/evdev-fallback.c
+build $BUILDROOT/libinput/src_evdev-totem.o: cc external/libinput/src/evdev-totem.c
+build $BUILDROOT/libinput/src_evdev-middle-button.o: cc external/libinput/src/evdev-middle-button.c
+build $BUILDROOT/libinput/src_evdev-mt-touchpad.o: cc external/libinput/src/evdev-mt-touchpad.c
+build $BUILDROOT/libinput/src_evdev-mt-touchpad-tap.o: cc external/libinput/src/evdev-mt-touchpad-tap.c
+build $BUILDROOT/libinput/src_evdev-mt-touchpad-thumb.o: cc external/libinput/src/evdev-mt-touchpad-thumb.c
+build $BUILDROOT/libinput/src_evdev-mt-touchpad-buttons.o: cc external/libinput/src/evdev-mt-touchpad-buttons.c
+build $BUILDROOT/libinput/src_evdev-mt-touchpad-edge-scroll.o: cc external/libinput/src/evdev-mt-touchpad-edge-scroll.c
+build $BUILDROOT/libinput/src_evdev-mt-touchpad-gestures.o: cc external/libinput/src/evdev-mt-touchpad-gestures.c
+build $BUILDROOT/libinput/src_evdev-tablet.o: cc external/libinput/src/evdev-tablet.c
+build $BUILDROOT/libinput/src_evdev-tablet-pad.o: cc external/libinput/src/evdev-tablet-pad.c
+build $BUILDROOT/libinput/src_evdev-tablet-pad-leds.o: cc external/libinput/src/evdev-tablet-pad-leds.c
+build $BUILDROOT/libinput/src_evdev-wheel.o: cc external/libinput/src/evdev-wheel.c
+build $BUILDROOT/libinput/src_path-seat.o: cc external/libinput/src/path-seat.c
+build $BUILDROOT/libinput/src_udev-seat.o: cc external/libinput/src/udev-seat.c
+build $BUILDROOT/libinput/src_timer.o: cc external/libinput/src/timer.c
+build $BUILDROOT/libinput/src_util-list.o: cc external/libinput/src/util-list.c
+build $BUILDROOT/libinput/src_util-ratelimit.o: cc external/libinput/src/util-ratelimit.c
+build $BUILDROOT/libinput/src_util-strings.o: cc external/libinput/src/util-strings.c
+build $BUILDROOT/libinput/src_util-prop-parsers.o: cc external/libinput/src/util-prop-parsers.c
+build $BUILDROOT/libinput/src_quirks.o: cc external/libinput/src/quirks.c
+
+build $BUILDROOT/libinput/liblibinput-util.a: ar $
+  $BUILDROOT/libinput/src_util-list.o $
+  $BUILDROOT/libinput/src_util-ratelimit.o $
+  $BUILDROOT/libinput/src_util-strings.o $
+  $BUILDROOT/libinput/src_util-prop-parsers.o $
+
+build $BUILDROOT/libinput/libquirks.a: ar $
+  $BUILDROOT/libinput/src_quirks.o $
+
+build $BUILDROOT/libinput/libinput.so: so $
+  $BUILDROOT/libinput/src_filter.o $
+  $BUILDROOT/libinput/src_filter-flat.o $
+  $BUILDROOT/libinput/src_filter-low-dpi.o $
+  $BUILDROOT/libinput/src_filter-mouse.o $
+  $BUILDROOT/libinput/src_filter-touchpad.o $
+  $BUILDROOT/libinput/src_filter-touchpad-flat.o $
+  $BUILDROOT/libinput/src_filter-touchpad-x230.o $
+  $BUILDROOT/libinput/src_filter-tablet.o $
+  $BUILDROOT/libinput/src_filter-trackpoint.o $
+  $BUILDROOT/libinput/src_libinput.o $
+  $BUILDROOT/libinput/src_libinput-private-config.o $
+  $BUILDROOT/libinput/src_evdev.o $
+  $BUILDROOT/libinput/src_evdev-debounce.o $
+  $BUILDROOT/libinput/src_evdev-fallback.o $
+  $BUILDROOT/libinput/src_evdev-totem.o $
+  $BUILDROOT/libinput/src_evdev-middle-button.o $
+  $BUILDROOT/libinput/src_evdev-mt-touchpad.o $
+  $BUILDROOT/libinput/src_evdev-mt-touchpad-tap.o $
+  $BUILDROOT/libinput/src_evdev-mt-touchpad-thumb.o $
+  $BUILDROOT/libinput/src_evdev-mt-touchpad-buttons.o $
+  $BUILDROOT/libinput/src_evdev-mt-touchpad-edge-scroll.o $
+  $BUILDROOT/libinput/src_evdev-mt-touchpad-gestures.o $
+  $BUILDROOT/libinput/src_evdev-tablet.o $
+  $BUILDROOT/libinput/src_evdev-tablet-pad.o $
+  $BUILDROOT/libinput/src_evdev-tablet-pad-leds.o $
+  $BUILDROOT/libinput/src_evdev-wheel.o $
+  $BUILDROOT/libinput/src_path-seat.o $
+  $BUILDROOT/libinput/src_udev-seat.o $
+  $BUILDROOT/libinput/src_timer.o $
+  $BUILDROOT/libinput/liblibinput-util.a $
+  $BUILDROOT/libinput/libquirks.a
+  libs = -levdev -lm -lrt
+
+#  | $
+#  /usr/lib64/libevdev.so $
+#  /usr/lib64/libm.so $
+#  /usr/lib64/libmtdev.so $
+#  /usr/lib64/librt.a $
+#  /usr/lib64/libudev.so
+#  libs = -lmtdev -ludev -levdev -lm -lrt

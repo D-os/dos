@@ -3,3 +3,4 @@
 .ninja_log
 .ninja_deps
 /.cache/
+/build/.cache/
