@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "llvm-vs-code-extensions.vscode-clangd",
+    "surajbarkale.ninja",
+    "EditorConfig.EditorConfig",
+    "timonwong.shellcheck",
+    "streetsidesoftware.code-spell-checker"
+  ]
+}
