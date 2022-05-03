@@ -1,0 +1,48 @@
+cflags = $
+  -fvisibility=hidden $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -std=c99 $
+  -O2 $
+  -Wsign-compare $
+  -Werror=undef $
+  -Werror=implicit-function-declaration $
+  -Wpointer-arith $
+  -Wwrite-strings $
+  -Wstrict-prototypes $
+  -Wmissing-prototypes $
+  -Wmissing-declarations $
+  -Wnested-externs $
+  -Wpacked $
+  -Wswitch-enum $
+  -Wmissing-format-attribute $
+  -Wstrict-aliasing=2 $
+  -Winit-self $
+  -Winline $
+  -Wshadow $
+  -Wdeclaration-after-statement $
+  -Wold-style-definition $
+  -Wno-unused-parameter $
+  -Wno-attributes $
+  -Wno-long-long $
+  -Wno-missing-field-initializers $
+  -Wno-declaration-after-statement $
+  -include build/libdrm/config.h
+
+includes = -Iexternal/libdrm/include/drm -Ibuild/libdrm
+libs = -lm
+
+build $BUILDROOT/libdrm/xf86drm.o: cc external/libdrm/xf86drm.c | build/libdrm/generated_static_table_fourcc.h
+build $BUILDROOT/libdrm/xf86drmHash.o: cc external/libdrm/xf86drmHash.c
+build $BUILDROOT/libdrm/xf86drmRandom.o: cc external/libdrm/xf86drmRandom.c
+build $BUILDROOT/libdrm/xf86drmSL.o: cc external/libdrm/xf86drmSL.c
+build $BUILDROOT/libdrm/xf86drmMode.o: cc external/libdrm/xf86drmMode.c
+
+build $BUILDROOT/libdrm/libdrm.so: so $
+  $BUILDROOT/libdrm/xf86drm.o $
+  $BUILDROOT/libdrm/xf86drmHash.o $
+  $BUILDROOT/libdrm/xf86drmRandom.o $
+  $BUILDROOT/libdrm/xf86drmSL.o $
+  $BUILDROOT/libdrm/xf86drmMode.o $
+
