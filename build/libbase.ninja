@@ -1,7 +1,7 @@
 cxxflags = -Wall -Werror -Wextra -D_FILE_OFFSET_BITS=64 $
   -Wexit-time-destructors -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses -Wno-sign-compare -Wno-c99-designator
 includes = -Isystem/libbase/include -Isystem/logging/liblog/include
-libs = -lc++ -llog
+libs = -lc++ -lunwind -lcutils -llog
 
 build $BUILDROOT/libbase/abi_compatibility.o: cxx system/libbase/abi_compatibility.cpp
 build $BUILDROOT/libbase/chrono_utils.o: cxx system/libbase/chrono_utils.cpp

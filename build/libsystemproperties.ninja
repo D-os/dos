@@ -22,7 +22,7 @@ build $BUILDROOT/libsystemproperties/libsystemproperties.a: ar $
 build $BUILDROOT/libsystemproperties/libsystemproperties.so: soa $
   $BUILDROOT/libsystemproperties/libsystemproperties.a $
   | $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a
-  libs = $
+  libs = -lc++ -lunwind -lcutils $
     -Wl,--whole-archive $
       $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a $
     -Wl,--no-whole-archive
