@@ -98,13 +98,10 @@ build $BUILDROOT/libinput/libinput.so: so $
   $BUILDROOT/libinput/src_udev-seat.o $
   $BUILDROOT/libinput/src_timer.o $
   $BUILDROOT/libinput/liblibinput-util.a $
-  $BUILDROOT/libinput/libquirks.a
-  libs = -levdev -lm -lrt
-
-#  | $
-#  /usr/lib64/libevdev.so $
-#  /usr/lib64/libm.so $
-#  /usr/lib64/libmtdev.so $
-#  /usr/lib64/librt.a $
-#  /usr/lib64/libudev.so
-#  libs = -lmtdev -ludev -levdev -lm -lrt
+  $BUILDROOT/libinput/libquirks.a $
+  $BUILDROOT/mtdev/libmtdev.a $
+  | $
+  $SYSROOT/lib/libevdev.so $
+  $SYSROOT/lib/librt.a $
+  $SYSROOT/lib/libudev.so
+  libs = -ludev -levdev -lrt
