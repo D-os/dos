@@ -229,7 +229,7 @@ build $SYSTEMDIR/apex: mkdir
 build $SYSTEMDIR/linkerconfig: mkdir
 
 build $SYSTEMDIR/bin/ldd: symlink
-  target = ../lib/ld-musl-x86_64.so.1
+  target = ../lib/libc.so
 
 build $SYSTEMDIR/lib: sync | $SYSROOT/lib
   source = $SYSROOT/lib/*.so*

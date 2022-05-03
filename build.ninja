@@ -105,6 +105,7 @@ subninja build/libcutils.ninja
 build $SYSROOT/lib/libcutils.so: copy $BUILDROOT/libcutils/libcutils.so
 
 subninja build/libdrm.ninja
+build $SYSROOT/lib/libdrm.so: copy $BUILDROOT/libdrm/libdrm.so
 
 subninja build/libevdev.ninja
 build $SYSROOT/lib/libevdev.so: copy $BUILDROOT/libevdev/libevdev.so
@@ -118,6 +119,7 @@ build $SYSROOT/lib/libext4_utils.so: copy $BUILDROOT/ext4_utils/libext4_utils.so
 subninja build/libffi.ninja
 
 subninja build/libinput.ninja
+build $SYSROOT/lib/libinput.so: copy $BUILDROOT/libinput/libinput.so
 
 subninja build/liblog.ninja
 build $SYSROOT/lib/liblog.so: copy $BUILDROOT/liblog/liblog.so
