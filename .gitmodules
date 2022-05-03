@@ -100,3 +100,7 @@
 [submodule "external/libxkbcommon"]
 	path = external/libxkbcommon
 	url = https://github.com/xkbcommon/libxkbcommon.git
+[submodule "external/libinput"]
+	path = external/libinput
+	url = https://github.com/wayland-project/libinput.git
+	branch = main
