@@ -68,7 +68,7 @@ rule hostar
   description = [HOST] AR $out
 
 rule hostld
-  command = $HOSTCXX $ldflags $in -o $out
+  command = $HOSTCXX -fuse-ld=mold $ldflags $in -o $out
   description = [HOST] LINK $out
 
 
