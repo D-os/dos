@@ -107,3 +107,6 @@
 [submodule "external/mtdev"]
 	path = external/mtdev
 	url = http://bitmath.org/git/mtdev.git
+[submodule "external/libudev"]
+	path = external/libudev
+	url = https://github.com/illiliti/libudev-zero.git
