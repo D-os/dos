@@ -1,0 +1,19 @@
+cflags = $
+  -Wall $
+  -Werror $
+
+#includes = -Iexternal/libffi/include -Ibuild/libffi -I$BUILDROOT/libffi
+
+build $BUILDROOT/mtdev/caps.o: cc external/mtdev/src/caps.c
+build $BUILDROOT/mtdev/core.o: cc external/mtdev/src/core.c
+build $BUILDROOT/mtdev/iobuf.o: cc external/mtdev/src/iobuf.c
+build $BUILDROOT/mtdev/match.o: cc external/mtdev/src/match.c
+build $BUILDROOT/mtdev/match_four.o: cc external/mtdev/src/match_four.c
+
+build $BUILDROOT/mtdev/libmtdev.a: ar $
+  $BUILDROOT/mtdev/caps.o $
+  $BUILDROOT/mtdev/core.o $
+  $BUILDROOT/mtdev/iobuf.o $
+  $BUILDROOT/mtdev/match.o $
+  $BUILDROOT/mtdev/match_four.o $
+
