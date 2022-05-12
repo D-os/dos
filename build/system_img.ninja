@@ -5,7 +5,14 @@ rule mkfs
   description = [HOST] MKFS $out
 
 build $BUILDROOT/system.img: mkfs $SYSTEMDIR
-  depfile = build/system_img/content.d
+  depfile = build/system/content.d
+
+rule fixup
+  command = sh build/system/content.sh && touch $out
+  description = [HOST] FIXUP $out
+
+build $BUILDROOT/system.stamp: fixup $BUILDROOT/system.img $
+  | build/system/content.sh
 
 rule mkdir
   command = mkdir -p $out

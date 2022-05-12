@@ -23,7 +23,7 @@ build $BUILDROOT/initramfs/initramfs: gen_init_cpio build/linux/initramfs $
   depfile = build/linux/initramfs.d
 
 rule copy_modules
-  command = tools/copy-initramfs-modules.sh $in $KERNEL_VERSION $out
+  command = build/linux/copy-initramfs-modules.sh $in $KERNEL_VERSION $out
   description = [HOST] STAGE MODULES $out
 
 build $BUILDROOT/initramfs/lib/modules/0.0: copy_modules build/linux/modules.load | $SYSROOT/lib/modules/$KERNEL_VERSION
