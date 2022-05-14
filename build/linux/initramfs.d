@@ -12,5 +12,5 @@ out/build/initramfs/initramfs: \
   out/build/initramfs/lib/modules/0.0/libcrc32c.ko \
   out/build/initramfs/lib/modules/0.0/mbcache.ko \
   build/linux/fstab.qemu \
-  tools/toybox-x86_64 \
+  build/toybox/toybox-x86_64 \
   build/linux/first_stage.sh \

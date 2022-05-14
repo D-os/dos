@@ -389,6 +389,10 @@ build $SYSTEMDIR/bin/base64: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/basename: symlink
   target = ../system/bin/toybox
+build $SYSTEMDIR/bin/blkdiscard: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/blkid: symlink
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/blockdev: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/cal: symlink
@@ -396,8 +400,6 @@ build $SYSTEMDIR/bin/cal: symlink
 build $SYSTEMDIR/bin/cat: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/chattr: symlink
-  target = ../system/bin/toybox
-build $SYSTEMDIR/bin/chcon: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/chgrp: symlink
   target = ../system/bin/toybox
@@ -413,9 +415,9 @@ build $SYSTEMDIR/bin/cksum: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/clear: symlink
   target = ../system/bin/toybox
-build $SYSTEMDIR/bin/comm: symlink
-  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/cmp: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/comm: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/cp: symlink
   target = ../system/bin/toybox
@@ -467,11 +469,17 @@ build $SYSTEMDIR/bin/fmt: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/free: symlink
   target = ../system/bin/toybox
+build $SYSTEMDIR/bin/freeramdisk: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/fsfreeze: symlink
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/fsync: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/getconf: symlink
   target = ../system/bin/toybox
-build $SYSTEMDIR/bin/getenforce: symlink
+build $SYSTEMDIR/bin/getfattr: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/getopt: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/grep: symlink
   target = ../system/bin/toybox
@@ -482,6 +490,8 @@ build $SYSTEMDIR/bin/gunzip: symlink
 build $SYSTEMDIR/bin/gzip: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/head: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/help: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/hostname: symlink
   target = ../system/bin/toybox
@@ -511,11 +521,11 @@ build $SYSTEMDIR/bin/ionice: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/iorenice: symlink
   target = ../system/bin/toybox
+build $SYSTEMDIR/bin/iotop: symlink
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/kill: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/killall: symlink
-  target = ../system/bin/toybox
-build $SYSTEMDIR/bin/load_policy: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/ln: symlink
   target = ../system/bin/toybox
@@ -537,7 +547,11 @@ build $SYSTEMDIR/bin/lspci: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/lsusb: symlink
   target = ../system/bin/toybox
+build $SYSTEMDIR/bin/makedevs: symlink
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/md5sum: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/microcom: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/mkdir: symlink
   target = ../system/bin/toybox
@@ -549,9 +563,9 @@ build $SYSTEMDIR/bin/mkswap: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/mktemp: symlink
   target = ../system/bin/toybox
-build $SYSTEMDIR/bin/microcom: symlink
-  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/modinfo: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/modprobe: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/more: symlink
   target = ../system/bin/toybox
@@ -560,6 +574,8 @@ build $SYSTEMDIR/bin/mount: symlink
 build $SYSTEMDIR/bin/mountpoint: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/mv: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/nbd-client: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/nc: symlink
   target = ../system/bin/toybox
@@ -579,6 +595,8 @@ build $SYSTEMDIR/bin/nsenter: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/od: symlink
   target = ../system/bin/toybox
+build $SYSTEMDIR/bin/partprobe: symlink
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/paste: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/patch: symlink
@@ -586,6 +604,12 @@ build $SYSTEMDIR/bin/patch: symlink
 build $SYSTEMDIR/bin/pgrep: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/pidof: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/ping: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/ping6: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/pivot_root: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/pkill: symlink
   target = ../system/bin/toybox
@@ -595,9 +619,13 @@ build $SYSTEMDIR/bin/printenv: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/printf: symlink
   target = ../system/bin/toybox
+build $SYSTEMDIR/bin/prlimit: symlink
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/ps: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/pwd: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/pwdx: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/readelf: symlink
   target = ../system/bin/toybox
@@ -609,6 +637,10 @@ build $SYSTEMDIR/bin/renice: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/restorecon: symlink
   target = ../system/bin/toybox
+build $SYSTEMDIR/bin/rev: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/rfkill: symlink
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/rm: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/rmdir: symlink
@@ -617,15 +649,13 @@ build $SYSTEMDIR/bin/rmmod: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/rtcwake: symlink
   target = ../system/bin/toybox
-build $SYSTEMDIR/bin/runcon: symlink
-  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sed: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/sendevent: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/seq: symlink
   target = ../system/bin/toybox
-build $SYSTEMDIR/bin/setenforce: symlink
+build $SYSTEMDIR/bin/setfattr: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/setsid: symlink
   target = ../system/bin/toybox
@@ -681,11 +711,17 @@ build $SYSTEMDIR/bin/touch: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/tr: symlink
   target = ../system/bin/toybox
+build $SYSTEMDIR/bin/traceroute: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/traceroute6: symlink
+  target = ../system/bin/toybox
 build $SYSTEMDIR/bin/true: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/truncate: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/tty: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/tunctl: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/uclampset: symlink
   target = ../system/bin/toybox
@@ -712,6 +748,10 @@ build $SYSTEMDIR/bin/uudecode: symlink
 build $SYSTEMDIR/bin/uuencode: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/uuidgen: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/vconfig: symlink
+  target = ../system/bin/toybox
+build $SYSTEMDIR/bin/vi: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/vmstat: symlink
   target = ../system/bin/toybox

@@ -24,11 +24,12 @@ out/build/system.img: \
   out/build/system/bin/acpi \
   out/build/system/bin/base64 \
   out/build/system/bin/basename \
+  out/build/system/bin/blkdiscard \
+  out/build/system/bin/blkid \
   out/build/system/bin/blockdev \
   out/build/system/bin/cal \
   out/build/system/bin/cat \
   out/build/system/bin/chattr \
-  out/build/system/bin/chcon \
   out/build/system/bin/chgrp \
   out/build/system/bin/chmod \
   out/build/system/bin/chown \
@@ -36,8 +37,8 @@ out/build/system.img: \
   out/build/system/bin/chrt \
   out/build/system/bin/cksum \
   out/build/system/bin/clear \
-  out/build/system/bin/comm \
   out/build/system/bin/cmp \
+  out/build/system/bin/comm \
   out/build/system/bin/cp \
   out/build/system/bin/cpio \
   out/build/system/bin/cut \
@@ -63,14 +64,18 @@ out/build/system.img: \
   out/build/system/bin/flock \
   out/build/system/bin/fmt \
   out/build/system/bin/free \
+  out/build/system/bin/freeramdisk \
+  out/build/system/bin/fsfreeze \
   out/build/system/bin/fsync \
   out/build/system/bin/getconf \
-  out/build/system/bin/getenforce \
+  out/build/system/bin/getfattr \
+  out/build/system/bin/getopt \
   out/build/system/bin/grep \
   out/build/system/bin/groups \
   out/build/system/bin/gunzip \
   out/build/system/bin/gzip \
   out/build/system/bin/head \
+  out/build/system/bin/help \
   out/build/system/bin/hostname \
   out/build/system/bin/hwclock \
   out/build/system/bin/i2cdetect \
@@ -85,9 +90,9 @@ out/build/system.img: \
   out/build/system/bin/install \
   out/build/system/bin/ionice \
   out/build/system/bin/iorenice \
+  out/build/system/bin/iotop \
   out/build/system/bin/kill \
   out/build/system/bin/killall \
-  out/build/system/bin/load_policy \
   out/build/system/bin/ln \
   out/build/system/bin/log \
   out/build/system/bin/logname \
@@ -98,18 +103,21 @@ out/build/system.img: \
   out/build/system/bin/lsof \
   out/build/system/bin/lspci \
   out/build/system/bin/lsusb \
+  out/build/system/bin/makedevs \
   out/build/system/bin/md5sum \
+  out/build/system/bin/microcom \
   out/build/system/bin/mkdir \
   out/build/system/bin/mkfifo \
   out/build/system/bin/mknod \
   out/build/system/bin/mkswap \
   out/build/system/bin/mktemp \
-  out/build/system/bin/microcom \
   out/build/system/bin/modinfo \
+  out/build/system/bin/modprobe \
   out/build/system/bin/more \
   out/build/system/bin/mount \
   out/build/system/bin/mountpoint \
   out/build/system/bin/mv \
+  out/build/system/bin/nbd-client \
   out/build/system/bin/nc \
   out/build/system/bin/netcat \
   out/build/system/bin/netstat \
@@ -119,30 +127,37 @@ out/build/system.img: \
   out/build/system/bin/nproc \
   out/build/system/bin/nsenter \
   out/build/system/bin/od \
+  out/build/system/bin/partprobe \
   out/build/system/bin/paste \
   out/build/system/bin/patch \
   out/build/system/bin/pgrep \
   out/build/system/bin/pidof \
+  out/build/system/bin/ping \
+  out/build/system/bin/ping6 \
+  out/build/system/bin/pivot_root \
   out/build/system/bin/pkill \
   out/build/system/bin/pmap \
   out/build/system/bin/printenv \
   out/build/system/bin/printf \
+  out/build/system/bin/prlimit \
   out/build/system/bin/ps \
   out/build/system/bin/pwd \
+  out/build/system/bin/pwdx \
   out/build/system/bin/readelf \
   out/build/system/bin/readlink \
   out/build/system/bin/realpath \
   out/build/system/bin/renice \
   out/build/system/bin/restorecon \
+  out/build/system/bin/rev \
+  out/build/system/bin/rfkill \
   out/build/system/bin/rm \
   out/build/system/bin/rmdir \
   out/build/system/bin/rmmod \
   out/build/system/bin/rtcwake \
-  out/build/system/bin/runcon \
   out/build/system/bin/sed \
   out/build/system/bin/sendevent \
   out/build/system/bin/seq \
-  out/build/system/bin/setenforce \
+  out/build/system/bin/setfattr \
   out/build/system/bin/setsid \
   out/build/system/bin/sha1sum \
   out/build/system/bin/sha224sum \
@@ -170,9 +185,12 @@ out/build/system.img: \
   out/build/system/bin/top \
   out/build/system/bin/touch \
   out/build/system/bin/tr \
+  out/build/system/bin/traceroute \
+  out/build/system/bin/traceroute6 \
   out/build/system/bin/true \
   out/build/system/bin/truncate \
   out/build/system/bin/tty \
+  out/build/system/bin/tunctl \
   out/build/system/bin/uclampset \
   out/build/system/bin/ulimit \
   out/build/system/bin/umount \
@@ -186,6 +204,8 @@ out/build/system.img: \
   out/build/system/bin/uudecode \
   out/build/system/bin/uuencode \
   out/build/system/bin/uuidgen \
+  out/build/system/bin/vconfig \
+  out/build/system/bin/vi \
   out/build/system/bin/vmstat \
   out/build/system/bin/watch \
   out/build/system/bin/wc \

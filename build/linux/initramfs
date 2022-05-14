@@ -21,7 +21,7 @@ file /lib/modules/mbcache.ko out/build/initramfs/lib/modules/0.0/mbcache.ko 0644
 file /fstab.qemu build/linux/fstab.qemu 0644 0 0
 dir /system 755 0 0
 dir /bin 755 0 0
-file /bin/toybox tools/toybox-x86_64 0755 0 0
+file /bin/toybox build/toybox/toybox-x86_64 0755 0 0
 slink /bin/sh toybox 777 0 0
 slink /system/bin /bin 777 0 0
 file /first_stage.sh build/linux/first_stage.sh 0644 0 0
