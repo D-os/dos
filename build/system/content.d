@@ -216,6 +216,7 @@ out/build/system.img: \
   out/build/system/bin/yes \
   out/build/system/bin/zcat \
   out/build/system/bin/ldd \
+  out/build/system/system/bin/su \
   out/build/system/system/bin/weston \
   out/build/system/system/lib/libweston-11.so \
   out/build/system/system/lib/weston/libexec_weston.so \

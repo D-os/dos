@@ -1,4 +1,4 @@
-cd $(dirname $0)/out
+cd "$(dirname "$0")/out" || exit
 IMG=tmp.img
 CMDLINE="loglevel=7 console=ttyS0 printk.devkmsg=on androidboot.fstab_suffix=qemu androidboot.first_stage_console=0"
 # BIOS="-bios /usr/share/edk2/ovmf/OVMF_CODE.fd"

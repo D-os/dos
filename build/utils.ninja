@@ -1,0 +1,9 @@
+cflags = -Wall -std=gnu99 -Wa,--noexecstack
+
+build $BUILDROOT/utils/su.o: cc system/tools/utils/su.c
+  cflags = $cflags -fstack-protector-all
+  libs = -lcrypt
+
+build $BUILDROOT/utils/su: link $
+  $BUILDROOT/utils/su.o $
+
