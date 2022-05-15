@@ -11,6 +11,7 @@
 [    0.435047] init: Setting property 'ro.product.cpu.abilist64' to 'x86_64'
 
 - put statically linked /system/bin/e2fsck in system.img
+  (or initramfs? as system.img is /dev/vda)
 [   15.306211] init: [libfs_mgr]Filesystem on /dev/vda was not cleanly shutdown; state flags: 0x1, incompat feature flags: 0x2c6
 [   15.306812] EXT4-fs (vda): Ignoring removed nomblk_io_submit option
 [   15.309096] EXT4-fs (vda): recovery complete
@@ -21,3 +22,6 @@
 [   15.312314] EXT4-fs (vda): mounted filesystem with ordered data mode. Opts: barrier=1. Quota mode: none.
 [   15.312709] init: [libfs_mgr]__mount(source=/dev/vda,target=/system,type=ext4)=0: No error information
 [   15.313141] init: Switching root to '/system'
+
+- Conventionally mounted at ``/dev/bus/usb/``, usbfs features include:
+  external/linux/Documentation/driver-api/usb/usb.rst

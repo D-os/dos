@@ -6,7 +6,6 @@ out/build/initramfs/initramfs: \
   out/build/initramfs/lib/modules/0.0/modules.softdep \
   out/build/initramfs/lib/modules/0.0/crc16.ko \
   out/build/initramfs/lib/modules/0.0/crc32c_generic.ko \
-  out/build/initramfs/lib/modules/0.0/crc32c-intel.ko \
   out/build/initramfs/lib/modules/0.0/ext4.ko \
   out/build/initramfs/lib/modules/0.0/jbd2.ko \
   out/build/initramfs/lib/modules/0.0/libcrc32c.ko \
