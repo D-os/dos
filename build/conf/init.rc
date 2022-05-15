@@ -19,7 +19,8 @@ on early-init
     # Android doesn't need kernel module autoloading, and it causes SELinux
     # denials.  So disable it by setting modprobe to the empty string.  Note: to
     # explicitly set a sysctl to an empty string, a trailing newline is needed.
-    write /proc/sys/kernel/modprobe \n
+    #write /proc/sys/kernel/modprobe \n
+    write /proc/sys/kernel/modprobe /bin/modprobe
 
     # Set the security context of /adb_keys if present.
     restorecon /adb_keys
