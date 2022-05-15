@@ -110,3 +110,6 @@
 [submodule "external/libudev"]
 	path = external/libudev
 	url = https://github.com/illiliti/libudev-zero.git
+[submodule "external/xkeyboard-config"]
+	path = external/xkeyboard-config
+	url = https://github.com/freedesktop/xkeyboard-config.git
