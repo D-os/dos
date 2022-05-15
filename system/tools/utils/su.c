@@ -34,13 +34,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <time.h>
 #include <sys/stat.h>
 
-#if 1 || defined(IN_KDEVELOP_PARSER)
-#define HAVE_SHADOW
-#endif
 #ifdef HAVE_SHADOW
 #include <shadow.h>
 #else
-#warning "shadow support disabled, did you forget to pass -DHAVE_SHADOW ?"
+// #warning "shadow support disabled, did you forget to pass -DHAVE_SHADOW ?"
 #endif
 
 #if !defined(_Noreturn) && __STDC_VERSION__+0 < 201112L
@@ -125,7 +122,7 @@ static int parse_args(int argc, char** argv,
 
 /* return 1 if the password check succeeded, 0 otherwise */
 int check_pass(const char* name, const char *pass, struct passwd *pwd) {
-        const char *encpw;
+	const char *encpw;
 #ifdef HAVE_SHADOW
 	struct spwd *shpwd = getspnam(name);
 	if(!shpwd) return 0;
