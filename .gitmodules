@@ -113,3 +113,6 @@
 [submodule "external/xkeyboard-config"]
 	path = external/xkeyboard-config
 	url = https://github.com/freedesktop/xkeyboard-config.git
+[submodule "external/mesa"]
+	path = external/mesa
+	url = https://gitlab.freedesktop.org/mesa/mesa.git
