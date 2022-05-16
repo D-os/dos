@@ -1,0 +1,18 @@
+build $SYSTEMDIR/usr/share/X11/xkb: phony $
+  $SYSTEMDIR/usr/share/X11/xkb/compat $
+  $SYSTEMDIR/usr/share/X11/xkb/geometry $
+  $SYSTEMDIR/usr/share/X11/xkb/keycodes $
+  $SYSTEMDIR/usr/share/X11/xkb/rules $
+  $SYSTEMDIR/usr/share/X11/xkb/symbols $
+  $SYSTEMDIR/usr/share/X11/xkb/types $
+
+rule sync
+  command = mkdir -p $out && cp -rf $in/* $out
+  description = SYNC $out <- $in
+
+build $SYSTEMDIR/usr/share/X11/xkb/compat: sync external/xkeyboard-config/compat
+build $SYSTEMDIR/usr/share/X11/xkb/geometry: sync external/xkeyboard-config/geometry
+build $SYSTEMDIR/usr/share/X11/xkb/keycodes: sync external/xkeyboard-config/keycodes
+build $SYSTEMDIR/usr/share/X11/xkb/rules: sync external/xkeyboard-config/rules
+build $SYSTEMDIR/usr/share/X11/xkb/symbols: sync external/xkeyboard-config/symbols
+build $SYSTEMDIR/usr/share/X11/xkb/types: sync external/xkeyboard-config/types

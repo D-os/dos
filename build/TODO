@@ -25,3 +25,5 @@
 
 - Conventionally mounted at ``/dev/bus/usb/``, usbfs features include:
   external/linux/Documentation/driver-api/usb/usb.rst
+
+- Move /usr/share/X11/xkb to /system/data/xkb and set XKB_CONFIG_ROOT

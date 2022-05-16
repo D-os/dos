@@ -188,6 +188,8 @@ build $SYSROOT/lib/libwayland-server.so: copy $BUILDROOT/wayland/libwayland-serv
 
 subninja build/weston.ninja
 
+subninja build/xkeyboard-config.ninja
+
 subninja build/zlib.ninja
 build $SYSROOT/lib/libz.so: copy $BUILDROOT/zlib/libz.so
 
