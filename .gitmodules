@@ -116,3 +116,6 @@
 [submodule "external/mesa"]
 	path = external/mesa
 	url = https://gitlab.freedesktop.org/mesa/mesa.git
+[submodule "external/expat"]
+	path = external/expat
+	url = https://android.googlesource.com/platform/external/expat
