@@ -1,0 +1,397 @@
+flags = $
+  -fvisibility=hidden $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -O2 $
+  -D__STDC_CONSTANT_MACROS $
+  -D__STDC_FORMAT_MACROS $
+  -D__STDC_LIMIT_MACROS $
+  '-DPACKAGE_VERSION="22.2.0-devel"' $
+  '-DPACKAGE_BUGREPORT="https://gitlab.freedesktop.org/mesa/mesa/-/issues"' $
+  -DHAVE_R300 $
+  -DHAVE_R600 $
+  -DHAVE_RADEONSI $
+  -DHAVE_NOUVEAU $
+  -DHAVE_VIRGL $
+  -DHAVE_SVGA $
+  -DHAVE_SWRAST $
+  -DHAVE_IRIS $
+  -DHAVE_CROCUS $
+  -DHAVE_I915 $
+  -DVIDEO_CODEC_VC1DEC=0 $
+  -DVIDEO_CODEC_H264DEC=0 $
+  -DVIDEO_CODEC_H264ENC=0 $
+  -DVIDEO_CODEC_H265DEC=0 $
+  -DVIDEO_CODEC_H265ENC=0 $
+  -DHAVE_WAYLAND_PLATFORM $
+  -DHAVE_SURFACELESS_PLATFORM $
+  -DHAVE_DRM_PLATFORM $
+  -DUSE_ELF_TLS $
+  -DENABLE_ST_OMX_BELLAGIO=0 $
+  -DENABLE_ST_OMX_TIZONIA=0 $
+  -DHAVE_VA_SURFACE_ATTRIB_DRM_FORMAT_MODIFIERS $
+  -DEGL_NO_X11 $
+  -DENABLE_SHADER_CACHE $
+  -DHAVE___BUILTIN_BSWAP32 $
+  -DHAVE___BUILTIN_BSWAP64 $
+  -DHAVE___BUILTIN_CLZ $
+  -DHAVE___BUILTIN_CLZLL $
+  -DHAVE___BUILTIN_CTZ $
+  -DHAVE___BUILTIN_EXPECT $
+  -DHAVE___BUILTIN_FFS $
+  -DHAVE___BUILTIN_FFSLL $
+  -DHAVE___BUILTIN_POPCOUNT $
+  -DHAVE___BUILTIN_POPCOUNTLL $
+  -DHAVE___BUILTIN_UNREACHABLE $
+  -DHAVE___BUILTIN_TYPES_COMPATIBLE_P $
+  -DHAVE_FUNC_ATTRIBUTE_CONST $
+  -DHAVE_FUNC_ATTRIBUTE_FLATTEN $
+  -DHAVE_FUNC_ATTRIBUTE_MALLOC $
+  -DHAVE_FUNC_ATTRIBUTE_PURE $
+  -DHAVE_FUNC_ATTRIBUTE_UNUSED $
+  -DHAVE_FUNC_ATTRIBUTE_WARN_UNUSED_RESULT $
+  -DHAVE_FUNC_ATTRIBUTE_WEAK $
+  -DHAVE_FUNC_ATTRIBUTE_FORMAT $
+  -DHAVE_FUNC_ATTRIBUTE_PACKED $
+  -DHAVE_FUNC_ATTRIBUTE_RETURNS_NONNULL $
+  -DHAVE_FUNC_ATTRIBUTE_ALIAS $
+  -DHAVE_FUNC_ATTRIBUTE_NORETURN $
+  -DHAVE_FUNC_ATTRIBUTE_VISIBILITY $
+  -DHAVE_UINT128 $
+  -D_GNU_SOURCE $
+  -DUSE_SSE41 $
+  -DUSE_GCC_ATOMIC_BUILTINS $
+  -DUSE_X86_64_ASM $
+  -DMAJOR_IN_SYSMACROS $
+  -DHAS_SCHED_H $
+  -DHAS_SCHED_GETAFFINITY $
+  -DHAVE_LINUX_FUTEX_H $
+  -DHAVE_ENDIAN_H $
+  -DHAVE_DLFCN_H $
+  -DHAVE_SYS_SHM_H $
+  -DHAVE_CET_H $
+  -DHAVE_STRTOF $
+  -DHAVE_MKOSTEMP $
+  -DHAVE_TIMESPEC_GET $
+  -DHAVE_MEMFD_CREATE $
+  -DHAVE_RANDOM_R $
+  -DHAVE_FLOCK $
+  -DHAVE_STRTOK_R $
+  -DHAVE_GETRANDOM $
+  -DHAVE_QSORT_R $
+  -DHAVE_PROGRAM_INVOCATION_NAME $
+  -DHAVE_ISSIGNALING $
+  -DHAVE_POSIX_MEMALIGN $
+  -DHAVE_DIRENT_D_TYPE $
+  -DHAVE_STRTOD_L $
+  -DHAVE_DLADDR $
+  -DHAVE_DL_ITERATE_PHDR $
+  -DHAVE_ZLIB $
+  -DHAVE_COMPRESSION $
+  -DHAVE_PTHREAD $
+  -DHAVE_PTHREAD_SETAFFINITY $
+  -DHAVE_LIBDRM $
+  -DHAVE_LIBUDEV $
+  -DLLVM_AVAILABLE $
+  '-DMESA_LLVM_VERSION_STRING="14.0.0"' $
+  -DLLVM_IS_SHARED=1 $
+  -DDRAW_LLVM_AVAILABLE $
+  -DMESA_EXECMEM $
+  -DHAVE_LIBUNWIND $
+  -DWL_HIDE_DEPRECATED $
+  -DHAVE_OPENMP $
+  -DVK_USE_PLATFORM_WAYLAND_KHR $
+  -DVK_USE_PLATFORM_DISPLAY_KHR $
+  -Werror=implicit-function-declaration $
+  -Werror=missing-prototypes $
+  -Werror=return-type $
+  -Werror=empty-body $
+  -Werror=incompatible-pointer-types $
+  -Werror=int-conversion $
+  -Wimplicit-fallthrough $
+  -Wno-missing-field-initializers $
+  -fno-math-errno $
+  -fno-trapping-math $
+  -fno-common $
+  -Wno-unused-function $
+  -Werror=format $
+  -Wformat-security $
+  -ffunction-sections $
+  -fdata-sections $
+  -fPIC $
+  -pthread $
+  -DBUILT_WITH_ASAN=0 $
+  -DHAVE_MINCORE $
+  -D_EGL_NATIVE_PLATFORM=_EGL_PLATFORM_WAYLAND $
+  -DUSE_DRICONF $
+  '-DDEFAULT_DRIVER_DIR="/usr/local/lib64/dri"' $
+
+cflags = -std=c11 $flags
+cxxflags = $flags
+
+includes = -Iexternal/mesa/include -Iexternal/mesa/src -Iexternal/mesa/src/mesa -Iexternal/mesa/src/util $
+  -Iexternal/mesa/src/egl/main -Iexternal/mesa/src/gallium/include $
+  -I$BUILDROOT/mesa -Iexternal/libdrm -Iexternal/libdrm/include/drm
+
+build $BUILDROOT/mesa/linux-dmabuf-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/mesa/linux-dmabuf-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+
+build $BUILDROOT/mesa/wayland-drm-protocol.c: wayland-scanner external/mesa/src/egl/wayland/wayland-drm/wayland-drm.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/mesa/wayland-drm-client-protocol.h: wayland-scanner external/mesa/src/egl/wayland/wayland-drm/wayland-drm.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/mesa/wayland-drm-server-protocol.h: wayland-scanner external/mesa/src/egl/wayland/wayland-drm/wayland-drm.xml | out/tc/host/bin/wayland-scanner
+  type = server-header
+
+build $BUILDROOT/mesa/wayland-drm-protocol.o: cc $BUILDROOT/mesa/wayland-drm-protocol.c
+build $BUILDROOT/mesa/egl/wayland-drm.o: cc external/mesa/src/egl/wayland/wayland-drm/wayland-drm.c | $BUILDROOT/mesa/wayland-drm-server-protocol.h
+
+build $BUILDROOT/mesa/libwayland_drm.a: ar $
+  $BUILDROOT/mesa/wayland-drm-protocol.o $
+  $BUILDROOT/mesa/egl/wayland-drm.o $
+
+build $BUILDROOT/mesa/loader/loader_dri_helper.o: cc external/mesa/src/loader/loader_dri_helper.c
+build $BUILDROOT/mesa/loader/loader.o: cc external/mesa/src/loader/loader.c
+
+build $BUILDROOT/mesa/libloader.a: ar $
+  $BUILDROOT/mesa/loader/loader_dri_helper.o $
+  $BUILDROOT/mesa/loader/loader.o $
+
+build $BUILDROOT/mesa/format/u_format_table.o: cc build/mesa/util/format/u_format_table.c
+  includes = $includes -Iexternal/mesa/src/util/format
+build $BUILDROOT/mesa/format/u_format.o: cc external/mesa/src/util/format/u_format.c
+build $BUILDROOT/mesa/format/u_format_bptc.o: cc external/mesa/src/util/format/u_format_bptc.c
+  includes = $includes -Ibuild/mesa/util/format
+build $BUILDROOT/mesa/format/u_format_etc.o: cc external/mesa/src/util/format/u_format_etc.c
+build $BUILDROOT/mesa/format/u_format_fxt1.o: cc external/mesa/src/util/format/u_format_fxt1.c
+  includes = $includes -Ibuild/mesa
+build $BUILDROOT/mesa/format/u_format_latc.o: cc external/mesa/src/util/format/u_format_latc.c
+build $BUILDROOT/mesa/format/u_format_other.o: cc external/mesa/src/util/format/u_format_other.c
+build $BUILDROOT/mesa/format/u_format_rgtc.o: cc external/mesa/src/util/format/u_format_rgtc.c
+build $BUILDROOT/mesa/format/u_format_s3tc.o: cc external/mesa/src/util/format/u_format_s3tc.c
+build $BUILDROOT/mesa/format/u_format_tests.o: cc external/mesa/src/util/format/u_format_tests.c
+build $BUILDROOT/mesa/format/u_format_unpack_neon.o: cc external/mesa/src/util/format/u_format_unpack_neon.c
+  includes = $includes -Iexternal/mesa/src/util/format
+build $BUILDROOT/mesa/format/u_format_yuv.o: cc external/mesa/src/util/format/u_format_yuv.c
+build $BUILDROOT/mesa/format/u_format_zs.o: cc external/mesa/src/util/format/u_format_zs.c
+
+build $BUILDROOT/mesa/libmesa_format.a: ar $
+  $BUILDROOT/mesa/format/u_format_table.o $
+  $BUILDROOT/mesa/format/u_format.o $
+  $BUILDROOT/mesa/format/u_format_bptc.o $
+  $BUILDROOT/mesa/format/u_format_etc.o $
+  $BUILDROOT/mesa/format/u_format_fxt1.o $
+  $BUILDROOT/mesa/format/u_format_latc.o $
+  $BUILDROOT/mesa/format/u_format_other.o $
+  $BUILDROOT/mesa/format/u_format_rgtc.o $
+  $BUILDROOT/mesa/format/u_format_s3tc.o $
+  $BUILDROOT/mesa/format/u_format_tests.o $
+  $BUILDROOT/mesa/format/u_format_unpack_neon.o $
+  $BUILDROOT/mesa/format/u_format_yuv.o $
+  $BUILDROOT/mesa/format/u_format_zs.o $
+
+build $BUILDROOT/mesa/util/format_srgb.o: cc build/mesa/util/format_srgb.c
+build $BUILDROOT/mesa/util/u_indices_gen.o: cc build/mesa/util/u_indices_gen.c
+  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
+build $BUILDROOT/mesa/util/u_unfilled_gen.o: cc build/mesa/util/u_unfilled_gen.c
+  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
+build $BUILDROOT/mesa/util/anon_file.o: cc external/mesa/src/util/anon_file.c
+build $BUILDROOT/mesa/util/bitscan.o: cc external/mesa/src/util/bitscan.c
+build $BUILDROOT/mesa/util/blob.o: cc external/mesa/src/util/blob.c
+build $BUILDROOT/mesa/util/build_id.o: cc external/mesa/src/util/build_id.c
+build $BUILDROOT/mesa/util/compress.o: cc external/mesa/src/util/compress.c
+build $BUILDROOT/mesa/util/crc32.o: cc external/mesa/src/util/crc32.c
+build $BUILDROOT/mesa/util/dag.o: cc external/mesa/src/util/dag.c
+build $BUILDROOT/mesa/util/debug.o: cc external/mesa/src/util/debug.c
+build $BUILDROOT/mesa/util/disk_cache.o: cc external/mesa/src/util/disk_cache.c
+build $BUILDROOT/mesa/util/disk_cache_os.o: cc external/mesa/src/util/disk_cache_os.c
+build $BUILDROOT/mesa/util/double.o: cc external/mesa/src/util/double.c
+build $BUILDROOT/mesa/util/fast_idiv_by_const.o: cc external/mesa/src/util/fast_idiv_by_const.c
+build $BUILDROOT/mesa/util/fossilize_db.o: cc external/mesa/src/util/fossilize_db.c
+build $BUILDROOT/mesa/util/half_float.o: cc external/mesa/src/util/half_float.c
+build $BUILDROOT/mesa/util/hash_table.o: cc external/mesa/src/util/hash_table.c
+build $BUILDROOT/mesa/util/u_idalloc.o: cc external/mesa/src/util/u_idalloc.c
+build $BUILDROOT/mesa/util/log.o: cc external/mesa/src/util/log.c
+build $BUILDROOT/mesa/util/memstream.o: cc external/mesa/src/util/memstream.c
+build $BUILDROOT/mesa/util/mesa-sha1.o: cc external/mesa/src/util/mesa-sha1.c
+build $BUILDROOT/mesa/util/os_time.o: cc external/mesa/src/util/os_time.c
+build $BUILDROOT/mesa/util/os_file.o: cc external/mesa/src/util/os_file.c
+build $BUILDROOT/mesa/util/os_memory_fd.o: cc external/mesa/src/util/os_memory_fd.c
+build $BUILDROOT/mesa/util/os_misc.o: cc external/mesa/src/util/os_misc.c
+build $BUILDROOT/mesa/util/os_socket.o: cc external/mesa/src/util/os_socket.c
+build $BUILDROOT/mesa/util/perf_u_trace.o: cc external/mesa/src/util/perf/u_trace.c
+  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
+build $BUILDROOT/mesa/util/u_process.o: cc external/mesa/src/util/u_process.c
+build $BUILDROOT/mesa/util/u_qsort.o: cxx external/mesa/src/util/u_qsort.cpp
+build $BUILDROOT/mesa/util/sha1_sha1.o: cc external/mesa/src/util/sha1/sha1.c
+build $BUILDROOT/mesa/util/ralloc.o: cc external/mesa/src/util/ralloc.c
+build $BUILDROOT/mesa/util/rand_xor.o: cc external/mesa/src/util/rand_xor.c
+build $BUILDROOT/mesa/util/rb_tree.o: cc external/mesa/src/util/rb_tree.c
+build $BUILDROOT/mesa/util/register_allocate.o: cc external/mesa/src/util/register_allocate.c
+build $BUILDROOT/mesa/util/rgtc.o: cc external/mesa/src/util/rgtc.c
+build $BUILDROOT/mesa/util/set.o: cc external/mesa/src/util/set.c
+build $BUILDROOT/mesa/util/slab.o: cc external/mesa/src/util/slab.c
+build $BUILDROOT/mesa/util/softfloat.o: cc external/mesa/src/util/softfloat.c
+build $BUILDROOT/mesa/util/sparse_array.o: cc external/mesa/src/util/sparse_array.c
+build $BUILDROOT/mesa/util/string_buffer.o: cc external/mesa/src/util/string_buffer.c
+build $BUILDROOT/mesa/util/strtod.o: cc external/mesa/src/util/strtod.c
+build $BUILDROOT/mesa/util/u_atomic.o: cc external/mesa/src/util/u_atomic.c
+build $BUILDROOT/mesa/util/u_debug_describe.o: cc external/mesa/src/util/u_debug_describe.c
+build $BUILDROOT/mesa/util/u_debug_refcnt.o: cc external/mesa/src/util/u_debug_refcnt.c
+build $BUILDROOT/mesa/util/u_hash_table.o: cc external/mesa/src/util/u_hash_table.c
+  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
+build $BUILDROOT/mesa/util/u_queue.o: cc external/mesa/src/util/u_queue.c
+build $BUILDROOT/mesa/util/u_vector.o: cc external/mesa/src/util/u_vector.c
+build $BUILDROOT/mesa/util/u_math.o: cc external/mesa/src/util/u_math.c
+build $BUILDROOT/mesa/util/u_mm.o: cc external/mesa/src/util/u_mm.c
+build $BUILDROOT/mesa/util/u_debug.o: cc external/mesa/src/util/u_debug.c
+build $BUILDROOT/mesa/util/u_debug_memory.o: cc external/mesa/src/util/u_debug_memory.c
+  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
+build $BUILDROOT/mesa/util/u_cpu_detect.o: cc external/mesa/src/util/u_cpu_detect.c
+build $BUILDROOT/mesa/util/u_printf.o: cc external/mesa/src/util/u_printf.c
+build $BUILDROOT/mesa/util/u_worklist.o: cc external/mesa/src/util/u_worklist.c
+build $BUILDROOT/mesa/util/vma.o: cc external/mesa/src/util/vma.c
+build $BUILDROOT/mesa/util/indices_u_primconvert.o: cc external/mesa/src/util/indices/u_primconvert.c
+  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
+build $BUILDROOT/mesa/util/u_debug_stack.o: cc external/mesa/src/util/u_debug_stack.c
+  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
+build $BUILDROOT/mesa/util/u_debug_symbol.o: cc external/mesa/src/util/u_debug_symbol.c
+  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
+
+build $BUILDROOT/mesa/libmesa_util.a: ar $
+  $BUILDROOT/mesa/util/format_srgb.o $
+  $BUILDROOT/mesa/util/u_indices_gen.o $
+  $BUILDROOT/mesa/util/u_unfilled_gen.o $
+  $BUILDROOT/mesa/util/anon_file.o $
+  $BUILDROOT/mesa/util/bitscan.o $
+  $BUILDROOT/mesa/util/blob.o $
+  $BUILDROOT/mesa/util/build_id.o $
+  $BUILDROOT/mesa/util/compress.o $
+  $BUILDROOT/mesa/util/crc32.o $
+  $BUILDROOT/mesa/util/dag.o $
+  $BUILDROOT/mesa/util/debug.o $
+  $BUILDROOT/mesa/util/disk_cache.o $
+  $BUILDROOT/mesa/util/disk_cache_os.o $
+  $BUILDROOT/mesa/util/double.o $
+  $BUILDROOT/mesa/util/fast_idiv_by_const.o $
+  $BUILDROOT/mesa/util/fossilize_db.o $
+  $BUILDROOT/mesa/util/half_float.o $
+  $BUILDROOT/mesa/util/hash_table.o $
+  $BUILDROOT/mesa/util/u_idalloc.o $
+  $BUILDROOT/mesa/util/log.o $
+  $BUILDROOT/mesa/util/memstream.o $
+  $BUILDROOT/mesa/util/mesa-sha1.o $
+  $BUILDROOT/mesa/util/os_time.o $
+  $BUILDROOT/mesa/util/os_file.o $
+  $BUILDROOT/mesa/util/os_memory_fd.o $
+  $BUILDROOT/mesa/util/os_misc.o $
+  $BUILDROOT/mesa/util/os_socket.o $
+  $BUILDROOT/mesa/util/perf_u_trace.o $
+  $BUILDROOT/mesa/util/u_process.o $
+  $BUILDROOT/mesa/util/u_qsort.o $
+  $BUILDROOT/mesa/util/sha1_sha1.o $
+  $BUILDROOT/mesa/util/ralloc.o $
+  $BUILDROOT/mesa/util/rand_xor.o $
+  $BUILDROOT/mesa/util/rb_tree.o $
+  $BUILDROOT/mesa/util/register_allocate.o $
+  $BUILDROOT/mesa/util/rgtc.o $
+  $BUILDROOT/mesa/util/set.o $
+  $BUILDROOT/mesa/util/slab.o $
+  $BUILDROOT/mesa/util/softfloat.o $
+  $BUILDROOT/mesa/util/sparse_array.o $
+  $BUILDROOT/mesa/util/string_buffer.o $
+  $BUILDROOT/mesa/util/strtod.o $
+  $BUILDROOT/mesa/util/u_atomic.o $
+  $BUILDROOT/mesa/util/u_debug_describe.o $
+  $BUILDROOT/mesa/util/u_debug_refcnt.o $
+  $BUILDROOT/mesa/util/u_hash_table.o $
+  $BUILDROOT/mesa/util/u_queue.o $
+  $BUILDROOT/mesa/util/u_vector.o $
+  $BUILDROOT/mesa/util/u_math.o $
+  $BUILDROOT/mesa/util/u_mm.o $
+  $BUILDROOT/mesa/util/u_debug.o $
+  $BUILDROOT/mesa/util/u_debug_memory.o $
+  $BUILDROOT/mesa/util/u_cpu_detect.o $
+  $BUILDROOT/mesa/util/u_printf.o $
+  $BUILDROOT/mesa/util/u_worklist.o $
+  $BUILDROOT/mesa/util/vma.o $
+  $BUILDROOT/mesa/util/indices_u_primconvert.o $
+  $BUILDROOT/mesa/util/u_debug_stack.o $
+  $BUILDROOT/mesa/util/u_debug_symbol.o $
+
+build $BUILDROOT/mesa/util/xmlconfig.o: cc external/mesa/src/util/xmlconfig.c
+
+build $BUILDROOT/mesa/libxmlconfig.a: ar $
+  $BUILDROOT/mesa/util/xmlconfig.o $
+
+build $BUILDROOT/mesa/linux-dmabuf-unstable-v1-protocol.o: cc $BUILDROOT/mesa/linux-dmabuf-unstable-v1-protocol.c
+build $BUILDROOT/mesa/egl/main_eglapi.o: cc external/mesa/src/egl/main/eglapi.c
+build $BUILDROOT/mesa/egl/main_eglarray.o: cc external/mesa/src/egl/main/eglarray.c
+build $BUILDROOT/mesa/egl/main_eglconfigdebug.o: cc external/mesa/src/egl/main/eglconfigdebug.c
+build $BUILDROOT/mesa/egl/main_eglconfig.o: cc external/mesa/src/egl/main/eglconfig.c
+build $BUILDROOT/mesa/egl/main_eglcontext.o: cc external/mesa/src/egl/main/eglcontext.c
+build $BUILDROOT/mesa/egl/main_eglcurrent.o: cc external/mesa/src/egl/main/eglcurrent.c
+build $BUILDROOT/mesa/egl/main_egldevice.o: cc external/mesa/src/egl/main/egldevice.c
+build $BUILDROOT/mesa/egl/main_egldisplay.o: cc external/mesa/src/egl/main/egldisplay.c
+build $BUILDROOT/mesa/egl/main_eglglobals.o: cc external/mesa/src/egl/main/eglglobals.c
+build $BUILDROOT/mesa/egl/main_eglimage.o: cc external/mesa/src/egl/main/eglimage.c
+build $BUILDROOT/mesa/egl/main_egllog.o: cc external/mesa/src/egl/main/egllog.c
+build $BUILDROOT/mesa/egl/main_eglsurface.o: cc external/mesa/src/egl/main/eglsurface.c
+build $BUILDROOT/mesa/egl/main_eglsync.o: cc external/mesa/src/egl/main/eglsync.c
+build $BUILDROOT/mesa/egl/drivers_dri2_egl_dri2.o: cc external/mesa/src/egl/drivers/dri2/egl_dri2.c | $BUILDROOT/mesa/wayland-drm-client-protocol.h $BUILDROOT/mesa/linux-dmabuf-unstable-v1-client-protocol.h
+  includes = $includes -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/egl/wayland/wayland-drm
+  cflags = $cflags -Wno-#warnings
+build $BUILDROOT/mesa/egl/drivers_dri2_platform_device.o: cc external/mesa/src/egl/drivers/dri2/platform_device.c
+  includes = $includes -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/loader
+build $BUILDROOT/mesa/egl/drivers_dri2_platform_surfaceless.o: cc external/mesa/src/egl/drivers/dri2/platform_surfaceless.c
+  includes = $includes -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/loader
+build $BUILDROOT/mesa/egl/drivers_dri2_platform_drm.o: cc external/mesa/src/egl/drivers/dri2/platform_drm.c
+  includes = $includes -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/loader
+build $BUILDROOT/mesa/egl/drivers_dri2_platform_wayland.o: cc external/mesa/src/egl/drivers/dri2/platform_wayland.c
+  includes = $includes -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/loader
+
+build $BUILDROOT/mesa/libEGL.so: so $
+  $BUILDROOT/mesa/linux-dmabuf-unstable-v1-protocol.o $
+  $BUILDROOT/mesa/egl/main_eglapi.o $
+  $BUILDROOT/mesa/egl/main_eglarray.o $
+  $BUILDROOT/mesa/egl/main_eglconfigdebug.o $
+  $BUILDROOT/mesa/egl/main_eglconfig.o $
+  $BUILDROOT/mesa/egl/main_eglcontext.o $
+  $BUILDROOT/mesa/egl/main_eglcurrent.o $
+  $BUILDROOT/mesa/egl/main_egldevice.o $
+  $BUILDROOT/mesa/egl/main_egldisplay.o $
+  $BUILDROOT/mesa/egl/main_eglglobals.o $
+  $BUILDROOT/mesa/egl/main_eglimage.o $
+  $BUILDROOT/mesa/egl/main_egllog.o $
+  $BUILDROOT/mesa/egl/main_eglsurface.o $
+  $BUILDROOT/mesa/egl/main_eglsync.o $
+  $BUILDROOT/mesa/egl/drivers_dri2_egl_dri2.o $
+  $BUILDROOT/mesa/egl/drivers_dri2_platform_device.o $
+  $BUILDROOT/mesa/egl/drivers_dri2_platform_surfaceless.o $
+  $BUILDROOT/mesa/egl/drivers_dri2_platform_drm.o $
+  $BUILDROOT/mesa/egl/drivers_dri2_platform_wayland.o $
+  $BUILDROOT/mesa/libwayland_drm.a $
+  $BUILDROOT/mesa/libloader.a $
+  $BUILDROOT/mesa/libmesa_format.a $
+  $BUILDROOT/mesa/libmesa_util.a $
+  $BUILDROOT/mesa/libxmlconfig.a $
+| $SYSROOT/lib/libdrm.so $
+  $SYSROOT/lib/libunwind.so $
+  $SYSROOT/lib/libwayland-client.so $
+  $SYSROOT/lib/libwayland-server.so $
+  $SYSROOT/lib/libz.so
+libs = $BUILDROOT/mesa/libgbm.so $BUILDROOT/mesa/libglapi.so $
+  -lm -ldrm -lwayland-client -lwayland-server -pthread -lz -lunwind
+
+#| $SYSROOT/lib/libdrm.so $
+#  $SYSROOT/lib/libexpat.so $
+#  $SYSROOT/lib/libm.so $
+#  $SYSROOT/lib/libunwind.so $
+#  $SYSROOT/lib/libwayland-client.so $
+#  $SYSROOT/lib/libwayland-server.so $
+#  $SYSROOT/lib/libz.so
+#libs = $BUILDROOT/mesa/libgbm.so $BUILDROOT/mesa/libglapi.so $
+#  -lexpat -lm -ldrm -lwayland-client -lwayland-server -pthread -lz -lunwind
