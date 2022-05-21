@@ -1,0 +1,23 @@
+cflags = $
+  -fno-strict-aliasing $
+  -Wall $
+  -Werror $
+  -Wmissing-prototypes $
+  -Wstrict-prototypes $
+  -Wno-unused-function $
+  -Wno-unused-parameter $
+  -Wno-missing-field-initializers $
+  -DHAVE_EXPAT_CONFIG_H $
+  -UWIN32_LEAN_AND_MEAN $
+  -include stdio.h
+
+build $BUILDROOT/expat/xmlparse.o: cc external/expat/lib/xmlparse.c
+build $BUILDROOT/expat/xmlrole.o: cc external/expat/lib/xmlrole.c
+build $BUILDROOT/expat/xmltok.o: cc external/expat/lib/xmltok.c
+
+build $BUILDROOT/expat/libexpat.a: ar $
+  $BUILDROOT/expat/xmlparse.o $
+  $BUILDROOT/expat/xmlrole.o $
+  $BUILDROOT/expat/xmltok.o $
+
+build $BUILDROOT/expat/libexpat.so: soa $BUILDROOT/expat/libexpat.a
