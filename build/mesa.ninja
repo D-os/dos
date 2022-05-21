@@ -125,7 +125,8 @@ flags = $
   -DHAVE_MINCORE $
   -D_EGL_NATIVE_PLATFORM=_EGL_PLATFORM_WAYLAND $
   -DUSE_DRICONF $
-  '-DDEFAULT_DRIVER_DIR="/usr/local/lib64/dri"' $
+  '-DDEFAULT_DRIVER_DIR="/system/lib/dri"' $
+  '-DDEFAULT_BACKENDS_PATH="/system/lib/gbm"' $
 
 cflags = -std=c11 $flags
 cxxflags = $flags
@@ -378,20 +379,63 @@ build $BUILDROOT/mesa/libEGL.so: so $
   $BUILDROOT/mesa/libmesa_format.a $
   $BUILDROOT/mesa/libmesa_util.a $
   $BUILDROOT/mesa/libxmlconfig.a $
-| $SYSROOT/lib/libdrm.so $
+| $BUILDROOT/mesa/libgbm.so $
+  $BUILDROOT/mesa/libglapi.so $
+  $SYSROOT/lib/libdrm.so $
+  $SYSROOT/lib/libexpat.so $
   $SYSROOT/lib/libunwind.so $
   $SYSROOT/lib/libwayland-client.so $
   $SYSROOT/lib/libwayland-server.so $
   $SYSROOT/lib/libz.so
-libs = $BUILDROOT/mesa/libgbm.so $BUILDROOT/mesa/libglapi.so $
-  -lm -ldrm -lwayland-client -lwayland-server -pthread -lz -lunwind
+  libs = $BUILDROOT/mesa/libgbm.so $BUILDROOT/mesa/libglapi.so $
+    -lexpat -lm -ldrm -lwayland-client -lwayland-server -pthread -lz -lunwind
 
-#| $SYSROOT/lib/libdrm.so $
-#  $SYSROOT/lib/libexpat.so $
-#  $SYSROOT/lib/libm.so $
-#  $SYSROOT/lib/libunwind.so $
-#  $SYSROOT/lib/libwayland-client.so $
-#  $SYSROOT/lib/libwayland-server.so $
-#  $SYSROOT/lib/libz.so
-#libs = $BUILDROOT/mesa/libgbm.so $BUILDROOT/mesa/libglapi.so $
-#  -lexpat -lm -ldrm -lwayland-client -lwayland-server -pthread -lz -lunwind
+build $BUILDROOT/mesa/gbm/main_backend.o: cc external/mesa/src/gbm/main/backend.c
+  includes = $includes -Iexternal/mesa/src/loader
+build $BUILDROOT/mesa/gbm/main_gbm.o: cc external/mesa/src/gbm/main/gbm.c
+build $BUILDROOT/mesa/gbm/backends_dri_gbm_dri.o: cc external/mesa/src/gbm/backends/dri/gbm_dri.c
+  includes = $includes -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/loader -Iexternal/mesa/src/egl/wayland/wayland-drm
+
+build $BUILDROOT/mesa/libgbm.so: so $
+  $BUILDROOT/mesa/gbm/main_backend.o $
+  $BUILDROOT/mesa/gbm/main_gbm.o $
+  $BUILDROOT/mesa/gbm/backends_dri_gbm_dri.o $
+  $BUILDROOT/mesa/libloader.a $
+  $BUILDROOT/mesa/libmesa_format.a $
+  $BUILDROOT/mesa/libmesa_util.a $
+  $BUILDROOT/mesa/libxmlconfig.a $
+| $
+  $SYSROOT/lib/libdrm.so $
+  $SYSROOT/lib/libexpat.so $
+  $SYSROOT/lib/libunwind.so $
+  $SYSROOT/lib/libwayland-server.so $
+  $SYSROOT/lib/libz.so
+  libs = -ldrm -lwayland-server -pthread -lz -lm -lexpat -lunwind
+
+build $BUILDROOT/mesa/mapi/entry.o: cc external/mesa/src/mapi/entry.c
+  cflags = $cflags -DMAPI_MODE_GLAPI '-DMAPI_ABI_HEADER="shared-glapi/glapi_mapi_tmp.h"' -fno-lto
+  includes = $includes -Ibuild/mesa
+build $BUILDROOT/mesa/mapi/mapi_glapi.o: cc external/mesa/src/mapi/mapi_glapi.c
+  cflags = $cflags -DMAPI_MODE_GLAPI '-DMAPI_ABI_HEADER="shared-glapi/glapi_mapi_tmp.h"' -fno-lto
+  includes = $includes -Ibuild/mesa
+build $BUILDROOT/mesa/mapi/stub.o: cc external/mesa/src/mapi/stub.c
+  cflags = $cflags -DMAPI_MODE_GLAPI '-DMAPI_ABI_HEADER="shared-glapi/glapi_mapi_tmp.h"' -fno-lto
+  includes = $includes -Ibuild/mesa
+build $BUILDROOT/mesa/mapi/table.o: cc external/mesa/src/mapi/table.c
+  cflags = $cflags -DMAPI_MODE_GLAPI '-DMAPI_ABI_HEADER="shared-glapi/glapi_mapi_tmp.h"' -fno-lto
+  includes = $includes -Ibuild/mesa
+build $BUILDROOT/mesa/mapi/u_current.o: cc external/mesa/src/mapi/u_current.c
+  cflags = $cflags -DMAPI_MODE_GLAPI '-DMAPI_ABI_HEADER="shared-glapi/glapi_mapi_tmp.h"' -fno-lto
+  includes = $includes -Ibuild/mesa
+build $BUILDROOT/mesa/mapi/u_execmem.o: cc external/mesa/src/mapi/u_execmem.c
+  cflags = $cflags -DMAPI_MODE_GLAPI '-DMAPI_ABI_HEADER="shared-glapi/glapi_mapi_tmp.h"' -fno-lto
+  includes = $includes -Ibuild/mesa
+
+build $BUILDROOT/mesa/libglapi.so: so $
+  $BUILDROOT/mesa/mapi/entry.o $
+  $BUILDROOT/mesa/mapi/mapi_glapi.o $
+  $BUILDROOT/mesa/mapi/stub.o $
+  $BUILDROOT/mesa/mapi/table.o $
+  $BUILDROOT/mesa/mapi/u_current.o $
+  $BUILDROOT/mesa/mapi/u_execmem.o
+  libs = -pthread

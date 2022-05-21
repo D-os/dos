@@ -175,6 +175,9 @@ subninja build/initramfs.ninja
 build initramfs: phony $BUILDROOT/initramfs.gz
 
 subninja build/mesa.ninja
+build $SYSROOT/lib/libgbm.so: copy $BUILDROOT/mesa/libgbm.so
+build $SYSROOT/lib/libglapi.so: copy $BUILDROOT/mesa/libglapi.so
+build $SYSROOT/lib/libEGL.so: copy $BUILDROOT/mesa/libEGL.so
 
 subninja build/mtdev.ninja
 
