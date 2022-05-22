@@ -122,3 +122,6 @@
 [submodule "external/libva"]
 	path = external/libva
 	url = https://github.com/intel/libva.git
+[submodule "external/seatd"]
+	path = external/seatd
+	url = https://git.sr.ht/~kennylevinsen/seatd
