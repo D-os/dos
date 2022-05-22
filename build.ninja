@@ -186,6 +186,9 @@ build $SYSROOT/lib/libEGL.so: copy $BUILDROOT/mesa/libEGL.so
 
 subninja build/mtdev.ninja
 
+subninja build/seatd.ninja
+build $SYSROOT/lib/libseat.so: copy $BUILDROOT/seatd/libseat.so
+
 subninja build/system_img.ninja
 build system.img: phony $BUILDROOT/system.img $BUILDROOT/system.stamp
 

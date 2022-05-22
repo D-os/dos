@@ -1,0 +1,66 @@
+cflags = $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -Wextra $
+  -Wpedantic $
+  -Werror $
+  -std=c11 $
+  -O0 $
+  -D_XOPEN_SOURCE=700 $
+  -D__BSD_VISIBLE $
+  -D_NETBSD_SOURCE $
+  '-DSEATD_VERSION="0.7.0"' $
+  '-DSEATD_DEFAULTPATH="/run/seatd.sock"' $
+  '-DSEATD_INSTALLPATH="/system/bin/seatd"' $
+  -Wundef $
+  -Wunused $
+  -Wno-sign-compare $
+  -Wmissing-include-dirs $
+  -Wold-style-definition $
+  -Wpointer-arith $
+  -Wstrict-prototypes $
+  -Wimplicit-fallthrough $
+  -Wmissing-prototypes $
+  -Wvla $
+  -DDEBUG $
+  -DLIBSEAT=1 $
+  -DBUILTIN_ENABLED=1 $
+
+includes = -Iexternal/seatd/include
+
+build $BUILDROOT/seatd/common_connection.o: cc external/seatd/common/connection.c
+build $BUILDROOT/seatd/common_linked_list.o: cc external/seatd/common/linked_list.c
+build $BUILDROOT/seatd/common_log.o: cc external/seatd/common/log.c
+build $BUILDROOT/seatd/libseat_backend_seatd.o: cc external/seatd/libseat/backend/seatd.c
+build $BUILDROOT/seatd/common_terminal.o: cc external/seatd/common/terminal.c
+build $BUILDROOT/seatd/common_evdev.o: cc external/seatd/common/evdev.c
+build $BUILDROOT/seatd/common_drm.o: cc external/seatd/common/drm.c
+build $BUILDROOT/seatd/common_wscons.o: cc external/seatd/common/wscons.c
+build $BUILDROOT/seatd/seatd_poller.o: cc external/seatd/seatd/poller.c
+build $BUILDROOT/seatd/seatd_seat.o: cc external/seatd/seatd/seat.c
+build $BUILDROOT/seatd/seatd_client.o: cc external/seatd/seatd/client.c
+build $BUILDROOT/seatd/seatd_server.o: cc external/seatd/seatd/server.c
+
+build $BUILDROOT/seatd/libseat-private.a: ar $
+  $BUILDROOT/seatd/common_connection.o $
+  $BUILDROOT/seatd/common_linked_list.o $
+  $BUILDROOT/seatd/common_log.o $
+  $BUILDROOT/seatd/libseat_backend_seatd.o $
+  $BUILDROOT/seatd/common_terminal.o $
+  $BUILDROOT/seatd/common_evdev.o $
+  $BUILDROOT/seatd/common_drm.o $
+  $BUILDROOT/seatd/common_wscons.o $
+  $BUILDROOT/seatd/seatd_poller.o $
+  $BUILDROOT/seatd/seatd_seat.o $
+  $BUILDROOT/seatd/seatd_client.o $
+  $BUILDROOT/seatd/seatd_server.o $
+
+build $BUILDROOT/seatd/libseat_libseat.o: cc external/seatd/libseat/libseat.c
+build $BUILDROOT/seatd/libseat_backend_noop.o: cc external/seatd/libseat/backend/noop.c
+
+build $BUILDROOT/seatd/libseat.so: so $
+  $BUILDROOT/seatd/libseat_libseat.o $
+  $BUILDROOT/seatd/libseat_backend_noop.o $
+  $BUILDROOT/seatd/libseat-private.a
+  libs = -lrt
