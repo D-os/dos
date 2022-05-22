@@ -439,3 +439,12 @@ build $BUILDROOT/mesa/libglapi.so: so $
   $BUILDROOT/mesa/mapi/u_current.o $
   $BUILDROOT/mesa/mapi/u_execmem.o
   libs = -pthread
+
+build $BUILDROOT/mesa/mapi/es2api/entry.o: cc external/mesa/src/mapi/entry.c
+  cflags = $cflags -DMAPI_MODE_BRIDGE '-DMAPI_ABI_HEADER="es2api/glapi_mapi_tmp.h"' -fno-lto
+  includes = $includes -Ibuild/mesa
+
+build  $BUILDROOT/mesa/libGLESv2.so: so $
+  $BUILDROOT/mesa/mapi/es2api/entry.o $
+| $SYSROOT/lib/libdrm.so
+  libs = $BUILDROOT/mesa/libglapi.so -pthread -ldrm

@@ -183,6 +183,7 @@ subninja build/mesa.ninja
 build $SYSROOT/lib/libgbm.so: copy $BUILDROOT/mesa/libgbm.so
 build $SYSROOT/lib/libglapi.so: copy $BUILDROOT/mesa/libglapi.so
 build $SYSROOT/lib/libEGL.so: copy $BUILDROOT/mesa/libEGL.so
+build $SYSROOT/lib/libGLESv2.so: copy $BUILDROOT/mesa/libGLESv2.so
 
 subninja build/mtdev.ninja
 
