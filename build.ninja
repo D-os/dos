@@ -144,6 +144,11 @@ build $SYSROOT/lib/libsystemproperties.so: copy $BUILDROOT/libsystemproperties/l
 subninja build/libudev.ninja
 build $SYSROOT/lib/libudev.so: copy $BUILDROOT/libudev/libudev.so
 
+subninja build/libva.ninja
+build $SYSROOT/lib/libva.so: copy $BUILDROOT/libva/libva.so
+build $SYSROOT/lib/libva-drm.so: copy $BUILDROOT/libva/libva-drm.so
+build $SYSROOT/lib/libva-wayland.so: copy $BUILDROOT/libva/libva-wayland.so
+
 subninja build/libxkbcommon.ninja
 build $SYSROOT/lib/libxkbcommon.so: copy $BUILDROOT/libxkbcommon/libxkbcommon.so
 

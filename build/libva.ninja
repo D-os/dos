@@ -1,0 +1,57 @@
+cflags = $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -O2 $
+  '-DSYSCONFDIR="/system/config"' $
+  '-DVA_DRIVERS_PATH="/system/lib/dri"' $
+  -DENABLE_VA_MESSAGING=1 $
+  -DHAVE_GNUC_VISIBILITY_ATTRIBUTE $
+
+includes = -Iexternal/libva -Iexternal/libva/va -I$BUILDROOT/libva -I/usr/include/libdrm
+
+build $BUILDROOT/libva/va.o: cc external/libva/va/va.c
+build $BUILDROOT/libva/va_str.o: cc external/libva/va/va_str.c
+build $BUILDROOT/libva/va_trace.o: cc external/libva/va/va_trace.c
+
+build $BUILDROOT/libva/libva.so: so $
+  $BUILDROOT/libva/va.o $
+  $BUILDROOT/libva/va_str.o $
+  $BUILDROOT/libva/va_trace.o
+  libs = -ldl
+
+build $BUILDROOT/libva/drm_va_drm.o: cc external/libva/va/drm/va_drm.c
+build $BUILDROOT/libva/drm_va_drm_auth.o: cc external/libva/va/drm/va_drm_auth.c
+build $BUILDROOT/libva/drm_va_drm_utils.o: cc external/libva/va/drm/va_drm_utils.c
+
+build $BUILDROOT/libva/libva-drm.so: so $
+  $BUILDROOT/libva/drm_va_drm.o $
+  $BUILDROOT/libva/drm_va_drm_auth.o $
+  $BUILDROOT/libva/drm_va_drm_utils.o $
+| $
+  $SYSROOT/lib/libdrm.so $
+  $BUILDROOT/libva/libva.so
+  libs = $BUILDROOT/libva/libva.so -ldrm -ldl
+
+build $BUILDROOT/libva/wayland-drm-client-protocol.h: wayland-scanner external/libva/va/wayland/wayland-drm.xml | out/tc/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/libva/wayland-drm-client-protocol.c: wayland-scanner external/libva/va/wayland/wayland-drm.xml | out/tc/host/bin/wayland-scanner
+  type = private-code
+
+build $BUILDROOT/libva/wayland-drm-client-protocol.o: cc $BUILDROOT/libva/wayland-drm-client-protocol.c
+
+build $BUILDROOT/libva/wayland_va_wayland.o: cc external/libva/va/wayland/va_wayland.c
+build $BUILDROOT/libva/wayland_va_wayland_drm.o: cc external/libva/va/wayland/va_wayland_drm.c | $BUILDROOT/libva/wayland-drm-client-protocol.h
+build $BUILDROOT/libva/wayland_va_wayland_emgd.o: cc external/libva/va/wayland/va_wayland_emgd.c
+
+build $BUILDROOT/libva/libva-wayland.so: so $
+  $BUILDROOT/libva/wayland-drm-client-protocol.o $
+  $BUILDROOT/libva/wayland_va_wayland.o $
+  $BUILDROOT/libva/wayland_va_wayland_drm.o $
+  $BUILDROOT/libva/wayland_va_wayland_emgd.o $
+  $BUILDROOT/libva/drm_va_drm_utils.o $
+| $
+  $SYSROOT/lib/libdrm.so $
+  $SYSROOT/lib/libwayland-client.so $
+  $BUILDROOT/libva/libva.so
+  libs = $BUILDROOT/libva/libva.so -ldrm -lwayland-client -ldl
