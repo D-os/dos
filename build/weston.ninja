@@ -10,7 +10,8 @@ cflags = $
   -fvisibility=hidden $
   -Wno-unused-but-set-variable $
 
-includes = -Iexternal/weston/include -Iexternal/weston -Ibuild/weston -I$BUILDROOT/weston/protocol $
+includes = -Iexternal/weston/include -Iexternal/weston -Iexternal/weston/libweston/ -Ibuild/weston $
+  -I$BUILDROOT/weston/protocol $
   -Iexternal/pixman/pixman -Ibuild/pixman/src $
   -Iexternal/libdrm/include/drm -Iexternal/libevdev
 
@@ -266,6 +267,7 @@ build $BUILDROOT/weston/libweston-11.so: so $
   $BUILDROOT/weston/libweston/weston-direct-display.o $
   $BUILDROOT/weston/shared/matrix.o $
   | $
+  $SYSROOT/lib/libEGL.so $
   $SYSROOT/lib/libdl.a $
   $SYSROOT/lib/libdrm.so $
   $SYSROOT/lib/libpixman-1.so $
@@ -274,19 +276,7 @@ build $BUILDROOT/weston/libweston-11.so: so $
   $SYSROOT/lib/libxkbcommon.so $
   $BUILDROOT/weston/libshared.a
   libs = -lm -ldl -Wl,--whole-archive $BUILDROOT/weston/libshared.a -Wl,--no-whole-archive $
-    -lwayland-client -lwayland-server -lpixman-1 -ldrm -lxkbcommon
-
-#  | $
-#  $SYSROOT/lib/libEGL.so $
-#  $SYSROOT/lib/libdl.a $
-#  $SYSROOT/lib/libdrm.so $
-#  $SYSROOT/lib/libpixman-1.so $
-#  $SYSROOT/lib/libwayland-client.so $
-#  $SYSROOT/lib/libwayland-server.so $
-#  $SYSROOT/lib/libxkbcommon.so $
-#  $BUILDROOT/weston/libshared.a
-#  libs = -lm -ldl -Wl,--whole-archive $BUILDROOT/weston/libshared.a -Wl,--no-whole-archive $
-#    -lwayland-client -lwayland-server -lpixman-1 -ldrm -lxkbcommon -lEGL
+    -lwayland-client -lwayland-server -lpixman-1 -ldrm -lxkbcommon -lEGL
 
 build $BUILDROOT/weston/compositor/main.o: cc external/weston/compositor/main.c
 build $BUILDROOT/weston/compositor/text-backend.o: cc external/weston/compositor/text-backend.c | $BUILDROOT/weston/protocol/text-input-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/input-method-unstable-v1-server-protocol.h
@@ -324,6 +314,26 @@ build $BUILDROOT/weston/weston: link $
   libs = -Wl,-rpath,/system/lib -Wl,-rpath,/system/lib/weston $BUILDROOT/weston/libexec_weston.so $BUILDROOT/weston/libweston-11.so $
     -lwayland-server -lpixman-1 -lxkbcommon
 
+build $BUILDROOT/weston/libweston/launcher-util.o: cc external/weston/libweston/launcher-util.c
+build $BUILDROOT/weston/libweston/launcher-logind.o: cc external/weston/libweston/launcher-logind.c
+build $BUILDROOT/weston/libweston/launcher-libseat.o: cc external/weston/libweston/launcher-libseat.c
+
+build $BUILDROOT/weston/libsession-helper.a: ar $
+  $BUILDROOT/weston/libweston/launcher-util.o $
+  $BUILDROOT/weston/libweston/launcher-libseat.o $
+
+build $BUILDROOT/weston/libweston/libinput-device.o: cc external/weston/libweston/libinput-device.c
+build $BUILDROOT/weston/libweston/libinput-seat.o: cc external/weston/libweston/libinput-seat.c
+
+build $BUILDROOT/weston/liblibinput-backend.a: ar $
+ $BUILDROOT/weston/libweston/libinput-device.o $
+ $BUILDROOT/weston/libweston/libinput-seat.o $
+
+build $BUILDROOT/weston/backend-drm/libbacklight.o: cc external/weston/libweston/backend-drm/libbacklight.c
+
+build $BUILDROOT/weston/libbacklight.a: ar $
+  $BUILDROOT/weston/backend-drm/libbacklight.o
+
 build $BUILDROOT/weston/backend-drm/drm.o: cc external/weston/libweston/backend-drm/drm.c
 build $BUILDROOT/weston/backend-drm/fb.o: cc external/weston/libweston/backend-drm/fb.c
 build $BUILDROOT/weston/backend-drm/modes.o: cc external/weston/libweston/backend-drm/modes.c
@@ -334,20 +344,6 @@ build $BUILDROOT/weston/backend-drm/drm-gbm.o: cc external/weston/libweston/back
 build $BUILDROOT/weston/backend-drm/vaapi-recorder.o: cc external/weston/libweston/backend-drm/vaapi-recorder.c
 build $BUILDROOT/weston/backend-drm/drm-virtual.o: cc external/weston/libweston/backend-drm/drm-virtual.c
 
-#build $BUILDROOT/weston/drm-backend.so: so $
-#  $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-protocol.o $
-#  $BUILDROOT/weston/backend-drm/drm.o $
-#  $BUILDROOT/weston/backend-drm/fb.o $
-#  $BUILDROOT/weston/backend-drm/modes.o $
-#  $BUILDROOT/weston/backend-drm/kms.o $
-#  $BUILDROOT/weston/backend-drm/state-helpers.o $
-#  $BUILDROOT/weston/backend-drm/state-propose.o $
-#  $BUILDROOT/weston/backend-drm/drm-gbm.o $
-#  $BUILDROOT/weston/backend-drm/vaapi-recorder.o $
-#  $BUILDROOT/weston/backend-drm/drm-virtual.o $
-#  $BUILDROOT/weston/libbacklight.a $
-#  $BUILDROOT/weston/liblibinput-backend.a $
-#  $BUILDROOT/weston/libsession-helper.a $
 build $BUILDROOT/weston/drm-backend.so: so $
   $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-protocol.o $
   $BUILDROOT/weston/backend-drm/drm.o $
@@ -359,21 +355,22 @@ build $BUILDROOT/weston/drm-backend.so: so $
   $BUILDROOT/weston/backend-drm/drm-gbm.o $
   $BUILDROOT/weston/backend-drm/vaapi-recorder.o $
   $BUILDROOT/weston/backend-drm/drm-virtual.o $
+  $BUILDROOT/weston/libbacklight.a $
+  $BUILDROOT/weston/liblibinput-backend.a $
+  $BUILDROOT/weston/libsession-helper.a $
   | $
   $SYSROOT/lib/libEGL.so $
-  $SYSROOT/lib/libdbus-1.so $
   $SYSROOT/lib/libdl.a $
   $SYSROOT/lib/libdrm.so $
   $SYSROOT/lib/libgbm.so $
   $SYSROOT/lib/libinput.so $
   $SYSROOT/lib/libpixman-1.so $
   $SYSROOT/lib/libseat.so $
-  $SYSROOT/lib/libsystemd.so $
   $SYSROOT/lib/libudev.so $
   $SYSROOT/lib/libva-drm.so $
   $SYSROOT/lib/libva.so $
   $SYSROOT/lib/libwayland-server.so $
-  $SYSROOT/lib/libxkbcommon.so $
+  $SYSROOT/lib/libxkbcommon.so
   libs = -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
-    -ldl /usr/lib64/-lwayland-server -lpixman-1 -lxkbcommon -ldrm -ludev -lgbm $
-    -lEGL -lva -lva-drm -pthread -ldbus-1 -lsystemd -lseat -linput
+    -ldl -lwayland-server -lpixman-1 -lxkbcommon -ldrm -ludev -lgbm $
+    -lEGL -lva -lva-drm -pthread -lseat -linput

@@ -5,7 +5,7 @@
 
 #pragma once
 
-#define BINDIR "out/sysroot/bin"
+#define BINDIR "/system/bin"
 
 #define BUILD_DRM_COMPOSITOR 1
 
@@ -19,9 +19,7 @@
 
 #define BUILD_WAYLAND_COMPOSITOR 1
 
-#define BUILD_X11_COMPOSITOR 1
-
-#define DATADIR "out/sysroot/share"
+#define DATADIR "/system/share"
 
 #define EGL_NO_PLATFORM_SPECIFIC_TYPES 1
 
@@ -30,8 +28,6 @@
 #define ENABLE_EGL 1
 
 #define ENABLE_JUNIT_XML 1
-
-#define HAVE_DBUS 1
 
 #define HAVE_GBM_FD_IMPORT 1
 
@@ -53,13 +49,9 @@
 
 #define HAVE_MKOSTEMP 1
 
-#define HAVE_PANGO 1
-
 #define HAVE_POSIX_FALLOCATE 1
 
 #define HAVE_STRCHRNUL 1
-
-#define HAVE_SYSTEMD_LOGIN 1
 
 #define HAVE_WEBP 1
 
@@ -67,15 +59,15 @@
 
 #define HAVE_XKBCOMMON_COMPOSE 1
 
-#define LIBEXECDIR "out/sysroot/libexec"
+#define LIBEXECDIR "/system/libexec"
 
-#define LIBWESTON_MODULEDIR "out/sysroot/lib64/libweston-11"
+#define LIBWESTON_MODULEDIR "/system/lib/libweston-11"
 
 #define MAJOR_IN_SYSMACROS 1
 
 #define MESA_EGL_NO_X11_HEADERS 1
 
-#define MODULEDIR "out/sysroot/lib64/weston"
+#define MODULEDIR "/system/lib/weston"
 
 #define PACKAGE_BUGREPORT "https://gitlab.freedesktop.org/wayland/weston/issues/"
 

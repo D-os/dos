@@ -56,3 +56,4 @@ build $SYSTEMDIR/system/etc/mkshrc: copy external/mksh/mkshrc
 build $SYSTEMDIR/system/bin/weston: copy $BUILDROOT/weston/weston
 build $SYSTEMDIR/system/lib/libweston-11.so: copy $BUILDROOT/weston/libweston-11.so
 build $SYSTEMDIR/system/lib/weston/libexec_weston.so: copy $BUILDROOT/weston/libexec_weston.so
+build $SYSTEMDIR/system/lib/libweston-11/drm-backend.so: copy $BUILDROOT/weston/drm-backend.so
