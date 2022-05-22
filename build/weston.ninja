@@ -374,3 +374,25 @@ build $BUILDROOT/weston/drm-backend.so: so $
   libs = -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
     -ldl -lwayland-server -lpixman-1 -lxkbcommon -ldrm -ludev -lgbm $
     -lEGL -lva -lva-drm -pthread -lseat -linput
+
+build $BUILDROOT/weston/renderer-gl/egl-glue.o: cc external/weston/libweston/renderer-gl/egl-glue.c
+build $BUILDROOT/weston/renderer-gl/gl-renderer.o: cc external/weston/libweston/renderer-gl/gl-renderer.c
+build $BUILDROOT/weston/renderer-gl/gl-shaders.o: cc external/weston/libweston/renderer-gl/gl-shaders.c
+  includes = $includes -Ibuild/weston/libweston/renderer-gl
+build $BUILDROOT/weston/renderer-gl/gl-shader-config-color-transformation.o: cc external/weston/libweston/renderer-gl/gl-shader-config-color-transformation.c
+build $BUILDROOT/weston/vertex-clipping.o: cc external/weston/libweston/vertex-clipping.c
+
+build $BUILDROOT/weston/gl-renderer.so: so $
+  $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-protocol.o $
+  $BUILDROOT/weston/renderer-gl/egl-glue.o $
+  $BUILDROOT/weston/renderer-gl/gl-renderer.o $
+  $BUILDROOT/weston/renderer-gl/gl-shaders.o $
+  $BUILDROOT/weston/renderer-gl/gl-shader-config-color-transformation.o $
+  $BUILDROOT/weston/vertex-clipping.o $
+| $
+  $SYSROOT/lib/libEGL.so $
+  $SYSROOT/lib/libGLESv2.so $
+  $SYSROOT/lib/libpixman-1.so $
+  $SYSROOT/lib/libwayland-server.so $
+  $SYSROOT/lib/libxkbcommon.so
+  libs = $BUILDROOT/weston/libweston-11.so -lm -lpixman-1 -lwayland-server -lxkbcommon -lEGL -lGLESv2
