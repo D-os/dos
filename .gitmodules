@@ -119,3 +119,6 @@
 [submodule "external/expat"]
 	path = external/expat
 	url = https://android.googlesource.com/platform/external/expat
+[submodule "external/libva"]
+	path = external/libva
+	url = https://github.com/intel/libva.git
