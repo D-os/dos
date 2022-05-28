@@ -115,6 +115,10 @@ flags = $
   -fno-trapping-math $
   -fno-common $
   -Wno-unused-function $
+  -Wno-deprecated-anon-enum-enum-conversion $
+  -Wno-missing-prototypes $
+  -Wno-deprecated-declarations $
+  -Wno-#warnings $
   -Werror=format $
   -Wformat-security $
   -ffunction-sections $
@@ -132,7 +136,9 @@ cflags = -std=c11 $flags
 cxxflags = $flags
 
 includes = -Iexternal/mesa/include -Iexternal/mesa/src -Iexternal/mesa/src/mesa -Iexternal/mesa/src/util $
-  -Iexternal/mesa/src/egl/main -Iexternal/mesa/src/gallium/include $
+  -Iexternal/mesa/src/mapi -Ibuild/mesa/glapi/gen -Iexternal/mesa/src/egl/main $
+  -Iexternal/mesa/src/gallium/include -Iexternal/mesa/src/gallium/auxiliary $
+  -Iexternal/mesa/src/gallium/drivers/svga/include $
   -I$BUILDROOT/mesa -Iexternal/libdrm -Iexternal/libdrm/include/drm
 
 build $BUILDROOT/mesa/linux-dmabuf-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/tc/host/bin/wayland-scanner
@@ -196,9 +202,7 @@ build $BUILDROOT/mesa/libmesa_format.a: ar $
 
 build $BUILDROOT/mesa/util/format_srgb.o: cc build/mesa/util/format_srgb.c
 build $BUILDROOT/mesa/util/u_indices_gen.o: cc build/mesa/util/u_indices_gen.c
-  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
 build $BUILDROOT/mesa/util/u_unfilled_gen.o: cc build/mesa/util/u_unfilled_gen.c
-  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
 build $BUILDROOT/mesa/util/anon_file.o: cc external/mesa/src/util/anon_file.c
 build $BUILDROOT/mesa/util/bitscan.o: cc external/mesa/src/util/bitscan.c
 build $BUILDROOT/mesa/util/blob.o: cc external/mesa/src/util/blob.c
@@ -224,7 +228,6 @@ build $BUILDROOT/mesa/util/os_memory_fd.o: cc external/mesa/src/util/os_memory_f
 build $BUILDROOT/mesa/util/os_misc.o: cc external/mesa/src/util/os_misc.c
 build $BUILDROOT/mesa/util/os_socket.o: cc external/mesa/src/util/os_socket.c
 build $BUILDROOT/mesa/util/perf_u_trace.o: cc external/mesa/src/util/perf/u_trace.c
-  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
 build $BUILDROOT/mesa/util/u_process.o: cc external/mesa/src/util/u_process.c
 build $BUILDROOT/mesa/util/u_qsort.o: cxx external/mesa/src/util/u_qsort.cpp
 build $BUILDROOT/mesa/util/sha1_sha1.o: cc external/mesa/src/util/sha1/sha1.c
@@ -243,24 +246,19 @@ build $BUILDROOT/mesa/util/u_atomic.o: cc external/mesa/src/util/u_atomic.c
 build $BUILDROOT/mesa/util/u_debug_describe.o: cc external/mesa/src/util/u_debug_describe.c
 build $BUILDROOT/mesa/util/u_debug_refcnt.o: cc external/mesa/src/util/u_debug_refcnt.c
 build $BUILDROOT/mesa/util/u_hash_table.o: cc external/mesa/src/util/u_hash_table.c
-  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
 build $BUILDROOT/mesa/util/u_queue.o: cc external/mesa/src/util/u_queue.c
 build $BUILDROOT/mesa/util/u_vector.o: cc external/mesa/src/util/u_vector.c
 build $BUILDROOT/mesa/util/u_math.o: cc external/mesa/src/util/u_math.c
 build $BUILDROOT/mesa/util/u_mm.o: cc external/mesa/src/util/u_mm.c
 build $BUILDROOT/mesa/util/u_debug.o: cc external/mesa/src/util/u_debug.c
 build $BUILDROOT/mesa/util/u_debug_memory.o: cc external/mesa/src/util/u_debug_memory.c
-  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
 build $BUILDROOT/mesa/util/u_cpu_detect.o: cc external/mesa/src/util/u_cpu_detect.c
 build $BUILDROOT/mesa/util/u_printf.o: cc external/mesa/src/util/u_printf.c
 build $BUILDROOT/mesa/util/u_worklist.o: cc external/mesa/src/util/u_worklist.c
 build $BUILDROOT/mesa/util/vma.o: cc external/mesa/src/util/vma.c
 build $BUILDROOT/mesa/util/indices_u_primconvert.o: cc external/mesa/src/util/indices/u_primconvert.c
-  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
 build $BUILDROOT/mesa/util/u_debug_stack.o: cc external/mesa/src/util/u_debug_stack.c
-  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
 build $BUILDROOT/mesa/util/u_debug_symbol.o: cc external/mesa/src/util/u_debug_symbol.c
-  includes = $includes -Iexternal/mesa/src/gallium/auxiliary
 
 build $BUILDROOT/mesa/libmesa_util.a: ar $
   $BUILDROOT/mesa/util/format_srgb.o $
@@ -344,7 +342,6 @@ build $BUILDROOT/mesa/egl/main_eglsurface.o: cc external/mesa/src/egl/main/eglsu
 build $BUILDROOT/mesa/egl/main_eglsync.o: cc external/mesa/src/egl/main/eglsync.c
 build $BUILDROOT/mesa/egl/drivers_dri2_egl_dri2.o: cc external/mesa/src/egl/drivers/dri2/egl_dri2.c | $BUILDROOT/mesa/wayland-drm-client-protocol.h $BUILDROOT/mesa/linux-dmabuf-unstable-v1-client-protocol.h
   includes = $includes -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/egl/wayland/wayland-drm
-  cflags = $cflags -Wno-#warnings
 build $BUILDROOT/mesa/egl/drivers_dri2_platform_device.o: cc external/mesa/src/egl/drivers/dri2/platform_device.c
   includes = $includes -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/loader
 build $BUILDROOT/mesa/egl/drivers_dri2_platform_surfaceless.o: cc external/mesa/src/egl/drivers/dri2/platform_surfaceless.c
@@ -444,7 +441,2413 @@ build $BUILDROOT/mesa/mapi/es2api/entry.o: cc external/mesa/src/mapi/entry.c
   cflags = $cflags -DMAPI_MODE_BRIDGE '-DMAPI_ABI_HEADER="es2api/glapi_mapi_tmp.h"' -fno-lto
   includes = $includes -Ibuild/mesa
 
-build  $BUILDROOT/mesa/libGLESv2.so: so $
+build $BUILDROOT/mesa/libGLESv2.so: so $
   $BUILDROOT/mesa/mapi/es2api/entry.o $
 | $SYSROOT/lib/libdrm.so
   libs = $BUILDROOT/mesa/libglapi.so -pthread -ldrm
+
+build $BUILDROOT/mesa/dri/target.o: cc external/mesa/src/gallium/targets/dri/target.c
+  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
+  includes = $includes -Iexternal/mesa/src/gallium/winsys -Iexternal/mesa/src/gallium/drivers -Iexternal/mesa/src/gallium/frontends/dri
+
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_context.o: cc external/mesa/src/gallium/frontends/dri/dri_context.c
+  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_drawable.o: cc external/mesa/src/gallium/frontends/dri/dri_drawable.c
+  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_helpers.o: cc external/mesa/src/gallium/frontends/dri/dri_helpers.c
+  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_query_renderer.o: cc external/mesa/src/gallium/frontends/dri/dri_query_renderer.c
+  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_screen.o: cc external/mesa/src/gallium/frontends/dri/dri_screen.c
+  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_util.o: cc external/mesa/src/gallium/frontends/dri/dri_util.c
+  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
+build $BUILDROOT/mesa/gallium/frontends/dri/drisw.o: cc external/mesa/src/gallium/frontends/dri/drisw.c
+  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
+build $BUILDROOT/mesa/gallium/frontends/dri/dri2.o: cc external/mesa/src/gallium/frontends/dri/dri2.c
+  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
+
+build $BUILDROOT/mesa/gallium/frontends/dri/libdri.a: ar $
+  $BUILDROOT/mesa/gallium/frontends/dri/dri_context.o $
+  $BUILDROOT/mesa/gallium/frontends/dri/dri_drawable.o $
+  $BUILDROOT/mesa/gallium/frontends/dri/dri_helpers.o $
+  $BUILDROOT/mesa/gallium/frontends/dri/dri_query_renderer.o $
+  $BUILDROOT/mesa/gallium/frontends/dri/dri_screen.o $
+  $BUILDROOT/mesa/gallium/frontends/dri/dri_util.o $
+  $BUILDROOT/mesa/gallium/frontends/dri/drisw.o $
+  $BUILDROOT/mesa/gallium/frontends/dri/dri2.o
+
+build $BUILDROOT/mesa/libgallium_dri.so: so $
+  $BUILDROOT/mesa/dri/target.o $
+  $BUILDROOT/mesa/gallium/frontends/dri/libdri.a $
+  $BUILDROOT/mesa/libloader.a $
+  $BUILDROOT/mesa/libmesa.a $
+  $BUILDROOT/mesa/libmesa_sse41.a $
+  $BUILDROOT/mesa/libmesa_format.a $
+  $BUILDROOT/mesa/libmesa_util.a $
+  $BUILDROOT/mesa/libxmlconfig.a $
+  $BUILDROOT/mesa/libglsl.a $
+  $BUILDROOT/mesa/libglcpp.a $
+  $BUILDROOT/mesa/libnir.a $
+  $BUILDROOT/mesa/libcompiler.a $
+  $BUILDROOT/mesa/libgalliumvl.a $
+  $BUILDROOT/mesa/libgallium.a $
+  $BUILDROOT/mesa/libpipe_loader_static.a $
+  $BUILDROOT/mesa/libws_null.a $
+  $BUILDROOT/mesa/libwsw.a $
+  $BUILDROOT/mesa/libswdri.a $
+  $BUILDROOT/mesa/libswkmsdri.a $
+  $BUILDROOT/mesa/libllvmpipe.a $
+  $BUILDROOT/mesa/libsoftpipe.a $
+  $BUILDROOT/mesa/libsvga.a $
+  $BUILDROOT/mesa/libsvgadrm.a $
+  $BUILDROOT/mesa/libvirgl.a $
+  $BUILDROOT/mesa/libvirgldrm.a $
+  $BUILDROOT/mesa/libvirglcommon.a $
+  $BUILDROOT/mesa/libvirglvtest.a $
+| $BUILDROOT/mesa/libglapi.so $
+  $SYSROOT/lib/libdrm.so $
+  $SYSROOT/lib/libLLVM-14.so $
+  $SYSROOT/lib/libexpat.so $
+  $SYSROOT/lib/libunwind.so $
+  $SYSROOT/lib/libz.so
+  libs = $BUILDROOT/mesa/libglapi.so -ldrm -lLLVM-14 -pthread -lexpat -lm -lz -lelf -lunwind -lc++
+
+build $BUILDROOT/mesa/libmesa/program/lex.yy.o: cc build/mesa/libmesa/program/lex.yy.c
+  includes = $includes -Ibuild/mesa/libmesa
+build $BUILDROOT/mesa/libmesa/program/program_parse.tab.o: cc build/mesa/libmesa/program/program_parse.tab.c
+build $BUILDROOT/mesa/libmesa/mapi/glapi/gen/api_exec_init.o: cc build/mesa/glapi/gen/api_exec_init.c
+  includes = $includes -Ibuild/mesa/libmesa
+build $BUILDROOT/mesa/libmesa/mapi/glapi/gen/enums.o: cc build/mesa/glapi/gen/enums.c
+build $BUILDROOT/mesa/libmesa/format_fallback.o: cc build/mesa/libmesa/format_fallback.c
+  includes = $includes -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated0.o: cc build/mesa/glapi/gen/marshal_generated0.c
+  includes = $includes -Iexternal/mesa/src/mesa/main -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated1.o: cc build/mesa/glapi/gen/marshal_generated1.c
+  includes = $includes -Iexternal/mesa/src/mesa/main -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated2.o: cc build/mesa/glapi/gen/marshal_generated2.c
+  includes = $includes -Iexternal/mesa/src/mesa/main -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated3.o: cc build/mesa/glapi/gen/marshal_generated3.c
+  includes = $includes -Iexternal/mesa/src/mesa/main -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated4.o: cc build/mesa/glapi/gen/marshal_generated4.c
+  includes = $includes -Iexternal/mesa/src/mesa/main -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated5.o: cc build/mesa/glapi/gen/marshal_generated5.c
+  includes = $includes -Iexternal/mesa/src/mesa/main -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated6.o: cc build/mesa/glapi/gen/marshal_generated6.c
+  includes = $includes -Iexternal/mesa/src/mesa/main -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated7.o: cc build/mesa/glapi/gen/marshal_generated7.c
+  includes = $includes -Iexternal/mesa/src/mesa/main -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/main/accum.o: cc external/mesa/src/mesa/main/accum.c
+build $BUILDROOT/mesa/libmesa/main/api_arrayelt.o: cc external/mesa/src/mesa/main/api_arrayelt.c
+  includes = $includes -Ibuild/mesa/libmesa -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/main/arbprogram.o: cc external/mesa/src/mesa/main/arbprogram.c
+build $BUILDROOT/mesa/libmesa/main/arrayobj.o: cc external/mesa/src/mesa/main/arrayobj.c
+build $BUILDROOT/mesa/libmesa/main/atifragshader.o: cc external/mesa/src/mesa/main/atifragshader.c
+build $BUILDROOT/mesa/libmesa/main/attrib.o: cc external/mesa/src/mesa/main/attrib.c
+build $BUILDROOT/mesa/libmesa/main/barrier.o: cc external/mesa/src/mesa/main/barrier.c
+build $BUILDROOT/mesa/libmesa/main/bbox.o: cc external/mesa/src/mesa/main/bbox.c
+build $BUILDROOT/mesa/libmesa/main/blend.o: cc external/mesa/src/mesa/main/blend.c
+build $BUILDROOT/mesa/libmesa/main/blit.o: cc external/mesa/src/mesa/main/blit.c
+build $BUILDROOT/mesa/libmesa/main/bufferobj.o: cc external/mesa/src/mesa/main/bufferobj.c
+build $BUILDROOT/mesa/libmesa/main/buffers.o: cc external/mesa/src/mesa/main/buffers.c
+build $BUILDROOT/mesa/libmesa/main/clear.o: cc external/mesa/src/mesa/main/clear.c
+build $BUILDROOT/mesa/libmesa/main/clip.o: cc external/mesa/src/mesa/main/clip.c
+build $BUILDROOT/mesa/libmesa/main/compute.o: cc external/mesa/src/mesa/main/compute.c
+build $BUILDROOT/mesa/libmesa/main/condrender.o: cc external/mesa/src/mesa/main/condrender.c
+build $BUILDROOT/mesa/libmesa/main/conservativeraster.o: cc external/mesa/src/mesa/main/conservativeraster.c
+build $BUILDROOT/mesa/libmesa/main/context.o: cc external/mesa/src/mesa/main/context.c
+  includes = $includes -Ibuild/mesa -Ibuild/mesa/libmesa
+build $BUILDROOT/mesa/libmesa/main/copyimage.o: cc external/mesa/src/mesa/main/copyimage.c
+build $BUILDROOT/mesa/libmesa/main/cpuinfo.o: cc external/mesa/src/mesa/main/cpuinfo.c
+build $BUILDROOT/mesa/libmesa/main/debug.o: cc external/mesa/src/mesa/main/debug.c
+build $BUILDROOT/mesa/libmesa/main/debug_output.o: cc external/mesa/src/mesa/main/debug_output.c
+build $BUILDROOT/mesa/libmesa/main/depth.o: cc external/mesa/src/mesa/main/depth.c
+build $BUILDROOT/mesa/libmesa/main/dlist.o: cc external/mesa/src/mesa/main/dlist.c
+  includes = $includes -Ibuild/mesa/libmesa -Ibuild/mesa/libmesa/main -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/main/draw.o: cc external/mesa/src/mesa/main/draw.c
+  includes = $includes -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/main/draw_validate.o: cc external/mesa/src/mesa/main/draw_validate.c
+build $BUILDROOT/mesa/libmesa/main/drawpix.o: cc external/mesa/src/mesa/main/drawpix.c
+build $BUILDROOT/mesa/libmesa/main/drawtex.o: cc external/mesa/src/mesa/main/drawtex.c
+build $BUILDROOT/mesa/libmesa/main/enable.o: cc external/mesa/src/mesa/main/enable.c
+build $BUILDROOT/mesa/libmesa/main/errors.o: cc external/mesa/src/mesa/main/errors.c
+build $BUILDROOT/mesa/libmesa/main/es1_conversion.o: cc external/mesa/src/mesa/main/es1_conversion.c
+build $BUILDROOT/mesa/libmesa/main/eval.o: cc external/mesa/src/mesa/main/eval.c
+  includes = $includes -Ibuild/mesa/libmesa
+build $BUILDROOT/mesa/libmesa/main/extensions.o: cc external/mesa/src/mesa/main/extensions.c
+build $BUILDROOT/mesa/libmesa/main/extensions_table.o: cc external/mesa/src/mesa/main/extensions_table.c
+build $BUILDROOT/mesa/libmesa/main/externalobjects.o: cc external/mesa/src/mesa/main/externalobjects.c
+build $BUILDROOT/mesa/libmesa/main/fbobject.o: cc external/mesa/src/mesa/main/fbobject.c
+build $BUILDROOT/mesa/libmesa/main/feedback.o: cc external/mesa/src/mesa/main/feedback.c
+build $BUILDROOT/mesa/libmesa/main/ff_fragment_shader.o: cxx external/mesa/src/mesa/main/ff_fragment_shader.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libmesa/main/ffvertex_prog.o: cc external/mesa/src/mesa/main/ffvertex_prog.c
+build $BUILDROOT/mesa/libmesa/main/fog.o: cc external/mesa/src/mesa/main/fog.c
+build $BUILDROOT/mesa/libmesa/main/format_utils.o: cc external/mesa/src/mesa/main/format_utils.c
+build $BUILDROOT/mesa/libmesa/main/formatquery.o: cc external/mesa/src/mesa/main/formatquery.c
+build $BUILDROOT/mesa/libmesa/main/formats.o: cc external/mesa/src/mesa/main/formats.c
+  includes = $includes -Ibuild/mesa/libmesa
+build $BUILDROOT/mesa/libmesa/main/framebuffer.o: cc external/mesa/src/mesa/main/framebuffer.c
+build $BUILDROOT/mesa/libmesa/main/genmipmap.o: cc external/mesa/src/mesa/main/genmipmap.c
+build $BUILDROOT/mesa/libmesa/main/get.o: cc external/mesa/src/mesa/main/get.c
+  cflags = $cflags -Wno-implicit-const-int-float-conversion
+  includes = $includes -Ibuild/mesa/libmesa
+build $BUILDROOT/mesa/libmesa/main/getstring.o: cc external/mesa/src/mesa/main/getstring.c
+build $BUILDROOT/mesa/libmesa/main/glformats.o: cc external/mesa/src/mesa/main/glformats.c
+build $BUILDROOT/mesa/libmesa/main/glspirv.o: cc external/mesa/src/mesa/main/glspirv.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libmesa/main/glthread.o: cc external/mesa/src/mesa/main/glthread.c
+  includes = $includes -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/main/glthread_bufferobj.o: cc external/mesa/src/mesa/main/glthread_bufferobj.c
+  includes = $includes -Ibuild/mesa/libmesa -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/main/glthread_draw.o: cc external/mesa/src/mesa/main/glthread_draw.c
+  includes = $includes -Ibuild/mesa/libmesa -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/main/glthread_get.o: cc external/mesa/src/mesa/main/glthread_get.c
+  includes = $includes -Ibuild/mesa/libmesa -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/main/glthread_list.o: cc external/mesa/src/mesa/main/glthread_list.c
+  includes = $includes -Ibuild/mesa/libmesa -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/main/glthread_shaderobj.o: cc external/mesa/src/mesa/main/glthread_shaderobj.c
+  includes = $includes -Ibuild/mesa/libmesa/main
+build $BUILDROOT/mesa/libmesa/main/glthread_varray.o: cc external/mesa/src/mesa/main/glthread_varray.c
+  includes = $includes -Ibuild/mesa/libmesa
+build $BUILDROOT/mesa/libmesa/main/hash.o: cc external/mesa/src/mesa/main/hash.c
+build $BUILDROOT/mesa/libmesa/main/hint.o: cc external/mesa/src/mesa/main/hint.c
+build $BUILDROOT/mesa/libmesa/main/image.o: cc external/mesa/src/mesa/main/image.c
+build $BUILDROOT/mesa/libmesa/main/light.o: cc external/mesa/src/mesa/main/light.c
+build $BUILDROOT/mesa/libmesa/main/lines.o: cc external/mesa/src/mesa/main/lines.c
+build $BUILDROOT/mesa/libmesa/main/matrix.o: cc external/mesa/src/mesa/main/matrix.c
+build $BUILDROOT/mesa/libmesa/main/mipmap.o: cc external/mesa/src/mesa/main/mipmap.c
+build $BUILDROOT/mesa/libmesa/main/multisample.o: cc external/mesa/src/mesa/main/multisample.c
+build $BUILDROOT/mesa/libmesa/main/objectlabel.o: cc external/mesa/src/mesa/main/objectlabel.c
+build $BUILDROOT/mesa/libmesa/main/objectpurge.o: cc external/mesa/src/mesa/main/objectpurge.c
+build $BUILDROOT/mesa/libmesa/main/pack.o: cc external/mesa/src/mesa/main/pack.c
+build $BUILDROOT/mesa/libmesa/main/pbo.o: cc external/mesa/src/mesa/main/pbo.c
+build $BUILDROOT/mesa/libmesa/main/performance_monitor.o: cc external/mesa/src/mesa/main/performance_monitor.c
+build $BUILDROOT/mesa/libmesa/main/performance_query.o: cc external/mesa/src/mesa/main/performance_query.c
+build $BUILDROOT/mesa/libmesa/main/pipelineobj.o: cc external/mesa/src/mesa/main/pipelineobj.c
+build $BUILDROOT/mesa/libmesa/main/pixel.o: cc external/mesa/src/mesa/main/pixel.c
+build $BUILDROOT/mesa/libmesa/main/pixelstore.o: cc external/mesa/src/mesa/main/pixelstore.c
+build $BUILDROOT/mesa/libmesa/main/pixeltransfer.o: cc external/mesa/src/mesa/main/pixeltransfer.c
+build $BUILDROOT/mesa/libmesa/main/points.o: cc external/mesa/src/mesa/main/points.c
+build $BUILDROOT/mesa/libmesa/main/polygon.o: cc external/mesa/src/mesa/main/polygon.c
+build $BUILDROOT/mesa/libmesa/main/program_binary.o: cc external/mesa/src/mesa/main/program_binary.c
+build $BUILDROOT/mesa/libmesa/main/program_resource.o: cc external/mesa/src/mesa/main/program_resource.c
+build $BUILDROOT/mesa/libmesa/main/querymatrix.o: cc external/mesa/src/mesa/main/querymatrix.c
+build $BUILDROOT/mesa/libmesa/main/queryobj.o: cc external/mesa/src/mesa/main/queryobj.c
+build $BUILDROOT/mesa/libmesa/main/rastpos.o: cc external/mesa/src/mesa/main/rastpos.c
+build $BUILDROOT/mesa/libmesa/main/readpix.o: cc external/mesa/src/mesa/main/readpix.c
+build $BUILDROOT/mesa/libmesa/main/remap.o: cc external/mesa/src/mesa/main/remap.c
+  includes = $includes -Ibuild/mesa/libmesa
+build $BUILDROOT/mesa/libmesa/main/renderbuffer.o: cc external/mesa/src/mesa/main/renderbuffer.c
+build $BUILDROOT/mesa/libmesa/main/robustness.o: cc external/mesa/src/mesa/main/robustness.c
+  includes = $includes -Ibuild/mesa/libmesa
+build $BUILDROOT/mesa/libmesa/main/samplerobj.o: cc external/mesa/src/mesa/main/samplerobj.c
+build $BUILDROOT/mesa/libmesa/main/scissor.o: cc external/mesa/src/mesa/main/scissor.c
+build $BUILDROOT/mesa/libmesa/main/shader_query.o: cxx external/mesa/src/mesa/main/shader_query.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libmesa/main/shaderapi.o: cc external/mesa/src/mesa/main/shaderapi.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libmesa/main/shaderimage.o: cc external/mesa/src/mesa/main/shaderimage.c
+build $BUILDROOT/mesa/libmesa/main/shaderobj.o: cc external/mesa/src/mesa/main/shaderobj.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libmesa/main/shared.o: cc external/mesa/src/mesa/main/shared.c
+build $BUILDROOT/mesa/libmesa/main/spirv_extensions.o: cc external/mesa/src/mesa/main/spirv_extensions.c
+build $BUILDROOT/mesa/libmesa/main/state.o: cc external/mesa/src/mesa/main/state.c
+build $BUILDROOT/mesa/libmesa/main/stencil.o: cc external/mesa/src/mesa/main/stencil.c
+build $BUILDROOT/mesa/libmesa/main/syncobj.o: cc external/mesa/src/mesa/main/syncobj.c
+build $BUILDROOT/mesa/libmesa/main/texcompress.o: cc external/mesa/src/mesa/main/texcompress.c
+build $BUILDROOT/mesa/libmesa/main/texcompress_astc.o: cxx external/mesa/src/mesa/main/texcompress_astc.cpp
+build $BUILDROOT/mesa/libmesa/main/texcompress_bptc.o: cc external/mesa/src/mesa/main/texcompress_bptc.c
+build $BUILDROOT/mesa/libmesa/main/texcompress_cpal.o: cc external/mesa/src/mesa/main/texcompress_cpal.c
+build $BUILDROOT/mesa/libmesa/main/texcompress_etc.o: cc external/mesa/src/mesa/main/texcompress_etc.c
+build $BUILDROOT/mesa/libmesa/main/texcompress_fxt1.o: cc external/mesa/src/mesa/main/texcompress_fxt1.c
+build $BUILDROOT/mesa/libmesa/main/texcompress_rgtc.o: cc external/mesa/src/mesa/main/texcompress_rgtc.c
+build $BUILDROOT/mesa/libmesa/main/texcompress_s3tc.o: cc external/mesa/src/mesa/main/texcompress_s3tc.c
+build $BUILDROOT/mesa/libmesa/main/texenv.o: cc external/mesa/src/mesa/main/texenv.c
+build $BUILDROOT/mesa/libmesa/main/texgen.o: cc external/mesa/src/mesa/main/texgen.c
+build $BUILDROOT/mesa/libmesa/main/texgetimage.o: cc external/mesa/src/mesa/main/texgetimage.c
+build $BUILDROOT/mesa/libmesa/main/teximage.o: cc external/mesa/src/mesa/main/teximage.c
+build $BUILDROOT/mesa/libmesa/main/texobj.o: cc external/mesa/src/mesa/main/texobj.c
+build $BUILDROOT/mesa/libmesa/main/texparam.o: cc external/mesa/src/mesa/main/texparam.c
+  cflags = $cflags -Wno-implicit-const-int-float-conversion
+build $BUILDROOT/mesa/libmesa/main/texstate.o: cc external/mesa/src/mesa/main/texstate.c
+build $BUILDROOT/mesa/libmesa/main/texstorage.o: cc external/mesa/src/mesa/main/texstorage.c
+build $BUILDROOT/mesa/libmesa/main/texstore.o: cc external/mesa/src/mesa/main/texstore.c
+build $BUILDROOT/mesa/libmesa/main/texturebindless.o: cc external/mesa/src/mesa/main/texturebindless.c
+build $BUILDROOT/mesa/libmesa/main/textureview.o: cc external/mesa/src/mesa/main/textureview.c
+build $BUILDROOT/mesa/libmesa/main/transformfeedback.o: cc external/mesa/src/mesa/main/transformfeedback.c
+build $BUILDROOT/mesa/libmesa/main/uniform_query.o: cxx external/mesa/src/mesa/main/uniform_query.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libmesa/main/uniforms.o: cc external/mesa/src/mesa/main/uniforms.c
+build $BUILDROOT/mesa/libmesa/main/varray.o: cc external/mesa/src/mesa/main/varray.c
+  includes = $includes -Ibuild/mesa/libmesa
+build $BUILDROOT/mesa/libmesa/main/vdpau.o: cc external/mesa/src/mesa/main/vdpau.c
+build $BUILDROOT/mesa/libmesa/main/version.o: cc external/mesa/src/mesa/main/version.c
+  includes = $includes -Ibuild/mesa
+build $BUILDROOT/mesa/libmesa/main/viewport.o: cc external/mesa/src/mesa/main/viewport.c
+build $BUILDROOT/mesa/libmesa/math/m_debug_clip.o: cc external/mesa/src/mesa/math/m_debug_clip.c
+build $BUILDROOT/mesa/libmesa/math/m_debug_norm.o: cc external/mesa/src/mesa/math/m_debug_norm.c
+build $BUILDROOT/mesa/libmesa/math/m_debug_xform.o: cc external/mesa/src/mesa/math/m_debug_xform.c
+build $BUILDROOT/mesa/libmesa/math/m_eval.o: cc external/mesa/src/mesa/math/m_eval.c
+build $BUILDROOT/mesa/libmesa/math/m_matrix.o: cc external/mesa/src/mesa/math/m_matrix.c
+build $BUILDROOT/mesa/libmesa/math/m_vector.o: cc external/mesa/src/mesa/math/m_vector.c
+build $BUILDROOT/mesa/libmesa/program/arbprogparse.o: cc external/mesa/src/mesa/program/arbprogparse.c
+build $BUILDROOT/mesa/libmesa/program/link_program.o: cxx external/mesa/src/mesa/program/link_program.cpp
+  includes = $includes -Ibuild/mesa/compiler -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libmesa/program/prog_cache.o: cc external/mesa/src/mesa/program/prog_cache.c
+build $BUILDROOT/mesa/libmesa/program/prog_instruction.o: cc external/mesa/src/mesa/program/prog_instruction.c
+build $BUILDROOT/mesa/libmesa/program/prog_opt_constant_fold.o: cc external/mesa/src/mesa/program/prog_opt_constant_fold.c
+build $BUILDROOT/mesa/libmesa/program/prog_optimize.o: cc external/mesa/src/mesa/program/prog_optimize.c
+build $BUILDROOT/mesa/libmesa/program/prog_parameter.o: cc external/mesa/src/mesa/program/prog_parameter.c
+build $BUILDROOT/mesa/libmesa/program/prog_parameter_layout.o: cc external/mesa/src/mesa/program/prog_parameter_layout.c
+build $BUILDROOT/mesa/libmesa/program/prog_print.o: cc external/mesa/src/mesa/program/prog_print.c
+build $BUILDROOT/mesa/libmesa/program/prog_statevars.o: cc external/mesa/src/mesa/program/prog_statevars.c
+  cflags = $cflags -Wno-sometimes-uninitialized
+build $BUILDROOT/mesa/libmesa/program/prog_to_nir.o: cc external/mesa/src/mesa/program/prog_to_nir.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libmesa/program/program.o: cc external/mesa/src/mesa/program/program.c
+build $BUILDROOT/mesa/libmesa/program/program_parse_extra.o: cc external/mesa/src/mesa/program/program_parse_extra.c
+build $BUILDROOT/mesa/libmesa/program/programopt.o: cc external/mesa/src/mesa/program/programopt.c
+build $BUILDROOT/mesa/libmesa/program/symbol_table.o: cc external/mesa/src/mesa/program/symbol_table.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atifs_to_nir.o: cc external/mesa/src/mesa/state_tracker/st_atifs_to_nir.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom.o: cc external/mesa/src/mesa/state_tracker/st_atom.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_array.o: cxx external/mesa/src/mesa/state_tracker/st_atom_array.cpp
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_atomicbuf.o: cc external/mesa/src/mesa/state_tracker/st_atom_atomicbuf.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_blend.o: cc external/mesa/src/mesa/state_tracker/st_atom_blend.c
+  includes = $includes -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_clip.o: cc external/mesa/src/mesa/state_tracker/st_atom_clip.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_constbuf.o: cc external/mesa/src/mesa/state_tracker/st_atom_constbuf.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_depth.o: cc external/mesa/src/mesa/state_tracker/st_atom_depth.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_framebuffer.o: cc external/mesa/src/mesa/state_tracker/st_atom_framebuffer.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_image.o: cc external/mesa/src/mesa/state_tracker/st_atom_image.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_msaa.o: cc external/mesa/src/mesa/state_tracker/st_atom_msaa.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_pixeltransfer.o: cc external/mesa/src/mesa/state_tracker/st_atom_pixeltransfer.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_rasterizer.o: cc external/mesa/src/mesa/state_tracker/st_atom_rasterizer.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_sampler.o: cc external/mesa/src/mesa/state_tracker/st_atom_sampler.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_scissor.o: cc external/mesa/src/mesa/state_tracker/st_atom_scissor.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_shader.o: cc external/mesa/src/mesa/state_tracker/st_atom_shader.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_stipple.o: cc external/mesa/src/mesa/state_tracker/st_atom_stipple.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_storagebuf.o: cc external/mesa/src/mesa/state_tracker/st_atom_storagebuf.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_tess.o: cc external/mesa/src/mesa/state_tracker/st_atom_tess.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_texture.o: cc external/mesa/src/mesa/state_tracker/st_atom_texture.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_atom_viewport.o: cc external/mesa/src/mesa/state_tracker/st_atom_viewport.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_cb_bitmap.o: cc external/mesa/src/mesa/state_tracker/st_cb_bitmap.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_cb_clear.o: cc external/mesa/src/mesa/state_tracker/st_cb_clear.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_cb_copyimage.o: cc external/mesa/src/mesa/state_tracker/st_cb_copyimage.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_cb_drawpixels.o: cc external/mesa/src/mesa/state_tracker/st_cb_drawpixels.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libmesa/state_tracker/st_cb_drawtex.o: cc external/mesa/src/mesa/state_tracker/st_cb_drawtex.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_cb_eglimage.o: cc external/mesa/src/mesa/state_tracker/st_cb_eglimage.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_cb_feedback.o: cc external/mesa/src/mesa/state_tracker/st_cb_feedback.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_cb_flush.o: cc external/mesa/src/mesa/state_tracker/st_cb_flush.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_cb_rasterpos.o: cc external/mesa/src/mesa/state_tracker/st_cb_rasterpos.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_cb_readpixels.o: cc external/mesa/src/mesa/state_tracker/st_cb_readpixels.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_cb_texture.o: cc external/mesa/src/mesa/state_tracker/st_cb_texture.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_context.o: cc external/mesa/src/mesa/state_tracker/st_context.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_copytex.o: cc external/mesa/src/mesa/state_tracker/st_copytex.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_debug.o: cc external/mesa/src/mesa/state_tracker/st_debug.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_draw.o: cc external/mesa/src/mesa/state_tracker/st_draw.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_draw_feedback.o: cc external/mesa/src/mesa/state_tracker/st_draw_feedback.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_extensions.o: cc external/mesa/src/mesa/state_tracker/st_extensions.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libmesa/state_tracker/st_format.o: cc external/mesa/src/mesa/state_tracker/st_format.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_gen_mipmap.o: cc external/mesa/src/mesa/state_tracker/st_gen_mipmap.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_glsl_to_ir.o: cxx external/mesa/src/mesa/state_tracker/st_glsl_to_ir.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libmesa/state_tracker/st_glsl_to_nir.o: cxx external/mesa/src/mesa/state_tracker/st_glsl_to_nir.cpp
+  includes = $includes -Ibuild/mesa/compiler -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libmesa/state_tracker/st_manager.o: cc external/mesa/src/mesa/state_tracker/st_manager.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_nir_builtins.o: cc external/mesa/src/mesa/state_tracker/st_nir_builtins.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libmesa/state_tracker/st_nir_lower_builtin.o: cc external/mesa/src/mesa/state_tracker/st_nir_lower_builtin.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/state_tracker/st_nir_lower_tex_src_plane.o: cc external/mesa/src/mesa/state_tracker/st_nir_lower_tex_src_plane.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libmesa/state_tracker/st_pbo.o: cc external/mesa/src/mesa/state_tracker/st_pbo.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libmesa/state_tracker/st_pbo_compute.o: cc external/mesa/src/mesa/state_tracker/st_pbo_compute.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libmesa/state_tracker/st_program.o: cc external/mesa/src/mesa/state_tracker/st_program.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libmesa/state_tracker/st_sampler_view.o: cc external/mesa/src/mesa/state_tracker/st_sampler_view.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_scissor.o: cc external/mesa/src/mesa/state_tracker/st_scissor.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_shader_cache.o: cc external/mesa/src/mesa/state_tracker/st_shader_cache.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libmesa/state_tracker/st_texture.o: cc external/mesa/src/mesa/state_tracker/st_texture.c
+build $BUILDROOT/mesa/libmesa/state_tracker/st_vdpau.o: cc external/mesa/src/mesa/state_tracker/st_vdpau.c
+build $BUILDROOT/mesa/libmesa/vbo/vbo_context.o: cc external/mesa/src/mesa/vbo/vbo_context.c
+  includes = $includes -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/vbo/vbo_exec.o: cc external/mesa/src/mesa/vbo/vbo_exec.c
+  includes = $includes -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/vbo/vbo_exec_api.o: cc external/mesa/src/mesa/vbo/vbo_exec_api.c
+  includes = $includes -Ibuild/mesa/libmesa -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/vbo/vbo_exec_draw.o: cc external/mesa/src/mesa/vbo/vbo_exec_draw.c
+  includes = $includes -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/vbo/vbo_exec_eval.o: cc external/mesa/src/mesa/vbo/vbo_exec_eval.c
+  includes = $includes -Ibuild/mesa/libmesa -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/vbo/vbo_minmax_index.o: cc external/mesa/src/mesa/vbo/vbo_minmax_index.c
+build $BUILDROOT/mesa/libmesa/vbo/vbo_noop.o: cc external/mesa/src/mesa/vbo/vbo_noop.c
+  includes = $includes -Ibuild/mesa/libmesa
+build $BUILDROOT/mesa/libmesa/vbo/vbo_save.o: cc external/mesa/src/mesa/vbo/vbo_save.c
+  includes = $includes -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/vbo/vbo_save_api.o: cc external/mesa/src/mesa/vbo/vbo_save_api.c
+  includes = $includes -Ibuild/mesa/libmesa -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/vbo/vbo_save_draw.o: cc external/mesa/src/mesa/vbo/vbo_save_draw.c
+  includes = $includes -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/vbo/vbo_save_loopback.o: cc external/mesa/src/mesa/vbo/vbo_save_loopback.c
+  includes = $includes -Ibuild/mesa/libmesa -Iexternal/mesa/src/mesa/main
+build $BUILDROOT/mesa/libmesa/x86/common_x86.o: cc external/mesa/src/mesa/x86/common_x86.c
+
+build $BUILDROOT/mesa/libmesa.a: ar $
+  $BUILDROOT/mesa/libmesa/program/lex.yy.o $
+  $BUILDROOT/mesa/libmesa/program/program_parse.tab.o $
+  $BUILDROOT/mesa/libmesa/mapi/glapi/gen/api_exec_init.o $
+  $BUILDROOT/mesa/libmesa/mapi/glapi/gen/enums.o $
+  $BUILDROOT/mesa/libmesa/format_fallback.o $
+  $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated0.o $
+  $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated1.o $
+  $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated2.o $
+  $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated3.o $
+  $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated4.o $
+  $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated5.o $
+  $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated6.o $
+  $BUILDROOT/mesa/libmesa/mapi/glapi/gen/marshal_generated7.o $
+  $BUILDROOT/mesa/libmesa/main/accum.o $
+  $BUILDROOT/mesa/libmesa/main/api_arrayelt.o $
+  $BUILDROOT/mesa/libmesa/main/arbprogram.o $
+  $BUILDROOT/mesa/libmesa/main/arrayobj.o $
+  $BUILDROOT/mesa/libmesa/main/atifragshader.o $
+  $BUILDROOT/mesa/libmesa/main/attrib.o $
+  $BUILDROOT/mesa/libmesa/main/barrier.o $
+  $BUILDROOT/mesa/libmesa/main/bbox.o $
+  $BUILDROOT/mesa/libmesa/main/blend.o $
+  $BUILDROOT/mesa/libmesa/main/blit.o $
+  $BUILDROOT/mesa/libmesa/main/bufferobj.o $
+  $BUILDROOT/mesa/libmesa/main/buffers.o $
+  $BUILDROOT/mesa/libmesa/main/clear.o $
+  $BUILDROOT/mesa/libmesa/main/clip.o $
+  $BUILDROOT/mesa/libmesa/main/compute.o $
+  $BUILDROOT/mesa/libmesa/main/condrender.o $
+  $BUILDROOT/mesa/libmesa/main/conservativeraster.o $
+  $BUILDROOT/mesa/libmesa/main/context.o $
+  $BUILDROOT/mesa/libmesa/main/copyimage.o $
+  $BUILDROOT/mesa/libmesa/main/cpuinfo.o $
+  $BUILDROOT/mesa/libmesa/main/debug.o $
+  $BUILDROOT/mesa/libmesa/main/debug_output.o $
+  $BUILDROOT/mesa/libmesa/main/depth.o $
+  $BUILDROOT/mesa/libmesa/main/dlist.o $
+  $BUILDROOT/mesa/libmesa/main/draw.o $
+  $BUILDROOT/mesa/libmesa/main/draw_validate.o $
+  $BUILDROOT/mesa/libmesa/main/drawpix.o $
+  $BUILDROOT/mesa/libmesa/main/drawtex.o $
+  $BUILDROOT/mesa/libmesa/main/enable.o $
+  $BUILDROOT/mesa/libmesa/main/errors.o $
+  $BUILDROOT/mesa/libmesa/main/es1_conversion.o $
+  $BUILDROOT/mesa/libmesa/main/eval.o $
+  $BUILDROOT/mesa/libmesa/main/extensions.o $
+  $BUILDROOT/mesa/libmesa/main/extensions_table.o $
+  $BUILDROOT/mesa/libmesa/main/externalobjects.o $
+  $BUILDROOT/mesa/libmesa/main/fbobject.o $
+  $BUILDROOT/mesa/libmesa/main/feedback.o $
+  $BUILDROOT/mesa/libmesa/main/ff_fragment_shader.o $
+  $BUILDROOT/mesa/libmesa/main/ffvertex_prog.o $
+  $BUILDROOT/mesa/libmesa/main/fog.o $
+  $BUILDROOT/mesa/libmesa/main/format_utils.o $
+  $BUILDROOT/mesa/libmesa/main/formatquery.o $
+  $BUILDROOT/mesa/libmesa/main/formats.o $
+  $BUILDROOT/mesa/libmesa/main/framebuffer.o $
+  $BUILDROOT/mesa/libmesa/main/genmipmap.o $
+  $BUILDROOT/mesa/libmesa/main/get.o $
+  $BUILDROOT/mesa/libmesa/main/getstring.o $
+  $BUILDROOT/mesa/libmesa/main/glformats.o $
+  $BUILDROOT/mesa/libmesa/main/glspirv.o $
+  $BUILDROOT/mesa/libmesa/main/glthread.o $
+  $BUILDROOT/mesa/libmesa/main/glthread_bufferobj.o $
+  $BUILDROOT/mesa/libmesa/main/glthread_draw.o $
+  $BUILDROOT/mesa/libmesa/main/glthread_get.o $
+  $BUILDROOT/mesa/libmesa/main/glthread_list.o $
+  $BUILDROOT/mesa/libmesa/main/glthread_shaderobj.o $
+  $BUILDROOT/mesa/libmesa/main/glthread_varray.o $
+  $BUILDROOT/mesa/libmesa/main/hash.o $
+  $BUILDROOT/mesa/libmesa/main/hint.o $
+  $BUILDROOT/mesa/libmesa/main/image.o $
+  $BUILDROOT/mesa/libmesa/main/light.o $
+  $BUILDROOT/mesa/libmesa/main/lines.o $
+  $BUILDROOT/mesa/libmesa/main/matrix.o $
+  $BUILDROOT/mesa/libmesa/main/mipmap.o $
+  $BUILDROOT/mesa/libmesa/main/multisample.o $
+  $BUILDROOT/mesa/libmesa/main/objectlabel.o $
+  $BUILDROOT/mesa/libmesa/main/objectpurge.o $
+  $BUILDROOT/mesa/libmesa/main/pack.o $
+  $BUILDROOT/mesa/libmesa/main/pbo.o $
+  $BUILDROOT/mesa/libmesa/main/performance_monitor.o $
+  $BUILDROOT/mesa/libmesa/main/performance_query.o $
+  $BUILDROOT/mesa/libmesa/main/pipelineobj.o $
+  $BUILDROOT/mesa/libmesa/main/pixel.o $
+  $BUILDROOT/mesa/libmesa/main/pixelstore.o $
+  $BUILDROOT/mesa/libmesa/main/pixeltransfer.o $
+  $BUILDROOT/mesa/libmesa/main/points.o $
+  $BUILDROOT/mesa/libmesa/main/polygon.o $
+  $BUILDROOT/mesa/libmesa/main/program_binary.o $
+  $BUILDROOT/mesa/libmesa/main/program_resource.o $
+  $BUILDROOT/mesa/libmesa/main/querymatrix.o $
+  $BUILDROOT/mesa/libmesa/main/queryobj.o $
+  $BUILDROOT/mesa/libmesa/main/rastpos.o $
+  $BUILDROOT/mesa/libmesa/main/readpix.o $
+  $BUILDROOT/mesa/libmesa/main/remap.o $
+  $BUILDROOT/mesa/libmesa/main/renderbuffer.o $
+  $BUILDROOT/mesa/libmesa/main/robustness.o $
+  $BUILDROOT/mesa/libmesa/main/samplerobj.o $
+  $BUILDROOT/mesa/libmesa/main/scissor.o $
+  $BUILDROOT/mesa/libmesa/main/shader_query.o $
+  $BUILDROOT/mesa/libmesa/main/shaderapi.o $
+  $BUILDROOT/mesa/libmesa/main/shaderimage.o $
+  $BUILDROOT/mesa/libmesa/main/shaderobj.o $
+  $BUILDROOT/mesa/libmesa/main/shared.o $
+  $BUILDROOT/mesa/libmesa/main/spirv_extensions.o $
+  $BUILDROOT/mesa/libmesa/main/state.o $
+  $BUILDROOT/mesa/libmesa/main/stencil.o $
+  $BUILDROOT/mesa/libmesa/main/syncobj.o $
+  $BUILDROOT/mesa/libmesa/main/texcompress.o $
+  $BUILDROOT/mesa/libmesa/main/texcompress_astc.o $
+  $BUILDROOT/mesa/libmesa/main/texcompress_bptc.o $
+  $BUILDROOT/mesa/libmesa/main/texcompress_cpal.o $
+  $BUILDROOT/mesa/libmesa/main/texcompress_etc.o $
+  $BUILDROOT/mesa/libmesa/main/texcompress_fxt1.o $
+  $BUILDROOT/mesa/libmesa/main/texcompress_rgtc.o $
+  $BUILDROOT/mesa/libmesa/main/texcompress_s3tc.o $
+  $BUILDROOT/mesa/libmesa/main/texenv.o $
+  $BUILDROOT/mesa/libmesa/main/texgen.o $
+  $BUILDROOT/mesa/libmesa/main/texgetimage.o $
+  $BUILDROOT/mesa/libmesa/main/teximage.o $
+  $BUILDROOT/mesa/libmesa/main/texobj.o $
+  $BUILDROOT/mesa/libmesa/main/texparam.o $
+  $BUILDROOT/mesa/libmesa/main/texstate.o $
+  $BUILDROOT/mesa/libmesa/main/texstorage.o $
+  $BUILDROOT/mesa/libmesa/main/texstore.o $
+  $BUILDROOT/mesa/libmesa/main/texturebindless.o $
+  $BUILDROOT/mesa/libmesa/main/textureview.o $
+  $BUILDROOT/mesa/libmesa/main/transformfeedback.o $
+  $BUILDROOT/mesa/libmesa/main/uniform_query.o $
+  $BUILDROOT/mesa/libmesa/main/uniforms.o $
+  $BUILDROOT/mesa/libmesa/main/varray.o $
+  $BUILDROOT/mesa/libmesa/main/vdpau.o $
+  $BUILDROOT/mesa/libmesa/main/version.o $
+  $BUILDROOT/mesa/libmesa/main/viewport.o $
+  $BUILDROOT/mesa/libmesa/math/m_debug_clip.o $
+  $BUILDROOT/mesa/libmesa/math/m_debug_norm.o $
+  $BUILDROOT/mesa/libmesa/math/m_debug_xform.o $
+  $BUILDROOT/mesa/libmesa/math/m_eval.o $
+  $BUILDROOT/mesa/libmesa/math/m_matrix.o $
+  $BUILDROOT/mesa/libmesa/math/m_vector.o $
+  $BUILDROOT/mesa/libmesa/program/arbprogparse.o $
+  $BUILDROOT/mesa/libmesa/program/link_program.o $
+  $BUILDROOT/mesa/libmesa/program/prog_cache.o $
+  $BUILDROOT/mesa/libmesa/program/prog_instruction.o $
+  $BUILDROOT/mesa/libmesa/program/prog_opt_constant_fold.o $
+  $BUILDROOT/mesa/libmesa/program/prog_optimize.o $
+  $BUILDROOT/mesa/libmesa/program/prog_parameter.o $
+  $BUILDROOT/mesa/libmesa/program/prog_parameter_layout.o $
+  $BUILDROOT/mesa/libmesa/program/prog_print.o $
+  $BUILDROOT/mesa/libmesa/program/prog_statevars.o $
+  $BUILDROOT/mesa/libmesa/program/prog_to_nir.o $
+  $BUILDROOT/mesa/libmesa/program/program.o $
+  $BUILDROOT/mesa/libmesa/program/program_parse_extra.o $
+  $BUILDROOT/mesa/libmesa/program/programopt.o $
+  $BUILDROOT/mesa/libmesa/program/symbol_table.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atifs_to_nir.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_array.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_atomicbuf.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_blend.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_clip.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_constbuf.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_depth.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_framebuffer.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_image.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_msaa.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_pixeltransfer.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_rasterizer.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_sampler.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_scissor.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_shader.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_stipple.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_storagebuf.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_tess.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_texture.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_atom_viewport.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_cb_bitmap.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_cb_clear.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_cb_copyimage.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_cb_drawpixels.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_cb_drawtex.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_cb_eglimage.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_cb_feedback.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_cb_flush.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_cb_rasterpos.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_cb_readpixels.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_cb_texture.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_context.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_copytex.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_debug.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_draw.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_draw_feedback.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_extensions.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_format.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_gen_mipmap.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_glsl_to_ir.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_glsl_to_nir.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_manager.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_nir_builtins.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_nir_lower_builtin.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_nir_lower_tex_src_plane.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_pbo.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_pbo_compute.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_program.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_sampler_view.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_scissor.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_shader_cache.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_texture.o $
+  $BUILDROOT/mesa/libmesa/state_tracker/st_vdpau.o $
+  $BUILDROOT/mesa/libmesa/vbo/vbo_context.o $
+  $BUILDROOT/mesa/libmesa/vbo/vbo_exec.o $
+  $BUILDROOT/mesa/libmesa/vbo/vbo_exec_api.o $
+  $BUILDROOT/mesa/libmesa/vbo/vbo_exec_draw.o $
+  $BUILDROOT/mesa/libmesa/vbo/vbo_exec_eval.o $
+  $BUILDROOT/mesa/libmesa/vbo/vbo_minmax_index.o $
+  $BUILDROOT/mesa/libmesa/vbo/vbo_noop.o $
+  $BUILDROOT/mesa/libmesa/vbo/vbo_save.o $
+  $BUILDROOT/mesa/libmesa/vbo/vbo_save_api.o $
+  $BUILDROOT/mesa/libmesa/vbo/vbo_save_draw.o $
+  $BUILDROOT/mesa/libmesa/vbo/vbo_save_loopback.o $
+  $BUILDROOT/mesa/libmesa/x86/common_x86.o $
+
+build $BUILDROOT/mesa/libmesa_sse41/main_streaming-load-memcpy.o: cc external/mesa/src/mesa/main/streaming-load-memcpy.c
+  cflags = $cflags -msse4.1
+build $BUILDROOT/mesa/libmesa_sse41/main_sse_minmax.o: cc external/mesa/src/mesa/main/sse_minmax.c
+  cflags = $cflags -msse4.1
+
+build $BUILDROOT/mesa/libmesa_sse41.a: ar $
+  $BUILDROOT/mesa/libmesa_sse41/main_streaming-load-memcpy.o $
+  $BUILDROOT/mesa/libmesa_sse41/main_sse_minmax.o $
+
+build $BUILDROOT/mesa/libglsl/glsl_parser.o: cxx build/mesa/compiler/glsl/glsl_parser.cpp
+  includes = $includes -Ibuild/mesa/compiler -Iexternal/mesa/src/compiler/glsl
+build $BUILDROOT/mesa/libglsl/glsl_lexer.o: cxx build/mesa/compiler/glsl/glsl_lexer.cpp
+  includes = $includes -Ibuild/mesa/compiler -Iexternal/mesa/src/compiler/glsl
+build $BUILDROOT/mesa/libglsl/ast_array_index.o: cxx external/mesa/src/compiler/glsl/ast_array_index.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ast_expr.o: cxx external/mesa/src/compiler/glsl/ast_expr.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ast_function.o: cxx external/mesa/src/compiler/glsl/ast_function.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ast_to_hir.o: cxx external/mesa/src/compiler/glsl/ast_to_hir.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ast_type.o: cxx external/mesa/src/compiler/glsl/ast_type.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/builtin_functions.o: cxx external/mesa/src/compiler/glsl/builtin_functions.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/builtin_types.o: cxx external/mesa/src/compiler/glsl/builtin_types.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/builtin_variables.o: cxx external/mesa/src/compiler/glsl/builtin_variables.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/generate_ir.o: cxx external/mesa/src/compiler/glsl/generate_ir.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/gl_nir_lower_atomics.o: cc external/mesa/src/compiler/glsl/gl_nir_lower_atomics.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libglsl/gl_nir_lower_images.o: cc external/mesa/src/compiler/glsl/gl_nir_lower_images.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libglsl/gl_nir_lower_buffers.o: cc external/mesa/src/compiler/glsl/gl_nir_lower_buffers.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libglsl/gl_nir_lower_packed_varyings.o: cc external/mesa/src/compiler/glsl/gl_nir_lower_packed_varyings.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libglsl/gl_nir_lower_samplers.o: cc external/mesa/src/compiler/glsl/gl_nir_lower_samplers.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libglsl/gl_nir_lower_samplers_as_deref.o: cc external/mesa/src/compiler/glsl/gl_nir_lower_samplers_as_deref.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libglsl/gl_nir_lower_xfb_varying.o: cc external/mesa/src/compiler/glsl/gl_nir_lower_xfb_varying.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libglsl/gl_nir_link_atomics.o: cc external/mesa/src/compiler/glsl/gl_nir_link_atomics.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libglsl/gl_nir_link_uniform_blocks.o: cc external/mesa/src/compiler/glsl/gl_nir_link_uniform_blocks.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libglsl/gl_nir_link_uniform_initializers.o: cc external/mesa/src/compiler/glsl/gl_nir_link_uniform_initializers.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libglsl/gl_nir_link_uniforms.o: cc external/mesa/src/compiler/glsl/gl_nir_link_uniforms.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libglsl/gl_nir_link_varyings.o: cc external/mesa/src/compiler/glsl/gl_nir_link_varyings.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libglsl/gl_nir_link_xfb.o: cc external/mesa/src/compiler/glsl/gl_nir_link_xfb.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libglsl/gl_nir_linker.o: cc external/mesa/src/compiler/glsl/gl_nir_linker.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libglsl/gl_nir_opt_dead_builtin_varyings.o: cc external/mesa/src/compiler/glsl/gl_nir_opt_dead_builtin_varyings.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libglsl/glsl_parser_extras.o: cxx external/mesa/src/compiler/glsl/glsl_parser_extras.cpp
+  includes = $includes -Ibuild/mesa/compiler -Ibuild/mesa/compiler/glsl
+build $BUILDROOT/mesa/libglsl/glsl_symbol_table.o: cxx external/mesa/src/compiler/glsl/glsl_symbol_table.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/glsl_to_nir.o: cxx external/mesa/src/compiler/glsl/glsl_to_nir.cpp
+  includes = $includes -Ibuild/mesa/compiler -Ibuild/mesa/compiler/nir -Ibuild/mesa/compiler/glsl
+build $BUILDROOT/mesa/libglsl/hir_field_selection.o: cxx external/mesa/src/compiler/glsl/hir_field_selection.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_array_refcount.o: cxx external/mesa/src/compiler/glsl/ir_array_refcount.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_basic_block.o: cxx external/mesa/src/compiler/glsl/ir_basic_block.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_builder.o: cxx external/mesa/src/compiler/glsl/ir_builder.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_clone.o: cxx external/mesa/src/compiler/glsl/ir_clone.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_constant_expression.o: cxx external/mesa/src/compiler/glsl/ir_constant_expression.cpp
+  includes = $includes -Ibuild/mesa/compiler -Ibuild/mesa/compiler/glsl
+build $BUILDROOT/mesa/libglsl/ir.o: cxx external/mesa/src/compiler/glsl/ir.cpp
+  cxxflags = $cxxflags -Wno-implicit-fallthrough
+  includes = $includes -Ibuild/mesa/compiler -Ibuild/mesa/compiler/glsl
+build $BUILDROOT/mesa/libglsl/ir_equals.o: cxx external/mesa/src/compiler/glsl/ir_equals.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_expression_flattening.o: cxx external/mesa/src/compiler/glsl/ir_expression_flattening.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_function_can_inline.o: cxx external/mesa/src/compiler/glsl/ir_function_can_inline.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_function_detect_recursion.o: cxx external/mesa/src/compiler/glsl/ir_function_detect_recursion.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_function.o: cxx external/mesa/src/compiler/glsl/ir_function.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_hierarchical_visitor.o: cxx external/mesa/src/compiler/glsl/ir_hierarchical_visitor.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_hv_accept.o: cxx external/mesa/src/compiler/glsl/ir_hv_accept.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_print_visitor.o: cxx external/mesa/src/compiler/glsl/ir_print_visitor.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_reader.o: cxx external/mesa/src/compiler/glsl/ir_reader.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_rvalue_visitor.o: cxx external/mesa/src/compiler/glsl/ir_rvalue_visitor.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_set_program_inouts.o: cxx external/mesa/src/compiler/glsl/ir_set_program_inouts.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_validate.o: cxx external/mesa/src/compiler/glsl/ir_validate.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/ir_variable_refcount.o: cxx external/mesa/src/compiler/glsl/ir_variable_refcount.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/linker.o: cxx external/mesa/src/compiler/glsl/linker.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/linker_util.o: cxx external/mesa/src/compiler/glsl/linker_util.cpp
+  includes = $includes -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libglsl/link_functions.o: cxx external/mesa/src/compiler/glsl/link_functions.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/link_interface_blocks.o: cxx external/mesa/src/compiler/glsl/link_interface_blocks.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/link_uniforms.o: cxx external/mesa/src/compiler/glsl/link_uniforms.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/link_uniform_block_active_visitor.o: cxx external/mesa/src/compiler/glsl/link_uniform_block_active_visitor.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/link_uniform_blocks.o: cxx external/mesa/src/compiler/glsl/link_uniform_blocks.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/link_varyings.o: cxx external/mesa/src/compiler/glsl/link_varyings.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/loop_analysis.o: cxx external/mesa/src/compiler/glsl/loop_analysis.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/loop_unroll.o: cxx external/mesa/src/compiler/glsl/loop_unroll.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_blend_equation_advanced.o: cxx external/mesa/src/compiler/glsl/lower_blend_equation_advanced.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_buffer_access.o: cxx external/mesa/src/compiler/glsl/lower_buffer_access.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_builtins.o: cxx external/mesa/src/compiler/glsl/lower_builtins.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_const_arrays_to_uniforms.o: cxx external/mesa/src/compiler/glsl/lower_const_arrays_to_uniforms.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_cs_derived.o: cxx external/mesa/src/compiler/glsl/lower_cs_derived.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_discard.o: cxx external/mesa/src/compiler/glsl/lower_discard.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_discard_flow.o: cxx external/mesa/src/compiler/glsl/lower_discard_flow.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_distance.o: cxx external/mesa/src/compiler/glsl/lower_distance.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_instructions.o: cxx external/mesa/src/compiler/glsl/lower_instructions.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_int64.o: cxx external/mesa/src/compiler/glsl/lower_int64.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_jumps.o: cxx external/mesa/src/compiler/glsl/lower_jumps.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_mat_op_to_vec.o: cxx external/mesa/src/compiler/glsl/lower_mat_op_to_vec.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_offset_array.o: cxx external/mesa/src/compiler/glsl/lower_offset_array.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_named_interface_blocks.o: cxx external/mesa/src/compiler/glsl/lower_named_interface_blocks.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_packing_builtins.o: cxx external/mesa/src/compiler/glsl/lower_packing_builtins.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_precision.o: cxx external/mesa/src/compiler/glsl/lower_precision.cpp
+  cxxflags = $cxxflags -include vector
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_subroutine.o: cxx external/mesa/src/compiler/glsl/lower_subroutine.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_tess_level.o: cxx external/mesa/src/compiler/glsl/lower_tess_level.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_vec_index_to_cond_assign.o: cxx external/mesa/src/compiler/glsl/lower_vec_index_to_cond_assign.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_vec_index_to_swizzle.o: cxx external/mesa/src/compiler/glsl/lower_vec_index_to_swizzle.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_vector_derefs.o: cxx external/mesa/src/compiler/glsl/lower_vector_derefs.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_vector_insert.o: cxx external/mesa/src/compiler/glsl/lower_vector_insert.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_vertex_id.o: cxx external/mesa/src/compiler/glsl/lower_vertex_id.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_output_reads.o: cxx external/mesa/src/compiler/glsl/lower_output_reads.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/lower_shared_reference.o: cxx external/mesa/src/compiler/glsl/lower_shared_reference.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_algebraic.o: cxx external/mesa/src/compiler/glsl/opt_algebraic.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_array_splitting.o: cxx external/mesa/src/compiler/glsl/opt_array_splitting.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_conditional_discard.o: cxx external/mesa/src/compiler/glsl/opt_conditional_discard.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_constant_folding.o: cxx external/mesa/src/compiler/glsl/opt_constant_folding.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_constant_propagation.o: cxx external/mesa/src/compiler/glsl/opt_constant_propagation.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_constant_variable.o: cxx external/mesa/src/compiler/glsl/opt_constant_variable.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_copy_propagation_elements.o: cxx external/mesa/src/compiler/glsl/opt_copy_propagation_elements.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_dead_builtin_variables.o: cxx external/mesa/src/compiler/glsl/opt_dead_builtin_variables.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_dead_code.o: cxx external/mesa/src/compiler/glsl/opt_dead_code.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_dead_code_local.o: cxx external/mesa/src/compiler/glsl/opt_dead_code_local.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_dead_functions.o: cxx external/mesa/src/compiler/glsl/opt_dead_functions.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_flatten_nested_if_blocks.o: cxx external/mesa/src/compiler/glsl/opt_flatten_nested_if_blocks.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_flip_matrices.o: cxx external/mesa/src/compiler/glsl/opt_flip_matrices.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_function_inlining.o: cxx external/mesa/src/compiler/glsl/opt_function_inlining.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_if_simplification.o: cxx external/mesa/src/compiler/glsl/opt_if_simplification.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_minmax.o: cxx external/mesa/src/compiler/glsl/opt_minmax.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_rebalance_tree.o: cxx external/mesa/src/compiler/glsl/opt_rebalance_tree.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_structure_splitting.o: cxx external/mesa/src/compiler/glsl/opt_structure_splitting.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_swizzle.o: cxx external/mesa/src/compiler/glsl/opt_swizzle.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/opt_tree_grafting.o: cxx external/mesa/src/compiler/glsl/opt_tree_grafting.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/propagate_invariance.o: cxx external/mesa/src/compiler/glsl/propagate_invariance.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libglsl/s_expression.o: cxx external/mesa/src/compiler/glsl/s_expression.cpp
+build $BUILDROOT/mesa/libglsl/string_to_uint_map.o: cxx external/mesa/src/compiler/glsl/string_to_uint_map.cpp
+build $BUILDROOT/mesa/libglsl/serialize.o: cxx external/mesa/src/compiler/glsl/serialize.cpp
+build $BUILDROOT/mesa/libglsl/shader_cache.o: cxx external/mesa/src/compiler/glsl/shader_cache.cpp
+  includes = $includes -Ibuild/mesa/compiler -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+
+build $BUILDROOT/mesa/libglsl.a: ar $
+  $BUILDROOT/mesa/libglsl/glsl_parser.o $
+  $BUILDROOT/mesa/libglsl/glsl_lexer.o $
+  $BUILDROOT/mesa/libglsl/ast_array_index.o $
+  $BUILDROOT/mesa/libglsl/ast_expr.o $
+  $BUILDROOT/mesa/libglsl/ast_function.o $
+  $BUILDROOT/mesa/libglsl/ast_to_hir.o $
+  $BUILDROOT/mesa/libglsl/ast_type.o $
+  $BUILDROOT/mesa/libglsl/builtin_functions.o $
+  $BUILDROOT/mesa/libglsl/builtin_types.o $
+  $BUILDROOT/mesa/libglsl/builtin_variables.o $
+  $BUILDROOT/mesa/libglsl/generate_ir.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_lower_atomics.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_lower_images.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_lower_buffers.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_lower_packed_varyings.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_lower_samplers.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_lower_samplers_as_deref.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_lower_xfb_varying.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_link_atomics.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_link_uniform_blocks.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_link_uniform_initializers.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_link_uniforms.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_link_varyings.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_link_xfb.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_linker.o $
+  $BUILDROOT/mesa/libglsl/gl_nir_opt_dead_builtin_varyings.o $
+  $BUILDROOT/mesa/libglsl/glsl_parser_extras.o $
+  $BUILDROOT/mesa/libglsl/glsl_symbol_table.o $
+  $BUILDROOT/mesa/libglsl/glsl_to_nir.o $
+  $BUILDROOT/mesa/libglsl/hir_field_selection.o $
+  $BUILDROOT/mesa/libglsl/ir_array_refcount.o $
+  $BUILDROOT/mesa/libglsl/ir_basic_block.o $
+  $BUILDROOT/mesa/libglsl/ir_builder.o $
+  $BUILDROOT/mesa/libglsl/ir_clone.o $
+  $BUILDROOT/mesa/libglsl/ir_constant_expression.o $
+  $BUILDROOT/mesa/libglsl/ir.o $
+  $BUILDROOT/mesa/libglsl/ir_equals.o $
+  $BUILDROOT/mesa/libglsl/ir_expression_flattening.o $
+  $BUILDROOT/mesa/libglsl/ir_function_can_inline.o $
+  $BUILDROOT/mesa/libglsl/ir_function_detect_recursion.o $
+  $BUILDROOT/mesa/libglsl/ir_function.o $
+  $BUILDROOT/mesa/libglsl/ir_hierarchical_visitor.o $
+  $BUILDROOT/mesa/libglsl/ir_hv_accept.o $
+  $BUILDROOT/mesa/libglsl/ir_print_visitor.o $
+  $BUILDROOT/mesa/libglsl/ir_reader.o $
+  $BUILDROOT/mesa/libglsl/ir_rvalue_visitor.o $
+  $BUILDROOT/mesa/libglsl/ir_set_program_inouts.o $
+  $BUILDROOT/mesa/libglsl/ir_validate.o $
+  $BUILDROOT/mesa/libglsl/ir_variable_refcount.o $
+  $BUILDROOT/mesa/libglsl/linker.o $
+  $BUILDROOT/mesa/libglsl/linker_util.o $
+  $BUILDROOT/mesa/libglsl/link_functions.o $
+  $BUILDROOT/mesa/libglsl/link_interface_blocks.o $
+  $BUILDROOT/mesa/libglsl/link_uniforms.o $
+  $BUILDROOT/mesa/libglsl/link_uniform_block_active_visitor.o $
+  $BUILDROOT/mesa/libglsl/link_uniform_blocks.o $
+  $BUILDROOT/mesa/libglsl/link_varyings.o $
+  $BUILDROOT/mesa/libglsl/loop_analysis.o $
+  $BUILDROOT/mesa/libglsl/loop_unroll.o $
+  $BUILDROOT/mesa/libglsl/lower_blend_equation_advanced.o $
+  $BUILDROOT/mesa/libglsl/lower_buffer_access.o $
+  $BUILDROOT/mesa/libglsl/lower_builtins.o $
+  $BUILDROOT/mesa/libglsl/lower_const_arrays_to_uniforms.o $
+  $BUILDROOT/mesa/libglsl/lower_cs_derived.o $
+  $BUILDROOT/mesa/libglsl/lower_discard.o $
+  $BUILDROOT/mesa/libglsl/lower_discard_flow.o $
+  $BUILDROOT/mesa/libglsl/lower_distance.o $
+  $BUILDROOT/mesa/libglsl/lower_instructions.o $
+  $BUILDROOT/mesa/libglsl/lower_int64.o $
+  $BUILDROOT/mesa/libglsl/lower_jumps.o $
+  $BUILDROOT/mesa/libglsl/lower_mat_op_to_vec.o $
+  $BUILDROOT/mesa/libglsl/lower_offset_array.o $
+  $BUILDROOT/mesa/libglsl/lower_named_interface_blocks.o $
+  $BUILDROOT/mesa/libglsl/lower_packing_builtins.o $
+  $BUILDROOT/mesa/libglsl/lower_precision.o $
+  $BUILDROOT/mesa/libglsl/lower_subroutine.o $
+  $BUILDROOT/mesa/libglsl/lower_tess_level.o $
+  $BUILDROOT/mesa/libglsl/lower_vec_index_to_cond_assign.o $
+  $BUILDROOT/mesa/libglsl/lower_vec_index_to_swizzle.o $
+  $BUILDROOT/mesa/libglsl/lower_vector_derefs.o $
+  $BUILDROOT/mesa/libglsl/lower_vector_insert.o $
+  $BUILDROOT/mesa/libglsl/lower_vertex_id.o $
+  $BUILDROOT/mesa/libglsl/lower_output_reads.o $
+  $BUILDROOT/mesa/libglsl/lower_shared_reference.o $
+  $BUILDROOT/mesa/libglsl/opt_algebraic.o $
+  $BUILDROOT/mesa/libglsl/opt_array_splitting.o $
+  $BUILDROOT/mesa/libglsl/opt_conditional_discard.o $
+  $BUILDROOT/mesa/libglsl/opt_constant_folding.o $
+  $BUILDROOT/mesa/libglsl/opt_constant_propagation.o $
+  $BUILDROOT/mesa/libglsl/opt_constant_variable.o $
+  $BUILDROOT/mesa/libglsl/opt_copy_propagation_elements.o $
+  $BUILDROOT/mesa/libglsl/opt_dead_builtin_variables.o $
+  $BUILDROOT/mesa/libglsl/opt_dead_code.o $
+  $BUILDROOT/mesa/libglsl/opt_dead_code_local.o $
+  $BUILDROOT/mesa/libglsl/opt_dead_functions.o $
+  $BUILDROOT/mesa/libglsl/opt_flatten_nested_if_blocks.o $
+  $BUILDROOT/mesa/libglsl/opt_flip_matrices.o $
+  $BUILDROOT/mesa/libglsl/opt_function_inlining.o $
+  $BUILDROOT/mesa/libglsl/opt_if_simplification.o $
+  $BUILDROOT/mesa/libglsl/opt_minmax.o $
+  $BUILDROOT/mesa/libglsl/opt_rebalance_tree.o $
+  $BUILDROOT/mesa/libglsl/opt_structure_splitting.o $
+  $BUILDROOT/mesa/libglsl/opt_swizzle.o $
+  $BUILDROOT/mesa/libglsl/opt_tree_grafting.o $
+  $BUILDROOT/mesa/libglsl/propagate_invariance.o $
+  $BUILDROOT/mesa/libglsl/s_expression.o $
+  $BUILDROOT/mesa/libglsl/string_to_uint_map.o $
+  $BUILDROOT/mesa/libglsl/serialize.o $
+  $BUILDROOT/mesa/libglsl/shader_cache.o $
+
+build $BUILDROOT/mesa/libglcpp/glcpp-lex.o: cc build/mesa/compiler/glsl/glcpp/glcpp-lex.c
+  includes = $includes -Iexternal/mesa/src/compiler/glsl/glcpp
+build $BUILDROOT/mesa/libglcpp/glcpp-parse.o: cc build/mesa/compiler/glsl/glcpp/glcpp-parse.c
+  includes = $includes -Iexternal/mesa/src/compiler/glsl/glcpp
+build $BUILDROOT/mesa/libglcpp/pp.o: cc external/mesa/src/compiler/glsl/glcpp/pp.c
+
+build $BUILDROOT/mesa/libglcpp.a: ar $
+  $BUILDROOT/mesa/libglcpp/glcpp-lex.o $
+  $BUILDROOT/mesa/libglcpp/glcpp-parse.o $
+  $BUILDROOT/mesa/libglcpp/pp.o $
+
+build $BUILDROOT/mesa/libnir/spirv_info.o: cc build/mesa/compiler/spirv/spirv_info.c
+  includes = $includes -Iexternal/mesa/src/compiler/spirv
+build $BUILDROOT/mesa/libnir/nir_opt_algebraic.o: cc build/mesa/compiler/nir/nir_opt_algebraic.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opcodes.o: cc build/mesa/compiler/nir/nir_opcodes.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_constant_expressions.o: cc build/mesa/compiler/nir/nir_constant_expressions.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libnir/vtn_gather_types.o: cc build/mesa/compiler/spirv/vtn_gather_types.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Ibuild/mesa/compiler/spirv -Iexternal/mesa/src/compiler -Iexternal/mesa/src/compiler/spirv
+build $BUILDROOT/mesa/libnir/nir_intrinsics.o: cc build/mesa/compiler/nir/nir_intrinsics.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libnir/nir.o: cc external/mesa/src/compiler/nir/nir.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_builder.o: cc external/mesa/src/compiler/nir/nir_builder.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_builtin_builder.o: cc external/mesa/src/compiler/nir/nir_builtin_builder.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_clone.o: cc external/mesa/src/compiler/nir/nir_clone.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_control_flow.o: cc external/mesa/src/compiler/nir/nir_control_flow.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_convert_ycbcr.o: cc external/mesa/src/compiler/nir/nir_convert_ycbcr.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_deref.o: cc external/mesa/src/compiler/nir/nir_deref.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_divergence_analysis.o: cc external/mesa/src/compiler/nir/nir_divergence_analysis.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_dominance.o: cc external/mesa/src/compiler/nir/nir_dominance.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_from_ssa.o: cc external/mesa/src/compiler/nir/nir_from_ssa.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_gather_info.o: cc external/mesa/src/compiler/nir/nir_gather_info.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_gather_ssa_types.o: cc external/mesa/src/compiler/nir/nir_gather_ssa_types.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_gather_xfb_info.o: cc external/mesa/src/compiler/nir/nir_gather_xfb_info.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_group_loads.o: cc external/mesa/src/compiler/nir/nir_group_loads.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_gs_count_vertices.o: cc external/mesa/src/compiler/nir/nir_gs_count_vertices.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_inline_functions.o: cc external/mesa/src/compiler/nir/nir_inline_functions.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_inline_uniforms.o: cc external/mesa/src/compiler/nir/nir_inline_uniforms.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_instr_set.o: cc external/mesa/src/compiler/nir/nir_instr_set.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_linking_helpers.o: cc external/mesa/src/compiler/nir/nir_linking_helpers.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_liveness.o: cc external/mesa/src/compiler/nir/nir_liveness.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_loop_analyze.o: cc external/mesa/src/compiler/nir/nir_loop_analyze.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_alu.o: cc external/mesa/src/compiler/nir/nir_lower_alu.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_alu_to_scalar.o: cc external/mesa/src/compiler/nir/nir_lower_alu_to_scalar.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_alpha_test.o: cc external/mesa/src/compiler/nir/nir_lower_alpha_test.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libnir/nir_lower_amul.o: cc external/mesa/src/compiler/nir/nir_lower_amul.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_array_deref_of_vec.o: cc external/mesa/src/compiler/nir/nir_lower_array_deref_of_vec.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_atomics_to_ssbo.o: cc external/mesa/src/compiler/nir/nir_lower_atomics_to_ssbo.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_bitmap.o: cc external/mesa/src/compiler/nir/nir_lower_bitmap.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_blend.o: cc external/mesa/src/compiler/nir/nir_lower_blend.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_bool_to_bitsize.o: cc external/mesa/src/compiler/nir/nir_lower_bool_to_bitsize.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_bool_to_float.o: cc external/mesa/src/compiler/nir/nir_lower_bool_to_float.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_bool_to_int32.o: cc external/mesa/src/compiler/nir/nir_lower_bool_to_int32.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_clamp_color_outputs.o: cc external/mesa/src/compiler/nir/nir_lower_clamp_color_outputs.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_clip.o: cc external/mesa/src/compiler/nir/nir_lower_clip.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_clip_cull_distance_arrays.o: cc external/mesa/src/compiler/nir/nir_lower_clip_cull_distance_arrays.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_clip_disable.o: cc external/mesa/src/compiler/nir/nir_lower_clip_disable.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_clip_halfz.o: cc external/mesa/src/compiler/nir/nir_lower_clip_halfz.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_convert_alu_types.o: cc external/mesa/src/compiler/nir/nir_lower_convert_alu_types.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_variable_initializers.o: cc external/mesa/src/compiler/nir/nir_lower_variable_initializers.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_discard_if.o: cc external/mesa/src/compiler/nir/nir_lower_discard_if.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_discard_or_demote.o: cc external/mesa/src/compiler/nir/nir_lower_discard_or_demote.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_double_ops.o: cc external/mesa/src/compiler/nir/nir_lower_double_ops.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_drawpixels.o: cc external/mesa/src/compiler/nir/nir_lower_drawpixels.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_fb_read.o: cc external/mesa/src/compiler/nir/nir_lower_fb_read.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_flatshade.o: cc external/mesa/src/compiler/nir/nir_lower_flatshade.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_flrp.o: cc external/mesa/src/compiler/nir/nir_lower_flrp.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_fp16_conv.o: cc external/mesa/src/compiler/nir/nir_lower_fp16_conv.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_fragcoord_wtrans.o: cc external/mesa/src/compiler/nir/nir_lower_fragcoord_wtrans.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_fragcolor.o: cc external/mesa/src/compiler/nir/nir_lower_fragcolor.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_frexp.o: cc external/mesa/src/compiler/nir/nir_lower_frexp.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_global_vars_to_local.o: cc external/mesa/src/compiler/nir/nir_lower_global_vars_to_local.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_goto_ifs.o: cc external/mesa/src/compiler/nir/nir_lower_goto_ifs.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_gs_intrinsics.o: cc external/mesa/src/compiler/nir/nir_lower_gs_intrinsics.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_load_const_to_scalar.o: cc external/mesa/src/compiler/nir/nir_lower_load_const_to_scalar.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_locals_to_regs.o: cc external/mesa/src/compiler/nir/nir_lower_locals_to_regs.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_idiv.o: cc external/mesa/src/compiler/nir/nir_lower_idiv.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_image.o: cc external/mesa/src/compiler/nir/nir_lower_image.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_indirect_derefs.o: cc external/mesa/src/compiler/nir/nir_lower_indirect_derefs.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_input_attachments.o: cc external/mesa/src/compiler/nir/nir_lower_input_attachments.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_int64.o: cc external/mesa/src/compiler/nir/nir_lower_int64.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_interpolation.o: cc external/mesa/src/compiler/nir/nir_lower_interpolation.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_int_to_float.o: cc external/mesa/src/compiler/nir/nir_lower_int_to_float.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_io.o: cc external/mesa/src/compiler/nir/nir_lower_io.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_io_arrays_to_elements.o: cc external/mesa/src/compiler/nir/nir_lower_io_arrays_to_elements.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_io_to_temporaries.o: cc external/mesa/src/compiler/nir/nir_lower_io_to_temporaries.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_io_to_scalar.o: cc external/mesa/src/compiler/nir/nir_lower_io_to_scalar.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_io_to_vector.o: cc external/mesa/src/compiler/nir/nir_lower_io_to_vector.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_is_helper_invocation.o: cc external/mesa/src/compiler/nir/nir_lower_is_helper_invocation.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_multiview.o: cc external/mesa/src/compiler/nir/nir_lower_multiview.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_mediump.o: cc external/mesa/src/compiler/nir/nir_lower_mediump.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_memcpy.o: cc external/mesa/src/compiler/nir/nir_lower_memcpy.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_memory_model.o: cc external/mesa/src/compiler/nir/nir_lower_memory_model.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libnir/nir_lower_non_uniform_access.o: cc external/mesa/src/compiler/nir/nir_lower_non_uniform_access.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_packing.o: cc external/mesa/src/compiler/nir/nir_lower_packing.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_passthrough_edgeflags.o: cc external/mesa/src/compiler/nir/nir_lower_passthrough_edgeflags.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_patch_vertices.o: cc external/mesa/src/compiler/nir/nir_lower_patch_vertices.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_phis_to_scalar.o: cc external/mesa/src/compiler/nir/nir_lower_phis_to_scalar.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_pntc_ytransform.o: cc external/mesa/src/compiler/nir/nir_lower_pntc_ytransform.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_point_size.o: cc external/mesa/src/compiler/nir/nir_lower_point_size.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_point_size_mov.o: cc external/mesa/src/compiler/nir/nir_lower_point_size_mov.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_printf.o: cc external/mesa/src/compiler/nir/nir_lower_printf.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_regs_to_ssa.o: cc external/mesa/src/compiler/nir/nir_lower_regs_to_ssa.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_readonly_images_to_tex.o: cc external/mesa/src/compiler/nir/nir_lower_readonly_images_to_tex.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_returns.o: cc external/mesa/src/compiler/nir/nir_lower_returns.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_samplers.o: cc external/mesa/src/compiler/nir/nir_lower_samplers.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libnir/nir_lower_scratch.o: cc external/mesa/src/compiler/nir/nir_lower_scratch.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libnir/nir_lower_shader_calls.o: cc external/mesa/src/compiler/nir/nir_lower_shader_calls.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_ssbo.o: cc external/mesa/src/compiler/nir/nir_lower_ssbo.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_subgroups.o: cc external/mesa/src/compiler/nir/nir_lower_subgroups.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_system_values.o: cc external/mesa/src/compiler/nir/nir_lower_system_values.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_tex_shadow.o: cc external/mesa/src/compiler/nir/nir_lower_tex_shadow.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_tex.o: cc external/mesa/src/compiler/nir/nir_lower_tex.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_texcoord_replace.o: cc external/mesa/src/compiler/nir/nir_lower_texcoord_replace.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_to_source_mods.o: cc external/mesa/src/compiler/nir/nir_lower_to_source_mods.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_two_sided_color.o: cc external/mesa/src/compiler/nir/nir_lower_two_sided_color.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_undef_to_zero.o: cc external/mesa/src/compiler/nir/nir_lower_undef_to_zero.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_vars_to_ssa.o: cc external/mesa/src/compiler/nir/nir_lower_vars_to_ssa.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_var_copies.o: cc external/mesa/src/compiler/nir/nir_lower_var_copies.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_vec_to_movs.o: cc external/mesa/src/compiler/nir/nir_lower_vec_to_movs.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_vec3_to_vec4.o: cc external/mesa/src/compiler/nir/nir_lower_vec3_to_vec4.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_viewport_transform.o: cc external/mesa/src/compiler/nir/nir_lower_viewport_transform.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libnir/nir_lower_wpos_center.o: cc external/mesa/src/compiler/nir/nir_lower_wpos_center.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_wpos_ytransform.o: cc external/mesa/src/compiler/nir/nir_lower_wpos_ytransform.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_wrmasks.o: cc external/mesa/src/compiler/nir/nir_lower_wrmasks.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_bit_size.o: cc external/mesa/src/compiler/nir/nir_lower_bit_size.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_ubo_vec4.o: cc external/mesa/src/compiler/nir/nir_lower_ubo_vec4.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_uniforms_to_ubo.o: cc external/mesa/src/compiler/nir/nir_lower_uniforms_to_ubo.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_sysvals_to_varyings.o: cc external/mesa/src/compiler/nir/nir_lower_sysvals_to_varyings.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_metadata.o: cc external/mesa/src/compiler/nir/nir_metadata.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_move_vec_src_uses_to_dest.o: cc external/mesa/src/compiler/nir/nir_move_vec_src_uses_to_dest.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_normalize_cubemap_coords.o: cc external/mesa/src/compiler/nir/nir_normalize_cubemap_coords.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_access.o: cc external/mesa/src/compiler/nir/nir_opt_access.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_barriers.o: cc external/mesa/src/compiler/nir/nir_opt_barriers.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_combine_stores.o: cc external/mesa/src/compiler/nir/nir_opt_combine_stores.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_comparison_pre.o: cc external/mesa/src/compiler/nir/nir_opt_comparison_pre.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_conditional_discard.o: cc external/mesa/src/compiler/nir/nir_opt_conditional_discard.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_constant_folding.o: cc external/mesa/src/compiler/nir/nir_opt_constant_folding.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_copy_prop_vars.o: cc external/mesa/src/compiler/nir/nir_opt_copy_prop_vars.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_copy_propagate.o: cc external/mesa/src/compiler/nir/nir_opt_copy_propagate.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_cse.o: cc external/mesa/src/compiler/nir/nir_opt_cse.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_dce.o: cc external/mesa/src/compiler/nir/nir_opt_dce.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_dead_cf.o: cc external/mesa/src/compiler/nir/nir_opt_dead_cf.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_dead_write_vars.o: cc external/mesa/src/compiler/nir/nir_opt_dead_write_vars.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_find_array_copies.o: cc external/mesa/src/compiler/nir/nir_opt_find_array_copies.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_fragdepth.o: cc external/mesa/src/compiler/nir/nir_opt_fragdepth.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_gcm.o: cc external/mesa/src/compiler/nir/nir_opt_gcm.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_idiv_const.o: cc external/mesa/src/compiler/nir/nir_opt_idiv_const.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_if.o: cc external/mesa/src/compiler/nir/nir_opt_if.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libnir/nir_opt_intrinsics.o: cc external/mesa/src/compiler/nir/nir_opt_intrinsics.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_large_constants.o: cc external/mesa/src/compiler/nir/nir_opt_large_constants.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_load_store_vectorize.o: cc external/mesa/src/compiler/nir/nir_opt_load_store_vectorize.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_loop_unroll.o: cc external/mesa/src/compiler/nir/nir_opt_loop_unroll.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_memcpy.o: cc external/mesa/src/compiler/nir/nir_opt_memcpy.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_move.o: cc external/mesa/src/compiler/nir/nir_opt_move.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_move_discards_to_top.o: cc external/mesa/src/compiler/nir/nir_opt_move_discards_to_top.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_offsets.o: cc external/mesa/src/compiler/nir/nir_opt_offsets.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_peephole_select.o: cc external/mesa/src/compiler/nir/nir_opt_peephole_select.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libnir/nir_opt_phi_precision.o: cc external/mesa/src/compiler/nir/nir_opt_phi_precision.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_preamble.o: cc external/mesa/src/compiler/nir/nir_opt_preamble.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_ray_queries.o: cc external/mesa/src/compiler/nir/nir_opt_ray_queries.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_rematerialize_compares.o: cc external/mesa/src/compiler/nir/nir_opt_rematerialize_compares.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libnir/nir_opt_remove_phis.o: cc external/mesa/src/compiler/nir/nir_opt_remove_phis.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_shrink_stores.o: cc external/mesa/src/compiler/nir/nir_opt_shrink_stores.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_shrink_vectors.o: cc external/mesa/src/compiler/nir/nir_opt_shrink_vectors.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_sink.o: cc external/mesa/src/compiler/nir/nir_opt_sink.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_trivial_continues.o: cc external/mesa/src/compiler/nir/nir_opt_trivial_continues.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_undef.o: cc external/mesa/src/compiler/nir/nir_opt_undef.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_opt_uniform_atomics.o: cc external/mesa/src/compiler/nir/nir_opt_uniform_atomics.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libnir/nir_opt_vectorize.o: cc external/mesa/src/compiler/nir/nir_opt_vectorize.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_phi_builder.o: cc external/mesa/src/compiler/nir/nir_phi_builder.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler
+build $BUILDROOT/mesa/libnir/nir_print.o: cc external/mesa/src/compiler/nir/nir_print.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_propagate_invariant.o: cc external/mesa/src/compiler/nir/nir_propagate_invariant.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_range_analysis.o: cc external/mesa/src/compiler/nir/nir_range_analysis.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_remove_dead_variables.o: cc external/mesa/src/compiler/nir/nir_remove_dead_variables.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_repair_ssa.o: cc external/mesa/src/compiler/nir/nir_repair_ssa.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_scale_fdiv.o: cc external/mesa/src/compiler/nir/nir_scale_fdiv.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_schedule.o: cc external/mesa/src/compiler/nir/nir_schedule.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_search.o: cc external/mesa/src/compiler/nir/nir_search.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_serialize.o: cc external/mesa/src/compiler/nir/nir_serialize.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_split_64bit_vec3_and_vec4.o: cc external/mesa/src/compiler/nir/nir_split_64bit_vec3_and_vec4.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_split_per_member_structs.o: cc external/mesa/src/compiler/nir/nir_split_per_member_structs.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_split_var_copies.o: cc external/mesa/src/compiler/nir/nir_split_var_copies.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_split_vars.o: cc external/mesa/src/compiler/nir/nir_split_vars.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_sweep.o: cc external/mesa/src/compiler/nir/nir_sweep.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_to_lcssa.o: cc external/mesa/src/compiler/nir/nir_to_lcssa.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_validate.o: cc external/mesa/src/compiler/nir/nir_validate.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_worklist.o: cc external/mesa/src/compiler/nir/nir_worklist.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libnir/gl_spirv.o: cc external/mesa/src/compiler/spirv/gl_spirv.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler -Ibuild/mesa/compiler/spirv
+build $BUILDROOT/mesa/libnir/nir_load_libclc.o: cc external/mesa/src/compiler/spirv/nir_load_libclc.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libnir/nir_lower_libclc.o: cc external/mesa/src/compiler/spirv/nir_lower_libclc.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libnir/spirv_to_nir.o: cc external/mesa/src/compiler/spirv/spirv_to_nir.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler -Ibuild/mesa/compiler/spirv
+build $BUILDROOT/mesa/libnir/vtn_alu.o: cc external/mesa/src/compiler/spirv/vtn_alu.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler -Ibuild/mesa/compiler/spirv
+build $BUILDROOT/mesa/libnir/vtn_amd.o: cc external/mesa/src/compiler/spirv/vtn_amd.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler -Ibuild/mesa/compiler/spirv
+build $BUILDROOT/mesa/libnir/vtn_cfg.o: cc external/mesa/src/compiler/spirv/vtn_cfg.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler -Ibuild/mesa/compiler/spirv
+build $BUILDROOT/mesa/libnir/vtn_glsl450.o: cc external/mesa/src/compiler/spirv/vtn_glsl450.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler -Ibuild/mesa/compiler/spirv
+build $BUILDROOT/mesa/libnir/vtn_opencl.o: cc external/mesa/src/compiler/spirv/vtn_opencl.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler -Ibuild/mesa/compiler/spirv
+build $BUILDROOT/mesa/libnir/vtn_subgroup.o: cc external/mesa/src/compiler/spirv/vtn_subgroup.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler -Ibuild/mesa/compiler/spirv
+build $BUILDROOT/mesa/libnir/vtn_variables.o: cc external/mesa/src/compiler/spirv/vtn_variables.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler -Ibuild/mesa/compiler/spirv -Iexternal/mesa/src/compiler/nir
+
+build $BUILDROOT/mesa/libnir.a: ar $
+  $BUILDROOT/mesa/libnir/spirv_info.o $
+  $BUILDROOT/mesa/libnir/nir_opt_algebraic.o $
+  $BUILDROOT/mesa/libnir/nir_opcodes.o $
+  $BUILDROOT/mesa/libnir/nir_constant_expressions.o $
+  $BUILDROOT/mesa/libnir/vtn_gather_types.o $
+  $BUILDROOT/mesa/libnir/nir_intrinsics.o $
+  $BUILDROOT/mesa/libnir/nir.o $
+  $BUILDROOT/mesa/libnir/nir_builder.o $
+  $BUILDROOT/mesa/libnir/nir_builtin_builder.o $
+  $BUILDROOT/mesa/libnir/nir_clone.o $
+  $BUILDROOT/mesa/libnir/nir_control_flow.o $
+  $BUILDROOT/mesa/libnir/nir_convert_ycbcr.o $
+  $BUILDROOT/mesa/libnir/nir_deref.o $
+  $BUILDROOT/mesa/libnir/nir_divergence_analysis.o $
+  $BUILDROOT/mesa/libnir/nir_dominance.o $
+  $BUILDROOT/mesa/libnir/nir_from_ssa.o $
+  $BUILDROOT/mesa/libnir/nir_gather_info.o $
+  $BUILDROOT/mesa/libnir/nir_gather_ssa_types.o $
+  $BUILDROOT/mesa/libnir/nir_gather_xfb_info.o $
+  $BUILDROOT/mesa/libnir/nir_group_loads.o $
+  $BUILDROOT/mesa/libnir/nir_gs_count_vertices.o $
+  $BUILDROOT/mesa/libnir/nir_inline_functions.o $
+  $BUILDROOT/mesa/libnir/nir_inline_uniforms.o $
+  $BUILDROOT/mesa/libnir/nir_instr_set.o $
+  $BUILDROOT/mesa/libnir/nir_linking_helpers.o $
+  $BUILDROOT/mesa/libnir/nir_liveness.o $
+  $BUILDROOT/mesa/libnir/nir_loop_analyze.o $
+  $BUILDROOT/mesa/libnir/nir_lower_alu.o $
+  $BUILDROOT/mesa/libnir/nir_lower_alu_to_scalar.o $
+  $BUILDROOT/mesa/libnir/nir_lower_alpha_test.o $
+  $BUILDROOT/mesa/libnir/nir_lower_amul.o $
+  $BUILDROOT/mesa/libnir/nir_lower_array_deref_of_vec.o $
+  $BUILDROOT/mesa/libnir/nir_lower_atomics_to_ssbo.o $
+  $BUILDROOT/mesa/libnir/nir_lower_bitmap.o $
+  $BUILDROOT/mesa/libnir/nir_lower_blend.o $
+  $BUILDROOT/mesa/libnir/nir_lower_bool_to_bitsize.o $
+  $BUILDROOT/mesa/libnir/nir_lower_bool_to_float.o $
+  $BUILDROOT/mesa/libnir/nir_lower_bool_to_int32.o $
+  $BUILDROOT/mesa/libnir/nir_lower_clamp_color_outputs.o $
+  $BUILDROOT/mesa/libnir/nir_lower_clip.o $
+  $BUILDROOT/mesa/libnir/nir_lower_clip_cull_distance_arrays.o $
+  $BUILDROOT/mesa/libnir/nir_lower_clip_disable.o $
+  $BUILDROOT/mesa/libnir/nir_lower_clip_halfz.o $
+  $BUILDROOT/mesa/libnir/nir_lower_convert_alu_types.o $
+  $BUILDROOT/mesa/libnir/nir_lower_variable_initializers.o $
+  $BUILDROOT/mesa/libnir/nir_lower_discard_if.o $
+  $BUILDROOT/mesa/libnir/nir_lower_discard_or_demote.o $
+  $BUILDROOT/mesa/libnir/nir_lower_double_ops.o $
+  $BUILDROOT/mesa/libnir/nir_lower_drawpixels.o $
+  $BUILDROOT/mesa/libnir/nir_lower_fb_read.o $
+  $BUILDROOT/mesa/libnir/nir_lower_flatshade.o $
+  $BUILDROOT/mesa/libnir/nir_lower_flrp.o $
+  $BUILDROOT/mesa/libnir/nir_lower_fp16_conv.o $
+  $BUILDROOT/mesa/libnir/nir_lower_fragcoord_wtrans.o $
+  $BUILDROOT/mesa/libnir/nir_lower_fragcolor.o $
+  $BUILDROOT/mesa/libnir/nir_lower_frexp.o $
+  $BUILDROOT/mesa/libnir/nir_lower_global_vars_to_local.o $
+  $BUILDROOT/mesa/libnir/nir_lower_goto_ifs.o $
+  $BUILDROOT/mesa/libnir/nir_lower_gs_intrinsics.o $
+  $BUILDROOT/mesa/libnir/nir_lower_load_const_to_scalar.o $
+  $BUILDROOT/mesa/libnir/nir_lower_locals_to_regs.o $
+  $BUILDROOT/mesa/libnir/nir_lower_idiv.o $
+  $BUILDROOT/mesa/libnir/nir_lower_image.o $
+  $BUILDROOT/mesa/libnir/nir_lower_indirect_derefs.o $
+  $BUILDROOT/mesa/libnir/nir_lower_input_attachments.o $
+  $BUILDROOT/mesa/libnir/nir_lower_int64.o $
+  $BUILDROOT/mesa/libnir/nir_lower_interpolation.o $
+  $BUILDROOT/mesa/libnir/nir_lower_int_to_float.o $
+  $BUILDROOT/mesa/libnir/nir_lower_io.o $
+  $BUILDROOT/mesa/libnir/nir_lower_io_arrays_to_elements.o $
+  $BUILDROOT/mesa/libnir/nir_lower_io_to_temporaries.o $
+  $BUILDROOT/mesa/libnir/nir_lower_io_to_scalar.o $
+  $BUILDROOT/mesa/libnir/nir_lower_io_to_vector.o $
+  $BUILDROOT/mesa/libnir/nir_lower_is_helper_invocation.o $
+  $BUILDROOT/mesa/libnir/nir_lower_multiview.o $
+  $BUILDROOT/mesa/libnir/nir_lower_mediump.o $
+  $BUILDROOT/mesa/libnir/nir_lower_memcpy.o $
+  $BUILDROOT/mesa/libnir/nir_lower_memory_model.o $
+  $BUILDROOT/mesa/libnir/nir_lower_non_uniform_access.o $
+  $BUILDROOT/mesa/libnir/nir_lower_packing.o $
+  $BUILDROOT/mesa/libnir/nir_lower_passthrough_edgeflags.o $
+  $BUILDROOT/mesa/libnir/nir_lower_patch_vertices.o $
+  $BUILDROOT/mesa/libnir/nir_lower_phis_to_scalar.o $
+  $BUILDROOT/mesa/libnir/nir_lower_pntc_ytransform.o $
+  $BUILDROOT/mesa/libnir/nir_lower_point_size.o $
+  $BUILDROOT/mesa/libnir/nir_lower_point_size_mov.o $
+  $BUILDROOT/mesa/libnir/nir_lower_printf.o $
+  $BUILDROOT/mesa/libnir/nir_lower_regs_to_ssa.o $
+  $BUILDROOT/mesa/libnir/nir_lower_readonly_images_to_tex.o $
+  $BUILDROOT/mesa/libnir/nir_lower_returns.o $
+  $BUILDROOT/mesa/libnir/nir_lower_samplers.o $
+  $BUILDROOT/mesa/libnir/nir_lower_scratch.o $
+  $BUILDROOT/mesa/libnir/nir_lower_shader_calls.o $
+  $BUILDROOT/mesa/libnir/nir_lower_ssbo.o $
+  $BUILDROOT/mesa/libnir/nir_lower_subgroups.o $
+  $BUILDROOT/mesa/libnir/nir_lower_system_values.o $
+  $BUILDROOT/mesa/libnir/nir_lower_tex_shadow.o $
+  $BUILDROOT/mesa/libnir/nir_lower_tex.o $
+  $BUILDROOT/mesa/libnir/nir_lower_texcoord_replace.o $
+  $BUILDROOT/mesa/libnir/nir_lower_to_source_mods.o $
+  $BUILDROOT/mesa/libnir/nir_lower_two_sided_color.o $
+  $BUILDROOT/mesa/libnir/nir_lower_undef_to_zero.o $
+  $BUILDROOT/mesa/libnir/nir_lower_vars_to_ssa.o $
+  $BUILDROOT/mesa/libnir/nir_lower_var_copies.o $
+  $BUILDROOT/mesa/libnir/nir_lower_vec_to_movs.o $
+  $BUILDROOT/mesa/libnir/nir_lower_vec3_to_vec4.o $
+  $BUILDROOT/mesa/libnir/nir_lower_viewport_transform.o $
+  $BUILDROOT/mesa/libnir/nir_lower_wpos_center.o $
+  $BUILDROOT/mesa/libnir/nir_lower_wpos_ytransform.o $
+  $BUILDROOT/mesa/libnir/nir_lower_wrmasks.o $
+  $BUILDROOT/mesa/libnir/nir_lower_bit_size.o $
+  $BUILDROOT/mesa/libnir/nir_lower_ubo_vec4.o $
+  $BUILDROOT/mesa/libnir/nir_lower_uniforms_to_ubo.o $
+  $BUILDROOT/mesa/libnir/nir_lower_sysvals_to_varyings.o $
+  $BUILDROOT/mesa/libnir/nir_metadata.o $
+  $BUILDROOT/mesa/libnir/nir_move_vec_src_uses_to_dest.o $
+  $BUILDROOT/mesa/libnir/nir_normalize_cubemap_coords.o $
+  $BUILDROOT/mesa/libnir/nir_opt_access.o $
+  $BUILDROOT/mesa/libnir/nir_opt_barriers.o $
+  $BUILDROOT/mesa/libnir/nir_opt_combine_stores.o $
+  $BUILDROOT/mesa/libnir/nir_opt_comparison_pre.o $
+  $BUILDROOT/mesa/libnir/nir_opt_conditional_discard.o $
+  $BUILDROOT/mesa/libnir/nir_opt_constant_folding.o $
+  $BUILDROOT/mesa/libnir/nir_opt_copy_prop_vars.o $
+  $BUILDROOT/mesa/libnir/nir_opt_copy_propagate.o $
+  $BUILDROOT/mesa/libnir/nir_opt_cse.o $
+  $BUILDROOT/mesa/libnir/nir_opt_dce.o $
+  $BUILDROOT/mesa/libnir/nir_opt_dead_cf.o $
+  $BUILDROOT/mesa/libnir/nir_opt_dead_write_vars.o $
+  $BUILDROOT/mesa/libnir/nir_opt_find_array_copies.o $
+  $BUILDROOT/mesa/libnir/nir_opt_fragdepth.o $
+  $BUILDROOT/mesa/libnir/nir_opt_gcm.o $
+  $BUILDROOT/mesa/libnir/nir_opt_idiv_const.o $
+  $BUILDROOT/mesa/libnir/nir_opt_if.o $
+  $BUILDROOT/mesa/libnir/nir_opt_intrinsics.o $
+  $BUILDROOT/mesa/libnir/nir_opt_large_constants.o $
+  $BUILDROOT/mesa/libnir/nir_opt_load_store_vectorize.o $
+  $BUILDROOT/mesa/libnir/nir_opt_loop_unroll.o $
+  $BUILDROOT/mesa/libnir/nir_opt_memcpy.o $
+  $BUILDROOT/mesa/libnir/nir_opt_move.o $
+  $BUILDROOT/mesa/libnir/nir_opt_move_discards_to_top.o $
+  $BUILDROOT/mesa/libnir/nir_opt_offsets.o $
+  $BUILDROOT/mesa/libnir/nir_opt_peephole_select.o $
+  $BUILDROOT/mesa/libnir/nir_opt_phi_precision.o $
+  $BUILDROOT/mesa/libnir/nir_opt_preamble.o $
+  $BUILDROOT/mesa/libnir/nir_opt_ray_queries.o $
+  $BUILDROOT/mesa/libnir/nir_opt_rematerialize_compares.o $
+  $BUILDROOT/mesa/libnir/nir_opt_remove_phis.o $
+  $BUILDROOT/mesa/libnir/nir_opt_shrink_stores.o $
+  $BUILDROOT/mesa/libnir/nir_opt_shrink_vectors.o $
+  $BUILDROOT/mesa/libnir/nir_opt_sink.o $
+  $BUILDROOT/mesa/libnir/nir_opt_trivial_continues.o $
+  $BUILDROOT/mesa/libnir/nir_opt_undef.o $
+  $BUILDROOT/mesa/libnir/nir_opt_uniform_atomics.o $
+  $BUILDROOT/mesa/libnir/nir_opt_vectorize.o $
+  $BUILDROOT/mesa/libnir/nir_phi_builder.o $
+  $BUILDROOT/mesa/libnir/nir_print.o $
+  $BUILDROOT/mesa/libnir/nir_propagate_invariant.o $
+  $BUILDROOT/mesa/libnir/nir_range_analysis.o $
+  $BUILDROOT/mesa/libnir/nir_remove_dead_variables.o $
+  $BUILDROOT/mesa/libnir/nir_repair_ssa.o $
+  $BUILDROOT/mesa/libnir/nir_scale_fdiv.o $
+  $BUILDROOT/mesa/libnir/nir_schedule.o $
+  $BUILDROOT/mesa/libnir/nir_search.o $
+  $BUILDROOT/mesa/libnir/nir_serialize.o $
+  $BUILDROOT/mesa/libnir/nir_split_64bit_vec3_and_vec4.o $
+  $BUILDROOT/mesa/libnir/nir_split_per_member_structs.o $
+  $BUILDROOT/mesa/libnir/nir_split_var_copies.o $
+  $BUILDROOT/mesa/libnir/nir_split_vars.o $
+  $BUILDROOT/mesa/libnir/nir_sweep.o $
+  $BUILDROOT/mesa/libnir/nir_to_lcssa.o $
+  $BUILDROOT/mesa/libnir/nir_validate.o $
+  $BUILDROOT/mesa/libnir/nir_worklist.o $
+  $BUILDROOT/mesa/libnir/gl_spirv.o $
+  $BUILDROOT/mesa/libnir/nir_load_libclc.o $
+  $BUILDROOT/mesa/libnir/nir_lower_libclc.o $
+  $BUILDROOT/mesa/libnir/spirv_to_nir.o $
+  $BUILDROOT/mesa/libnir/vtn_alu.o $
+  $BUILDROOT/mesa/libnir/vtn_amd.o $
+  $BUILDROOT/mesa/libnir/vtn_cfg.o $
+  $BUILDROOT/mesa/libnir/vtn_glsl450.o $
+  $BUILDROOT/mesa/libnir/vtn_opencl.o $
+  $BUILDROOT/mesa/libnir/vtn_subgroup.o $
+  $BUILDROOT/mesa/libnir/vtn_variables.o $
+
+build $BUILDROOT/mesa/libcompiler/glsl_types.o: cxx external/mesa/src/compiler/glsl_types.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libcompiler/nir_types.o: cxx external/mesa/src/compiler/nir_types.cpp
+  includes = $includes -Ibuild/mesa/compiler
+build $BUILDROOT/mesa/libcompiler/shader_enums.o: cc external/mesa/src/compiler/shader_enums.c
+
+build $BUILDROOT/mesa/libcompiler.a: ar $
+  $BUILDROOT/mesa/libcompiler/glsl_types.o $
+  $BUILDROOT/mesa/libcompiler/nir_types.o $
+  $BUILDROOT/mesa/libcompiler/shader_enums.o $
+
+build $BUILDROOT/mesa/libgalliumvl/vl_bicubic_filter.o: cc external/mesa/src/gallium/auxiliary/vl/vl_bicubic_filter.c
+build $BUILDROOT/mesa/libgalliumvl/vl_codec.o: cc external/mesa/src/gallium/auxiliary/vl/vl_codec.c
+build $BUILDROOT/mesa/libgalliumvl/vl_compositor.o: cc external/mesa/src/gallium/auxiliary/vl/vl_compositor.c
+build $BUILDROOT/mesa/libgalliumvl/vl_compositor_gfx.o: cc external/mesa/src/gallium/auxiliary/vl/vl_compositor_gfx.c
+build $BUILDROOT/mesa/libgalliumvl/vl_compositor_cs.o: cc external/mesa/src/gallium/auxiliary/vl/vl_compositor_cs.c
+build $BUILDROOT/mesa/libgalliumvl/vl_csc.o: cc external/mesa/src/gallium/auxiliary/vl/vl_csc.c
+build $BUILDROOT/mesa/libgalliumvl/vl_decoder.o: cc external/mesa/src/gallium/auxiliary/vl/vl_decoder.c
+build $BUILDROOT/mesa/libgalliumvl/vl_deint_filter.o: cc external/mesa/src/gallium/auxiliary/vl/vl_deint_filter.c
+build $BUILDROOT/mesa/libgalliumvl/vl_idct.o: cc external/mesa/src/gallium/auxiliary/vl/vl_idct.c
+build $BUILDROOT/mesa/libgalliumvl/vl_matrix_filter.o: cc external/mesa/src/gallium/auxiliary/vl/vl_matrix_filter.c
+build $BUILDROOT/mesa/libgalliumvl/vl_mc.o: cc external/mesa/src/gallium/auxiliary/vl/vl_mc.c
+build $BUILDROOT/mesa/libgalliumvl/vl_median_filter.o: cc external/mesa/src/gallium/auxiliary/vl/vl_median_filter.c
+build $BUILDROOT/mesa/libgalliumvl/vl_mpeg12_bitstream.o: cc external/mesa/src/gallium/auxiliary/vl/vl_mpeg12_bitstream.c
+build $BUILDROOT/mesa/libgalliumvl/vl_mpeg12_decoder.o: cc external/mesa/src/gallium/auxiliary/vl/vl_mpeg12_decoder.c
+build $BUILDROOT/mesa/libgalliumvl/vl_vertex_buffers.o: cc external/mesa/src/gallium/auxiliary/vl/vl_vertex_buffers.c
+build $BUILDROOT/mesa/libgalliumvl/vl_video_buffer.o: cc external/mesa/src/gallium/auxiliary/vl/vl_video_buffer.c
+build $BUILDROOT/mesa/libgalliumvl/vl_zscan.o: cc external/mesa/src/gallium/auxiliary/vl/vl_zscan.c
+
+build $BUILDROOT/mesa/libgalliumvl.a: ar $
+  $BUILDROOT/mesa/libgalliumvl/vl_bicubic_filter.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_codec.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_compositor.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_compositor_gfx.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_compositor_cs.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_csc.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_decoder.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_deint_filter.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_idct.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_matrix_filter.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_mc.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_median_filter.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_mpeg12_bitstream.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_mpeg12_decoder.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_vertex_buffers.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_video_buffer.o $
+  $BUILDROOT/mesa/libgalliumvl/vl_zscan.o $
+
+build $BUILDROOT/mesa/libgallium/tr_util.o: cc build/mesa/gallium/auxiliary/tr_util.c
+build $BUILDROOT/mesa/libgallium/u_tracepoints.o: cc build/mesa/gallium/auxiliary/u_tracepoints.c
+build $BUILDROOT/mesa/libgallium/cso_cache/cso_cache.o: cc external/mesa/src/gallium/auxiliary/cso_cache/cso_cache.c
+build $BUILDROOT/mesa/libgallium/cso_cache/cso_context.o: cc external/mesa/src/gallium/auxiliary/cso_cache/cso_context.c
+build $BUILDROOT/mesa/libgallium/cso_cache/cso_hash.o: cc external/mesa/src/gallium/auxiliary/cso_cache/cso_hash.c
+build $BUILDROOT/mesa/libgallium/draw/draw_context.o: cc external/mesa/src/gallium/auxiliary/draw/draw_context.c
+build $BUILDROOT/mesa/libgallium/draw/draw_fs.o: cc external/mesa/src/gallium/auxiliary/draw/draw_fs.c
+build $BUILDROOT/mesa/libgallium/draw/draw_gs.o: cc external/mesa/src/gallium/auxiliary/draw/draw_gs.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_aaline.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_aaline.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_aapoint.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_aapoint.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_clip.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_clip.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_cull.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_cull.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_flatshade.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_flatshade.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_offset.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_offset.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_pstipple.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_pstipple.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_stipple.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_stipple.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_twoside.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_twoside.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_unfilled.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_unfilled.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_user_cull.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_user_cull.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_util.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_util.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_validate.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_validate.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_vbuf.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_vbuf.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_wide_line.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_wide_line.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pipe_wide_point.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pipe_wide_point.c
+build $BUILDROOT/mesa/libgallium/draw/draw_prim_assembler.o: cc external/mesa/src/gallium/auxiliary/draw/draw_prim_assembler.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pt.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pt.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pt_emit.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pt_emit.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pt_fetch.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pt_fetch.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pt_fetch_shade_emit.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pt_fetch_shade_emit.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pt_fetch_shade_pipeline.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pt_fetch_shade_pipeline.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pt_post_vs.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pt_post_vs.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pt_so_emit.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pt_so_emit.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pt_util.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pt_util.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pt_vsplit.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pt_vsplit.c
+build $BUILDROOT/mesa/libgallium/draw/draw_tess.o: cc external/mesa/src/gallium/auxiliary/draw/draw_tess.c
+build $BUILDROOT/mesa/libgallium/draw/draw_vertex.o: cc external/mesa/src/gallium/auxiliary/draw/draw_vertex.c
+build $BUILDROOT/mesa/libgallium/draw/draw_vs.o: cc external/mesa/src/gallium/auxiliary/draw/draw_vs.c
+build $BUILDROOT/mesa/libgallium/draw/draw_vs_exec.o: cc external/mesa/src/gallium/auxiliary/draw/draw_vs_exec.c
+build $BUILDROOT/mesa/libgallium/draw/draw_vs_variant.o: cc external/mesa/src/gallium/auxiliary/draw/draw_vs_variant.c
+build $BUILDROOT/mesa/libgallium/driver_ddebug/dd_context.o: cc external/mesa/src/gallium/auxiliary/driver_ddebug/dd_context.c
+build $BUILDROOT/mesa/libgallium/driver_ddebug/dd_draw.o: cc external/mesa/src/gallium/auxiliary/driver_ddebug/dd_draw.c
+build $BUILDROOT/mesa/libgallium/driver_ddebug/dd_screen.o: cc external/mesa/src/gallium/auxiliary/driver_ddebug/dd_screen.c
+build $BUILDROOT/mesa/libgallium/driver_noop/noop_pipe.o: cc external/mesa/src/gallium/auxiliary/driver_noop/noop_pipe.c
+build $BUILDROOT/mesa/libgallium/driver_noop/noop_state.o: cc external/mesa/src/gallium/auxiliary/driver_noop/noop_state.c
+build $BUILDROOT/mesa/libgallium/driver_rbug/rbug_context.o: cc external/mesa/src/gallium/auxiliary/driver_rbug/rbug_context.c
+build $BUILDROOT/mesa/libgallium/driver_rbug/rbug_core.o: cc external/mesa/src/gallium/auxiliary/driver_rbug/rbug_core.c
+build $BUILDROOT/mesa/libgallium/driver_rbug/rbug_objects.o: cc external/mesa/src/gallium/auxiliary/driver_rbug/rbug_objects.c
+build $BUILDROOT/mesa/libgallium/driver_rbug/rbug_screen.o: cc external/mesa/src/gallium/auxiliary/driver_rbug/rbug_screen.c
+build $BUILDROOT/mesa/libgallium/driver_trace/tr_context.o: cc external/mesa/src/gallium/auxiliary/driver_trace/tr_context.c
+  includes = $includes -Ibuild/mesa/gallium/auxiliary
+build $BUILDROOT/mesa/libgallium/driver_trace/tr_dump.o: cc external/mesa/src/gallium/auxiliary/driver_trace/tr_dump.c
+build $BUILDROOT/mesa/libgallium/driver_trace/tr_dump_state.o: cc external/mesa/src/gallium/auxiliary/driver_trace/tr_dump_state.c
+  includes = $includes -Ibuild/mesa/gallium/auxiliary
+build $BUILDROOT/mesa/libgallium/driver_trace/tr_screen.o: cc external/mesa/src/gallium/auxiliary/driver_trace/tr_screen.c
+  includes = $includes -Ibuild/mesa/gallium/auxiliary
+build $BUILDROOT/mesa/libgallium/driver_trace/tr_texture.o: cc external/mesa/src/gallium/auxiliary/driver_trace/tr_texture.c
+build $BUILDROOT/mesa/libgallium/hud/font.o: cc external/mesa/src/gallium/auxiliary/hud/font.c
+build $BUILDROOT/mesa/libgallium/hud/hud_context.o: cc external/mesa/src/gallium/auxiliary/hud/hud_context.c
+build $BUILDROOT/mesa/libgallium/hud/hud_cpu.o: cc external/mesa/src/gallium/auxiliary/hud/hud_cpu.c
+build $BUILDROOT/mesa/libgallium/hud/hud_nic.o: cc external/mesa/src/gallium/auxiliary/hud/hud_nic.c
+build $BUILDROOT/mesa/libgallium/hud/hud_cpufreq.o: cc external/mesa/src/gallium/auxiliary/hud/hud_cpufreq.c
+build $BUILDROOT/mesa/libgallium/hud/hud_diskstat.o: cc external/mesa/src/gallium/auxiliary/hud/hud_diskstat.c
+build $BUILDROOT/mesa/libgallium/hud/hud_sensors_temp.o: cc external/mesa/src/gallium/auxiliary/hud/hud_sensors_temp.c
+build $BUILDROOT/mesa/libgallium/hud/hud_driver_query.o: cc external/mesa/src/gallium/auxiliary/hud/hud_driver_query.c
+build $BUILDROOT/mesa/libgallium/hud/hud_fps.o: cc external/mesa/src/gallium/auxiliary/hud/hud_fps.c
+build $BUILDROOT/mesa/libgallium/os/os_process.o: cc external/mesa/src/gallium/auxiliary/os/os_process.c
+build $BUILDROOT/mesa/libgallium/pipebuffer/pb_buffer_fenced.o: cc external/mesa/src/gallium/auxiliary/pipebuffer/pb_buffer_fenced.c
+build $BUILDROOT/mesa/libgallium/pipebuffer/pb_bufmgr_cache.o: cc external/mesa/src/gallium/auxiliary/pipebuffer/pb_bufmgr_cache.c
+build $BUILDROOT/mesa/libgallium/pipebuffer/pb_bufmgr_debug.o: cc external/mesa/src/gallium/auxiliary/pipebuffer/pb_bufmgr_debug.c
+build $BUILDROOT/mesa/libgallium/pipebuffer/pb_bufmgr_mm.o: cc external/mesa/src/gallium/auxiliary/pipebuffer/pb_bufmgr_mm.c
+build $BUILDROOT/mesa/libgallium/pipebuffer/pb_bufmgr_slab.o: cc external/mesa/src/gallium/auxiliary/pipebuffer/pb_bufmgr_slab.c
+build $BUILDROOT/mesa/libgallium/pipebuffer/pb_cache.o: cc external/mesa/src/gallium/auxiliary/pipebuffer/pb_cache.c
+build $BUILDROOT/mesa/libgallium/pipebuffer/pb_slab.o: cc external/mesa/src/gallium/auxiliary/pipebuffer/pb_slab.c
+build $BUILDROOT/mesa/libgallium/pipebuffer/pb_validate.o: cc external/mesa/src/gallium/auxiliary/pipebuffer/pb_validate.c
+build $BUILDROOT/mesa/libgallium/postprocess/pp_celshade.o: cc external/mesa/src/gallium/auxiliary/postprocess/pp_celshade.c
+build $BUILDROOT/mesa/libgallium/postprocess/pp_colors.o: cc external/mesa/src/gallium/auxiliary/postprocess/pp_colors.c
+build $BUILDROOT/mesa/libgallium/postprocess/pp_init.o: cc external/mesa/src/gallium/auxiliary/postprocess/pp_init.c
+build $BUILDROOT/mesa/libgallium/postprocess/pp_mlaa.o: cc external/mesa/src/gallium/auxiliary/postprocess/pp_mlaa.c
+build $BUILDROOT/mesa/libgallium/postprocess/pp_program.o: cc external/mesa/src/gallium/auxiliary/postprocess/pp_program.c
+build $BUILDROOT/mesa/libgallium/postprocess/pp_run.o: cc external/mesa/src/gallium/auxiliary/postprocess/pp_run.c
+build $BUILDROOT/mesa/libgallium/rbug/rbug_connection.o: cc external/mesa/src/gallium/auxiliary/rbug/rbug_connection.c
+build $BUILDROOT/mesa/libgallium/rbug/rbug_context.o: cc external/mesa/src/gallium/auxiliary/rbug/rbug_context.c
+build $BUILDROOT/mesa/libgallium/rbug/rbug_core.o: cc external/mesa/src/gallium/auxiliary/rbug/rbug_core.c
+build $BUILDROOT/mesa/libgallium/rbug/rbug_demarshal.o: cc external/mesa/src/gallium/auxiliary/rbug/rbug_demarshal.c
+build $BUILDROOT/mesa/libgallium/rbug/rbug_shader.o: cc external/mesa/src/gallium/auxiliary/rbug/rbug_shader.c
+build $BUILDROOT/mesa/libgallium/rbug/rbug_texture.o: cc external/mesa/src/gallium/auxiliary/rbug/rbug_texture.c
+build $BUILDROOT/mesa/libgallium/rtasm/rtasm_cpu.o: cc external/mesa/src/gallium/auxiliary/rtasm/rtasm_cpu.c
+build $BUILDROOT/mesa/libgallium/rtasm/rtasm_execmem.o: cc external/mesa/src/gallium/auxiliary/rtasm/rtasm_execmem.c
+build $BUILDROOT/mesa/libgallium/rtasm/rtasm_x86sse.o: cc external/mesa/src/gallium/auxiliary/rtasm/rtasm_x86sse.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_aa_point.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_aa_point.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_build.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_build.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_dump.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_dump.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_dynamic_indexing.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_dynamic_indexing.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_exec.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_exec.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_from_mesa.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_from_mesa.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_info.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_info.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_iterate.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_iterate.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_lowering.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_lowering.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_parse.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_parse.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_point_sprite.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_point_sprite.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_sanity.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_sanity.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_scan.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_scan.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_strings.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_strings.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_text.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_text.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_transform.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_transform.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_two_side.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_two_side.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_ureg.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_ureg.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_util.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_util.c
+build $BUILDROOT/mesa/libgallium/tgsi/tgsi_vpos.o: cc external/mesa/src/gallium/auxiliary/tgsi/tgsi_vpos.c
+build $BUILDROOT/mesa/libgallium/translate/translate.o: cc external/mesa/src/gallium/auxiliary/translate/translate.c
+build $BUILDROOT/mesa/libgallium/translate/translate_cache.o: cc external/mesa/src/gallium/auxiliary/translate/translate_cache.c
+build $BUILDROOT/mesa/libgallium/translate/translate_generic.o: cc external/mesa/src/gallium/auxiliary/translate/translate_generic.c
+build $BUILDROOT/mesa/libgallium/translate/translate_sse.o: cc external/mesa/src/gallium/auxiliary/translate/translate_sse.c
+build $BUILDROOT/mesa/libgallium/util/u_async_debug.o: cc external/mesa/src/gallium/auxiliary/util/u_async_debug.c
+build $BUILDROOT/mesa/libgallium/util/u_bitmask.o: cc external/mesa/src/gallium/auxiliary/util/u_bitmask.c
+build $BUILDROOT/mesa/libgallium/util/u_blitter.o: cc external/mesa/src/gallium/auxiliary/util/u_blitter.c
+build $BUILDROOT/mesa/libgallium/util/u_cache.o: cc external/mesa/src/gallium/auxiliary/util/u_cache.c
+build $BUILDROOT/mesa/libgallium/util/u_compute.o: cc external/mesa/src/gallium/auxiliary/util/u_compute.c
+build $BUILDROOT/mesa/libgallium/util/u_debug_flush.o: cc external/mesa/src/gallium/auxiliary/util/u_debug_flush.c
+build $BUILDROOT/mesa/libgallium/util/u_debug_image.o: cc external/mesa/src/gallium/auxiliary/util/u_debug_image.c
+build $BUILDROOT/mesa/libgallium/util/u_dl.o: cc external/mesa/src/gallium/auxiliary/util/u_dl.c
+build $BUILDROOT/mesa/libgallium/util/u_draw.o: cc external/mesa/src/gallium/auxiliary/util/u_draw.c
+build $BUILDROOT/mesa/libgallium/util/u_draw_quad.o: cc external/mesa/src/gallium/auxiliary/util/u_draw_quad.c
+build $BUILDROOT/mesa/libgallium/util/u_driconf.o: cc external/mesa/src/gallium/auxiliary/util/u_driconf.c
+build $BUILDROOT/mesa/libgallium/util/u_dump_defines.o: cc external/mesa/src/gallium/auxiliary/util/u_dump_defines.c
+build $BUILDROOT/mesa/libgallium/util/u_dump_state.o: cc external/mesa/src/gallium/auxiliary/util/u_dump_state.c
+build $BUILDROOT/mesa/libgallium/util/u_framebuffer.o: cc external/mesa/src/gallium/auxiliary/util/u_framebuffer.c
+build $BUILDROOT/mesa/libgallium/util/u_gen_mipmap.o: cc external/mesa/src/gallium/auxiliary/util/u_gen_mipmap.c
+build $BUILDROOT/mesa/libgallium/util/u_handle_table.o: cc external/mesa/src/gallium/auxiliary/util/u_handle_table.c
+build $BUILDROOT/mesa/libgallium/util/u_helpers.o: cc external/mesa/src/gallium/auxiliary/util/u_helpers.c
+build $BUILDROOT/mesa/libgallium/util/u_index_modify.o: cc external/mesa/src/gallium/auxiliary/util/u_index_modify.c
+build $BUILDROOT/mesa/libgallium/util/u_linear.o: cc external/mesa/src/gallium/auxiliary/util/u_linear.c
+build $BUILDROOT/mesa/libgallium/util/u_live_shader_cache.o: cc external/mesa/src/gallium/auxiliary/util/u_live_shader_cache.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libgallium/util/u_log.o: cc external/mesa/src/gallium/auxiliary/util/u_log.c
+build $BUILDROOT/mesa/libgallium/util/u_network.o: cc external/mesa/src/gallium/auxiliary/util/u_network.c
+build $BUILDROOT/mesa/libgallium/util/u_prim.o: cc external/mesa/src/gallium/auxiliary/util/u_prim.c
+build $BUILDROOT/mesa/libgallium/util/u_prim_restart.o: cc external/mesa/src/gallium/auxiliary/util/u_prim_restart.c
+build $BUILDROOT/mesa/libgallium/util/u_pstipple.o: cc external/mesa/src/gallium/auxiliary/util/u_pstipple.c
+build $BUILDROOT/mesa/libgallium/util/u_resource.o: cc external/mesa/src/gallium/auxiliary/util/u_resource.c
+build $BUILDROOT/mesa/libgallium/util/u_sampler.o: cc external/mesa/src/gallium/auxiliary/util/u_sampler.c
+build $BUILDROOT/mesa/libgallium/util/u_screen.o: cc external/mesa/src/gallium/auxiliary/util/u_screen.c
+build $BUILDROOT/mesa/libgallium/util/u_simple_shaders.o: cc external/mesa/src/gallium/auxiliary/util/u_simple_shaders.c
+build $BUILDROOT/mesa/libgallium/util/u_split_draw.o: cc external/mesa/src/gallium/auxiliary/util/u_split_draw.c
+build $BUILDROOT/mesa/libgallium/util/u_suballoc.o: cc external/mesa/src/gallium/auxiliary/util/u_suballoc.c
+build $BUILDROOT/mesa/libgallium/util/u_surface.o: cc external/mesa/src/gallium/auxiliary/util/u_surface.c
+build $BUILDROOT/mesa/libgallium/util/u_tests.o: cc external/mesa/src/gallium/auxiliary/util/u_tests.c
+build $BUILDROOT/mesa/libgallium/util/u_texture.o: cc external/mesa/src/gallium/auxiliary/util/u_texture.c
+build $BUILDROOT/mesa/libgallium/util/u_tile.o: cc external/mesa/src/gallium/auxiliary/util/u_tile.c
+build $BUILDROOT/mesa/libgallium/util/u_transfer.o: cc external/mesa/src/gallium/auxiliary/util/u_transfer.c
+build $BUILDROOT/mesa/libgallium/util/u_transfer_helper.o: cc external/mesa/src/gallium/auxiliary/util/u_transfer_helper.c
+build $BUILDROOT/mesa/libgallium/util/u_threaded_context.o: cc external/mesa/src/gallium/auxiliary/util/u_threaded_context.c
+build $BUILDROOT/mesa/libgallium/util/u_trace_gallium.o: cc external/mesa/src/gallium/auxiliary/util/u_trace_gallium.c
+  includes = $includes -Ibuild/mesa/gallium/auxiliary
+build $BUILDROOT/mesa/libgallium/util/u_upload_mgr.o: cc external/mesa/src/gallium/auxiliary/util/u_upload_mgr.c
+build $BUILDROOT/mesa/libgallium/util/u_vbuf.o: cc external/mesa/src/gallium/auxiliary/util/u_vbuf.c
+build $BUILDROOT/mesa/libgallium/util/u_vertex_state_cache.o: cc external/mesa/src/gallium/auxiliary/util/u_vertex_state_cache.c
+build $BUILDROOT/mesa/libgallium/nir/tgsi_to_nir.o: cc external/mesa/src/gallium/auxiliary/nir/tgsi_to_nir.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libgallium/nir/nir_to_tgsi.o: cc external/mesa/src/gallium/auxiliary/nir/nir_to_tgsi.c
+  includes = $includes -Ibuild/mesa/compiler/nir
+build $BUILDROOT/mesa/libgallium/nir/nir_draw_helpers.o: cc external/mesa/src/gallium/auxiliary/nir/nir_draw_helpers.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libgallium/nir/nir_helpers.o: cc external/mesa/src/gallium/auxiliary/nir/nir_helpers.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libgallium/renderonly/renderonly.o: cc external/mesa/src/gallium/auxiliary/renderonly/renderonly.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_arit.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_arit.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_arit_overflow.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_arit_overflow.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_assert.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_assert.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_bitarit.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_bitarit.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_const.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_const.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_conv.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_conv.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_coro.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_coro.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_debug.o: cxx external/mesa/src/gallium/auxiliary/gallivm/lp_bld_debug.cpp
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_flow.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_flow.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_aos_array.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_format_aos_array.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_aos.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_format_aos.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_float.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_format_float.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_s3tc.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_format_s3tc.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_format.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_soa.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_format_soa.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_srgb.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_format_srgb.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_yuv.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_format_yuv.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_gather.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_gather.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_init.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_init.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_intr.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_intr.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_ir_common.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_ir_common.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_logic.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_logic.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_misc.o: cxx external/mesa/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_nir.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_nir.c
+  cflags = $cflags -Wno-sometimes-uninitialized
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_nir_aos.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_nir_aos.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_nir_soa.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_nir_soa.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_pack.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_pack.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_printf.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_printf.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_quad.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_quad.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_sample_aos.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_sample_aos.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_sample.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_sample.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_sample_soa.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_sample_soa.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_struct.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_struct.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_swizzle.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_swizzle.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_tgsi_action.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_tgsi_action.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_tgsi_aos.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_tgsi_aos.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_tgsi.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_tgsi.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_tgsi_info.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_tgsi_info.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_tgsi_soa.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_tgsi_soa.c
+build $BUILDROOT/mesa/libgallium/gallivm/lp_bld_type.o: cc external/mesa/src/gallium/auxiliary/gallivm/lp_bld_type.c
+build $BUILDROOT/mesa/libgallium/draw/draw_llvm.o: cc external/mesa/src/gallium/auxiliary/draw/draw_llvm.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libgallium/draw/draw_llvm_sample.o: cc external/mesa/src/gallium/auxiliary/draw/draw_llvm_sample.c
+build $BUILDROOT/mesa/libgallium/draw/draw_pt_fetch_shade_pipeline_llvm.o: cc external/mesa/src/gallium/auxiliary/draw/draw_pt_fetch_shade_pipeline_llvm.c
+build $BUILDROOT/mesa/libgallium/draw/draw_vs_llvm.o: cc external/mesa/src/gallium/auxiliary/draw/draw_vs_llvm.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libgallium/tessellator/tessellator.o: cxx external/mesa/src/gallium/auxiliary/tessellator/tessellator.cpp
+build $BUILDROOT/mesa/libgallium/tessellator/p_tessellator.o: cxx external/mesa/src/gallium/auxiliary/tessellator/p_tessellator.cpp
+build $BUILDROOT/mesa/libgallium/nir/nir_to_tgsi_info.o: cc external/mesa/src/gallium/auxiliary/nir/nir_to_tgsi_info.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+
+build $BUILDROOT/mesa/libgallium.a: ar $
+  $BUILDROOT/mesa/libgallium/tr_util.o $
+  $BUILDROOT/mesa/libgallium/u_tracepoints.o $
+  $BUILDROOT/mesa/libgallium/cso_cache/cso_cache.o $
+  $BUILDROOT/mesa/libgallium/cso_cache/cso_context.o $
+  $BUILDROOT/mesa/libgallium/cso_cache/cso_hash.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_context.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_fs.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_gs.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_aaline.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_aapoint.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_clip.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_cull.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_flatshade.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_offset.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_pstipple.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_stipple.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_twoside.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_unfilled.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_user_cull.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_util.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_validate.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_vbuf.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_wide_line.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pipe_wide_point.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_prim_assembler.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pt.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pt_emit.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pt_fetch.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pt_fetch_shade_emit.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pt_fetch_shade_pipeline.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pt_post_vs.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pt_so_emit.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pt_util.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pt_vsplit.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_tess.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_vertex.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_vs.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_vs_exec.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_vs_variant.o $
+  $BUILDROOT/mesa/libgallium/driver_ddebug/dd_context.o $
+  $BUILDROOT/mesa/libgallium/driver_ddebug/dd_draw.o $
+  $BUILDROOT/mesa/libgallium/driver_ddebug/dd_screen.o $
+  $BUILDROOT/mesa/libgallium/driver_noop/noop_pipe.o $
+  $BUILDROOT/mesa/libgallium/driver_noop/noop_state.o $
+  $BUILDROOT/mesa/libgallium/driver_rbug/rbug_context.o $
+  $BUILDROOT/mesa/libgallium/driver_rbug/rbug_core.o $
+  $BUILDROOT/mesa/libgallium/driver_rbug/rbug_objects.o $
+  $BUILDROOT/mesa/libgallium/driver_rbug/rbug_screen.o $
+  $BUILDROOT/mesa/libgallium/driver_trace/tr_context.o $
+  $BUILDROOT/mesa/libgallium/driver_trace/tr_dump.o $
+  $BUILDROOT/mesa/libgallium/driver_trace/tr_dump_state.o $
+  $BUILDROOT/mesa/libgallium/driver_trace/tr_screen.o $
+  $BUILDROOT/mesa/libgallium/driver_trace/tr_texture.o $
+  $BUILDROOT/mesa/libgallium/hud/font.o $
+  $BUILDROOT/mesa/libgallium/hud/hud_context.o $
+  $BUILDROOT/mesa/libgallium/hud/hud_cpu.o $
+  $BUILDROOT/mesa/libgallium/hud/hud_nic.o $
+  $BUILDROOT/mesa/libgallium/hud/hud_cpufreq.o $
+  $BUILDROOT/mesa/libgallium/hud/hud_diskstat.o $
+  $BUILDROOT/mesa/libgallium/hud/hud_sensors_temp.o $
+  $BUILDROOT/mesa/libgallium/hud/hud_driver_query.o $
+  $BUILDROOT/mesa/libgallium/hud/hud_fps.o $
+  $BUILDROOT/mesa/libgallium/os/os_process.o $
+  $BUILDROOT/mesa/libgallium/pipebuffer/pb_buffer_fenced.o $
+  $BUILDROOT/mesa/libgallium/pipebuffer/pb_bufmgr_cache.o $
+  $BUILDROOT/mesa/libgallium/pipebuffer/pb_bufmgr_debug.o $
+  $BUILDROOT/mesa/libgallium/pipebuffer/pb_bufmgr_mm.o $
+  $BUILDROOT/mesa/libgallium/pipebuffer/pb_bufmgr_slab.o $
+  $BUILDROOT/mesa/libgallium/pipebuffer/pb_cache.o $
+  $BUILDROOT/mesa/libgallium/pipebuffer/pb_slab.o $
+  $BUILDROOT/mesa/libgallium/pipebuffer/pb_validate.o $
+  $BUILDROOT/mesa/libgallium/postprocess/pp_celshade.o $
+  $BUILDROOT/mesa/libgallium/postprocess/pp_colors.o $
+  $BUILDROOT/mesa/libgallium/postprocess/pp_init.o $
+  $BUILDROOT/mesa/libgallium/postprocess/pp_mlaa.o $
+  $BUILDROOT/mesa/libgallium/postprocess/pp_program.o $
+  $BUILDROOT/mesa/libgallium/postprocess/pp_run.o $
+  $BUILDROOT/mesa/libgallium/rbug/rbug_connection.o $
+  $BUILDROOT/mesa/libgallium/rbug/rbug_context.o $
+  $BUILDROOT/mesa/libgallium/rbug/rbug_core.o $
+  $BUILDROOT/mesa/libgallium/rbug/rbug_demarshal.o $
+  $BUILDROOT/mesa/libgallium/rbug/rbug_shader.o $
+  $BUILDROOT/mesa/libgallium/rbug/rbug_texture.o $
+  $BUILDROOT/mesa/libgallium/rtasm/rtasm_cpu.o $
+  $BUILDROOT/mesa/libgallium/rtasm/rtasm_execmem.o $
+  $BUILDROOT/mesa/libgallium/rtasm/rtasm_x86sse.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_aa_point.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_build.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_dump.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_dynamic_indexing.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_exec.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_from_mesa.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_info.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_iterate.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_lowering.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_parse.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_point_sprite.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_sanity.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_scan.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_strings.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_text.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_transform.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_two_side.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_ureg.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_util.o $
+  $BUILDROOT/mesa/libgallium/tgsi/tgsi_vpos.o $
+  $BUILDROOT/mesa/libgallium/translate/translate.o $
+  $BUILDROOT/mesa/libgallium/translate/translate_cache.o $
+  $BUILDROOT/mesa/libgallium/translate/translate_generic.o $
+  $BUILDROOT/mesa/libgallium/translate/translate_sse.o $
+  $BUILDROOT/mesa/libgallium/util/u_async_debug.o $
+  $BUILDROOT/mesa/libgallium/util/u_bitmask.o $
+  $BUILDROOT/mesa/libgallium/util/u_blitter.o $
+  $BUILDROOT/mesa/libgallium/util/u_cache.o $
+  $BUILDROOT/mesa/libgallium/util/u_compute.o $
+  $BUILDROOT/mesa/libgallium/util/u_debug_flush.o $
+  $BUILDROOT/mesa/libgallium/util/u_debug_image.o $
+  $BUILDROOT/mesa/libgallium/util/u_dl.o $
+  $BUILDROOT/mesa/libgallium/util/u_draw.o $
+  $BUILDROOT/mesa/libgallium/util/u_draw_quad.o $
+  $BUILDROOT/mesa/libgallium/util/u_driconf.o $
+  $BUILDROOT/mesa/libgallium/util/u_dump_defines.o $
+  $BUILDROOT/mesa/libgallium/util/u_dump_state.o $
+  $BUILDROOT/mesa/libgallium/util/u_framebuffer.o $
+  $BUILDROOT/mesa/libgallium/util/u_gen_mipmap.o $
+  $BUILDROOT/mesa/libgallium/util/u_handle_table.o $
+  $BUILDROOT/mesa/libgallium/util/u_helpers.o $
+  $BUILDROOT/mesa/libgallium/util/u_index_modify.o $
+  $BUILDROOT/mesa/libgallium/util/u_linear.o $
+  $BUILDROOT/mesa/libgallium/util/u_live_shader_cache.o $
+  $BUILDROOT/mesa/libgallium/util/u_log.o $
+  $BUILDROOT/mesa/libgallium/util/u_network.o $
+  $BUILDROOT/mesa/libgallium/util/u_prim.o $
+  $BUILDROOT/mesa/libgallium/util/u_prim_restart.o $
+  $BUILDROOT/mesa/libgallium/util/u_pstipple.o $
+  $BUILDROOT/mesa/libgallium/util/u_resource.o $
+  $BUILDROOT/mesa/libgallium/util/u_sampler.o $
+  $BUILDROOT/mesa/libgallium/util/u_screen.o $
+  $BUILDROOT/mesa/libgallium/util/u_simple_shaders.o $
+  $BUILDROOT/mesa/libgallium/util/u_split_draw.o $
+  $BUILDROOT/mesa/libgallium/util/u_suballoc.o $
+  $BUILDROOT/mesa/libgallium/util/u_surface.o $
+  $BUILDROOT/mesa/libgallium/util/u_tests.o $
+  $BUILDROOT/mesa/libgallium/util/u_texture.o $
+  $BUILDROOT/mesa/libgallium/util/u_tile.o $
+  $BUILDROOT/mesa/libgallium/util/u_transfer.o $
+  $BUILDROOT/mesa/libgallium/util/u_transfer_helper.o $
+  $BUILDROOT/mesa/libgallium/util/u_threaded_context.o $
+  $BUILDROOT/mesa/libgallium/util/u_trace_gallium.o $
+  $BUILDROOT/mesa/libgallium/util/u_upload_mgr.o $
+  $BUILDROOT/mesa/libgallium/util/u_vbuf.o $
+  $BUILDROOT/mesa/libgallium/util/u_vertex_state_cache.o $
+  $BUILDROOT/mesa/libgallium/nir/tgsi_to_nir.o $
+  $BUILDROOT/mesa/libgallium/nir/nir_to_tgsi.o $
+  $BUILDROOT/mesa/libgallium/nir/nir_draw_helpers.o $
+  $BUILDROOT/mesa/libgallium/nir/nir_helpers.o $
+  $BUILDROOT/mesa/libgallium/renderonly/renderonly.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_arit.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_arit_overflow.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_assert.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_bitarit.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_const.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_conv.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_coro.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_debug.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_flow.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_aos_array.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_aos.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_float.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_s3tc.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_soa.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_srgb.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_format_yuv.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_gather.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_init.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_intr.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_ir_common.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_logic.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_misc.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_nir.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_nir_aos.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_nir_soa.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_pack.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_printf.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_quad.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_sample_aos.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_sample.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_sample_soa.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_struct.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_swizzle.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_tgsi_action.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_tgsi_aos.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_tgsi.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_tgsi_info.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_tgsi_soa.o $
+  $BUILDROOT/mesa/libgallium/gallivm/lp_bld_type.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_llvm.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_llvm_sample.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_pt_fetch_shade_pipeline_llvm.o $
+  $BUILDROOT/mesa/libgallium/draw/draw_vs_llvm.o $
+  $BUILDROOT/mesa/libgallium/tessellator/tessellator.o $
+  $BUILDROOT/mesa/libgallium/tessellator/p_tessellator.o $
+  $BUILDROOT/mesa/libgallium/nir/nir_to_tgsi_info.o $
+
+build $BUILDROOT/mesa/libpipe_loader_static/pipe_loader.o: cc external/mesa/src/gallium/auxiliary/pipe-loader/pipe_loader.c
+  cflags = $cflags -pthread -DHAVE_PIPE_LOADER_DRI -DHAVE_PIPE_LOADER_KMS -DGALLIUM_STATIC_TARGETS=1
+build $BUILDROOT/mesa/libpipe_loader_static/pipe_loader_sw.o: cc external/mesa/src/gallium/auxiliary/pipe-loader/pipe_loader_sw.c
+  cflags = $cflags -pthread -DHAVE_PIPE_LOADER_DRI -DHAVE_PIPE_LOADER_KMS -DGALLIUM_STATIC_TARGETS=1
+  includes = $includes -Iexternal/mesa/src/gallium/winsys
+build $BUILDROOT/mesa/libpipe_loader_static/pipe_loader_drm.o: cc external/mesa/src/gallium/auxiliary/pipe-loader/pipe_loader_drm.c
+  cflags = $cflags -pthread -DHAVE_PIPE_LOADER_DRI -DHAVE_PIPE_LOADER_KMS -DGALLIUM_STATIC_TARGETS=1
+  includes = $includes -Iexternal/mesa/src/loader
+
+build $BUILDROOT/mesa/libpipe_loader_static.a: ar $
+  $BUILDROOT/mesa/libpipe_loader_static/pipe_loader.o $
+  $BUILDROOT/mesa/libpipe_loader_static/pipe_loader_sw.o $
+  $BUILDROOT/mesa/libpipe_loader_static/pipe_loader_drm.o $
+
+build $BUILDROOT/mesa/libws_null/null_sw_winsys.o: cc external/mesa/src/gallium/winsys/sw/null/null_sw_winsys.c
+build $BUILDROOT/mesa/libws_null.a: ar $BUILDROOT/mesa/libws_null/null_sw_winsys.o
+
+build $BUILDROOT/mesa/libwsw/wrapper_sw_winsys.o: cc external/mesa/src/gallium/winsys/sw/wrapper/wrapper_sw_winsys.c
+build $BUILDROOT/mesa/libwsw.a: ar $BUILDROOT/mesa/libwsw/wrapper_sw_winsys.o
+
+build $BUILDROOT/mesa/libswdri/dri_sw_winsys.o: cc external/mesa/src/gallium/winsys/sw/dri/dri_sw_winsys.c
+build $BUILDROOT/mesa/libswdri.a: ar $BUILDROOT/mesa/libswdri/dri_sw_winsys.o
+
+build $BUILDROOT/mesa/libswkmsdri/kms_dri_sw_winsys.o: cc external/mesa/src/gallium/winsys/sw/kms-dri/kms_dri_sw_winsys.c
+build $BUILDROOT/mesa/libswkmsdri.a: ar $BUILDROOT/mesa/libswkmsdri/kms_dri_sw_winsys.o
+
+build $BUILDROOT/mesa/libllvmpipe/lp_bld_alpha.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_bld_alpha.c
+build $BUILDROOT/mesa/libllvmpipe/lp_bld_blend_aos.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_bld_blend_aos.c
+build $BUILDROOT/mesa/libllvmpipe/lp_bld_blend.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_bld_blend.c
+build $BUILDROOT/mesa/libllvmpipe/lp_bld_blend_logicop.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_bld_blend_logicop.c
+build $BUILDROOT/mesa/libllvmpipe/lp_bld_depth.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_bld_depth.c
+build $BUILDROOT/mesa/libllvmpipe/lp_bld_interp.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_bld_interp.c
+build $BUILDROOT/mesa/libllvmpipe/lp_clear.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_clear.c
+build $BUILDROOT/mesa/libllvmpipe/lp_context.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_context.c
+build $BUILDROOT/mesa/libllvmpipe/lp_cs_tpool.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_cs_tpool.c
+build $BUILDROOT/mesa/libllvmpipe/lp_draw_arrays.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_draw_arrays.c
+build $BUILDROOT/mesa/libllvmpipe/lp_fence.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_fence.c
+build $BUILDROOT/mesa/libllvmpipe/lp_flush.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_flush.c
+build $BUILDROOT/mesa/libllvmpipe/lp_jit.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_jit.c
+build $BUILDROOT/mesa/libllvmpipe/lp_linear.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_linear.c
+build $BUILDROOT/mesa/libllvmpipe/lp_linear_fastpath.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_linear_fastpath.c
+build $BUILDROOT/mesa/libllvmpipe/lp_linear_interp.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_linear_interp.c
+build $BUILDROOT/mesa/libllvmpipe/lp_linear_sampler.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_linear_sampler.c
+build $BUILDROOT/mesa/libllvmpipe/lp_memory.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_memory.c
+build $BUILDROOT/mesa/libllvmpipe/lp_perf.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_perf.c
+build $BUILDROOT/mesa/libllvmpipe/lp_query.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_query.c
+build $BUILDROOT/mesa/libllvmpipe/lp_rast.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_rast.c
+build $BUILDROOT/mesa/libllvmpipe/lp_rast_debug.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_rast_debug.c
+build $BUILDROOT/mesa/libllvmpipe/lp_rast_linear.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_rast_linear.c
+build $BUILDROOT/mesa/libllvmpipe/lp_rast_linear_fallback.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_rast_linear_fallback.c
+build $BUILDROOT/mesa/libllvmpipe/lp_rast_rect.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_rast_rect.c
+build $BUILDROOT/mesa/libllvmpipe/lp_rast_tri.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_rast_tri.c
+build $BUILDROOT/mesa/libllvmpipe/lp_scene.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_scene.c
+build $BUILDROOT/mesa/libllvmpipe/lp_scene_queue.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_scene_queue.c
+build $BUILDROOT/mesa/libllvmpipe/lp_screen.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_screen.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libllvmpipe/lp_setup.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_setup.c
+build $BUILDROOT/mesa/libllvmpipe/lp_setup_analysis.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_setup_analysis.c
+build $BUILDROOT/mesa/libllvmpipe/lp_setup_line.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_setup_line.c
+build $BUILDROOT/mesa/libllvmpipe/lp_setup_point.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_setup_point.c
+build $BUILDROOT/mesa/libllvmpipe/lp_setup_rect.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_setup_rect.c
+build $BUILDROOT/mesa/libllvmpipe/lp_setup_tri.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_setup_tri.c
+build $BUILDROOT/mesa/libllvmpipe/lp_setup_vbuf.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_setup_vbuf.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_blend.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_blend.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_clip.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_clip.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_derived.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_derived.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_cs.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_cs.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libllvmpipe/lp_state_fs.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_fs.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libllvmpipe/lp_state_fs_analysis.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_fs_analysis.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libllvmpipe/lp_state_fs_fastpath.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_fs_fastpath.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_fs_linear.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_fs_linear.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_fs_linear_llvm.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_fs_linear_llvm.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libllvmpipe/lp_state_gs.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_gs.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_rasterizer.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_rasterizer.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_sampler.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_sampler.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_setup.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_setup.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_so.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_so.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_surface.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_surface.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_tess.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_tess.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_vertex.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_vertex.c
+build $BUILDROOT/mesa/libllvmpipe/lp_state_vs.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_state_vs.c
+build $BUILDROOT/mesa/libllvmpipe/lp_surface.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_surface.c
+build $BUILDROOT/mesa/libllvmpipe/lp_tex_sample.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_tex_sample.c
+build $BUILDROOT/mesa/libllvmpipe/lp_texture.o: cc external/mesa/src/gallium/drivers/llvmpipe/lp_texture.c
+  includes = $includes -Ibuild/mesa
+
+build $BUILDROOT/mesa/libllvmpipe.a: ar $
+  $BUILDROOT/mesa/libllvmpipe/lp_bld_alpha.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_bld_blend_aos.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_bld_blend.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_bld_blend_logicop.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_bld_depth.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_bld_interp.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_clear.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_context.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_cs_tpool.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_draw_arrays.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_fence.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_flush.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_jit.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_linear.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_linear_fastpath.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_linear_interp.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_linear_sampler.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_memory.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_perf.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_query.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_rast.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_rast_debug.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_rast_linear.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_rast_linear_fallback.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_rast_rect.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_rast_tri.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_scene.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_scene_queue.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_screen.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_setup.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_setup_analysis.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_setup_line.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_setup_point.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_setup_rect.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_setup_tri.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_setup_vbuf.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_blend.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_clip.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_derived.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_cs.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_fs.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_fs_analysis.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_fs_fastpath.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_fs_linear.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_fs_linear_llvm.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_gs.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_rasterizer.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_sampler.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_setup.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_so.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_surface.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_tess.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_vertex.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_state_vs.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_surface.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_tex_sample.o $
+  $BUILDROOT/mesa/libllvmpipe/lp_texture.o $
+
+build $BUILDROOT/mesa/libsoftpipe/sp_buffer.o: cc external/mesa/src/gallium/drivers/softpipe/sp_buffer.c
+build $BUILDROOT/mesa/libsoftpipe/sp_clear.o: cc external/mesa/src/gallium/drivers/softpipe/sp_clear.c
+build $BUILDROOT/mesa/libsoftpipe/sp_context.o: cc external/mesa/src/gallium/drivers/softpipe/sp_context.c
+build $BUILDROOT/mesa/libsoftpipe/sp_compute.o: cc external/mesa/src/gallium/drivers/softpipe/sp_compute.c
+build $BUILDROOT/mesa/libsoftpipe/sp_draw_arrays.o: cc external/mesa/src/gallium/drivers/softpipe/sp_draw_arrays.c
+build $BUILDROOT/mesa/libsoftpipe/sp_fence.o: cc external/mesa/src/gallium/drivers/softpipe/sp_fence.c
+build $BUILDROOT/mesa/libsoftpipe/sp_flush.o: cc external/mesa/src/gallium/drivers/softpipe/sp_flush.c
+build $BUILDROOT/mesa/libsoftpipe/sp_fs_exec.o: cc external/mesa/src/gallium/drivers/softpipe/sp_fs_exec.c
+build $BUILDROOT/mesa/libsoftpipe/sp_image.o: cc external/mesa/src/gallium/drivers/softpipe/sp_image.c
+build $BUILDROOT/mesa/libsoftpipe/sp_prim_vbuf.o: cc external/mesa/src/gallium/drivers/softpipe/sp_prim_vbuf.c
+build $BUILDROOT/mesa/libsoftpipe/sp_quad_blend.o: cc external/mesa/src/gallium/drivers/softpipe/sp_quad_blend.c
+build $BUILDROOT/mesa/libsoftpipe/sp_quad_depth_test.o: cc external/mesa/src/gallium/drivers/softpipe/sp_quad_depth_test.c
+build $BUILDROOT/mesa/libsoftpipe/sp_quad_fs.o: cc external/mesa/src/gallium/drivers/softpipe/sp_quad_fs.c
+build $BUILDROOT/mesa/libsoftpipe/sp_quad_pipe.o: cc external/mesa/src/gallium/drivers/softpipe/sp_quad_pipe.c
+build $BUILDROOT/mesa/libsoftpipe/sp_query.o: cc external/mesa/src/gallium/drivers/softpipe/sp_query.c
+build $BUILDROOT/mesa/libsoftpipe/sp_screen.o: cc external/mesa/src/gallium/drivers/softpipe/sp_screen.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libsoftpipe/sp_setup.o: cc external/mesa/src/gallium/drivers/softpipe/sp_setup.c
+build $BUILDROOT/mesa/libsoftpipe/sp_state_blend.o: cc external/mesa/src/gallium/drivers/softpipe/sp_state_blend.c
+build $BUILDROOT/mesa/libsoftpipe/sp_state_clip.o: cc external/mesa/src/gallium/drivers/softpipe/sp_state_clip.c
+build $BUILDROOT/mesa/libsoftpipe/sp_state_derived.o: cc external/mesa/src/gallium/drivers/softpipe/sp_state_derived.c
+build $BUILDROOT/mesa/libsoftpipe/sp_state_image.o: cc external/mesa/src/gallium/drivers/softpipe/sp_state_image.c
+build $BUILDROOT/mesa/libsoftpipe/sp_state_rasterizer.o: cc external/mesa/src/gallium/drivers/softpipe/sp_state_rasterizer.c
+build $BUILDROOT/mesa/libsoftpipe/sp_state_sampler.o: cc external/mesa/src/gallium/drivers/softpipe/sp_state_sampler.c
+build $BUILDROOT/mesa/libsoftpipe/sp_state_shader.o: cc external/mesa/src/gallium/drivers/softpipe/sp_state_shader.c
+  includes = $includes -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libsoftpipe/sp_state_so.o: cc external/mesa/src/gallium/drivers/softpipe/sp_state_so.c
+build $BUILDROOT/mesa/libsoftpipe/sp_state_surface.o: cc external/mesa/src/gallium/drivers/softpipe/sp_state_surface.c
+build $BUILDROOT/mesa/libsoftpipe/sp_state_vertex.o: cc external/mesa/src/gallium/drivers/softpipe/sp_state_vertex.c
+build $BUILDROOT/mesa/libsoftpipe/sp_surface.o: cc external/mesa/src/gallium/drivers/softpipe/sp_surface.c
+build $BUILDROOT/mesa/libsoftpipe/sp_tex_sample.o: cc external/mesa/src/gallium/drivers/softpipe/sp_tex_sample.c
+build $BUILDROOT/mesa/libsoftpipe/sp_tex_tile_cache.o: cc external/mesa/src/gallium/drivers/softpipe/sp_tex_tile_cache.c
+build $BUILDROOT/mesa/libsoftpipe/sp_texture.o: cc external/mesa/src/gallium/drivers/softpipe/sp_texture.c
+build $BUILDROOT/mesa/libsoftpipe/sp_tile_cache.o: cc external/mesa/src/gallium/drivers/softpipe/sp_tile_cache.c
+
+build $BUILDROOT/mesa/libsoftpipe.a: ar $
+  $BUILDROOT/mesa/libsoftpipe/sp_buffer.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_clear.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_context.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_compute.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_draw_arrays.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_fence.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_flush.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_fs_exec.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_image.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_prim_vbuf.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_quad_blend.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_quad_depth_test.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_quad_fs.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_quad_pipe.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_query.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_screen.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_setup.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_state_blend.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_state_clip.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_state_derived.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_state_image.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_state_rasterizer.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_state_sampler.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_state_shader.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_state_so.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_state_surface.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_state_vertex.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_surface.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_tex_sample.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_tex_tile_cache.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_texture.o $
+  $BUILDROOT/mesa/libsoftpipe/sp_tile_cache.o $
+
+build $BUILDROOT/mesa/libsvga/svga_cmd.o: cc external/mesa/src/gallium/drivers/svga/svga_cmd.c
+build $BUILDROOT/mesa/libsvga/svga_cmd_vgpu10.o: cc external/mesa/src/gallium/drivers/svga/svga_cmd_vgpu10.c
+build $BUILDROOT/mesa/libsvga/svga_context.o: cc external/mesa/src/gallium/drivers/svga/svga_context.c
+build $BUILDROOT/mesa/libsvga/svga_draw_arrays.o: cc external/mesa/src/gallium/drivers/svga/svga_draw_arrays.c
+build $BUILDROOT/mesa/libsvga/svga_draw.o: cc external/mesa/src/gallium/drivers/svga/svga_draw.c
+build $BUILDROOT/mesa/libsvga/svga_draw_elements.o: cc external/mesa/src/gallium/drivers/svga/svga_draw_elements.c
+build $BUILDROOT/mesa/libsvga/svga_format.o: cc external/mesa/src/gallium/drivers/svga/svga_format.c
+  cflags = $cflags -Wno-enum-conversion
+build $BUILDROOT/mesa/libsvga/svga_image_view.o: cc external/mesa/src/gallium/drivers/svga/svga_image_view.c
+build $BUILDROOT/mesa/libsvga/svga_link.o: cc external/mesa/src/gallium/drivers/svga/svga_link.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_blend.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_blend.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_blit.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_blit.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_clear.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_clear.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_constants.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_constants.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_cs.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_cs.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_depthstencil.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_depthstencil.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_draw.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_draw.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_flush.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_flush.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_fs.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_fs.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_gs.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_gs.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_ts.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_ts.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_misc.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_misc.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_query.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_query.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_rasterizer.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_rasterizer.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_sampler.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_sampler.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_streamout.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_streamout.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_vertex.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_vertex.c
+build $BUILDROOT/mesa/libsvga/svga_pipe_vs.o: cc external/mesa/src/gallium/drivers/svga/svga_pipe_vs.c
+build $BUILDROOT/mesa/libsvga/svga_resource_buffer.o: cc external/mesa/src/gallium/drivers/svga/svga_resource_buffer.c
+build $BUILDROOT/mesa/libsvga/svga_resource_buffer_upload.o: cc external/mesa/src/gallium/drivers/svga/svga_resource_buffer_upload.c
+build $BUILDROOT/mesa/libsvga/svga_resource.o: cc external/mesa/src/gallium/drivers/svga/svga_resource.c
+build $BUILDROOT/mesa/libsvga/svga_resource_texture.o: cc external/mesa/src/gallium/drivers/svga/svga_resource_texture.c
+build $BUILDROOT/mesa/libsvga/svga_sampler_view.o: cc external/mesa/src/gallium/drivers/svga/svga_sampler_view.c
+build $BUILDROOT/mesa/libsvga/svga_screen.o: cc external/mesa/src/gallium/drivers/svga/svga_screen.c
+  includes = $includes -Ibuild/mesa -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libsvga/svga_screen_cache.o: cc external/mesa/src/gallium/drivers/svga/svga_screen_cache.c
+build $BUILDROOT/mesa/libsvga/svga_shader.o: cc external/mesa/src/gallium/drivers/svga/svga_shader.c
+build $BUILDROOT/mesa/libsvga/svga_shader_buffer.o: cc external/mesa/src/gallium/drivers/svga/svga_shader_buffer.c
+build $BUILDROOT/mesa/libsvga/svga_state.o: cc external/mesa/src/gallium/drivers/svga/svga_state.c
+build $BUILDROOT/mesa/libsvga/svga_state_constants.o: cc external/mesa/src/gallium/drivers/svga/svga_state_constants.c
+build $BUILDROOT/mesa/libsvga/svga_state_cs.o: cc external/mesa/src/gallium/drivers/svga/svga_state_cs.c
+build $BUILDROOT/mesa/libsvga/svga_state_framebuffer.o: cc external/mesa/src/gallium/drivers/svga/svga_state_framebuffer.c
+build $BUILDROOT/mesa/libsvga/svga_state_fs.o: cc external/mesa/src/gallium/drivers/svga/svga_state_fs.c
+build $BUILDROOT/mesa/libsvga/svga_state_gs.o: cc external/mesa/src/gallium/drivers/svga/svga_state_gs.c
+build $BUILDROOT/mesa/libsvga/svga_state_ts.o: cc external/mesa/src/gallium/drivers/svga/svga_state_ts.c
+build $BUILDROOT/mesa/libsvga/svga_state_need_swtnl.o: cc external/mesa/src/gallium/drivers/svga/svga_state_need_swtnl.c
+build $BUILDROOT/mesa/libsvga/svga_state_rss.o: cc external/mesa/src/gallium/drivers/svga/svga_state_rss.c
+build $BUILDROOT/mesa/libsvga/svga_state_sampler.o: cc external/mesa/src/gallium/drivers/svga/svga_state_sampler.c
+build $BUILDROOT/mesa/libsvga/svga_state_tgsi_transform.o: cc external/mesa/src/gallium/drivers/svga/svga_state_tgsi_transform.c
+build $BUILDROOT/mesa/libsvga/svga_state_tss.o: cc external/mesa/src/gallium/drivers/svga/svga_state_tss.c
+build $BUILDROOT/mesa/libsvga/svga_state_uav.o: cc external/mesa/src/gallium/drivers/svga/svga_state_uav.c
+build $BUILDROOT/mesa/libsvga/svga_state_vdecl.o: cc external/mesa/src/gallium/drivers/svga/svga_state_vdecl.c
+build $BUILDROOT/mesa/libsvga/svga_state_vs.o: cc external/mesa/src/gallium/drivers/svga/svga_state_vs.c
+build $BUILDROOT/mesa/libsvga/svga_surface.o: cc external/mesa/src/gallium/drivers/svga/svga_surface.c
+build $BUILDROOT/mesa/libsvga/svga_swtnl_backend.o: cc external/mesa/src/gallium/drivers/svga/svga_swtnl_backend.c
+build $BUILDROOT/mesa/libsvga/svga_swtnl_draw.o: cc external/mesa/src/gallium/drivers/svga/svga_swtnl_draw.c
+build $BUILDROOT/mesa/libsvga/svga_swtnl_state.o: cc external/mesa/src/gallium/drivers/svga/svga_swtnl_state.c
+build $BUILDROOT/mesa/libsvga/svga_tgsi.o: cc external/mesa/src/gallium/drivers/svga/svga_tgsi.c
+build $BUILDROOT/mesa/libsvga/svga_tgsi_decl_sm30.o: cc external/mesa/src/gallium/drivers/svga/svga_tgsi_decl_sm30.c
+build $BUILDROOT/mesa/libsvga/svga_tgsi_insn.o: cc external/mesa/src/gallium/drivers/svga/svga_tgsi_insn.c
+build $BUILDROOT/mesa/libsvga/svga_tgsi_vgpu10.o: cc external/mesa/src/gallium/drivers/svga/svga_tgsi_vgpu10.c
+  cflags = $cflags -Wno-unused-but-set-variable -Wno-enum-conversion
+build $BUILDROOT/mesa/libsvga/svgadump_svga_dump.o: cc external/mesa/src/gallium/drivers/svga/svgadump/svga_dump.c
+build $BUILDROOT/mesa/libsvga/svgadump_svga_shader_dump.o: cc external/mesa/src/gallium/drivers/svga/svgadump/svga_shader_dump.c
+build $BUILDROOT/mesa/libsvga/svgadump_svga_shader_op.o: cc external/mesa/src/gallium/drivers/svga/svgadump/svga_shader_op.c
+
+build $BUILDROOT/mesa/libsvga.a: ar $
+  $BUILDROOT/mesa/libsvga/svga_cmd.o $
+  $BUILDROOT/mesa/libsvga/svga_cmd_vgpu10.o $
+  $BUILDROOT/mesa/libsvga/svga_context.o $
+  $BUILDROOT/mesa/libsvga/svga_draw_arrays.o $
+  $BUILDROOT/mesa/libsvga/svga_draw.o $
+  $BUILDROOT/mesa/libsvga/svga_draw_elements.o $
+  $BUILDROOT/mesa/libsvga/svga_format.o $
+  $BUILDROOT/mesa/libsvga/svga_image_view.o $
+  $BUILDROOT/mesa/libsvga/svga_link.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_blend.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_blit.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_clear.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_constants.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_cs.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_depthstencil.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_draw.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_flush.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_fs.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_gs.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_ts.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_misc.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_query.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_rasterizer.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_sampler.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_streamout.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_vertex.o $
+  $BUILDROOT/mesa/libsvga/svga_pipe_vs.o $
+  $BUILDROOT/mesa/libsvga/svga_resource_buffer.o $
+  $BUILDROOT/mesa/libsvga/svga_resource_buffer_upload.o $
+  $BUILDROOT/mesa/libsvga/svga_resource.o $
+  $BUILDROOT/mesa/libsvga/svga_resource_texture.o $
+  $BUILDROOT/mesa/libsvga/svga_sampler_view.o $
+  $BUILDROOT/mesa/libsvga/svga_screen.o $
+  $BUILDROOT/mesa/libsvga/svga_screen_cache.o $
+  $BUILDROOT/mesa/libsvga/svga_shader.o $
+  $BUILDROOT/mesa/libsvga/svga_shader_buffer.o $
+  $BUILDROOT/mesa/libsvga/svga_state.o $
+  $BUILDROOT/mesa/libsvga/svga_state_constants.o $
+  $BUILDROOT/mesa/libsvga/svga_state_cs.o $
+  $BUILDROOT/mesa/libsvga/svga_state_framebuffer.o $
+  $BUILDROOT/mesa/libsvga/svga_state_fs.o $
+  $BUILDROOT/mesa/libsvga/svga_state_gs.o $
+  $BUILDROOT/mesa/libsvga/svga_state_ts.o $
+  $BUILDROOT/mesa/libsvga/svga_state_need_swtnl.o $
+  $BUILDROOT/mesa/libsvga/svga_state_rss.o $
+  $BUILDROOT/mesa/libsvga/svga_state_sampler.o $
+  $BUILDROOT/mesa/libsvga/svga_state_tgsi_transform.o $
+  $BUILDROOT/mesa/libsvga/svga_state_tss.o $
+  $BUILDROOT/mesa/libsvga/svga_state_uav.o $
+  $BUILDROOT/mesa/libsvga/svga_state_vdecl.o $
+  $BUILDROOT/mesa/libsvga/svga_state_vs.o $
+  $BUILDROOT/mesa/libsvga/svga_surface.o $
+  $BUILDROOT/mesa/libsvga/svga_swtnl_backend.o $
+  $BUILDROOT/mesa/libsvga/svga_swtnl_draw.o $
+  $BUILDROOT/mesa/libsvga/svga_swtnl_state.o $
+  $BUILDROOT/mesa/libsvga/svga_tgsi.o $
+  $BUILDROOT/mesa/libsvga/svga_tgsi_decl_sm30.o $
+  $BUILDROOT/mesa/libsvga/svga_tgsi_insn.o $
+  $BUILDROOT/mesa/libsvga/svga_tgsi_vgpu10.o $
+  $BUILDROOT/mesa/libsvga/svgadump_svga_dump.o $
+  $BUILDROOT/mesa/libsvga/svgadump_svga_shader_dump.o $
+  $BUILDROOT/mesa/libsvga/svgadump_svga_shader_op.o $
+
+build $BUILDROOT/mesa/libsvgadrm/pb_buffer_simple_fenced.o: cc external/mesa/src/gallium/winsys/svga/drm/pb_buffer_simple_fenced.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_buffer.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_buffer.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_context.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_context.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_fence.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_fence.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_msg.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_msg.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_screen.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_screen.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_screen_dri.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_screen_dri.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_screen_ioctl.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_screen_ioctl.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_screen_pools.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_screen_pools.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_screen_svga.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_screen_svga.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_surface.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_surface.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_shader.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_shader.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+build $BUILDROOT/mesa/libsvgadrm/vmw_query.o: cc external/mesa/src/gallium/winsys/svga/drm/vmw_query.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers/svga
+
+build $BUILDROOT/mesa/libsvgadrm.a: ar $
+  $BUILDROOT/mesa/libsvgadrm/pb_buffer_simple_fenced.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_buffer.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_context.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_fence.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_msg.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_screen.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_screen_dri.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_screen_ioctl.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_screen_pools.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_screen_svga.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_surface.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_shader.o $
+  $BUILDROOT/mesa/libsvgadrm/vmw_query.o $
+
+build $BUILDROOT/mesa/libvirgl/virgl_buffer.o: cc external/mesa/src/gallium/drivers/virgl/virgl_buffer.c
+  includes = $includes -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libvirgl/virgl_context.o: cc external/mesa/src/gallium/drivers/virgl/virgl_context.c
+  includes = $includes -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libvirgl/virgl_encode.o: cc external/mesa/src/gallium/drivers/virgl/virgl_encode.c
+  includes = $includes -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libvirgl/virgl_query.o: cc external/mesa/src/gallium/drivers/virgl/virgl_query.c
+  includes = $includes -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libvirgl/virgl_resource.o: cc external/mesa/src/gallium/drivers/virgl/virgl_resource.c
+  includes = $includes -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libvirgl/virgl_screen.o: cc external/mesa/src/gallium/drivers/virgl/virgl_screen.c
+  includes = $includes -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libvirgl/virgl_staging_mgr.o: cc external/mesa/src/gallium/drivers/virgl/virgl_staging_mgr.c
+  includes = $includes -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libvirgl/virgl_streamout.o: cc external/mesa/src/gallium/drivers/virgl/virgl_streamout.c
+  includes = $includes -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libvirgl/virgl_transfer_queue.o: cc external/mesa/src/gallium/drivers/virgl/virgl_transfer_queue.c
+  includes = $includes -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libvirgl/virgl_texture.o: cc external/mesa/src/gallium/drivers/virgl/virgl_texture.c
+  includes = $includes -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libvirgl/virgl_tgsi.o: cc external/mesa/src/gallium/drivers/virgl/virgl_tgsi.c
+  includes = $includes -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+
+build $BUILDROOT/mesa/libvirgl.a: ar $
+  $BUILDROOT/mesa/libvirgl/virgl_buffer.o $
+  $BUILDROOT/mesa/libvirgl/virgl_context.o $
+  $BUILDROOT/mesa/libvirgl/virgl_encode.o $
+  $BUILDROOT/mesa/libvirgl/virgl_query.o $
+  $BUILDROOT/mesa/libvirgl/virgl_resource.o $
+  $BUILDROOT/mesa/libvirgl/virgl_screen.o $
+  $BUILDROOT/mesa/libvirgl/virgl_staging_mgr.o $
+  $BUILDROOT/mesa/libvirgl/virgl_streamout.o $
+  $BUILDROOT/mesa/libvirgl/virgl_transfer_queue.o $
+  $BUILDROOT/mesa/libvirgl/virgl_texture.o $
+  $BUILDROOT/mesa/libvirgl/virgl_tgsi.o $
+
+build $BUILDROOT/mesa/libvirgldrm/virgl_drm_winsys.o: cc external/mesa/src/gallium/winsys/virgl/drm/virgl_drm_winsys.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers -Iexternal/mesa/src/gallium/winsys/virgl/common $
+    -Iexternal/mesa/src/virtio -Ibuild/mesa/compiler/nir -Iexternal/mesa/src/compiler/nir
+build $BUILDROOT/mesa/libvirgldrm.a: ar $BUILDROOT/mesa/libvirgldrm/virgl_drm_winsys.o
+
+build $BUILDROOT/mesa/libvirglcommon/virgl_resource_cache.o: cc external/mesa/src/gallium/winsys/virgl/common/virgl_resource_cache.c
+build $BUILDROOT/mesa/libvirglcommon.a: ar $BUILDROOT/mesa/libvirglcommon/virgl_resource_cache.o
+
+build $BUILDROOT/mesa/libvirglvtest/virgl_vtest_socket.o: cc external/mesa/src/gallium/winsys/virgl/vtest/virgl_vtest_socket.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers -Iexternal/mesa/src/virtio -Iexternal/mesa/src/gallium/winsys/virgl/common
+build $BUILDROOT/mesa/libvirglvtest/virgl_vtest_winsys.o: cc external/mesa/src/gallium/winsys/virgl/vtest/virgl_vtest_winsys.c
+  includes = $includes -Iexternal/mesa/src/gallium/drivers -Iexternal/mesa/src/virtio -Iexternal/mesa/src/gallium/winsys/virgl/common
+
+build $BUILDROOT/mesa/libvirglvtest.a: ar $
+  $BUILDROOT/mesa/libvirglvtest/virgl_vtest_socket.o $
+  $BUILDROOT/mesa/libvirglvtest/virgl_vtest_winsys.o $
+
