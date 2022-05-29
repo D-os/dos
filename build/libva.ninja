@@ -33,9 +33,9 @@ build $BUILDROOT/libva/libva-drm.so: so $
   $BUILDROOT/libva/libva.so
   libs = $BUILDROOT/libva/libva.so -ldrm -ldl
 
-build $BUILDROOT/libva/wayland-drm-client-protocol.h: wayland-scanner external/libva/va/wayland/wayland-drm.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/libva/wayland-drm-client-protocol.h: wayland-scanner external/libva/va/wayland/wayland-drm.xml | out/host/bin/wayland-scanner
   type = client-header
-build $BUILDROOT/libva/wayland-drm-client-protocol.c: wayland-scanner external/libva/va/wayland/wayland-drm.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/libva/wayland-drm-client-protocol.c: wayland-scanner external/libva/va/wayland/wayland-drm.xml | out/host/bin/wayland-scanner
   type = private-code
 
 build $BUILDROOT/libva/wayland-drm-client-protocol.o: cc $BUILDROOT/libva/wayland-drm-client-protocol.c

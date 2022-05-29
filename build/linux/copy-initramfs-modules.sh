@@ -1,19 +1,20 @@
 #!/bin/sh
 #
 ## Copy modules given on stdin to staging directory.
-## usage: tools/copy-initramfs-modules.sh MODULES_LIST KERNEL_VERSION MODULES_STAGING_DIR
+## usage: tools/copy-initramfs-modules.sh MODULES_LIST KERNEL_VERSION MODULES_STAGING_DIR SYSTEM_TARGET
 
 MODULES_LIST=$1
 KERNEL_VERSION=$2
 MODULES_STAGING_DIR=$3
+TARGET=$4
 
-if [ $# -ne 3 ]; then
+if [ $# -ne 4 ]; then
   sed -n '/^## /{s/^## //p}' "$0"
   exit 1
 fi
 
 set -e
-KERNEL_DIR=out/sysroot/lib/modules/$KERNEL_VERSION
+KERNEL_DIR=out/target/$TARGET/lib/modules/$KERNEL_VERSION
 
 mkdir -p "$MODULES_STAGING_DIR"
 cp "$KERNEL_DIR"/modules.{order,builtin} "$MODULES_STAGING_DIR"

@@ -12,8 +12,8 @@ API, suitable for use in a wide range of deployment environments.
 Updating ninja build file:
 ```sh
 rm Makefile
-env CC=out/tc/target/bin/x86_64-linux-musl-clang external/musl/configure --prefix=/ --disable-static
+env CC=out/target/bin/x86_64-linux-musl-clang external/musl/configure --prefix=/ --disable-static
 sed -i -e 's!\(lib\|obj\)/!out/build/musl/\1/!g' Makefile
-out/tc/host/bin/kati DESTDIR=out/sysroot install --ninja --ninja_dir=build --ninja_suffix=-musl --no_ninja_prelude --use_ninja_phony_output
+out/host/bin/kati DESTDIR=out/sysroot install --ninja --ninja_dir=build --ninja_suffix=-musl --no_ninja_prelude --use_ninja_phony_output
 git checkout Makefile
 ```

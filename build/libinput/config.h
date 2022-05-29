@@ -19,13 +19,13 @@
 
 #define HTTP_DOC_LINK "https://wayland.freedesktop.org/libinput/doc/1.20.0"
 
-#define LIBINPUT_QUIRKS_DIR "out/sysroot/share/libinput"
+#define LIBINPUT_QUIRKS_DIR "/system/share/libinput"
 
-#define LIBINPUT_QUIRKS_OVERRIDE_FILE "out/sysroot/etc/libinput/local-overrides.quirks"
+#define LIBINPUT_QUIRKS_OVERRIDE_FILE "/system/etc/libinput/local-overrides.quirks"
 
 #define LIBINPUT_QUIRKS_SRCDIR "external/libinput/quirks"
 
-#define LIBINPUT_TOOL_PATH "out/sysroot/libexec/libinput"
+#define LIBINPUT_TOOL_PATH "/system/libexec/libinput"
 
 #define MESON_BUILD_ROOT "out/build/libinput"
 

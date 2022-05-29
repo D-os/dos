@@ -23,7 +23,7 @@ rule generate_cap_names_list
   command = awk -f external/libcap/generate_cap_names_list.awk $in > $out
   description = [HOST] GEN $out
 
-build $BUILDROOT/libcap/cap_names.list.h: generate_cap_names_list out/tc/target/${TARGET}/include/linux/capability.h
+build $BUILDROOT/libcap/cap_names.list.h: generate_cap_names_list out/target/${TARGET}/include/linux/capability.h
 
 build $BUILDROOT/libcap/_makenames.o: hostcc external/libcap/libcap/_makenames.c | $BUILDROOT/libcap/cap_names.list.h
 

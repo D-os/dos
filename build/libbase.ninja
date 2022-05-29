@@ -1,7 +1,6 @@
 cxxflags = -Wall -Werror -Wextra -D_FILE_OFFSET_BITS=64 $
   -Wexit-time-destructors -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses -Wno-sign-compare -Wno-c99-designator
 includes = -Isystem/libbase/include -Isystem/logging/liblog/include
-libs = -lc++ -lunwind -lcutils -llog
 
 build $BUILDROOT/libbase/abi_compatibility.o: cxx system/libbase/abi_compatibility.cpp
 build $BUILDROOT/libbase/chrono_utils.o: cxx system/libbase/chrono_utils.cpp
@@ -40,4 +39,7 @@ build $BUILDROOT/libbase/libbase.a: ar $
   $BUILDROOT/libbase/test_utils.o $
   $BUILDROOT/libbase/errors_unix.o $
 
-build $BUILDROOT/libbase/libbase.so: soa $BUILDROOT/libbase/libbase.a | $SYSROOT/lib/liblog.so
+build $BUILDROOT/libbase/libbase.so: soa $BUILDROOT/libbase/libbase.a $
+| $SYSROOT/lib/libcutils.so $
+  $SYSROOT/lib/liblog.so
+  libs = -lc++ -lunwind -lcutils -llog

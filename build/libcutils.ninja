@@ -1,6 +1,6 @@
 cxxflags = -Wno-exit-time-destructors -Wno-deprecated-pragma
 includes = -Isystem/core/libcutils/include -Isystem/libbase/include -Isystem/logging/liblog/include
-libs = -lc++ -llog -lsystemproperties
+libs = -lc++ -llog
 
 build $BUILDROOT/libcutils/config_utils.o: cxx system/core/libcutils/config_utils.cpp
 build $BUILDROOT/libcutils/iosched_policy.o: cxx system/core/libcutils/iosched_policy.cpp
@@ -85,8 +85,7 @@ rule soa
 
 build $BUILDROOT/libcutils/libcutils.so: soa $BUILDROOT/libcutils/libcutils.a $
   | $BUILDROOT/libcutils/libcutils_sockets.a $
-    $SYSROOT/lib/liblog.so $
-    $SYSROOT/lib/libsystemproperties.so $
+    $SYSROOT/lib/liblog.so
 
 build $BUILDROOT/libcutils/android_get_control_file.o: cxx system/core/libcutils/android_get_control_file.cpp
 build $BUILDROOT/libcutils/socket_inaddr_any_server_unix.o: cxx system/core/libcutils/socket_inaddr_any_server_unix.cpp

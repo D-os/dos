@@ -23,16 +23,16 @@ build $BUILDROOT/initramfs/initramfs: gen_init_cpio build/linux/initramfs $
   depfile = build/linux/initramfs.d
 
 rule copy_modules
-  command = build/linux/copy-initramfs-modules.sh $in $KERNEL_VERSION $out
+  command = build/linux/copy-initramfs-modules.sh $in $KERNEL_VERSION $out $TARGET
   description = [HOST] STAGE MODULES $out
 
 build $BUILDROOT/initramfs/lib/modules/0.0: copy_modules build/linux/modules.load | $SYSROOT/lib/modules/$KERNEL_VERSION
 
 rule depmod
-  command = out/tc/host/bin/depmod -a -b $BUILDROOT/initramfs 0.0
+  command = out/host/bin/depmod -a -b $BUILDROOT/initramfs 0.0
   description = [HOST] DEPMOD $out
 
-build $BUILDROOT/initramfs/lib/modules/0.0/modules.dep: depmod | out/tc/host/bin/depmod || $BUILDROOT/initramfs/lib/modules/0.0
+build $BUILDROOT/initramfs/lib/modules/0.0/modules.dep: depmod | out/host/bin/depmod || $BUILDROOT/initramfs/lib/modules/0.0
 
 rule gzip
   command = gzip -c $in > $out

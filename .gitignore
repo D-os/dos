@@ -4,3 +4,4 @@
 .ninja_deps
 /.cache/
 /build/.cache/
+/.vscode/*.log

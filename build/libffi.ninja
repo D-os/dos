@@ -10,6 +10,7 @@ cflags = $
   -Wno-sign-compare $
   -Wno-unused-parameter $
   -Wno-unused-result $
+  -Wno-unused-but-set-variable $
   -DHAVE_AS_X86_PCREL $
   -DHAVE_AS_ASCII_PSEUDO_OP $
   -Wno-unused-label $

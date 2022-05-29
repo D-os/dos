@@ -15,15 +15,15 @@ cflags = $
 
 includes = -Ibuild/wayland/src
 
-build $BUILDROOT/wayland/wayland-server-protocol.h: wayland-scanner external/wayland/protocol/wayland.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/wayland/wayland-server-protocol.h: wayland-scanner external/wayland/protocol/wayland.xml | out/host/bin/wayland-scanner
   type = server-header
-build $BUILDROOT/wayland/wayland-server-protocol-core.h: wayland-scanner external/wayland/protocol/wayland.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/wayland/wayland-server-protocol-core.h: wayland-scanner external/wayland/protocol/wayland.xml | out/host/bin/wayland-scanner
   type = server-header -c
-build $BUILDROOT/wayland/wayland-client-protocol.h: wayland-scanner external/wayland/protocol/wayland.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/wayland/wayland-client-protocol.h: wayland-scanner external/wayland/protocol/wayland.xml | out/host/bin/wayland-scanner
   type = client-header
-build $BUILDROOT/wayland/wayland-client-protocol-core.h: wayland-scanner external/wayland/protocol/wayland.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/wayland/wayland-client-protocol-core.h: wayland-scanner external/wayland/protocol/wayland.xml | out/host/bin/wayland-scanner
   type = client-header -c
-build $BUILDROOT/wayland/wayland-protocol.c: wayland-scanner external/wayland/protocol/wayland.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/wayland/wayland-protocol.c: wayland-scanner external/wayland/protocol/wayland.xml | out/host/bin/wayland-scanner
   type = public-code
 
 build $BUILDROOT/wayland/wayland-protocol.o: cc $BUILDROOT/wayland/wayland-protocol.c || $BUILDROOT/wayland/wayland-server-protocol-core.h $BUILDROOT/wayland/wayland-server-protocol.h

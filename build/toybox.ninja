@@ -10,6 +10,7 @@ cflags = $
   -Wno-string-plus-int $
   -Wno-unused-parameter $
   -Wno-unused-variable $
+  -Wno-unused-but-set-variable $
   -funsigned-char $
   -ffunction-sections $
   -fdata-sections $

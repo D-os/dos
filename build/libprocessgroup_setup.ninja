@@ -2,7 +2,6 @@ cxxflags = -Wall -Werror
 includes = -Isystem/core/libprocessgroup/setup/include  -Isystem/core/libprocessgroup/cgrouprc/include $
   -Isystem/core/libprocessgroup/cgrouprc_format/include -Isystem/core/libprocessgroup/include $
   -Isystem/libbase/include -Iexternal/jsoncpp/include
-libs = -lc++ -lunwind -lbase -lprocessgroup
 
 build $BUILDROOT/libprocessgroup_setup/cgroup_map_write.o: cxx system/core/libprocessgroup/setup/cgroup_map_write.cpp
 
@@ -11,4 +10,7 @@ build $BUILDROOT/libprocessgroup_setup/libprocessgroup_setup.a: ar $
 
 build $BUILDROOT/libprocessgroup_setup/libprocessgroup_setup.so: soa $
   $BUILDROOT/libprocessgroup_setup/libprocessgroup_setup.a $
-  $BUILDROOT/libcgrouprc_format/libcgrouprc_format.a
+  $BUILDROOT/libcgrouprc_format/libcgrouprc_format.a $
+| $SYSROOT/lib/libbase.so $
+  $SYSROOT/lib/libprocessgroup.so
+  libs = -lc++ -lunwind -lbase -lprocessgroup

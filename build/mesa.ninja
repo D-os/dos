@@ -141,16 +141,16 @@ includes = -Iexternal/mesa/include -Iexternal/mesa/src -Iexternal/mesa/src/mesa 
   -Iexternal/mesa/src/gallium/drivers/svga/include $
   -I$BUILDROOT/mesa -Iexternal/libdrm -Iexternal/libdrm/include/drm
 
-build $BUILDROOT/mesa/linux-dmabuf-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/mesa/linux-dmabuf-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/host/bin/wayland-scanner
   type = client-header
-build $BUILDROOT/mesa/linux-dmabuf-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/mesa/linux-dmabuf-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/host/bin/wayland-scanner
   type = private-code
 
-build $BUILDROOT/mesa/wayland-drm-protocol.c: wayland-scanner external/mesa/src/egl/wayland/wayland-drm/wayland-drm.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/mesa/wayland-drm-protocol.c: wayland-scanner external/mesa/src/egl/wayland/wayland-drm/wayland-drm.xml | out/host/bin/wayland-scanner
   type = private-code
-build $BUILDROOT/mesa/wayland-drm-client-protocol.h: wayland-scanner external/mesa/src/egl/wayland/wayland-drm/wayland-drm.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/mesa/wayland-drm-client-protocol.h: wayland-scanner external/mesa/src/egl/wayland/wayland-drm/wayland-drm.xml | out/host/bin/wayland-scanner
   type = client-header
-build $BUILDROOT/mesa/wayland-drm-server-protocol.h: wayland-scanner external/mesa/src/egl/wayland/wayland-drm/wayland-drm.xml | out/tc/host/bin/wayland-scanner
+build $BUILDROOT/mesa/wayland-drm-server-protocol.h: wayland-scanner external/mesa/src/egl/wayland/wayland-drm/wayland-drm.xml | out/host/bin/wayland-scanner
   type = server-header
 
 build $BUILDROOT/mesa/wayland-drm-protocol.o: cc $BUILDROOT/mesa/wayland-drm-protocol.c
@@ -443,7 +443,8 @@ build $BUILDROOT/mesa/mapi/es2api/entry.o: cc external/mesa/src/mapi/entry.c
 
 build $BUILDROOT/mesa/libGLESv2.so: so $
   $BUILDROOT/mesa/mapi/es2api/entry.o $
-| $SYSROOT/lib/libdrm.so
+| $BUILDROOT/mesa/libglapi.so $
+  $SYSROOT/lib/libdrm.so
   libs = $BUILDROOT/mesa/libglapi.so -pthread -ldrm
 
 build $BUILDROOT/mesa/dri/target.o: cc external/mesa/src/gallium/targets/dri/target.c

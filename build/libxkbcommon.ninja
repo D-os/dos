@@ -9,6 +9,7 @@ cflags = $
   -fsanitize-undefined-trap-on-error $
   -Wno-unused-parameter $
   -Wno-missing-field-initializers $
+  -Wno-unused-but-set-variable $
   -Wpointer-arith $
   -Wmissing-declarations $
   -Wformat=2 $
@@ -23,7 +24,7 @@ cflags = $
 includes = -Iexternal/libxkbcommon/include -Iexternal/libxkbcommon/src -Ibuild/libxkbcommon -I$BUILDROOT/libxkbcommon
 
 rule bison
-  command = /usr/bin/bison --defines=$BUILDROOT/libxkbcommon/parser.h -o $BUILDROOT/libxkbcommon/parser.c -p _xkbcommon_ $in
+  command = /usr/bin/bison -Wno-deprecated --defines=$BUILDROOT/libxkbcommon/parser.h -o $BUILDROOT/libxkbcommon/parser.c -p _xkbcommon_ $in
   description = [HOST] BISON $out
 
 build $BUILDROOT/libxkbcommon/parser.c $BUILDROOT/libxkbcommon/parser.h: bison external/libxkbcommon/src/xkbcomp/parser.y | /usr/bin/bison
@@ -44,7 +45,7 @@ build $BUILDROOT/libxkbcommon/src_xkbcomp_keymap.o: cc external/libxkbcommon/src
 build $BUILDROOT/libxkbcommon/src_xkbcomp_keymap-dump.o: cc external/libxkbcommon/src/xkbcomp/keymap-dump.c
 build $BUILDROOT/libxkbcommon/src_xkbcomp_keywords.o: cc external/libxkbcommon/src/xkbcomp/keywords.c | $BUILDROOT/libxkbcommon/parser.h
 build $BUILDROOT/libxkbcommon/src_xkbcomp_rules.o: cc external/libxkbcommon/src/xkbcomp/rules.c | $BUILDROOT/libxkbcommon/parser.h
-build $BUILDROOT/libxkbcommon/src_xkbcomp_scanner.o: cc external/libxkbcommon/src/xkbcomp/scanner.c
+build $BUILDROOT/libxkbcommon/src_xkbcomp_scanner.o: cc external/libxkbcommon/src/xkbcomp/scanner.c | $BUILDROOT/libxkbcommon/parser.h
 build $BUILDROOT/libxkbcommon/src_xkbcomp_symbols.o: cc external/libxkbcommon/src/xkbcomp/symbols.c
 build $BUILDROOT/libxkbcommon/src_xkbcomp_types.o: cc external/libxkbcommon/src/xkbcomp/types.c
 build $BUILDROOT/libxkbcommon/src_xkbcomp_vmod.o: cc external/libxkbcommon/src/xkbcomp/vmod.c
