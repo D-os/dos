@@ -8,11 +8,11 @@ BUILD_DIR := $(OUT_DIR)/build
 TARGET := x86_64-unknown-linux-musl
 SYSROOT_DIR := $(OUT_DIR)/target/$(TARGET)
 
-.PHONY: toolchain sysroot clean compdb toolchain-host toolchain-target mold samurai kati libc libcxx kernel-headers kernel kernel_modules
+.PHONY: toolchain sysroot clean compdb toolchain-host toolchain-target mold samurai kati libc libcxx libllvm kernel-headers kernel kernel_modules
 
 toolchain: toolchain-host toolchain-target samurai kati
 
-sysroot: $(SYSROOT_DIR) kernel-headers libc libcxx
+sysroot: $(SYSROOT_DIR) kernel-headers libc libcxx libllvm
 
 clean:
 	rm -rf $(OUT_DIR)
@@ -87,6 +87,22 @@ $(SYSROOT_DIR)/lib/libc++.so: | $(SYSROOT_DIR)/lib/libc.so
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=$(SYSROOT_DIR) \
 		-DLIBCXX_ENABLE_SHARED=YES -DLIBCXX_ENABLE_STATIC=NO -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=NO
 	cd $(BUILD_DIR)/libcxx && PATH=$(OUT_DIR)/host/bin:${PATH} ninja install
+
+libllvm: $(SYSROOT_DIR)/lib/libLLVM.so
+
+$(SYSROOT_DIR)/lib/libLLVM.so: | $(SYSROOT_DIR)/lib/libc++.so
+	rm -rf $(BUILD_DIR)/libllvm
+	PATH=$(OUT_DIR)/target/bin:${PATH} cmake -G Ninja \
+		--toolchain $(ROOT_DIR)/tools/CMake.toolchain \
+		-S external/llvm-project/llvm -B $(BUILD_DIR)/libllvm \
+		-DLLVM_ENABLE_PROJECTS='llvm' \
+		-DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
+		-DLLVM_TARGETS_TO_BUILD="AArch64;AMDGPU;NVPTX;WebAssembly;X86" \
+		-DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON \
+		-DLLVM_ENABLE_RTTI=ON -DLLVM_CCACHE_BUILD=ON \
+		-DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=$(SYSROOT_DIR) \
+		-DLLVM_TABLEGEN=$(OUT_DIR)/host/bin/llvm-tblgen -DLLVM_OPTIMIZED_TABLEGEN=ON
+	cd $(BUILD_DIR)/libllvm && PATH=$(OUT_DIR)/host/bin:${PATH} ninja install-LLVM install-llvm-headers
 
 kernel-headers: $(SYSROOT_DIR)/include/linux
 

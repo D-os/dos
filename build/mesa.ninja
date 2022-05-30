@@ -508,11 +508,11 @@ build $BUILDROOT/mesa/libgallium_dri.so: so $
   $BUILDROOT/mesa/libvirglvtest.a $
 | $BUILDROOT/mesa/libglapi.so $
   $SYSROOT/lib/libdrm.so $
-  $SYSROOT/lib/libLLVM-14.so $
+  $SYSROOT/lib/libLLVM.so $
   $SYSROOT/lib/libexpat.so $
   $SYSROOT/lib/libunwind.so $
   $SYSROOT/lib/libz.so
-  libs = $BUILDROOT/mesa/libglapi.so -ldrm -lLLVM-14 -pthread -lexpat -lm -lz -lelf -lunwind -lc++
+  libs = $BUILDROOT/mesa/libglapi.so -ldrm -lLLVM -pthread -lexpat -lm -lz -lelf -lunwind -lc++
 
 build $BUILDROOT/mesa/libmesa/program/lex.yy.o: cc build/mesa/libmesa/program/lex.yy.c
   includes = $includes -Ibuild/mesa/libmesa
