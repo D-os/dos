@@ -8,7 +8,8 @@ cflags = $
   -DENABLE_VA_MESSAGING=1 $
   -DHAVE_GNUC_VISIBILITY_ATTRIBUTE $
 
-includes = -Iexternal/libva -Iexternal/libva/va -I$BUILDROOT/libva -I/usr/include/libdrm
+includes = -Iexternal/libva -Iexternal/libva/va -I$BUILDROOT/libva -Ibuild/libva $
+  -Iexternal/libdrm/include/drm -Iexternal/libdrm
 
 build $BUILDROOT/libva/va.o: cc external/libva/va/va.c
 build $BUILDROOT/libva/va_str.o: cc external/libva/va/va_str.c

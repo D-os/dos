@@ -18,7 +18,8 @@ cflags = $
   -DTOYBOX_VENDOR=\"-dos\" $
   -D__BIONIC__=1 $
 
-includes = -Iexternal/toybox -Iexternal/toybox/android/device -Isystem/logging/liblog/include
+includes = -Iexternal/toybox -Iexternal/toybox/android/device -Isystem/logging/liblog/include $
+  -Iexternal/zlib -Iexternal/boringssl/src/include
 libs = -lcrypto -lz -llog -lprocessgroup
 
 # all_srcs

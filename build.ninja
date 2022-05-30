@@ -1,11 +1,14 @@
 ninja_required_version = 1.8.2
 
 TARGET = x86_64-unknown-linux-musl
+LLVM_VER = 15.0.0
 
 BUILDROOT = out/build
+
 SYSROOT = out/target/${TARGET}
-CC = out/target/bin/${TARGET}-clang -isystem $SYSROOT/include -Isystem/bioniccompat/include
-CXX = out/target/bin/${TARGET}-clang++ -nostdinc++ -cxx-isystem $SYSROOT/include/c++/v1 -cxx-isystem $SYSROOT/include -Isystem/bioniccompat/include
+INC = -isystem out/target/clang/lib/clang/${LLVM_VER}/include -isystem $SYSROOT/include -Isystem/bioniccompat/include
+CC = out/target/bin/${TARGET}-clang -nostdinc $INC
+CXX = out/target/bin/${TARGET}-clang++ -nostdinc -nostdinc++ -isystem $SYSROOT/include/c++/v1 $INC
 LINKER = out/target/bin/${TARGET}-clang -isysroot $SYSROOT
 AR = out/target/bin/${TARGET}-ar
 STRIP = out/target/bin/${TARGET}-strip
@@ -144,6 +147,7 @@ build $SYSROOT/lib/libsystemproperties.so: copy $BUILDROOT/libsystemproperties/l
 
 subninja build/libudev.ninja
 build $SYSROOT/lib/libudev.so: copy $BUILDROOT/libudev/libudev.so
+build $SYSROOT/include/libudev.h: copy external/libudev/udev.h
 
 subninja build/libva.ninja
 build $SYSROOT/lib/libva.so: copy $BUILDROOT/libva/libva.so

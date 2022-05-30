@@ -115,7 +115,9 @@ flags = $
   -fno-trapping-math $
   -fno-common $
   -Wno-unused-function $
+  -Wno-unused-but-set-variable $
   -Wno-deprecated-anon-enum-enum-conversion $
+  -Wno-deprecated-non-prototype $
   -Wno-missing-prototypes $
   -Wno-deprecated-declarations $
   -Wno-#warnings $
@@ -139,7 +141,8 @@ includes = -Iexternal/mesa/include -Iexternal/mesa/src -Iexternal/mesa/src/mesa 
   -Iexternal/mesa/src/mapi -Ibuild/mesa/glapi/gen -Iexternal/mesa/src/egl/main $
   -Iexternal/mesa/src/gallium/include -Iexternal/mesa/src/gallium/auxiliary $
   -Iexternal/mesa/src/gallium/drivers/svga/include $
-  -I$BUILDROOT/mesa -Iexternal/libdrm -Iexternal/libdrm/include/drm
+  -I$BUILDROOT/mesa -Iexternal/libdrm -Iexternal/libdrm/include/drm -Iexternal/expat/lib -Iexternal/zlib $
+  -Iexternal/wayland/src -Ibuild/wayland/src -I$BUILDROOT/wayland -Iexternal/wayland/egl $
 
 build $BUILDROOT/mesa/linux-dmabuf-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/host/bin/wayland-scanner
   type = client-header
@@ -154,7 +157,7 @@ build $BUILDROOT/mesa/wayland-drm-server-protocol.h: wayland-scanner external/me
   type = server-header
 
 build $BUILDROOT/mesa/wayland-drm-protocol.o: cc $BUILDROOT/mesa/wayland-drm-protocol.c
-build $BUILDROOT/mesa/egl/wayland-drm.o: cc external/mesa/src/egl/wayland/wayland-drm/wayland-drm.c | $BUILDROOT/mesa/wayland-drm-server-protocol.h
+build $BUILDROOT/mesa/egl/wayland-drm.o: cc external/mesa/src/egl/wayland/wayland-drm/wayland-drm.c | $BUILDROOT/mesa/wayland-drm-server-protocol.h $BUILDROOT/wayland/wayland-server-protocol.h
 
 build $BUILDROOT/mesa/libwayland_drm.a: ar $
   $BUILDROOT/mesa/wayland-drm-protocol.o $
@@ -334,21 +337,22 @@ build $BUILDROOT/mesa/egl/main_eglconfig.o: cc external/mesa/src/egl/main/eglcon
 build $BUILDROOT/mesa/egl/main_eglcontext.o: cc external/mesa/src/egl/main/eglcontext.c
 build $BUILDROOT/mesa/egl/main_eglcurrent.o: cc external/mesa/src/egl/main/eglcurrent.c
 build $BUILDROOT/mesa/egl/main_egldevice.o: cc external/mesa/src/egl/main/egldevice.c
-build $BUILDROOT/mesa/egl/main_egldisplay.o: cc external/mesa/src/egl/main/egldisplay.c
+build $BUILDROOT/mesa/egl/main_egldisplay.o: cc external/mesa/src/egl/main/egldisplay.c | $BUILDROOT/wayland/wayland-client-protocol.h
+  includes = $includes -Iexternal/mesa/src/gbm/main
 build $BUILDROOT/mesa/egl/main_eglglobals.o: cc external/mesa/src/egl/main/eglglobals.c
 build $BUILDROOT/mesa/egl/main_eglimage.o: cc external/mesa/src/egl/main/eglimage.c
 build $BUILDROOT/mesa/egl/main_egllog.o: cc external/mesa/src/egl/main/egllog.c
 build $BUILDROOT/mesa/egl/main_eglsurface.o: cc external/mesa/src/egl/main/eglsurface.c
 build $BUILDROOT/mesa/egl/main_eglsync.o: cc external/mesa/src/egl/main/eglsync.c
-build $BUILDROOT/mesa/egl/drivers_dri2_egl_dri2.o: cc external/mesa/src/egl/drivers/dri2/egl_dri2.c | $BUILDROOT/mesa/wayland-drm-client-protocol.h $BUILDROOT/mesa/linux-dmabuf-unstable-v1-client-protocol.h
+build $BUILDROOT/mesa/egl/drivers_dri2_egl_dri2.o: cc external/mesa/src/egl/drivers/dri2/egl_dri2.c | $BUILDROOT/mesa/wayland-drm-client-protocol.h $BUILDROOT/mesa/linux-dmabuf-unstable-v1-client-protocol.h $BUILDROOT/wayland/wayland-client-protocol.h
   includes = $includes -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/egl/wayland/wayland-drm
-build $BUILDROOT/mesa/egl/drivers_dri2_platform_device.o: cc external/mesa/src/egl/drivers/dri2/platform_device.c
+build $BUILDROOT/mesa/egl/drivers_dri2_platform_device.o: cc external/mesa/src/egl/drivers/dri2/platform_device.c | $BUILDROOT/wayland/wayland-client-protocol.h
   includes = $includes -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/loader
-build $BUILDROOT/mesa/egl/drivers_dri2_platform_surfaceless.o: cc external/mesa/src/egl/drivers/dri2/platform_surfaceless.c
+build $BUILDROOT/mesa/egl/drivers_dri2_platform_surfaceless.o: cc external/mesa/src/egl/drivers/dri2/platform_surfaceless.c | $BUILDROOT/wayland/wayland-client-protocol.h
   includes = $includes -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/loader
-build $BUILDROOT/mesa/egl/drivers_dri2_platform_drm.o: cc external/mesa/src/egl/drivers/dri2/platform_drm.c
+build $BUILDROOT/mesa/egl/drivers_dri2_platform_drm.o: cc external/mesa/src/egl/drivers/dri2/platform_drm.c | $BUILDROOT/wayland/wayland-client-protocol.h
   includes = $includes -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/loader
-build $BUILDROOT/mesa/egl/drivers_dri2_platform_wayland.o: cc external/mesa/src/egl/drivers/dri2/platform_wayland.c
+build $BUILDROOT/mesa/egl/drivers_dri2_platform_wayland.o: cc external/mesa/src/egl/drivers/dri2/platform_wayland.c | $BUILDROOT/wayland/wayland-client-protocol.h
   includes = $includes -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/gbm/backends/dri -Iexternal/mesa/src/loader
 
 build $BUILDROOT/mesa/libEGL.so: so $
@@ -390,7 +394,7 @@ build $BUILDROOT/mesa/libEGL.so: so $
 build $BUILDROOT/mesa/gbm/main_backend.o: cc external/mesa/src/gbm/main/backend.c
   includes = $includes -Iexternal/mesa/src/loader
 build $BUILDROOT/mesa/gbm/main_gbm.o: cc external/mesa/src/gbm/main/gbm.c
-build $BUILDROOT/mesa/gbm/backends_dri_gbm_dri.o: cc external/mesa/src/gbm/backends/dri/gbm_dri.c
+build $BUILDROOT/mesa/gbm/backends_dri_gbm_dri.o: cc external/mesa/src/gbm/backends/dri/gbm_dri.c | $BUILDROOT/wayland/wayland-client-protocol.h
   includes = $includes -Iexternal/mesa/src/gbm/main -Iexternal/mesa/src/loader -Iexternal/mesa/src/egl/wayland/wayland-drm
 
 build $BUILDROOT/mesa/libgbm.so: so $
@@ -447,25 +451,25 @@ build $BUILDROOT/mesa/libGLESv2.so: so $
   $SYSROOT/lib/libdrm.so
   libs = $BUILDROOT/mesa/libglapi.so -pthread -ldrm
 
-build $BUILDROOT/mesa/dri/target.o: cc external/mesa/src/gallium/targets/dri/target.c
+build $BUILDROOT/mesa/dri/target.o: cc external/mesa/src/gallium/targets/dri/target.c | $BUILDROOT/wayland/wayland-client-protocol.h
   cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
   includes = $includes -Iexternal/mesa/src/gallium/winsys -Iexternal/mesa/src/gallium/drivers -Iexternal/mesa/src/gallium/frontends/dri
 
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_context.o: cc external/mesa/src/gallium/frontends/dri/dri_context.c
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_context.o: cc external/mesa/src/gallium/frontends/dri/dri_context.c | $BUILDROOT/wayland/wayland-client-protocol.h
   cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_drawable.o: cc external/mesa/src/gallium/frontends/dri/dri_drawable.c
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_drawable.o: cc external/mesa/src/gallium/frontends/dri/dri_drawable.c | $BUILDROOT/wayland/wayland-client-protocol.h
   cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_helpers.o: cc external/mesa/src/gallium/frontends/dri/dri_helpers.c
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_helpers.o: cc external/mesa/src/gallium/frontends/dri/dri_helpers.c | $BUILDROOT/wayland/wayland-client-protocol.h
   cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_query_renderer.o: cc external/mesa/src/gallium/frontends/dri/dri_query_renderer.c
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_query_renderer.o: cc external/mesa/src/gallium/frontends/dri/dri_query_renderer.c | $BUILDROOT/wayland/wayland-client-protocol.h
   cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_screen.o: cc external/mesa/src/gallium/frontends/dri/dri_screen.c
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_screen.o: cc external/mesa/src/gallium/frontends/dri/dri_screen.c | $BUILDROOT/wayland/wayland-client-protocol.h
   cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_util.o: cc external/mesa/src/gallium/frontends/dri/dri_util.c
+build $BUILDROOT/mesa/gallium/frontends/dri/dri_util.o: cc external/mesa/src/gallium/frontends/dri/dri_util.c | $BUILDROOT/wayland/wayland-client-protocol.h
   cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/drisw.o: cc external/mesa/src/gallium/frontends/dri/drisw.c
+build $BUILDROOT/mesa/gallium/frontends/dri/drisw.o: cc external/mesa/src/gallium/frontends/dri/drisw.c | $BUILDROOT/wayland/wayland-client-protocol.h
   cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri2.o: cc external/mesa/src/gallium/frontends/dri/dri2.c
+build $BUILDROOT/mesa/gallium/frontends/dri/dri2.o: cc external/mesa/src/gallium/frontends/dri/dri2.c | $BUILDROOT/wayland/wayland-client-protocol.h
   cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
 
 build $BUILDROOT/mesa/gallium/frontends/dri/libdri.a: ar $

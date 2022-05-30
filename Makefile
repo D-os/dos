@@ -83,7 +83,7 @@ $(SYSROOT_DIR)/lib/libc++.so: | $(SYSROOT_DIR)/lib/libc.so
 		--toolchain $(ROOT_DIR)/tools/CMake.toolchain \
 		-S external/llvm-project/runtimes -B $(BUILD_DIR)/libcxx \
 		-DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
-		-DLIBCXX_HAS_MUSL_LIBC=ON \
+		-DLIBCXX_HAS_MUSL_LIBC=ON -DLIBUNWIND_INSTALL_HEADERS=ON \
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=$(SYSROOT_DIR) \
 		-DLIBCXX_ENABLE_SHARED=YES -DLIBCXX_ENABLE_STATIC=NO -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=NO
 	cd $(BUILD_DIR)/libcxx && PATH=$(OUT_DIR)/host/bin:${PATH} ninja install

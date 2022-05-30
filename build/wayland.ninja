@@ -13,7 +13,7 @@ cflags = $
   -fvisibility=hidden $
   -Wno-sign-compare
 
-includes = -Ibuild/wayland/src
+includes = -Iexternal/wayland/src -Ibuild/wayland/src -I$BUILDROOT/wayland -Iexternal/libffi/include -Ibuild/libffi -I$BUILDROOT/libffi
 
 build $BUILDROOT/wayland/wayland-server-protocol.h: wayland-scanner external/wayland/protocol/wayland.xml | out/host/bin/wayland-scanner
   type = server-header
@@ -27,7 +27,7 @@ build $BUILDROOT/wayland/wayland-protocol.c: wayland-scanner external/wayland/pr
   type = public-code
 
 build $BUILDROOT/wayland/wayland-protocol.o: cc $BUILDROOT/wayland/wayland-protocol.c || $BUILDROOT/wayland/wayland-server-protocol-core.h $BUILDROOT/wayland/wayland-server-protocol.h
-build $BUILDROOT/wayland/connection.o: cc external/wayland/src/connection.c
+build $BUILDROOT/wayland/connection.o: cc external/wayland/src/connection.c | $BUILDROOT/libffi/ffi_gen.h
 build $BUILDROOT/wayland/wayland-os.o: cc external/wayland/src/wayland-os.c
 build $BUILDROOT/wayland/wayland-util.o: cc external/wayland/src/wayland-util.c
 build $BUILDROOT/wayland/wayland-server.o: cc external/wayland/src/wayland-server.c

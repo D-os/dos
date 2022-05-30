@@ -2,7 +2,7 @@ cflags = $
   -Wall $
   -Werror $
 
-#includes = -Iexternal/libffi/include -Ibuild/libffi -I$BUILDROOT/libffi
+includes = -Iexternal/mtdev/include
 
 build $BUILDROOT/mtdev/caps.o: cc external/mtdev/src/caps.c
 build $BUILDROOT/mtdev/core.o: cc external/mtdev/src/core.c

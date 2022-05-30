@@ -12,8 +12,15 @@ cflags = $
 
 includes = -Iexternal/weston/include -Iexternal/weston -Iexternal/weston/libweston/ -Ibuild/weston $
   -I$BUILDROOT/weston/protocol $
+  -Iexternal/wayland/src -Ibuild/wayland/src -I$BUILDROOT/wayland -Iexternal/wayland/egl $
+  -Iexternal/mesa/include -Iexternal/mesa/src/gbm/main $
+  -Iexternal/libxkbcommon/include $
   -Iexternal/pixman/pixman -Ibuild/pixman/src $
-  -Iexternal/libdrm/include/drm -Iexternal/libevdev
+  -Iexternal/libdrm/include/drm -Iexternal/libdrm $
+  -Iexternal/libva -Ibuild/libva $
+  -Iexternal/libinput/src $
+  -Iexternal/libevdev $
+  -Iexternal/seatd/include $
 
 build $BUILDROOT/weston/protocol/input-method-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/input-method/input-method-unstable-v1.xml | out/host/bin/wayland-scanner
   type = client-header
@@ -177,23 +184,23 @@ build $BUILDROOT/weston/protocol/xdg-output-unstable-v1-protocol.o: cc $BUILDROO
 build $BUILDROOT/weston/protocol/weston-debug-protocol.o: cc $BUILDROOT/weston/protocol/weston-debug-protocol.c
 build $BUILDROOT/weston/protocol/weston-direct-display-protocol.o: cc $BUILDROOT/weston/protocol/weston-direct-display-protocol.c
 
-build $BUILDROOT/weston/libweston/animation.o: cc external/weston/libweston/animation.c
-build $BUILDROOT/weston/libweston/bindings.o: cc external/weston/libweston/bindings.c
-build $BUILDROOT/weston/libweston/clipboard.o: cc external/weston/libweston/clipboard.c
-build $BUILDROOT/weston/libweston/color.o: cc external/weston/libweston/color.c
-build $BUILDROOT/weston/libweston/color-noop.o: cc external/weston/libweston/color-noop.c
-build $BUILDROOT/weston/libweston/compositor.o: cc external/weston/libweston/compositor.c | $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/viewporter-server-protocol.h $BUILDROOT/weston/protocol/presentation-time-server-protocol.h $BUILDROOT/weston/protocol/xdg-output-unstable-v1-server-protocol.h
-build $BUILDROOT/weston/libweston/content-protection.o: cc external/weston/libweston/content-protection.c | $BUILDROOT/weston/protocol/weston-content-protection-server-protocol.h
-build $BUILDROOT/weston/libweston/data-device.o: cc external/weston/libweston/data-device.c
-build $BUILDROOT/weston/libweston/drm-formats.o: cc external/weston/libweston/drm-formats.c
-build $BUILDROOT/weston/libweston/input.o: cc external/weston/libweston/input.c | $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/input-timestamps-unstable-v1-server-protocol.h
-build $BUILDROOT/weston/libweston/linux-dmabuf.o: cc external/weston/libweston/linux-dmabuf.c | $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-server-protocol.h
-build $BUILDROOT/weston/libweston/linux-explicit-synchronization.o: cc external/weston/libweston/linux-explicit-synchronization.c | $BUILDROOT/weston/protocol/linux-explicit-synchronization-unstable-v1-server-protocol.h
+build $BUILDROOT/weston/libweston/animation.o: cc external/weston/libweston/animation.c | $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/bindings.o: cc external/weston/libweston/bindings.c | $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/clipboard.o: cc external/weston/libweston/clipboard.c | $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/color.o: cc external/weston/libweston/color.c | $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/color-noop.o: cc external/weston/libweston/color-noop.c | $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/compositor.o: cc external/weston/libweston/compositor.c | $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/viewporter-server-protocol.h $BUILDROOT/weston/protocol/presentation-time-server-protocol.h $BUILDROOT/weston/protocol/xdg-output-unstable-v1-server-protocol.h $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/content-protection.o: cc external/weston/libweston/content-protection.c | $BUILDROOT/weston/protocol/weston-content-protection-server-protocol.h $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/data-device.o: cc external/weston/libweston/data-device.c | $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/drm-formats.o: cc external/weston/libweston/drm-formats.c | $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/input.o: cc external/weston/libweston/input.c | $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/input-timestamps-unstable-v1-server-protocol.h  $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/linux-dmabuf.o: cc external/weston/libweston/linux-dmabuf.c | $BUILDROOT/weston/protocol/linux-dmabuf-unstable-v1-server-protocol.h $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/linux-explicit-synchronization.o: cc external/weston/libweston/linux-explicit-synchronization.c | $BUILDROOT/weston/protocol/linux-explicit-synchronization-unstable-v1-server-protocol.h $BUILDROOT/wayland/wayland-server-protocol.h
 build $BUILDROOT/weston/libweston/linux-sync-file.o: cc external/weston/libweston/linux-sync-file.c
-build $BUILDROOT/weston/libweston/log.o: cc external/weston/libweston/log.c
-build $BUILDROOT/weston/libweston/noop-renderer.o: cc external/weston/libweston/noop-renderer.c
-build $BUILDROOT/weston/libweston/pixel-formats.o: cc external/weston/libweston/pixel-formats.c
-build $BUILDROOT/weston/libweston/pixman-renderer.o: cc external/weston/libweston/pixman-renderer.c
+build $BUILDROOT/weston/libweston/log.o: cc external/weston/libweston/log.c | $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/noop-renderer.o: cc external/weston/libweston/noop-renderer.c | $BUILDROOT/wayland/wayland-server-protocol.h
+build $BUILDROOT/weston/libweston/pixel-formats.o: cc external/weston/libweston/pixel-formats.c | $BUILDROOT/wayland/wayland-client-protocol.h
+build $BUILDROOT/weston/libweston/pixman-renderer.o: cc external/weston/libweston/pixman-renderer.c | $BUILDROOT/wayland/wayland-server-protocol.h
 build $BUILDROOT/weston/libweston/plugin-registry.o: cc external/weston/libweston/plugin-registry.c
 build $BUILDROOT/weston/libweston/screenshooter.o: cc external/weston/libweston/screenshooter.c
 build $BUILDROOT/weston/libweston/timeline.o: cc external/weston/libweston/timeline.c

@@ -19,7 +19,7 @@ rule mkdir
   description = MKDIR $out
 
 rule sync
-  command = mkdir -p $out && for SOURCE in $source; do cp -a $$SOURCE $out; done
+  command = mkdir -p $out && for SOURCE in $source; do cp -a $$SOURCE $out; done; touch $out
   description = SYNC $out <- $source
 
 rule hardlink
