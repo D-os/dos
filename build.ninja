@@ -13,7 +13,7 @@ LINKER = out/target/bin/${TARGET}-clang -isysroot $SYSROOT
 AR = out/target/bin/${TARGET}-ar
 STRIP = out/target/bin/${TARGET}-strip
 
-SYSTEMDIR = $BUILDROOT/system
+SYSTEMDIR = out/system
 
 KERNEL_VERSION = 5.16.11-zen-gfbc389882a61
 
@@ -196,13 +196,13 @@ subninja build/seatd.ninja
 build $SYSROOT/lib/libseat.so: copy $BUILDROOT/seatd/libseat.so
 
 subninja build/system_img.ninja
-build system.img: phony $BUILDROOT/system.img $BUILDROOT/system.stamp
+build system.img: phony $SYSTEMDIR.img $SYSTEMDIR.stamp
 
 subninja build/toybox.ninja
-build $BUILDROOT/system/system/bin/toybox: copy $BUILDROOT/toybox/toybox
+build $SYSTEMDIR/system/bin/toybox: copy $BUILDROOT/toybox/toybox
 
 subninja build/utils.ninja
-build $BUILDROOT/system/system/bin/su: copy $BUILDROOT/utils/su
+build $SYSTEMDIR/system/bin/su: copy $BUILDROOT/utils/su
 
 subninja build/wayland.ninja
 build $SYSROOT/lib/libwayland-client.so: copy $BUILDROOT/wayland/libwayland-client.so

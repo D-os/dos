@@ -4,14 +4,14 @@ rule mkfs
   command = truncate -s $IMAGE_SIZE $out && mke2fs -q -t ext4 -L / -E root_owner=0:0 -d $in $out
   description = [HOST] MKFS $out
 
-build $BUILDROOT/system.img: mkfs $SYSTEMDIR
+build $SYSTEMDIR.img: mkfs $SYSTEMDIR
   depfile = build/system/content.d
 
 rule fixup
   command = sh build/system/content.sh && sleep 1s && touch $out
   description = [HOST] FIXUP $out
 
-build $BUILDROOT/system.stamp: fixup $BUILDROOT/system.img $
+build $SYSTEMDIR.stamp: fixup $SYSTEMDIR.img $
   | build/system/content.sh
 
 rule mkdir

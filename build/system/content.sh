@@ -1,5 +1,5 @@
 mkdir -p out/mnt
-fuse2fs out/build/system.img out/mnt -o fakeroot,rw
+fuse2fs out/system.img out/mnt -o fakeroot,rw
 
 chown -R 0:0 out/mnt/*
 chmod 4755 out/mnt/system/bin/su
