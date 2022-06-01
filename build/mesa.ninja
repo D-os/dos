@@ -9,16 +9,9 @@ flags = $
   -D__STDC_LIMIT_MACROS $
   '-DPACKAGE_VERSION="22.2.0-devel"' $
   '-DPACKAGE_BUGREPORT="https://gitlab.freedesktop.org/mesa/mesa/-/issues"' $
-  -DHAVE_R300 $
-  -DHAVE_R600 $
-  -DHAVE_RADEONSI $
-  -DHAVE_NOUVEAU $
   -DHAVE_VIRGL $
   -DHAVE_SVGA $
   -DHAVE_SWRAST $
-  -DHAVE_IRIS $
-  -DHAVE_CROCUS $
-  -DHAVE_I915 $
   -DVIDEO_CODEC_VC1DEC=0 $
   -DVIDEO_CODEC_H264DEC=0 $
   -DVIDEO_CODEC_H264ENC=0 $
@@ -27,10 +20,13 @@ flags = $
   -DHAVE_WAYLAND_PLATFORM $
   -DHAVE_SURFACELESS_PLATFORM $
   -DHAVE_DRM_PLATFORM $
+  -DGALLIUM_VIRGL $
+  -DGALLIUM_VMWGFX $
+  -DGALLIUM_SOFTPIPE $
+  -DGALLIUM_LLVMPIPE $
   -DUSE_ELF_TLS $
   -DENABLE_ST_OMX_BELLAGIO=0 $
   -DENABLE_ST_OMX_TIZONIA=0 $
-  -DHAVE_VA_SURFACE_ATTRIB_DRM_FORMAT_MODIFIERS $
   -DEGL_NO_X11 $
   -DENABLE_SHADER_CACHE $
   -DHAVE___BUILTIN_BSWAP32 $
@@ -94,13 +90,11 @@ flags = $
   -DHAVE_LIBDRM $
   -DHAVE_LIBUDEV $
   -DLLVM_AVAILABLE $
-  '-DMESA_LLVM_VERSION_STRING="14.0.0"' $
+  '-DMESA_LLVM_VERSION_STRING="15.0.0"' $
   -DLLVM_IS_SHARED=1 $
   -DDRAW_LLVM_AVAILABLE $
   -DMESA_EXECMEM $
   -DHAVE_LIBUNWIND $
-  -DWL_HIDE_DEPRECATED $
-  -DHAVE_OPENMP $
   -DVK_USE_PLATFORM_WAYLAND_KHR $
   -DVK_USE_PLATFORM_DISPLAY_KHR $
   -Werror=implicit-function-declaration $
@@ -452,71 +446,63 @@ build $BUILDROOT/mesa/libGLESv2.so: so $
   libs = $BUILDROOT/mesa/libglapi.so -pthread -ldrm
 
 build $BUILDROOT/mesa/dri/target.o: cc external/mesa/src/gallium/targets/dri/target.c | $BUILDROOT/wayland/wayland-client-protocol.h
-  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
   includes = $includes -Iexternal/mesa/src/gallium/winsys -Iexternal/mesa/src/gallium/drivers -Iexternal/mesa/src/gallium/frontends/dri
 
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_context.o: cc external/mesa/src/gallium/frontends/dri/dri_context.c | $BUILDROOT/wayland/wayland-client-protocol.h
-  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_drawable.o: cc external/mesa/src/gallium/frontends/dri/dri_drawable.c | $BUILDROOT/wayland/wayland-client-protocol.h
-  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_helpers.o: cc external/mesa/src/gallium/frontends/dri/dri_helpers.c | $BUILDROOT/wayland/wayland-client-protocol.h
-  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_query_renderer.o: cc external/mesa/src/gallium/frontends/dri/dri_query_renderer.c | $BUILDROOT/wayland/wayland-client-protocol.h
-  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_screen.o: cc external/mesa/src/gallium/frontends/dri/dri_screen.c | $BUILDROOT/wayland/wayland-client-protocol.h
-  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri_util.o: cc external/mesa/src/gallium/frontends/dri/dri_util.c | $BUILDROOT/wayland/wayland-client-protocol.h
-  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/drisw.o: cc external/mesa/src/gallium/frontends/dri/drisw.c | $BUILDROOT/wayland/wayland-client-protocol.h
-  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
-build $BUILDROOT/mesa/gallium/frontends/dri/dri2.o: cc external/mesa/src/gallium/frontends/dri/dri2.c | $BUILDROOT/wayland/wayland-client-protocol.h
-  cflags = $cflags -pthread -DGALLIUM_VIRGL -DGALLIUM_SOFTPIPE -DGALLIUM_LLVMPIPE
+build $BUILDROOT/mesa/libdri/dri_context.o: cc external/mesa/src/gallium/frontends/dri/dri_context.c | $BUILDROOT/wayland/wayland-client-protocol.h
+build $BUILDROOT/mesa/libdri/dri_drawable.o: cc external/mesa/src/gallium/frontends/dri/dri_drawable.c | $BUILDROOT/wayland/wayland-client-protocol.h
+build $BUILDROOT/mesa/libdri/dri_helpers.o: cc external/mesa/src/gallium/frontends/dri/dri_helpers.c | $BUILDROOT/wayland/wayland-client-protocol.h
+build $BUILDROOT/mesa/libdri/dri_query_renderer.o: cc external/mesa/src/gallium/frontends/dri/dri_query_renderer.c | $BUILDROOT/wayland/wayland-client-protocol.h
+build $BUILDROOT/mesa/libdri/dri_screen.o: cc external/mesa/src/gallium/frontends/dri/dri_screen.c | $BUILDROOT/wayland/wayland-client-protocol.h
+build $BUILDROOT/mesa/libdri/dri_util.o: cc external/mesa/src/gallium/frontends/dri/dri_util.c | $BUILDROOT/wayland/wayland-client-protocol.h
+build $BUILDROOT/mesa/libdri/drisw.o: cc external/mesa/src/gallium/frontends/dri/drisw.c | $BUILDROOT/wayland/wayland-client-protocol.h
+build $BUILDROOT/mesa/libdri/dri2.o: cc external/mesa/src/gallium/frontends/dri/dri2.c | $BUILDROOT/wayland/wayland-client-protocol.h
 
-build $BUILDROOT/mesa/gallium/frontends/dri/libdri.a: ar $
-  $BUILDROOT/mesa/gallium/frontends/dri/dri_context.o $
-  $BUILDROOT/mesa/gallium/frontends/dri/dri_drawable.o $
-  $BUILDROOT/mesa/gallium/frontends/dri/dri_helpers.o $
-  $BUILDROOT/mesa/gallium/frontends/dri/dri_query_renderer.o $
-  $BUILDROOT/mesa/gallium/frontends/dri/dri_screen.o $
-  $BUILDROOT/mesa/gallium/frontends/dri/dri_util.o $
-  $BUILDROOT/mesa/gallium/frontends/dri/drisw.o $
-  $BUILDROOT/mesa/gallium/frontends/dri/dri2.o
+build $BUILDROOT/mesa/libdri.a: ar $
+  $BUILDROOT/mesa/libdri/dri_context.o $
+  $BUILDROOT/mesa/libdri/dri_drawable.o $
+  $BUILDROOT/mesa/libdri/dri_helpers.o $
+  $BUILDROOT/mesa/libdri/dri_query_renderer.o $
+  $BUILDROOT/mesa/libdri/dri_screen.o $
+  $BUILDROOT/mesa/libdri/dri_util.o $
+  $BUILDROOT/mesa/libdri/drisw.o $
+  $BUILDROOT/mesa/libdri/dri2.o $
 
 build $BUILDROOT/mesa/libgallium_dri.so: so $
   $BUILDROOT/mesa/dri/target.o $
-  $BUILDROOT/mesa/gallium/frontends/dri/libdri.a $
+  $BUILDROOT/mesa/libglcpp.a $
+  $BUILDROOT/mesa/libglsl.a $
+  $BUILDROOT/mesa/libcompiler.a $
+  $BUILDROOT/mesa/libnir.a $
+  $BUILDROOT/mesa/libgallium.a $
+  $BUILDROOT/mesa/libgalliumvl.a $
+  $BUILDROOT/mesa/libpipe_loader_static.a $
+  $BUILDROOT/mesa/libllvmpipe.a $
+  $BUILDROOT/mesa/libsoftpipe.a $
+  $BUILDROOT/mesa/libsvga.a $
+  $BUILDROOT/mesa/libvirgl.a $
+  $BUILDROOT/mesa/libdri.a $
+  $BUILDROOT/mesa/libsvgadrm.a $
+  $BUILDROOT/mesa/libswdri.a $
+  $BUILDROOT/mesa/libswkmsdri.a $
+  $BUILDROOT/mesa/libws_null.a $
+  $BUILDROOT/mesa/libwsw.a $
+  $BUILDROOT/mesa/libvirglcommon.a $
+  $BUILDROOT/mesa/libvirgldrm.a $
+  $BUILDROOT/mesa/libvirglvtest.a $
   $BUILDROOT/mesa/libloader.a $
   $BUILDROOT/mesa/libmesa.a $
   $BUILDROOT/mesa/libmesa_sse41.a $
   $BUILDROOT/mesa/libmesa_format.a $
   $BUILDROOT/mesa/libmesa_util.a $
   $BUILDROOT/mesa/libxmlconfig.a $
-  $BUILDROOT/mesa/libglsl.a $
-  $BUILDROOT/mesa/libglcpp.a $
-  $BUILDROOT/mesa/libnir.a $
-  $BUILDROOT/mesa/libcompiler.a $
-  $BUILDROOT/mesa/libgalliumvl.a $
-  $BUILDROOT/mesa/libgallium.a $
-  $BUILDROOT/mesa/libpipe_loader_static.a $
-  $BUILDROOT/mesa/libws_null.a $
-  $BUILDROOT/mesa/libwsw.a $
-  $BUILDROOT/mesa/libswdri.a $
-  $BUILDROOT/mesa/libswkmsdri.a $
-  $BUILDROOT/mesa/libllvmpipe.a $
-  $BUILDROOT/mesa/libsoftpipe.a $
-  $BUILDROOT/mesa/libsvga.a $
-  $BUILDROOT/mesa/libsvgadrm.a $
-  $BUILDROOT/mesa/libvirgl.a $
-  $BUILDROOT/mesa/libvirgldrm.a $
-  $BUILDROOT/mesa/libvirglcommon.a $
-  $BUILDROOT/mesa/libvirglvtest.a $
 | $BUILDROOT/mesa/libglapi.so $
-  $SYSROOT/lib/libdrm.so $
   $SYSROOT/lib/libLLVM.so $
+  $SYSROOT/lib/libdrm.so $
   $SYSROOT/lib/libexpat.so $
   $SYSROOT/lib/libunwind.so $
+  $SYSROOT/lib/libwayland-client.so $
   $SYSROOT/lib/libz.so
-  libs = $BUILDROOT/mesa/libglapi.so -ldrm -lLLVM -pthread -lexpat -lm -lz -lelf -lunwind -lc++
+  libs = $BUILDROOT/mesa/libglapi.so -ldrm -lLLVM -pthread -lexpat -lm -lz -lunwind -lwayland-client -lc++
 
 build $BUILDROOT/mesa/libmesa/program/lex.yy.o: cc build/mesa/libmesa/program/lex.yy.c
   includes = $includes -Ibuild/mesa/libmesa
@@ -2417,7 +2403,7 @@ build $BUILDROOT/mesa/libpipe_loader_static/pipe_loader.o: cc external/mesa/src/
   cflags = $cflags -pthread -DHAVE_PIPE_LOADER_DRI -DHAVE_PIPE_LOADER_KMS -DGALLIUM_STATIC_TARGETS=1
 build $BUILDROOT/mesa/libpipe_loader_static/pipe_loader_sw.o: cc external/mesa/src/gallium/auxiliary/pipe-loader/pipe_loader_sw.c
   cflags = $cflags -pthread -DHAVE_PIPE_LOADER_DRI -DHAVE_PIPE_LOADER_KMS -DGALLIUM_STATIC_TARGETS=1
-  includes = $includes -Iexternal/mesa/src/gallium/winsys
+  includes = $includes -Iexternal/mesa/src/gallium/winsys -Iexternal/mesa/src/gallium/drivers
 build $BUILDROOT/mesa/libpipe_loader_static/pipe_loader_drm.o: cc external/mesa/src/gallium/auxiliary/pipe-loader/pipe_loader_drm.c
   cflags = $cflags -pthread -DHAVE_PIPE_LOADER_DRI -DHAVE_PIPE_LOADER_KMS -DGALLIUM_STATIC_TARGETS=1
   includes = $includes -Iexternal/mesa/src/loader

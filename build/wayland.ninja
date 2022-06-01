@@ -30,7 +30,7 @@ build $BUILDROOT/wayland/wayland-protocol.o: cc $BUILDROOT/wayland/wayland-proto
 build $BUILDROOT/wayland/connection.o: cc external/wayland/src/connection.c | $BUILDROOT/libffi/ffi_gen.h
 build $BUILDROOT/wayland/wayland-os.o: cc external/wayland/src/wayland-os.c
 build $BUILDROOT/wayland/wayland-util.o: cc external/wayland/src/wayland-util.c
-build $BUILDROOT/wayland/wayland-server.o: cc external/wayland/src/wayland-server.c
+build $BUILDROOT/wayland/wayland-server.o: cc external/wayland/src/wayland-server.c | $BUILDROOT/wayland/wayland-server-protocol.h
 build $BUILDROOT/wayland/wayland-shm.o: cc external/wayland/src/wayland-shm.c
 build $BUILDROOT/wayland/event-loop.o: cc external/wayland/src/event-loop.c
 build $BUILDROOT/wayland/wayland-client.o: cc external/wayland/src/wayland-client.c

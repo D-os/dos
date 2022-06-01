@@ -404,4 +404,6 @@ build $BUILDROOT/weston/gl-renderer.so: so $
   $SYSROOT/lib/libpixman-1.so $
   $SYSROOT/lib/libwayland-server.so $
   $SYSROOT/lib/libxkbcommon.so
-  libs = $BUILDROOT/weston/libweston-11.so -lm -lpixman-1 -lwayland-server -lxkbcommon -lEGL -lGLESv2
+  libs = -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
+    -lm -lpixman-1 -lwayland-server -lxkbcommon -lEGL -lGLESv2
+

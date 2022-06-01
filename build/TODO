@@ -30,3 +30,8 @@
 
 - Replace seatd-builtin with daemon
 meson .. -Dlibseat-logind=disabled -Dlibseat-builtin=enabled -Dlibseat-seatd=disabled
+
+- streamline XDG_RUNTIME_DIR=/apex MESA_LOADER_DRIVER_OVERRIDE=virtio_gpu MESA_DEBUG=1 /system/bin/weston
+XDG_RUNTIME_DIR=/apex /system/bin/weston
+
+[09:13:00.774] Failed to load the device quirks from /system/share/libinput and /system/etc/libinput/local-overrides.quirks. This will negatively affect device behavior. See https://wayland.freedesktop.org/libinput/doc/1.20.0/device-quirks.html for details.
