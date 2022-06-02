@@ -217,6 +217,7 @@ out/system.img: \
   out/system/bin/zcat \
   out/system/bin/ldd \
   out/system/lib/libz.so \
+  out/system/lib/libjpeg.so \
   out/system/lib/libgbm.so \
   out/system/lib/libglapi.so \
   out/system/lib/libEGL.so \

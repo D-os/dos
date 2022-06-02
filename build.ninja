@@ -131,6 +131,9 @@ subninja build/libffi.ninja
 subninja build/libinput.ninja
 build $SYSROOT/lib/libinput.so: copy $BUILDROOT/libinput/libinput.so
 
+subninja build/libjpeg.ninja
+build $SYSROOT/lib/libjpeg.so: copy $BUILDROOT/libjpeg/libjpeg.so
+
 subninja build/liblog.ninja
 build $SYSROOT/lib/liblog.so: copy $BUILDROOT/liblog/liblog.so
 

@@ -1,0 +1,180 @@
+defines = -DELF -DPIC -D__x86_64__
+
+cflags = $defines $
+  -DWITH_SIMD $
+  -DNO_GETENV $
+  -O3 $
+  -fstrict-aliasing $
+  -Werror $
+  -Wno-sign-compare $
+  -Wno-unused-parameter $
+  -Wno-unused-command-line-argument
+
+asflags = $defines -w
+
+includes = -Iexternal/libjpeg-turbo -Iexternal/libjpeg-turbo/simd/nasm
+
+build $BUILDROOT/libjpeg/jaricom.o: cc external/libjpeg-turbo/jaricom.c
+build $BUILDROOT/libjpeg/jcapimin.o: cc external/libjpeg-turbo/jcapimin.c
+build $BUILDROOT/libjpeg/jcapistd.o: cc external/libjpeg-turbo/jcapistd.c
+build $BUILDROOT/libjpeg/jcarith.o: cc external/libjpeg-turbo/jcarith.c
+build $BUILDROOT/libjpeg/jccoefct.o: cc external/libjpeg-turbo/jccoefct.c
+build $BUILDROOT/libjpeg/jccolor.o: cc external/libjpeg-turbo/jccolor.c
+build $BUILDROOT/libjpeg/jcdctmgr.o: cc external/libjpeg-turbo/jcdctmgr.c
+build $BUILDROOT/libjpeg/jchuff.o: cc external/libjpeg-turbo/jchuff.c
+build $BUILDROOT/libjpeg/jcicc.o: cc external/libjpeg-turbo/jcicc.c
+build $BUILDROOT/libjpeg/jcinit.o: cc external/libjpeg-turbo/jcinit.c
+build $BUILDROOT/libjpeg/jcmainct.o: cc external/libjpeg-turbo/jcmainct.c
+build $BUILDROOT/libjpeg/jcmarker.o: cc external/libjpeg-turbo/jcmarker.c
+build $BUILDROOT/libjpeg/jcmaster.o: cc external/libjpeg-turbo/jcmaster.c
+build $BUILDROOT/libjpeg/jcomapi.o: cc external/libjpeg-turbo/jcomapi.c
+build $BUILDROOT/libjpeg/jcparam.o: cc external/libjpeg-turbo/jcparam.c
+build $BUILDROOT/libjpeg/jcphuff.o: cc external/libjpeg-turbo/jcphuff.c
+build $BUILDROOT/libjpeg/jcprepct.o: cc external/libjpeg-turbo/jcprepct.c
+build $BUILDROOT/libjpeg/jcsample.o: cc external/libjpeg-turbo/jcsample.c
+build $BUILDROOT/libjpeg/jctrans.o: cc external/libjpeg-turbo/jctrans.c
+build $BUILDROOT/libjpeg/jdapimin.o: cc external/libjpeg-turbo/jdapimin.c
+build $BUILDROOT/libjpeg/jdapistd.o: cc external/libjpeg-turbo/jdapistd.c
+build $BUILDROOT/libjpeg/jdarith.o: cc external/libjpeg-turbo/jdarith.c
+build $BUILDROOT/libjpeg/jdatadst.o: cc external/libjpeg-turbo/jdatadst.c
+build $BUILDROOT/libjpeg/jdatasrc.o: cc external/libjpeg-turbo/jdatasrc.c
+build $BUILDROOT/libjpeg/jdcoefct.o: cc external/libjpeg-turbo/jdcoefct.c
+build $BUILDROOT/libjpeg/jdcolor.o: cc external/libjpeg-turbo/jdcolor.c
+build $BUILDROOT/libjpeg/jddctmgr.o: cc external/libjpeg-turbo/jddctmgr.c
+build $BUILDROOT/libjpeg/jdhuff.o: cc external/libjpeg-turbo/jdhuff.c
+build $BUILDROOT/libjpeg/jdicc.o: cc external/libjpeg-turbo/jdicc.c
+build $BUILDROOT/libjpeg/jdinput.o: cc external/libjpeg-turbo/jdinput.c
+build $BUILDROOT/libjpeg/jdmainct.o: cc external/libjpeg-turbo/jdmainct.c
+build $BUILDROOT/libjpeg/jdmarker.o: cc external/libjpeg-turbo/jdmarker.c
+build $BUILDROOT/libjpeg/jdmaster.o: cc external/libjpeg-turbo/jdmaster.c
+build $BUILDROOT/libjpeg/jdmerge.o: cc external/libjpeg-turbo/jdmerge.c
+build $BUILDROOT/libjpeg/jdphuff.o: cc external/libjpeg-turbo/jdphuff.c
+build $BUILDROOT/libjpeg/jdpostct.o: cc external/libjpeg-turbo/jdpostct.c
+build $BUILDROOT/libjpeg/jdsample.o: cc external/libjpeg-turbo/jdsample.c
+build $BUILDROOT/libjpeg/jdtrans.o: cc external/libjpeg-turbo/jdtrans.c
+build $BUILDROOT/libjpeg/jerror.o: cc external/libjpeg-turbo/jerror.c
+build $BUILDROOT/libjpeg/jfdctflt.o: cc external/libjpeg-turbo/jfdctflt.c
+build $BUILDROOT/libjpeg/jfdctfst.o: cc external/libjpeg-turbo/jfdctfst.c
+build $BUILDROOT/libjpeg/jfdctint.o: cc external/libjpeg-turbo/jfdctint.c
+build $BUILDROOT/libjpeg/jidctflt.o: cc external/libjpeg-turbo/jidctflt.c
+build $BUILDROOT/libjpeg/jidctfst.o: cc external/libjpeg-turbo/jidctfst.c
+build $BUILDROOT/libjpeg/jidctint.o: cc external/libjpeg-turbo/jidctint.c
+build $BUILDROOT/libjpeg/jidctred.o: cc external/libjpeg-turbo/jidctred.c
+build $BUILDROOT/libjpeg/jmemmgr.o: cc external/libjpeg-turbo/jmemmgr.c
+build $BUILDROOT/libjpeg/jmemnobs.o: cc external/libjpeg-turbo/jmemnobs.c
+build $BUILDROOT/libjpeg/jpeg_nbits_table.o: cc external/libjpeg-turbo/jpeg_nbits_table.c
+build $BUILDROOT/libjpeg/jquant1.o: cc external/libjpeg-turbo/jquant1.c
+build $BUILDROOT/libjpeg/jquant2.o: cc external/libjpeg-turbo/jquant2.c
+build $BUILDROOT/libjpeg/jutils.o: cc external/libjpeg-turbo/jutils.c
+
+build $BUILDROOT/libjpeg/jccolor-avx2.o: yasm external/libjpeg-turbo/simd/x86_64/jccolor-avx2.asm
+build $BUILDROOT/libjpeg/jccolor-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jccolor-sse2.asm
+build $BUILDROOT/libjpeg/jcgray-avx2.o: yasm external/libjpeg-turbo/simd/x86_64/jcgray-avx2.asm
+build $BUILDROOT/libjpeg/jcgray-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jcgray-sse2.asm
+build $BUILDROOT/libjpeg/jchuff-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jchuff-sse2.asm
+build $BUILDROOT/libjpeg/jcphuff-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jcphuff-sse2.asm
+build $BUILDROOT/libjpeg/jcsample-avx2.o: yasm external/libjpeg-turbo/simd/x86_64/jcsample-avx2.asm
+build $BUILDROOT/libjpeg/jcsample-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jcsample-sse2.asm
+build $BUILDROOT/libjpeg/jdcolor-avx2.o: yasm external/libjpeg-turbo/simd/x86_64/jdcolor-avx2.asm
+build $BUILDROOT/libjpeg/jdcolor-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jdcolor-sse2.asm
+build $BUILDROOT/libjpeg/jdmerge-avx2.o: yasm external/libjpeg-turbo/simd/x86_64/jdmerge-avx2.asm
+build $BUILDROOT/libjpeg/jdmerge-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jdmerge-sse2.asm
+build $BUILDROOT/libjpeg/jdsample-avx2.o: yasm external/libjpeg-turbo/simd/x86_64/jdsample-avx2.asm
+build $BUILDROOT/libjpeg/jdsample-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jdsample-sse2.asm
+build $BUILDROOT/libjpeg/jfdctflt-sse.o: yasm external/libjpeg-turbo/simd/x86_64/jfdctflt-sse.asm
+build $BUILDROOT/libjpeg/jfdctfst-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jfdctfst-sse2.asm
+build $BUILDROOT/libjpeg/jfdctint-avx2.o: yasm external/libjpeg-turbo/simd/x86_64/jfdctint-avx2.asm
+build $BUILDROOT/libjpeg/jfdctint-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jfdctint-sse2.asm
+build $BUILDROOT/libjpeg/jidctflt-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jidctflt-sse2.asm
+build $BUILDROOT/libjpeg/jidctfst-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jidctfst-sse2.asm
+build $BUILDROOT/libjpeg/jidctint-avx2.o: yasm external/libjpeg-turbo/simd/x86_64/jidctint-avx2.asm
+build $BUILDROOT/libjpeg/jidctint-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jidctint-sse2.asm
+build $BUILDROOT/libjpeg/jidctred-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jidctred-sse2.asm
+build $BUILDROOT/libjpeg/jquantf-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jquantf-sse2.asm
+build $BUILDROOT/libjpeg/jquanti-avx2.o: yasm external/libjpeg-turbo/simd/x86_64/jquanti-avx2.asm
+build $BUILDROOT/libjpeg/jquanti-sse2.o: yasm external/libjpeg-turbo/simd/x86_64/jquanti-sse2.asm
+build $BUILDROOT/libjpeg/jsimdcpu.o: yasm external/libjpeg-turbo/simd/x86_64/jsimdcpu.asm
+build $BUILDROOT/libjpeg/jsimd.o: cc external/libjpeg-turbo/simd/x86_64/jsimd.c
+
+build $BUILDROOT/libjpeg/libjpeg.so: so $
+  $BUILDROOT/libjpeg/jaricom.o $
+  $BUILDROOT/libjpeg/jcapimin.o $
+  $BUILDROOT/libjpeg/jcapistd.o $
+  $BUILDROOT/libjpeg/jcarith.o $
+  $BUILDROOT/libjpeg/jccoefct.o $
+  $BUILDROOT/libjpeg/jccolor.o $
+  $BUILDROOT/libjpeg/jcdctmgr.o $
+  $BUILDROOT/libjpeg/jchuff.o $
+  $BUILDROOT/libjpeg/jcicc.o $
+  $BUILDROOT/libjpeg/jcinit.o $
+  $BUILDROOT/libjpeg/jcmainct.o $
+  $BUILDROOT/libjpeg/jcmarker.o $
+  $BUILDROOT/libjpeg/jcmaster.o $
+  $BUILDROOT/libjpeg/jcomapi.o $
+  $BUILDROOT/libjpeg/jcparam.o $
+  $BUILDROOT/libjpeg/jcphuff.o $
+  $BUILDROOT/libjpeg/jcprepct.o $
+  $BUILDROOT/libjpeg/jcsample.o $
+  $BUILDROOT/libjpeg/jctrans.o $
+  $BUILDROOT/libjpeg/jdapimin.o $
+  $BUILDROOT/libjpeg/jdapistd.o $
+  $BUILDROOT/libjpeg/jdarith.o $
+  $BUILDROOT/libjpeg/jdatadst.o $
+  $BUILDROOT/libjpeg/jdatasrc.o $
+  $BUILDROOT/libjpeg/jdcoefct.o $
+  $BUILDROOT/libjpeg/jdcolor.o $
+  $BUILDROOT/libjpeg/jddctmgr.o $
+  $BUILDROOT/libjpeg/jdhuff.o $
+  $BUILDROOT/libjpeg/jdicc.o $
+  $BUILDROOT/libjpeg/jdinput.o $
+  $BUILDROOT/libjpeg/jdmainct.o $
+  $BUILDROOT/libjpeg/jdmarker.o $
+  $BUILDROOT/libjpeg/jdmaster.o $
+  $BUILDROOT/libjpeg/jdmerge.o $
+  $BUILDROOT/libjpeg/jdphuff.o $
+  $BUILDROOT/libjpeg/jdpostct.o $
+  $BUILDROOT/libjpeg/jdsample.o $
+  $BUILDROOT/libjpeg/jdtrans.o $
+  $BUILDROOT/libjpeg/jerror.o $
+  $BUILDROOT/libjpeg/jfdctflt.o $
+  $BUILDROOT/libjpeg/jfdctfst.o $
+  $BUILDROOT/libjpeg/jfdctint.o $
+  $BUILDROOT/libjpeg/jidctflt.o $
+  $BUILDROOT/libjpeg/jidctfst.o $
+  $BUILDROOT/libjpeg/jidctint.o $
+  $BUILDROOT/libjpeg/jidctred.o $
+  $BUILDROOT/libjpeg/jmemmgr.o $
+  $BUILDROOT/libjpeg/jmemnobs.o $
+  $BUILDROOT/libjpeg/jpeg_nbits_table.o $
+  $BUILDROOT/libjpeg/jquant1.o $
+  $BUILDROOT/libjpeg/jquant2.o $
+  $BUILDROOT/libjpeg/jutils.o $
+  $BUILDROOT/libjpeg/jccolor-avx2.o $
+  $BUILDROOT/libjpeg/jccolor-sse2.o $
+  $BUILDROOT/libjpeg/jcgray-avx2.o $
+  $BUILDROOT/libjpeg/jcgray-sse2.o $
+  $BUILDROOT/libjpeg/jchuff-sse2.o $
+  $BUILDROOT/libjpeg/jcphuff-sse2.o $
+  $BUILDROOT/libjpeg/jcsample-avx2.o $
+  $BUILDROOT/libjpeg/jcsample-sse2.o $
+  $BUILDROOT/libjpeg/jdcolor-avx2.o $
+  $BUILDROOT/libjpeg/jdcolor-sse2.o $
+  $BUILDROOT/libjpeg/jdmerge-avx2.o $
+  $BUILDROOT/libjpeg/jdmerge-sse2.o $
+  $BUILDROOT/libjpeg/jdsample-avx2.o $
+  $BUILDROOT/libjpeg/jdsample-sse2.o $
+  $BUILDROOT/libjpeg/jfdctflt-sse.o $
+  $BUILDROOT/libjpeg/jfdctfst-sse2.o $
+  $BUILDROOT/libjpeg/jfdctint-avx2.o $
+  $BUILDROOT/libjpeg/jfdctint-sse2.o $
+  $BUILDROOT/libjpeg/jidctflt-sse2.o $
+  $BUILDROOT/libjpeg/jidctfst-sse2.o $
+  $BUILDROOT/libjpeg/jidctint-avx2.o $
+  $BUILDROOT/libjpeg/jidctint-sse2.o $
+  $BUILDROOT/libjpeg/jidctred-sse2.o $
+  $BUILDROOT/libjpeg/jquantf-sse2.o $
+  $BUILDROOT/libjpeg/jquanti-avx2.o $
+  $BUILDROOT/libjpeg/jquanti-sse2.o $
+  $BUILDROOT/libjpeg/jsimd.o $
+  $BUILDROOT/libjpeg/jsimdcpu.o $
+
