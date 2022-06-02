@@ -232,4 +232,5 @@ out/system.img: \
   out/system/system/lib/dri/kms_swrast_dri.so \
   out/system/system/lib/dri/swrast_dri.so \
   out/system/system/data/xkb \
+  out/system/system/data/libinput \
   

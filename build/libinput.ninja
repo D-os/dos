@@ -105,3 +105,9 @@ build $BUILDROOT/libinput/libinput.so: so $
   $SYSROOT/lib/librt.a $
   $SYSROOT/lib/libudev.so
   libs = -ludev -levdev -lrt
+
+rule sync-quirks
+  command = mkdir -p $out && cp -a $in/*.quirks $out
+  description = SYNC $out <- $in
+
+build $SYSTEMDIR/system/data/libinput: sync-quirks external/libinput/quirks

@@ -7,7 +7,7 @@ build $SYSTEMDIR/system/data/xkb: phony $
   $SYSTEMDIR/system/data/xkb/types $
 
 rule sync
-  command = mkdir -p $out && cp -rf $in/* $out
+  command = mkdir -p $out && cp -a $in/* $out
   description = SYNC $out <- $in
 
 build $SYSTEMDIR/system/data/xkb/compat: sync external/xkeyboard-config/compat
