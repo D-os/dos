@@ -1,18 +1,110 @@
-build $SYSTEMDIR/usr/share/X11/xkb: phony $
-  $SYSTEMDIR/usr/share/X11/xkb/compat $
-  $SYSTEMDIR/usr/share/X11/xkb/geometry $
-  $SYSTEMDIR/usr/share/X11/xkb/keycodes $
-  $SYSTEMDIR/usr/share/X11/xkb/rules $
-  $SYSTEMDIR/usr/share/X11/xkb/symbols $
-  $SYSTEMDIR/usr/share/X11/xkb/types $
+build $SYSTEMDIR/system/data/xkb: phony $
+  $SYSTEMDIR/system/data/xkb/compat $
+  $SYSTEMDIR/system/data/xkb/geometry $
+  $SYSTEMDIR/system/data/xkb/keycodes $
+  $SYSTEMDIR/system/data/xkb/rules $
+  $SYSTEMDIR/system/data/xkb/symbols $
+  $SYSTEMDIR/system/data/xkb/types $
 
 rule sync
   command = mkdir -p $out && cp -rf $in/* $out
   description = SYNC $out <- $in
 
-build $SYSTEMDIR/usr/share/X11/xkb/compat: sync external/xkeyboard-config/compat
-build $SYSTEMDIR/usr/share/X11/xkb/geometry: sync external/xkeyboard-config/geometry
-build $SYSTEMDIR/usr/share/X11/xkb/keycodes: sync external/xkeyboard-config/keycodes
-build $SYSTEMDIR/usr/share/X11/xkb/rules: sync external/xkeyboard-config/rules
-build $SYSTEMDIR/usr/share/X11/xkb/symbols: sync external/xkeyboard-config/symbols
-build $SYSTEMDIR/usr/share/X11/xkb/types: sync external/xkeyboard-config/types
+build $SYSTEMDIR/system/data/xkb/compat: sync external/xkeyboard-config/compat
+build $SYSTEMDIR/system/data/xkb/geometry: sync external/xkeyboard-config/geometry
+build $SYSTEMDIR/system/data/xkb/keycodes: sync external/xkeyboard-config/keycodes
+build $SYSTEMDIR/system/data/xkb/symbols: sync external/xkeyboard-config/symbols
+build $SYSTEMDIR/system/data/xkb/types: sync external/xkeyboard-config/types
+
+build $SYSTEMDIR/system/data/xkb/rules: phony $
+  $SYSTEMDIR/system/data/xkb/rules/README $
+  $SYSTEMDIR/system/data/xkb/rules/base $
+  $SYSTEMDIR/system/data/xkb/rules/base.extras.xml $
+  $SYSTEMDIR/system/data/xkb/rules/base.lst $
+  $SYSTEMDIR/system/data/xkb/rules/base.xml $
+  $SYSTEMDIR/system/data/xkb/rules/evdev $
+  $SYSTEMDIR/system/data/xkb/rules/evdev.extras.xml $
+  $SYSTEMDIR/system/data/xkb/rules/evdev.lst $
+  $SYSTEMDIR/system/data/xkb/rules/evdev.xml $
+  $SYSTEMDIR/system/data/xkb/rules/xfree98 $
+  $SYSTEMDIR/system/data/xkb/rules/xkb.dtd $
+
+build $SYSTEMDIR/system/data/xkb/rules/README: copy external/xkeyboard-config/rules/README
+build $SYSTEMDIR/system/data/xkb/rules/xkb.dtd: copy external/xkeyboard-config/rules/xkb.dtd
+build $SYSTEMDIR/system/data/xkb/rules/xfree98: copy external/xkeyboard-config/rules/xfree98
+build $SYSTEMDIR/system/data/xkb/rules/base.xml: copy external/xkeyboard-config/rules/base.xml
+build $SYSTEMDIR/system/data/xkb/rules/base.extras.xml: copy external/xkeyboard-config/rules/base.extras.xml
+build $SYSTEMDIR/system/data/xkb/rules/evdev.xml: copy external/xkeyboard-config/rules/base.xml
+build $SYSTEMDIR/system/data/xkb/rules/evdev.extras.xml: copy external/xkeyboard-config/rules/base.extras.xml
+
+rule merge
+  command = external/xkeyboard-config/rules/merge.py $in > $out
+  description = MERGE $out <- $in
+
+rule xml2lst
+  command = external/xkeyboard-config/rules/xml2lst.pl $in > $out
+  description = XML2LST $out <- $in
+
+build $SYSTEMDIR/system/data/xkb/rules/base: merge $
+  external/xkeyboard-config/rules/0000-hdr.part $
+  external/xkeyboard-config/rules/0001-lists.part $
+  external/xkeyboard-config/rules/0002-base.lists.part $
+  external/xkeyboard-config/rules/0004-base.m_k.part $
+  external/xkeyboard-config/rules/0005-l1_k.part $
+  external/xkeyboard-config/rules/0006-l_k.part $
+  external/xkeyboard-config/rules/0007-o_k.part $
+  external/xkeyboard-config/rules/0008-ml_g.part $
+  external/xkeyboard-config/rules/0009-m_g.part $
+  external/xkeyboard-config/rules/0011-mlv_s.part $
+  external/xkeyboard-config/rules/0013-ml_s.part $
+  external/xkeyboard-config/rules/0015-ml1_s.part $
+  external/xkeyboard-config/rules/0018-ml2_s.part $
+  external/xkeyboard-config/rules/0020-ml3_s.part $
+  external/xkeyboard-config/rules/0022-ml4_s.part $
+  external/xkeyboard-config/rules/0026-base.m_s.part $
+  external/xkeyboard-config/rules/0027-base.ml_s1.part $
+  external/xkeyboard-config/rules/0033-ml_c.part $
+  external/xkeyboard-config/rules/0034-ml1_c.part $
+  external/xkeyboard-config/rules/0035-m_t.part $
+  external/xkeyboard-config/rules/0036-lo_s.part $
+  external/xkeyboard-config/rules/0037-l1o_s.part $
+  external/xkeyboard-config/rules/0038-l2o_s.part $
+  external/xkeyboard-config/rules/0039-l3o_s.part $
+  external/xkeyboard-config/rules/0040-l4o_s.part $
+  external/xkeyboard-config/rules/0042-o_s.part $
+  external/xkeyboard-config/rules/0043-o_c.part $
+  external/xkeyboard-config/rules/0044-o_t.part $
+
+build $SYSTEMDIR/system/data/xkb/rules/base.lst: xml2lst $SYSTEMDIR/system/data/xkb/rules/base.xml
+
+build $SYSTEMDIR/system/data/xkb/rules/evdev: merge $
+  external/xkeyboard-config/rules/0000-hdr.part $
+  external/xkeyboard-config/rules/0001-lists.part $
+  external/xkeyboard-config/rules/0002-evdev.lists.part $
+  external/xkeyboard-config/rules/0004-evdev.m_k.part $
+  external/xkeyboard-config/rules/0005-l1_k.part $
+  external/xkeyboard-config/rules/0006-l_k.part $
+  external/xkeyboard-config/rules/0007-o_k.part $
+  external/xkeyboard-config/rules/0008-ml_g.part $
+  external/xkeyboard-config/rules/0009-m_g.part $
+  external/xkeyboard-config/rules/0011-mlv_s.part $
+  external/xkeyboard-config/rules/0013-ml_s.part $
+  external/xkeyboard-config/rules/0015-ml1_s.part $
+  external/xkeyboard-config/rules/0018-ml2_s.part $
+  external/xkeyboard-config/rules/0020-ml3_s.part $
+  external/xkeyboard-config/rules/0022-ml4_s.part $
+  external/xkeyboard-config/rules/0026-evdev.m_s.part $
+  external/xkeyboard-config/rules/0027-evdev.ml_s1.part $
+  external/xkeyboard-config/rules/0033-ml_c.part $
+  external/xkeyboard-config/rules/0034-ml1_c.part $
+  external/xkeyboard-config/rules/0035-m_t.part $
+  external/xkeyboard-config/rules/0036-lo_s.part $
+  external/xkeyboard-config/rules/0037-l1o_s.part $
+  external/xkeyboard-config/rules/0038-l2o_s.part $
+  external/xkeyboard-config/rules/0039-l3o_s.part $
+  external/xkeyboard-config/rules/0040-l4o_s.part $
+  external/xkeyboard-config/rules/0042-o_s.part $
+  external/xkeyboard-config/rules/0043-o_c.part $
+  external/xkeyboard-config/rules/0044-o_t.part $
+
+build $SYSTEMDIR/system/data/xkb/rules/evdev.lst: xml2lst $SYSTEMDIR/system/data/xkb/rules/evdev.xml

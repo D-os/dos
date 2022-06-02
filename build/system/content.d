@@ -231,5 +231,5 @@ out/system.img: \
   out/system/system/lib/dri/virtio_gpu_dri.so \
   out/system/system/lib/dri/kms_swrast_dri.so \
   out/system/system/lib/dri/swrast_dri.so \
-  out/system/usr/share/X11/xkb \
+  out/system/system/data/xkb \
   

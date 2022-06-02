@@ -17,7 +17,7 @@
 
 #define DFLT_XKB_CONFIG_EXTRA_PATH "/home/smoku/xkb-test/etc/xkb"
 
-#define DFLT_XKB_CONFIG_ROOT "/usr/share/X11/xkb"
+#define DFLT_XKB_CONFIG_ROOT "/system/data/xkb"
 
 #define EXIT_INVALID_USAGE 2
 
@@ -57,7 +57,7 @@
 
 #define WIN32_LEAN_AND_MEAN 1
 
-#define XLOCALEDIR "/usr/share/X11/locale"
+#define XLOCALEDIR "/system/data/locale"
 
 #define _CRT_NONSTDC_NO_DEPRECATE 1
 
