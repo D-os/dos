@@ -20,16 +20,22 @@ KERNEL_VERSION = 5.16.11-zen-gfbc389882a61
 HOSTCC = out/host/bin/clang
 HOSTCXX = out/host/bin/clang++
 HOSTAR = out/host/bin/llvm-ar
+YASM = out/host/bin/yasm -f elf64 -m amd64
 
 rule cc
-  depfile = $out.d
   command = $CC -fPIC -g -MD -MF $out.d $cflags $includes -c $in -o $out
+  depfile = $out.d
   description = CC $out
 
 rule cxx
-  depfile = $out.d
   command = $CXX -std=c++20 -fPIC -g -MD -MF $out.d $cxxflags $includes -c $in -o $out
+  depfile = $out.d
   description = CXX $out
+
+rule yasm
+  command = $YASM $asflags $includes -o $out $in && $YASM $asflags $includes -M $in >$out.d
+  depfile = $out.d
+  description = YASM $out
 
 rule ar
   command = $AR csrD $out $in

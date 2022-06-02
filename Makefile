@@ -10,7 +10,7 @@ SYSROOT_DIR := $(OUT_DIR)/target/$(TARGET)
 
 .PHONY: toolchain sysroot clean compdb toolchain-host toolchain-target mold samurai kati libc libcxx libllvm kernel-headers kernel kernel_modules
 
-toolchain: toolchain-host toolchain-target samurai kati
+toolchain: toolchain-host toolchain-target yasm samurai kati
 
 sysroot: $(SYSROOT_DIR) kernel-headers libc libcxx libllvm
 
@@ -65,6 +65,16 @@ $(OUT_DIR)/host/bin/ckati: | $(OUT_DIR)/host/bin
 		KATI_INTERMEDIATES_PATH=$(BUILD_DIR)/_host/kati KATI_BIN_PATH=$(OUT_DIR)/host/bin \
 		-C external/kati -f Makefile.ckati $(OUT_DIR)/host/bin/ckati
 	ln -sf ./ckati $(OUT_DIR)/host/bin/kati
+
+yasm: $(OUT_DIR)/host/bin/yasm
+
+$(OUT_DIR)/host/bin/yasm: | $(OUT_DIR)/host/bin
+	rm -rf $(BUILD_DIR)/_host/yasm
+	PATH=$(OUT_DIR)/host/bin:${PATH} CC=clang CXX=clang++ cmake -G Ninja \
+		-S external/yasm -B $(BUILD_DIR)/_host/yasm -Wno-dev \
+		-DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(OUT_DIR)/host \
+		-DCMAKE_INSTALL_RPATH=$(OUT_DIR)/host/lib
+	cd $(BUILD_DIR)/_host/yasm && PATH=$(OUT_DIR)/host/bin:${PATH} ninja install
 
 libc: $(SYSROOT_DIR)/lib/libc.so
 
