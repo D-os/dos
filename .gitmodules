@@ -125,3 +125,6 @@
 [submodule "external/seatd"]
 	path = external/seatd
 	url = https://git.sr.ht/~kennylevinsen/seatd
+[submodule "external/libjpeg-turbo"]
+	path = external/libjpeg-turbo
+	url = https://android.googlesource.com/platform/external/libjpeg-turbo
