@@ -128,3 +128,6 @@
 [submodule "external/libjpeg-turbo"]
 	path = external/libjpeg-turbo
 	url = https://android.googlesource.com/platform/external/libjpeg-turbo
+[submodule "external/yasm"]
+	path = external/yasm
+	url = https://github.com/yasm/yasm.git
