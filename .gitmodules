@@ -72,7 +72,7 @@
 	url = https://android.googlesource.com/platform/external/mksh
 [submodule "external/toybox"]
 	path = external/toybox
-	url = https://android.googlesource.com/platform/external/toybox
+	url = https://github.com/D-os/toybox.git
 [submodule "external/boringssl"]
 	path = external/boringssl
 	url = https://android.googlesource.com/platform/external/boringssl
