@@ -60,8 +60,10 @@ build $SYSTEMDIR/system/etc/mkshrc: copy external/mksh/mkshrc
 build $SYSTEMDIR/system/bin/weston: copy $BUILDROOT/weston/weston
 build $SYSTEMDIR/system/lib/libweston-11.so: copy $BUILDROOT/weston/libweston-11.so
 build $SYSTEMDIR/system/lib/weston/libexec_weston.so: copy $BUILDROOT/weston/libexec_weston.so
+build $SYSTEMDIR/system/lib/weston/desktop-shell.so: copy $BUILDROOT/weston/desktop-shell.so
 build $SYSTEMDIR/system/lib/libweston-11/drm-backend.so: copy $BUILDROOT/weston/drm-backend.so
 build $SYSTEMDIR/system/lib/libweston-11/gl-renderer.so: copy $BUILDROOT/weston/gl-renderer.so
+build $SYSTEMDIR/system/lib/libweston-11/libweston-desktop-11.so: copy $BUILDROOT/weston/libweston-desktop-11.so
 build $SYSTEMDIR/system/lib/dri/libgallium_dri.so: copy $BUILDROOT/mesa/libgallium_dri.so
 build $SYSTEMDIR/system/lib/dri/swrast_dri.so: hardlink $SYSTEMDIR/system/lib/dri/libgallium_dri.so
 build $SYSTEMDIR/system/lib/dri/kms_swrast_dri.so: hardlink $SYSTEMDIR/system/lib/dri/libgallium_dri.so

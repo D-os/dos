@@ -282,7 +282,8 @@ build $BUILDROOT/weston/libweston-11.so: so $
   $SYSROOT/lib/libwayland-server.so $
   $SYSROOT/lib/libxkbcommon.so $
   $BUILDROOT/weston/libshared.a
-  libs = -lm -ldl -Wl,--whole-archive $BUILDROOT/weston/libshared.a -Wl,--no-whole-archive $
+  libs = -lm -ldl $
+    -Wl,--whole-archive $BUILDROOT/weston/libshared.a -Wl,--no-whole-archive $
     -lwayland-client -lwayland-server -lpixman-1 -ldrm -lxkbcommon -lEGL
 
 build $BUILDROOT/weston/compositor/main.o: cc external/weston/compositor/main.c
@@ -305,7 +306,8 @@ build $BUILDROOT/weston/libexec_weston.so: so $
   $SYSROOT/lib/libwayland-server.so $
   $SYSROOT/lib/libxkbcommon.so $
   $BUILDROOT/weston/libweston-11.so
-  libs = -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
+  libs = $
+    -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
     -lwayland-client -lwayland-server -lpixman-1 -lxkbcommon -linput -levdev -ldl -pthread
 
 build $BUILDROOT/weston/compositor/executable.o: cc external/weston/compositor/executable.c
@@ -318,7 +320,9 @@ build $BUILDROOT/weston/weston: link $
   $SYSROOT/lib/libxkbcommon.so $
   $BUILDROOT/weston/libexec_weston.so $
   $BUILDROOT/weston/libweston-11.so
-  libs = -Wl,-rpath,/system/lib -Wl,-rpath,/system/lib/weston $BUILDROOT/weston/libexec_weston.so $BUILDROOT/weston/libweston-11.so $
+  libs = $
+    -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
+    -Wl,-rpath,/system/lib/weston $BUILDROOT/weston/libexec_weston.so $
     -lwayland-server -lpixman-1 -lxkbcommon
 
 build $BUILDROOT/weston/libweston/launcher-util.o: cc external/weston/libweston/launcher-util.c
@@ -333,8 +337,8 @@ build $BUILDROOT/weston/libweston/libinput-device.o: cc external/weston/libwesto
 build $BUILDROOT/weston/libweston/libinput-seat.o: cc external/weston/libweston/libinput-seat.c
 
 build $BUILDROOT/weston/liblibinput-backend.a: ar $
- $BUILDROOT/weston/libweston/libinput-device.o $
- $BUILDROOT/weston/libweston/libinput-seat.o $
+  $BUILDROOT/weston/libweston/libinput-device.o $
+  $BUILDROOT/weston/libweston/libinput-seat.o $
 
 build $BUILDROOT/weston/backend-drm/libbacklight.o: cc external/weston/libweston/backend-drm/libbacklight.c
 
@@ -379,7 +383,8 @@ build $BUILDROOT/weston/drm-backend.so: so $
   $SYSROOT/lib/libva.so $
   $SYSROOT/lib/libwayland-server.so $
   $SYSROOT/lib/libxkbcommon.so
-  libs = -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
+  libs = $
+    -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
     -ldl -lwayland-server -lpixman-1 -lxkbcommon -ldrm -ludev -lgbm $
     -lEGL -lva -lva-drm -pthread -lseat -linput
 
@@ -397,13 +402,73 @@ build $BUILDROOT/weston/gl-renderer.so: so $
   $BUILDROOT/weston/renderer-gl/gl-shaders.o $
   $BUILDROOT/weston/renderer-gl/gl-shader-config-color-transformation.o $
   $BUILDROOT/weston/vertex-clipping.o $
-| $
+  | $
   $BUILDROOT/weston/libweston-11.so $
   $SYSROOT/lib/libEGL.so $
   $SYSROOT/lib/libGLESv2.so $
   $SYSROOT/lib/libpixman-1.so $
   $SYSROOT/lib/libwayland-server.so $
   $SYSROOT/lib/libxkbcommon.so
-  libs = -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
+  libs = $
+    -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
     -lm -lpixman-1 -lwayland-server -lxkbcommon -lEGL -lGLESv2
+
+build $BUILDROOT/weston/libweston-desktop-11/xdg-shell-unstable-v6-protocol.o: cc $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-protocol.c | $BUILDROOT/weston/protocol/xdg-shell-server-protocol.h $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-server-protocol.h
+build $BUILDROOT/weston/libweston-desktop-11/xdg-shell-protocol.o: cc $BUILDROOT/weston/protocol/xdg-shell-protocol.c | $BUILDROOT/weston/protocol/xdg-shell-server-protocol.h $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-server-protocol.h
+build $BUILDROOT/weston/libweston-desktop-11/libweston-desktop.o: cc external/weston/libweston-desktop/libweston-desktop.c | $BUILDROOT/weston/protocol/xdg-shell-server-protocol.h $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-server-protocol.h
+build $BUILDROOT/weston/libweston-desktop-11/client.o: cc external/weston/libweston-desktop/client.c | $BUILDROOT/weston/protocol/xdg-shell-server-protocol.h $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-server-protocol.h
+build $BUILDROOT/weston/libweston-desktop-11/seat.o: cc external/weston/libweston-desktop/seat.c | $BUILDROOT/weston/protocol/xdg-shell-server-protocol.h $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-server-protocol.h
+build $BUILDROOT/weston/libweston-desktop-11/surface.o: cc external/weston/libweston-desktop/surface.c | $BUILDROOT/weston/protocol/xdg-shell-server-protocol.h $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-server-protocol.h
+build $BUILDROOT/weston/libweston-desktop-11/xwayland.o: cc external/weston/libweston-desktop/xwayland.c | $BUILDROOT/weston/protocol/xdg-shell-server-protocol.h $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-server-protocol.h
+build $BUILDROOT/weston/libweston-desktop-11/xdg-shell.o: cc external/weston/libweston-desktop/xdg-shell.c | $BUILDROOT/weston/protocol/xdg-shell-server-protocol.h $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-server-protocol.h
+build $BUILDROOT/weston/libweston-desktop-11/xdg-shell-v6.o: cc external/weston/libweston-desktop/xdg-shell-v6.c | $BUILDROOT/weston/protocol/xdg-shell-server-protocol.h $BUILDROOT/weston/protocol/xdg-shell-unstable-v6-server-protocol.h
+
+build $BUILDROOT/weston/libweston-desktop-11.so: so $
+  $BUILDROOT/weston/libweston-desktop-11/xdg-shell-unstable-v6-protocol.o $
+  $BUILDROOT/weston/libweston-desktop-11/xdg-shell-protocol.o $
+  $BUILDROOT/weston/libweston-desktop-11/libweston-desktop.o $
+  $BUILDROOT/weston/libweston-desktop-11/client.o $
+  $BUILDROOT/weston/libweston-desktop-11/seat.o $
+  $BUILDROOT/weston/libweston-desktop-11/surface.o $
+  $BUILDROOT/weston/libweston-desktop-11/xwayland.o $
+  $BUILDROOT/weston/libweston-desktop-11/xdg-shell.o $
+  $BUILDROOT/weston/libweston-desktop-11/xdg-shell-v6.o $
+  | $
+  $SYSROOT/lib/libpixman-1.so $
+  $SYSROOT/lib/libwayland-server.so $
+  $SYSROOT/lib/libxkbcommon.so
+  libs = $
+    -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
+    -lwayland-server -lpixman-1 -lxkbcommon
+
+build $BUILDROOT/weston/desktop-shell/weston-desktop-shell-protocol.o: cc $BUILDROOT/weston/protocol/weston-desktop-shell-protocol.c | $BUILDROOT/weston/protocol/input-method-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/weston-desktop-shell-server-protocol.h
+build $BUILDROOT/weston/desktop-shell/input-method-unstable-v1-protocol.o: cc $BUILDROOT/weston/protocol/input-method-unstable-v1-protocol.c | $BUILDROOT/weston/protocol/input-method-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/weston-desktop-shell-server-protocol.h
+build $BUILDROOT/weston/desktop-shell/shell.o: cc external/weston/desktop-shell/shell.c | $BUILDROOT/weston/protocol/input-method-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/weston-desktop-shell-server-protocol.h
+  includes = $includes -Iexternal/weston/shell-utils
+build $BUILDROOT/weston/desktop-shell/exposay.o: cc external/weston/desktop-shell/exposay.c | $BUILDROOT/weston/protocol/input-method-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/weston-desktop-shell-server-protocol.h
+build $BUILDROOT/weston/desktop-shell/input-panel.o: cc external/weston/desktop-shell/input-panel.c | $BUILDROOT/weston/protocol/input-method-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/weston-desktop-shell-server-protocol.h
+build $BUILDROOT/weston/desktop-shell/shell-utils.o: cc external/weston/shell-utils/shell-utils.c | $BUILDROOT/weston/protocol/input-method-unstable-v1-server-protocol.h $BUILDROOT/weston/protocol/weston-desktop-shell-server-protocol.h
+  includes = $includes -Iexternal/weston/shell-utils
+
+build $BUILDROOT/weston/desktop-shell.so: so $
+  $BUILDROOT/weston/desktop-shell/weston-desktop-shell-protocol.o $
+  $BUILDROOT/weston/desktop-shell/input-method-unstable-v1-protocol.o $
+  $BUILDROOT/weston/desktop-shell/shell.o $
+  $BUILDROOT/weston/desktop-shell/exposay.o $
+  $BUILDROOT/weston/desktop-shell/input-panel.o $
+  $BUILDROOT/weston/desktop-shell/shell-utils.o $
+  $BUILDROOT/weston/libshared.a $
+  | $
+  $BUILDROOT/weston/libexec_weston.so $
+  $BUILDROOT/weston/libweston-11.so $
+  $BUILDROOT/weston/libweston-desktop-11.so $
+  $SYSROOT/lib/libpixman-1.so $
+  $SYSROOT/lib/libwayland-client.so $
+  $SYSROOT/lib/libwayland-server.so $
+  $SYSROOT/lib/libxkbcommon.so
+  libs = $
+    -Wl,-rpath,/system/lib $BUILDROOT/weston/libweston-11.so $
+    -Wl,-rpath,/system/lib/weston $BUILDROOT/weston/libexec_weston.so $
+    -Wl,-rpath,/system/lib/libweston-11 $BUILDROOT/weston/libweston-desktop-11.so $
+    -lm -lwayland-server -lpixman-1 -lxkbcommon -lwayland-client
 

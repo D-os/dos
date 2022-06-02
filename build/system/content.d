@@ -225,8 +225,10 @@ out/system.img: \
   out/system/system/bin/weston \
   out/system/system/lib/libweston-11.so \
   out/system/system/lib/weston/libexec_weston.so \
+  out/system/system/lib/weston/desktop-shell.so \
   out/system/system/lib/libweston-11/drm-backend.so \
   out/system/system/lib/libweston-11/gl-renderer.so \
+  out/system/system/lib/libweston-11/libweston-desktop-11.so \
   out/system/system/lib/dri/libgallium_dri.so \
   out/system/system/lib/dri/virtio_gpu_dri.so \
   out/system/system/lib/dri/kms_swrast_dri.so \
