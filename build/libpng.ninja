@@ -1,0 +1,49 @@
+cflags = $
+  -std=gnu89 $
+  -Wall $
+  -Werror $
+  -Wno-unused-parameter $
+  -DPNG_INTEL_SSE_OPT=1 $
+  -Wno-unused-but-set-variable
+
+includes = -Iexternal/libpng -Iexternal/zlib
+
+libs = -lz
+
+build $BUILDROOT/libpng/png.o: cc external/libpng/png.c
+build $BUILDROOT/libpng/pngerror.o: cc external/libpng/pngerror.c
+build $BUILDROOT/libpng/pngget.o: cc external/libpng/pngget.c
+build $BUILDROOT/libpng/pngmem.o: cc external/libpng/pngmem.c
+build $BUILDROOT/libpng/pngpread.o: cc external/libpng/pngpread.c
+build $BUILDROOT/libpng/pngread.o: cc external/libpng/pngread.c
+build $BUILDROOT/libpng/pngrio.o: cc external/libpng/pngrio.c
+build $BUILDROOT/libpng/pngrtran.o: cc external/libpng/pngrtran.c
+build $BUILDROOT/libpng/pngrutil.o: cc external/libpng/pngrutil.c
+build $BUILDROOT/libpng/pngset.o: cc external/libpng/pngset.c
+build $BUILDROOT/libpng/pngtrans.o: cc external/libpng/pngtrans.c
+build $BUILDROOT/libpng/pngwio.o: cc external/libpng/pngwio.c
+build $BUILDROOT/libpng/pngwrite.o: cc external/libpng/pngwrite.c
+build $BUILDROOT/libpng/pngwtran.o: cc external/libpng/pngwtran.c
+build $BUILDROOT/libpng/pngwutil.o: cc external/libpng/pngwutil.c
+build $BUILDROOT/libpng/filter_sse2_intrinsics.o: cc external/libpng/intel/filter_sse2_intrinsics.c
+build $BUILDROOT/libpng/intel_init.o: cc external/libpng/intel/intel_init.c
+
+build $BUILDROOT/libpng/libpng.so: so $
+  $BUILDROOT/libpng/png.o $
+  $BUILDROOT/libpng/pngerror.o $
+  $BUILDROOT/libpng/pngget.o $
+  $BUILDROOT/libpng/pngmem.o $
+  $BUILDROOT/libpng/pngpread.o $
+  $BUILDROOT/libpng/pngread.o $
+  $BUILDROOT/libpng/pngrio.o $
+  $BUILDROOT/libpng/pngrtran.o $
+  $BUILDROOT/libpng/pngrutil.o $
+  $BUILDROOT/libpng/pngset.o $
+  $BUILDROOT/libpng/pngtrans.o $
+  $BUILDROOT/libpng/pngwio.o $
+  $BUILDROOT/libpng/pngwrite.o $
+  $BUILDROOT/libpng/pngwtran.o $
+  $BUILDROOT/libpng/pngwutil.o $
+  $BUILDROOT/libpng/filter_sse2_intrinsics.o $
+  $BUILDROOT/libpng/intel_init.o $
+
