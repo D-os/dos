@@ -131,3 +131,6 @@
 [submodule "external/yasm"]
 	path = external/yasm
 	url = https://github.com/yasm/yasm.git
+[submodule "external/libpng"]
+	path = external/libpng
+	url = https://android.googlesource.com/platform/external/libpng
