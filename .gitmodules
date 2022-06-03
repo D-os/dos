@@ -134,3 +134,6 @@
 [submodule "external/libpng"]
 	path = external/libpng
 	url = https://android.googlesource.com/platform/external/libpng
+[submodule "external/libwebp"]
+	path = external/libwebp
+	url = https://android.googlesource.com/platform/external/webp
