@@ -1,0 +1,250 @@
+cflags = $
+  -O2 $
+  -DANDROID $
+  -DWEBP_SWAP_16BIT_CSP $
+  -DWEBP_USE_THREAD $
+  -Wall $
+  -Werror $
+  -Wno-unused-but-set-variable
+
+includes = -Iexternal/libwebp
+
+#libs = -lz
+
+#build $BUILDROOT/libwebp/libwebp-encode.a: ar $
+build $BUILDROOT/libwebp/cost.o: cc external/libwebp/src/dsp/cost.c
+build $BUILDROOT/libwebp/cost_mips32.o: cc external/libwebp/src/dsp/cost_mips32.c
+build $BUILDROOT/libwebp/cost_mips_dsp_r2.o: cc external/libwebp/src/dsp/cost_mips_dsp_r2.c
+build $BUILDROOT/libwebp/cost_neon.o: cc external/libwebp/src/dsp/cost_neon.c
+build $BUILDROOT/libwebp/cost_sse2.o: cc external/libwebp/src/dsp/cost_sse2.c
+build $BUILDROOT/libwebp/cpu.o: cc external/libwebp/src/dsp/cpu.c
+build $BUILDROOT/libwebp/enc.o: cc external/libwebp/src/dsp/enc.c
+build $BUILDROOT/libwebp/enc_mips32.o: cc external/libwebp/src/dsp/enc_mips32.c
+build $BUILDROOT/libwebp/enc_mips_dsp_r2.o: cc external/libwebp/src/dsp/enc_mips_dsp_r2.c
+build $BUILDROOT/libwebp/enc_msa.o: cc external/libwebp/src/dsp/enc_msa.c
+build $BUILDROOT/libwebp/enc_neon.o: cc external/libwebp/src/dsp/enc_neon.c
+build $BUILDROOT/libwebp/enc_sse2.o: cc external/libwebp/src/dsp/enc_sse2.c
+build $BUILDROOT/libwebp/enc_sse41.o: cc external/libwebp/src/dsp/enc_sse41.c
+build $BUILDROOT/libwebp/lossless_enc.o: cc external/libwebp/src/dsp/lossless_enc.c
+build $BUILDROOT/libwebp/lossless_enc_mips32.o: cc external/libwebp/src/dsp/lossless_enc_mips32.c
+build $BUILDROOT/libwebp/lossless_enc_mips_dsp_r2.o: cc external/libwebp/src/dsp/lossless_enc_mips_dsp_r2.c
+build $BUILDROOT/libwebp/lossless_enc_msa.o: cc external/libwebp/src/dsp/lossless_enc_msa.c
+build $BUILDROOT/libwebp/lossless_enc_neon.o: cc external/libwebp/src/dsp/lossless_enc_neon.c
+build $BUILDROOT/libwebp/lossless_enc_sse2.o: cc external/libwebp/src/dsp/lossless_enc_sse2.c
+build $BUILDROOT/libwebp/lossless_enc_sse41.o: cc external/libwebp/src/dsp/lossless_enc_sse41.c
+build $BUILDROOT/libwebp/ssim.o: cc external/libwebp/src/dsp/ssim.c
+build $BUILDROOT/libwebp/ssim_sse2.o: cc external/libwebp/src/dsp/ssim_sse2.c
+build $BUILDROOT/libwebp/alpha_enc.o: cc external/libwebp/src/enc/alpha_enc.c
+build $BUILDROOT/libwebp/analysis_enc.o: cc external/libwebp/src/enc/analysis_enc.c
+build $BUILDROOT/libwebp/backward_references_cost_enc.o: cc external/libwebp/src/enc/backward_references_cost_enc.c
+build $BUILDROOT/libwebp/backward_references_enc.o: cc external/libwebp/src/enc/backward_references_enc.c
+build $BUILDROOT/libwebp/config_enc.o: cc external/libwebp/src/enc/config_enc.c
+build $BUILDROOT/libwebp/cost_enc.o: cc external/libwebp/src/enc/cost_enc.c
+build $BUILDROOT/libwebp/filter_enc.o: cc external/libwebp/src/enc/filter_enc.c
+build $BUILDROOT/libwebp/frame_enc.o: cc external/libwebp/src/enc/frame_enc.c
+build $BUILDROOT/libwebp/histogram_enc.o: cc external/libwebp/src/enc/histogram_enc.c
+build $BUILDROOT/libwebp/iterator_enc.o: cc external/libwebp/src/enc/iterator_enc.c
+build $BUILDROOT/libwebp/near_lossless_enc.o: cc external/libwebp/src/enc/near_lossless_enc.c
+build $BUILDROOT/libwebp/picture_csp_enc.o: cc external/libwebp/src/enc/picture_csp_enc.c
+build $BUILDROOT/libwebp/picture_enc.o: cc external/libwebp/src/enc/picture_enc.c
+build $BUILDROOT/libwebp/picture_psnr_enc.o: cc external/libwebp/src/enc/picture_psnr_enc.c
+build $BUILDROOT/libwebp/picture_rescale_enc.o: cc external/libwebp/src/enc/picture_rescale_enc.c
+build $BUILDROOT/libwebp/picture_tools_enc.o: cc external/libwebp/src/enc/picture_tools_enc.c
+build $BUILDROOT/libwebp/predictor_enc.o: cc external/libwebp/src/enc/predictor_enc.c
+build $BUILDROOT/libwebp/quant_enc.o: cc external/libwebp/src/enc/quant_enc.c
+build $BUILDROOT/libwebp/syntax_enc.o: cc external/libwebp/src/enc/syntax_enc.c
+build $BUILDROOT/libwebp/token_enc.o: cc external/libwebp/src/enc/token_enc.c
+build $BUILDROOT/libwebp/tree_enc.o: cc external/libwebp/src/enc/tree_enc.c
+build $BUILDROOT/libwebp/vp8l_enc.o: cc external/libwebp/src/enc/vp8l_enc.c
+build $BUILDROOT/libwebp/webp_enc.o: cc external/libwebp/src/enc/webp_enc.c
+build $BUILDROOT/libwebp/anim_encode.o: cc external/libwebp/src/mux/anim_encode.c
+build $BUILDROOT/libwebp/muxedit.o: cc external/libwebp/src/mux/muxedit.c
+build $BUILDROOT/libwebp/muxinternal.o: cc external/libwebp/src/mux/muxinternal.c
+build $BUILDROOT/libwebp/muxread.o: cc external/libwebp/src/mux/muxread.c
+build $BUILDROOT/libwebp/bit_writer_utils.o: cc external/libwebp/src/utils/bit_writer_utils.c
+build $BUILDROOT/libwebp/huffman_encode_utils.o: cc external/libwebp/src/utils/huffman_encode_utils.c
+build $BUILDROOT/libwebp/quant_levels_utils.o: cc external/libwebp/src/utils/quant_levels_utils.c
+
+#build $BUILDROOT/libwebp/libwebp-decode.a: ar $
+build $BUILDROOT/libwebp/alpha_dec.o: cc external/libwebp/src/dec/alpha_dec.c
+build $BUILDROOT/libwebp/buffer_dec.o: cc external/libwebp/src/dec/buffer_dec.c
+build $BUILDROOT/libwebp/frame_dec.o: cc external/libwebp/src/dec/frame_dec.c
+build $BUILDROOT/libwebp/idec_dec.o: cc external/libwebp/src/dec/idec_dec.c
+build $BUILDROOT/libwebp/io_dec.o: cc external/libwebp/src/dec/io_dec.c
+build $BUILDROOT/libwebp/quant_dec.o: cc external/libwebp/src/dec/quant_dec.c
+build $BUILDROOT/libwebp/tree_dec.o: cc external/libwebp/src/dec/tree_dec.c
+build $BUILDROOT/libwebp/vp8_dec.o: cc external/libwebp/src/dec/vp8_dec.c
+build $BUILDROOT/libwebp/vp8l_dec.o: cc external/libwebp/src/dec/vp8l_dec.c
+build $BUILDROOT/libwebp/webp_dec.o: cc external/libwebp/src/dec/webp_dec.c
+build $BUILDROOT/libwebp/anim_decode.o: cc external/libwebp/src/demux/anim_decode.c
+build $BUILDROOT/libwebp/demux.o: cc external/libwebp/src/demux/demux.c
+build $BUILDROOT/libwebp/alpha_processing.o: cc external/libwebp/src/dsp/alpha_processing.c
+build $BUILDROOT/libwebp/alpha_processing_mips_dsp_r2.o: cc external/libwebp/src/dsp/alpha_processing_mips_dsp_r2.c
+build $BUILDROOT/libwebp/alpha_processing_neon.o: cc external/libwebp/src/dsp/alpha_processing_neon.c
+build $BUILDROOT/libwebp/alpha_processing_sse2.o: cc external/libwebp/src/dsp/alpha_processing_sse2.c
+build $BUILDROOT/libwebp/alpha_processing_sse41.o: cc external/libwebp/src/dsp/alpha_processing_sse41.c
+#build $BUILDROOT/libwebp/cpu.o: cc external/libwebp/src/dsp/cpu.c
+build $BUILDROOT/libwebp/dec.o: cc external/libwebp/src/dsp/dec.c
+build $BUILDROOT/libwebp/dec_clip_tables.o: cc external/libwebp/src/dsp/dec_clip_tables.c
+build $BUILDROOT/libwebp/dec_mips32.o: cc external/libwebp/src/dsp/dec_mips32.c
+build $BUILDROOT/libwebp/dec_mips_dsp_r2.o: cc external/libwebp/src/dsp/dec_mips_dsp_r2.c
+build $BUILDROOT/libwebp/dec_msa.o: cc external/libwebp/src/dsp/dec_msa.c
+build $BUILDROOT/libwebp/dec_neon.o: cc external/libwebp/src/dsp/dec_neon.c
+build $BUILDROOT/libwebp/dec_sse2.o: cc external/libwebp/src/dsp/dec_sse2.c
+build $BUILDROOT/libwebp/dec_sse41.o: cc external/libwebp/src/dsp/dec_sse41.c
+build $BUILDROOT/libwebp/filters.o: cc external/libwebp/src/dsp/filters.c
+build $BUILDROOT/libwebp/filters_mips_dsp_r2.o: cc external/libwebp/src/dsp/filters_mips_dsp_r2.c
+build $BUILDROOT/libwebp/filters_msa.o: cc external/libwebp/src/dsp/filters_msa.c
+build $BUILDROOT/libwebp/filters_neon.o: cc external/libwebp/src/dsp/filters_neon.c
+build $BUILDROOT/libwebp/filters_sse2.o: cc external/libwebp/src/dsp/filters_sse2.c
+build $BUILDROOT/libwebp/lossless.o: cc external/libwebp/src/dsp/lossless.c
+build $BUILDROOT/libwebp/lossless_mips_dsp_r2.o: cc external/libwebp/src/dsp/lossless_mips_dsp_r2.c
+build $BUILDROOT/libwebp/lossless_msa.o: cc external/libwebp/src/dsp/lossless_msa.c
+build $BUILDROOT/libwebp/lossless_neon.o: cc external/libwebp/src/dsp/lossless_neon.c
+build $BUILDROOT/libwebp/lossless_sse2.o: cc external/libwebp/src/dsp/lossless_sse2.c
+build $BUILDROOT/libwebp/lossless_sse41.o: cc external/libwebp/src/dsp/lossless_sse41.c
+build $BUILDROOT/libwebp/rescaler.o: cc external/libwebp/src/dsp/rescaler.c
+build $BUILDROOT/libwebp/rescaler_mips32.o: cc external/libwebp/src/dsp/rescaler_mips32.c
+build $BUILDROOT/libwebp/rescaler_mips_dsp_r2.o: cc external/libwebp/src/dsp/rescaler_mips_dsp_r2.c
+build $BUILDROOT/libwebp/rescaler_msa.o: cc external/libwebp/src/dsp/rescaler_msa.c
+build $BUILDROOT/libwebp/rescaler_neon.o: cc external/libwebp/src/dsp/rescaler_neon.c
+build $BUILDROOT/libwebp/rescaler_sse2.o: cc external/libwebp/src/dsp/rescaler_sse2.c
+build $BUILDROOT/libwebp/upsampling.o: cc external/libwebp/src/dsp/upsampling.c
+build $BUILDROOT/libwebp/upsampling_mips_dsp_r2.o: cc external/libwebp/src/dsp/upsampling_mips_dsp_r2.c
+build $BUILDROOT/libwebp/upsampling_msa.o: cc external/libwebp/src/dsp/upsampling_msa.c
+build $BUILDROOT/libwebp/upsampling_neon.o: cc external/libwebp/src/dsp/upsampling_neon.c
+build $BUILDROOT/libwebp/upsampling_sse2.o: cc external/libwebp/src/dsp/upsampling_sse2.c
+build $BUILDROOT/libwebp/upsampling_sse41.o: cc external/libwebp/src/dsp/upsampling_sse41.c
+build $BUILDROOT/libwebp/yuv.o: cc external/libwebp/src/dsp/yuv.c
+build $BUILDROOT/libwebp/yuv_mips32.o: cc external/libwebp/src/dsp/yuv_mips32.c
+build $BUILDROOT/libwebp/yuv_mips_dsp_r2.o: cc external/libwebp/src/dsp/yuv_mips_dsp_r2.c
+build $BUILDROOT/libwebp/yuv_neon.o: cc external/libwebp/src/dsp/yuv_neon.c
+build $BUILDROOT/libwebp/yuv_sse2.o: cc external/libwebp/src/dsp/yuv_sse2.c
+build $BUILDROOT/libwebp/yuv_sse41.o: cc external/libwebp/src/dsp/yuv_sse41.c
+build $BUILDROOT/libwebp/bit_reader_utils.o: cc external/libwebp/src/utils/bit_reader_utils.c
+build $BUILDROOT/libwebp/color_cache_utils.o: cc external/libwebp/src/utils/color_cache_utils.c
+build $BUILDROOT/libwebp/filters_utils.o: cc external/libwebp/src/utils/filters_utils.c
+build $BUILDROOT/libwebp/huffman_utils.o: cc external/libwebp/src/utils/huffman_utils.c
+build $BUILDROOT/libwebp/quant_levels_dec_utils.o: cc external/libwebp/src/utils/quant_levels_dec_utils.c
+build $BUILDROOT/libwebp/random_utils.o: cc external/libwebp/src/utils/random_utils.c
+build $BUILDROOT/libwebp/rescaler_utils.o: cc external/libwebp/src/utils/rescaler_utils.c
+build $BUILDROOT/libwebp/thread_utils.o: cc external/libwebp/src/utils/thread_utils.c
+build $BUILDROOT/libwebp/utils.o: cc external/libwebp/src/utils/utils.c
+
+build $BUILDROOT/libwebp/libwebp.so: soa $
+  $BUILDROOT/libwebp/cost.o $
+  $BUILDROOT/libwebp/cost_mips32.o $
+  $BUILDROOT/libwebp/cost_mips_dsp_r2.o $
+  $BUILDROOT/libwebp/cost_neon.o $
+  $BUILDROOT/libwebp/cost_sse2.o $
+  $BUILDROOT/libwebp/cpu.o $
+  $BUILDROOT/libwebp/enc.o $
+  $BUILDROOT/libwebp/enc_mips32.o $
+  $BUILDROOT/libwebp/enc_mips_dsp_r2.o $
+  $BUILDROOT/libwebp/enc_msa.o $
+  $BUILDROOT/libwebp/enc_neon.o $
+  $BUILDROOT/libwebp/enc_sse2.o $
+  $BUILDROOT/libwebp/enc_sse41.o $
+  $BUILDROOT/libwebp/lossless_enc.o $
+  $BUILDROOT/libwebp/lossless_enc_mips32.o $
+  $BUILDROOT/libwebp/lossless_enc_mips_dsp_r2.o $
+  $BUILDROOT/libwebp/lossless_enc_msa.o $
+  $BUILDROOT/libwebp/lossless_enc_neon.o $
+  $BUILDROOT/libwebp/lossless_enc_sse2.o $
+  $BUILDROOT/libwebp/lossless_enc_sse41.o $
+  $BUILDROOT/libwebp/ssim.o $
+  $BUILDROOT/libwebp/ssim_sse2.o $
+  $BUILDROOT/libwebp/alpha_enc.o $
+  $BUILDROOT/libwebp/analysis_enc.o $
+  $BUILDROOT/libwebp/backward_references_cost_enc.o $
+  $BUILDROOT/libwebp/backward_references_enc.o $
+  $BUILDROOT/libwebp/config_enc.o $
+  $BUILDROOT/libwebp/cost_enc.o $
+  $BUILDROOT/libwebp/filter_enc.o $
+  $BUILDROOT/libwebp/frame_enc.o $
+  $BUILDROOT/libwebp/histogram_enc.o $
+  $BUILDROOT/libwebp/iterator_enc.o $
+  $BUILDROOT/libwebp/near_lossless_enc.o $
+  $BUILDROOT/libwebp/picture_csp_enc.o $
+  $BUILDROOT/libwebp/picture_enc.o $
+  $BUILDROOT/libwebp/picture_psnr_enc.o $
+  $BUILDROOT/libwebp/picture_rescale_enc.o $
+  $BUILDROOT/libwebp/picture_tools_enc.o $
+  $BUILDROOT/libwebp/predictor_enc.o $
+  $BUILDROOT/libwebp/quant_enc.o $
+  $BUILDROOT/libwebp/syntax_enc.o $
+  $BUILDROOT/libwebp/token_enc.o $
+  $BUILDROOT/libwebp/tree_enc.o $
+  $BUILDROOT/libwebp/vp8l_enc.o $
+  $BUILDROOT/libwebp/webp_enc.o $
+  $BUILDROOT/libwebp/anim_encode.o $
+  $BUILDROOT/libwebp/muxedit.o $
+  $BUILDROOT/libwebp/muxinternal.o $
+  $BUILDROOT/libwebp/muxread.o $
+  $BUILDROOT/libwebp/bit_writer_utils.o $
+  $BUILDROOT/libwebp/huffman_encode_utils.o $
+  $BUILDROOT/libwebp/quant_levels_utils.o $
+  $BUILDROOT/libwebp/alpha_dec.o $
+  $BUILDROOT/libwebp/buffer_dec.o $
+  $BUILDROOT/libwebp/frame_dec.o $
+  $BUILDROOT/libwebp/idec_dec.o $
+  $BUILDROOT/libwebp/io_dec.o $
+  $BUILDROOT/libwebp/quant_dec.o $
+  $BUILDROOT/libwebp/tree_dec.o $
+  $BUILDROOT/libwebp/vp8_dec.o $
+  $BUILDROOT/libwebp/vp8l_dec.o $
+  $BUILDROOT/libwebp/webp_dec.o $
+  $BUILDROOT/libwebp/anim_decode.o $
+  $BUILDROOT/libwebp/demux.o $
+  $BUILDROOT/libwebp/alpha_processing.o $
+  $BUILDROOT/libwebp/alpha_processing_mips_dsp_r2.o $
+  $BUILDROOT/libwebp/alpha_processing_neon.o $
+  $BUILDROOT/libwebp/alpha_processing_sse2.o $
+  $BUILDROOT/libwebp/alpha_processing_sse41.o $
+  $BUILDROOT/libwebp/dec.o $
+  $BUILDROOT/libwebp/dec_clip_tables.o $
+  $BUILDROOT/libwebp/dec_mips32.o $
+  $BUILDROOT/libwebp/dec_mips_dsp_r2.o $
+  $BUILDROOT/libwebp/dec_msa.o $
+  $BUILDROOT/libwebp/dec_neon.o $
+  $BUILDROOT/libwebp/dec_sse2.o $
+  $BUILDROOT/libwebp/dec_sse41.o $
+  $BUILDROOT/libwebp/filters.o $
+  $BUILDROOT/libwebp/filters_mips_dsp_r2.o $
+  $BUILDROOT/libwebp/filters_msa.o $
+  $BUILDROOT/libwebp/filters_neon.o $
+  $BUILDROOT/libwebp/filters_sse2.o $
+  $BUILDROOT/libwebp/lossless.o $
+  $BUILDROOT/libwebp/lossless_mips_dsp_r2.o $
+  $BUILDROOT/libwebp/lossless_msa.o $
+  $BUILDROOT/libwebp/lossless_neon.o $
+  $BUILDROOT/libwebp/lossless_sse2.o $
+  $BUILDROOT/libwebp/lossless_sse41.o $
+  $BUILDROOT/libwebp/rescaler.o $
+  $BUILDROOT/libwebp/rescaler_mips32.o $
+  $BUILDROOT/libwebp/rescaler_mips_dsp_r2.o $
+  $BUILDROOT/libwebp/rescaler_msa.o $
+  $BUILDROOT/libwebp/rescaler_neon.o $
+  $BUILDROOT/libwebp/rescaler_sse2.o $
+  $BUILDROOT/libwebp/upsampling.o $
+  $BUILDROOT/libwebp/upsampling_mips_dsp_r2.o $
+  $BUILDROOT/libwebp/upsampling_msa.o $
+  $BUILDROOT/libwebp/upsampling_neon.o $
+  $BUILDROOT/libwebp/upsampling_sse2.o $
+  $BUILDROOT/libwebp/upsampling_sse41.o $
+  $BUILDROOT/libwebp/yuv.o $
+  $BUILDROOT/libwebp/yuv_mips32.o $
+  $BUILDROOT/libwebp/yuv_mips_dsp_r2.o $
+  $BUILDROOT/libwebp/yuv_neon.o $
+  $BUILDROOT/libwebp/yuv_sse2.o $
+  $BUILDROOT/libwebp/yuv_sse41.o $
+  $BUILDROOT/libwebp/bit_reader_utils.o $
+  $BUILDROOT/libwebp/color_cache_utils.o $
+  $BUILDROOT/libwebp/filters_utils.o $
+  $BUILDROOT/libwebp/huffman_utils.o $
+  $BUILDROOT/libwebp/quant_levels_dec_utils.o $
+  $BUILDROOT/libwebp/random_utils.o $
+  $BUILDROOT/libwebp/rescaler_utils.o $
+  $BUILDROOT/libwebp/thread_utils.o $
+  $BUILDROOT/libwebp/utils.o $
+

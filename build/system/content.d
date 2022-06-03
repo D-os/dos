@@ -219,6 +219,7 @@ out/system.img: \
   out/system/lib/libz.so \
   out/system/lib/libjpeg.so \
   out/system/lib/libpng.so \
+  out/system/lib/libwebp.so \
   out/system/lib/libgbm.so \
   out/system/lib/libglapi.so \
   out/system/lib/libEGL.so \

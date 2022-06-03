@@ -166,6 +166,9 @@ build $SYSROOT/lib/libva.so: copy $BUILDROOT/libva/libva.so
 build $SYSROOT/lib/libva-drm.so: copy $BUILDROOT/libva/libva-drm.so
 build $SYSROOT/lib/libva-wayland.so: copy $BUILDROOT/libva/libva-wayland.so
 
+subninja build/libwebp.ninja
+build $SYSROOT/lib/libwebp.so: copy $BUILDROOT/libwebp/libwebp.so
+
 subninja build/libxkbcommon.ninja
 build $SYSROOT/lib/libxkbcommon.so: copy $BUILDROOT/libxkbcommon/libxkbcommon.so
 

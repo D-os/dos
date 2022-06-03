@@ -54,6 +54,7 @@ build $SYSTEMDIR/etc/group: copy build/conf/group
 build $SYSTEMDIR/lib/libz.so: copy $SYSROOT/lib/libz.so
 build $SYSTEMDIR/lib/libjpeg.so: copy $SYSROOT/lib/libjpeg.so
 build $SYSTEMDIR/lib/libpng.so: copy $SYSROOT/lib/libpng.so
+build $SYSTEMDIR/lib/libwebp.so: copy $SYSROOT/lib/libwebp.so
 build $SYSTEMDIR/lib/libgbm.so: copy $SYSROOT/lib/libgbm.so
 build $SYSTEMDIR/lib/libglapi.so: copy $SYSROOT/lib/libglapi.so
 build $SYSTEMDIR/lib/libEGL.so: copy $SYSROOT/lib/libEGL.so
