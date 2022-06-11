@@ -87,7 +87,7 @@
 	url = https://github.com/libffi/libffi.git
 [submodule "external/pixman"]
 	path = external/pixman
-	url = https://github.com/freedesktop/pixman.git
+	url = https://gitlab.freedesktop.org/pixman/pixman.git
 [submodule "external/wayland-protocols"]
 	path = external/wayland-protocols
 	url = https://github.com/wayland-project/wayland-protocols.git
@@ -96,7 +96,7 @@
 	url = https://gitlab.freedesktop.org/mesa/drm.git
 [submodule "external/libevdev"]
 	path = external/libevdev
-	url = https://github.com/freedesktop/libevdev.git
+	url = https://gitlab.freedesktop.org/libevdev/libevdev.git
 [submodule "external/libxkbcommon"]
 	path = external/libxkbcommon
 	url = https://github.com/xkbcommon/libxkbcommon.git
@@ -112,7 +112,7 @@
 	url = https://github.com/illiliti/libudev-zero.git
 [submodule "external/xkeyboard-config"]
 	path = external/xkeyboard-config
-	url = https://github.com/freedesktop/xkeyboard-config.git
+	url = https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config.git
 [submodule "external/mesa"]
 	path = external/mesa
 	url = https://gitlab.freedesktop.org/mesa/mesa.git
@@ -137,3 +137,6 @@
 [submodule "external/libwebp"]
 	path = external/libwebp
 	url = https://android.googlesource.com/platform/external/webp
+[submodule "external/cairo"]
+	path = external/cairo
+	url = https://gitlab.freedesktop.org/cairo/cairo.git
