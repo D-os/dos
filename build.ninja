@@ -33,7 +33,7 @@ rule cxx
   description = CXX $out
 
 rule yasm
-  command = $YASM $asflags $includes -o $out $in && $YASM $asflags $includes -M $in >$out.d
+  command = $YASM $asflags $includes -o $out $in && echo -n $$(dirname $out)/ >$out.d && $YASM $asflags $includes -M $in >>$out.d
   depfile = $out.d
   description = YASM $out
 
