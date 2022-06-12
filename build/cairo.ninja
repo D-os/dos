@@ -1,0 +1,344 @@
+cflags = $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -Wextra $
+  -O0 $
+  -g $
+  -Wmissing-declarations $
+  -Werror-implicit-function-declaration $
+  -Wpointer-arith $
+  -Wwrite-strings $
+  -Wsign-compare $
+  -Wpacked $
+  -Wswitch-enum $
+  -Wmissing-format-attribute $
+  -Wvolatile-register-var $
+  -Wstrict-aliasing=2 $
+  -Winit-self $
+  -Wno-missing-field-initializers $
+  -Wno-unused-parameter $
+  -Wno-attributes $
+  -Wno-long-long $
+  -Winline $
+  -Wno-unused-but-set-variable $
+  -Wno-enum-conversion $
+  -fno-strict-aliasing $
+  -fno-common $
+  -D_GNU_SOURCE $
+  -DHAVE_CONFIG_H $
+  -fPIC $
+  -pthread $
+  -Wno-attributes $
+  -Wno-unused-but-set-variable $
+  -Wno-missing-field-initializers $
+  -Wno-unused-parameter $
+  -Wno-long-long $
+  -D_REENTRANT $
+  -Wno-sometimes-uninitialized $
+  -Wno-switch-enum $
+  -Wno-parentheses-equality $
+  -Wno-unused-function $
+
+includes = -Ibuild/cairo -Iexternal/pixman/pixman -Ibuild/pixman/src -Iexternal/mesa/include $
+  -Iexternal/freetype/include -Iexternal/libpng -Iexternal/zlib
+
+build $BUILDROOT/cairo/cairo-analysis-surface.o: cc external/cairo/src/cairo-analysis-surface.c
+build $BUILDROOT/cairo/cairo-arc.o: cc external/cairo/src/cairo-arc.c
+build $BUILDROOT/cairo/cairo-array.o: cc external/cairo/src/cairo-array.c
+build $BUILDROOT/cairo/cairo-atomic.o: cc external/cairo/src/cairo-atomic.c
+build $BUILDROOT/cairo/cairo-base64-stream.o: cc external/cairo/src/cairo-base64-stream.c
+build $BUILDROOT/cairo/cairo-base85-stream.o: cc external/cairo/src/cairo-base85-stream.c
+build $BUILDROOT/cairo/cairo-bentley-ottmann-rectangular.o: cc external/cairo/src/cairo-bentley-ottmann-rectangular.c
+build $BUILDROOT/cairo/cairo-bentley-ottmann-rectilinear.o: cc external/cairo/src/cairo-bentley-ottmann-rectilinear.c
+build $BUILDROOT/cairo/cairo-bentley-ottmann.o: cc external/cairo/src/cairo-bentley-ottmann.c
+build $BUILDROOT/cairo/cairo-botor-scan-converter.o: cc external/cairo/src/cairo-botor-scan-converter.c
+build $BUILDROOT/cairo/cairo-boxes-intersect.o: cc external/cairo/src/cairo-boxes-intersect.c
+build $BUILDROOT/cairo/cairo-boxes.o: cc external/cairo/src/cairo-boxes.c
+build $BUILDROOT/cairo/cairo-cache.o: cc external/cairo/src/cairo-cache.c
+build $BUILDROOT/cairo/cairo-clip-boxes.o: cc external/cairo/src/cairo-clip-boxes.c
+build $BUILDROOT/cairo/cairo-clip-polygon.o: cc external/cairo/src/cairo-clip-polygon.c
+build $BUILDROOT/cairo/cairo-clip-region.o: cc external/cairo/src/cairo-clip-region.c
+build $BUILDROOT/cairo/cairo-clip-surface.o: cc external/cairo/src/cairo-clip-surface.c
+build $BUILDROOT/cairo/cairo-clip-tor-scan-converter.o: cc external/cairo/src/cairo-clip-tor-scan-converter.c
+build $BUILDROOT/cairo/cairo-clip.o: cc external/cairo/src/cairo-clip.c
+build $BUILDROOT/cairo/cairo-color.o: cc external/cairo/src/cairo-color.c
+build $BUILDROOT/cairo/cairo-composite-rectangles.o: cc external/cairo/src/cairo-composite-rectangles.c
+build $BUILDROOT/cairo/cairo-compositor.o: cc external/cairo/src/cairo-compositor.c
+build $BUILDROOT/cairo/cairo-contour.o: cc external/cairo/src/cairo-contour.c
+build $BUILDROOT/cairo/cairo-damage.o: cc external/cairo/src/cairo-damage.c
+build $BUILDROOT/cairo/cairo-debug.o: cc external/cairo/src/cairo-debug.c
+build $BUILDROOT/cairo/cairo-default-context.o: cc external/cairo/src/cairo-default-context.c
+build $BUILDROOT/cairo/cairo-device.o: cc external/cairo/src/cairo-device.c
+build $BUILDROOT/cairo/cairo-error.o: cc external/cairo/src/cairo-error.c
+build $BUILDROOT/cairo/cairo-fallback-compositor.o: cc external/cairo/src/cairo-fallback-compositor.c
+build $BUILDROOT/cairo/cairo-fixed.o: cc external/cairo/src/cairo-fixed.c
+build $BUILDROOT/cairo/cairo-font-face-twin-data.o: cc external/cairo/src/cairo-font-face-twin-data.c
+build $BUILDROOT/cairo/cairo-font-face-twin.o: cc external/cairo/src/cairo-font-face-twin.c
+build $BUILDROOT/cairo/cairo-font-face.o: cc external/cairo/src/cairo-font-face.c
+build $BUILDROOT/cairo/cairo-font-options.o: cc external/cairo/src/cairo-font-options.c
+build $BUILDROOT/cairo/cairo-freed-pool.o: cc external/cairo/src/cairo-freed-pool.c
+build $BUILDROOT/cairo/cairo-freelist.o: cc external/cairo/src/cairo-freelist.c
+build $BUILDROOT/cairo/cairo-gstate.o: cc external/cairo/src/cairo-gstate.c
+build $BUILDROOT/cairo/cairo-hash.o: cc external/cairo/src/cairo-hash.c
+build $BUILDROOT/cairo/cairo-hull.o: cc external/cairo/src/cairo-hull.c
+build $BUILDROOT/cairo/cairo-image-compositor.o: cc external/cairo/src/cairo-image-compositor.c
+build $BUILDROOT/cairo/cairo-image-info.o: cc external/cairo/src/cairo-image-info.c
+build $BUILDROOT/cairo/cairo-image-source.o: cc external/cairo/src/cairo-image-source.c
+build $BUILDROOT/cairo/cairo-image-surface.o: cc external/cairo/src/cairo-image-surface.c
+build $BUILDROOT/cairo/cairo-line.o: cc external/cairo/src/cairo-line.c
+build $BUILDROOT/cairo/cairo-lzw.o: cc external/cairo/src/cairo-lzw.c
+build $BUILDROOT/cairo/cairo-mask-compositor.o: cc external/cairo/src/cairo-mask-compositor.c
+build $BUILDROOT/cairo/cairo-matrix.o: cc external/cairo/src/cairo-matrix.c
+build $BUILDROOT/cairo/cairo-mempool.o: cc external/cairo/src/cairo-mempool.c
+build $BUILDROOT/cairo/cairo-mesh-pattern-rasterizer.o: cc external/cairo/src/cairo-mesh-pattern-rasterizer.c
+build $BUILDROOT/cairo/cairo-misc.o: cc external/cairo/src/cairo-misc.c
+build $BUILDROOT/cairo/cairo-mono-scan-converter.o: cc external/cairo/src/cairo-mono-scan-converter.c
+build $BUILDROOT/cairo/cairo-mutex.o: cc external/cairo/src/cairo-mutex.c
+build $BUILDROOT/cairo/cairo-no-compositor.o: cc external/cairo/src/cairo-no-compositor.c
+build $BUILDROOT/cairo/cairo-observer.o: cc external/cairo/src/cairo-observer.c
+build $BUILDROOT/cairo/cairo-output-stream.o: cc external/cairo/src/cairo-output-stream.c
+build $BUILDROOT/cairo/cairo-paginated-surface.o: cc external/cairo/src/cairo-paginated-surface.c
+build $BUILDROOT/cairo/cairo-path-bounds.o: cc external/cairo/src/cairo-path-bounds.c
+build $BUILDROOT/cairo/cairo-path-fill.o: cc external/cairo/src/cairo-path-fill.c
+build $BUILDROOT/cairo/cairo-path-fixed.o: cc external/cairo/src/cairo-path-fixed.c
+build $BUILDROOT/cairo/cairo-path-in-fill.o: cc external/cairo/src/cairo-path-in-fill.c
+build $BUILDROOT/cairo/cairo-path-stroke-boxes.o: cc external/cairo/src/cairo-path-stroke-boxes.c
+build $BUILDROOT/cairo/cairo-path-stroke-polygon.o: cc external/cairo/src/cairo-path-stroke-polygon.c
+build $BUILDROOT/cairo/cairo-path-stroke-traps.o: cc external/cairo/src/cairo-path-stroke-traps.c
+build $BUILDROOT/cairo/cairo-path-stroke-tristrip.o: cc external/cairo/src/cairo-path-stroke-tristrip.c
+build $BUILDROOT/cairo/cairo-path-stroke.o: cc external/cairo/src/cairo-path-stroke.c
+build $BUILDROOT/cairo/cairo-path.o: cc external/cairo/src/cairo-path.c
+build $BUILDROOT/cairo/cairo-pattern.o: cc external/cairo/src/cairo-pattern.c
+build $BUILDROOT/cairo/cairo-pen.o: cc external/cairo/src/cairo-pen.c
+build $BUILDROOT/cairo/cairo-polygon-intersect.o: cc external/cairo/src/cairo-polygon-intersect.c
+build $BUILDROOT/cairo/cairo-polygon-reduce.o: cc external/cairo/src/cairo-polygon-reduce.c
+build $BUILDROOT/cairo/cairo-polygon.o: cc external/cairo/src/cairo-polygon.c
+build $BUILDROOT/cairo/cairo-raster-source-pattern.o: cc external/cairo/src/cairo-raster-source-pattern.c
+build $BUILDROOT/cairo/cairo-recording-surface.o: cc external/cairo/src/cairo-recording-surface.c
+build $BUILDROOT/cairo/cairo-rectangle.o: cc external/cairo/src/cairo-rectangle.c
+build $BUILDROOT/cairo/cairo-rectangular-scan-converter.o: cc external/cairo/src/cairo-rectangular-scan-converter.c
+build $BUILDROOT/cairo/cairo-region.o: cc external/cairo/src/cairo-region.c
+build $BUILDROOT/cairo/cairo-rtree.o: cc external/cairo/src/cairo-rtree.c
+build $BUILDROOT/cairo/cairo-scaled-font.o: cc external/cairo/src/cairo-scaled-font.c
+build $BUILDROOT/cairo/cairo-shape-mask-compositor.o: cc external/cairo/src/cairo-shape-mask-compositor.c
+build $BUILDROOT/cairo/cairo-slope.o: cc external/cairo/src/cairo-slope.c
+build $BUILDROOT/cairo/cairo-spans-compositor.o: cc external/cairo/src/cairo-spans-compositor.c
+build $BUILDROOT/cairo/cairo-spans.o: cc external/cairo/src/cairo-spans.c
+build $BUILDROOT/cairo/cairo-spline.o: cc external/cairo/src/cairo-spline.c
+build $BUILDROOT/cairo/cairo-stroke-dash.o: cc external/cairo/src/cairo-stroke-dash.c
+build $BUILDROOT/cairo/cairo-stroke-style.o: cc external/cairo/src/cairo-stroke-style.c
+build $BUILDROOT/cairo/cairo-surface-clipper.o: cc external/cairo/src/cairo-surface-clipper.c
+build $BUILDROOT/cairo/cairo-surface-fallback.o: cc external/cairo/src/cairo-surface-fallback.c
+build $BUILDROOT/cairo/cairo-surface-observer.o: cc external/cairo/src/cairo-surface-observer.c
+build $BUILDROOT/cairo/cairo-surface-offset.o: cc external/cairo/src/cairo-surface-offset.c
+build $BUILDROOT/cairo/cairo-surface-snapshot.o: cc external/cairo/src/cairo-surface-snapshot.c
+build $BUILDROOT/cairo/cairo-surface-subsurface.o: cc external/cairo/src/cairo-surface-subsurface.c
+build $BUILDROOT/cairo/cairo-surface-wrapper.o: cc external/cairo/src/cairo-surface-wrapper.c
+build $BUILDROOT/cairo/cairo-surface.o: cc external/cairo/src/cairo-surface.c
+build $BUILDROOT/cairo/cairo-time.o: cc external/cairo/src/cairo-time.c
+build $BUILDROOT/cairo/cairo-tor-scan-converter.o: cc external/cairo/src/cairo-tor-scan-converter.c
+build $BUILDROOT/cairo/cairo-tor22-scan-converter.o: cc external/cairo/src/cairo-tor22-scan-converter.c
+build $BUILDROOT/cairo/cairo-toy-font-face.o: cc external/cairo/src/cairo-toy-font-face.c
+build $BUILDROOT/cairo/cairo-traps-compositor.o: cc external/cairo/src/cairo-traps-compositor.c
+build $BUILDROOT/cairo/cairo-traps.o: cc external/cairo/src/cairo-traps.c
+build $BUILDROOT/cairo/cairo-tristrip.o: cc external/cairo/src/cairo-tristrip.c
+build $BUILDROOT/cairo/cairo-unicode.o: cc external/cairo/src/cairo-unicode.c
+build $BUILDROOT/cairo/cairo-user-font.o: cc external/cairo/src/cairo-user-font.c
+build $BUILDROOT/cairo/cairo-version.o: cc external/cairo/src/cairo-version.c
+build $BUILDROOT/cairo/cairo-wideint.o: cc external/cairo/src/cairo-wideint.c
+build $BUILDROOT/cairo/cairo.o: cc external/cairo/src/cairo.c
+build $BUILDROOT/cairo/cairo-cff-subset.o: cc external/cairo/src/cairo-cff-subset.c
+build $BUILDROOT/cairo/cairo-scaled-font-subsets.o: cc external/cairo/src/cairo-scaled-font-subsets.c
+build $BUILDROOT/cairo/cairo-truetype-subset.o: cc external/cairo/src/cairo-truetype-subset.c
+build $BUILDROOT/cairo/cairo-type1-fallback.o: cc external/cairo/src/cairo-type1-fallback.c
+build $BUILDROOT/cairo/cairo-type1-glyph-names.o: cc external/cairo/src/cairo-type1-glyph-names.c
+build $BUILDROOT/cairo/cairo-type1-subset.o: cc external/cairo/src/cairo-type1-subset.c
+build $BUILDROOT/cairo/cairo-type3-glyph-surface.o: cc external/cairo/src/cairo-type3-glyph-surface.c
+build $BUILDROOT/cairo/cairo-pdf-operators.o: cc external/cairo/src/cairo-pdf-operators.c
+build $BUILDROOT/cairo/cairo-pdf-shading.o: cc external/cairo/src/cairo-pdf-shading.c
+build $BUILDROOT/cairo/cairo-tag-attributes.o: cc external/cairo/src/cairo-tag-attributes.c
+build $BUILDROOT/cairo/cairo-tag-stack.o: cc external/cairo/src/cairo-tag-stack.c
+build $BUILDROOT/cairo/cairo-deflate-stream.o: cc external/cairo/src/cairo-deflate-stream.c
+build $BUILDROOT/cairo/cairo-png.o: cc external/cairo/src/cairo-png.c
+build $BUILDROOT/cairo/cairo-svg-surface.o: cc external/cairo/src/cairo-svg-surface.c
+build $BUILDROOT/cairo/cairo-ft-font.o: cc external/cairo/src/cairo-ft-font.c
+build $BUILDROOT/cairo/cairo-xlib-display.o: cc external/cairo/src/cairo-xlib-display.c
+build $BUILDROOT/cairo/cairo-xlib-core-compositor.o: cc external/cairo/src/cairo-xlib-core-compositor.c
+build $BUILDROOT/cairo/cairo-xlib-fallback-compositor.o: cc external/cairo/src/cairo-xlib-fallback-compositor.c
+build $BUILDROOT/cairo/cairo-xlib-render-compositor.o: cc external/cairo/src/cairo-xlib-render-compositor.c
+build $BUILDROOT/cairo/cairo-xlib-screen.o: cc external/cairo/src/cairo-xlib-screen.c
+build $BUILDROOT/cairo/cairo-xlib-source.o: cc external/cairo/src/cairo-xlib-source.c
+build $BUILDROOT/cairo/cairo-xlib-surface.o: cc external/cairo/src/cairo-xlib-surface.c
+build $BUILDROOT/cairo/cairo-xlib-surface-shm.o: cc external/cairo/src/cairo-xlib-surface-shm.c
+build $BUILDROOT/cairo/cairo-xlib-visual.o: cc external/cairo/src/cairo-xlib-visual.c
+build $BUILDROOT/cairo/cairo-xlib-xcb-surface.o: cc external/cairo/src/cairo-xlib-xcb-surface.c
+build $BUILDROOT/cairo/cairo-gl-composite.o: cc external/cairo/src/cairo-gl-composite.c
+build $BUILDROOT/cairo/cairo-gl-device.o: cc external/cairo/src/cairo-gl-device.c
+build $BUILDROOT/cairo/cairo-gl-dispatch.o: cc external/cairo/src/cairo-gl-dispatch.c
+build $BUILDROOT/cairo/cairo-gl-glyphs.o: cc external/cairo/src/cairo-gl-glyphs.c
+build $BUILDROOT/cairo/cairo-gl-gradient.o: cc external/cairo/src/cairo-gl-gradient.c
+build $BUILDROOT/cairo/cairo-gl-info.o: cc external/cairo/src/cairo-gl-info.c
+build $BUILDROOT/cairo/cairo-gl-msaa-compositor.o: cc external/cairo/src/cairo-gl-msaa-compositor.c
+build $BUILDROOT/cairo/cairo-gl-operand.o: cc external/cairo/src/cairo-gl-operand.c
+build $BUILDROOT/cairo/cairo-gl-shaders.o: cc external/cairo/src/cairo-gl-shaders.c
+build $BUILDROOT/cairo/cairo-gl-source.o: cc external/cairo/src/cairo-gl-source.c
+build $BUILDROOT/cairo/cairo-gl-spans-compositor.o: cc external/cairo/src/cairo-gl-spans-compositor.c
+build $BUILDROOT/cairo/cairo-gl-surface.o: cc external/cairo/src/cairo-gl-surface.c
+build $BUILDROOT/cairo/cairo-gl-traps-compositor.o: cc external/cairo/src/cairo-gl-traps-compositor.c
+build $BUILDROOT/cairo/cairo-egl-context.o: cc external/cairo/src/cairo-egl-context.c
+build $BUILDROOT/cairo/cairo-script-surface.o: cc external/cairo/src/cairo-script-surface.c
+build $BUILDROOT/cairo/cairo-ps-surface.o: cc external/cairo/src/cairo-ps-surface.c
+build $BUILDROOT/cairo/cairo-pdf-surface.o: cc external/cairo/src/cairo-pdf-surface.c
+build $BUILDROOT/cairo/cairo-pdf-interchange.o: cc external/cairo/src/cairo-pdf-interchange.c
+
+build $BUILDROOT/cairo/libcairo.so: so $
+  $BUILDROOT/cairo/cairo-analysis-surface.o $
+  $BUILDROOT/cairo/cairo-arc.o $
+  $BUILDROOT/cairo/cairo-array.o $
+  $BUILDROOT/cairo/cairo-atomic.o $
+  $BUILDROOT/cairo/cairo-base64-stream.o $
+  $BUILDROOT/cairo/cairo-base85-stream.o $
+  $BUILDROOT/cairo/cairo-bentley-ottmann-rectangular.o $
+  $BUILDROOT/cairo/cairo-bentley-ottmann-rectilinear.o $
+  $BUILDROOT/cairo/cairo-bentley-ottmann.o $
+  $BUILDROOT/cairo/cairo-botor-scan-converter.o $
+  $BUILDROOT/cairo/cairo-boxes-intersect.o $
+  $BUILDROOT/cairo/cairo-boxes.o $
+  $BUILDROOT/cairo/cairo-cache.o $
+  $BUILDROOT/cairo/cairo-clip-boxes.o $
+  $BUILDROOT/cairo/cairo-clip-polygon.o $
+  $BUILDROOT/cairo/cairo-clip-region.o $
+  $BUILDROOT/cairo/cairo-clip-surface.o $
+  $BUILDROOT/cairo/cairo-clip-tor-scan-converter.o $
+  $BUILDROOT/cairo/cairo-clip.o $
+  $BUILDROOT/cairo/cairo-color.o $
+  $BUILDROOT/cairo/cairo-composite-rectangles.o $
+  $BUILDROOT/cairo/cairo-compositor.o $
+  $BUILDROOT/cairo/cairo-contour.o $
+  $BUILDROOT/cairo/cairo-damage.o $
+  $BUILDROOT/cairo/cairo-debug.o $
+  $BUILDROOT/cairo/cairo-default-context.o $
+  $BUILDROOT/cairo/cairo-device.o $
+  $BUILDROOT/cairo/cairo-error.o $
+  $BUILDROOT/cairo/cairo-fallback-compositor.o $
+  $BUILDROOT/cairo/cairo-fixed.o $
+  $BUILDROOT/cairo/cairo-font-face-twin-data.o $
+  $BUILDROOT/cairo/cairo-font-face-twin.o $
+  $BUILDROOT/cairo/cairo-font-face.o $
+  $BUILDROOT/cairo/cairo-font-options.o $
+  $BUILDROOT/cairo/cairo-freed-pool.o $
+  $BUILDROOT/cairo/cairo-freelist.o $
+  $BUILDROOT/cairo/cairo-gstate.o $
+  $BUILDROOT/cairo/cairo-hash.o $
+  $BUILDROOT/cairo/cairo-hull.o $
+  $BUILDROOT/cairo/cairo-image-compositor.o $
+  $BUILDROOT/cairo/cairo-image-info.o $
+  $BUILDROOT/cairo/cairo-image-source.o $
+  $BUILDROOT/cairo/cairo-image-surface.o $
+  $BUILDROOT/cairo/cairo-line.o $
+  $BUILDROOT/cairo/cairo-lzw.o $
+  $BUILDROOT/cairo/cairo-mask-compositor.o $
+  $BUILDROOT/cairo/cairo-matrix.o $
+  $BUILDROOT/cairo/cairo-mempool.o $
+  $BUILDROOT/cairo/cairo-mesh-pattern-rasterizer.o $
+  $BUILDROOT/cairo/cairo-misc.o $
+  $BUILDROOT/cairo/cairo-mono-scan-converter.o $
+  $BUILDROOT/cairo/cairo-mutex.o $
+  $BUILDROOT/cairo/cairo-no-compositor.o $
+  $BUILDROOT/cairo/cairo-observer.o $
+  $BUILDROOT/cairo/cairo-output-stream.o $
+  $BUILDROOT/cairo/cairo-paginated-surface.o $
+  $BUILDROOT/cairo/cairo-path-bounds.o $
+  $BUILDROOT/cairo/cairo-path-fill.o $
+  $BUILDROOT/cairo/cairo-path-fixed.o $
+  $BUILDROOT/cairo/cairo-path-in-fill.o $
+  $BUILDROOT/cairo/cairo-path-stroke-boxes.o $
+  $BUILDROOT/cairo/cairo-path-stroke-polygon.o $
+  $BUILDROOT/cairo/cairo-path-stroke-traps.o $
+  $BUILDROOT/cairo/cairo-path-stroke-tristrip.o $
+  $BUILDROOT/cairo/cairo-path-stroke.o $
+  $BUILDROOT/cairo/cairo-path.o $
+  $BUILDROOT/cairo/cairo-pattern.o $
+  $BUILDROOT/cairo/cairo-pen.o $
+  $BUILDROOT/cairo/cairo-polygon-intersect.o $
+  $BUILDROOT/cairo/cairo-polygon-reduce.o $
+  $BUILDROOT/cairo/cairo-polygon.o $
+  $BUILDROOT/cairo/cairo-raster-source-pattern.o $
+  $BUILDROOT/cairo/cairo-recording-surface.o $
+  $BUILDROOT/cairo/cairo-rectangle.o $
+  $BUILDROOT/cairo/cairo-rectangular-scan-converter.o $
+  $BUILDROOT/cairo/cairo-region.o $
+  $BUILDROOT/cairo/cairo-rtree.o $
+  $BUILDROOT/cairo/cairo-scaled-font.o $
+  $BUILDROOT/cairo/cairo-shape-mask-compositor.o $
+  $BUILDROOT/cairo/cairo-slope.o $
+  $BUILDROOT/cairo/cairo-spans-compositor.o $
+  $BUILDROOT/cairo/cairo-spans.o $
+  $BUILDROOT/cairo/cairo-spline.o $
+  $BUILDROOT/cairo/cairo-stroke-dash.o $
+  $BUILDROOT/cairo/cairo-stroke-style.o $
+  $BUILDROOT/cairo/cairo-surface-clipper.o $
+  $BUILDROOT/cairo/cairo-surface-fallback.o $
+  $BUILDROOT/cairo/cairo-surface-observer.o $
+  $BUILDROOT/cairo/cairo-surface-offset.o $
+  $BUILDROOT/cairo/cairo-surface-snapshot.o $
+  $BUILDROOT/cairo/cairo-surface-subsurface.o $
+  $BUILDROOT/cairo/cairo-surface-wrapper.o $
+  $BUILDROOT/cairo/cairo-surface.o $
+  $BUILDROOT/cairo/cairo-time.o $
+  $BUILDROOT/cairo/cairo-tor-scan-converter.o $
+  $BUILDROOT/cairo/cairo-tor22-scan-converter.o $
+  $BUILDROOT/cairo/cairo-toy-font-face.o $
+  $BUILDROOT/cairo/cairo-traps-compositor.o $
+  $BUILDROOT/cairo/cairo-traps.o $
+  $BUILDROOT/cairo/cairo-tristrip.o $
+  $BUILDROOT/cairo/cairo-unicode.o $
+  $BUILDROOT/cairo/cairo-user-font.o $
+  $BUILDROOT/cairo/cairo-version.o $
+  $BUILDROOT/cairo/cairo-wideint.o $
+  $BUILDROOT/cairo/cairo.o $
+  $BUILDROOT/cairo/cairo-cff-subset.o $
+  $BUILDROOT/cairo/cairo-scaled-font-subsets.o $
+  $BUILDROOT/cairo/cairo-truetype-subset.o $
+  $BUILDROOT/cairo/cairo-type1-fallback.o $
+  $BUILDROOT/cairo/cairo-type1-glyph-names.o $
+  $BUILDROOT/cairo/cairo-type1-subset.o $
+  $BUILDROOT/cairo/cairo-type3-glyph-surface.o $
+  $BUILDROOT/cairo/cairo-pdf-operators.o $
+  $BUILDROOT/cairo/cairo-pdf-shading.o $
+  $BUILDROOT/cairo/cairo-tag-attributes.o $
+  $BUILDROOT/cairo/cairo-tag-stack.o $
+  $BUILDROOT/cairo/cairo-deflate-stream.o $
+  $BUILDROOT/cairo/cairo-png.o $
+  $BUILDROOT/cairo/cairo-svg-surface.o $
+  $BUILDROOT/cairo/cairo-ft-font.o $
+  $BUILDROOT/cairo/cairo-gl-composite.o $
+  $BUILDROOT/cairo/cairo-gl-device.o $
+  $BUILDROOT/cairo/cairo-gl-dispatch.o $
+  $BUILDROOT/cairo/cairo-gl-glyphs.o $
+  $BUILDROOT/cairo/cairo-gl-gradient.o $
+  $BUILDROOT/cairo/cairo-gl-info.o $
+  $BUILDROOT/cairo/cairo-gl-msaa-compositor.o $
+  $BUILDROOT/cairo/cairo-gl-operand.o $
+  $BUILDROOT/cairo/cairo-gl-shaders.o $
+  $BUILDROOT/cairo/cairo-gl-source.o $
+  $BUILDROOT/cairo/cairo-gl-spans-compositor.o $
+  $BUILDROOT/cairo/cairo-gl-surface.o $
+  $BUILDROOT/cairo/cairo-gl-traps-compositor.o $
+  $BUILDROOT/cairo/cairo-egl-context.o $
+  $BUILDROOT/cairo/cairo-script-surface.o $
+  $BUILDROOT/cairo/cairo-ps-surface.o $
+  $BUILDROOT/cairo/cairo-pdf-surface.o $
+  $BUILDROOT/cairo/cairo-pdf-interchange.o $
+  | $
+  $SYSROOT/lib/libEGL.so $
+  $SYSROOT/lib/libGLESv2.so $
+  $SYSROOT/lib/libfreetype.so $
+  $SYSROOT/lib/libpixman-1.so $
+  $SYSROOT/lib/libpng.so $
+  $SYSROOT/lib/libpthread.a $
+  $SYSROOT/lib/libz.so
+  libs = $
+  -lpthread -lm -ldl -lbfd $
+  -lz -lpng -lfreetype -lGLESv2 -lEGL -lpixman-1

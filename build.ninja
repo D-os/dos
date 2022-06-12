@@ -175,6 +175,9 @@ build $SYSROOT/lib/libxkbcommon.so: copy $BUILDROOT/libxkbcommon/libxkbcommon.so
 subninja build/boringssl.ninja
 build $SYSROOT/lib/libcrypto.so: copy $BUILDROOT/boringssl/libcrypto.so
 
+subninja build/cairo.ninja
+build $SYSROOT/lib/libcairo.so: copy $BUILDROOT/cairo/libcairo.so
+
 subninja build/expat.ninja
 build $SYSROOT/lib/libexpat.so: copy $BUILDROOT/expat/libexpat.so
 
