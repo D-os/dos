@@ -140,3 +140,6 @@
 [submodule "external/cairo"]
 	path = external/cairo
 	url = https://gitlab.freedesktop.org/cairo/cairo.git
+[submodule "external/freetype"]
+	path = external/freetype
+	url = https://android.googlesource.com/platform/external/freetype
