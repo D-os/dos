@@ -228,6 +228,7 @@ build $SYSTEMDIR/system/bin/su: copy $BUILDROOT/utils/su
 subninja build/wayland.ninja
 build $SYSROOT/lib/libwayland-client.so: copy $BUILDROOT/wayland/libwayland-client.so
 build $SYSROOT/lib/libwayland-server.so: copy $BUILDROOT/wayland/libwayland-server.so
+build $SYSROOT/lib/libwayland-cursor.so: copy $BUILDROOT/wayland/libwayland-cursor.so
 
 subninja build/weston.ninja
 

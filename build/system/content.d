@@ -224,6 +224,8 @@ out/system.img: \
   out/system/lib/libglapi.so \
   out/system/lib/libEGL.so \
   out/system/lib/libGLESv2.so \
+  out/system/lib/libfreetype.so \
+  out/system/lib/libcairo.so \
   out/system/system/bin/su \
   out/system/system/bin/weston \
   out/system/system/lib/libweston-11.so \
@@ -232,10 +234,12 @@ out/system.img: \
   out/system/system/lib/libweston-11/drm-backend.so \
   out/system/system/lib/libweston-11/gl-renderer.so \
   out/system/system/lib/libweston-11/libweston-desktop-11.so \
+  out/system/system/libexec/weston-desktop-shell \
   out/system/system/lib/dri/libgallium_dri.so \
   out/system/system/lib/dri/virtio_gpu_dri.so \
   out/system/system/lib/dri/kms_swrast_dri.so \
   out/system/system/lib/dri/swrast_dri.so \
+  out/system/system/data/weston \
   out/system/system/data/xkb \
   out/system/system/data/libinput \
   

@@ -19,7 +19,7 @@
 
 #define BUILD_WAYLAND_COMPOSITOR 1
 
-#define DATADIR "/system/share"
+#define DATADIR "/system/data"
 
 #define EGL_NO_PLATFORM_SPECIFIC_TYPES 1
 
@@ -69,7 +69,8 @@
 
 #define MODULEDIR "/system/lib/weston"
 
-#define PACKAGE_BUGREPORT "https://gitlab.freedesktop.org/wayland/weston/issues/"
+#define PACKAGE_BUGREPORT                                                      \
+  "https://gitlab.freedesktop.org/wayland/weston/issues/"
 
 #define PACKAGE_STRING "weston 10.0.90"
 
@@ -90,4 +91,3 @@
 #define _ALL_SOURCE 1
 
 #define _GNU_SOURCE 1
-

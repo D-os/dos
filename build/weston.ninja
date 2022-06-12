@@ -472,3 +472,78 @@ build $BUILDROOT/weston/desktop-shell.so: so $
     -Wl,-rpath,/system/lib/libweston-11 $BUILDROOT/weston/libweston-desktop-11.so $
     -lm -lwayland-server -lpixman-1 -lxkbcommon -lwayland-client
 
+build $BUILDROOT/weston/libcairo-shared/image-loader.o: cc external/weston/shared/image-loader.c
+  includes = $includes -Iexternal/cairo/src -Ibuild/cairo -Iexternal/libpng -Iexternal/libjpeg-turbo -Iexternal/libwebp/include
+build $BUILDROOT/weston/libcairo-shared/cairo-util.o: cc external/weston/shared/cairo-util.c
+  includes = $includes -Iexternal/cairo/src -Ibuild/cairo
+build $BUILDROOT/weston/libcairo-shared/frame.o: cc external/weston/shared/frame.c
+  includes = $includes -Iexternal/cairo/src -Ibuild/cairo
+
+build $BUILDROOT/weston/libcairo-shared.a: ar $
+  $BUILDROOT/weston/libcairo-shared/image-loader.o $
+  $BUILDROOT/weston/libcairo-shared/cairo-util.o $
+  $BUILDROOT/weston/libcairo-shared/frame.o $
+
+build $BUILDROOT/weston/libtoytoolkit/xdg-shell-protocol.o: cc $BUILDROOT/weston/protocol/xdg-shell-protocol.c | $BUILDROOT/weston/protocol/ivi-application-client-protocol.h $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/text-cursor-position-client-protocol.h $BUILDROOT/weston/protocol/viewporter-client-protocol.h $BUILDROOT/weston/protocol/xdg-shell-client-protocol.h
+build $BUILDROOT/weston/libtoytoolkit/text-cursor-position-protocol.o: cc $BUILDROOT/weston/protocol/text-cursor-position-protocol.c | $BUILDROOT/weston/protocol/ivi-application-client-protocol.h $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/text-cursor-position-client-protocol.h $BUILDROOT/weston/protocol/viewporter-client-protocol.h $BUILDROOT/weston/protocol/xdg-shell-client-protocol.h
+build $BUILDROOT/weston/libtoytoolkit/relative-pointer-unstable-v1-protocol.o: cc $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-protocol.c | $BUILDROOT/weston/protocol/ivi-application-client-protocol.h $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/text-cursor-position-client-protocol.h $BUILDROOT/weston/protocol/viewporter-client-protocol.h $BUILDROOT/weston/protocol/xdg-shell-client-protocol.h
+build $BUILDROOT/weston/libtoytoolkit/pointer-constraints-unstable-v1-protocol.o: cc $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-protocol.c | $BUILDROOT/weston/protocol/ivi-application-client-protocol.h $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/text-cursor-position-client-protocol.h $BUILDROOT/weston/protocol/viewporter-client-protocol.h $BUILDROOT/weston/protocol/xdg-shell-client-protocol.h
+build $BUILDROOT/weston/libtoytoolkit/ivi-application-protocol.o: cc $BUILDROOT/weston/protocol/ivi-application-protocol.c | $BUILDROOT/weston/protocol/ivi-application-client-protocol.h $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/text-cursor-position-client-protocol.h $BUILDROOT/weston/protocol/viewporter-client-protocol.h $BUILDROOT/weston/protocol/xdg-shell-client-protocol.h
+build $BUILDROOT/weston/libtoytoolkit/viewporter-protocol.o: cc $BUILDROOT/weston/protocol/viewporter-protocol.c | $BUILDROOT/weston/protocol/ivi-application-client-protocol.h $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/text-cursor-position-client-protocol.h $BUILDROOT/weston/protocol/viewporter-client-protocol.h $BUILDROOT/weston/protocol/xdg-shell-client-protocol.h
+build $BUILDROOT/weston/libtoytoolkit/window.o: cc external/weston/clients/window.c | $BUILDROOT/weston/protocol/ivi-application-client-protocol.h $BUILDROOT/weston/protocol/pointer-constraints-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/relative-pointer-unstable-v1-client-protocol.h $BUILDROOT/weston/protocol/text-cursor-position-client-protocol.h $BUILDROOT/weston/protocol/viewporter-client-protocol.h $BUILDROOT/weston/protocol/xdg-shell-client-protocol.h
+  includes = $includes -Iexternal/cairo/src -Ibuild/cairo -Iexternal/wayland/cursor
+
+build $BUILDROOT/weston/libtoytoolkit.a: ar $
+  $BUILDROOT/weston/libtoytoolkit/xdg-shell-protocol.o $
+  $BUILDROOT/weston/libtoytoolkit/text-cursor-position-protocol.o $
+  $BUILDROOT/weston/libtoytoolkit/relative-pointer-unstable-v1-protocol.o $
+  $BUILDROOT/weston/libtoytoolkit/pointer-constraints-unstable-v1-protocol.o $
+  $BUILDROOT/weston/libtoytoolkit/ivi-application-protocol.o $
+  $BUILDROOT/weston/libtoytoolkit/viewporter-protocol.o $
+  $BUILDROOT/weston/libtoytoolkit/window.o
+
+build $BUILDROOT/weston/desktop-shell/desktop-shell.o: cc external/weston/clients/desktop-shell.c | $BUILDROOT/weston/protocol/weston-desktop-shell-client-protocol.h
+  includes = $includes -Iexternal/cairo/src -Ibuild/cairo
+
+build $BUILDROOT/weston/weston-desktop-shell: link $
+  $BUILDROOT/weston/desktop-shell/weston-desktop-shell-protocol.o $
+  $BUILDROOT/weston/desktop-shell/desktop-shell.o $
+  $BUILDROOT/weston/libtoytoolkit.a $
+  $BUILDROOT/weston/libcairo-shared.a $
+  $BUILDROOT/weston/libshared.a $
+  | $
+  $SYSROOT/lib/libcairo.so $
+  $SYSROOT/lib/libjpeg.so $
+  $SYSROOT/lib/libpixman-1.so $
+  $SYSROOT/lib/libpng.so $
+  $SYSROOT/lib/libwayland-client.so $
+  $SYSROOT/lib/libwayland-cursor.so $
+  $SYSROOT/lib/libwayland-server.so $
+  $SYSROOT/lib/libwebp.so $
+  $SYSROOT/lib/libxkbcommon.so $
+  $SYSROOT/lib/libz.so
+  libs = -lm -lutil $
+    -lwayland-client -lwayland-server -lcairo -lpng -lz -lpixman-1 $
+    -ljpeg -lwebp -lxkbcommon -lwayland-cursor
+#  | $
+#  $SYSROOT/lib/libcairo.so $
+#  $SYSROOT/lib/libglib-2.0.so $
+#  $SYSROOT/lib/libgobject-2.0.so $
+#  $SYSROOT/lib/libharfbuzz.so $
+#  $SYSROOT/lib/libjpeg.so $
+#  $SYSROOT/lib/libm.so $
+#  $SYSROOT/lib/libpango-1.0.so $
+#  $SYSROOT/lib/libpangocairo-1.0.so $
+#  $SYSROOT/lib/libpixman-1.so $
+#  $SYSROOT/lib/libpng16.so $
+#  $SYSROOT/lib/libutil.a $
+#  $SYSROOT/lib/libwayland-client.so $
+#  $SYSROOT/lib/libwayland-cursor.so $
+#  $SYSROOT/lib/libwayland-server.so $
+#  $SYSROOT/lib/libwebp.so $
+#  $SYSROOT/lib/libxkbcommon.so $
+#  $SYSROOT/lib/libz.so
+#  libs = -lm -lutil $
+#    -lwayland-client -lwayland-server -lcairo -lpng16 -lz -lpixman-1 $
+#    -lpango-1.0 -lgobject-2.0 -lglib-2.0 -lharfbuzz -lpangocairo-1.0 $
+#    -ljpeg -lwebp -lxkbcommon -lwayland-cursor

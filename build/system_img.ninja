@@ -8,7 +8,7 @@ build $SYSTEMDIR.img: mkfs $SYSTEMDIR
   depfile = build/system/content.d
 
 rule fixup
-  command = sh build/system/content.sh && sleep 1s && touch $out
+  command = sh build/system/content.sh && touch $out
   description = [HOST] FIXUP $out
 
 build $SYSTEMDIR.stamp: fixup $SYSTEMDIR.img $
@@ -68,8 +68,11 @@ build $SYSTEMDIR/system/lib/weston/desktop-shell.so: copy $BUILDROOT/weston/desk
 build $SYSTEMDIR/system/lib/libweston-11/drm-backend.so: copy $BUILDROOT/weston/drm-backend.so
 build $SYSTEMDIR/system/lib/libweston-11/gl-renderer.so: copy $BUILDROOT/weston/gl-renderer.so
 build $SYSTEMDIR/system/lib/libweston-11/libweston-desktop-11.so: copy $BUILDROOT/weston/libweston-desktop-11.so
+build $SYSTEMDIR/system/libexec/weston-desktop-shell: copy $BUILDROOT/weston/weston-desktop-shell
 build $SYSTEMDIR/system/lib/dri/libgallium_dri.so: copy $BUILDROOT/mesa/libgallium_dri.so
 build $SYSTEMDIR/system/lib/dri/swrast_dri.so: hardlink $SYSTEMDIR/system/lib/dri/libgallium_dri.so
 build $SYSTEMDIR/system/lib/dri/kms_swrast_dri.so: hardlink $SYSTEMDIR/system/lib/dri/libgallium_dri.so
 build $SYSTEMDIR/system/lib/dri/vmwgfx_dri.so: hardlink $SYSTEMDIR/system/lib/dri/libgallium_dri.so
 build $SYSTEMDIR/system/lib/dri/virtio_gpu_dri.so: hardlink $SYSTEMDIR/system/lib/dri/libgallium_dri.so
+build $SYSTEMDIR/system/data/weston: sync | external/weston/data
+  source = external/weston/data/*.png
