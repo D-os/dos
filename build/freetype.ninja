@@ -1,0 +1,69 @@
+cflags = $
+  -W $
+  -Wall $
+  -Werror $
+  -DDARWIN_NO_CARBON $
+  -DFT2_BUILD_LIBRARY $
+  -O2 $
+  -Wno-unused-parameter $
+  -Wno-unused-variable $
+  -DFT_CONFIG_OPTION_USE_PNG $
+  -DFT_CONFIG_OPTION_USE_ZLIB $
+  -fPIC $
+  -DPIC $
+
+includes = -Iexternal/freetype/include -Iexternal/libpng
+
+libs = -lpng -lz
+
+build $BUILDROOT/freetype/autofit.o: cc external/freetype/src/autofit/autofit.c
+build $BUILDROOT/freetype/ftbase.o: cc external/freetype/src/base/ftbase.c
+build $BUILDROOT/freetype/ftbbox.o: cc external/freetype/src/base/ftbbox.c
+build $BUILDROOT/freetype/ftbitmap.o: cc external/freetype/src/base/ftbitmap.c
+build $BUILDROOT/freetype/ftdebug.o: cc external/freetype/src/base/ftdebug.c
+build $BUILDROOT/freetype/ftfstype.o: cc external/freetype/src/base/ftfstype.c
+build $BUILDROOT/freetype/ftgasp.o: cc external/freetype/src/base/ftgasp.c
+build $BUILDROOT/freetype/ftglyph.o: cc external/freetype/src/base/ftglyph.c
+build $BUILDROOT/freetype/ftinit.o: cc external/freetype/src/base/ftinit.c
+build $BUILDROOT/freetype/ftmm.o: cc external/freetype/src/base/ftmm.c
+build $BUILDROOT/freetype/ftstroke.o: cc external/freetype/src/base/ftstroke.c
+build $BUILDROOT/freetype/fttype1.o: cc external/freetype/src/base/fttype1.c
+build $BUILDROOT/freetype/ftsystem.o: cc external/freetype/src/base/ftsystem.c
+build $BUILDROOT/freetype/type1cid.o: cc external/freetype/src/cid/type1cid.c
+build $BUILDROOT/freetype/cff.o: cc external/freetype/src/cff/cff.c
+build $BUILDROOT/freetype/ftgzip.o: cc external/freetype/src/gzip/ftgzip.c
+build $BUILDROOT/freetype/psaux.o: cc external/freetype/src/psaux/psaux.c
+build $BUILDROOT/freetype/pshinter.o: cc external/freetype/src/pshinter/pshinter.c
+build $BUILDROOT/freetype/psnames.o: cc external/freetype/src/psnames/psnames.c
+build $BUILDROOT/freetype/raster.o: cc external/freetype/src/raster/raster.c
+build $BUILDROOT/freetype/sfnt.o: cc external/freetype/src/sfnt/sfnt.c
+build $BUILDROOT/freetype/smooth.o: cc external/freetype/src/smooth/smooth.c
+build $BUILDROOT/freetype/truetype.o: cc external/freetype/src/truetype/truetype.c
+build $BUILDROOT/freetype/type1.o: cc external/freetype/src/type1/type1.c
+
+build $BUILDROOT/freetype/libfreetype.so: so $
+  $BUILDROOT/freetype/autofit.o $
+  $BUILDROOT/freetype/ftbase.o $
+  $BUILDROOT/freetype/ftbbox.o $
+  $BUILDROOT/freetype/ftbitmap.o $
+  $BUILDROOT/freetype/ftdebug.o $
+  $BUILDROOT/freetype/ftfstype.o $
+  $BUILDROOT/freetype/ftgasp.o $
+  $BUILDROOT/freetype/ftglyph.o $
+  $BUILDROOT/freetype/ftinit.o $
+  $BUILDROOT/freetype/ftmm.o $
+  $BUILDROOT/freetype/ftstroke.o $
+  $BUILDROOT/freetype/fttype1.o $
+  $BUILDROOT/freetype/ftsystem.o $
+  $BUILDROOT/freetype/type1cid.o $
+  $BUILDROOT/freetype/cff.o $
+  $BUILDROOT/freetype/ftgzip.o $
+  $BUILDROOT/freetype/psaux.o $
+  $BUILDROOT/freetype/pshinter.o $
+  $BUILDROOT/freetype/psnames.o $
+  $BUILDROOT/freetype/raster.o $
+  $BUILDROOT/freetype/sfnt.o $
+  $BUILDROOT/freetype/smooth.o $
+  $BUILDROOT/freetype/truetype.o $
+  $BUILDROOT/freetype/type1.o $
+
