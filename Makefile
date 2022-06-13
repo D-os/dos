@@ -82,7 +82,7 @@ $(SYSROOT_DIR)/lib/libc.so: | $(SYSROOT_DIR)
 	rm -rf $(BUILD_DIR)/musl
 	mkdir -p $(BUILD_DIR)/musl
 	cd $(BUILD_DIR)/musl && CC=$(OUT_DIR)/target/bin/$(TARGET)-clang \
-		../../../external/musl/configure --prefix=
+		../../../external/musl/configure --prefix= --enable-debug
 	cd $(BUILD_DIR)/musl && DESTDIR=$(SYSROOT_DIR) $(MAKE) -j install
 
 libcxx: $(SYSROOT_DIR)/lib/libc++.so

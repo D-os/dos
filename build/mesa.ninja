@@ -10,7 +10,6 @@ flags = $
   '-DPACKAGE_VERSION="22.2.0-devel"' $
   '-DPACKAGE_BUGREPORT="https://gitlab.freedesktop.org/mesa/mesa/-/issues"' $
   -DHAVE_VIRGL $
-  -DHAVE_SVGA $
   -DHAVE_SWRAST $
   -DVIDEO_CODEC_VC1DEC=0 $
   -DVIDEO_CODEC_H264DEC=0 $
@@ -21,7 +20,6 @@ flags = $
   -DHAVE_SURFACELESS_PLATFORM $
   -DHAVE_DRM_PLATFORM $
   -DGALLIUM_VIRGL $
-  -DGALLIUM_VMWGFX $
   -DGALLIUM_SOFTPIPE $
   -DGALLIUM_LLVMPIPE $
   -DUSE_ELF_TLS $
@@ -502,7 +500,7 @@ build $BUILDROOT/mesa/libgallium_dri.so: so $
   $SYSROOT/lib/libunwind.so $
   $SYSROOT/lib/libwayland-client.so $
   $SYSROOT/lib/libz.so
-  libs = $BUILDROOT/mesa/libglapi.so -ldrm -lLLVM -pthread -lexpat -lm -lz -lunwind -lwayland-client -lc++
+  libs = -Wl,--build-id=sha1 $BUILDROOT/mesa/libglapi.so -ldrm -lLLVM -pthread -lexpat -lm -lz -lunwind -lwayland-client -lc++
 
 build $BUILDROOT/mesa/libmesa/program/lex.yy.o: cc build/mesa/libmesa/program/lex.yy.c
   includes = $includes -Ibuild/mesa/libmesa

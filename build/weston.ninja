@@ -434,6 +434,7 @@ build $BUILDROOT/weston/libweston-desktop-11.so: so $
   $BUILDROOT/weston/libweston-desktop-11/xdg-shell.o $
   $BUILDROOT/weston/libweston-desktop-11/xdg-shell-v6.o $
   | $
+  $BUILDROOT/weston/libweston-11.so $
   $SYSROOT/lib/libpixman-1.so $
   $SYSROOT/lib/libwayland-server.so $
   $SYSROOT/lib/libxkbcommon.so
