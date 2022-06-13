@@ -70,6 +70,7 @@ build $SYSTEMDIR/system/lib/libweston-11/gl-renderer.so: copy $BUILDROOT/weston/
 build $SYSTEMDIR/system/lib/libweston-11/libweston-desktop-11.so: copy $BUILDROOT/weston/libweston-desktop-11.so
 build $SYSTEMDIR/system/libexec/weston-desktop-shell: copy $BUILDROOT/weston/weston-desktop-shell
 build $SYSTEMDIR/system/libexec/weston-keyboard: copy $BUILDROOT/weston/weston-keyboard
+build $SYSTEMDIR/system/bin/weston-terminal: copy $BUILDROOT/weston/weston-terminal
 build $SYSTEMDIR/system/lib/dri/libgallium_dri.so: copy $BUILDROOT/mesa/libgallium_dri.so
 build $SYSTEMDIR/system/lib/dri/swrast_dri.so: hardlink $SYSTEMDIR/system/lib/dri/libgallium_dri.so
 build $SYSTEMDIR/system/lib/dri/kms_swrast_dri.so: hardlink $SYSTEMDIR/system/lib/dri/libgallium_dri.so

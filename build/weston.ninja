@@ -522,28 +522,6 @@ build $BUILDROOT/weston/weston-keyboard: link $
   libs = -lm $
   -lwayland-client -lwayland-server -lcairo -lpng -lz -lpixman-1 $
   -ljpeg -lwebp -lxkbcommon -lwayland-cursor
-#  | $
-#  $SYSROOT/lib/libcairo.so $
-#  $SYSROOT/lib/libglib-2.0.so $
-#  $SYSROOT/lib/libgobject-2.0.so $
-#  $SYSROOT/lib/libharfbuzz.so $
-#  $SYSROOT/lib/libjpeg.so $
-#  $SYSROOT/lib/libm.so $
-#  $SYSROOT/lib/libpango-1.0.so $
-#  $SYSROOT/lib/libpangocairo-1.0.so $
-#  $SYSROOT/lib/libpixman-1.so $
-#  $SYSROOT/lib/libpng16.so $
-#  $SYSROOT/lib/libutil.a $
-#  $SYSROOT/lib/libwayland-client.so $
-#  $SYSROOT/lib/libwayland-cursor.so $
-#  $SYSROOT/lib/libwayland-server.so $
-#  $SYSROOT/lib/libwebp.so $
-#  $SYSROOT/lib/libxkbcommon.so $
-#  $SYSROOT/lib/libz.so
-#  libs = -lm $
-#  -lwayland-client -lwayland-server -lcairo -lpng -lz -lpixman-1 $
-#  -lpango-1.0 -lgobject-2.0 -lglib-2.0 -lharfbuzz -lpangocairo-1.0 $
-#  -ljpeg -lwebp -lxkbcommon -lwayland-cursor
 
 build $BUILDROOT/weston/libexec/weston-desktop-shell/desktop-shell.o: cc external/weston/clients/desktop-shell.c | $BUILDROOT/weston/protocol/weston-desktop-shell-client-protocol.h
   includes = $includes -Iexternal/cairo/src -Ibuild/cairo
@@ -568,25 +546,24 @@ build $BUILDROOT/weston/weston-desktop-shell: link $
   libs = -lm -lutil $
     -lwayland-client -lwayland-server -lcairo -lpng -lz -lpixman-1 $
     -ljpeg -lwebp -lxkbcommon -lwayland-cursor
-#  | $
-#  $SYSROOT/lib/libcairo.so $
-#  $SYSROOT/lib/libglib-2.0.so $
-#  $SYSROOT/lib/libgobject-2.0.so $
-#  $SYSROOT/lib/libharfbuzz.so $
-#  $SYSROOT/lib/libjpeg.so $
-#  $SYSROOT/lib/libm.so $
-#  $SYSROOT/lib/libpango-1.0.so $
-#  $SYSROOT/lib/libpangocairo-1.0.so $
-#  $SYSROOT/lib/libpixman-1.so $
-#  $SYSROOT/lib/libpng16.so $
-#  $SYSROOT/lib/libutil.a $
-#  $SYSROOT/lib/libwayland-client.so $
-#  $SYSROOT/lib/libwayland-cursor.so $
-#  $SYSROOT/lib/libwayland-server.so $
-#  $SYSROOT/lib/libwebp.so $
-#  $SYSROOT/lib/libxkbcommon.so $
-#  $SYSROOT/lib/libz.so
-#  libs = -lm -lutil $
-#    -lwayland-client -lwayland-server -lcairo -lpng16 -lz -lpixman-1 $
-#    -lpango-1.0 -lgobject-2.0 -lglib-2.0 -lharfbuzz -lpangocairo-1.0 $
-#    -ljpeg -lwebp -lxkbcommon -lwayland-cursor
+
+build $BUILDROOT/weston/bin/weston-terminal/terminal.o: cc external/weston/clients/terminal.c
+  includes = $includes -Iexternal/cairo/src -Ibuild/cairo
+
+build $BUILDROOT/weston/weston-terminal: link $
+  $BUILDROOT/weston/bin/weston-terminal/terminal.o $
+  $BUILDROOT/weston/libtoytoolkit.a $
+  $BUILDROOT/weston/libcairo-shared.a $
+  $BUILDROOT/weston/libshared.a $
+  | $
+  $SYSROOT/lib/libcairo.so $
+  $SYSROOT/lib/libjpeg.so $
+  $SYSROOT/lib/libpixman-1.so $
+  $SYSROOT/lib/libpng.so $
+  $SYSROOT/lib/libwayland-client.so $
+  $SYSROOT/lib/libwayland-cursor.so $
+  $SYSROOT/lib/libwayland-server.so $
+  $SYSROOT/lib/libwebp.so $
+  $SYSROOT/lib/libxkbcommon.so $
+  $SYSROOT/lib/libz.so
+  libs = -lm -lwayland-client -lwayland-server -lcairo -lpng -lz -lpixman-1 -ljpeg -lwebp -lxkbcommon -lwayland-cursor
