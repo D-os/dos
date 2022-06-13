@@ -9,7 +9,7 @@ qemu-system-x86_64 -enable-kvm -machine q35 -cpu host -smp 4 -m 8G \
     -device virtio-vga-gl -display sdl,gl=on \
     -device intel-hda -device hda-duplex \
     -usb -device usb-mouse -device usb-kbd \
-    $BIOS -append "$CMDLINE" -serial stdio \
+    $BIOS -append "$CMDLINE" -serial mon:stdio \
     -drive format=qcow2,file=$IMG,cache=none,aio=threads,if=virtio \
     -kernel build/linux/arch/x86/boot/bzImage -initrd build/initramfs.gz
 rm -f $IMG
