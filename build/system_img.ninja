@@ -77,3 +77,8 @@ build $SYSTEMDIR/system/lib/dri/vmwgfx_dri.so: hardlink $SYSTEMDIR/system/lib/dr
 build $SYSTEMDIR/system/lib/dri/virtio_gpu_dri.so: hardlink $SYSTEMDIR/system/lib/dri/libgallium_dri.so
 build $SYSTEMDIR/system/data/weston: sync | external/weston/data
   source = external/weston/data/*.png
+build $SYSTEMDIR/lib/libz.so.1: symlink
+  target = libz.so
+
+build $SYSTEMDIR/bin/lldb: copy $BUILDROOT/llvm/bin/lldb
+build $SYSTEMDIR/bin/lldb-server: copy $BUILDROOT/llvm/bin/lldb-server

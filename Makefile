@@ -8,11 +8,11 @@ BUILD_DIR := $(OUT_DIR)/build
 TARGET := x86_64-unknown-linux-musl
 SYSROOT_DIR := $(OUT_DIR)/target/$(TARGET)
 
-.PHONY: toolchain sysroot clean compdb toolchain-host toolchain-target mold samurai kati libc libcxx libllvm kernel-headers kernel kernel_modules
+.PHONY: toolchain sysroot clean compdb toolchain-host toolchain-target mold samurai kati libc libcxx llvm kernel-headers kernel kernel_modules
 
 toolchain: toolchain-host toolchain-target yasm samurai kati
 
-sysroot: $(SYSROOT_DIR) kernel-headers libc libcxx libllvm
+sysroot: $(SYSROOT_DIR) kernel-headers libc libcxx llvm
 
 clean:
 	rm -rf $(OUT_DIR)
@@ -98,21 +98,24 @@ $(SYSROOT_DIR)/lib/libc++.so: | $(SYSROOT_DIR)/lib/libc.so
 		-DLIBCXX_ENABLE_SHARED=YES -DLIBCXX_ENABLE_STATIC=NO -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=NO
 	cd $(BUILD_DIR)/libcxx && PATH=$(OUT_DIR)/host/bin:${PATH} ninja install
 
-libllvm: $(SYSROOT_DIR)/lib/libLLVM.so
+llvm: $(SYSROOT_DIR)/lib/libLLVM.so
 
 $(SYSROOT_DIR)/lib/libLLVM.so: | $(SYSROOT_DIR)/lib/libc++.so
-	rm -rf $(BUILD_DIR)/libllvm
+	rm -rf $(BUILD_DIR)/llvm
 	PATH=$(OUT_DIR)/target/bin:${PATH} cmake -G Ninja \
 		--toolchain $(ROOT_DIR)/tools/CMake.toolchain \
-		-S external/llvm-project/llvm -B $(BUILD_DIR)/libllvm \
-		-DLLVM_ENABLE_PROJECTS='llvm' \
+		-S external/llvm-project/llvm -B $(BUILD_DIR)/llvm \
+		-DLLVM_ENABLE_PROJECTS="clang;lldb" \
 		-DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
 		-DLLVM_TARGETS_TO_BUILD="AArch64;AMDGPU;NVPTX;WebAssembly;X86" \
 		-DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_LINK_LLVM_DYLIB=ON \
 		-DLLVM_ENABLE_RTTI=ON -DLLVM_CCACHE_BUILD=ON \
+		-DLLDB_ENABLE_PYTHON=0 -DLLDB_ENABLE_LIBEDIT=0 -DLLDB_ENABLE_CURSES=0 -DLLVM_ENABLE_TERMINFO=0 \
 		-DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=$(SYSROOT_DIR) \
 		-DLLVM_TABLEGEN=$(OUT_DIR)/host/bin/llvm-tblgen -DLLVM_OPTIMIZED_TABLEGEN=ON
-	cd $(BUILD_DIR)/libllvm && PATH=$(OUT_DIR)/host/bin:${PATH} ninja install-LLVM install-llvm-headers
+	cd $(BUILD_DIR)/llvm && \
+		export LD_LIBRARY_PATH=$(OUT_DIR)/target/clang/lib/x86_64-unknown-linux-gnu && \
+		PATH=$(OUT_DIR)/host/bin:${PATH} ninja install-LLVM install-llvm-headers install-lldb install-lldb-server install-liblldb install-clang-cpp
 
 kernel-headers: $(SYSROOT_DIR)/include/linux
 

@@ -217,6 +217,7 @@ out/system.img: \
   out/system/bin/zcat \
   out/system/bin/ldd \
   out/system/lib/libz.so \
+  out/system/lib/libz.so.1 \
   out/system/lib/libjpeg.so \
   out/system/lib/libpng.so \
   out/system/lib/libwebp.so \
@@ -243,4 +244,6 @@ out/system.img: \
   out/system/system/data/weston \
   out/system/system/data/xkb \
   out/system/system/data/libinput \
+  out/system/bin/lldb \
+  out/system/bin/lldb-server \
   
