@@ -244,6 +244,7 @@ out/system.img: \
   out/system/system/data/weston \
   out/system/system/data/xkb \
   out/system/system/data/libinput \
+  out/system/system/data/icons/default \
   out/system/bin/lldb \
   out/system/bin/lldb-server \
   
