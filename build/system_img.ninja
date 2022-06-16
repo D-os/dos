@@ -8,7 +8,7 @@ build $SYSTEMDIR.img: mkfs $SYSTEMDIR
   depfile = build/system/content.d
 
 rule fixup
-  command = sh build/system/content.sh && touch $out
+  command = sh build/system/content.sh && touch -d "now + 1 second" $out
   description = [HOST] FIXUP $out
 
 build $SYSTEMDIR.stamp: fixup $SYSTEMDIR.img $

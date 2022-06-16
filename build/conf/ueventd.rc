@@ -1,7 +1,4 @@
-import /vendor/etc/ueventd.rc
-import /odm/etc/ueventd.rc
-
-firmware_directories /etc/firmware/ /odm/firmware/ /vendor/firmware/ /firmware/image/
+firmware_directories /etc/firmware/
 uevent_socket_rcvbuf_size 16M
 
 subsystem graphics
@@ -60,12 +57,12 @@ subsystem dma_heap
 /dev/v4l-touch*           0660   root       input
 /dev/snd/*                0660   system     audio
 /dev/bus/usb/*            0660   root       usb
-/dev/mtp_usb              0660   root       mtp
+#/dev/mtp_usb              0660   root       mtp
 /dev/usb_accessory        0660   root       usb
-/dev/tun                  0660   system     vpn
+#/dev/tun                  0660   system     vpn
 
 # CDMA radio interface MUX
-/dev/ppp                  0660   radio      vpn
+#/dev/ppp                  0660   radio      vpn
 
 # Virtualisation is managed by Virt Manager
 /dev/kvm                  0600   virtmanager root
