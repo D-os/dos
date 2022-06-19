@@ -237,4 +237,7 @@ subninja build/xkeyboard-config.ninja
 subninja build/zlib.ninja
 build $SYSROOT/lib/libz.so: copy $BUILDROOT/zlib/libz.so
 
+subninja build/zstd.ninja
+build $SYSROOT/lib/libzstd.so: copy $BUILDROOT/zstd/libzstd.so
+
 default initramfs system.img

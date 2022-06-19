@@ -1,0 +1,71 @@
+cflags = -Wall -Werror $
+  -DZSTD_MULTITHREAD
+
+includes = $
+  -Iexternal/zstd/lib/common $
+  -Iexternal/zstd/lib/compress $
+  -Iexternal/zstd/lib/decompress $
+  -Iexternal/zstd/lib/dictBuilder $
+
+build $BUILDROOT/zstd/entropy_common.o: cc external/zstd/lib/common/entropy_common.c
+build $BUILDROOT/zstd/fse_decompress.o: cc external/zstd/lib/common/fse_decompress.c
+build $BUILDROOT/zstd/threading.o: cc external/zstd/lib/common/threading.c
+build $BUILDROOT/zstd/pool.o: cc external/zstd/lib/common/pool.c
+build $BUILDROOT/zstd/zstd_common.o: cc external/zstd/lib/common/zstd_common.c
+build $BUILDROOT/zstd/error_private.o: cc external/zstd/lib/common/error_private.c
+build $BUILDROOT/zstd/xxhash.o: cc external/zstd/lib/common/xxhash.c
+build $BUILDROOT/zstd/hist.o: cc external/zstd/lib/compress/hist.c
+build $BUILDROOT/zstd/fse_compress.o: cc external/zstd/lib/compress/fse_compress.c
+build $BUILDROOT/zstd/huf_compress.o: cc external/zstd/lib/compress/huf_compress.c
+build $BUILDROOT/zstd/zstd_compress.o: cc external/zstd/lib/compress/zstd_compress.c
+build $BUILDROOT/zstd/zstd_compress_literals.o: cc external/zstd/lib/compress/zstd_compress_literals.c
+build $BUILDROOT/zstd/zstd_compress_sequences.o: cc external/zstd/lib/compress/zstd_compress_sequences.c
+build $BUILDROOT/zstd/zstd_compress_superblock.o: cc external/zstd/lib/compress/zstd_compress_superblock.c
+build $BUILDROOT/zstd/zstdmt_compress.o: cc external/zstd/lib/compress/zstdmt_compress.c
+build $BUILDROOT/zstd/zstd_fast.o: cc external/zstd/lib/compress/zstd_fast.c
+build $BUILDROOT/zstd/zstd_double_fast.o: cc external/zstd/lib/compress/zstd_double_fast.c
+build $BUILDROOT/zstd/zstd_lazy.o: cc external/zstd/lib/compress/zstd_lazy.c
+build $BUILDROOT/zstd/zstd_opt.o: cc external/zstd/lib/compress/zstd_opt.c
+build $BUILDROOT/zstd/zstd_ldm.o: cc external/zstd/lib/compress/zstd_ldm.c
+build $BUILDROOT/zstd/huf_decompress.o: cc external/zstd/lib/decompress/huf_decompress.c
+build $BUILDROOT/zstd/zstd_decompress.o: cc external/zstd/lib/decompress/zstd_decompress.c
+build $BUILDROOT/zstd/zstd_decompress_block.o: cc external/zstd/lib/decompress/zstd_decompress_block.c
+build $BUILDROOT/zstd/zstd_ddict.o: cc external/zstd/lib/decompress/zstd_ddict.c
+build $BUILDROOT/zstd/cover.o: cc external/zstd/lib/dictBuilder/cover.c
+build $BUILDROOT/zstd/fastcover.o: cc external/zstd/lib/dictBuilder/fastcover.c
+build $BUILDROOT/zstd/divsufsort.o: cc external/zstd/lib/dictBuilder/divsufsort.c
+build $BUILDROOT/zstd/zdict.o: cc external/zstd/lib/dictBuilder/zdict.c
+build $BUILDROOT/zstd/huf_decompress_amd64.o: cc external/zstd/lib/decompress/huf_decompress_amd64.S
+
+build $BUILDROOT/zstd/libzstd.a: ar $
+  $BUILDROOT/zstd/entropy_common.o $
+  $BUILDROOT/zstd/fse_decompress.o $
+  $BUILDROOT/zstd/threading.o $
+  $BUILDROOT/zstd/pool.o $
+  $BUILDROOT/zstd/zstd_common.o $
+  $BUILDROOT/zstd/error_private.o $
+  $BUILDROOT/zstd/xxhash.o $
+  $BUILDROOT/zstd/hist.o $
+  $BUILDROOT/zstd/fse_compress.o $
+  $BUILDROOT/zstd/huf_compress.o $
+  $BUILDROOT/zstd/zstd_compress.o $
+  $BUILDROOT/zstd/zstd_compress_literals.o $
+  $BUILDROOT/zstd/zstd_compress_sequences.o $
+  $BUILDROOT/zstd/zstd_compress_superblock.o $
+  $BUILDROOT/zstd/zstdmt_compress.o $
+  $BUILDROOT/zstd/zstd_fast.o $
+  $BUILDROOT/zstd/zstd_double_fast.o $
+  $BUILDROOT/zstd/zstd_lazy.o $
+  $BUILDROOT/zstd/zstd_opt.o $
+  $BUILDROOT/zstd/zstd_ldm.o $
+  $BUILDROOT/zstd/huf_decompress.o $
+  $BUILDROOT/zstd/zstd_decompress.o $
+  $BUILDROOT/zstd/zstd_decompress_block.o $
+  $BUILDROOT/zstd/zstd_ddict.o $
+  $BUILDROOT/zstd/cover.o $
+  $BUILDROOT/zstd/fastcover.o $
+  $BUILDROOT/zstd/divsufsort.o $
+  $BUILDROOT/zstd/zdict.o $
+  $BUILDROOT/zstd/huf_decompress_amd64.o $
+
+build $BUILDROOT/zstd/libzstd.so: soa $BUILDROOT/zstd/libzstd.a
