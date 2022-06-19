@@ -157,6 +157,9 @@ subninja build/libpropertyinfoserializer.ninja
 subninja build/libsystemproperties.ninja
 build $SYSROOT/lib/libsystemproperties.so: copy $BUILDROOT/libsystemproperties/libsystemproperties.so
 
+subninja build/libsysutils.ninja
+build $SYSROOT/lib/libsysutils.so: copy $BUILDROOT/libsysutils/libsysutils.so
+
 subninja build/libudev.ninja
 build $SYSROOT/lib/libudev.so: copy $BUILDROOT/libudev/libudev.so
 build $SYSROOT/include/libudev.h: copy external/libudev/udev.h

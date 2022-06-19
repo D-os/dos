@@ -1,0 +1,34 @@
+cxxflags = -Werror $
+  -D__UAPI_DEF_IF_IFCONF=0 $
+  -D__UAPI_DEF_IF_IFMAP=0 $
+  -D__UAPI_DEF_IF_IFREQ=0 $
+
+includes = -Isystem/core/libsysutils/include $
+  -Isystem/libbase/include $
+  -Isystem/core/libcutils/include $
+  -Isystem/logging/liblog/include $
+  -include system/libbase/include/android-base/macros.h
+
+libs = -lc++ -lunwind -lbase -lcutils -llog
+
+build $BUILDROOT/libsysutils/SocketListener.o: cxx system/core/libsysutils/src/SocketListener.cpp
+build $BUILDROOT/libsysutils/FrameworkListener.o: cxx system/core/libsysutils/src/FrameworkListener.cpp
+build $BUILDROOT/libsysutils/NetlinkListener.o: cxx system/core/libsysutils/src/NetlinkListener.cpp
+build $BUILDROOT/libsysutils/NetlinkEvent.o: cxx system/core/libsysutils/src/NetlinkEvent.cpp
+  includes = -include build/libsysutils/ndisc.h $includes
+build $BUILDROOT/libsysutils/FrameworkCommand.o: cxx system/core/libsysutils/src/FrameworkCommand.cpp
+build $BUILDROOT/libsysutils/SocketClient.o: cxx system/core/libsysutils/src/SocketClient.cpp
+build $BUILDROOT/libsysutils/ServiceManager.o: cxx system/core/libsysutils/src/ServiceManager.cpp
+
+build $BUILDROOT/libsysutils/libsysutils.so: so $
+  $BUILDROOT/libsysutils/SocketListener.o $
+  $BUILDROOT/libsysutils/FrameworkListener.o $
+  $BUILDROOT/libsysutils/NetlinkListener.o $
+  $BUILDROOT/libsysutils/NetlinkEvent.o $
+  $BUILDROOT/libsysutils/FrameworkCommand.o $
+  $BUILDROOT/libsysutils/SocketClient.o $
+  $BUILDROOT/libsysutils/ServiceManager.o $
+  | $
+  $SYSROOT/lib/libbase.so $
+  $SYSROOT/lib/libcutils.so $
+  $SYSROOT/lib/liblog.so
