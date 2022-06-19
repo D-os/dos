@@ -1,0 +1,99 @@
+cxxflags = $
+  -Wextra $
+  -Wthread-safety $
+  -DAUDITD_LOG_TAG=1003 $
+  -DCHATTY_LOG_TAG=1004 $
+  -DTAG_DEF_LOG_TAG=1005 $
+  -DLIBLOG_LOG_TAG=1006 $
+  -D_LIBCPP_ENABLE_THREAD_SAFETY_ANNOTATIONS $
+  -Wno-c99-designator $
+  -Wno-sign-compare $
+  -Wno-missing-field-initializers $
+
+includes = -Isystem/logging/logd $
+  -Isystem/libbase/include $
+  -Isystem/logging/liblog/include $
+  -Isystem/core/libcutils/include $
+  -Isystem/core/libutils/include $
+  -Isystem/core/libsystem/include $
+  -Isystem/core/libsysutils/include $
+  -Isystem/core/libprocessgroup/include $
+  -Iexternal/zlib $
+  -Iexternal/zstd/lib $
+
+libs = -lc++ -lunwind -lbase -lz -lzstd
+
+build $BUILDROOT/logd/ChattyLogBuffer.o: cxx system/logging/logd/ChattyLogBuffer.cpp
+build $BUILDROOT/logd/CompressionEngine.o: cxx system/logging/logd/CompressionEngine.cpp
+build $BUILDROOT/logd/LogBufferElement.o: cxx system/logging/logd/LogBufferElement.cpp
+build $BUILDROOT/logd/LogReaderList.o: cxx system/logging/logd/LogReaderList.cpp
+build $BUILDROOT/logd/LogReaderThread.o: cxx system/logging/logd/LogReaderThread.cpp
+build $BUILDROOT/logd/LogSize.o: cxx system/logging/logd/LogSize.cpp
+build $BUILDROOT/logd/LogStatistics.o: cxx system/logging/logd/LogStatistics.cpp
+build $BUILDROOT/logd/LogTags.o: cxx system/logging/logd/LogTags.cpp
+build $BUILDROOT/logd/LogdLock.o: cxx system/logging/logd/LogdLock.cpp
+build $BUILDROOT/logd/PruneList.o: cxx system/logging/logd/PruneList.cpp
+build $BUILDROOT/logd/SerializedFlushToState.o: cxx system/logging/logd/SerializedFlushToState.cpp
+build $BUILDROOT/logd/SerializedLogBuffer.o: cxx system/logging/logd/SerializedLogBuffer.cpp
+build $BUILDROOT/logd/SerializedLogChunk.o: cxx system/logging/logd/SerializedLogChunk.cpp
+build $BUILDROOT/logd/SimpleLogBuffer.o: cxx system/logging/logd/SimpleLogBuffer.cpp
+
+build $BUILDROOT/logd/liblogd.a: ar $
+  $BUILDROOT/logd/ChattyLogBuffer.o $
+  $BUILDROOT/logd/CompressionEngine.o $
+  $BUILDROOT/logd/LogBufferElement.o $
+  $BUILDROOT/logd/LogReaderList.o $
+  $BUILDROOT/logd/LogReaderThread.o $
+  $BUILDROOT/logd/LogSize.o $
+  $BUILDROOT/logd/LogStatistics.o $
+  $BUILDROOT/logd/LogTags.o $
+  $BUILDROOT/logd/LogdLock.o $
+  $BUILDROOT/logd/PruneList.o $
+  $BUILDROOT/logd/SerializedFlushToState.o $
+  $BUILDROOT/logd/SerializedLogBuffer.o $
+  $BUILDROOT/logd/SerializedLogChunk.o $
+  $BUILDROOT/logd/SimpleLogBuffer.o $
+
+build $BUILDROOT/logd/main.o: cxx system/logging/logd/main.cpp
+  includes = -include system/bioniccompat/bionic/libc/include/sys/klog.h $includes
+build $BUILDROOT/logd/LogPermissions.o: cxx system/logging/logd/LogPermissions.cpp
+build $BUILDROOT/logd/CommandListener.o: cxx system/logging/logd/CommandListener.cpp
+build $BUILDROOT/logd/LogListener.o: cxx system/logging/logd/LogListener.cpp
+build $BUILDROOT/logd/LogReader.o: cxx system/logging/logd/LogReader.cpp
+build $BUILDROOT/logd/LogAudit.o: cxx system/logging/logd/LogAudit.cpp
+build $BUILDROOT/logd/LogKlog.o: cxx system/logging/logd/LogKlog.cpp
+build $BUILDROOT/logd/TrustyLog.o: cxx system/logging/logd/TrustyLog.cpp
+build $BUILDROOT/logd/libaudit.o: cxx system/logging/logd/libaudit.cpp
+build $BUILDROOT/logd/PkgIds.o: cxx system/logging/logd/PkgIds.cpp
+
+build $BUILDROOT/logd/logd: link $
+  $BUILDROOT/logd/main.o $
+  $BUILDROOT/logd/LogPermissions.o $
+  $BUILDROOT/logd/CommandListener.o $
+  $BUILDROOT/logd/LogListener.o $
+  $BUILDROOT/logd/LogReader.o $
+  $BUILDROOT/logd/LogAudit.o $
+  $BUILDROOT/logd/LogKlog.o $
+  $BUILDROOT/logd/TrustyLog.o $
+  $BUILDROOT/logd/libaudit.o $
+  $BUILDROOT/liblog/liblog.a $
+  $BUILDROOT/logd/liblogd.a $
+  | $
+  $SYSROOT/lib/libbase.so $
+  $SYSROOT/lib/libz.so $
+  $SYSROOT/lib/libzstd.so $
+  $SYSROOT/lib/liblog.so $
+  $SYSROOT/lib/libsysutils.so $
+  $SYSROOT/lib/libcutils.so $
+  $SYSROOT/lib/libprocessgroup.so $
+  $SYSROOT/lib/libcap.so
+  libs = $libs -llog -lsysutils -lcutils -lprocessgroup -lcap
+
+build $BUILDROOT/logd/auditctl.o: cxx system/logging/logd/auditctl.cpp
+
+build $BUILDROOT/logd/auditctl: link $
+  $BUILDROOT/logd/auditctl.o $
+  $BUILDROOT/logd/libaudit.o $
+  | $
+  $SYSROOT/lib/libbase.so
+  libs = -lbase
