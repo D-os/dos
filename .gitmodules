@@ -143,3 +143,6 @@
 [submodule "external/freetype"]
 	path = external/freetype
 	url = https://android.googlesource.com/platform/external/freetype
+[submodule "frameworks/native"]
+	path = frameworks/native
+	url = https://android.googlesource.com/platform/frameworks/native
