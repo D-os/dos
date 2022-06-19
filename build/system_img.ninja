@@ -51,6 +51,7 @@ build $SYSTEMDIR/system/etc/init/hw/init.rc: copy build/conf/init.rc
 build $SYSTEMDIR/system/etc/ueventd.rc: copy build/conf/ueventd.rc
 build $SYSTEMDIR/etc/passwd: copy build/conf/passwd
 build $SYSTEMDIR/etc/group: copy build/conf/group
+build $SYSTEMDIR/etc/fstab: copy build/conf/fstab
 build $SYSTEMDIR/lib/libz.so: copy $SYSROOT/lib/libz.so
 build $SYSTEMDIR/lib/libjpeg.so: copy $SYSROOT/lib/libjpeg.so
 build $SYSTEMDIR/lib/libpng.so: copy $SYSROOT/lib/libpng.so

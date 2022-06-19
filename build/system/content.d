@@ -17,6 +17,7 @@ out/system.img: \
   out/system/system/etc/ueventd.rc \
   out/system/etc/passwd \
   out/system/etc/group \
+  out/system/etc/fstab \
   out/system/system/bin/sh \
   out/system/system/etc/mkshrc \
   out/system/system/bin/toybox \

@@ -1,3 +1,4 @@
+#!/bin/sh
 cd "$(dirname "$0")/out" || exit
 IMG=tmp.img
 CMDLINE="loglevel=7 console=ttyS0 printk.devkmsg=on androidboot.fstab_suffix=qemu androidboot.first_stage_console=0"
@@ -11,6 +12,7 @@ qemu-system-x86_64 -enable-kvm -machine q35 -cpu host -smp 4 -m 8G \
     -device virtio-mouse -device virtio-keyboard \
     -rtc clock=host,base=localtime \
     $BIOS -append "$CMDLINE" -serial mon:stdio \
+    -kernel build/linux/arch/x86/boot/bzImage -initrd build/initramfs.gz \
     -drive format=qcow2,file=$IMG,cache=none,aio=threads,if=virtio \
-    -kernel build/linux/arch/x86/boot/bzImage -initrd build/initramfs.gz
+    -virtfs local,path=./system/system,mount_tag=system,security_model=none,readonly=on
 rm -f $IMG

@@ -1,0 +1,1 @@
+system /system 9p ro,user,noauto,trans=virtio,version=9p2000.L,cache=loose 0 0
