@@ -149,3 +149,6 @@
 [submodule "external/zstd"]
 	path = external/zstd
 	url = https://github.com/facebook/zstd.git
+[submodule "system/tools/aidl"]
+	path = system/tools/aidl
+	url = https://android.googlesource.com/platform/system/tools/aidl
