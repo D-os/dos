@@ -40,9 +40,9 @@ includes = $
   -Iexternal/protobuf/src $
   -Iexternal/fmtlib/include $
 
-build $BUILDROOT/init/proto/system/core/init/subcontext.pb.d | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc: protoc system/core/init/subcontext.proto | out/host/bin/protoc
-build $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.d | $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.h $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.cc: protoc system/core/init/persistent_properties.proto | out/host/bin/protoc
-build $BUILDROOT/init/proto/system/core/init/property_service.pb.d | $BUILDROOT/init/proto/system/core/init/property_service.pb.h $BUILDROOT/init/proto/system/core/init/property_service.pb.cc: protoc system/core/init/property_service.proto | out/host/bin/protoc
+build $BUILDROOT/init/proto/system/core/init/subcontext.pb.d | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc: protoc system/core/init/subcontext.proto | $HOSTPROTOC
+build $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.d | $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.h $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.cc: protoc system/core/init/persistent_properties.proto | $HOSTPROTOC
+build $BUILDROOT/init/proto/system/core/init/property_service.pb.d | $BUILDROOT/init/proto/system/core/init/property_service.pb.h $BUILDROOT/init/proto/system/core/init/property_service.pb.cc: protoc system/core/init/property_service.proto | $HOSTPROTOC
 
 build $BUILDROOT/init/obj/subcontext.pb.o: cxx $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc
   cxxflags = $cxxflags -Wno-unused-command-line-argument
