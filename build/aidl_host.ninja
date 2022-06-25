@@ -1,0 +1,104 @@
+cxxflags = $
+  -Wall $
+  -Werror $
+  -Wextra $
+  -O0 $
+  -g $
+  -Wno-defaulted-function-deleted $
+  -Wno-inconsistent-missing-override $
+
+includes = -Isystem/tools/aidl -I$BUILDROOT/_host/aidl $
+  -Isystem/libbase/include $
+  -Iexternal/fmtlib/include $
+
+rule lex
+  command = flex -o $out $in
+  description = [HOST] LEX $out
+
+build $BUILDROOT/_host/aidl/aidl_language_l.cpp: lex system/tools/aidl/aidl_language_l.ll
+
+rule yacc
+  command = bison --header=$header -o $out $in
+  description = [HOST] YACC $out
+
+build $BUILDROOT/_host/aidl/aidl_language_y.cpp | $BUILDROOT/_host/aidl/aidl_language_y.h: yacc system/tools/aidl/aidl_language_y.yy
+  header = $BUILDROOT/_host/aidl/aidl_language_y.h
+
+build $BUILDROOT/_host/aidl/aidl_checkapi.o: hostcxx system/tools/aidl/aidl_checkapi.cpp
+build $BUILDROOT/_host/aidl/aidl_const_expressions.o: hostcxx system/tools/aidl/aidl_const_expressions.cpp
+build $BUILDROOT/_host/aidl/aidl_dumpapi.o: hostcxx system/tools/aidl/aidl_dumpapi.cpp
+build $BUILDROOT/_host/aidl/aidl_language_l.o: hostcxx $BUILDROOT/_host/aidl/aidl_language_l.cpp | $BUILDROOT/_host/aidl/aidl_language_y.h
+build $BUILDROOT/_host/aidl/aidl_language_y.o: hostcxx $BUILDROOT/_host/aidl/aidl_language_y.cpp
+build $BUILDROOT/_host/aidl/aidl_language.o: hostcxx system/tools/aidl/aidl_language.cpp | $BUILDROOT/_host/aidl/aidl_language_y.h
+build $BUILDROOT/_host/aidl/aidl_to_cpp_common.o: hostcxx system/tools/aidl/aidl_to_cpp_common.cpp
+build $BUILDROOT/_host/aidl/aidl_to_cpp.o: hostcxx system/tools/aidl/aidl_to_cpp.cpp
+build $BUILDROOT/_host/aidl/aidl_to_java.o: hostcxx system/tools/aidl/aidl_to_java.cpp
+build $BUILDROOT/_host/aidl/aidl_to_ndk.o: hostcxx system/tools/aidl/aidl_to_ndk.cpp
+build $BUILDROOT/_host/aidl/aidl_to_rust.o: hostcxx system/tools/aidl/aidl_to_rust.cpp
+build $BUILDROOT/_host/aidl/aidl_typenames.o: hostcxx system/tools/aidl/aidl_typenames.cpp
+build $BUILDROOT/_host/aidl/aidl.o: hostcxx system/tools/aidl/aidl.cpp
+build $BUILDROOT/_host/aidl/ast_java.o: hostcxx system/tools/aidl/ast_java.cpp
+build $BUILDROOT/_host/aidl/check_valid.o: hostcxx system/tools/aidl/check_valid.cpp
+build $BUILDROOT/_host/aidl/code_writer.o: hostcxx system/tools/aidl/code_writer.cpp
+build $BUILDROOT/_host/aidl/comments.o: hostcxx system/tools/aidl/comments.cpp
+build $BUILDROOT/_host/aidl/diagnostics.o: hostcxx system/tools/aidl/diagnostics.cpp
+build $BUILDROOT/_host/aidl/generate_aidl_mappings.o: hostcxx system/tools/aidl/generate_aidl_mappings.cpp
+build $BUILDROOT/_host/aidl/generate_cpp.o: hostcxx system/tools/aidl/generate_cpp.cpp
+build $BUILDROOT/_host/aidl/generate_java_binder.o: hostcxx system/tools/aidl/generate_java_binder.cpp
+build $BUILDROOT/_host/aidl/generate_java.o: hostcxx system/tools/aidl/generate_java.cpp
+build $BUILDROOT/_host/aidl/generate_ndk.o: hostcxx system/tools/aidl/generate_ndk.cpp
+build $BUILDROOT/_host/aidl/generate_rust.o: hostcxx system/tools/aidl/generate_rust.cpp
+build $BUILDROOT/_host/aidl/import_resolver.o: hostcxx system/tools/aidl/import_resolver.cpp
+build $BUILDROOT/_host/aidl/io_delegate.o: hostcxx system/tools/aidl/io_delegate.cpp
+build $BUILDROOT/_host/aidl/location.o: hostcxx system/tools/aidl/location.cpp
+build $BUILDROOT/_host/aidl/logging.o: hostcxx system/tools/aidl/logging.cpp
+build $BUILDROOT/_host/aidl/options.o: hostcxx system/tools/aidl/options.cpp
+build $BUILDROOT/_host/aidl/parser.o: hostcxx system/tools/aidl/parser.cpp | $BUILDROOT/_host/aidl/aidl_language_y.h
+build $BUILDROOT/_host/aidl/permission.o: hostcxx system/tools/aidl/permission.cpp
+build $BUILDROOT/_host/aidl/preprocess.o: hostcxx system/tools/aidl/preprocess.cpp
+
+build $BUILDROOT/_host/aidl/libaidl-common.a: ar $
+  $BUILDROOT/_host/aidl/aidl_checkapi.o $
+  $BUILDROOT/_host/aidl/aidl_const_expressions.o $
+  $BUILDROOT/_host/aidl/aidl_dumpapi.o $
+  $BUILDROOT/_host/aidl/aidl_language_l.o $
+  $BUILDROOT/_host/aidl/aidl_language_y.o $
+  $BUILDROOT/_host/aidl/aidl_language.o $
+  $BUILDROOT/_host/aidl/aidl_to_cpp_common.o $
+  $BUILDROOT/_host/aidl/aidl_to_cpp.o $
+  $BUILDROOT/_host/aidl/aidl_to_java.o $
+  $BUILDROOT/_host/aidl/aidl_to_ndk.o $
+  $BUILDROOT/_host/aidl/aidl_to_rust.o $
+  $BUILDROOT/_host/aidl/aidl_typenames.o $
+  $BUILDROOT/_host/aidl/aidl.o $
+  $BUILDROOT/_host/aidl/ast_java.o $
+  $BUILDROOT/_host/aidl/check_valid.o $
+  $BUILDROOT/_host/aidl/code_writer.o $
+  $BUILDROOT/_host/aidl/comments.o $
+  $BUILDROOT/_host/aidl/diagnostics.o $
+  $BUILDROOT/_host/aidl/generate_aidl_mappings.o $
+  $BUILDROOT/_host/aidl/generate_cpp.o $
+  $BUILDROOT/_host/aidl/generate_java_binder.o $
+  $BUILDROOT/_host/aidl/generate_java.o $
+  $BUILDROOT/_host/aidl/generate_ndk.o $
+  $BUILDROOT/_host/aidl/generate_rust.o $
+  $BUILDROOT/_host/aidl/import_resolver.o $
+  $BUILDROOT/_host/aidl/io_delegate.o $
+  $BUILDROOT/_host/aidl/location.o $
+  $BUILDROOT/_host/aidl/logging.o $
+  $BUILDROOT/_host/aidl/options.o $
+  $BUILDROOT/_host/aidl/parser.o $
+  $BUILDROOT/_host/aidl/permission.o $
+  $BUILDROOT/_host/aidl/preprocess.o $
+
+build $BUILDROOT/_host/aidl/main.o: hostcxx system/tools/aidl/main.cpp
+
+build $BUILDROOT/_host/aidl/aidl: hostld $
+  $BUILDROOT/_host/aidl/main.o $
+  $BUILDROOT/_host/aidl/libaidl-common.a $
+  $BUILDROOT/_host/fmtlib/fmtlib.a $
+  $BUILDROOT/_host/libbase/libbase.a $
+  $BUILDROOT/_host/liblog/liblog.a $
+
+#  $BUILDROOT/_host/libutils/libutils.a $
+

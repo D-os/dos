@@ -85,7 +85,8 @@ rule hostld
 # host versions of target builds
 subninja build/host.ninja
 
-subninja build/fmtlib_host.ninja
+subninja build/aidl_host.ninja
+build out/host/bin/aidl: copy $BUILDROOT/_host/aidl/aidl
 
 subninja build/protobuf_host.ninja
 build out/host/bin/protoc: copy $BUILDROOT/_host/protobuf/aprotoc

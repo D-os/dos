@@ -151,7 +151,7 @@
 	url = https://github.com/facebook/zstd.git
 [submodule "system/tools/aidl"]
 	path = system/tools/aidl
-	url = https://android.googlesource.com/platform/system/tools/aidl
+	url = https://github.com/D-os/system_tools_aidl.git
 [submodule "external/fmtlib"]
 	path = external/fmtlib
 	url = https://github.com/fmtlib/fmt.git
