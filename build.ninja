@@ -82,6 +82,8 @@ rule hostld
   description = [HOST] LINK $out
 
 
+subninja build/fmtlib_host.ninja
+
 subninja build/protobuf_host.ninja
 build out/host/bin/protoc: copy $BUILDROOT/_host/protobuf/aprotoc
 rule protoc

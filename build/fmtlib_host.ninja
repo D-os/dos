@@ -1,0 +1,11 @@
+cxxflags = $
+  -fno-exceptions $
+  -UNDEBUG $
+
+includes = -Iexternal/fmtlib/include
+
+build $BUILDROOT/_host/fmtlib/format.o: hostcxx external/fmtlib/src/format.cc
+
+build $BUILDROOT/_host/fmtlib/fmtlib.a: ar $
+  $BUILDROOT/_host/fmtlib/format.o $
+
