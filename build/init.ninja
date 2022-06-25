@@ -38,6 +38,7 @@ includes = $
   -Isystem/androidcompat/sysprop/public/include $
   -Iexternal/libcap/libcap/include $
   -Iexternal/protobuf/src $
+  -Iexternal/fmtlib/include $
 
 build $BUILDROOT/init/proto/system/core/init/subcontext.pb.d | $BUILDROOT/init/proto/system/core/init/subcontext.pb.h $BUILDROOT/init/proto/system/core/init/subcontext.pb.cc: protoc system/core/init/subcontext.proto | out/host/bin/protoc
 build $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.d | $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.h $BUILDROOT/init/proto/system/core/init/persistent_properties.pb.cc: protoc system/core/init/persistent_properties.proto | out/host/bin/protoc

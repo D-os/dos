@@ -10,7 +10,8 @@ includes = $
   -Isystem/logging/liblog/include $
   -Isystem/logging/logwrapper/include $
   -Isystem/extras/ext4_utils/include $
-  -Isystem/vold
+  -Isystem/vold $
+  -Iexternal/fmtlib/include $
 
 build $BUILDROOT/fs_mgr/blockdev.o: cxx system/core/fs_mgr/blockdev.cpp
 build $BUILDROOT/fs_mgr/file_wait.o: cxx system/core/fs_mgr/file_wait.cpp

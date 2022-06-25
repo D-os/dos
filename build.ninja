@@ -102,6 +102,8 @@ rule wayland-scanner
   description = [HOST] WAYLAND SCANNER $out
 
 
+subninja build/fmtlib.ninja
+
 subninja build/libbase.ninja
 build $SYSROOT/lib/libbase.so: copy $BUILDROOT/libbase/libbase.so
 
