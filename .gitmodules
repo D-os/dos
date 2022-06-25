@@ -152,3 +152,6 @@
 [submodule "system/tools/aidl"]
 	path = system/tools/aidl
 	url = https://android.googlesource.com/platform/system/tools/aidl
+[submodule "external/fmtlib"]
+	path = external/fmtlib
+	url = https://github.com/fmtlib/fmt.git
