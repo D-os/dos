@@ -1,0 +1,11 @@
+BUILDROOT = $BUILDROOT/_host
+CC = $HOSTCC
+CXX = $HOSTCXX
+AR = $HOSTAR
+
+subninja build/fmtlib.ninja
+
+libbase_host_flags = -D__BUILD_FOR_HOST
+subninja build/libbase.ninja
+
+subninja build/liblog.ninja
