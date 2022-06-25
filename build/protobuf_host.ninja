@@ -9,7 +9,9 @@ cxxflags = $
   -Wno-unused-parameter $
   -Wno-sign-promo $
   -Wno-inconsistent-missing-override $
-  -Wno-unused-but-set-variable
+  -Wno-unused-but-set-variable $
+  -Wno-deprecated-pragma $
+
 includes = -Iexternal/protobuf/src -Iexternal/protobuf/config
 
 build $BUILDROOT/_host/protobuf/any_lite.o: hostcxx external/protobuf/src/google/protobuf/any_lite.cc

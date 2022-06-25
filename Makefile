@@ -23,7 +23,8 @@ compdb:
 toolchain-host: | $(OUT_DIR)/host/bin
 
 $(OUT_DIR)/host/bin: tools/tc-build/build-llvm.py
-	tools/tc-build/build-llvm.py --show-build-commands --targets="AArch64;X86" \
+	tools/tc-build/build-llvm.py --show-build-commands \
+		--targets="AArch64;X86" --projects="clang;compiler-rt;lld;polly;libcxxabi;libcxx" \
 		--llvm-folder=$(ROOT_DIR)/external/llvm-project --no-update \
 		--build-folder=$(BUILD_DIR)/_host --install-folder=$(OUT_DIR)/host \
 		--clang-vendor=D/os --build-stage1-only --install-stage1-only

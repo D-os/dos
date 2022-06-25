@@ -9,7 +9,7 @@ SYSROOT = out/target/${TARGET}
 INC = -isystem out/target/clang/lib/clang/${LLVM_VER}/include -isystem $SYSROOT/include -Isystem/bioniccompat/include
 CC = out/target/bin/${TARGET}-clang -nostdinc $INC
 CXX = out/target/bin/${TARGET}-clang++ -nostdinc -nostdinc++ -isystem $SYSROOT/include/c++/v1 $INC
-LINKER = out/target/bin/${TARGET}-clang -isysroot $SYSROOT
+LINKER = out/target/bin/${TARGET}-clang -isysroot $SYSROOT -stdlib=libc++
 AR = out/target/bin/${TARGET}-ar
 STRIP = out/target/bin/${TARGET}-strip
 
@@ -70,7 +70,7 @@ rule hostcc
   description = [HOST] CC $out
 
 rule hostcxx
-  command = $HOSTCXX -fPIC -g $cxxflags $includes -c $in -o $out
+  command = $HOSTCXX -std=c++20 -stdlib++-isystem out/host/include/c++/v1 -fPIC -g $cxxflags $includes -c $in -o $out
   description = [HOST] CXX $out
 
 rule hostar
@@ -78,7 +78,7 @@ rule hostar
   description = [HOST] AR $out
 
 rule hostld
-  command = $HOSTCXX -fuse-ld=mold $ldflags $in -o $out
+  command = $HOSTCXX -fuse-ld=mold -stdlib=libc++ -Wl,-rpath,out/host/lib $ldflags $in -o $out
   description = [HOST] LINK $out
 
 
