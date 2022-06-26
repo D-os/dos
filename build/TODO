@@ -34,3 +34,7 @@ XDG_RUNTIME_DIR=/apex XDG_DATA_HOME=/system/data /system/bin/weston
 XDG_RUNTIME_DIR=/apex WAYLAND_DISPLAY=wayland-1 /system/bin/weston-terminal
 
 - find /sys/ -name modalias | xargs sort -u | xargs -n 1 modprobe
+
+- reimplement backtrace using libunwind
+  https://www.cnblogs.com/utopia007/p/11642581.html
+  https://github.com/cslarsen/libunwind-examples/blob/master/backtrace.cpp

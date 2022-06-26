@@ -180,6 +180,9 @@ subninja build/libudev.ninja
 build $SYSROOT/lib/libudev.so: copy $BUILDROOT/libudev/libudev.so
 build $SYSROOT/include/libudev.h: copy external/libudev/udev.h
 
+subninja build/libutils.ninja
+build $SYSROOT/lib/libutils.so: copy $BUILDROOT/libutils/libutils.so
+
 subninja build/libva.ninja
 build $SYSROOT/lib/libva.so: copy $BUILDROOT/libva/libva.so
 build $SYSROOT/lib/libva-drm.so: copy $BUILDROOT/libva/libva-drm.so

@@ -1,0 +1,57 @@
+cxxflags = $
+  -Wall $
+  -Werror $
+  -Wno-exit-time-destructors $
+
+includes = -Isystem/core/libutils/include -Isystem/core/libcutils/include $
+  -Isystem/libbase/include -Isystem/logging/liblog/include
+
+build $BUILDROOT/libutils/Errors.o: cxx system/core/libutils/Errors.cpp
+build $BUILDROOT/libutils/FileMap.o: cxx system/core/libutils/FileMap.cpp
+build $BUILDROOT/libutils/JenkinsHash.o: cxx system/core/libutils/JenkinsHash.cpp
+build $BUILDROOT/libutils/LightRefBase.o: cxx system/core/libutils/LightRefBase.cpp
+build $BUILDROOT/libutils/NativeHandle.o: cxx system/core/libutils/NativeHandle.cpp
+build $BUILDROOT/libutils/Printer.o: cxx system/core/libutils/Printer.cpp
+build $BUILDROOT/libutils/RefBase.o: cxx system/core/libutils/RefBase.cpp
+build $BUILDROOT/libutils/SharedBuffer.o: cxx system/core/libutils/SharedBuffer.cpp
+build $BUILDROOT/libutils/StopWatch.o: cxx system/core/libutils/StopWatch.cpp
+build $BUILDROOT/libutils/String8.o: cxx system/core/libutils/String8.cpp
+build $BUILDROOT/libutils/String16.o: cxx system/core/libutils/String16.cpp
+build $BUILDROOT/libutils/StrongPointer.o: cxx system/core/libutils/StrongPointer.cpp
+build $BUILDROOT/libutils/SystemClock.o: cxx system/core/libutils/SystemClock.cpp
+build $BUILDROOT/libutils/Threads.o: cxx system/core/libutils/Threads.cpp
+build $BUILDROOT/libutils/Timers.o: cxx system/core/libutils/Timers.cpp
+build $BUILDROOT/libutils/Tokenizer.o: cxx system/core/libutils/Tokenizer.cpp
+build $BUILDROOT/libutils/Unicode.o: cxx system/core/libutils/Unicode.cpp
+build $BUILDROOT/libutils/VectorImpl.o: cxx system/core/libutils/VectorImpl.cpp
+build $BUILDROOT/libutils/misc.o: cxx system/core/libutils/misc.cpp
+build $BUILDROOT/libutils/Trace.o: cxx system/core/libutils/Trace.cpp
+build $BUILDROOT/libutils/Looper.o: cxx system/core/libutils/Looper.cpp
+
+build $BUILDROOT/libutils/libutils.a: ar $
+  $BUILDROOT/libutils/Errors.o $
+  $BUILDROOT/libutils/FileMap.o $
+  $BUILDROOT/libutils/JenkinsHash.o $
+  $BUILDROOT/libutils/LightRefBase.o $
+  $BUILDROOT/libutils/NativeHandle.o $
+  $BUILDROOT/libutils/Printer.o $
+  $BUILDROOT/libutils/RefBase.o $
+  $BUILDROOT/libutils/SharedBuffer.o $
+  $BUILDROOT/libutils/StopWatch.o $
+  $BUILDROOT/libutils/String8.o $
+  $BUILDROOT/libutils/String16.o $
+  $BUILDROOT/libutils/StrongPointer.o $
+  $BUILDROOT/libutils/SystemClock.o $
+  $BUILDROOT/libutils/Timers.o $
+  $BUILDROOT/libutils/Tokenizer.o $
+  $BUILDROOT/libutils/Unicode.o $
+  $BUILDROOT/libutils/VectorImpl.o $
+  $BUILDROOT/libutils/misc.o $
+  $BUILDROOT/libutils/Trace.o $
+  $BUILDROOT/libutils/Looper.o $
+
+build $BUILDROOT/libutils/libutils.so: soa $BUILDROOT/libutils/libutils.a $
+  | $SYSROOT/lib/libcutils.so $
+    $SYSROOT/lib/liblog.so $
+    $SYSROOT/lib/libprocessgroup.so
+  libs = -lc++ -lunwind -lcutils -llog -lprocessgroup

@@ -15,7 +15,6 @@ includes = -Isystem/logging/logd $
   -Isystem/logging/liblog/include $
   -Isystem/core/libcutils/include $
   -Isystem/core/libutils/include $
-  -Isystem/core/libsystem/include $
   -Isystem/core/libsysutils/include $
   -Isystem/core/libprocessgroup/include $
   -Iexternal/zlib $
