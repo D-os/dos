@@ -1,0 +1,41 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🏗️ Build",
+      "type": "process",
+      "command": "ninja",
+      "args": ["-v"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "revealProblems": "onProblem",
+        "panel": "shared"
+      },
+      "problemMatcher": ["$gcc"]
+    },
+
+    {
+      "label": "🗃️ Update compilation database",
+      "type": "process",
+      "command": "make",
+      "args": ["compdb"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared"
+      }
+    }
+  ]
+}

@@ -1,4 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "modifications"
+  "editor.formatOnSaveMode": "modifications",
+  "typescript.tsc.autoDetect": "off",
+  "npm.autoDetect": "off"
 }
