@@ -124,6 +124,7 @@ build $SYSROOT/lib/libbinder.so: copy $BUILDROOT/libbinder/libbinder.so
 
 subninja build/libcap.ninja
 build $SYSROOT/include/sys/capability.h: copy external/libcap/libcap/include/sys/capability.h
+build $SYSROOT/lib/libcap.so: copy $BUILDROOT/libcap/libcap.so
 
 subninja build/libcgrouprc.ninja
 build $SYSROOT/lib/libcgrouprc.so: copy $BUILDROOT/libcgrouprc/libcgrouprc.so
@@ -213,7 +214,6 @@ subninja build/fs_mgr.ninja
 build $SYSROOT/lib/libfs_mgr.so: copy $BUILDROOT/fs_mgr/libfs_mgr.so
 
 subninja build/init.ninja
-build $SYSROOT/bin/init: copy $BUILDROOT/init/obj/init
 
 subninja build/jsoncpp.ninja
 
@@ -241,14 +241,13 @@ subninja build/mtdev.ninja
 subninja build/seatd.ninja
 build $SYSROOT/lib/libseat.so: copy $BUILDROOT/seatd/libseat.so
 
+subninja build/servicemanager.ninja
+
 subninja build/system_img.ninja
-build system.img: phony $SYSTEMDIR.img $SYSTEMDIR.stamp
 
 subninja build/toybox.ninja
-build $SYSTEMDIR/system/bin/toybox: copy $BUILDROOT/toybox/toybox
 
 subninja build/utils.ninja
-build $SYSTEMDIR/system/bin/su: copy $BUILDROOT/utils/su
 
 subninja build/wayland.ninja
 build $SYSROOT/lib/libwayland-client.so: copy $BUILDROOT/wayland/libwayland-client.so

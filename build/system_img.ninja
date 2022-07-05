@@ -45,12 +45,17 @@ build $SYSTEMDIR/lib: sync | $SYSROOT/lib
   source = $SYSROOT/lib/*.so*
 build $SYSTEMDIR/lib/modules: sync | $SYSROOT/lib/modules
   source = $SYSROOT/lib/modules/*
-build $SYSTEMDIR/system/bin/init: copy $BUILDROOT/init/obj/init
-build $SYSTEMDIR/system/bin/ueventd: hardlink $SYSTEMDIR/system/bin/init
-build $SYSTEMDIR/system/build.prop: copy build/conf/build.prop
 build $SYSTEMDIR/etc/cgroups.json: copy build/conf/cgroups.json
+build $SYSTEMDIR/etc/task_profiles.json: copy system/core/libprocessgroup/profiles/task_profiles.json
+build $SYSTEMDIR/system/build.prop: copy build/conf/build.prop
 build $SYSTEMDIR/system/etc/init/hw/init.rc: copy build/conf/init.rc
+build $SYSTEMDIR/system/bin/init: copy $BUILDROOT/init/obj/init
 build $SYSTEMDIR/system/etc/ueventd.rc: copy build/conf/ueventd.rc
+build $SYSTEMDIR/system/bin/ueventd: hardlink $SYSTEMDIR/system/bin/init
+build $SYSTEMDIR/system/etc/init/servicemanager.rc: copy frameworks/native/cmds/servicemanager/servicemanager.rc
+build $SYSTEMDIR/system/bin/servicemanager: copy $BUILDROOT/servicemanager/servicemanager
+build $SYSTEMDIR/system/bin/su: copy $BUILDROOT/utils/su
+build $SYSTEMDIR/system/bin/toybox: copy $BUILDROOT/toybox/toybox
 build $SYSTEMDIR/etc/passwd: copy build/conf/passwd
 build $SYSTEMDIR/etc/group: copy build/conf/group
 build $SYSTEMDIR/etc/fstab: copy build/conf/fstab

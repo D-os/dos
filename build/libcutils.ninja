@@ -1,6 +1,6 @@
 cxxflags = -Wno-exit-time-destructors -Wno-deprecated-pragma
 includes = -Isystem/core/libcutils/include -Isystem/libbase/include -Isystem/logging/liblog/include
-libs = -lc++ -llog
+libs = -lc++ -llog -lsystemproperties
 
 build $BUILDROOT/libcutils/config_utils.o: cxx system/core/libcutils/config_utils.cpp
 build $BUILDROOT/libcutils/iosched_policy.o: cxx system/core/libcutils/iosched_policy.cpp

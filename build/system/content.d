@@ -13,6 +13,7 @@ out/system.img: \
   out/system/apex \
   out/system/linkerconfig \
   out/system/etc/cgroups.json \
+  out/system/etc/task_profiles.json \
   out/system/system/etc/init/hw/init.rc \
   out/system/system/etc/ueventd.rc \
   out/system/etc/passwd \
@@ -229,6 +230,7 @@ out/system.img: \
   out/system/lib/libfreetype.so \
   out/system/lib/libcairo.so \
   out/system/system/bin/su \
+  out/system/system/bin/servicemanager \
   out/system/system/bin/weston \
   out/system/system/lib/libweston-11.so \
   out/system/system/lib/weston/libexec_weston.so \

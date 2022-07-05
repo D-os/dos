@@ -1,0 +1,32 @@
+cxxflags = $
+  -Wall $
+  -Wextra $
+  -Werror $
+  -DANDROID_UTILS_REF_BASE_DISABLE_IMPLICIT_CONSTRUCTION $
+  -DVENDORSERVICEMANAGER=1 $
+
+includes = $
+  -Isystem/libbase/include $
+  -Iframeworks/native/libs/binder/include $
+  -I$BUILDROOT/libbinder/gen/include $
+  -Iframeworks/native/libs/binder/ndk/include_cpp $
+  -Isystem/core/libcutils/include $
+  -Isystem/logging/liblog/include $
+  -Isystem/core/libutils/include $
+  -Isystem/core/libsystem/include $
+
+build $BUILDROOT/servicemanager/Access.o: cxx frameworks/native/cmds/servicemanager/Access.cpp
+build $BUILDROOT/servicemanager/ServiceManager.o: cxx frameworks/native/cmds/servicemanager/ServiceManager.cpp | $BUILDROOT/libbinder/gen/include/android/os/BnServiceManager.h
+build $BUILDROOT/servicemanager/main.o: cxx frameworks/native/cmds/servicemanager/main.cpp | $BUILDROOT/libbinder/gen/include/android/os/BnServiceManager.h
+
+build $BUILDROOT/servicemanager/servicemanager: link $
+  $BUILDROOT/servicemanager/ServiceManager.o $
+  $BUILDROOT/servicemanager/main.o $
+  | $
+  $SYSROOT/lib/libbase.so $
+  $SYSROOT/lib/libbinder.so $
+  $SYSROOT/lib/libcutils.so $
+  $SYSROOT/lib/liblog.so $
+  $SYSROOT/lib/libutils.so
+  libs = -lc++ -lunwind -lbase -lbinder -lcutils -llog -lutils
+
