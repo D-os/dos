@@ -1,0 +1,157 @@
+cxxflags = $
+  -Wall $
+  -Wextra $
+  -Wextra-semi $
+  -Werror $
+  -Wzero-as-null-pointer-constant $
+  -Wreorder-init-list $
+  -DANDROID_BASE_UNIQUE_FD_DISABLE_IMPLICIT_CONVERSION $
+  -DANDROID_UTILS_REF_BASE_DISABLE_IMPLICIT_CONSTRUCTION $
+  -DBINDER_WITH_KERNEL_IPC $
+  -Wno-zero-as-null-pointer-constant $
+  -Wno-sign-compare $
+  -Wno-inconsistent-missing-override $
+  -Wno-c99-designator $
+  -Wno-unused-but-set-variable $
+
+includes = -Iframeworks/native/libs -Iframeworks/native/libs/binder/include -I$BUILDROOT/libbinder/gen/include $
+  -Isystem/logging/liblog/include $
+  -Isystem/core/libcutils/include $
+  -Isystem/core/libutils/include $
+  -Isystem/libbase/include $
+  -Isystem/core/libsystem/include $
+  -Isystem/core/libprocessgroup/include $
+  -Iframeworks/native/libs/binder/ndk/include_cpp $
+  -Iexternal/fmtlib/include $
+  -include system/libbase/include/android-base/macros.h
+
+build $BUILDROOT/libbinder/Binder.o: cxx frameworks/native/libs/binder/Binder.cpp
+build $BUILDROOT/libbinder/BpBinder.o: cxx frameworks/native/libs/binder/BpBinder.cpp
+build $BUILDROOT/libbinder/BufferedTextOutput.o: cxx frameworks/native/libs/binder/BufferedTextOutput.cpp
+build $BUILDROOT/libbinder/Debug.o: cxx frameworks/native/libs/binder/Debug.cpp
+build $BUILDROOT/libbinder/FdTrigger.o: cxx frameworks/native/libs/binder/FdTrigger.cpp
+build $BUILDROOT/libbinder/IInterface.o: cxx frameworks/native/libs/binder/IInterface.cpp
+build $BUILDROOT/libbinder/IMemory.o: cxx frameworks/native/libs/binder/IMemory.cpp
+build $BUILDROOT/libbinder/IPCThreadState.o: cxx frameworks/native/libs/binder/IPCThreadState.cpp
+build $BUILDROOT/libbinder/IResultReceiver.o: cxx frameworks/native/libs/binder/IResultReceiver.cpp
+build $BUILDROOT/libbinder/IServiceManager.o: cxx frameworks/native/libs/binder/IServiceManager.cpp | $
+  $BUILDROOT/libbinder/gen/include/android/os/BnServiceCallback.h $
+  $BUILDROOT/libbinder/gen/include/android/os/ConnectionInfo.h
+build $BUILDROOT/libbinder/IShellCallback.o: cxx frameworks/native/libs/binder/IShellCallback.cpp
+build $BUILDROOT/libbinder/LazyServiceRegistrar.o: cxx frameworks/native/libs/binder/LazyServiceRegistrar.cpp | $
+  $BUILDROOT/libbinder/gen/include/android/os/BnClientCallback.h $
+  $BUILDROOT/libbinder/gen/include/android/os/IServiceManager.h $
+  $BUILDROOT/libbinder/gen/include/android/os/ConnectionInfo.h
+build $BUILDROOT/libbinder/MemoryBase.o: cxx frameworks/native/libs/binder/MemoryBase.cpp
+build $BUILDROOT/libbinder/MemoryDealer.o: cxx frameworks/native/libs/binder/MemoryDealer.cpp
+build $BUILDROOT/libbinder/MemoryHeapBase.o: cxx frameworks/native/libs/binder/MemoryHeapBase.cpp
+build $BUILDROOT/libbinder/Parcel.o: cxx frameworks/native/libs/binder/Parcel.cpp
+build $BUILDROOT/libbinder/ParcelableHolder.o: cxx frameworks/native/libs/binder/ParcelableHolder.cpp
+build $BUILDROOT/libbinder/ParcelFileDescriptor.o: cxx frameworks/native/libs/binder/ParcelFileDescriptor.cpp
+build $BUILDROOT/libbinder/PersistableBundle.o: cxx frameworks/native/libs/binder/PersistableBundle.cpp
+build $BUILDROOT/libbinder/ProcessState.o: cxx frameworks/native/libs/binder/ProcessState.cpp
+build $BUILDROOT/libbinder/RpcSession.o: cxx frameworks/native/libs/binder/RpcSession.cpp
+build $BUILDROOT/libbinder/RpcServer.o: cxx frameworks/native/libs/binder/RpcServer.cpp
+build $BUILDROOT/libbinder/RpcState.o: cxx frameworks/native/libs/binder/RpcState.cpp
+build $BUILDROOT/libbinder/RpcTransportRaw.o: cxx frameworks/native/libs/binder/RpcTransportRaw.cpp
+build $BUILDROOT/libbinder/Static.o: cxx frameworks/native/libs/binder/Static.cpp
+build $BUILDROOT/libbinder/Stability.o: cxx frameworks/native/libs/binder/Stability.cpp
+build $BUILDROOT/libbinder/Status.o: cxx frameworks/native/libs/binder/Status.cpp
+build $BUILDROOT/libbinder/TextOutput.o: cxx frameworks/native/libs/binder/TextOutput.cpp
+build $BUILDROOT/libbinder/Utils.o: cxx frameworks/native/libs/binder/Utils.cpp
+
+# "libbinder_aidl",
+build $BUILDROOT/libbinder/aidl/ConnectionInfo.o: cxx $BUILDROOT/libbinder/gen/android/os/ConnectionInfo.cpp
+build $BUILDROOT/libbinder/aidl/IClientCallback.o: cxx $BUILDROOT/libbinder/gen/android/os/IClientCallback.cpp
+build $BUILDROOT/libbinder/aidl/IServiceCallback.o: cxx $BUILDROOT/libbinder/gen/android/os/IServiceCallback.cpp
+build $BUILDROOT/libbinder/aidl/IServiceManager.o: cxx $BUILDROOT/libbinder/gen/android/os/IServiceManager.cpp
+build $BUILDROOT/libbinder/aidl/ServiceDebugInfo.o: cxx $BUILDROOT/libbinder/gen/android/os/ServiceDebugInfo.cpp
+
+build $BUILDROOT/libbinder/libbinder.so: so $
+  $BUILDROOT/libbinder/Binder.o $
+  $BUILDROOT/libbinder/BpBinder.o $
+  $BUILDROOT/libbinder/BufferedTextOutput.o $
+  $BUILDROOT/libbinder/Debug.o $
+  $BUILDROOT/libbinder/FdTrigger.o $
+  $BUILDROOT/libbinder/IInterface.o $
+  $BUILDROOT/libbinder/IMemory.o $
+  $BUILDROOT/libbinder/IPCThreadState.o $
+  $BUILDROOT/libbinder/IResultReceiver.o $
+  $BUILDROOT/libbinder/IServiceManager.o $
+  $BUILDROOT/libbinder/IShellCallback.o $
+  $BUILDROOT/libbinder/LazyServiceRegistrar.o $
+  $BUILDROOT/libbinder/MemoryBase.o $
+  $BUILDROOT/libbinder/MemoryDealer.o $
+  $BUILDROOT/libbinder/MemoryHeapBase.o $
+  $BUILDROOT/libbinder/Parcel.o $
+  $BUILDROOT/libbinder/ParcelableHolder.o $
+  $BUILDROOT/libbinder/ParcelFileDescriptor.o $
+  $BUILDROOT/libbinder/PersistableBundle.o $
+  $BUILDROOT/libbinder/ProcessState.o $
+  $BUILDROOT/libbinder/RpcSession.o $
+  $BUILDROOT/libbinder/RpcServer.o $
+  $BUILDROOT/libbinder/RpcState.o $
+  $BUILDROOT/libbinder/RpcTransportRaw.o $
+  $BUILDROOT/libbinder/Static.o $
+  $BUILDROOT/libbinder/Stability.o $
+  $BUILDROOT/libbinder/Status.o $
+  $BUILDROOT/libbinder/TextOutput.o $
+  $BUILDROOT/libbinder/Utils.o $
+  $BUILDROOT/libbinder/aidl/ConnectionInfo.o $
+  $BUILDROOT/libbinder/aidl/IClientCallback.o $
+  $BUILDROOT/libbinder/aidl/IServiceCallback.o $
+  $BUILDROOT/libbinder/aidl/IServiceManager.o $
+  $BUILDROOT/libbinder/aidl/ServiceDebugInfo.o $
+  | $
+  $SYSROOT/lib/liblog.so $
+  $SYSROOT/lib/libbase.so $
+  $SYSROOT/lib/libcutils.so $
+  $SYSROOT/lib/libutils.so
+  libs = -lc++ -lunwind -llog -lbase -lcutils -lutils
+
+
+headerDir = $BUILDROOT/libbinder/gen/include
+imports = -Iframeworks/native/libs/binder/aidl
+lang = cpp
+optionalFlags = -Weverything -Wno-missing-permission-annotation
+outDir = $BUILDROOT/libbinder/gen
+
+# AIDL interface between libbinder and framework.jar
+# name: "libbinder_aidl",
+build $BUILDROOT/libbinder/gen/android/os/ConnectionInfo.cpp $
+| $BUILDROOT/libbinder/gen/include/android/os/ConnectionInfo.h $
+  $BUILDROOT/libbinder/gen/include/android/os/BpConnectionInfo.h $
+  $BUILDROOT/libbinder/gen/include/android/os/BnConnectionInfo.h: aidl $
+  frameworks/native/libs/binder/aidl/android/os/ConnectionInfo.aidl $
+| $HOSTAIDL
+
+build $BUILDROOT/libbinder/gen/android/os/IClientCallback.cpp $
+| $BUILDROOT/libbinder/gen/include/android/os/IClientCallback.h $
+  $BUILDROOT/libbinder/gen/include/android/os/BpClientCallback.h $
+  $BUILDROOT/libbinder/gen/include/android/os/BnClientCallback.h: aidl $
+  frameworks/native/libs/binder/aidl/android/os/IClientCallback.aidl $
+| $HOSTAIDL
+
+build $BUILDROOT/libbinder/gen/android/os/IServiceCallback.cpp $
+| $BUILDROOT/libbinder/gen/include/android/os/IServiceCallback.h $
+  $BUILDROOT/libbinder/gen/include/android/os/BpServiceCallback.h $
+  $BUILDROOT/libbinder/gen/include/android/os/BnServiceCallback.h: aidl $
+  frameworks/native/libs/binder/aidl/android/os/IServiceCallback.aidl $
+| $HOSTAIDL
+
+build $BUILDROOT/libbinder/gen/android/os/IServiceManager.cpp $
+| $BUILDROOT/libbinder/gen/include/android/os/IServiceManager.h $
+  $BUILDROOT/libbinder/gen/include/android/os/BpServiceManager.h $
+  $BUILDROOT/libbinder/gen/include/android/os/BnServiceManager.h: aidl $
+  frameworks/native/libs/binder/aidl/android/os/IServiceManager.aidl $
+| $BUILDROOT/libbinder/gen/include/android/os/IClientCallback.h $
+  $BUILDROOT/libbinder/gen/include/android/os/IServiceCallback.h $
+  $BUILDROOT/libbinder/gen/include/android/os/ServiceDebugInfo.h $
+  $HOSTAIDL
+
+build $BUILDROOT/libbinder/gen/android/os/ServiceDebugInfo.cpp $
+| $BUILDROOT/libbinder/gen/include/android/os/ServiceDebugInfo.h $
+  $BUILDROOT/libbinder/gen/include/android/os/BpServiceDebugInfo.h $
+  $BUILDROOT/libbinder/gen/include/android/os/BnServiceDebugInfo.h: aidl $
+  frameworks/native/libs/binder/aidl/android/os/ServiceDebugInfo.aidl $
+| $HOSTAIDL

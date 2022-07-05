@@ -145,7 +145,7 @@
 	url = https://android.googlesource.com/platform/external/freetype
 [submodule "frameworks/native"]
 	path = frameworks/native
-	url = https://android.googlesource.com/platform/frameworks/native
+	url = https://github.com/D-os/frameworks_native.git
 [submodule "external/zstd"]
 	path = external/zstd
 	url = https://github.com/facebook/zstd.git

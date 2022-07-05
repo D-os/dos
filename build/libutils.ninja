@@ -4,7 +4,8 @@ cxxflags = $
   -Wno-exit-time-destructors $
 
 includes = -Isystem/core/libutils/include -Isystem/core/libcutils/include $
-  -Isystem/libbase/include -Isystem/logging/liblog/include
+  -Isystem/core/libsystem/include -Isystem/libbase/include -Isystem/core/libprocessgroup/include $
+  -Isystem/logging/liblog/include
 
 build $BUILDROOT/libutils/Errors.o: cxx system/core/libutils/Errors.cpp
 build $BUILDROOT/libutils/FileMap.o: cxx system/core/libutils/FileMap.cpp
@@ -42,6 +43,7 @@ build $BUILDROOT/libutils/libutils.a: ar $
   $BUILDROOT/libutils/String16.o $
   $BUILDROOT/libutils/StrongPointer.o $
   $BUILDROOT/libutils/SystemClock.o $
+  $BUILDROOT/libutils/Threads.o $
   $BUILDROOT/libutils/Timers.o $
   $BUILDROOT/libutils/Tokenizer.o $
   $BUILDROOT/libutils/Unicode.o $

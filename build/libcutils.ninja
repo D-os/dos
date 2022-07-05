@@ -62,6 +62,7 @@ build $BUILDROOT/libcutils/libcutils.a: ar $
   $BUILDROOT/libcutils/multiuser.o $
   $BUILDROOT/libcutils/str_parms.o $
   $BUILDROOT/libcutils/android_reboot.o $
+  $BUILDROOT/libcutils/ashmem-dev.o $
   $BUILDROOT/libcutils/canned_fs_config.o $
   $BUILDROOT/libcutils/fs_config.o $
   $BUILDROOT/libcutils/klog.o $
