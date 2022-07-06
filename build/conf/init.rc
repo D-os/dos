@@ -25,8 +25,8 @@ on early-init
     mkdir /dev/boringssl 0755 root root
     mkdir /dev/boringssl/selftest 0755 root root
 
-    # Mount tracefs
-    mount tracefs tracefs /sys/kernel/tracing
+    # Mount tracefs (with GID=AID_READTRACEFS)
+    mount tracefs tracefs /sys/kernel/tracing gid=3012
 
     # create sys dirctory
     mkdir /dev/sys 0755 system system
@@ -45,8 +45,6 @@ on init
     symlink /proc/self/fd/2 /dev/stderr
 
     mount configfs none /config nodev noexec nosuid
-    chmod 0770 /config/sdcardfs
-    chown system package_info /config/sdcardfs
 
     # Mount binderfs
     mkdir /dev/binderfs
@@ -57,14 +55,13 @@ on init
     mount fusectl none /sys/fs/fuse/connections
 
     symlink /dev/binderfs/binder /dev/binder
-    symlink /dev/binderfs/hwbinder /dev/hwbinder
-    symlink /dev/binderfs/vndbinder /dev/vndbinder
+    #symlink /dev/binderfs/hwbinder /dev/hwbinder
+    #symlink /dev/binderfs/vndbinder /dev/vndbinder
 
     chmod 0666 /dev/binderfs/hwbinder
     chmod 0666 /dev/binderfs/binder
     chmod 0666 /dev/binderfs/vndbinder
 
-    mkdir /mnt/media_rw 0750 root external_storage
     mkdir /mnt/user 0755 root root
     mkdir /mnt/user/0 0755 root root
     mkdir /mnt/user/0/self 0755 root root
@@ -113,12 +110,6 @@ on init
     chown system system /proc/pressure/memory
     chmod 0664 /proc/pressure/memory
 
-    # qtaguid will limit access to specific data based on group memberships.
-    #   net_bw_acct grants impersonation of socket owners.
-    #   net_bw_stats grants access to other apps' detailed tagged-socket stats.
-    chown root net_bw_acct /proc/net/xt_qtaguid/ctrl
-    chown root net_bw_stats /proc/net/xt_qtaguid/stats
-
     # Allow everybody to read the xt_qtaguid resource tracking misc dev.
     # This is needed by any process that uses socket tagging.
     chmod 0644 /dev/xt_qtaguid
@@ -140,8 +131,8 @@ on init
     chown system system /sys/power/wakeup_count
     chmod 0660 /sys/power/state
 
-    chown radio wakelock /sys/power/wake_lock
-    chown radio wakelock /sys/power/wake_unlock
+    chown system system /sys/power/wake_lock
+    chown system system /sys/power/wake_unlock
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
 
@@ -150,11 +141,6 @@ on init
 
     # Start essential services.
     start servicemanager
-
-on load_persist_props_action
-    load_persist_props
-    start logd
-    start logd-reinit
 
 # Indicate to fw loaders that the relevant mounts are up.
 on firmware_mounts_complete
@@ -182,9 +168,6 @@ on late-init
     # /data, which in turn can only be loaded when system properties are present.
     trigger post-fs-data
 
-    # Load persist properties and override properties (if enabled) from /data.
-    trigger load_persist_props_action
-
     # Should be before netd, but after apex, properties and logging is available.
     trigger load_bpf_programs
 
@@ -202,8 +185,6 @@ on early-fs
     start vold
 
 on post-fs
-    exec - system system -- /system/bin/vdc checkpoint markBootAttempt
-
     # Once everything is setup, no need to modify /.
     # The bind+remount combination allows this to work in containers.
     mount rootfs rootfs / remount bind ro nodev
@@ -243,26 +224,17 @@ on post-fs-data
 
     mark_post_data
 
-    # Start checkpoint before we touch data
-    exec - system system -- /system/bin/vdc checkpoint prepareCheckpoint
-
     # We chown/chmod /data again so because mount is run as root + defaults
     chown system system /data
     chmod 0771 /data
 
     # Start bootcharting as soon as possible after the data partition is
     # mounted to collect more data.
-    mkdir /data/bootchart 0755 shell shell encryption=Require
+    mkdir /data/bootchart 0755 shell shell encryption=None
     bootchart start
 
     # Avoid predictable entropy pool. Carry over entropy from previous boot.
     copy /data/system/entropy.dat /dev/urandom
-
-    # Now that /data is mounted and we have created /data/misc/keystore,
-    # we can tell keystore to stop allowing use of early-boot keys,
-    # and access its database for the first time to support creation and
-    # use of MAX_BOOT_LEVEL keys.
-    exec - system system -- /system/bin/vdc keymaster earlyBootEnded
 
     # create the lost+found directories, so as to enforce our permissions
     mkdir /data/lost+found 0770 root root encryption=None
@@ -312,11 +284,11 @@ on boot
 
     # to access F2FS sysfs on dm-<num> directly
     mkdir /dev/sys/fs/by-name 0755 system system
-    symlink /sys/fs/f2fs/${dev.mnt.blk.data} /dev/sys/fs/by-name/userdata
+    symlink /sys/fs/f2fs/${dev.mnt.dev.data} /dev/sys/fs/by-name/userdata
 
     # to access dm-<num> sysfs
     mkdir /dev/sys/block/by-name 0755 system system
-    symlink /sys/devices/virtual/block/${dev.mnt.blk.data} /dev/sys/block/by-name/userdata
+    symlink /sys/devices/virtual/block/${dev.mnt.dev.data} /dev/sys/block/by-name/userdata
 
     # Define default initial receive window size in segments.
     setprop net.tcp_def_init_rwnd 60
