@@ -44,5 +44,4 @@ build $BUILDROOT/libbase/libbase.so: soa $BUILDROOT/libbase/libbase.a $
   $SYSROOT/lib/libcutils.so $
   $SYSROOT/lib/liblog.so
   libs = -lc++ -lunwind -lcutils -llog $
-    -Wl,--whole-archive $BUILDROOT/fmtlib/fmtlib.a -Wl,--no-whole-archive $
-
+    -Wl,--whole-archive $BUILDROOT/fmtlib/fmtlib.a -Wl,--no-whole-archive

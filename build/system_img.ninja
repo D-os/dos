@@ -21,7 +21,7 @@ rule mkdir
   description = MKDIR $out
 
 rule sync
-  command = mkdir -p $out && for SOURCE in $source; do cp -a $$SOURCE $out; done; touch $out
+  command = mkdir -p $out && for SOURCE in $source; do cp --archive --update $$SOURCE $out; done; touch $out
   description = SYNC $out <- $source
 
 rule hardlink
@@ -43,6 +43,7 @@ build $SYSTEMDIR/bin/ldd: symlink
 
 build $SYSTEMDIR/lib: sync | $SYSROOT/lib
   source = $SYSROOT/lib/*.so*
+build $SYSTEMDIR/lib/libcutils.so: copy $BUILDROOT/libcutils/linked/libcutils.so
 build $SYSTEMDIR/lib/modules: sync | $SYSROOT/lib/modules
   source = $SYSROOT/lib/modules/*
 build $SYSTEMDIR/etc/cgroups.json: copy build/conf/cgroups.json

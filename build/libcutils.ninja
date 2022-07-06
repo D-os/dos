@@ -1,6 +1,5 @@
 cxxflags = -Wno-exit-time-destructors -Wno-deprecated-pragma
 includes = -Isystem/core/libcutils/include -Isystem/libbase/include -Isystem/logging/liblog/include
-libs = -lc++ -llog -lsystemproperties
 
 build $BUILDROOT/libcutils/config_utils.o: cxx system/core/libcutils/config_utils.cpp
 build $BUILDROOT/libcutils/iosched_policy.o: cxx system/core/libcutils/iosched_policy.cpp
@@ -85,8 +84,17 @@ rule soa
     -Wl,--no-whole-archive $
 
 build $BUILDROOT/libcutils/libcutils.so: soa $BUILDROOT/libcutils/libcutils.a $
-  | $BUILDROOT/libcutils/libcutils_sockets.a $
-    $SYSROOT/lib/liblog.so
+| $BUILDROOT/libcutils/libcutils_sockets.a $
+  $SYSROOT/lib/liblog.so
+  libs = -lc++ -llog
+# -lbase -lsystemproperties - cyclic dependency
+
+build $BUILDROOT/libcutils/linked/libcutils.so: soa $BUILDROOT/libcutils/libcutils.a $
+| $BUILDROOT/libcutils/libcutils_sockets.a $
+  $SYSROOT/lib/liblog.so $
+  $SYSROOT/lib/libbase.so $
+  $SYSROOT/lib/libsystemproperties.so
+  libs = -lc++ -llog -lbase -lsystemproperties
 
 build $BUILDROOT/libcutils/android_get_control_file.o: cxx system/core/libcutils/android_get_control_file.cpp
 build $BUILDROOT/libcutils/socket_inaddr_any_server_unix.o: cxx system/core/libcutils/socket_inaddr_any_server_unix.cpp
@@ -103,5 +111,3 @@ build $BUILDROOT/libcutils/libcutils_sockets.a: ar $
   $BUILDROOT/libcutils/socket_network_client_unix.o $
   $BUILDROOT/libcutils/sockets_unix.o $
 
-build $BUILDROOT/libcutils/libcutils_sockets.so: soa $BUILDROOT/libcutils/libcutils_sockets.a | $SYSROOT/lib/libbase.so
-  libs = -lbase

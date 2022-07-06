@@ -42,3 +42,6 @@ XDG_RUNTIME_DIR=/apex WAYLAND_DISPLAY=wayland-1 /system/bin/weston-terminal
 - dos/system/core
 remote: error: File libunwindstack/tests/files/offline/jit_debug_x86_32/libartd.so is 219.06 MB; this exceeds GitHub's file size limit of 100.00 MB
 git filter-repo --invert-paths --path libunwindstack/tests/files/offline --force
+
+- console:/ # cat /lib/libc++.so                                                 
+INPUT(libc++.so.1 -lc++abi)

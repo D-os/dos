@@ -6,6 +6,7 @@ out/system.img: \
   out/system/debug_ramdisk \
   out/system/second_stage_resources \
   out/system/lib \
+  out/system/lib/libcutils.so \
   out/system/lib/modules \
   out/system/system/bin/init \
   out/system/system/bin/ueventd \
