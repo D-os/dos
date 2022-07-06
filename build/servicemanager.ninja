@@ -28,5 +28,5 @@ build $BUILDROOT/servicemanager/servicemanager: link $
   $SYSROOT/lib/libcutils.so $
   $SYSROOT/lib/liblog.so $
   $SYSROOT/lib/libutils.so
-  libs = -lc++ -lunwind -lbase -lbinder -lcutils -llog -lutils
+  libs = -lc++ -lunwind -lbase -lbinder -lcutils -llog -lutils -lsystemproperties
 

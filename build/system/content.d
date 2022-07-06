@@ -16,6 +16,7 @@ out/system.img: \
   out/system/etc/cgroups.json \
   out/system/etc/task_profiles.json \
   out/system/system/etc/init/hw/init.rc \
+  out/system/system/etc/init/servicemanager.rc \
   out/system/system/etc/ueventd.rc \
   out/system/etc/passwd \
   out/system/etc/group \
