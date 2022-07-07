@@ -30,3 +30,9 @@ build $BUILDROOT/servicemanager/servicemanager: link $
   $SYSROOT/lib/libutils.so
   libs = -lc++ -lunwind -lbase -lbinder -lcutils -llog -lutils -lsystemproperties
 
+build $BUILDROOT/servicemanager/cmds/service.o: cxx frameworks/native/cmds/service/service.cpp
+  cxxflags = -DXP_UNIX -Wall -Werror
+
+build $BUILDROOT/servicemanager/service: link $
+  $BUILDROOT/servicemanager/cmds/service.o
+  libs = -lc++ -lunwind -lcutils -lutils -lbinder -llog -lbase -lsystemproperties

@@ -233,6 +233,7 @@ out/system.img: \
   out/system/lib/libcairo.so \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \
+  out/system/system/bin/service \
   out/system/system/bin/weston \
   out/system/system/lib/libweston-11.so \
   out/system/system/lib/weston/libexec_weston.so \
