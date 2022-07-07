@@ -28,6 +28,10 @@ rule hardlink
   command = ln -f $in $out
   description = HARDLINK $out -> $in
 
+rule sed
+  command = sed '${pattern}' <$in >$out
+  description = SED $out -> $in
+
 build $SYSTEMDIR: mkdir
 build $SYSTEMDIR/dev: mkdir
 build $SYSTEMDIR/proc: mkdir
@@ -53,7 +57,8 @@ build $SYSTEMDIR/system/etc/init/hw/init.rc: copy build/conf/init.rc
 build $SYSTEMDIR/system/bin/init: copy $BUILDROOT/init/obj/init
 build $SYSTEMDIR/system/etc/ueventd.rc: copy build/conf/ueventd.rc
 build $SYSTEMDIR/system/bin/ueventd: hardlink $SYSTEMDIR/system/bin/init
-build $SYSTEMDIR/system/etc/init/servicemanager.rc: copy frameworks/native/cmds/servicemanager/servicemanager.rc
+build $SYSTEMDIR/system/etc/init/servicemanager.rc: sed frameworks/native/cmds/servicemanager/servicemanager.microdroid.rc
+  pattern = s/.microdroid//
 build $SYSTEMDIR/system/bin/servicemanager: copy $BUILDROOT/servicemanager/servicemanager
 build $SYSTEMDIR/system/bin/service: copy $BUILDROOT/servicemanager/service
 build $SYSTEMDIR/system/bin/su: copy $BUILDROOT/utils/su
