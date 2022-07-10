@@ -2,18 +2,13 @@ out/system.img: \
   out/system/dev \
   out/system/proc \
   out/system/sys \
-  out/system/mnt \
   out/system/data \
-  out/system/debug_ramdisk \
-  out/system/second_stage_resources \
   out/system/lib \
   out/system/lib/libcutils.so \
   out/system/lib/modules \
   out/system/system/bin/init \
   out/system/system/bin/ueventd \
   out/system/system/build.prop \
-  out/system/apex \
-  out/system/linkerconfig \
   out/system/etc/cgroups.json \
   out/system/etc/task_profiles.json \
   out/system/system/etc/fstab.qemu \
@@ -25,6 +20,7 @@ out/system.img: \
   out/system/etc/passwd \
   out/system/etc/group \
   out/system/etc/fstab \
+  out/system/etc/hosts \
   out/system/system/bin/sh \
   out/system/system/etc/mkshrc \
   out/system/system/bin/toybox \

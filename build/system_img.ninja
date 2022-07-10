@@ -36,12 +36,7 @@ build $SYSTEMDIR: mkdir
 build $SYSTEMDIR/dev: mkdir
 build $SYSTEMDIR/proc: mkdir
 build $SYSTEMDIR/sys: mkdir
-build $SYSTEMDIR/mnt: mkdir
 build $SYSTEMDIR/data: mkdir
-build $SYSTEMDIR/debug_ramdisk: mkdir
-build $SYSTEMDIR/second_stage_resources: mkdir
-build $SYSTEMDIR/apex: mkdir
-build $SYSTEMDIR/linkerconfig: mkdir
 
 build $SYSTEMDIR/bin/ldd: symlink
   target = ../lib/libc.so
@@ -70,6 +65,7 @@ build $SYSTEMDIR/system/bin/toybox: copy $BUILDROOT/toybox/toybox
 build $SYSTEMDIR/etc/passwd: copy build/conf/passwd
 build $SYSTEMDIR/etc/group: copy build/conf/group
 build $SYSTEMDIR/etc/fstab: copy build/conf/fstab
+build $SYSTEMDIR/etc/hosts: copy system/core/rootdir/etc/hosts
 build $SYSTEMDIR/lib/libz.so: copy $SYSROOT/lib/libz.so
 build $SYSTEMDIR/lib/libjpeg.so: copy $SYSROOT/lib/libjpeg.so
 build $SYSTEMDIR/lib/libpng.so: copy $SYSROOT/lib/libpng.so

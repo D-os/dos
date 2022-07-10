@@ -73,12 +73,6 @@ on init
     chmod 0666 /dev/binderfs/binder
     chmod 0666 /dev/binderfs/vndbinder
 
-    mkdir /mnt/user 0755 root root
-    mkdir /mnt/user/0 0755 root root
-    mkdir /mnt/user/0/self 0755 root root
-    mkdir /mnt/user/0/emulated 0755 root root
-    mkdir /mnt/user/0/emulated/0 0755 root root
-
     write /proc/sys/kernel/panic_on_oops 1
     write /proc/sys/kernel/hung_task_timeout_secs 0
     write /proc/cpu/alignment 4
@@ -199,10 +193,6 @@ on post-fs
     # Once everything is setup, no need to modify /.
     # The bind+remount combination allows this to work in containers.
     mount rootfs rootfs / remount bind ro nodev
-
-    # Mount default storage into root namespace
-    mount none /mnt/user/0 /storage bind rec
-    mount none none /storage slave rec
 
     #change permissions on vmallocinfo so we can grab it from bugreports
     chown root log /proc/vmallocinfo

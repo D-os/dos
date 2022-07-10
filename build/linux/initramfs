@@ -2,9 +2,6 @@ file /init out/build/init/obj/init_first_stage.stripped 0755 0 0
 dir /dev 755 0 0
 dir /proc 755 0 0
 dir /sys 755 0 0
-dir /mnt 755 0 0
-dir /debug_ramdisk 755 0 0
-dir /second_stage_resources 755 0 0
 dir /lib 755 0 0
 dir /lib/modules 755 0 0
 file /lib/modules/modules.load build/linux/modules.load 0644 0 0
