@@ -2,6 +2,7 @@ out/system.img: \
   out/system/dev \
   out/system/proc \
   out/system/sys \
+  out/system/run \
   out/system/data \
   out/system/lib \
   out/system/lib/libcutils.so \

@@ -46,6 +46,8 @@ on post-fs
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
+    mkdir /run/user 0755 root system
+
 on late-fs
     # Mount RW partitions which need run fsck
     mount_all --late
