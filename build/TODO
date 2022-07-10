@@ -29,9 +29,8 @@
 - Replace seatd-builtin with daemon
 meson .. -Dlibseat-logind=disabled -Dlibseat-builtin=enabled -Dlibseat-seatd=disabled
 
-- streamline XDG_RUNTIME_DIR=/apex MESA_LOADER_DRIVER_OVERRIDE=virtio_gpu MESA_DEBUG=1 /system/bin/weston
-XDG_RUNTIME_DIR=/apex XDG_DATA_HOME=/system/data /system/bin/weston
-XDG_RUNTIME_DIR=/apex WAYLAND_DISPLAY=wayland-1 /system/bin/weston-terminal
+- run under wayland:
+XDG_RUNTIME_DIR=/run/user/1000 WAYLAND_DISPLAY=wayland-1 /system/bin/weston-terminal
 
 - reimplement backtrace using libunwind
   https://www.cnblogs.com/utopia007/p/11642581.html

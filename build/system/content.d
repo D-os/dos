@@ -17,6 +17,7 @@ out/system.img: \
   out/system/system/etc/init/hw/init.qemu.rc \
   out/system/system/bin/init.insmod.sh \
   out/system/system/etc/init/servicemanager.rc \
+  out/system/system/etc/init/weston.rc \
   out/system/system/etc/ueventd.rc \
   out/system/etc/passwd \
   out/system/etc/group \

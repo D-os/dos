@@ -1,0 +1,16 @@
+on late-fs
+    mkdir /run/user/1000 0700 system system
+    mount tmpfs tmpfs /run/user/1000 nodev noexec nosuid mode=0700,uid=1000,gid=1000
+
+    mkdir /data/cache 0700 system system
+
+service weston /system/bin/weston
+    class core
+    stdio_to_kmsg
+    user system
+    group system graphics input readproc
+    capabilities SYS_TTY_CONFIG
+    task_profiles HighPerformance
+    setenv XDG_RUNTIME_DIR /run/user/1000
+    setenv XDG_CACHE_HOME /data/cache
+    setenv XDG_DATA_HOME /system/data

@@ -67,7 +67,8 @@ build $BUILDROOT/wayland/xcursor.o: cc external/wayland/cursor/xcursor.c
 build $BUILDROOT/wayland/libwayland-cursor.so: so $
   $BUILDROOT/wayland/wayland-cursor.o $
   $BUILDROOT/wayland/os-compatibility.o $
-  $BUILDROOT/wayland/xcursor.o
+  $BUILDROOT/wayland/xcursor.o $
+  | $BUILDROOT/wayland/libwayland-client.so
   libs = $BUILDROOT/wayland/libwayland-client.so
 
 build $BUILDROOT/wayland/wayland-egl.o: cc external/wayland/egl/wayland-egl.c

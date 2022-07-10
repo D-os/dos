@@ -51,6 +51,7 @@ subsystem dma_heap
 /dev/uinput               0660   uhid       uhid
 /dev/rtc0                 0640   system     system
 /dev/tty0                 0660   root       system
+/dev/tty1                 0660   root       system
 /dev/graphics/*           0660   root       graphics
 /dev/input/*              0660   root       input
 /dev/v4l-touch*           0660   root       input
