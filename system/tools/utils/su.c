@@ -140,7 +140,7 @@ int check_pass(const char* name, const char *pass, struct passwd *pwd) {
 
 extern char** environ;
 
-#define SU_DIR "/var/lib/su"
+#define SU_DIR "/run/su"
 #define LOGIN_DELAY_SECS 1
 #define STRIFY2(x) #x
 #define STRIFY(x) STRIFY2(x)
