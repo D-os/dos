@@ -36,8 +36,7 @@ subsystem dma_heap
 /dev/urandom              0666   root       root
 /dev/ashmem*              0666   root       root
 /dev/binder               0666   root       root
-/dev/hwbinder             0666   root       root
-/dev/vndbinder            0666   root       root
+/dev/binderfs/binder      0666   root       root
 
 /dev/pmsg0                0222   root       log
 /dev/dma_heap/system      0444   system     system

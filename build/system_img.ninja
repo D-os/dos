@@ -37,6 +37,7 @@ build $SYSTEMDIR/dev: mkdir
 build $SYSTEMDIR/proc: mkdir
 build $SYSTEMDIR/sys: mkdir
 build $SYSTEMDIR/mnt: mkdir
+build $SYSTEMDIR/data: mkdir
 build $SYSTEMDIR/debug_ramdisk: mkdir
 build $SYSTEMDIR/second_stage_resources: mkdir
 build $SYSTEMDIR/apex: mkdir
@@ -53,8 +54,11 @@ build $SYSTEMDIR/lib/modules: sync | $SYSROOT/lib/modules
 build $SYSTEMDIR/etc/cgroups.json: copy build/conf/cgroups.json
 build $SYSTEMDIR/etc/task_profiles.json: copy system/core/libprocessgroup/profiles/task_profiles.json
 build $SYSTEMDIR/system/build.prop: copy build/conf/build.prop
+build $SYSTEMDIR/system/etc/fstab.qemu: copy build/conf/fstab.qemu
 build $SYSTEMDIR/system/etc/init/hw/init.rc: copy build/conf/init.rc
+build $SYSTEMDIR/system/etc/init/hw/init.qemu.rc: copy build/conf/init.qemu.rc
 build $SYSTEMDIR/system/bin/init: copy $BUILDROOT/init/obj/init
+build $SYSTEMDIR/system/bin/init.insmod.sh: copy build/conf/init.insmod.sh
 build $SYSTEMDIR/system/etc/ueventd.rc: copy build/conf/ueventd.rc
 build $SYSTEMDIR/system/bin/ueventd: hardlink $SYSTEMDIR/system/bin/init
 build $SYSTEMDIR/system/etc/init/servicemanager.rc: sed frameworks/native/cmds/servicemanager/servicemanager.microdroid.rc

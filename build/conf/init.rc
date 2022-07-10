@@ -1,4 +1,15 @@
-# Based on Android 12
+# Copyright (C) 2012 The Android Open Source Project
+#
+# IMPORTANT: Do not create world writable files or directories.
+# This is a common source of Android security bugs.
+#
+
+import /init.environ.rc
+import /system/etc/init/hw/init.usb.rc
+import /init.${ro.hardware}.rc
+import /system/etc/init/hw/init.${ro.hardware}.rc
+import /system/etc/init/hw/init.usb.configfs.rc
+import /system/etc/init/hw/init.${ro.zygote}.rc
 
 # Cgroups are mounted right before early-init using list from /etc/cgroups.json
 on early-init
@@ -230,22 +241,22 @@ on post-fs-data
 
     # Start bootcharting as soon as possible after the data partition is
     # mounted to collect more data.
-    mkdir /data/bootchart 0755 shell shell encryption=None
+    mkdir /data/bootchart 0755 shell shell
     bootchart start
 
     # Avoid predictable entropy pool. Carry over entropy from previous boot.
     copy /data/system/entropy.dat /dev/urandom
 
     # create the lost+found directories, so as to enforce our permissions
-    mkdir /data/lost+found 0770 root root encryption=None
+    mkdir /data/lost+found 0770 root root
 
-    mkdir /data/user 0711 system system encryption=None
+    mkdir /data/user 0711 system system
 
     # Unlink /data/user/0 if we previously symlink it to /data/data
     rm /data/user/0
 
     # Bind mount /data/user/0 to /data/data
-    mkdir /data/user/0 0700 system system encryption=None
+    mkdir /data/user/0 0700 system system
     mount none /data/data /data/user/0 bind rec
 
     init_user0

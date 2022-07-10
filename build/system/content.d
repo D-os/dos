@@ -3,6 +3,7 @@ out/system.img: \
   out/system/proc \
   out/system/sys \
   out/system/mnt \
+  out/system/data \
   out/system/debug_ramdisk \
   out/system/second_stage_resources \
   out/system/lib \
@@ -15,7 +16,10 @@ out/system.img: \
   out/system/linkerconfig \
   out/system/etc/cgroups.json \
   out/system/etc/task_profiles.json \
+  out/system/system/etc/fstab.qemu \
   out/system/system/etc/init/hw/init.rc \
+  out/system/system/etc/init/hw/init.qemu.rc \
+  out/system/system/bin/init.insmod.sh \
   out/system/system/etc/init/servicemanager.rc \
   out/system/system/etc/ueventd.rc \
   out/system/etc/passwd \

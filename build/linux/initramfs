@@ -17,7 +17,7 @@ file /lib/modules/ext4.ko out/build/initramfs/lib/modules/0.0/ext4.ko 0644 0 0
 file /lib/modules/jbd2.ko out/build/initramfs/lib/modules/0.0/jbd2.ko 0644 0 0
 file /lib/modules/libcrc32c.ko out/build/initramfs/lib/modules/0.0/libcrc32c.ko 0644 0 0
 file /lib/modules/mbcache.ko out/build/initramfs/lib/modules/0.0/mbcache.ko 0644 0 0
-file /fstab.qemu build/linux/fstab.qemu 0644 0 0
+file /fstab.qemu build/conf/fstab.qemu 0644 0 0
 dir /system 755 0 0
 dir /bin 755 0 0
 file /bin/toybox build/toybox/toybox-x86_64 0755 0 0

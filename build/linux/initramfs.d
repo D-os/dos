@@ -10,6 +10,6 @@ out/build/initramfs/initramfs: \
   out/build/initramfs/lib/modules/0.0/jbd2.ko \
   out/build/initramfs/lib/modules/0.0/libcrc32c.ko \
   out/build/initramfs/lib/modules/0.0/mbcache.ko \
-  build/linux/fstab.qemu \
+  build/conf/fstab.qemu \
   build/toybox/toybox-x86_64 \
   build/linux/first_stage.sh \

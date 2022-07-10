@@ -1,0 +1,5 @@
+#<src>                         <mnt_point>    <type>    <mnt_flags and options>              <fs_mgr_flags>
+/dev/vda                       /system        ext4      ro,barrier=1                         wait,first_stage_mount
+#/dev/block/by-name/userdata   /data          ext4      nodev,noatime,nosuid,errors=panic    latemount,wait,check,quota,formattable,checkpoint=block
+userdata                       /data          9p        nosuid,nodev,noatime,trans=virtio,version=9p2000.L,cache=loose    nofail
+/dev/block/zram0               zram           swap      defaults                             zramsize=75%

@@ -33,8 +33,6 @@ meson .. -Dlibseat-logind=disabled -Dlibseat-builtin=enabled -Dlibseat-seatd=dis
 XDG_RUNTIME_DIR=/apex XDG_DATA_HOME=/system/data /system/bin/weston
 XDG_RUNTIME_DIR=/apex WAYLAND_DISPLAY=wayland-1 /system/bin/weston-terminal
 
-- find /sys/ -name modalias | xargs sort -u | xargs -n 1 modprobe
-
 - reimplement backtrace using libunwind
   https://www.cnblogs.com/utopia007/p/11642581.html
   https://github.com/cslarsen/libunwind-examples/blob/master/backtrace.cpp
@@ -43,5 +41,5 @@ XDG_RUNTIME_DIR=/apex WAYLAND_DISPLAY=wayland-1 /system/bin/weston-terminal
 remote: error: File libunwindstack/tests/files/offline/jit_debug_x86_32/libartd.so is 219.06 MB; this exceeds GitHub's file size limit of 100.00 MB
 git filter-repo --invert-paths --path libunwindstack/tests/files/offline --force
 
-- console:/ # cat /lib/libc++.so                                                 
+- console:/ # cat /lib/libc++.so
 INPUT(libc++.so.1 -lc++abi)
