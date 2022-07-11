@@ -104,7 +104,7 @@ build $BUILDROOT/toybox/taskset.o: cc external/toybox/toys/other/taskset.c
 #build $BUILDROOT/toybox/getenforce.o: cc external/toybox/toys/android/getenforce.c
 #build $BUILDROOT/toybox/load_policy.o: cc external/toybox/toys/android/load_policy.c
 build $BUILDROOT/toybox/log.o: cc external/toybox/toys/android/log.c
-build $BUILDROOT/toybox/restorecon.o: cc external/toybox/toys/android/restorecon.c
+#build $BUILDROOT/toybox/restorecon.o: cc external/toybox/toys/android/restorecon.c
 #build $BUILDROOT/toybox/runcon.o: cc external/toybox/toys/android/runcon.c
 build $BUILDROOT/toybox/sendevent.o: cc external/toybox/toys/android/sendevent.c
 #build $BUILDROOT/toybox/setenforce.o: cc external/toybox/toys/android/setenforce.c
@@ -282,7 +282,6 @@ build $BUILDROOT/toybox/toybox: link $
   $BUILDROOT/toybox/ps.o $
   $BUILDROOT/toybox/taskset.o $
   $BUILDROOT/toybox/log.o $
-  $BUILDROOT/toybox/restorecon.o $
   $BUILDROOT/toybox/sendevent.o $
   $BUILDROOT/toybox/dmesg.o $
   $BUILDROOT/toybox/killall.o $
@@ -636,8 +635,6 @@ build $SYSTEMDIR/bin/readlink: symlink
 build $SYSTEMDIR/bin/realpath: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/renice: symlink
-  target = ../system/bin/toybox
-build $SYSTEMDIR/bin/restorecon: symlink
   target = ../system/bin/toybox
 build $SYSTEMDIR/bin/rev: symlink
   target = ../system/bin/toybox

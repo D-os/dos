@@ -1,0 +1,46 @@
+cflags = $
+  -Werror $
+  -Wno-unused-parameter $
+  -Wno-unused-const-variable $
+  -D_FILE_OFFSET_BITS=64 $
+
+includes = -I$BUILDROOT/toolbox/gen -Isystem/libbase/include $
+  -Isystem/core/property_service/libpropertyinfoparser/include $
+
+rule gen_labels
+  command = system/core/toolbox/generate-input.h-labels.py $in >$out
+  generator = system/core/toolbox/generate-input.h-labels.py
+  description = [HOST] GEN $out
+
+build $BUILDROOT/toolbox/gen/input.h-labels.h: gen_labels $
+  external/linux/include/uapi/linux/input-event-codes.h $
+  external/linux/include/uapi/linux/input.h $
+
+build $BUILDROOT/toolbox/toolbox.o: cc system/core/toolbox/toolbox.c
+build $BUILDROOT/toolbox/getevent.o: cc system/core/toolbox/getevent.c | $BUILDROOT/toolbox/gen/input.h-labels.h
+  includes = $includes -include external/linux/include/uapi/linux/input-event-codes.h
+build $BUILDROOT/toolbox/getprop.o: cxx system/core/toolbox/getprop.cpp
+build $BUILDROOT/toolbox/modprobe.o: cxx system/core/toolbox/modprobe.cpp
+build $BUILDROOT/toolbox/setprop.o: cxx system/core/toolbox/setprop.cpp
+build $BUILDROOT/toolbox/start.o: cxx system/core/toolbox/start.cpp
+
+build $BUILDROOT/toolbox/toolbox: link $
+  $BUILDROOT/toolbox/toolbox.o $
+  $BUILDROOT/toolbox/getevent.o $
+  $BUILDROOT/toolbox/getprop.o $
+  $BUILDROOT/toolbox/setprop.o $
+  $BUILDROOT/toolbox/start.o $
+  $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a $
+| $SYSROOT/lib/libbase.so
+  libs = -lc++ -lunwind -lbase -lcutils
+
+build $SYSTEMDIR/bin/getevent: symlink
+  target = ../system/bin/toolbox
+build $SYSTEMDIR/bin/getprop: symlink
+  target = ../system/bin/toolbox
+build $SYSTEMDIR/bin/setprop: symlink
+  target = ../system/bin/toolbox
+build $SYSTEMDIR/bin/start: symlink
+  target = ../system/bin/toolbox
+build $SYSTEMDIR/bin/stop: symlink
+  target = ../system/bin/toolbox

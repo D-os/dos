@@ -153,7 +153,6 @@ out/system.img: \
   out/system/bin/readlink \
   out/system/bin/realpath \
   out/system/bin/renice \
-  out/system/bin/restorecon \
   out/system/bin/rev \
   out/system/bin/rfkill \
   out/system/bin/rm \
@@ -221,6 +220,12 @@ out/system.img: \
   out/system/bin/xxd \
   out/system/bin/yes \
   out/system/bin/zcat \
+  out/system/system/bin/toolbox \
+  out/system/bin/getevent \
+  out/system/bin/getprop \
+  out/system/bin/setprop \
+  out/system/bin/start \
+  out/system/bin/stop \
   out/system/bin/ldd \
   out/system/lib/libz.so \
   out/system/lib/libz.so.1 \

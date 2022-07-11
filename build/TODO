@@ -42,3 +42,9 @@ git filter-repo --invert-paths --path libunwindstack/tests/files/offline --force
 
 - console:/ # cat /lib/libc++.so
 INPUT(libc++.so.1 -lc++abi)
+
+- fix property_service
+console:/ # setprop persist.sys.zram_enabled 1
+libc: Using old property service protocol ("ro.property_service.version" is not set)
+console:/ # getprop persist.sys.zram_enabled
+console:/ #

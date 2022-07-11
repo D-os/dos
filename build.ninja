@@ -245,6 +245,8 @@ subninja build/servicemanager.ninja
 
 subninja build/system_img.ninja
 
+subninja build/toolbox.ninja
+
 subninja build/toybox.ninja
 
 subninja build/utils.ninja
