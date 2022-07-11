@@ -1,3 +1,4 @@
 ext4.ko
 crc32c_generic.ko
 libcrc32c.ko
+zram.ko

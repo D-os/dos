@@ -32,7 +32,9 @@ rule depmod
   command = out/host/bin/depmod -a -b $BUILDROOT/initramfs 0.0
   description = [HOST] DEPMOD $out
 
-build $BUILDROOT/initramfs/lib/modules/0.0/modules.dep: depmod | out/host/bin/depmod || $BUILDROOT/initramfs/lib/modules/0.0
+build $BUILDROOT/initramfs/lib/modules/0.0/modules.dep: depmod $
+| out/host/bin/depmod build/linux/modules.load $
+|| $BUILDROOT/initramfs/lib/modules/0.0
 
 rule gzip
   command = gzip -c $in > $out
