@@ -473,7 +473,7 @@ build $BUILDROOT/weston/desktop-shell.so: so $
     -lm -lwayland-server -lpixman-1 -lxkbcommon -lwayland-client
 
 build $BUILDROOT/weston/libcairo-shared/image-loader.o: cc external/weston/shared/image-loader.c
-  includes = $includes -Iexternal/cairo/src -Ibuild/cairo -Iexternal/libpng -Iexternal/libjpeg-turbo -Iexternal/libwebp/include
+  includes = $includes -Iexternal/cairo/src -Ibuild/cairo -Iexternal/libpng -Iexternal/libjpeg -Ibuild/libjpeg -Iexternal/libwebp/include
 build $BUILDROOT/weston/libcairo-shared/cairo-util.o: cc external/weston/shared/cairo-util.c
   includes = $includes -Iexternal/cairo/src -Ibuild/cairo
 build $BUILDROOT/weston/libcairo-shared/frame.o: cc external/weston/shared/frame.c

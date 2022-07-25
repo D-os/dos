@@ -125,9 +125,6 @@
 [submodule "external/seatd"]
 	path = external/seatd
 	url = https://git.sr.ht/~kennylevinsen/seatd
-[submodule "external/libjpeg-turbo"]
-	path = external/libjpeg-turbo
-	url = https://android.googlesource.com/platform/external/libjpeg-turbo
 [submodule "external/yasm"]
 	path = external/yasm
 	url = https://github.com/yasm/yasm.git
@@ -155,3 +152,6 @@
 [submodule "external/fmtlib"]
 	path = external/fmtlib
 	url = https://github.com/fmtlib/fmt.git
+[submodule "external/libjpeg"]
+	path = external/libjpeg
+	url = https://github.com/mozilla/mozjpeg.git
