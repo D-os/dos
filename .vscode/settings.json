@@ -2,5 +2,6 @@
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "modifications",
   "typescript.tsc.autoDetect": "off",
-  "npm.autoDetect": "off"
+  "npm.autoDetect": "off",
+  "task.allowAutomaticTasks": true
 }

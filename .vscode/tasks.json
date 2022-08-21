@@ -36,6 +36,22 @@
         "reveal": "never",
         "panel": "shared"
       }
+    },
+
+    {
+      "label": "🐓 Run QEmu",
+      "type": "process",
+      "command": "sh",
+      "args": ["qemu.sh"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOn": ["🏗️ Build"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
     }
   ]
 }
