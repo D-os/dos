@@ -114,6 +114,8 @@ rule wayland-scanner
   description = [HOST] WAYLAND SCANNER $out
 
 
+subninja build/bioniccompat.ninja
+
 subninja build/fmtlib.ninja
 
 subninja build/libbase.ninja

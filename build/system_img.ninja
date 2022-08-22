@@ -44,7 +44,6 @@ build $SYSTEMDIR/bin/ldd: symlink
 
 build $SYSTEMDIR/lib: sync | $SYSROOT/lib
   source = $SYSROOT/lib/*.so*
-build $SYSTEMDIR/lib/libcutils.so: copy $BUILDROOT/libcutils/linked/libcutils.so
 build $SYSTEMDIR/lib/modules: sync | $SYSROOT/lib/modules
   source = $SYSROOT/lib/modules/*
 build $SYSTEMDIR/etc/cgroups.json: copy build/conf/cgroups.json

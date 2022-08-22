@@ -2,6 +2,7 @@ cxxflags = -Wall -Werror -Wextra
 includes = -Isystem/bioniccompat/bionic/libc/system_properties/include $
   -Isystem/bioniccompat/bionic/libc -Isystem/bioniccompat/bionic/libc/async_safe/include $
   -Isystem/logging/liblog/include $
+  -Isystem/libbase/include $
   -Isystem/core/property_service/libpropertyinfoparser/include $
 
 build $BUILDROOT/libsystemproperties/context_node.o: cxx system/bioniccompat/bionic/libc/system_properties/context_node.cpp
@@ -10,6 +11,9 @@ build $BUILDROOT/libsystemproperties/contexts_serialized.o: cxx system/bioniccom
 build $BUILDROOT/libsystemproperties/prop_area.o: cxx system/bioniccompat/bionic/libc/system_properties/prop_area.cpp
 build $BUILDROOT/libsystemproperties/prop_info.o: cxx system/bioniccompat/bionic/libc/system_properties/prop_info.cpp
 build $BUILDROOT/libsystemproperties/system_properties.o: cxx system/bioniccompat/bionic/libc/system_properties/system_properties.cpp
+build $BUILDROOT/libsystemproperties/system_property_api.o: cxx system/bioniccompat/bionic/libc/bionic/system_property_api.cpp
+build $BUILDROOT/libsystemproperties/system_property_set.o: cxx system/bioniccompat/bionic/libc/bionic/system_property_set.cpp
+build $BUILDROOT/libsystemproperties/init_array.o: cxx build/libsystemproperties/init_array.cpp
 
 build $BUILDROOT/libsystemproperties/libsystemproperties.a: ar $
   $BUILDROOT/libsystemproperties/context_node.o $
@@ -18,12 +22,15 @@ build $BUILDROOT/libsystemproperties/libsystemproperties.a: ar $
   $BUILDROOT/libsystemproperties/prop_area.o $
   $BUILDROOT/libsystemproperties/prop_info.o $
   $BUILDROOT/libsystemproperties/system_properties.o $
+  $BUILDROOT/bioniccompat/async_safe_log.o $
+  $BUILDROOT/libsystemproperties/system_property_api.o $
+  $BUILDROOT/libsystemproperties/system_property_set.o $
+  $BUILDROOT/libsystemproperties/init_array.o $
 
 build $BUILDROOT/libsystemproperties/libsystemproperties.so: soa $
   $BUILDROOT/libsystemproperties/libsystemproperties.a $
-| $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a $
-  $SYSROOT/lib/libcutils.so
-  libs = -lc++ -lunwind -lcutils $
+| $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a
+  libs = -lc++ -lunwind $
     -Wl,--whole-archive $
       $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a $
     -Wl,--no-whole-archive

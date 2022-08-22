@@ -23,32 +23,6 @@ build $BUILDROOT/libcutils/qtaguid.o: cxx system/core/libcutils/qtaguid.cpp
 build $BUILDROOT/libcutils/trace-dev.o: cxx system/core/libcutils/trace-dev.cpp
 build $BUILDROOT/libcutils/uevent.o: cxx system/core/libcutils/uevent.cpp
 
-build $BUILDROOT/bioniccompat/recallocarray.o: cc system/bioniccompat/bionic/libc/upstream-openbsd/lib/libc/stdlib/recallocarray.c
-  includes = -Isystem/bioniccompat/bionic/libc $
-  -Isystem/bioniccompat/bionic/libc/upstream-openbsd/android/include
-  cflags = -Wno-macro-redefined
-build $BUILDROOT/bioniccompat/fts.o: cc system/bioniccompat/bionic/libc/bionic/fts.c
-  includes = -Isystem/bioniccompat/bionic/libc $
-  -Isystem/bioniccompat/bionic/libc/upstream-openbsd/android/include
-  cflags = -Wno-macro-redefined
-build $BUILDROOT/bioniccompat/async_safe_log.o: cxx system/bioniccompat/bionic/libc/async_safe/async_safe_log.cpp
-  includes = -Isystem/bioniccompat/bionic/libc/async_safe/include $
-  -Isystem/bioniccompat/bionic/libc $
-  -Isystem/core/libcutils/include $
-  -Isystem/logging/liblog/include
-build $BUILDROOT/bioniccompat/system_property_api.o: cxx system/bioniccompat/bionic/libc/bionic/system_property_api.cpp
-  includes = -Isystem/bioniccompat/bionic/libc/system_properties/include $
-  -Isystem/bioniccompat/bionic/libc $
-  -Isystem/core/property_service/libpropertyinfoparser/include
-build $BUILDROOT/bioniccompat/system_property_set.o: cxx system/bioniccompat/bionic/libc/bionic/system_property_set.cpp
-  includes = -Isystem/bioniccompat/bionic/libc/system_properties/include $
-  -Isystem/bioniccompat/bionic/libc $
-  -Isystem/bioniccompat/bionic/libc/async_safe/include $
-  -Isystem/core/libcutils/include $
-  -Isystem/logging/liblog/include
-build $BUILDROOT/bioniccompat/init_array.o: cxx build/libcutils/init_array.cpp
-  includes = -Isystem/bioniccompat/bionic/libc/system_properties/include
-
 build $BUILDROOT/libcutils/libcutils.a: ar $
   $BUILDROOT/libcutils/config_utils.o $
   $BUILDROOT/libcutils/iosched_policy.o $
@@ -74,9 +48,6 @@ build $BUILDROOT/libcutils/libcutils.a: ar $
   $BUILDROOT/bioniccompat/recallocarray.o $
   $BUILDROOT/bioniccompat/fts.o $
   $BUILDROOT/bioniccompat/async_safe_log.o $
-  $BUILDROOT/bioniccompat/system_property_api.o $
-  $BUILDROOT/bioniccompat/system_property_set.o $
-  $BUILDROOT/bioniccompat/init_array.o $
 
 rule soa
   description = SO(.a) $out
@@ -87,12 +58,6 @@ rule soa
     -Wl,--no-whole-archive $
 
 build $BUILDROOT/libcutils/libcutils.so: soa $BUILDROOT/libcutils/libcutils.a $
-| $BUILDROOT/libcutils/libcutils_sockets.a $
-  $SYSROOT/lib/liblog.so
-  libs = -lc++ -llog
-# -lbase -lsystemproperties - cyclic dependency
-
-build $BUILDROOT/libcutils/linked/libcutils.so: soa $BUILDROOT/libcutils/libcutils.a $
 | $BUILDROOT/libcutils/libcutils_sockets.a $
   $SYSROOT/lib/liblog.so $
   $SYSROOT/lib/libbase.so $

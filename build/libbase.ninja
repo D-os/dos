@@ -41,7 +41,7 @@ build $BUILDROOT/libbase/libbase.a: ar $
 
 build $BUILDROOT/libbase/libbase.so: soa $BUILDROOT/libbase/libbase.a $
 | $BUILDROOT/fmtlib/fmtlib.a $
-  $SYSROOT/lib/libcutils.so $
+  $SYSROOT/lib/libsystemproperties.so $
   $SYSROOT/lib/liblog.so
-  libs = -lc++ -lunwind -lcutils -llog $
+  libs = -lc++ -lunwind -lsystemproperties -llog $
     -Wl,--whole-archive $BUILDROOT/fmtlib/fmtlib.a -Wl,--no-whole-archive

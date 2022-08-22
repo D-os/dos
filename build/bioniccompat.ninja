@@ -1,0 +1,12 @@
+includes = $
+  -Isystem/bioniccompat/bionic/libc $
+  -Isystem/bioniccompat/bionic/libc/async_safe/include $
+  -Isystem/bioniccompat/bionic/libc/upstream-openbsd/android/include $
+  -Isystem/libbase/include $
+
+cflags = -Wno-macro-redefined
+
+build $BUILDROOT/bioniccompat/recallocarray.o: cc system/bioniccompat/bionic/libc/upstream-openbsd/lib/libc/stdlib/recallocarray.c
+build $BUILDROOT/bioniccompat/fts.o: cc system/bioniccompat/bionic/libc/bionic/fts.c
+build $BUILDROOT/bioniccompat/async_safe_log.o: cxx system/bioniccompat/bionic/libc/async_safe/async_safe_log.cpp
+  includes = $includes -Isystem/logging/liblog/include

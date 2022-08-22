@@ -31,8 +31,9 @@ build $BUILDROOT/toolbox/toolbox: link $
   $BUILDROOT/toolbox/setprop.o $
   $BUILDROOT/toolbox/start.o $
   $BUILDROOT/libpropertyinfoparser/libpropertyinfoparser.a $
-| $SYSROOT/lib/libbase.so
-  libs = -lc++ -lunwind -lbase -lcutils
+| $SYSROOT/lib/libbase.so $
+  $SYSROOT/lib/libsystemproperties.so
+  libs = -lc++ -lunwind -lbase -lsystemproperties
 
 build $SYSTEMDIR/bin/getevent: symlink
   target = ../system/bin/toolbox
