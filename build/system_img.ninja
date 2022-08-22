@@ -61,6 +61,7 @@ build $SYSTEMDIR/system/etc/init/servicemanager.rc: sed frameworks/native/cmds/s
   pattern = s/.microdroid//
 build $SYSTEMDIR/system/bin/servicemanager: copy $BUILDROOT/servicemanager/servicemanager
 build $SYSTEMDIR/system/bin/service: copy $BUILDROOT/servicemanager/service
+build $SYSTEMDIR/system/bin/cmd: copy $BUILDROOT/servicemanager/cmd
 build $SYSTEMDIR/system/bin/su: copy $BUILDROOT/utils/su
 build $SYSTEMDIR/system/bin/toybox: copy $BUILDROOT/toybox/toybox
 build $SYSTEMDIR/system/bin/toolbox: copy $BUILDROOT/toolbox/toolbox

@@ -27,12 +27,34 @@ build $BUILDROOT/servicemanager/servicemanager: link $
   $SYSROOT/lib/libbinder.so $
   $SYSROOT/lib/libcutils.so $
   $SYSROOT/lib/liblog.so $
-  $SYSROOT/lib/libutils.so
+  $SYSROOT/lib/libutils.so $
+  $SYSROOT/lib/libsystemproperties.so
   libs = -lc++ -lunwind -lbase -lbinder -lcutils -llog -lutils -lsystemproperties
 
 build $BUILDROOT/servicemanager/cmds/service.o: cxx frameworks/native/cmds/service/service.cpp
   cxxflags = -DXP_UNIX -Wall -Werror
 
 build $BUILDROOT/servicemanager/service: link $
-  $BUILDROOT/servicemanager/cmds/service.o
+  $BUILDROOT/servicemanager/cmds/service.o $
+  | $
+  $SYSROOT/lib/libcutils.so $
+  $SYSROOT/lib/libutils.so $
+  $SYSROOT/lib/libbinder.so $
+  $SYSROOT/lib/liblog.so $
+  $SYSROOT/lib/libbase.so $
+  $SYSROOT/lib/libsystemproperties.so
   libs = -lc++ -lunwind -lcutils -lutils -lbinder -llog -lbase -lsystemproperties
+
+build $BUILDROOT/servicemanager/cmds/cmd.o: cxx frameworks/native/cmds/cmd/cmd.cpp
+  cxxflags = -Wall -Werror -DXP_UNIX
+build $BUILDROOT/servicemanager/cmds/main.o: cxx frameworks/native/cmds/cmd/main.cpp
+  cxxflags = -Wall -Werror -DXP_UNIX
+
+build $BUILDROOT/servicemanager/cmd: link $
+  $BUILDROOT/servicemanager/cmds/cmd.o $
+  $BUILDROOT/servicemanager/cmds/main.o $
+  | $
+  $SYSROOT/lib/libutils.so $
+  $SYSROOT/lib/liblog.so $
+  $SYSROOT/lib/libbinder.so
+  libs = -lc++ -lunwind -lutils -llog -lbinder
