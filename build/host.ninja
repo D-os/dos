@@ -8,4 +8,5 @@ subninja build/fmtlib.ninja
 libbase_host_flags = -D__BUILD_FOR_HOST
 subninja build/libbase.ninja
 
+liblog_host_flags = -D__BUILD_FOR_HOST
 subninja build/liblog.ninja
