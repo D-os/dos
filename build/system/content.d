@@ -23,6 +23,7 @@ out/system.img: \
   out/system/etc/fstab \
   out/system/etc/hosts \
   out/system/system/bin/sh \
+  out/system/bin/sh \
   out/system/system/etc/mkshrc \
   out/system/system/bin/toybox \
   out/system/bin/[ \

@@ -77,6 +77,8 @@ build $SYSTEMDIR/lib/libglapi.so: copy $SYSROOT/lib/libglapi.so
 build $SYSTEMDIR/lib/libEGL.so: copy $SYSROOT/lib/libEGL.so
 build $SYSTEMDIR/lib/libGLESv2.so: copy $SYSROOT/lib/libGLESv2.so
 build $SYSTEMDIR/system/bin/sh: copy $BUILDROOT/mksh/sh
+build $SYSTEMDIR/bin/sh: symlink
+  target = ../system/bin/sh
 build $SYSTEMDIR/system/etc/mkshrc: copy external/mksh/mkshrc
 build $SYSTEMDIR/system/etc/init/weston.rc: copy build/weston/weston.rc
 build $SYSTEMDIR/system/bin/weston: copy $BUILDROOT/weston/weston
