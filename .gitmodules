@@ -155,3 +155,6 @@
 [submodule "external/libjpeg"]
 	path = external/libjpeg
 	url = https://github.com/mozilla/mozjpeg.git
+[submodule "docs"]
+	path = docs
+	url = https://github.com/D-os/docs.git
