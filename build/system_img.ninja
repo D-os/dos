@@ -76,6 +76,7 @@ build $SYSTEMDIR/lib/libgbm.so: copy $SYSROOT/lib/libgbm.so
 build $SYSTEMDIR/lib/libglapi.so: copy $SYSROOT/lib/libglapi.so
 build $SYSTEMDIR/lib/libEGL.so: copy $SYSROOT/lib/libEGL.so
 build $SYSTEMDIR/lib/libGLESv2.so: copy $SYSROOT/lib/libGLESv2.so
+build $SYSTEMDIR/lib/libcairo.so: copy $SYSROOT/lib/libcairo.so
 build $SYSTEMDIR/system/bin/sh: copy $BUILDROOT/mksh/sh
 build $SYSTEMDIR/bin/sh: symlink
   target = ../system/bin/sh
