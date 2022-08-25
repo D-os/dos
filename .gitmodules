@@ -158,3 +158,6 @@
 [submodule "docs"]
 	path = docs
 	url = https://github.com/D-os/docs.git
+[submodule "system/os"]
+	path = system/os
+	url = git@github.com:D-os/libb2.git
