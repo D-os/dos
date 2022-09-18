@@ -1,1 +1,3 @@
-system /system 9p ro,user,noauto,trans=virtio,version=9p2000.L,cache=loose 0 0
+system /system 9p ro,user,noauto,trans=virtio,version=9p2000.L,cache=mmap 0 0
+lib /lib 9p ro,user,noauto,trans=virtio,version=9p2000.L,cache=mmap 0 0
+tests /tests 9p ro,user,noauto,trans=virtio,version=9p2000.L,cache=mmap 0 0

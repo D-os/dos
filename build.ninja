@@ -268,4 +268,8 @@ build $SYSROOT/lib/libz.so: copy $BUILDROOT/zlib/libz.so
 subninja build/zstd.ninja
 build $SYSROOT/lib/libzstd.so: copy $BUILDROOT/zstd/libzstd.so
 
+subninja system/os/build.ninja
+build $SYSROOT/lib/libbe.so: copy $BUILDROOT/os/libbe.so
+build $SYSTEMDIR/tests/app: copy $BUILDROOT/os/tests/app/app
+
 default initramfs system.img

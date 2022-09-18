@@ -1,19 +1,26 @@
 IMAGE_SIZE = 5G
 
-build system.img: phony $SYSTEMDIR.img $SYSTEMDIR.stamp
+build system.img: phony $SYSTEMDIR.content $SYSTEMDIR.img $SYSTEMDIR.fixup
+
+rule touch
+  command = touch $out
+  description = [HOST] TOUCH $out
+
+build $SYSTEMDIR.content: touch $SYSTEMDIR
+  depfile = build/system/content.d
 
 rule mkfs
   command = truncate -s $IMAGE_SIZE $out && mke2fs -q -t ext4 -L / -E root_owner=0:0 -d $in $out
   description = [HOST] MKFS $out
 
-build $SYSTEMDIR.img: mkfs $SYSTEMDIR
-  depfile = build/system/content.d
+build $SYSTEMDIR.img: mkfs $SYSTEMDIR $
+  | $SYSTEMDIR.content
 
 rule fixup
   command = sh build/system/content.sh && touch -d "now + 1 second" $out
   description = [HOST] FIXUP $out
 
-build $SYSTEMDIR.stamp: fixup $SYSTEMDIR.img $
+build $SYSTEMDIR.fixup: fixup $SYSTEMDIR.img $
   | build/system/content.sh
 
 rule mkdir
@@ -77,6 +84,7 @@ build $SYSTEMDIR/lib/libglapi.so: copy $SYSROOT/lib/libglapi.so
 build $SYSTEMDIR/lib/libEGL.so: copy $SYSROOT/lib/libEGL.so
 build $SYSTEMDIR/lib/libGLESv2.so: copy $SYSROOT/lib/libGLESv2.so
 build $SYSTEMDIR/lib/libcairo.so: copy $SYSROOT/lib/libcairo.so
+build $SYSTEMDIR/lib/libbe.so: copy $SYSROOT/lib/libbe.so
 build $SYSTEMDIR/system/bin/sh: copy $BUILDROOT/mksh/sh
 build $SYSTEMDIR/bin/sh: symlink
   target = ../system/bin/sh

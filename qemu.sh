@@ -20,5 +20,8 @@ qemu-system-x86_64 -enable-kvm -machine q35 -cpu host -smp 4 -m 8G \
     -kernel build/linux/arch/x86/boot/bzImage -initrd build/initramfs.gz \
     -drive format=qcow2,file=$IMG,cache=none,aio=threads,if=virtio \
     -virtfs local,path=$DATA_DIR,mount_tag=userdata,security_model=none \
-    -virtfs local,path=./system/system,mount_tag=system,security_model=none,readonly=on
+    -virtfs local,path=./system/system,mount_tag=system,security_model=none,readonly=on \
+    -virtfs local,path=./system/lib,mount_tag=lib,security_model=none,readonly=on \
+    -virtfs local,path=./system/tests,mount_tag=tests,security_model=none,readonly=on \
+
 rm -f $IMG

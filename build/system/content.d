@@ -1,4 +1,4 @@
-out/system.img: \
+out/system.content: \
   out/system/dev \
   out/system/proc \
   out/system/sys \
@@ -238,6 +238,8 @@ out/system.img: \
   out/system/lib/libGLESv2.so \
   out/system/lib/libfreetype.so \
   out/system/lib/libcairo.so \
+  out/system/lib/libbe.so \
+  out/system/tests/app \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \
   out/system/system/bin/service \
