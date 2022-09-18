@@ -48,3 +48,6 @@ console:/ # setprop persist.sys.zram_enabled 1
 libc: Using old property service protocol ("ro.property_service.version" is not set)
 console:/ # getprop persist.sys.zram_enabled
 console:/ #
+
+- to rebuild libs directory (which is synced, not build) do:
+  touch out/target/x86_64-unknown-linux-musl/lib && ninja

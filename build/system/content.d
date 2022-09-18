@@ -240,6 +240,7 @@ out/system.content: \
   out/system/lib/libcairo.so \
   out/system/lib/libbe.so \
   out/system/tests/app \
+  out/system/tests/sampservice \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \
   out/system/system/bin/service \

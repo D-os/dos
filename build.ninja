@@ -271,5 +271,6 @@ build $SYSROOT/lib/libzstd.so: copy $BUILDROOT/zstd/libzstd.so
 subninja system/os/build.ninja
 build $SYSROOT/lib/libbe.so: copy $BUILDROOT/os/libbe.so
 build $SYSTEMDIR/tests/app: copy $BUILDROOT/os/tests/app/app
+build $SYSTEMDIR/tests/sampservice: copy $BUILDROOT/os/services/sampservice/sampservice
 
 default initramfs system.img
