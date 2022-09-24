@@ -244,6 +244,7 @@ out/system.content: \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \
   out/system/system/bin/service \
+  out/system/system/bin/rosterservice \
   out/system/system/bin/cmd \
   out/system/system/bin/weston \
   out/system/system/lib/libweston-11.so \
