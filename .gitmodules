@@ -161,3 +161,6 @@
 [submodule "system/os"]
 	path = system/os
 	url = git@github.com:D-os/libb2.git
+[submodule "external/doctest"]
+	path = external/doctest
+	url = https://github.com/doctest/doctest.git
