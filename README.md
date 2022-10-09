@@ -30,6 +30,11 @@ See `tools/tc-build/README.md` for a list of required host tools.
 
 ```sh
 make toolchain sysroot compdb kernel kernel_modules
-ninja
-sh qemu.sh
+ninja && qemu.sh
+```
+
+### Testing
+
+```sh
+ninja out/system.content && sudo ./chroot.sh out/system /tests/kits
 ```
