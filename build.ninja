@@ -273,6 +273,6 @@ build $SYSROOT/lib/libbe.so: copy $BUILDROOT/os/libbe.so
 build $SYSTEMDIR/tests/kits: copy $BUILDROOT/os/tests/kits
 build $SYSTEMDIR/tests/app: copy $BUILDROOT/os/tests/app/app
 build $SYSTEMDIR/tests/sampservice: copy $BUILDROOT/os/services/sampservice/sampservice
-build $SYSTEMDIR/system/bin/rosterservice: copy $BUILDROOT/os/services/rosterservice/rosterservice
+build $SYSTEMDIR/system/libexec/app_service: copy $BUILDROOT/os/services/app/app_service
 
 default initramfs system.img

@@ -245,7 +245,6 @@ out/system.content: \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \
   out/system/system/bin/service \
-  out/system/system/bin/rosterservice \
   out/system/system/bin/cmd \
   out/system/system/bin/weston \
   out/system/system/lib/libweston-11.so \
@@ -254,6 +253,7 @@ out/system.content: \
   out/system/system/lib/libweston-11/drm-backend.so \
   out/system/system/lib/libweston-11/gl-renderer.so \
   out/system/system/lib/libweston-11/libweston-desktop-11.so \
+  out/system/system/libexec/app_service \
   out/system/system/libexec/weston-desktop-shell \
   out/system/system/libexec/weston-keyboard \
   out/system/system/bin/weston-terminal \
