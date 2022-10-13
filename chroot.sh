@@ -6,12 +6,15 @@
 DIR=$1
 CMD=$2
 
-if [ ! -d "$DIR" ]; then
+if [ -z "$DIR" ] || [ ! -d "$DIR" ]; then
   sed -n '/^## /{s/^## //p}' $0
   exit 1
 fi
 
 echo chrooting into $DIR
+
+mkdir -p $DIR/etc
+cp /etc/resolv.conf $DIR/etc
 mkdir -p $DIR/proc
 mount --read-only --bind /proc $DIR/proc
 mkdir -p $DIR/sys
@@ -20,11 +23,14 @@ mkdir -p $DIR/dev
 mount --read-only --bind /dev $DIR/dev
 mount --read-only --bind /dev/pts $DIR/dev/pts
 
-mkdir -p $DIR/etc
-cp /etc/resolv.conf $DIR/etc
+cleanup_chroot() {
+grep -o "[^ ]*$DIR[^ ]*" /proc/self/mountinfo | sort -r | xargs umount --recursive --lazy
+rm $DIR/etc/resolv.conf
+}
+
+trap cleanup_chroot SIGINT
+stty -echoctl # hide ^C
 
 chroot $DIR ${CMD:=/bin/init}
 
-grep -o "[^ ]*$DIR[^ ]*" /proc/self/mountinfo | sort -r | xargs umount --recursive --lazy
-
-rm $DIR/etc/resolv.conf
+cleanup_chroot
