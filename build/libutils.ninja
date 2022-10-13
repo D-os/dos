@@ -28,6 +28,8 @@ build $BUILDROOT/libutils/VectorImpl.o: cxx system/core/libutils/VectorImpl.cpp
 build $BUILDROOT/libutils/misc.o: cxx system/core/libutils/misc.cpp
 build $BUILDROOT/libutils/Trace.o: cxx system/core/libutils/Trace.cpp
 build $BUILDROOT/libutils/Looper.o: cxx system/core/libutils/Looper.cpp
+build $BUILDROOT/libutils/CallStack.o: cxx system/core/libutils/CallStack.cpp
+build $BUILDROOT/libutils/ProcessCallStack.o: cxx system/core/libutils/ProcessCallStack.cpp
 
 build $BUILDROOT/libutils/libutils.a: ar $
   $BUILDROOT/libutils/Errors.o $
@@ -51,6 +53,8 @@ build $BUILDROOT/libutils/libutils.a: ar $
   $BUILDROOT/libutils/misc.o $
   $BUILDROOT/libutils/Trace.o $
   $BUILDROOT/libutils/Looper.o $
+  $BUILDROOT/libutils/CallStack.o $
+  $BUILDROOT/libutils/ProcessCallStack.o $
 
 build $BUILDROOT/libutils/libutils.so: soa $BUILDROOT/libutils/libutils.a $
   | $SYSROOT/lib/libcutils.so $
