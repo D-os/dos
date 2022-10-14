@@ -3,5 +3,21 @@
   "editor.formatOnSaveMode": "modifications",
   "typescript.tsc.autoDetect": "off",
   "npm.autoDetect": "off",
-  "task.allowAutomaticTasks": true
+  "task.allowAutomaticTasks": "on",
+  "testMate.cpp.test.advancedExecutables": [
+    {
+      "pattern": "out/system/tests/kit*",
+      "cwd": "${workspaceDirectory}",
+      "sourceFileMap": {
+        "${workspaceDirectory}/out/system/": "/"
+      },
+      "executionWrapper": {
+        "path": "chroot.sh",
+        "args": ["${workspaceDirectory}/out/system", "${cmd}", "${argsFlat}"]
+      },
+      "runTask": {
+        "before": ["build content"]
+      }
+    }
+  ]
 }

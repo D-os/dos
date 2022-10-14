@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "🏗️ Build",
+      "label": "🏗️ Build all",
       "type": "process",
       "command": "ninja",
       "args": ["-v"],
@@ -13,7 +13,23 @@
       },
       "group": "build",
       "presentation": {
-        "reveal": "always",
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "panel": "shared"
+      },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "build content",
+      "type": "process",
+      "command": "ninja",
+      "args": ["out/system.content"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
         "revealProblems": "onProblem",
         "panel": "shared"
       },

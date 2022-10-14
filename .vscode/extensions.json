@@ -4,6 +4,7 @@
     "surajbarkale.ninja",
     "EditorConfig.EditorConfig",
     "timonwong.shellcheck",
-    "streetsidesoftware.code-spell-checker"
+    "streetsidesoftware.code-spell-checker",
+    "matepek.vscode-catch2-test-adapter"
   ]
 }
