@@ -36,5 +36,5 @@ ninja && qemu.sh
 ### Testing
 
 ```sh
-ninja out/system.content && sudo ./chroot.sh out/system /tests/kits
+ninja out/system.content && ./chroot.sh out/system /tests/kits
 ```
