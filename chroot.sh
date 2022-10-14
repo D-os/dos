@@ -39,6 +39,6 @@ CMD=${1:=/bin/init}
 shift
 CMD=${CMD#$DIR}
 
-sudo chroot $DIR "$CMD" $*
+sudo chroot $DIR "$CMD" "$@"
 
 cleanup_chroot
