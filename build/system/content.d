@@ -241,10 +241,12 @@ out/system.content: \
   out/system/lib/libbe.so \
   out/system/tests/kits \
   out/system/tests/kernel_area \
+  out/system/tests/kernel_debug \
   out/system/tests/kernel_sem \
   out/system/tests/kernel_team \
   out/system/tests/kernel_thread \
-  out/system/tests/app \
+  out/system/tests/app_application \
+  out/system/tests/app_message \
   out/system/tests/sampservice \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \

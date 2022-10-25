@@ -277,7 +277,9 @@ build $SYSTEMDIR/tests/kernel_port: copy $BUILDROOT/os/tests/kernel_port
 build $SYSTEMDIR/tests/kernel_sem: copy $BUILDROOT/os/tests/kernel_sem
 build $SYSTEMDIR/tests/kernel_team: copy $BUILDROOT/os/tests/kernel_team
 build $SYSTEMDIR/tests/kernel_thread: copy $BUILDROOT/os/tests/kernel_thread
-build $SYSTEMDIR/tests/app: copy $BUILDROOT/os/tests/app/app
+build $SYSTEMDIR/tests/kernel_debug: copy $BUILDROOT/os/tests/kernel_debug
+build $SYSTEMDIR/tests/app_application: copy $BUILDROOT/os/tests/app_application
+build $SYSTEMDIR/tests/app_message: copy $BUILDROOT/os/tests/app_message
 build $SYSTEMDIR/tests/sampservice: copy $BUILDROOT/os/services/sampservice/sampservice
 build $SYSTEMDIR/system/libexec/app_service: copy $BUILDROOT/os/services/app/app_service
 
