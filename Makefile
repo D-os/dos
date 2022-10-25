@@ -20,6 +20,9 @@ clean:
 compdb:
 	ninja -t compdb > build/compile_commands.json
 
+compdb_debug:
+	ninja -f debug.ninja -t compdb > build/compile_commands.json
+
 toolchain-host: | $(OUT_DIR)/host/bin
 
 $(OUT_DIR)/host/bin: tools/tc-build/build-llvm.py

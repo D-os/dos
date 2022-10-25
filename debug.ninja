@@ -1,0 +1,3 @@
+system_os_build_flags = -DRUN_WITHOUT_APP_SERVER -UNDEBUG
+
+include build.ninja
