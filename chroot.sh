@@ -16,6 +16,7 @@ fi
 
 echo chrooting into $DIR
 
+NEED_CLEANUP=1
 mkdir -p $DIR/etc
 cp /etc/resolv.conf $DIR/etc
 mkdir -p $DIR/proc
@@ -27,8 +28,9 @@ sudo mount --read-only --bind /dev $DIR/dev
 sudo mount --read-only --bind /dev/pts $DIR/dev/pts
 
 cleanup_chroot() {
-grep -o "[^ ]*$DIR[^ ]*" /proc/self/mountinfo | sort -r | xargs sudo umount --recursive --lazy
-rm $DIR/etc/resolv.conf
+  grep -o "[^ ]*$DIR[^ ]*" /proc/self/mountinfo | sort -r | xargs sudo umount --recursive --lazy
+  rm $DIR/etc/resolv.conf
+  NEED_CLEANUP=0
 }
 
 trap cleanup_chroot INT
@@ -41,4 +43,4 @@ CMD=${CMD#$DIR}
 
 sudo chroot $DIR "$CMD" "$@"
 
-cleanup_chroot
+[ $NEED_CLEANUP = 1 ] && cleanup_chroot
