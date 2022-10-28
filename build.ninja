@@ -258,6 +258,8 @@ build $SYSROOT/lib/libwayland-client.so: copy $BUILDROOT/wayland/libwayland-clie
 build $SYSROOT/lib/libwayland-server.so: copy $BUILDROOT/wayland/libwayland-server.so
 build $SYSROOT/lib/libwayland-cursor.so: copy $BUILDROOT/wayland/libwayland-cursor.so
 
+subninja build/wayland-utils.ninja
+
 subninja build/weston.ninja
 
 subninja build/xkeyboard-config.ninja

@@ -1,0 +1,61 @@
+cflags = $
+  -fdiagnostics-color=always $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -Wextra $
+  -Wpedantic $
+  -Wundef $
+  -Wno-unused-parameter $
+
+includes = $
+  -Iexternal/wayland-utils/wayland-info $
+  -Ibuild/wayland-utils $
+  -I$BUILDROOT/wayland-utils $
+  -Ibuild/wayland/src $
+  -I$BUILDROOT/wayland $
+  -Iexternal/wayland/src $
+  -Iexternal/libdrm $
+  -Iexternal/libdrm/include/drm $
+
+build $BUILDROOT/wayland-utils/linux-dmabuf-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/wayland-utils/linux-dmabuf-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/linux-dmabuf/linux-dmabuf-unstable-v1.xml | out/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/wayland-utils/presentation-time-client-protocol.h: wayland-scanner external/wayland-protocols/stable/presentation-time/presentation-time.xml | out/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/wayland-utils/presentation-time-protocol.c: wayland-scanner external/wayland-protocols/stable/presentation-time/presentation-time.xml | out/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/wayland-utils/tablet-unstable-v2-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/tablet/tablet-unstable-v2.xml | out/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/wayland-utils/tablet-unstable-v2-protocol.c: wayland-scanner external/wayland-protocols/unstable/tablet/tablet-unstable-v2.xml | out/host/bin/wayland-scanner
+  type = private-code
+build $BUILDROOT/wayland-utils/xdg-output-unstable-v1-client-protocol.h: wayland-scanner external/wayland-protocols/unstable/xdg-output/xdg-output-unstable-v1.xml | out/host/bin/wayland-scanner
+  type = client-header
+build $BUILDROOT/wayland-utils/xdg-output-unstable-v1-protocol.c: wayland-scanner external/wayland-protocols/unstable/xdg-output/xdg-output-unstable-v1.xml | out/host/bin/wayland-scanner
+  type = private-code
+
+build $BUILDROOT/wayland-utils/linux-dmabuf-unstable-v1-protocol.o: cc $BUILDROOT/wayland-utils/linux-dmabuf-unstable-v1-protocol.c
+build $BUILDROOT/wayland-utils/presentation-time-protocol.o: cc $BUILDROOT/wayland-utils/presentation-time-protocol.c
+build $BUILDROOT/wayland-utils/tablet-unstable-v2-protocol.o: cc $BUILDROOT/wayland-utils/tablet-unstable-v2-protocol.c
+build $BUILDROOT/wayland-utils/xdg-output-unstable-v1-protocol.o: cc $BUILDROOT/wayland-utils/xdg-output-unstable-v1-protocol.c
+
+build $BUILDROOT/wayland-utils/wayland-info.o: cc external/wayland-utils/wayland-info/wayland-info.c $
+  | $BUILDROOT/wayland/wayland-client-protocol.h $
+  || $
+  $BUILDROOT/wayland-utils/linux-dmabuf-unstable-v1-client-protocol.h $
+  $BUILDROOT/wayland-utils/presentation-time-client-protocol.h $
+  $BUILDROOT/wayland-utils/tablet-unstable-v2-client-protocol.h $
+  $BUILDROOT/wayland-utils/xdg-output-unstable-v1-client-protocol.h
+
+build $BUILDROOT/wayland-utils/wayland-info: link $
+  $BUILDROOT/wayland-utils/linux-dmabuf-unstable-v1-protocol.o $
+  $BUILDROOT/wayland-utils/presentation-time-protocol.o $
+  $BUILDROOT/wayland-utils/tablet-unstable-v2-protocol.o $
+  $BUILDROOT/wayland-utils/xdg-output-unstable-v1-protocol.o $
+  $BUILDROOT/wayland-utils/wayland-info.o $
+  | $
+  $SYSROOT/lib/libdrm.so $
+  $SYSROOT/lib/libwayland-client.so
+  libs = -ldrm -lwayland-client
+

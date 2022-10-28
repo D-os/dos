@@ -263,6 +263,7 @@ out/system.content: \
   out/system/system/libexec/weston-desktop-shell \
   out/system/system/libexec/weston-keyboard \
   out/system/system/bin/weston-terminal \
+  out/system/system/bin/wayland-info \
   out/system/system/lib/dri/libgallium_dri.so \
   out/system/system/lib/dri/virtio_gpu_dri.so \
   out/system/system/lib/dri/kms_swrast_dri.so \
