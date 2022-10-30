@@ -247,6 +247,7 @@ out/system.content: \
   out/system/tests/kernel_thread \
   out/system/tests/app_application \
   out/system/tests/app_message \
+  out/system/tests/interface_window \
   out/system/tests/sampservice \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \
@@ -259,7 +260,7 @@ out/system.content: \
   out/system/system/lib/libweston-11/drm-backend.so \
   out/system/system/lib/libweston-11/gl-renderer.so \
   out/system/system/lib/libweston-11/libweston-desktop-11.so \
-  out/system/system/libexec/app_service \
+  out/system/system/libexec/app_server \
   out/system/system/libexec/weston-desktop-shell \
   out/system/system/libexec/weston-keyboard \
   out/system/system/bin/weston-terminal \

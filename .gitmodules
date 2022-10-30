@@ -78,7 +78,7 @@
 	url = https://android.googlesource.com/platform/external/boringssl
 [submodule "external/weston"]
 	path = external/weston
-	url = https://github.com/wayland-project/weston.git
+	url = https://github.com/D-os/weston.git
 [submodule "external/wayland"]
 	path = external/wayland
 	url = https://github.com/wayland-project/wayland.git
@@ -160,7 +160,7 @@
 	url = https://github.com/D-os/docs.git
 [submodule "system/os"]
 	path = system/os
-	url = git@github.com:D-os/libb2.git
+	url = https://github.com/D-os/libb2.git
 [submodule "external/doctest"]
 	path = external/doctest
 	url = https://github.com/doctest/doctest.git

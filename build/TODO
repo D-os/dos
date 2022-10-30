@@ -32,9 +32,11 @@ meson .. -Dlibseat-logind=disabled -Dlibseat-builtin=enabled -Dlibseat-seatd=dis
 - run under wayland:
 XDG_RUNTIME_DIR=/run/user/1000 WAYLAND_DISPLAY=wayland-1 /system/bin/weston-terminal
 
-- reimplement backtrace using libunwind
-  https://www.cnblogs.com/utopia007/p/11642581.html
-  https://github.com/cslarsen/libunwind-examples/blob/master/backtrace.cpp
+- run under weston + chroot
+  XDG_RUNTIME_DIR=~/devel/Dos/dos/out/system/run build/compositor/weston
+  ninja -f debug.ninja out/system.content && ./chroot.sh out/system env XDG_RUNTIME_DIR=/run WAYLAND_DISPLAY=wayland-1 /tests/interface_window
+
+  ninja -f debug.ninja out/system.content && ./chroot.sh out/system env XDG_RUNTIME_DIR=/run WAYLAND_DISPLAY=wayland-1 SHELL=/bin/sh /system/bin/weston-terminal
 
 - dos/system/core
 remote: error: File libunwindstack/tests/files/offline/jit_debug_x86_32/libartd.so is 219.06 MB; this exceeds GitHub's file size limit of 100.00 MB

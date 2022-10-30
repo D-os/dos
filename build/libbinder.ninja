@@ -13,6 +13,8 @@ cxxflags = $
   -Wno-inconsistent-missing-override $
   -Wno-c99-designator $
   -Wno-unused-but-set-variable $
+  -DNDEBUG $
+  $libbinder_build_flags
 
 includes = -Iframeworks/native/libs -Iframeworks/native/libs/binder/include -I$BUILDROOT/libbinder/gen/include $
   -Isystem/logging/liblog/include $
