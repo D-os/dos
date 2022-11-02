@@ -167,3 +167,6 @@
 [submodule "external/wayland-utils"]
 	path = external/wayland-utils
 	url = https://gitlab.freedesktop.org/wayland/wayland-utils.git
+[submodule "external/skia"]
+	path = external/skia
+	url = https://skia.googlesource.com/skia.git
