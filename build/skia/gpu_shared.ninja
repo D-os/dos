@@ -1,0 +1,30 @@
+defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 -DSK_ENABLE_SKSL -DSK_ENABLE_PRECOMPILE -DSK_USE_PERFETTO -DSK_GAMMA_APPLY_TO_A8 -DSKIA_IMPLEMENTATION=1 -DSK_SUPPORT_GPU=1
+includes = -Iexternal/skia
+cflags = $defines -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
+cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti
+
+build $BUILDROOT/skia/gpu/gpu_shared.AtlasTypes.o: cxx external/skia/src/gpu/AtlasTypes.cpp
+build $BUILDROOT/skia/gpu/gpu_shared.Blend.o: cxx external/skia/src/gpu/Blend.cpp
+build $BUILDROOT/skia/gpu/gpu_shared.RectanizerPow2.o: cxx external/skia/src/gpu/RectanizerPow2.cpp
+build $BUILDROOT/skia/gpu/gpu_shared.RectanizerSkyline.o: cxx external/skia/src/gpu/RectanizerSkyline.cpp
+build $BUILDROOT/skia/gpu/gpu_shared.ResourceKey.o: cxx external/skia/src/gpu/ResourceKey.cpp
+build $BUILDROOT/skia/gpu/gpu_shared.ShaderErrorHandler.o: cxx external/skia/src/gpu/ShaderErrorHandler.cpp
+build $BUILDROOT/skia/gpu/gpu_shared.Swizzle.o: cxx external/skia/src/gpu/Swizzle.cpp
+build $BUILDROOT/skia/gpu/tessellate/gpu_shared.FixedCountBufferUtils.o: cxx external/skia/src/gpu/tessellate/FixedCountBufferUtils.cpp
+build $BUILDROOT/skia/gpu/tessellate/gpu_shared.Tessellation.o: cxx external/skia/src/gpu/tessellate/Tessellation.cpp
+build $BUILDROOT/skia/text/gpu/gpu_shared.DistanceFieldAdjustTable.o: cxx external/skia/src/text/gpu/DistanceFieldAdjustTable.cpp
+build $BUILDROOT/skia/text/gpu/gpu_shared.GlyphVector.o: cxx external/skia/src/text/gpu/GlyphVector.cpp
+build $BUILDROOT/skia/text/gpu/gpu_shared.SDFMaskFilter.o: cxx external/skia/src/text/gpu/SDFMaskFilter.cpp
+build $BUILDROOT/skia/text/gpu/gpu_shared.SDFTControl.o: cxx external/skia/src/text/gpu/SDFTControl.cpp
+build $BUILDROOT/skia/text/gpu/gpu_shared.Slug.o: cxx external/skia/src/text/gpu/Slug.cpp
+build $BUILDROOT/skia/text/gpu/gpu_shared.StrikeCache.o: cxx external/skia/src/text/gpu/StrikeCache.cpp
+build $BUILDROOT/skia/text/gpu/gpu_shared.SubRunAllocator.o: cxx external/skia/src/text/gpu/SubRunAllocator.cpp
+build $BUILDROOT/skia/text/gpu/gpu_shared.SubRunContainer.o: cxx external/skia/src/text/gpu/SubRunContainer.cpp
+build $BUILDROOT/skia/text/gpu/gpu_shared.TextBlob.o: cxx external/skia/src/text/gpu/TextBlob.cpp
+build $BUILDROOT/skia/text/gpu/gpu_shared.TextBlobRedrawCoordinator.o: cxx external/skia/src/text/gpu/TextBlobRedrawCoordinator.cpp
+build $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLGLSLCodeGenerator.o: cxx external/skia/src/sksl/codegen/SkSLGLSLCodeGenerator.cpp
+build $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLMetalCodeGenerator.o: cxx external/skia/src/sksl/codegen/SkSLMetalCodeGenerator.cpp
+build $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLPipelineStageCodeGenerator.o: cxx external/skia/src/sksl/codegen/SkSLPipelineStageCodeGenerator.cpp
+build $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLSPIRVCodeGenerator.o: cxx external/skia/src/sksl/codegen/SkSLSPIRVCodeGenerator.cpp
+build $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLSPIRVtoHLSL.o: cxx external/skia/src/sksl/codegen/SkSLSPIRVtoHLSL.cpp
+build $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLWGSLCodeGenerator.o: cxx external/skia/src/sksl/codegen/SkSLWGSLCodeGenerator.cpp

@@ -1,0 +1,6 @@
+defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 -DSK_ENABLE_SKSL -DSK_ENABLE_PRECOMPILE -DSK_USE_PERFETTO -DSK_GAMMA_APPLY_TO_A8 -DSKIA_IMPLEMENTATION=1 -DSK_ENCODE_PNG
+includes = -Iexternal/skia -Iexternal/libpng
+cflags = $defines -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
+cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti
+
+build $BUILDROOT/skia/images/png_encode.SkPngEncoder.o: cxx external/skia/src/images/SkPngEncoder.cpp

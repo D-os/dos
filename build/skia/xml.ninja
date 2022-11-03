@@ -1,0 +1,10 @@
+defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 -DSK_ENABLE_SKSL -DSK_ENABLE_PRECOMPILE -DSK_USE_PERFETTO -DSK_GAMMA_APPLY_TO_A8 -DSKIA_IMPLEMENTATION=1 -DSK_XML
+includes = -Iexternal/skia -Iexternal/expat/lib
+cflags = $defines -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
+cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti
+
+build $BUILDROOT/skia/svg/xml.SkSVGCanvas.o: cxx external/skia/src/svg/SkSVGCanvas.cpp
+build $BUILDROOT/skia/svg/xml.SkSVGDevice.o: cxx external/skia/src/svg/SkSVGDevice.cpp
+build $BUILDROOT/skia/xml/xml.SkDOM.o: cxx external/skia/src/xml/SkDOM.cpp
+build $BUILDROOT/skia/xml/xml.SkXMLParser.o: cxx external/skia/src/xml/SkXMLParser.cpp
+build $BUILDROOT/skia/xml/xml.SkXMLWriter.o: cxx external/skia/src/xml/SkXMLWriter.cpp

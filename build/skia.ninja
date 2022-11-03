@@ -1,0 +1,1222 @@
+# bin/gn gen out/Shared --args='is_official_build=true is_component_build=true cc="clang" cxx="clang++" skia_use_dng_sdk=false skia_use_fontconfig=false skia_use_freetype=false skia_use_gl=false skia_use_harfbuzz=false skia_use_icu=false skia_use_x11=false skia_use_xps=false'
+# cp out/Shared/obj/skia.ninja ../../build/skia.ninja
+# cp out/Shared/obj/{avx,hsw,jpeg_decode,jpeg_encode,png_decode,png_encode,skx,sse42,ssse3,webp_decode,webp_encode,wuffs,xmlfontmgr_empty_factory}.ninja ../../build/skia/
+# cp out/Shared/obj/modules/skcms/skcms.ninja ../../build/skia/
+# cp out/Shared/obj/third_party/wuffs/wuffs.ninja ../../build/skia/wuffs_c.ninja
+# edit!
+subninja build/skia/avx.ninja
+subninja build/skia/hsw.ninja
+subninja build/skia/jpeg_decode.ninja
+subninja build/skia/jpeg_encode.ninja
+subninja build/skia/png_decode.ninja
+subninja build/skia/png_encode.ninja
+subninja build/skia/skx.ninja
+subninja build/skia/sse42.ninja
+subninja build/skia/ssse3.ninja
+subninja build/skia/webp_decode.ninja
+subninja build/skia/webp_encode.ninja
+subninja build/skia/wuffs.ninja
+subninja build/skia/xml.ninja
+subninja build/skia/fontmgr_empty_factory.ninja
+subninja build/skia/gpu.ninja
+subninja build/skia/gpu_shared.ninja
+subninja build/skia/skcms.ninja
+subninja build/skia/wuffs_c.ninja
+
+defines = -DSK_HAS_ANDROID_CODEC -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 -DSK_ENABLE_SKSL -DSK_ENABLE_PRECOMPILE -DSK_USE_PERFETTO -DSK_GAMMA_APPLY_TO_A8 -DSKIA_IMPLEMENTATION=1 -DSK_SUPPORT_GPU=1 -DSK_SUPPORT_PDF -DSK_CODEC_DECODES_JPEG -DSK_ENCODE_JPEG -DSK_CODEC_DECODES_PNG -DSK_ENCODE_PNG -DSK_CODEC_DECODES_WEBP -DSK_ENCODE_WEBP -DSK_HAS_WUFFS_LIBRARY -DSK_XML
+includes = -Iexternal/skia
+cflags = $defines -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
+cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -Wno-psabi
+
+build $BUILDROOT/skia/core/libskia.SkAAClip.o: cxx external/skia/src/core/SkAAClip.cpp
+build $BUILDROOT/skia/core/libskia.SkATrace.o: cxx external/skia/src/core/SkATrace.cpp
+build $BUILDROOT/skia/core/libskia.SkAlphaRuns.o: cxx external/skia/src/core/SkAlphaRuns.cpp
+build $BUILDROOT/skia/core/libskia.SkAnalyticEdge.o: cxx external/skia/src/core/SkAnalyticEdge.cpp
+build $BUILDROOT/skia/core/libskia.SkAnnotation.o: cxx external/skia/src/core/SkAnnotation.cpp
+build $BUILDROOT/skia/core/libskia.SkArenaAlloc.o: cxx external/skia/src/core/SkArenaAlloc.cpp
+build $BUILDROOT/skia/core/libskia.SkAutoPixmapStorage.o: cxx external/skia/src/core/SkAutoPixmapStorage.cpp
+build $BUILDROOT/skia/core/libskia.SkBBHFactory.o: cxx external/skia/src/core/SkBBHFactory.cpp
+build $BUILDROOT/skia/core/libskia.SkBitmap.o: cxx external/skia/src/core/SkBitmap.cpp
+build $BUILDROOT/skia/core/libskia.SkBitmapCache.o: cxx external/skia/src/core/SkBitmapCache.cpp
+build $BUILDROOT/skia/core/libskia.SkBitmapDevice.o: cxx external/skia/src/core/SkBitmapDevice.cpp
+build $BUILDROOT/skia/core/libskia.SkBitmapProcState.o: cxx external/skia/src/core/SkBitmapProcState.cpp
+build $BUILDROOT/skia/core/libskia.SkBitmapProcState_matrixProcs.o: cxx external/skia/src/core/SkBitmapProcState_matrixProcs.cpp
+build $BUILDROOT/skia/core/libskia.SkBlendMode.o: cxx external/skia/src/core/SkBlendMode.cpp
+build $BUILDROOT/skia/core/libskia.SkBlendModeBlender.o: cxx external/skia/src/core/SkBlendModeBlender.cpp
+build $BUILDROOT/skia/core/libskia.SkBlitRow_D32.o: cxx external/skia/src/core/SkBlitRow_D32.cpp
+build $BUILDROOT/skia/core/libskia.SkBlitter.o: cxx external/skia/src/core/SkBlitter.cpp
+build $BUILDROOT/skia/core/libskia.SkBlitter_A8.o: cxx external/skia/src/core/SkBlitter_A8.cpp
+build $BUILDROOT/skia/core/libskia.SkBlitter_ARGB32.o: cxx external/skia/src/core/SkBlitter_ARGB32.cpp
+build $BUILDROOT/skia/core/libskia.SkBlitter_Sprite.o: cxx external/skia/src/core/SkBlitter_Sprite.cpp
+build $BUILDROOT/skia/core/libskia.SkBlockAllocator.o: cxx external/skia/src/core/SkBlockAllocator.cpp
+build $BUILDROOT/skia/core/libskia.SkBlurMF.o: cxx external/skia/src/core/SkBlurMF.cpp
+build $BUILDROOT/skia/core/libskia.SkBlurMask.o: cxx external/skia/src/core/SkBlurMask.cpp
+build $BUILDROOT/skia/core/libskia.SkBuffer.o: cxx external/skia/src/core/SkBuffer.cpp
+build $BUILDROOT/skia/core/libskia.SkCachedData.o: cxx external/skia/src/core/SkCachedData.cpp
+build $BUILDROOT/skia/core/libskia.SkCanvas.o: cxx external/skia/src/core/SkCanvas.cpp
+build $BUILDROOT/skia/core/libskia.SkCanvasPriv.o: cxx external/skia/src/core/SkCanvasPriv.cpp
+build $BUILDROOT/skia/core/libskia.SkCapabilities.o: cxx external/skia/src/core/SkCapabilities.cpp
+build $BUILDROOT/skia/core/libskia.SkChromeRemoteGlyphCache.o: cxx external/skia/src/core/SkChromeRemoteGlyphCache.cpp
+build $BUILDROOT/skia/core/libskia.SkClipStack.o: cxx external/skia/src/core/SkClipStack.cpp
+build $BUILDROOT/skia/core/libskia.SkClipStackDevice.o: cxx external/skia/src/core/SkClipStackDevice.cpp
+build $BUILDROOT/skia/core/libskia.SkColor.o: cxx external/skia/src/core/SkColor.cpp
+build $BUILDROOT/skia/core/libskia.SkColorFilter.o: cxx external/skia/src/core/SkColorFilter.cpp
+build $BUILDROOT/skia/core/libskia.SkColorFilter_Matrix.o: cxx external/skia/src/core/SkColorFilter_Matrix.cpp
+build $BUILDROOT/skia/core/libskia.SkColorSpace.o: cxx external/skia/src/core/SkColorSpace.cpp
+build $BUILDROOT/skia/core/libskia.SkColorSpaceXformSteps.o: cxx external/skia/src/core/SkColorSpaceXformSteps.cpp
+build $BUILDROOT/skia/core/libskia.SkCompressedDataUtils.o: cxx external/skia/src/core/SkCompressedDataUtils.cpp
+build $BUILDROOT/skia/core/libskia.SkContainers.o: cxx external/skia/src/core/SkContainers.cpp
+build $BUILDROOT/skia/core/libskia.SkContourMeasure.o: cxx external/skia/src/core/SkContourMeasure.cpp
+build $BUILDROOT/skia/core/libskia.SkConvertPixels.o: cxx external/skia/src/core/SkConvertPixels.cpp
+build $BUILDROOT/skia/core/libskia.SkCpu.o: cxx external/skia/src/core/SkCpu.cpp
+build $BUILDROOT/skia/core/libskia.SkCubicClipper.o: cxx external/skia/src/core/SkCubicClipper.cpp
+build $BUILDROOT/skia/core/libskia.SkCubicMap.o: cxx external/skia/src/core/SkCubicMap.cpp
+build $BUILDROOT/skia/core/libskia.SkData.o: cxx external/skia/src/core/SkData.cpp
+build $BUILDROOT/skia/core/libskia.SkDataTable.o: cxx external/skia/src/core/SkDataTable.cpp
+build $BUILDROOT/skia/core/libskia.SkDebug.o: cxx external/skia/src/core/SkDebug.cpp
+build $BUILDROOT/skia/core/libskia.SkDeferredDisplayList.o: cxx external/skia/src/core/SkDeferredDisplayList.cpp
+build $BUILDROOT/skia/core/libskia.SkDeferredDisplayListRecorder.o: cxx external/skia/src/core/SkDeferredDisplayListRecorder.cpp
+build $BUILDROOT/skia/core/libskia.SkDeque.o: cxx external/skia/src/core/SkDeque.cpp
+build $BUILDROOT/skia/core/libskia.SkDescriptor.o: cxx external/skia/src/core/SkDescriptor.cpp
+build $BUILDROOT/skia/core/libskia.SkDevice.o: cxx external/skia/src/core/SkDevice.cpp
+build $BUILDROOT/skia/core/libskia.SkDistanceFieldGen.o: cxx external/skia/src/core/SkDistanceFieldGen.cpp
+build $BUILDROOT/skia/core/libskia.SkDocument.o: cxx external/skia/src/core/SkDocument.cpp
+build $BUILDROOT/skia/core/libskia.SkDraw.o: cxx external/skia/src/core/SkDraw.cpp
+build $BUILDROOT/skia/core/libskia.SkDrawLooper.o: cxx external/skia/src/core/SkDrawLooper.cpp
+build $BUILDROOT/skia/core/libskia.SkDrawShadowInfo.o: cxx external/skia/src/core/SkDrawShadowInfo.cpp
+build $BUILDROOT/skia/core/libskia.SkDraw_atlas.o: cxx external/skia/src/core/SkDraw_atlas.cpp
+build $BUILDROOT/skia/core/libskia.SkDraw_text.o: cxx external/skia/src/core/SkDraw_text.cpp
+build $BUILDROOT/skia/core/libskia.SkDraw_vertices.o: cxx external/skia/src/core/SkDraw_vertices.cpp
+build $BUILDROOT/skia/core/libskia.SkDrawable.o: cxx external/skia/src/core/SkDrawable.cpp
+build $BUILDROOT/skia/core/libskia.SkEdge.o: cxx external/skia/src/core/SkEdge.cpp
+build $BUILDROOT/skia/core/libskia.SkEdgeBuilder.o: cxx external/skia/src/core/SkEdgeBuilder.cpp
+build $BUILDROOT/skia/core/libskia.SkEdgeClipper.o: cxx external/skia/src/core/SkEdgeClipper.cpp
+build $BUILDROOT/skia/core/libskia.SkExecutor.o: cxx external/skia/src/core/SkExecutor.cpp
+build $BUILDROOT/skia/core/libskia.SkFlattenable.o: cxx external/skia/src/core/SkFlattenable.cpp
+build $BUILDROOT/skia/core/libskia.SkFont.o: cxx external/skia/src/core/SkFont.cpp
+build $BUILDROOT/skia/core/libskia.SkFontDescriptor.o: cxx external/skia/src/core/SkFontDescriptor.cpp
+build $BUILDROOT/skia/core/libskia.SkFontMgr.o: cxx external/skia/src/core/SkFontMgr.cpp
+build $BUILDROOT/skia/core/libskia.SkFontStream.o: cxx external/skia/src/core/SkFontStream.cpp
+build $BUILDROOT/skia/core/libskia.SkFont_serial.o: cxx external/skia/src/core/SkFont_serial.cpp
+build $BUILDROOT/skia/core/libskia.SkGaussFilter.o: cxx external/skia/src/core/SkGaussFilter.cpp
+build $BUILDROOT/skia/core/libskia.SkGeometry.o: cxx external/skia/src/core/SkGeometry.cpp
+build $BUILDROOT/skia/core/libskia.SkGlobalInitialization_core.o: cxx external/skia/src/core/SkGlobalInitialization_core.cpp
+build $BUILDROOT/skia/core/libskia.SkGlyph.o: cxx external/skia/src/core/SkGlyph.cpp
+build $BUILDROOT/skia/core/libskia.SkGlyphBuffer.o: cxx external/skia/src/core/SkGlyphBuffer.cpp
+build $BUILDROOT/skia/core/libskia.SkGlyphRunPainter.o: cxx external/skia/src/core/SkGlyphRunPainter.cpp
+build $BUILDROOT/skia/core/libskia.SkGpuBlurUtils.o: cxx external/skia/src/core/SkGpuBlurUtils.cpp
+build $BUILDROOT/skia/core/libskia.SkGraphics.o: cxx external/skia/src/core/SkGraphics.cpp
+build $BUILDROOT/skia/core/libskia.SkHalf.o: cxx external/skia/src/core/SkHalf.cpp
+build $BUILDROOT/skia/core/libskia.SkICC.o: cxx external/skia/src/core/SkICC.cpp
+build $BUILDROOT/skia/core/libskia.SkIDChangeListener.o: cxx external/skia/src/core/SkIDChangeListener.cpp
+build $BUILDROOT/skia/core/libskia.SkImageFilter.o: cxx external/skia/src/core/SkImageFilter.cpp
+build $BUILDROOT/skia/core/libskia.SkImageFilterCache.o: cxx external/skia/src/core/SkImageFilterCache.cpp
+build $BUILDROOT/skia/core/libskia.SkImageFilterTypes.o: cxx external/skia/src/core/SkImageFilterTypes.cpp
+build $BUILDROOT/skia/core/libskia.SkImageGenerator.o: cxx external/skia/src/core/SkImageGenerator.cpp
+build $BUILDROOT/skia/core/libskia.SkImageInfo.o: cxx external/skia/src/core/SkImageInfo.cpp
+build $BUILDROOT/skia/core/libskia.SkKeyContext.o: cxx external/skia/src/core/SkKeyContext.cpp
+build $BUILDROOT/skia/core/libskia.SkKeyHelpers.o: cxx external/skia/src/core/SkKeyHelpers.cpp
+build $BUILDROOT/skia/core/libskia.SkLatticeIter.o: cxx external/skia/src/core/SkLatticeIter.cpp
+build $BUILDROOT/skia/core/libskia.SkLineClipper.o: cxx external/skia/src/core/SkLineClipper.cpp
+build $BUILDROOT/skia/core/libskia.SkLocalMatrixImageFilter.o: cxx external/skia/src/core/SkLocalMatrixImageFilter.cpp
+build $BUILDROOT/skia/core/libskia.SkM44.o: cxx external/skia/src/core/SkM44.cpp
+build $BUILDROOT/skia/core/libskia.SkMD5.o: cxx external/skia/src/core/SkMD5.cpp
+build $BUILDROOT/skia/core/libskia.SkMalloc.o: cxx external/skia/src/core/SkMalloc.cpp
+build $BUILDROOT/skia/core/libskia.SkMallocPixelRef.o: cxx external/skia/src/core/SkMallocPixelRef.cpp
+build $BUILDROOT/skia/core/libskia.SkMask.o: cxx external/skia/src/core/SkMask.cpp
+build $BUILDROOT/skia/core/libskia.SkMaskBlurFilter.o: cxx external/skia/src/core/SkMaskBlurFilter.cpp
+build $BUILDROOT/skia/core/libskia.SkMaskCache.o: cxx external/skia/src/core/SkMaskCache.cpp
+build $BUILDROOT/skia/core/libskia.SkMaskFilter.o: cxx external/skia/src/core/SkMaskFilter.cpp
+build $BUILDROOT/skia/core/libskia.SkMaskGamma.o: cxx external/skia/src/core/SkMaskGamma.cpp
+build $BUILDROOT/skia/core/libskia.SkMath.o: cxx external/skia/src/core/SkMath.cpp
+build $BUILDROOT/skia/core/libskia.SkMatrix.o: cxx external/skia/src/core/SkMatrix.cpp
+build $BUILDROOT/skia/core/libskia.SkMatrixInvert.o: cxx external/skia/src/core/SkMatrixInvert.cpp
+build $BUILDROOT/skia/core/libskia.SkMesh.o: cxx external/skia/src/core/SkMesh.cpp
+build $BUILDROOT/skia/core/libskia.SkMipmap.o: cxx external/skia/src/core/SkMipmap.cpp
+build $BUILDROOT/skia/core/libskia.SkMipmapAccessor.o: cxx external/skia/src/core/SkMipmapAccessor.cpp
+build $BUILDROOT/skia/core/libskia.SkModeColorFilter.o: cxx external/skia/src/core/SkModeColorFilter.cpp
+build $BUILDROOT/skia/core/libskia.SkOpts.o: cxx external/skia/src/core/SkOpts.cpp
+build $BUILDROOT/skia/core/libskia.SkOpts_erms.o: cxx external/skia/src/core/SkOpts_erms.cpp
+build $BUILDROOT/skia/core/libskia.SkOverdrawCanvas.o: cxx external/skia/src/core/SkOverdrawCanvas.cpp
+build $BUILDROOT/skia/core/libskia.SkPaint.o: cxx external/skia/src/core/SkPaint.cpp
+build $BUILDROOT/skia/core/libskia.SkPaintParamsKey.o: cxx external/skia/src/core/SkPaintParamsKey.cpp
+build $BUILDROOT/skia/core/libskia.SkPaintPriv.o: cxx external/skia/src/core/SkPaintPriv.cpp
+build $BUILDROOT/skia/core/libskia.SkPath.o: cxx external/skia/src/core/SkPath.cpp
+build $BUILDROOT/skia/core/libskia.SkPathBuilder.o: cxx external/skia/src/core/SkPathBuilder.cpp
+build $BUILDROOT/skia/core/libskia.SkPathEffect.o: cxx external/skia/src/core/SkPathEffect.cpp
+build $BUILDROOT/skia/core/libskia.SkPathMeasure.o: cxx external/skia/src/core/SkPathMeasure.cpp
+build $BUILDROOT/skia/core/libskia.SkPathRef.o: cxx external/skia/src/core/SkPathRef.cpp
+build $BUILDROOT/skia/core/libskia.SkPath_serial.o: cxx external/skia/src/core/SkPath_serial.cpp
+build $BUILDROOT/skia/core/libskia.SkPipelineData.o: cxx external/skia/src/core/SkPipelineData.cpp
+build $BUILDROOT/skia/core/libskia.SkPixelRef.o: cxx external/skia/src/core/SkPixelRef.cpp
+build $BUILDROOT/skia/core/libskia.SkPixmap.o: cxx external/skia/src/core/SkPixmap.cpp
+build $BUILDROOT/skia/core/libskia.SkPoint.o: cxx external/skia/src/core/SkPoint.cpp
+build $BUILDROOT/skia/core/libskia.SkPoint3.o: cxx external/skia/src/core/SkPoint3.cpp
+build $BUILDROOT/skia/core/libskia.SkPromiseImageTexture.o: cxx external/skia/src/core/SkPromiseImageTexture.cpp
+build $BUILDROOT/skia/core/libskia.SkPtrRecorder.o: cxx external/skia/src/core/SkPtrRecorder.cpp
+build $BUILDROOT/skia/core/libskia.SkQuadClipper.o: cxx external/skia/src/core/SkQuadClipper.cpp
+build $BUILDROOT/skia/core/libskia.SkRRect.o: cxx external/skia/src/core/SkRRect.cpp
+build $BUILDROOT/skia/core/libskia.SkRTree.o: cxx external/skia/src/core/SkRTree.cpp
+build $BUILDROOT/skia/core/libskia.SkRasterClip.o: cxx external/skia/src/core/SkRasterClip.cpp
+build $BUILDROOT/skia/core/libskia.SkRasterPipeline.o: cxx external/skia/src/core/SkRasterPipeline.cpp
+build $BUILDROOT/skia/core/libskia.SkRasterPipelineBlitter.o: cxx external/skia/src/core/SkRasterPipelineBlitter.cpp
+build $BUILDROOT/skia/core/libskia.SkReadBuffer.o: cxx external/skia/src/core/SkReadBuffer.cpp
+build $BUILDROOT/skia/core/libskia.SkRecord.o: cxx external/skia/src/core/SkRecord.cpp
+build $BUILDROOT/skia/core/libskia.SkRecordDraw.o: cxx external/skia/src/core/SkRecordDraw.cpp
+build $BUILDROOT/skia/core/libskia.SkRecordOpts.o: cxx external/skia/src/core/SkRecordOpts.cpp
+build $BUILDROOT/skia/core/libskia.SkRecords.o: cxx external/skia/src/core/SkRecords.cpp
+build $BUILDROOT/skia/core/libskia.SkRect.o: cxx external/skia/src/core/SkRect.cpp
+build $BUILDROOT/skia/core/libskia.SkRegion.o: cxx external/skia/src/core/SkRegion.cpp
+build $BUILDROOT/skia/core/libskia.SkRegion_path.o: cxx external/skia/src/core/SkRegion_path.cpp
+build $BUILDROOT/skia/core/libskia.SkResourceCache.o: cxx external/skia/src/core/SkResourceCache.cpp
+build $BUILDROOT/skia/core/libskia.SkRuntimeEffect.o: cxx external/skia/src/core/SkRuntimeEffect.cpp
+build $BUILDROOT/skia/core/libskia.SkSLTypeShared.o: cxx external/skia/src/core/SkSLTypeShared.cpp
+build $BUILDROOT/skia/core/libskia.SkScalar.o: cxx external/skia/src/core/SkScalar.cpp
+build $BUILDROOT/skia/core/libskia.SkScalerCache.o: cxx external/skia/src/core/SkScalerCache.cpp
+build $BUILDROOT/skia/core/libskia.SkScalerContext.o: cxx external/skia/src/core/SkScalerContext.cpp
+build $BUILDROOT/skia/core/libskia.SkScan.o: cxx external/skia/src/core/SkScan.cpp
+build $BUILDROOT/skia/core/libskia.SkScan_AAAPath.o: cxx external/skia/src/core/SkScan_AAAPath.cpp
+build $BUILDROOT/skia/core/libskia.SkScan_AntiPath.o: cxx external/skia/src/core/SkScan_AntiPath.cpp
+build $BUILDROOT/skia/core/libskia.SkScan_Antihair.o: cxx external/skia/src/core/SkScan_Antihair.cpp
+build $BUILDROOT/skia/core/libskia.SkScan_Hairline.o: cxx external/skia/src/core/SkScan_Hairline.cpp
+build $BUILDROOT/skia/core/libskia.SkScan_Path.o: cxx external/skia/src/core/SkScan_Path.cpp
+build $BUILDROOT/skia/core/libskia.SkSemaphore.o: cxx external/skia/src/core/SkSemaphore.cpp
+build $BUILDROOT/skia/core/libskia.SkShaderCodeDictionary.o: cxx external/skia/src/core/SkShaderCodeDictionary.cpp
+build $BUILDROOT/skia/core/libskia.SkSharedMutex.o: cxx external/skia/src/core/SkSharedMutex.cpp
+build $BUILDROOT/skia/core/libskia.SkSpecialImage.o: cxx external/skia/src/core/SkSpecialImage.cpp
+build $BUILDROOT/skia/core/libskia.SkSpecialSurface.o: cxx external/skia/src/core/SkSpecialSurface.cpp
+build $BUILDROOT/skia/core/libskia.SkSpinlock.o: cxx external/skia/src/core/SkSpinlock.cpp
+build $BUILDROOT/skia/core/libskia.SkSpriteBlitter_ARGB32.o: cxx external/skia/src/core/SkSpriteBlitter_ARGB32.cpp
+build $BUILDROOT/skia/core/libskia.SkStream.o: cxx external/skia/src/core/SkStream.cpp
+build $BUILDROOT/skia/core/libskia.SkStrikeCache.o: cxx external/skia/src/core/SkStrikeCache.cpp
+build $BUILDROOT/skia/core/libskia.SkStrikeSpec.o: cxx external/skia/src/core/SkStrikeSpec.cpp
+build $BUILDROOT/skia/core/libskia.SkString.o: cxx external/skia/src/core/SkString.cpp
+build $BUILDROOT/skia/core/libskia.SkStringUtils.o: cxx external/skia/src/core/SkStringUtils.cpp
+build $BUILDROOT/skia/core/libskia.SkStroke.o: cxx external/skia/src/core/SkStroke.cpp
+build $BUILDROOT/skia/core/libskia.SkStrokeRec.o: cxx external/skia/src/core/SkStrokeRec.cpp
+build $BUILDROOT/skia/core/libskia.SkStrokerPriv.o: cxx external/skia/src/core/SkStrokerPriv.cpp
+build $BUILDROOT/skia/core/libskia.SkSurfaceCharacterization.o: cxx external/skia/src/core/SkSurfaceCharacterization.cpp
+build $BUILDROOT/skia/core/libskia.SkSwizzle.o: cxx external/skia/src/core/SkSwizzle.cpp
+build $BUILDROOT/skia/core/libskia.SkTDArray.o: cxx external/skia/src/core/SkTDArray.cpp
+build $BUILDROOT/skia/core/libskia.SkTSearch.o: cxx external/skia/src/core/SkTSearch.cpp
+build $BUILDROOT/skia/core/libskia.SkTaskGroup.o: cxx external/skia/src/core/SkTaskGroup.cpp
+build $BUILDROOT/skia/core/libskia.SkTextBlob.o: cxx external/skia/src/core/SkTextBlob.cpp
+build $BUILDROOT/skia/core/libskia.SkTextBlobTrace.o: cxx external/skia/src/core/SkTextBlobTrace.cpp
+build $BUILDROOT/skia/core/libskia.SkThreadID.o: cxx external/skia/src/core/SkThreadID.cpp
+build $BUILDROOT/skia/core/libskia.SkTime.o: cxx external/skia/src/core/SkTime.cpp
+build $BUILDROOT/skia/core/libskia.SkTypeface.o: cxx external/skia/src/core/SkTypeface.cpp
+build $BUILDROOT/skia/core/libskia.SkTypefaceCache.o: cxx external/skia/src/core/SkTypefaceCache.cpp
+build $BUILDROOT/skia/core/libskia.SkTypeface_remote.o: cxx external/skia/src/core/SkTypeface_remote.cpp
+build $BUILDROOT/skia/core/libskia.SkUnPreMultiply.o: cxx external/skia/src/core/SkUnPreMultiply.cpp
+build $BUILDROOT/skia/core/libskia.SkUtils.o: cxx external/skia/src/core/SkUtils.cpp
+build $BUILDROOT/skia/core/libskia.SkUtilsArm.o: cxx external/skia/src/core/SkUtilsArm.cpp
+build $BUILDROOT/skia/core/libskia.SkVM.o: cxx external/skia/src/core/SkVM.cpp
+build $BUILDROOT/skia/core/libskia.SkVMBlitter.o: cxx external/skia/src/core/SkVMBlitter.cpp
+build $BUILDROOT/skia/core/libskia.SkVertState.o: cxx external/skia/src/core/SkVertState.cpp
+build $BUILDROOT/skia/core/libskia.SkVertices.o: cxx external/skia/src/core/SkVertices.cpp
+build $BUILDROOT/skia/core/libskia.SkWriteBuffer.o: cxx external/skia/src/core/SkWriteBuffer.cpp
+build $BUILDROOT/skia/core/libskia.SkWriter32.o: cxx external/skia/src/core/SkWriter32.cpp
+build $BUILDROOT/skia/core/libskia.SkXfermode.o: cxx external/skia/src/core/SkXfermode.cpp
+build $BUILDROOT/skia/core/libskia.SkXfermodeInterpretation.o: cxx external/skia/src/core/SkXfermodeInterpretation.cpp
+build $BUILDROOT/skia/core/libskia.SkYUVAInfo.o: cxx external/skia/src/core/SkYUVAInfo.cpp
+build $BUILDROOT/skia/core/libskia.SkYUVAPixmaps.o: cxx external/skia/src/core/SkYUVAPixmaps.cpp
+build $BUILDROOT/skia/core/libskia.SkYUVMath.o: cxx external/skia/src/core/SkYUVMath.cpp
+build $BUILDROOT/skia/core/libskia.SkYUVPlanesCache.o: cxx external/skia/src/core/SkYUVPlanesCache.cpp
+build $BUILDROOT/skia/image/libskia.SkImage.o: cxx external/skia/src/image/SkImage.cpp
+build $BUILDROOT/skia/image/libskia.SkImage_Lazy.o: cxx external/skia/src/image/SkImage_Lazy.cpp
+build $BUILDROOT/skia/image/libskia.SkImage_Raster.o: cxx external/skia/src/image/SkImage_Raster.cpp
+build $BUILDROOT/skia/image/libskia.SkRescaleAndReadPixels.o: cxx external/skia/src/image/SkRescaleAndReadPixels.cpp
+build $BUILDROOT/skia/image/libskia.SkSurface.o: cxx external/skia/src/image/SkSurface.cpp
+build $BUILDROOT/skia/image/libskia.SkSurface_Raster.o: cxx external/skia/src/image/SkSurface_Raster.cpp
+build $BUILDROOT/skia/lazy/libskia.SkDiscardableMemoryPool.o: cxx external/skia/src/lazy/SkDiscardableMemoryPool.cpp
+build $BUILDROOT/skia/shaders/libskia.SkBitmapProcShader.o: cxx external/skia/src/shaders/SkBitmapProcShader.cpp
+build $BUILDROOT/skia/shaders/libskia.SkColorFilterShader.o: cxx external/skia/src/shaders/SkColorFilterShader.cpp
+build $BUILDROOT/skia/shaders/libskia.SkColorShader.o: cxx external/skia/src/shaders/SkColorShader.cpp
+build $BUILDROOT/skia/shaders/libskia.SkComposeShader.o: cxx external/skia/src/shaders/SkComposeShader.cpp
+build $BUILDROOT/skia/shaders/libskia.SkEmptyShader.o: cxx external/skia/src/shaders/SkEmptyShader.cpp
+build $BUILDROOT/skia/shaders/libskia.SkImageShader.o: cxx external/skia/src/shaders/SkImageShader.cpp
+build $BUILDROOT/skia/shaders/libskia.SkLocalMatrixShader.o: cxx external/skia/src/shaders/SkLocalMatrixShader.cpp
+build $BUILDROOT/skia/shaders/libskia.SkPerlinNoiseShader.o: cxx external/skia/src/shaders/SkPerlinNoiseShader.cpp
+build $BUILDROOT/skia/shaders/libskia.SkShader.o: cxx external/skia/src/shaders/SkShader.cpp
+build $BUILDROOT/skia/shaders/libskia.SkTransformShader.o: cxx external/skia/src/shaders/SkTransformShader.cpp
+build $BUILDROOT/skia/text/libskia.GlyphRun.o: cxx external/skia/src/text/GlyphRun.cpp
+build $BUILDROOT/skia/text/libskia.StrikeForGPU.o: cxx external/skia/src/text/StrikeForGPU.cpp
+build $BUILDROOT/skia/pathops/libskia.SkAddIntersections.o: cxx external/skia/src/pathops/SkAddIntersections.cpp
+build $BUILDROOT/skia/pathops/libskia.SkDConicLineIntersection.o: cxx external/skia/src/pathops/SkDConicLineIntersection.cpp
+build $BUILDROOT/skia/pathops/libskia.SkDCubicLineIntersection.o: cxx external/skia/src/pathops/SkDCubicLineIntersection.cpp
+build $BUILDROOT/skia/pathops/libskia.SkDCubicToQuads.o: cxx external/skia/src/pathops/SkDCubicToQuads.cpp
+build $BUILDROOT/skia/pathops/libskia.SkDLineIntersection.o: cxx external/skia/src/pathops/SkDLineIntersection.cpp
+build $BUILDROOT/skia/pathops/libskia.SkDQuadLineIntersection.o: cxx external/skia/src/pathops/SkDQuadLineIntersection.cpp
+build $BUILDROOT/skia/pathops/libskia.SkIntersections.o: cxx external/skia/src/pathops/SkIntersections.cpp
+build $BUILDROOT/skia/pathops/libskia.SkOpAngle.o: cxx external/skia/src/pathops/SkOpAngle.cpp
+build $BUILDROOT/skia/pathops/libskia.SkOpBuilder.o: cxx external/skia/src/pathops/SkOpBuilder.cpp
+build $BUILDROOT/skia/pathops/libskia.SkOpCoincidence.o: cxx external/skia/src/pathops/SkOpCoincidence.cpp
+build $BUILDROOT/skia/pathops/libskia.SkOpContour.o: cxx external/skia/src/pathops/SkOpContour.cpp
+build $BUILDROOT/skia/pathops/libskia.SkOpCubicHull.o: cxx external/skia/src/pathops/SkOpCubicHull.cpp
+build $BUILDROOT/skia/pathops/libskia.SkOpEdgeBuilder.o: cxx external/skia/src/pathops/SkOpEdgeBuilder.cpp
+build $BUILDROOT/skia/pathops/libskia.SkOpSegment.o: cxx external/skia/src/pathops/SkOpSegment.cpp
+build $BUILDROOT/skia/pathops/libskia.SkOpSpan.o: cxx external/skia/src/pathops/SkOpSpan.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsAsWinding.o: cxx external/skia/src/pathops/SkPathOpsAsWinding.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsCommon.o: cxx external/skia/src/pathops/SkPathOpsCommon.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsConic.o: cxx external/skia/src/pathops/SkPathOpsConic.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsCubic.o: cxx external/skia/src/pathops/SkPathOpsCubic.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsCurve.o: cxx external/skia/src/pathops/SkPathOpsCurve.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsDebug.o: cxx external/skia/src/pathops/SkPathOpsDebug.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsLine.o: cxx external/skia/src/pathops/SkPathOpsLine.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsOp.o: cxx external/skia/src/pathops/SkPathOpsOp.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsQuad.o: cxx external/skia/src/pathops/SkPathOpsQuad.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsRect.o: cxx external/skia/src/pathops/SkPathOpsRect.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsSimplify.o: cxx external/skia/src/pathops/SkPathOpsSimplify.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsTSect.o: cxx external/skia/src/pathops/SkPathOpsTSect.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsTightBounds.o: cxx external/skia/src/pathops/SkPathOpsTightBounds.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsTypes.o: cxx external/skia/src/pathops/SkPathOpsTypes.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathOpsWinding.o: cxx external/skia/src/pathops/SkPathOpsWinding.cpp
+build $BUILDROOT/skia/pathops/libskia.SkPathWriter.o: cxx external/skia/src/pathops/SkPathWriter.cpp
+build $BUILDROOT/skia/pathops/libskia.SkReduceOrder.o: cxx external/skia/src/pathops/SkReduceOrder.cpp
+build $BUILDROOT/skia/core/libskia.SkBigPicture.o: cxx external/skia/src/core/SkBigPicture.cpp
+build $BUILDROOT/skia/core/libskia.SkPicture.o: cxx external/skia/src/core/SkPicture.cpp
+build $BUILDROOT/skia/core/libskia.SkPictureData.o: cxx external/skia/src/core/SkPictureData.cpp
+build $BUILDROOT/skia/core/libskia.SkPictureFlat.o: cxx external/skia/src/core/SkPictureFlat.cpp
+build $BUILDROOT/skia/core/libskia.SkPictureImageGenerator.o: cxx external/skia/src/core/SkPictureImageGenerator.cpp
+build $BUILDROOT/skia/core/libskia.SkPicturePlayback.o: cxx external/skia/src/core/SkPicturePlayback.cpp
+build $BUILDROOT/skia/core/libskia.SkPictureRecord.o: cxx external/skia/src/core/SkPictureRecord.cpp
+build $BUILDROOT/skia/core/libskia.SkPictureRecorder.o: cxx external/skia/src/core/SkPictureRecorder.cpp
+build $BUILDROOT/skia/core/libskia.SkRecordedDrawable.o: cxx external/skia/src/core/SkRecordedDrawable.cpp
+build $BUILDROOT/skia/core/libskia.SkRecorder.o: cxx external/skia/src/core/SkRecorder.cpp
+build $BUILDROOT/skia/shaders/libskia.SkPictureShader.o: cxx external/skia/src/shaders/SkPictureShader.cpp
+build $BUILDROOT/skia/utils/libskia.SkAnimCodecPlayer.o: cxx external/skia/src/utils/SkAnimCodecPlayer.cpp
+build $BUILDROOT/skia/utils/libskia.SkBase64.o: cxx external/skia/src/utils/SkBase64.cpp
+build $BUILDROOT/skia/utils/libskia.SkCamera.o: cxx external/skia/src/utils/SkCamera.cpp
+build $BUILDROOT/skia/utils/libskia.SkCanvasStack.o: cxx external/skia/src/utils/SkCanvasStack.cpp
+build $BUILDROOT/skia/utils/libskia.SkCanvasStateUtils.o: cxx external/skia/src/utils/SkCanvasStateUtils.cpp
+build $BUILDROOT/skia/utils/libskia.SkCharToGlyphCache.o: cxx external/skia/src/utils/SkCharToGlyphCache.cpp
+build $BUILDROOT/skia/utils/libskia.SkClipStackUtils.o: cxx external/skia/src/utils/SkClipStackUtils.cpp
+build $BUILDROOT/skia/utils/libskia.SkCustomTypeface.o: cxx external/skia/src/utils/SkCustomTypeface.cpp
+build $BUILDROOT/skia/utils/libskia.SkDashPath.o: cxx external/skia/src/utils/SkDashPath.cpp
+build $BUILDROOT/skia/utils/libskia.SkEventTracer.o: cxx external/skia/src/utils/SkEventTracer.cpp
+build $BUILDROOT/skia/utils/libskia.SkFloatToDecimal.o: cxx external/skia/src/utils/SkFloatToDecimal.cpp
+build $BUILDROOT/skia/utils/libskia.SkGaussianColorFilter.o: cxx external/skia/src/utils/SkGaussianColorFilter.cpp
+build $BUILDROOT/skia/utils/libskia.SkJSON.o: cxx external/skia/src/utils/SkJSON.cpp
+build $BUILDROOT/skia/utils/libskia.SkJSONWriter.o: cxx external/skia/src/utils/SkJSONWriter.cpp
+build $BUILDROOT/skia/utils/libskia.SkMatrix22.o: cxx external/skia/src/utils/SkMatrix22.cpp
+build $BUILDROOT/skia/utils/libskia.SkMultiPictureDocument.o: cxx external/skia/src/utils/SkMultiPictureDocument.cpp
+build $BUILDROOT/skia/utils/libskia.SkNWayCanvas.o: cxx external/skia/src/utils/SkNWayCanvas.cpp
+build $BUILDROOT/skia/utils/libskia.SkNullCanvas.o: cxx external/skia/src/utils/SkNullCanvas.cpp
+build $BUILDROOT/skia/utils/libskia.SkOSPath.o: cxx external/skia/src/utils/SkOSPath.cpp
+build $BUILDROOT/skia/utils/libskia.SkOrderedFontMgr.o: cxx external/skia/src/utils/SkOrderedFontMgr.cpp
+build $BUILDROOT/skia/utils/libskia.SkPaintFilterCanvas.o: cxx external/skia/src/utils/SkPaintFilterCanvas.cpp
+build $BUILDROOT/skia/utils/libskia.SkParse.o: cxx external/skia/src/utils/SkParse.cpp
+build $BUILDROOT/skia/utils/libskia.SkParseColor.o: cxx external/skia/src/utils/SkParseColor.cpp
+build $BUILDROOT/skia/utils/libskia.SkParsePath.o: cxx external/skia/src/utils/SkParsePath.cpp
+build $BUILDROOT/skia/utils/libskia.SkPatchUtils.o: cxx external/skia/src/utils/SkPatchUtils.cpp
+build $BUILDROOT/skia/utils/libskia.SkPolyUtils.o: cxx external/skia/src/utils/SkPolyUtils.cpp
+build $BUILDROOT/skia/utils/libskia.SkShaderUtils.o: cxx external/skia/src/utils/SkShaderUtils.cpp
+build $BUILDROOT/skia/utils/libskia.SkShadowTessellator.o: cxx external/skia/src/utils/SkShadowTessellator.cpp
+build $BUILDROOT/skia/utils/libskia.SkShadowUtils.o: cxx external/skia/src/utils/SkShadowUtils.cpp
+build $BUILDROOT/skia/utils/libskia.SkTextUtils.o: cxx external/skia/src/utils/SkTextUtils.cpp
+build $BUILDROOT/skia/utils/libskia.SkUTF.o: cxx external/skia/src/utils/SkUTF.cpp
+build $BUILDROOT/skia/utils/libskia.SkVMVisualizer.o: cxx external/skia/src/utils/SkVMVisualizer.cpp
+build $BUILDROOT/skia/utils/mac/libskia.SkCTFont.o: cxx external/skia/src/utils/mac/SkCTFont.cpp
+build $BUILDROOT/skia/utils/mac/libskia.SkCreateCGImageRef.o: cxx external/skia/src/utils/mac/SkCreateCGImageRef.cpp
+build $BUILDROOT/skia/utils/win/libskia.SkAutoCoInitialize.o: cxx external/skia/src/utils/win/SkAutoCoInitialize.cpp
+build $BUILDROOT/skia/utils/win/libskia.SkDWrite.o: cxx external/skia/src/utils/win/SkDWrite.cpp
+build $BUILDROOT/skia/utils/win/libskia.SkDWriteFontFileStream.o: cxx external/skia/src/utils/win/SkDWriteFontFileStream.cpp
+build $BUILDROOT/skia/utils/win/libskia.SkDWriteGeometrySink.o: cxx external/skia/src/utils/win/SkDWriteGeometrySink.cpp
+build $BUILDROOT/skia/utils/win/libskia.SkHRESULT.o: cxx external/skia/src/utils/win/SkHRESULT.cpp
+build $BUILDROOT/skia/utils/win/libskia.SkIStream.o: cxx external/skia/src/utils/win/SkIStream.cpp
+build $BUILDROOT/skia/utils/win/libskia.SkWGL_win.o: cxx external/skia/src/utils/win/SkWGL_win.cpp
+build $BUILDROOT/skia/effects/libskia.Sk1DPathEffect.o: cxx external/skia/src/effects/Sk1DPathEffect.cpp
+build $BUILDROOT/skia/effects/libskia.Sk2DPathEffect.o: cxx external/skia/src/effects/Sk2DPathEffect.cpp
+build $BUILDROOT/skia/effects/libskia.SkBlenders.o: cxx external/skia/src/effects/SkBlenders.cpp
+build $BUILDROOT/skia/effects/libskia.SkColorMatrix.o: cxx external/skia/src/effects/SkColorMatrix.cpp
+build $BUILDROOT/skia/effects/libskia.SkColorMatrixFilter.o: cxx external/skia/src/effects/SkColorMatrixFilter.cpp
+build $BUILDROOT/skia/effects/libskia.SkCornerPathEffect.o: cxx external/skia/src/effects/SkCornerPathEffect.cpp
+build $BUILDROOT/skia/effects/libskia.SkDashPathEffect.o: cxx external/skia/src/effects/SkDashPathEffect.cpp
+build $BUILDROOT/skia/effects/libskia.SkDiscretePathEffect.o: cxx external/skia/src/effects/SkDiscretePathEffect.cpp
+build $BUILDROOT/skia/effects/libskia.SkEmbossMask.o: cxx external/skia/src/effects/SkEmbossMask.cpp
+build $BUILDROOT/skia/effects/libskia.SkEmbossMaskFilter.o: cxx external/skia/src/effects/SkEmbossMaskFilter.cpp
+build $BUILDROOT/skia/effects/libskia.SkHighContrastFilter.o: cxx external/skia/src/effects/SkHighContrastFilter.cpp
+build $BUILDROOT/skia/effects/libskia.SkLayerDrawLooper.o: cxx external/skia/src/effects/SkLayerDrawLooper.cpp
+build $BUILDROOT/skia/effects/libskia.SkLumaColorFilter.o: cxx external/skia/src/effects/SkLumaColorFilter.cpp
+build $BUILDROOT/skia/effects/libskia.SkOpPathEffect.o: cxx external/skia/src/effects/SkOpPathEffect.cpp
+build $BUILDROOT/skia/effects/libskia.SkOverdrawColorFilter.o: cxx external/skia/src/effects/SkOverdrawColorFilter.cpp
+build $BUILDROOT/skia/effects/libskia.SkShaderMaskFilter.o: cxx external/skia/src/effects/SkShaderMaskFilter.cpp
+build $BUILDROOT/skia/effects/libskia.SkTableColorFilter.o: cxx external/skia/src/effects/SkTableColorFilter.cpp
+build $BUILDROOT/skia/effects/libskia.SkTableMaskFilter.o: cxx external/skia/src/effects/SkTableMaskFilter.cpp
+build $BUILDROOT/skia/effects/libskia.SkTrimPathEffect.o: cxx external/skia/src/effects/SkTrimPathEffect.cpp
+build $BUILDROOT/skia/shaders/gradients/libskia.Sk4fGradientBase.o: cxx external/skia/src/shaders/gradients/Sk4fGradientBase.cpp
+build $BUILDROOT/skia/shaders/gradients/libskia.Sk4fLinearGradient.o: cxx external/skia/src/shaders/gradients/Sk4fLinearGradient.cpp
+build $BUILDROOT/skia/shaders/gradients/libskia.SkGradientShader.o: cxx external/skia/src/shaders/gradients/SkGradientShader.cpp
+build $BUILDROOT/skia/shaders/gradients/libskia.SkGradientShaderBase.o: cxx external/skia/src/shaders/gradients/SkGradientShaderBase.cpp
+build $BUILDROOT/skia/shaders/gradients/libskia.SkLinearGradient.o: cxx external/skia/src/shaders/gradients/SkLinearGradient.cpp
+build $BUILDROOT/skia/shaders/gradients/libskia.SkRadialGradient.o: cxx external/skia/src/shaders/gradients/SkRadialGradient.cpp
+build $BUILDROOT/skia/shaders/gradients/libskia.SkSweepGradient.o: cxx external/skia/src/shaders/gradients/SkSweepGradient.cpp
+build $BUILDROOT/skia/shaders/gradients/libskia.SkTwoPointConicalGradient.o: cxx external/skia/src/shaders/gradients/SkTwoPointConicalGradient.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkAlphaThresholdImageFilter.o: cxx external/skia/src/effects/imagefilters/SkAlphaThresholdImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkArithmeticImageFilter.o: cxx external/skia/src/effects/imagefilters/SkArithmeticImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkBlendImageFilter.o: cxx external/skia/src/effects/imagefilters/SkBlendImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkBlurImageFilter.o: cxx external/skia/src/effects/imagefilters/SkBlurImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkColorFilterImageFilter.o: cxx external/skia/src/effects/imagefilters/SkColorFilterImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkComposeImageFilter.o: cxx external/skia/src/effects/imagefilters/SkComposeImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkCropImageFilter.o: cxx external/skia/src/effects/imagefilters/SkCropImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkDisplacementMapImageFilter.o: cxx external/skia/src/effects/imagefilters/SkDisplacementMapImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkDropShadowImageFilter.o: cxx external/skia/src/effects/imagefilters/SkDropShadowImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkImageImageFilter.o: cxx external/skia/src/effects/imagefilters/SkImageImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkLightingImageFilter.o: cxx external/skia/src/effects/imagefilters/SkLightingImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkMagnifierImageFilter.o: cxx external/skia/src/effects/imagefilters/SkMagnifierImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkMatrixConvolutionImageFilter.o: cxx external/skia/src/effects/imagefilters/SkMatrixConvolutionImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkMatrixTransformImageFilter.o: cxx external/skia/src/effects/imagefilters/SkMatrixTransformImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkMergeImageFilter.o: cxx external/skia/src/effects/imagefilters/SkMergeImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkMorphologyImageFilter.o: cxx external/skia/src/effects/imagefilters/SkMorphologyImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkPictureImageFilter.o: cxx external/skia/src/effects/imagefilters/SkPictureImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkRuntimeImageFilter.o: cxx external/skia/src/effects/imagefilters/SkRuntimeImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkShaderImageFilter.o: cxx external/skia/src/effects/imagefilters/SkShaderImageFilter.cpp
+build $BUILDROOT/skia/effects/imagefilters/libskia.SkTileImageFilter.o: cxx external/skia/src/effects/imagefilters/SkTileImageFilter.cpp
+build $BUILDROOT/skia/android/libskia.SkAndroidFrameworkUtils.o: cxx external/skia/src/android/SkAndroidFrameworkUtils.cpp
+build $BUILDROOT/skia/android/libskia.SkAnimatedImage.o: cxx external/skia/src/android/SkAnimatedImage.cpp
+build $BUILDROOT/skia/codec/libskia.SkAndroidCodec.o: cxx external/skia/src/codec/SkAndroidCodec.cpp
+build $BUILDROOT/skia/codec/libskia.SkAndroidCodecAdapter.o: cxx external/skia/src/codec/SkAndroidCodecAdapter.cpp
+build $BUILDROOT/skia/codec/libskia.SkBmpBaseCodec.o: cxx external/skia/src/codec/SkBmpBaseCodec.cpp
+build $BUILDROOT/skia/codec/libskia.SkBmpCodec.o: cxx external/skia/src/codec/SkBmpCodec.cpp
+build $BUILDROOT/skia/codec/libskia.SkBmpMaskCodec.o: cxx external/skia/src/codec/SkBmpMaskCodec.cpp
+build $BUILDROOT/skia/codec/libskia.SkBmpRLECodec.o: cxx external/skia/src/codec/SkBmpRLECodec.cpp
+build $BUILDROOT/skia/codec/libskia.SkBmpStandardCodec.o: cxx external/skia/src/codec/SkBmpStandardCodec.cpp
+build $BUILDROOT/skia/codec/libskia.SkCodec.o: cxx external/skia/src/codec/SkCodec.cpp
+build $BUILDROOT/skia/codec/libskia.SkCodecImageGenerator.o: cxx external/skia/src/codec/SkCodecImageGenerator.cpp
+build $BUILDROOT/skia/codec/libskia.SkColorTable.o: cxx external/skia/src/codec/SkColorTable.cpp
+build $BUILDROOT/skia/codec/libskia.SkEncodedInfo.o: cxx external/skia/src/codec/SkEncodedInfo.cpp
+build $BUILDROOT/skia/codec/libskia.SkMaskSwizzler.o: cxx external/skia/src/codec/SkMaskSwizzler.cpp
+build $BUILDROOT/skia/codec/libskia.SkMasks.o: cxx external/skia/src/codec/SkMasks.cpp
+build $BUILDROOT/skia/codec/libskia.SkParseEncodedOrigin.o: cxx external/skia/src/codec/SkParseEncodedOrigin.cpp
+build $BUILDROOT/skia/codec/libskia.SkSampledCodec.o: cxx external/skia/src/codec/SkSampledCodec.cpp
+build $BUILDROOT/skia/codec/libskia.SkSampler.o: cxx external/skia/src/codec/SkSampler.cpp
+build $BUILDROOT/skia/codec/libskia.SkSwizzler.o: cxx external/skia/src/codec/SkSwizzler.cpp
+build $BUILDROOT/skia/codec/libskia.SkWbmpCodec.o: cxx external/skia/src/codec/SkWbmpCodec.cpp
+build $BUILDROOT/skia/images/libskia.SkImageEncoder.o: cxx external/skia/src/images/SkImageEncoder.cpp
+build $BUILDROOT/skia/ports/libskia.SkDiscardableMemory_none.o: cxx external/skia/src/ports/SkDiscardableMemory_none.cpp
+build $BUILDROOT/skia/ports/libskia.SkGlobalInitialization_default.o: cxx external/skia/src/ports/SkGlobalInitialization_default.cpp
+build $BUILDROOT/skia/ports/libskia.SkImageGenerator_skia.o: cxx external/skia/src/ports/SkImageGenerator_skia.cpp
+build $BUILDROOT/skia/ports/libskia.SkMemory_malloc.o: cxx external/skia/src/ports/SkMemory_malloc.cpp
+build $BUILDROOT/skia/ports/libskia.SkOSFile_stdio.o: cxx external/skia/src/ports/SkOSFile_stdio.cpp
+build $BUILDROOT/skia/sfnt/libskia.SkOTTable_name.o: cxx external/skia/src/sfnt/SkOTTable_name.cpp
+build $BUILDROOT/skia/sfnt/libskia.SkOTUtils.o: cxx external/skia/src/sfnt/SkOTUtils.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLAnalysis.o: cxx external/skia/src/sksl/SkSLAnalysis.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLBuiltinTypes.o: cxx external/skia/src/sksl/SkSLBuiltinTypes.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLCompiler.o: cxx external/skia/src/sksl/SkSLCompiler.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLConstantFolder.o: cxx external/skia/src/sksl/SkSLConstantFolder.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLContext.o: cxx external/skia/src/sksl/SkSLContext.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLErrorReporter.o: cxx external/skia/src/sksl/SkSLErrorReporter.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLInliner.o: cxx external/skia/src/sksl/SkSLInliner.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLIntrinsicList.o: cxx external/skia/src/sksl/SkSLIntrinsicList.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLLexer.o: cxx external/skia/src/sksl/SkSLLexer.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLMangler.o: cxx external/skia/src/sksl/SkSLMangler.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLModuleLoader.o: cxx external/skia/src/sksl/SkSLModuleLoader.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLOperator.o: cxx external/skia/src/sksl/SkSLOperator.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLOutputStream.o: cxx external/skia/src/sksl/SkSLOutputStream.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLParser.o: cxx external/skia/src/sksl/SkSLParser.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLPool.o: cxx external/skia/src/sksl/SkSLPool.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLPosition.o: cxx external/skia/src/sksl/SkSLPosition.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLSampleUsage.o: cxx external/skia/src/sksl/SkSLSampleUsage.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLString.o: cxx external/skia/src/sksl/SkSLString.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLThreadContext.o: cxx external/skia/src/sksl/SkSLThreadContext.cpp
+build $BUILDROOT/skia/sksl/libskia.SkSLUtil.o: cxx external/skia/src/sksl/SkSLUtil.cpp
+build $BUILDROOT/skia/sksl/analysis/libskia.SkSLCanExitWithoutReturningValue.o: cxx external/skia/src/sksl/analysis/SkSLCanExitWithoutReturningValue.cpp
+build $BUILDROOT/skia/sksl/analysis/libskia.SkSLCheckProgramStructure.o: cxx external/skia/src/sksl/analysis/SkSLCheckProgramStructure.cpp
+build $BUILDROOT/skia/sksl/analysis/libskia.SkSLFinalizationChecks.o: cxx external/skia/src/sksl/analysis/SkSLFinalizationChecks.cpp
+build $BUILDROOT/skia/sksl/analysis/libskia.SkSLGetLoopUnrollInfo.o: cxx external/skia/src/sksl/analysis/SkSLGetLoopUnrollInfo.cpp
+build $BUILDROOT/skia/sksl/analysis/libskia.SkSLHasSideEffects.o: cxx external/skia/src/sksl/analysis/SkSLHasSideEffects.cpp
+build $BUILDROOT/skia/sksl/analysis/libskia.SkSLIsConstantExpression.o: cxx external/skia/src/sksl/analysis/SkSLIsConstantExpression.cpp
+build $BUILDROOT/skia/sksl/analysis/libskia.SkSLIsSameExpressionTree.o: cxx external/skia/src/sksl/analysis/SkSLIsSameExpressionTree.cpp
+build $BUILDROOT/skia/sksl/analysis/libskia.SkSLIsTrivialExpression.o: cxx external/skia/src/sksl/analysis/SkSLIsTrivialExpression.cpp
+build $BUILDROOT/skia/sksl/analysis/libskia.SkSLProgramUsage.o: cxx external/skia/src/sksl/analysis/SkSLProgramUsage.cpp
+build $BUILDROOT/skia/sksl/analysis/libskia.SkSLSwitchCaseContainsExit.o: cxx external/skia/src/sksl/analysis/SkSLSwitchCaseContainsExit.cpp
+build $BUILDROOT/skia/sksl/analysis/libskia.SkSLSymbolTableStackBuilder.o: cxx external/skia/src/sksl/analysis/SkSLSymbolTableStackBuilder.cpp
+build $BUILDROOT/skia/sksl/codegen/libskia.SkSLVMCodeGenerator.o: cxx external/skia/src/sksl/codegen/SkSLVMCodeGenerator.cpp
+build $BUILDROOT/skia/sksl/dsl/libskia.DSLBlock.o: cxx external/skia/src/sksl/dsl/DSLBlock.cpp
+build $BUILDROOT/skia/sksl/dsl/libskia.DSLCase.o: cxx external/skia/src/sksl/dsl/DSLCase.cpp
+build $BUILDROOT/skia/sksl/dsl/libskia.DSLCore.o: cxx external/skia/src/sksl/dsl/DSLCore.cpp
+build $BUILDROOT/skia/sksl/dsl/libskia.DSLExpression.o: cxx external/skia/src/sksl/dsl/DSLExpression.cpp
+build $BUILDROOT/skia/sksl/dsl/libskia.DSLFunction.o: cxx external/skia/src/sksl/dsl/DSLFunction.cpp
+build $BUILDROOT/skia/sksl/dsl/libskia.DSLLayout.o: cxx external/skia/src/sksl/dsl/DSLLayout.cpp
+build $BUILDROOT/skia/sksl/dsl/libskia.DSLStatement.o: cxx external/skia/src/sksl/dsl/DSLStatement.cpp
+build $BUILDROOT/skia/sksl/dsl/libskia.DSLType.o: cxx external/skia/src/sksl/dsl/DSLType.cpp
+build $BUILDROOT/skia/sksl/dsl/libskia.DSLVar.o: cxx external/skia/src/sksl/dsl/DSLVar.cpp
+build $BUILDROOT/skia/sksl/dsl/priv/libskia.DSLWriter.o: cxx external/skia/src/sksl/dsl/priv/DSLWriter.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLBinaryExpression.o: cxx external/skia/src/sksl/ir/SkSLBinaryExpression.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLBlock.o: cxx external/skia/src/sksl/ir/SkSLBlock.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLChildCall.o: cxx external/skia/src/sksl/ir/SkSLChildCall.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructor.o: cxx external/skia/src/sksl/ir/SkSLConstructor.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorArray.o: cxx external/skia/src/sksl/ir/SkSLConstructorArray.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorArrayCast.o: cxx external/skia/src/sksl/ir/SkSLConstructorArrayCast.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorCompound.o: cxx external/skia/src/sksl/ir/SkSLConstructorCompound.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorCompoundCast.o: cxx external/skia/src/sksl/ir/SkSLConstructorCompoundCast.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorDiagonalMatrix.o: cxx external/skia/src/sksl/ir/SkSLConstructorDiagonalMatrix.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorMatrixResize.o: cxx external/skia/src/sksl/ir/SkSLConstructorMatrixResize.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorScalarCast.o: cxx external/skia/src/sksl/ir/SkSLConstructorScalarCast.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorSplat.o: cxx external/skia/src/sksl/ir/SkSLConstructorSplat.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorStruct.o: cxx external/skia/src/sksl/ir/SkSLConstructorStruct.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLDiscardStatement.o: cxx external/skia/src/sksl/ir/SkSLDiscardStatement.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLDoStatement.o: cxx external/skia/src/sksl/ir/SkSLDoStatement.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLExpression.o: cxx external/skia/src/sksl/ir/SkSLExpression.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLExpressionStatement.o: cxx external/skia/src/sksl/ir/SkSLExpressionStatement.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLFieldAccess.o: cxx external/skia/src/sksl/ir/SkSLFieldAccess.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLForStatement.o: cxx external/skia/src/sksl/ir/SkSLForStatement.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLFunctionCall.o: cxx external/skia/src/sksl/ir/SkSLFunctionCall.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLFunctionDeclaration.o: cxx external/skia/src/sksl/ir/SkSLFunctionDeclaration.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLFunctionDefinition.o: cxx external/skia/src/sksl/ir/SkSLFunctionDefinition.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLIfStatement.o: cxx external/skia/src/sksl/ir/SkSLIfStatement.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLIndexExpression.o: cxx external/skia/src/sksl/ir/SkSLIndexExpression.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLInterfaceBlock.o: cxx external/skia/src/sksl/ir/SkSLInterfaceBlock.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLLayout.o: cxx external/skia/src/sksl/ir/SkSLLayout.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLLiteral.o: cxx external/skia/src/sksl/ir/SkSLLiteral.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLModifiers.o: cxx external/skia/src/sksl/ir/SkSLModifiers.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLPostfixExpression.o: cxx external/skia/src/sksl/ir/SkSLPostfixExpression.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLPrefixExpression.o: cxx external/skia/src/sksl/ir/SkSLPrefixExpression.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLSetting.o: cxx external/skia/src/sksl/ir/SkSLSetting.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLSwitchStatement.o: cxx external/skia/src/sksl/ir/SkSLSwitchStatement.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLSwizzle.o: cxx external/skia/src/sksl/ir/SkSLSwizzle.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLSymbolTable.o: cxx external/skia/src/sksl/ir/SkSLSymbolTable.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLTernaryExpression.o: cxx external/skia/src/sksl/ir/SkSLTernaryExpression.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLType.o: cxx external/skia/src/sksl/ir/SkSLType.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLTypeReference.o: cxx external/skia/src/sksl/ir/SkSLTypeReference.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLVarDeclarations.o: cxx external/skia/src/sksl/ir/SkSLVarDeclarations.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLVariable.o: cxx external/skia/src/sksl/ir/SkSLVariable.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLVariableReference.o: cxx external/skia/src/sksl/ir/SkSLVariableReference.cpp
+build $BUILDROOT/skia/sksl/tracing/libskia.SkVMDebugTrace.o: cxx external/skia/src/sksl/tracing/SkVMDebugTrace.cpp
+build $BUILDROOT/skia/sksl/transform/libskia.SkSLAddConstToVarModifiers.o: cxx external/skia/src/sksl/transform/SkSLAddConstToVarModifiers.cpp
+build $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateDeadFunctions.o: cxx external/skia/src/sksl/transform/SkSLEliminateDeadFunctions.cpp
+build $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateDeadGlobalVariables.o: cxx external/skia/src/sksl/transform/SkSLEliminateDeadGlobalVariables.cpp
+build $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateDeadLocalVariables.o: cxx external/skia/src/sksl/transform/SkSLEliminateDeadLocalVariables.cpp
+build $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateEmptyStatements.o: cxx external/skia/src/sksl/transform/SkSLEliminateEmptyStatements.cpp
+build $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateUnreachableCode.o: cxx external/skia/src/sksl/transform/SkSLEliminateUnreachableCode.cpp
+build $BUILDROOT/skia/sksl/transform/libskia.SkSLFindAndDeclareBuiltinFunctions.o: cxx external/skia/src/sksl/transform/SkSLFindAndDeclareBuiltinFunctions.cpp
+build $BUILDROOT/skia/sksl/transform/libskia.SkSLFindAndDeclareBuiltinVariables.o: cxx external/skia/src/sksl/transform/SkSLFindAndDeclareBuiltinVariables.cpp
+build $BUILDROOT/skia/sksl/transform/libskia.SkSLRenamePrivateSymbols.o: cxx external/skia/src/sksl/transform/SkSLRenamePrivateSymbols.cpp
+build $BUILDROOT/skia/sksl/transform/libskia.SkSLReplaceConstVarsWithLiterals.o: cxx external/skia/src/sksl/transform/SkSLReplaceConstVarsWithLiterals.cpp
+build $BUILDROOT/skia/gpu/graphite/libskia.CombinationBuilder.o: cxx external/skia/src/gpu/graphite/CombinationBuilder.cpp
+build $BUILDROOT/skia/gpu/graphite/libskia.FactoryFunctions.o: cxx external/skia/src/gpu/graphite/FactoryFunctions.cpp
+build $BUILDROOT/skia/ports/libskia.SkOSFile_posix.o: cxx external/skia/src/ports/SkOSFile_posix.cpp
+build $BUILDROOT/skia/ports/libskia.SkOSLibrary_posix.o: cxx external/skia/src/ports/SkOSLibrary_posix.cpp
+build $BUILDROOT/skia/ports/libskia.SkDebug_stdio.o: cxx external/skia/src/ports/SkDebug_stdio.cpp
+
+build $BUILDROOT/skia/libskia.so: so $
+  $BUILDROOT/skia/core/libskia.SkAAClip.o $
+  $BUILDROOT/skia/core/libskia.SkATrace.o $
+  $BUILDROOT/skia/core/libskia.SkAlphaRuns.o $
+  $BUILDROOT/skia/core/libskia.SkAnalyticEdge.o $
+  $BUILDROOT/skia/core/libskia.SkAnnotation.o $
+  $BUILDROOT/skia/core/libskia.SkArenaAlloc.o $
+  $BUILDROOT/skia/core/libskia.SkAutoPixmapStorage.o $
+  $BUILDROOT/skia/core/libskia.SkBBHFactory.o $
+  $BUILDROOT/skia/core/libskia.SkBitmap.o $
+  $BUILDROOT/skia/core/libskia.SkBitmapCache.o $
+  $BUILDROOT/skia/core/libskia.SkBitmapDevice.o $
+  $BUILDROOT/skia/core/libskia.SkBitmapProcState.o $
+  $BUILDROOT/skia/core/libskia.SkBitmapProcState_matrixProcs.o $
+  $BUILDROOT/skia/core/libskia.SkBlendMode.o $
+  $BUILDROOT/skia/core/libskia.SkBlendModeBlender.o $
+  $BUILDROOT/skia/core/libskia.SkBlitRow_D32.o $
+  $BUILDROOT/skia/core/libskia.SkBlitter.o $
+  $BUILDROOT/skia/core/libskia.SkBlitter_A8.o $
+  $BUILDROOT/skia/core/libskia.SkBlitter_ARGB32.o $
+  $BUILDROOT/skia/core/libskia.SkBlitter_Sprite.o $
+  $BUILDROOT/skia/core/libskia.SkBlockAllocator.o $
+  $BUILDROOT/skia/core/libskia.SkBlurMF.o $
+  $BUILDROOT/skia/core/libskia.SkBlurMask.o $
+  $BUILDROOT/skia/core/libskia.SkBuffer.o $
+  $BUILDROOT/skia/core/libskia.SkCachedData.o $
+  $BUILDROOT/skia/core/libskia.SkCanvas.o $
+  $BUILDROOT/skia/core/libskia.SkCanvasPriv.o $
+  $BUILDROOT/skia/core/libskia.SkCapabilities.o $
+  $BUILDROOT/skia/core/libskia.SkChromeRemoteGlyphCache.o $
+  $BUILDROOT/skia/core/libskia.SkClipStack.o $
+  $BUILDROOT/skia/core/libskia.SkClipStackDevice.o $
+  $BUILDROOT/skia/core/libskia.SkColor.o $
+  $BUILDROOT/skia/core/libskia.SkColorFilter.o $
+  $BUILDROOT/skia/core/libskia.SkColorFilter_Matrix.o $
+  $BUILDROOT/skia/core/libskia.SkColorSpace.o $
+  $BUILDROOT/skia/core/libskia.SkColorSpaceXformSteps.o $
+  $BUILDROOT/skia/core/libskia.SkCompressedDataUtils.o $
+  $BUILDROOT/skia/core/libskia.SkContainers.o $
+  $BUILDROOT/skia/core/libskia.SkContourMeasure.o $
+  $BUILDROOT/skia/core/libskia.SkConvertPixels.o $
+  $BUILDROOT/skia/core/libskia.SkCpu.o $
+  $BUILDROOT/skia/core/libskia.SkCubicClipper.o $
+  $BUILDROOT/skia/core/libskia.SkCubicMap.o $
+  $BUILDROOT/skia/core/libskia.SkData.o $
+  $BUILDROOT/skia/core/libskia.SkDataTable.o $
+  $BUILDROOT/skia/core/libskia.SkDebug.o $
+  $BUILDROOT/skia/core/libskia.SkDeferredDisplayList.o $
+  $BUILDROOT/skia/core/libskia.SkDeferredDisplayListRecorder.o $
+  $BUILDROOT/skia/core/libskia.SkDeque.o $
+  $BUILDROOT/skia/core/libskia.SkDescriptor.o $
+  $BUILDROOT/skia/core/libskia.SkDevice.o $
+  $BUILDROOT/skia/core/libskia.SkDistanceFieldGen.o $
+  $BUILDROOT/skia/core/libskia.SkDocument.o $
+  $BUILDROOT/skia/core/libskia.SkDraw.o $
+  $BUILDROOT/skia/core/libskia.SkDrawLooper.o $
+  $BUILDROOT/skia/core/libskia.SkDrawShadowInfo.o $
+  $BUILDROOT/skia/core/libskia.SkDraw_atlas.o $
+  $BUILDROOT/skia/core/libskia.SkDraw_text.o $
+  $BUILDROOT/skia/core/libskia.SkDraw_vertices.o $
+  $BUILDROOT/skia/core/libskia.SkDrawable.o $
+  $BUILDROOT/skia/core/libskia.SkEdge.o $
+  $BUILDROOT/skia/core/libskia.SkEdgeBuilder.o $
+  $BUILDROOT/skia/core/libskia.SkEdgeClipper.o $
+  $BUILDROOT/skia/core/libskia.SkExecutor.o $
+  $BUILDROOT/skia/core/libskia.SkFlattenable.o $
+  $BUILDROOT/skia/core/libskia.SkFont.o $
+  $BUILDROOT/skia/core/libskia.SkFontDescriptor.o $
+  $BUILDROOT/skia/core/libskia.SkFontMgr.o $
+  $BUILDROOT/skia/core/libskia.SkFontStream.o $
+  $BUILDROOT/skia/core/libskia.SkFont_serial.o $
+  $BUILDROOT/skia/core/libskia.SkGaussFilter.o $
+  $BUILDROOT/skia/core/libskia.SkGeometry.o $
+  $BUILDROOT/skia/core/libskia.SkGlobalInitialization_core.o $
+  $BUILDROOT/skia/core/libskia.SkGlyph.o $
+  $BUILDROOT/skia/core/libskia.SkGlyphBuffer.o $
+  $BUILDROOT/skia/core/libskia.SkGlyphRunPainter.o $
+  $BUILDROOT/skia/core/libskia.SkGpuBlurUtils.o $
+  $BUILDROOT/skia/core/libskia.SkGraphics.o $
+  $BUILDROOT/skia/core/libskia.SkHalf.o $
+  $BUILDROOT/skia/core/libskia.SkICC.o $
+  $BUILDROOT/skia/core/libskia.SkIDChangeListener.o $
+  $BUILDROOT/skia/core/libskia.SkImageFilter.o $
+  $BUILDROOT/skia/core/libskia.SkImageFilterCache.o $
+  $BUILDROOT/skia/core/libskia.SkImageFilterTypes.o $
+  $BUILDROOT/skia/core/libskia.SkImageGenerator.o $
+  $BUILDROOT/skia/core/libskia.SkImageInfo.o $
+  $BUILDROOT/skia/core/libskia.SkKeyContext.o $
+  $BUILDROOT/skia/core/libskia.SkKeyHelpers.o $
+  $BUILDROOT/skia/core/libskia.SkLatticeIter.o $
+  $BUILDROOT/skia/core/libskia.SkLineClipper.o $
+  $BUILDROOT/skia/core/libskia.SkLocalMatrixImageFilter.o $
+  $BUILDROOT/skia/core/libskia.SkM44.o $
+  $BUILDROOT/skia/core/libskia.SkMD5.o $
+  $BUILDROOT/skia/core/libskia.SkMalloc.o $
+  $BUILDROOT/skia/core/libskia.SkMallocPixelRef.o $
+  $BUILDROOT/skia/core/libskia.SkMask.o $
+  $BUILDROOT/skia/core/libskia.SkMaskBlurFilter.o $
+  $BUILDROOT/skia/core/libskia.SkMaskCache.o $
+  $BUILDROOT/skia/core/libskia.SkMaskFilter.o $
+  $BUILDROOT/skia/core/libskia.SkMaskGamma.o $
+  $BUILDROOT/skia/core/libskia.SkMath.o $
+  $BUILDROOT/skia/core/libskia.SkMatrix.o $
+  $BUILDROOT/skia/core/libskia.SkMatrixInvert.o $
+  $BUILDROOT/skia/core/libskia.SkMesh.o $
+  $BUILDROOT/skia/core/libskia.SkMipmap.o $
+  $BUILDROOT/skia/core/libskia.SkMipmapAccessor.o $
+  $BUILDROOT/skia/core/libskia.SkModeColorFilter.o $
+  $BUILDROOT/skia/core/libskia.SkOpts.o $
+  $BUILDROOT/skia/core/libskia.SkOpts_erms.o $
+  $BUILDROOT/skia/core/libskia.SkOverdrawCanvas.o $
+  $BUILDROOT/skia/core/libskia.SkPaint.o $
+  $BUILDROOT/skia/core/libskia.SkPaintParamsKey.o $
+  $BUILDROOT/skia/core/libskia.SkPaintPriv.o $
+  $BUILDROOT/skia/core/libskia.SkPath.o $
+  $BUILDROOT/skia/core/libskia.SkPathBuilder.o $
+  $BUILDROOT/skia/core/libskia.SkPathEffect.o $
+  $BUILDROOT/skia/core/libskia.SkPathMeasure.o $
+  $BUILDROOT/skia/core/libskia.SkPathRef.o $
+  $BUILDROOT/skia/core/libskia.SkPath_serial.o $
+  $BUILDROOT/skia/core/libskia.SkPipelineData.o $
+  $BUILDROOT/skia/core/libskia.SkPixelRef.o $
+  $BUILDROOT/skia/core/libskia.SkPixmap.o $
+  $BUILDROOT/skia/core/libskia.SkPoint.o $
+  $BUILDROOT/skia/core/libskia.SkPoint3.o $
+  $BUILDROOT/skia/core/libskia.SkPromiseImageTexture.o $
+  $BUILDROOT/skia/core/libskia.SkPtrRecorder.o $
+  $BUILDROOT/skia/core/libskia.SkQuadClipper.o $
+  $BUILDROOT/skia/core/libskia.SkRRect.o $
+  $BUILDROOT/skia/core/libskia.SkRTree.o $
+  $BUILDROOT/skia/core/libskia.SkRasterClip.o $
+  $BUILDROOT/skia/core/libskia.SkRasterPipeline.o $
+  $BUILDROOT/skia/core/libskia.SkRasterPipelineBlitter.o $
+  $BUILDROOT/skia/core/libskia.SkReadBuffer.o $
+  $BUILDROOT/skia/core/libskia.SkRecord.o $
+  $BUILDROOT/skia/core/libskia.SkRecordDraw.o $
+  $BUILDROOT/skia/core/libskia.SkRecordOpts.o $
+  $BUILDROOT/skia/core/libskia.SkRecords.o $
+  $BUILDROOT/skia/core/libskia.SkRect.o $
+  $BUILDROOT/skia/core/libskia.SkRegion.o $
+  $BUILDROOT/skia/core/libskia.SkRegion_path.o $
+  $BUILDROOT/skia/core/libskia.SkResourceCache.o $
+  $BUILDROOT/skia/core/libskia.SkRuntimeEffect.o $
+  $BUILDROOT/skia/core/libskia.SkSLTypeShared.o $
+  $BUILDROOT/skia/core/libskia.SkScalar.o $
+  $BUILDROOT/skia/core/libskia.SkScalerCache.o $
+  $BUILDROOT/skia/core/libskia.SkScalerContext.o $
+  $BUILDROOT/skia/core/libskia.SkScan.o $
+  $BUILDROOT/skia/core/libskia.SkScan_AAAPath.o $
+  $BUILDROOT/skia/core/libskia.SkScan_AntiPath.o $
+  $BUILDROOT/skia/core/libskia.SkScan_Antihair.o $
+  $BUILDROOT/skia/core/libskia.SkScan_Hairline.o $
+  $BUILDROOT/skia/core/libskia.SkScan_Path.o $
+  $BUILDROOT/skia/core/libskia.SkSemaphore.o $
+  $BUILDROOT/skia/core/libskia.SkShaderCodeDictionary.o $
+  $BUILDROOT/skia/core/libskia.SkSharedMutex.o $
+  $BUILDROOT/skia/core/libskia.SkSpecialImage.o $
+  $BUILDROOT/skia/core/libskia.SkSpecialSurface.o $
+  $BUILDROOT/skia/core/libskia.SkSpinlock.o $
+  $BUILDROOT/skia/core/libskia.SkSpriteBlitter_ARGB32.o $
+  $BUILDROOT/skia/core/libskia.SkStream.o $
+  $BUILDROOT/skia/core/libskia.SkStrikeCache.o $
+  $BUILDROOT/skia/core/libskia.SkStrikeSpec.o $
+  $BUILDROOT/skia/core/libskia.SkString.o $
+  $BUILDROOT/skia/core/libskia.SkStringUtils.o $
+  $BUILDROOT/skia/core/libskia.SkStroke.o $
+  $BUILDROOT/skia/core/libskia.SkStrokeRec.o $
+  $BUILDROOT/skia/core/libskia.SkStrokerPriv.o $
+  $BUILDROOT/skia/core/libskia.SkSurfaceCharacterization.o $
+  $BUILDROOT/skia/core/libskia.SkSwizzle.o $
+  $BUILDROOT/skia/core/libskia.SkTDArray.o $
+  $BUILDROOT/skia/core/libskia.SkTSearch.o $
+  $BUILDROOT/skia/core/libskia.SkTaskGroup.o $
+  $BUILDROOT/skia/core/libskia.SkTextBlob.o $
+  $BUILDROOT/skia/core/libskia.SkTextBlobTrace.o $
+  $BUILDROOT/skia/core/libskia.SkThreadID.o $
+  $BUILDROOT/skia/core/libskia.SkTime.o $
+  $BUILDROOT/skia/core/libskia.SkTypeface.o $
+  $BUILDROOT/skia/core/libskia.SkTypefaceCache.o $
+  $BUILDROOT/skia/core/libskia.SkTypeface_remote.o $
+  $BUILDROOT/skia/core/libskia.SkUnPreMultiply.o $
+  $BUILDROOT/skia/core/libskia.SkUtils.o $
+  $BUILDROOT/skia/core/libskia.SkUtilsArm.o $
+  $BUILDROOT/skia/core/libskia.SkVM.o $
+  $BUILDROOT/skia/core/libskia.SkVMBlitter.o $
+  $BUILDROOT/skia/core/libskia.SkVertState.o $
+  $BUILDROOT/skia/core/libskia.SkVertices.o $
+  $BUILDROOT/skia/core/libskia.SkWriteBuffer.o $
+  $BUILDROOT/skia/core/libskia.SkWriter32.o $
+  $BUILDROOT/skia/core/libskia.SkXfermode.o $
+  $BUILDROOT/skia/core/libskia.SkXfermodeInterpretation.o $
+  $BUILDROOT/skia/core/libskia.SkYUVAInfo.o $
+  $BUILDROOT/skia/core/libskia.SkYUVAPixmaps.o $
+  $BUILDROOT/skia/core/libskia.SkYUVMath.o $
+  $BUILDROOT/skia/core/libskia.SkYUVPlanesCache.o $
+  $BUILDROOT/skia/image/libskia.SkImage.o $
+  $BUILDROOT/skia/image/libskia.SkImage_Lazy.o $
+  $BUILDROOT/skia/image/libskia.SkImage_Raster.o $
+  $BUILDROOT/skia/image/libskia.SkRescaleAndReadPixels.o $
+  $BUILDROOT/skia/image/libskia.SkSurface.o $
+  $BUILDROOT/skia/image/libskia.SkSurface_Raster.o $
+  $BUILDROOT/skia/lazy/libskia.SkDiscardableMemoryPool.o $
+  $BUILDROOT/skia/shaders/libskia.SkBitmapProcShader.o $
+  $BUILDROOT/skia/shaders/libskia.SkColorFilterShader.o $
+  $BUILDROOT/skia/shaders/libskia.SkColorShader.o $
+  $BUILDROOT/skia/shaders/libskia.SkComposeShader.o $
+  $BUILDROOT/skia/shaders/libskia.SkEmptyShader.o $
+  $BUILDROOT/skia/shaders/libskia.SkImageShader.o $
+  $BUILDROOT/skia/shaders/libskia.SkLocalMatrixShader.o $
+  $BUILDROOT/skia/shaders/libskia.SkPerlinNoiseShader.o $
+  $BUILDROOT/skia/shaders/libskia.SkShader.o $
+  $BUILDROOT/skia/shaders/libskia.SkTransformShader.o $
+  $BUILDROOT/skia/text/libskia.GlyphRun.o $
+  $BUILDROOT/skia/text/libskia.StrikeForGPU.o $
+  $BUILDROOT/skia/pathops/libskia.SkAddIntersections.o $
+  $BUILDROOT/skia/pathops/libskia.SkDConicLineIntersection.o $
+  $BUILDROOT/skia/pathops/libskia.SkDCubicLineIntersection.o $
+  $BUILDROOT/skia/pathops/libskia.SkDCubicToQuads.o $
+  $BUILDROOT/skia/pathops/libskia.SkDLineIntersection.o $
+  $BUILDROOT/skia/pathops/libskia.SkDQuadLineIntersection.o $
+  $BUILDROOT/skia/pathops/libskia.SkIntersections.o $
+  $BUILDROOT/skia/pathops/libskia.SkOpAngle.o $
+  $BUILDROOT/skia/pathops/libskia.SkOpBuilder.o $
+  $BUILDROOT/skia/pathops/libskia.SkOpCoincidence.o $
+  $BUILDROOT/skia/pathops/libskia.SkOpContour.o $
+  $BUILDROOT/skia/pathops/libskia.SkOpCubicHull.o $
+  $BUILDROOT/skia/pathops/libskia.SkOpEdgeBuilder.o $
+  $BUILDROOT/skia/pathops/libskia.SkOpSegment.o $
+  $BUILDROOT/skia/pathops/libskia.SkOpSpan.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsAsWinding.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsCommon.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsConic.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsCubic.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsCurve.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsDebug.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsLine.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsOp.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsQuad.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsRect.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsSimplify.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsTSect.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsTightBounds.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsTypes.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathOpsWinding.o $
+  $BUILDROOT/skia/pathops/libskia.SkPathWriter.o $
+  $BUILDROOT/skia/pathops/libskia.SkReduceOrder.o $
+  $BUILDROOT/skia/core/libskia.SkBigPicture.o $
+  $BUILDROOT/skia/core/libskia.SkPicture.o $
+  $BUILDROOT/skia/core/libskia.SkPictureData.o $
+  $BUILDROOT/skia/core/libskia.SkPictureFlat.o $
+  $BUILDROOT/skia/core/libskia.SkPictureImageGenerator.o $
+  $BUILDROOT/skia/core/libskia.SkPicturePlayback.o $
+  $BUILDROOT/skia/core/libskia.SkPictureRecord.o $
+  $BUILDROOT/skia/core/libskia.SkPictureRecorder.o $
+  $BUILDROOT/skia/core/libskia.SkRecordedDrawable.o $
+  $BUILDROOT/skia/core/libskia.SkRecorder.o $
+  $BUILDROOT/skia/shaders/libskia.SkPictureShader.o $
+  $BUILDROOT/skia/utils/libskia.SkAnimCodecPlayer.o $
+  $BUILDROOT/skia/utils/libskia.SkBase64.o $
+  $BUILDROOT/skia/utils/libskia.SkCamera.o $
+  $BUILDROOT/skia/utils/libskia.SkCanvasStack.o $
+  $BUILDROOT/skia/utils/libskia.SkCanvasStateUtils.o $
+  $BUILDROOT/skia/utils/libskia.SkCharToGlyphCache.o $
+  $BUILDROOT/skia/utils/libskia.SkClipStackUtils.o $
+  $BUILDROOT/skia/utils/libskia.SkCustomTypeface.o $
+  $BUILDROOT/skia/utils/libskia.SkDashPath.o $
+  $BUILDROOT/skia/utils/libskia.SkEventTracer.o $
+  $BUILDROOT/skia/utils/libskia.SkFloatToDecimal.o $
+  $BUILDROOT/skia/utils/libskia.SkGaussianColorFilter.o $
+  $BUILDROOT/skia/utils/libskia.SkJSON.o $
+  $BUILDROOT/skia/utils/libskia.SkJSONWriter.o $
+  $BUILDROOT/skia/utils/libskia.SkMatrix22.o $
+  $BUILDROOT/skia/utils/libskia.SkMultiPictureDocument.o $
+  $BUILDROOT/skia/utils/libskia.SkNWayCanvas.o $
+  $BUILDROOT/skia/utils/libskia.SkNullCanvas.o $
+  $BUILDROOT/skia/utils/libskia.SkOSPath.o $
+  $BUILDROOT/skia/utils/libskia.SkOrderedFontMgr.o $
+  $BUILDROOT/skia/utils/libskia.SkPaintFilterCanvas.o $
+  $BUILDROOT/skia/utils/libskia.SkParse.o $
+  $BUILDROOT/skia/utils/libskia.SkParseColor.o $
+  $BUILDROOT/skia/utils/libskia.SkParsePath.o $
+  $BUILDROOT/skia/utils/libskia.SkPatchUtils.o $
+  $BUILDROOT/skia/utils/libskia.SkPolyUtils.o $
+  $BUILDROOT/skia/utils/libskia.SkShaderUtils.o $
+  $BUILDROOT/skia/utils/libskia.SkShadowTessellator.o $
+  $BUILDROOT/skia/utils/libskia.SkShadowUtils.o $
+  $BUILDROOT/skia/utils/libskia.SkTextUtils.o $
+  $BUILDROOT/skia/utils/libskia.SkUTF.o $
+  $BUILDROOT/skia/utils/libskia.SkVMVisualizer.o $
+  $BUILDROOT/skia/utils/mac/libskia.SkCTFont.o $
+  $BUILDROOT/skia/utils/mac/libskia.SkCreateCGImageRef.o $
+  $BUILDROOT/skia/utils/win/libskia.SkAutoCoInitialize.o $
+  $BUILDROOT/skia/utils/win/libskia.SkDWrite.o $
+  $BUILDROOT/skia/utils/win/libskia.SkDWriteFontFileStream.o $
+  $BUILDROOT/skia/utils/win/libskia.SkDWriteGeometrySink.o $
+  $BUILDROOT/skia/utils/win/libskia.SkHRESULT.o $
+  $BUILDROOT/skia/utils/win/libskia.SkIStream.o $
+  $BUILDROOT/skia/utils/win/libskia.SkWGL_win.o $
+  $BUILDROOT/skia/effects/libskia.Sk1DPathEffect.o $
+  $BUILDROOT/skia/effects/libskia.Sk2DPathEffect.o $
+  $BUILDROOT/skia/effects/libskia.SkBlenders.o $
+  $BUILDROOT/skia/effects/libskia.SkColorMatrix.o $
+  $BUILDROOT/skia/effects/libskia.SkColorMatrixFilter.o $
+  $BUILDROOT/skia/effects/libskia.SkCornerPathEffect.o $
+  $BUILDROOT/skia/effects/libskia.SkDashPathEffect.o $
+  $BUILDROOT/skia/effects/libskia.SkDiscretePathEffect.o $
+  $BUILDROOT/skia/effects/libskia.SkEmbossMask.o $
+  $BUILDROOT/skia/effects/libskia.SkEmbossMaskFilter.o $
+  $BUILDROOT/skia/effects/libskia.SkHighContrastFilter.o $
+  $BUILDROOT/skia/effects/libskia.SkLayerDrawLooper.o $
+  $BUILDROOT/skia/effects/libskia.SkLumaColorFilter.o $
+  $BUILDROOT/skia/effects/libskia.SkOpPathEffect.o $
+  $BUILDROOT/skia/effects/libskia.SkOverdrawColorFilter.o $
+  $BUILDROOT/skia/effects/libskia.SkShaderMaskFilter.o $
+  $BUILDROOT/skia/effects/libskia.SkTableColorFilter.o $
+  $BUILDROOT/skia/effects/libskia.SkTableMaskFilter.o $
+  $BUILDROOT/skia/effects/libskia.SkTrimPathEffect.o $
+  $BUILDROOT/skia/shaders/gradients/libskia.Sk4fGradientBase.o $
+  $BUILDROOT/skia/shaders/gradients/libskia.Sk4fLinearGradient.o $
+  $BUILDROOT/skia/shaders/gradients/libskia.SkGradientShader.o $
+  $BUILDROOT/skia/shaders/gradients/libskia.SkGradientShaderBase.o $
+  $BUILDROOT/skia/shaders/gradients/libskia.SkLinearGradient.o $
+  $BUILDROOT/skia/shaders/gradients/libskia.SkRadialGradient.o $
+  $BUILDROOT/skia/shaders/gradients/libskia.SkSweepGradient.o $
+  $BUILDROOT/skia/shaders/gradients/libskia.SkTwoPointConicalGradient.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkAlphaThresholdImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkArithmeticImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkBlendImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkBlurImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkColorFilterImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkComposeImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkCropImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkDisplacementMapImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkDropShadowImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkImageImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkLightingImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkMagnifierImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkMatrixConvolutionImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkMatrixTransformImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkMergeImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkMorphologyImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkPictureImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkRuntimeImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkShaderImageFilter.o $
+  $BUILDROOT/skia/effects/imagefilters/libskia.SkTileImageFilter.o $
+  $BUILDROOT/skia/android/libskia.SkAndroidFrameworkUtils.o $
+  $BUILDROOT/skia/android/libskia.SkAnimatedImage.o $
+  $BUILDROOT/skia/codec/libskia.SkAndroidCodec.o $
+  $BUILDROOT/skia/codec/libskia.SkAndroidCodecAdapter.o $
+  $BUILDROOT/skia/codec/libskia.SkBmpBaseCodec.o $
+  $BUILDROOT/skia/codec/libskia.SkBmpCodec.o $
+  $BUILDROOT/skia/codec/libskia.SkBmpMaskCodec.o $
+  $BUILDROOT/skia/codec/libskia.SkBmpRLECodec.o $
+  $BUILDROOT/skia/codec/libskia.SkBmpStandardCodec.o $
+  $BUILDROOT/skia/codec/libskia.SkCodec.o $
+  $BUILDROOT/skia/codec/libskia.SkCodecImageGenerator.o $
+  $BUILDROOT/skia/codec/libskia.SkColorTable.o $
+  $BUILDROOT/skia/codec/libskia.SkEncodedInfo.o $
+  $BUILDROOT/skia/codec/libskia.SkMaskSwizzler.o $
+  $BUILDROOT/skia/codec/libskia.SkMasks.o $
+  $BUILDROOT/skia/codec/libskia.SkParseEncodedOrigin.o $
+  $BUILDROOT/skia/codec/libskia.SkSampledCodec.o $
+  $BUILDROOT/skia/codec/libskia.SkSampler.o $
+  $BUILDROOT/skia/codec/libskia.SkSwizzler.o $
+  $BUILDROOT/skia/codec/libskia.SkWbmpCodec.o $
+  $BUILDROOT/skia/images/libskia.SkImageEncoder.o $
+  $BUILDROOT/skia/ports/libskia.SkDiscardableMemory_none.o $
+  $BUILDROOT/skia/ports/libskia.SkGlobalInitialization_default.o $
+  $BUILDROOT/skia/ports/libskia.SkImageGenerator_skia.o $
+  $BUILDROOT/skia/ports/libskia.SkMemory_malloc.o $
+  $BUILDROOT/skia/ports/libskia.SkOSFile_stdio.o $
+  $BUILDROOT/skia/sfnt/libskia.SkOTTable_name.o $
+  $BUILDROOT/skia/sfnt/libskia.SkOTUtils.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLAnalysis.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLBuiltinTypes.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLCompiler.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLConstantFolder.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLContext.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLErrorReporter.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLInliner.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLIntrinsicList.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLLexer.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLMangler.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLModuleLoader.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLOperator.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLOutputStream.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLParser.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLPool.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLPosition.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLSampleUsage.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLString.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLThreadContext.o $
+  $BUILDROOT/skia/sksl/libskia.SkSLUtil.o $
+  $BUILDROOT/skia/sksl/analysis/libskia.SkSLCanExitWithoutReturningValue.o $
+  $BUILDROOT/skia/sksl/analysis/libskia.SkSLCheckProgramStructure.o $
+  $BUILDROOT/skia/sksl/analysis/libskia.SkSLFinalizationChecks.o $
+  $BUILDROOT/skia/sksl/analysis/libskia.SkSLGetLoopUnrollInfo.o $
+  $BUILDROOT/skia/sksl/analysis/libskia.SkSLHasSideEffects.o $
+  $BUILDROOT/skia/sksl/analysis/libskia.SkSLIsConstantExpression.o $
+  $BUILDROOT/skia/sksl/analysis/libskia.SkSLIsSameExpressionTree.o $
+  $BUILDROOT/skia/sksl/analysis/libskia.SkSLIsTrivialExpression.o $
+  $BUILDROOT/skia/sksl/analysis/libskia.SkSLProgramUsage.o $
+  $BUILDROOT/skia/sksl/analysis/libskia.SkSLSwitchCaseContainsExit.o $
+  $BUILDROOT/skia/sksl/analysis/libskia.SkSLSymbolTableStackBuilder.o $
+  $BUILDROOT/skia/sksl/codegen/libskia.SkSLVMCodeGenerator.o $
+  $BUILDROOT/skia/sksl/dsl/libskia.DSLBlock.o $
+  $BUILDROOT/skia/sksl/dsl/libskia.DSLCase.o $
+  $BUILDROOT/skia/sksl/dsl/libskia.DSLCore.o $
+  $BUILDROOT/skia/sksl/dsl/libskia.DSLExpression.o $
+  $BUILDROOT/skia/sksl/dsl/libskia.DSLFunction.o $
+  $BUILDROOT/skia/sksl/dsl/libskia.DSLLayout.o $
+  $BUILDROOT/skia/sksl/dsl/libskia.DSLStatement.o $
+  $BUILDROOT/skia/sksl/dsl/libskia.DSLType.o $
+  $BUILDROOT/skia/sksl/dsl/libskia.DSLVar.o $
+  $BUILDROOT/skia/sksl/dsl/priv/libskia.DSLWriter.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLBinaryExpression.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLBlock.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLChildCall.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructor.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorArray.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorArrayCast.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorCompound.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorCompoundCast.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorDiagonalMatrix.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorMatrixResize.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorScalarCast.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorSplat.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLConstructorStruct.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLDiscardStatement.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLDoStatement.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLExpression.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLExpressionStatement.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLFieldAccess.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLForStatement.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLFunctionCall.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLFunctionDeclaration.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLFunctionDefinition.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLIfStatement.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLIndexExpression.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLInterfaceBlock.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLLayout.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLLiteral.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLModifiers.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLPostfixExpression.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLPrefixExpression.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLSetting.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLSwitchStatement.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLSwizzle.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLSymbolTable.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLTernaryExpression.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLType.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLTypeReference.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLVarDeclarations.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLVariable.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLVariableReference.o $
+  $BUILDROOT/skia/sksl/tracing/libskia.SkVMDebugTrace.o $
+  $BUILDROOT/skia/sksl/transform/libskia.SkSLAddConstToVarModifiers.o $
+  $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateDeadFunctions.o $
+  $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateDeadGlobalVariables.o $
+  $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateDeadLocalVariables.o $
+  $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateEmptyStatements.o $
+  $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateUnreachableCode.o $
+  $BUILDROOT/skia/sksl/transform/libskia.SkSLFindAndDeclareBuiltinFunctions.o $
+  $BUILDROOT/skia/sksl/transform/libskia.SkSLFindAndDeclareBuiltinVariables.o $
+  $BUILDROOT/skia/sksl/transform/libskia.SkSLRenamePrivateSymbols.o $
+  $BUILDROOT/skia/sksl/transform/libskia.SkSLReplaceConstVarsWithLiterals.o $
+  $BUILDROOT/skia/gpu/graphite/libskia.CombinationBuilder.o $
+  $BUILDROOT/skia/gpu/graphite/libskia.FactoryFunctions.o $
+  $BUILDROOT/skia/ports/libskia.SkOSFile_posix.o $
+  $BUILDROOT/skia/ports/libskia.SkOSLibrary_posix.o $
+  $BUILDROOT/skia/ports/libskia.SkDebug_stdio.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.ClipStack.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.Device.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.Device_drawTexture.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrAHardwareBufferImageGenerator.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrAHardwareBufferUtils.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrAttachment.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrAuditTrail.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrBackendSemaphore.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrBackendSurface.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrBackendTextureImageGenerator.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrBackendUtils.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrBlurUtils.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrBufferAllocPool.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrBufferTransferRenderTask.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrBufferUpdateRenderTask.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrCaps.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrClientMappedBufferManager.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrColorInfo.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrColorSpaceXform.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrContextThreadSafeProxy.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrContext_Base.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrCopyRenderTask.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDDLContext.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDDLTask.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDataUtils.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDefaultGeoProcFactory.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDirectContext.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDirectContextPriv.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDistanceFieldGenFromVector.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDrawOpAtlas.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDrawOpTest.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDrawingManager.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDriverBugWorkarounds.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrDynamicAtlas.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrEagerVertexAllocator.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrFinishCallbacks.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrFixedClip.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrFragmentProcessor.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrGeometryProcessor.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrGpu.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrGpuBuffer.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrGpuResource.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrImageContext.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrImageInfo.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrManagedResource.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrMemoryPool.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrMeshDrawTarget.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrOnFlushResourceProvider.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrOpFlushState.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrOpsRenderPass.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrPaint.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrPersistentCacheUtils.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrPipeline.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrProcessor.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrProcessorAnalysis.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrProcessorSet.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrProcessorUnitTest.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrProgramDesc.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrProgramInfo.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrProxyProvider.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrRecordingContext.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrRecordingContextPriv.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrRenderTarget.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrRenderTargetProxy.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrRenderTask.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrRenderTaskCluster.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrResourceAllocator.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrResourceCache.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrResourceProvider.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrRingBuffer.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrSPIRVUniformHandler.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrSPIRVVaryingHandler.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrSWMaskHelper.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrShaderCaps.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrShaderVar.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrStagingBufferManager.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrStencilSettings.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrStyle.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrSurface.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrSurfaceInfo.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrSurfaceProxy.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrTestUtils.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrTexture.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrTextureProxy.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrTextureRenderTargetProxy.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrTextureResolveRenderTask.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrThreadSafeCache.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrThreadSafePipelineBuilder.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrTransferFromRenderTask.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrUniformDataManager.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrUtil.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrVertexChunkArray.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrWaitRenderTask.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrWritePixelsRenderTask.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrXferProcessor.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrYUVABackendTextures.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrYUVATextureProxies.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.PathRenderer.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.PathRendererChain.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.SkGr.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.StencilMaskHelper.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.SurfaceContext.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.SurfaceDrawContext.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.SurfaceFillContext.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrBezierEffect.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrBicubicEffect.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrBitmapTextGeoProc.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrBlendFragmentProcessor.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrConvexPolyEffect.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrCoverageSetOpXP.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrCustomXfermode.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrDisableColorXP.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrDistanceFieldGeoProc.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrGaussianConvolutionFragmentProcessor.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrMatrixConvolutionEffect.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrMatrixEffect.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrModulateAtlasCoverageEffect.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrOvalEffect.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrPorterDuffXferProcessor.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrRRectEffect.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrShadowGeoProc.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrSkSLFP.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrTextureEffect.o $
+  $BUILDROOT/skia/gpu/ganesh/effects/gpu.GrYUVtoRGBEffect.o $
+  $BUILDROOT/skia/gpu/ganesh/geometry/gpu.GrAAConvexTessellator.o $
+  $BUILDROOT/skia/gpu/ganesh/geometry/gpu.GrAATriangulator.o $
+  $BUILDROOT/skia/gpu/ganesh/geometry/gpu.GrPathUtils.o $
+  $BUILDROOT/skia/gpu/ganesh/geometry/gpu.GrQuad.o $
+  $BUILDROOT/skia/gpu/ganesh/geometry/gpu.GrQuadUtils.o $
+  $BUILDROOT/skia/gpu/ganesh/geometry/gpu.GrShape.o $
+  $BUILDROOT/skia/gpu/ganesh/geometry/gpu.GrStyledShape.o $
+  $BUILDROOT/skia/gpu/ganesh/geometry/gpu.GrTriangulator.o $
+  $BUILDROOT/skia/gpu/ganesh/glsl/gpu.GrGLSLBlend.o $
+  $BUILDROOT/skia/gpu/ganesh/glsl/gpu.GrGLSLFragmentShaderBuilder.o $
+  $BUILDROOT/skia/gpu/ganesh/glsl/gpu.GrGLSLProgramBuilder.o $
+  $BUILDROOT/skia/gpu/ganesh/glsl/gpu.GrGLSLProgramDataManager.o $
+  $BUILDROOT/skia/gpu/ganesh/glsl/gpu.GrGLSLShaderBuilder.o $
+  $BUILDROOT/skia/gpu/ganesh/glsl/gpu.GrGLSLUniformHandler.o $
+  $BUILDROOT/skia/gpu/ganesh/glsl/gpu.GrGLSLVarying.o $
+  $BUILDROOT/skia/gpu/ganesh/glsl/gpu.GrGLSLVertexGeoBuilder.o $
+  $BUILDROOT/skia/gpu/ganesh/gradients/gpu.GrGradientBitmapCache.o $
+  $BUILDROOT/skia/gpu/ganesh/gradients/gpu.GrGradientShader.o $
+  $BUILDROOT/skia/gpu/ganesh/mock/gpu.GrMockCaps.o $
+  $BUILDROOT/skia/gpu/ganesh/mock/gpu.GrMockGpu.o $
+  $BUILDROOT/skia/gpu/ganesh/mock/gpu.GrMockTypes.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.AAConvexPathRenderer.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.AAHairLinePathRenderer.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.AALinearizingConvexPathRenderer.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.AtlasInstancedHelper.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.AtlasPathRenderer.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.AtlasRenderTask.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.AtlasTextOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.ClearOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.DashLinePathRenderer.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.DashOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.DefaultPathRenderer.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.DrawAtlasOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.DrawAtlasPathOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.DrawMeshOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.DrawableOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.FillRRectOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.FillRectOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.GrMeshDrawOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.GrOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.GrOvalOpFactory.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.GrSimpleMeshDrawOpHelper.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.GrSimpleMeshDrawOpHelperWithStencil.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.LatticeOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.OpsTask.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.PathInnerTriangulateOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.PathStencilCoverOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.PathTessellateOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.QuadPerEdgeAA.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.RegionOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.ShadowRRectOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.SmallPathAtlasMgr.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.SmallPathRenderer.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.SmallPathShapeData.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.SoftwarePathRenderer.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.StrokeRectOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.StrokeTessellateOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.TessellationPathRenderer.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.TextureOp.o $
+  $BUILDROOT/skia/gpu/ganesh/ops/gpu.TriangulatingPathRenderer.o $
+  $BUILDROOT/skia/gpu/ganesh/tessellate/gpu.GrPathTessellationShader.o $
+  $BUILDROOT/skia/gpu/ganesh/tessellate/gpu.GrStrokeTessellationShader.o $
+  $BUILDROOT/skia/gpu/ganesh/tessellate/gpu.GrTessellationShader.o $
+  $BUILDROOT/skia/gpu/ganesh/tessellate/gpu.PathTessellator.o $
+  $BUILDROOT/skia/gpu/ganesh/tessellate/gpu.StrokeTessellator.o $
+  $BUILDROOT/skia/gpu/ganesh/text/gpu.GrAtlasManager.o $
+  $BUILDROOT/skia/image/gpu.SkImage_Gpu.o $
+  $BUILDROOT/skia/image/gpu.SkImage_GpuBase.o $
+  $BUILDROOT/skia/image/gpu.SkImage_GpuYUVA.o $
+  $BUILDROOT/skia/image/gpu.SkSurface_Gpu.o $
+  $BUILDROOT/skia/opts/avx.SkOpts_avx.o $
+  $BUILDROOT/skia/opts/hsw.SkOpts_hsw.o $
+  $BUILDROOT/skia/codec/jpeg_decode.SkJpegCodec.o $
+  $BUILDROOT/skia/codec/jpeg_decode.SkJpegDecoderMgr.o $
+  $BUILDROOT/skia/codec/jpeg_decode.SkJpegUtility.o $
+  $BUILDROOT/skia/images/jpeg_encode.SkJPEGWriteUtility.o $
+  $BUILDROOT/skia/images/jpeg_encode.SkJpegEncoder.o $
+  $BUILDROOT/skia/codec/png_decode.SkIcoCodec.o $
+  $BUILDROOT/skia/codec/png_decode.SkPngCodec.o $
+  $BUILDROOT/skia/images/png_encode.SkPngEncoder.o $
+  $BUILDROOT/skia/opts/skx.SkOpts_skx.o $
+  $BUILDROOT/skia/opts/sse42.SkOpts_sse42.o $
+  $BUILDROOT/skia/opts/ssse3.SkOpts_ssse3.o $
+  $BUILDROOT/skia/codec/webp_decode.SkWebpCodec.o $
+  $BUILDROOT/skia/images/webp_encode.SkWebpEncoder.o $
+  $BUILDROOT/skia/codec/wuffs.SkWuffsCodec.o $
+  $BUILDROOT/skia/svg/xml.SkSVGCanvas.o $
+  $BUILDROOT/skia/svg/xml.SkSVGDevice.o $
+  $BUILDROOT/skia/xml/xml.SkDOM.o $
+  $BUILDROOT/skia/xml/xml.SkXMLParser.o $
+  $BUILDROOT/skia/xml/xml.SkXMLWriter.o $
+  $BUILDROOT/skia/gpu/gpu_shared.AtlasTypes.o $
+  $BUILDROOT/skia/gpu/gpu_shared.Blend.o $
+  $BUILDROOT/skia/gpu/gpu_shared.RectanizerPow2.o $
+  $BUILDROOT/skia/gpu/gpu_shared.RectanizerSkyline.o $
+  $BUILDROOT/skia/gpu/gpu_shared.ResourceKey.o $
+  $BUILDROOT/skia/gpu/gpu_shared.ShaderErrorHandler.o $
+  $BUILDROOT/skia/gpu/gpu_shared.Swizzle.o $
+  $BUILDROOT/skia/gpu/tessellate/gpu_shared.FixedCountBufferUtils.o $
+  $BUILDROOT/skia/gpu/tessellate/gpu_shared.Tessellation.o $
+  $BUILDROOT/skia/text/gpu/gpu_shared.DistanceFieldAdjustTable.o $
+  $BUILDROOT/skia/text/gpu/gpu_shared.GlyphVector.o $
+  $BUILDROOT/skia/text/gpu/gpu_shared.SDFMaskFilter.o $
+  $BUILDROOT/skia/text/gpu/gpu_shared.SDFTControl.o $
+  $BUILDROOT/skia/text/gpu/gpu_shared.Slug.o $
+  $BUILDROOT/skia/text/gpu/gpu_shared.StrikeCache.o $
+  $BUILDROOT/skia/text/gpu/gpu_shared.SubRunAllocator.o $
+  $BUILDROOT/skia/text/gpu/gpu_shared.SubRunContainer.o $
+  $BUILDROOT/skia/text/gpu/gpu_shared.TextBlob.o $
+  $BUILDROOT/skia/text/gpu/gpu_shared.TextBlobRedrawCoordinator.o $
+  $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLGLSLCodeGenerator.o $
+  $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLMetalCodeGenerator.o $
+  $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLPipelineStageCodeGenerator.o $
+  $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLSPIRVCodeGenerator.o $
+  $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLSPIRVtoHLSL.o $
+  $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLWGSLCodeGenerator.o $
+  $BUILDROOT/skia/ports/fontmgr_empty_factory.SkFontMgr_empty_factory.o $
+  $BUILDROOT/skia/libskcms.a $
+  $BUILDROOT/skia/libwuffs.a $
+  | $
+  $SYSROOT/lib/libz.so $
+  $SYSROOT/lib/libjpeg.so $
+  $SYSROOT/lib/libpng.so $
+  $SYSROOT/lib/libwebp.so $
+  $SYSROOT/lib/libexpat.so
+  libs = -Wl,--gc-sections -ldl -lpthread -lz -ljpeg -lpng -lwebp -lexpat -lc++

@@ -245,6 +245,8 @@ build $SYSROOT/lib/libseat.so: copy $BUILDROOT/seatd/libseat.so
 
 subninja build/servicemanager.ninja
 
+subninja build/skia.ninja
+
 subninja build/system_img.ninja
 
 subninja build/toolbox.ninja

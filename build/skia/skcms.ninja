@@ -1,0 +1,7 @@
+defines = -DNDEBUG
+cflags = $defines -std=c11 -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
+cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti
+
+build $BUILDROOT/skia/skcms/libskcms.skcms.o: cxx external/skia/modules/skcms/skcms.cc
+
+build $BUILDROOT/skia/libskcms.a: ar $BUILDROOT/skia/skcms/libskcms.skcms.o
