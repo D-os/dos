@@ -170,3 +170,6 @@
 [submodule "external/skia"]
 	path = external/skia
 	url = https://skia.googlesource.com/skia.git
+[submodule "external/fontconfig"]
+	path = external/fontconfig
+	url = https://gitlab.freedesktop.org/fontconfig/fontconfig.git
