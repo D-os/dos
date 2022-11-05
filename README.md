@@ -8,8 +8,8 @@ _δέος (déos)_ — Dee Operating System
 
 ## Mission statement
 
-Build operating system for workplace computers,
-using best available open source components.
+_Build operating system for workplace computers,
+using best available open source components._
 
 ### Goals
 
@@ -22,7 +22,7 @@ using best available open source components.
 - LSB compliance
 - applications distribution
 
-## Building
+## Build && Run
 
 See `tools/tc-build/README.md` for a list of required host tools.
 
@@ -35,6 +35,25 @@ ninja && qemu.sh
 
 ### Testing
 
+#### Unit tests
+
 ```sh
-ninja out/system.content && ./chroot.sh out/system /tests/kits
+ninja -f debug.ninja out/system.content && ./chroot.sh out/system /tests/kits
 ```
+
+#### Interactive tests
+
+Clone [Weston][1] and make a local build for host. Then run it:
+(`$DOS_DIR` is a directory with _this repository_ working copy.)
+
+```sh
+XDG_RUNTIME_DIR=$DOS_DIR/out/system/run build/compositor/weston
+```
+
+Having Weston window open run in another terminal window:
+
+```sh
+ninja -f debug.ninja out/system.content && ./chroot.sh out/system env XDG_RUNTIME_DIR=/run WAYLAND_DISPLAY=wayland-1 WAYLAND_DEBUG=1 /tests/interface_window
+```
+
+[1]: https://github.com/D-os/weston.git
