@@ -1,0 +1,9 @@
+defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 -DSK_ENABLE_SKSL -DSK_ENABLE_PRECOMPILE -DSK_USE_PERFETTO -DSK_GAMMA_APPLY_TO_A8 -DSKIA_IMPLEMENTATION=1
+includes = -Iexternal/skia -Iexternal/fontconfig
+cflags = $defines -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
+cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti
+
+build $BUILDROOT/skia/ports/fontmgr_FontConfigInterface.SkFontConfigInterface.o: cxx external/skia/src/ports/SkFontConfigInterface.cpp
+build $BUILDROOT/skia/ports/fontmgr_FontConfigInterface.SkFontConfigInterface_direct.o: cxx external/skia/src/ports/SkFontConfigInterface_direct.cpp
+build $BUILDROOT/skia/ports/fontmgr_FontConfigInterface.SkFontConfigInterface_direct_factory.o: cxx external/skia/src/ports/SkFontConfigInterface_direct_factory.cpp
+build $BUILDROOT/skia/ports/fontmgr_FontConfigInterface.SkFontMgr_FontConfigInterface.o: cxx external/skia/src/ports/SkFontMgr_FontConfigInterface.cpp

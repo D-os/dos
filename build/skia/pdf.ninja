@@ -1,0 +1,27 @@
+defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 -DSK_ENABLE_SKSL -DSK_ENABLE_PRECOMPILE -DSK_USE_PERFETTO -DSK_GAMMA_APPLY_TO_A8 -DSKIA_IMPLEMENTATION=1 -DSK_SUPPORT_PDF -DSK_CODEC_DECODES_JPEG -DSK_ENCODE_JPEG
+includes = -Iexternal/skia -Iexternal/zlib
+cflags = $defines -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
+cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti
+
+build $BUILDROOT/skia/pdf/pdf.SkClusterator.o: cxx external/skia/src/pdf/SkClusterator.cpp
+build $BUILDROOT/skia/pdf/pdf.SkDeflate.o: cxx external/skia/src/pdf/SkDeflate.cpp
+build $BUILDROOT/skia/pdf/pdf.SkJpegInfo.o: cxx external/skia/src/pdf/SkJpegInfo.cpp
+build $BUILDROOT/skia/pdf/pdf.SkKeyedImage.o: cxx external/skia/src/pdf/SkKeyedImage.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFBitmap.o: cxx external/skia/src/pdf/SkPDFBitmap.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFDevice.o: cxx external/skia/src/pdf/SkPDFDevice.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFDocument.o: cxx external/skia/src/pdf/SkPDFDocument.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFFont.o: cxx external/skia/src/pdf/SkPDFFont.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFFormXObject.o: cxx external/skia/src/pdf/SkPDFFormXObject.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFGradientShader.o: cxx external/skia/src/pdf/SkPDFGradientShader.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFGraphicStackState.o: cxx external/skia/src/pdf/SkPDFGraphicStackState.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFGraphicState.o: cxx external/skia/src/pdf/SkPDFGraphicState.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFMakeCIDGlyphWidthsArray.o: cxx external/skia/src/pdf/SkPDFMakeCIDGlyphWidthsArray.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFMakeToUnicodeCmap.o: cxx external/skia/src/pdf/SkPDFMakeToUnicodeCmap.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFMetadata.o: cxx external/skia/src/pdf/SkPDFMetadata.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFResourceDict.o: cxx external/skia/src/pdf/SkPDFResourceDict.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFShader.o: cxx external/skia/src/pdf/SkPDFShader.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFSubsetFont.o: cxx external/skia/src/pdf/SkPDFSubsetFont.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFTag.o: cxx external/skia/src/pdf/SkPDFTag.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFType1Font.o: cxx external/skia/src/pdf/SkPDFType1Font.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFTypes.o: cxx external/skia/src/pdf/SkPDFTypes.cpp
+build $BUILDROOT/skia/pdf/pdf.SkPDFUtils.o: cxx external/skia/src/pdf/SkPDFUtils.cpp

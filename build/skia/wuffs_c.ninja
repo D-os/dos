@@ -1,5 +1,5 @@
 defines = -DWUFFS_IMPLEMENTATION -DWUFFS_CONFIG__MODULES -DWUFFS_CONFIG__MODULE__BASE -DWUFFS_CONFIG__MODULE__GIF -DWUFFS_CONFIG__MODULE__LZW -DNDEBUG
-cflags = $defines -w -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections -isystem /home/smoku/devel/Dos/skia/third_party/externals/wuffs/release/c
+cflags = $defines -w -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
 
 build $BUILDROOT/skia/third_party/externals/wuffs/release/c/libwuffs.wuffs-v0.3.o: cc build/skia/wuffs-v0.3.c
 

@@ -1,6 +1,6 @@
-# bin/gn gen out/Shared --args='is_official_build=true is_component_build=true cc="clang" cxx="clang++" skia_use_dng_sdk=false skia_use_fontconfig=false skia_use_freetype=false skia_use_gl=false skia_use_harfbuzz=false skia_use_icu=false skia_use_x11=false skia_use_xps=false'
+# bin/gn gen out/Shared --args='is_official_build=true is_component_build=true cc="clang" cxx="clang++" skia_use_dng_sdk=false skia_use_fontconfig=true skia_use_freetype=true skia_use_system_freetype2=true skia_use_gl=false skia_use_harfbuzz=false skia_use_icu=false skia_use_x11=false skia_use_xps=false'
 # cp out/Shared/obj/skia.ninja ../../build/skia.ninja
-# cp out/Shared/obj/{avx,hsw,jpeg_decode,jpeg_encode,png_decode,png_encode,skx,sse42,ssse3,webp_decode,webp_encode,wuffs,xmlfontmgr_empty_factory}.ninja ../../build/skia/
+# cp out/Shared/obj/{avx,hsw,jpeg_decode,jpeg_encode,png_decode,png_encode,skx,sse42,ssse3,webp_decode,webp_encode,wuffs,xml,fontmgr_fontconfig_factory}.ninja ../../build/skia/
 # cp out/Shared/obj/modules/skcms/skcms.ninja ../../build/skia/
 # cp out/Shared/obj/third_party/wuffs/wuffs.ninja ../../build/skia/wuffs_c.ninja
 # edit!
@@ -17,13 +17,21 @@ subninja build/skia/webp_decode.ninja
 subninja build/skia/webp_encode.ninja
 subninja build/skia/wuffs.ninja
 subninja build/skia/xml.ninja
-subninja build/skia/fontmgr_empty_factory.ninja
+subninja build/skia/pdf.ninja
+subninja build/skia/fontmgr_fontconfig_factory.ninja
+subninja build/skia/fontmgr_FontConfigInterface.ninja
+subninja build/skia/fontmgr_custom_directory.ninja
+subninja build/skia/fontmgr_custom_embedded.ninja
+subninja build/skia/fontmgr_custom_empty.ninja
+subninja build/skia/fontmgr_custom.ninja
+subninja build/skia/fontmgr_fontconfig.ninja
+subninja build/skia/typeface_freetype.ninja
 subninja build/skia/gpu.ninja
 subninja build/skia/gpu_shared.ninja
 subninja build/skia/skcms.ninja
 subninja build/skia/wuffs_c.ninja
 
-defines = -DSK_HAS_ANDROID_CODEC -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 -DSK_ENABLE_SKSL -DSK_ENABLE_PRECOMPILE -DSK_USE_PERFETTO -DSK_GAMMA_APPLY_TO_A8 -DSKIA_IMPLEMENTATION=1 -DSK_SUPPORT_GPU=1 -DSK_SUPPORT_PDF -DSK_CODEC_DECODES_JPEG -DSK_ENCODE_JPEG -DSK_CODEC_DECODES_PNG -DSK_ENCODE_PNG -DSK_CODEC_DECODES_WEBP -DSK_ENCODE_WEBP -DSK_HAS_WUFFS_LIBRARY -DSK_XML
+defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 -DSK_ENABLE_SKSL -DSK_ENABLE_PRECOMPILE -DSK_USE_PERFETTO -DSK_GAMMA_APPLY_TO_A8 -DSKIA_IMPLEMENTATION=1 -DSK_SUPPORT_GPU=1 -DSK_SUPPORT_PDF -DSK_CODEC_DECODES_JPEG -DSK_ENCODE_JPEG -DSK_CODEC_DECODES_PNG -DSK_ENCODE_PNG -DSK_CODEC_DECODES_WEBP -DSK_ENCODE_WEBP -DSK_HAS_WUFFS_LIBRARY -DSK_XML
 includes = -Iexternal/skia
 cflags = $defines -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
 cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -Wno-psabi
@@ -372,8 +380,6 @@ build $BUILDROOT/skia/effects/imagefilters/libskia.SkPictureImageFilter.o: cxx e
 build $BUILDROOT/skia/effects/imagefilters/libskia.SkRuntimeImageFilter.o: cxx external/skia/src/effects/imagefilters/SkRuntimeImageFilter.cpp
 build $BUILDROOT/skia/effects/imagefilters/libskia.SkShaderImageFilter.o: cxx external/skia/src/effects/imagefilters/SkShaderImageFilter.cpp
 build $BUILDROOT/skia/effects/imagefilters/libskia.SkTileImageFilter.o: cxx external/skia/src/effects/imagefilters/SkTileImageFilter.cpp
-build $BUILDROOT/skia/android/libskia.SkAndroidFrameworkUtils.o: cxx external/skia/src/android/SkAndroidFrameworkUtils.cpp
-build $BUILDROOT/skia/android/libskia.SkAnimatedImage.o: cxx external/skia/src/android/SkAnimatedImage.cpp
 build $BUILDROOT/skia/codec/libskia.SkAndroidCodec.o: cxx external/skia/src/codec/SkAndroidCodec.cpp
 build $BUILDROOT/skia/codec/libskia.SkAndroidCodecAdapter.o: cxx external/skia/src/codec/SkAndroidCodecAdapter.cpp
 build $BUILDROOT/skia/codec/libskia.SkBmpBaseCodec.o: cxx external/skia/src/codec/SkBmpBaseCodec.cpp
@@ -844,8 +850,6 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/effects/imagefilters/libskia.SkRuntimeImageFilter.o $
   $BUILDROOT/skia/effects/imagefilters/libskia.SkShaderImageFilter.o $
   $BUILDROOT/skia/effects/imagefilters/libskia.SkTileImageFilter.o $
-  $BUILDROOT/skia/android/libskia.SkAndroidFrameworkUtils.o $
-  $BUILDROOT/skia/android/libskia.SkAnimatedImage.o $
   $BUILDROOT/skia/codec/libskia.SkAndroidCodec.o $
   $BUILDROOT/skia/codec/libskia.SkAndroidCodecAdapter.o $
   $BUILDROOT/skia/codec/libskia.SkBmpBaseCodec.o $
@@ -970,6 +974,14 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/ports/libskia.SkOSFile_posix.o $
   $BUILDROOT/skia/ports/libskia.SkOSLibrary_posix.o $
   $BUILDROOT/skia/ports/libskia.SkDebug_stdio.o $
+  $BUILDROOT/skia/ports/fontmgr_FontConfigInterface.SkFontConfigInterface.o $
+  $BUILDROOT/skia/ports/fontmgr_FontConfigInterface.SkFontConfigInterface_direct.o $
+  $BUILDROOT/skia/ports/fontmgr_FontConfigInterface.SkFontConfigInterface_direct_factory.o $
+  $BUILDROOT/skia/ports/fontmgr_FontConfigInterface.SkFontMgr_FontConfigInterface.o $
+  $BUILDROOT/skia/ports/fontmgr_custom_directory.SkFontMgr_custom_directory.o $
+  $BUILDROOT/skia/ports/fontmgr_custom_embedded.SkFontMgr_custom_embedded.o $
+  $BUILDROOT/skia/ports/fontmgr_custom_empty.SkFontMgr_custom_empty.o $
+  $BUILDROOT/skia/ports/fontmgr_fontconfig.SkFontMgr_fontconfig.o $
   $BUILDROOT/skia/gpu/ganesh/gpu.ClipStack.o $
   $BUILDROOT/skia/gpu/ganesh/gpu.Device.o $
   $BUILDROOT/skia/gpu/ganesh/gpu.Device_drawTexture.o $
@@ -1164,6 +1176,28 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/image/gpu.SkImage_GpuBase.o $
   $BUILDROOT/skia/image/gpu.SkImage_GpuYUVA.o $
   $BUILDROOT/skia/image/gpu.SkSurface_Gpu.o $
+  $BUILDROOT/skia/pdf/pdf.SkClusterator.o $
+  $BUILDROOT/skia/pdf/pdf.SkDeflate.o $
+  $BUILDROOT/skia/pdf/pdf.SkJpegInfo.o $
+  $BUILDROOT/skia/pdf/pdf.SkKeyedImage.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFBitmap.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFDevice.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFDocument.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFFont.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFFormXObject.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFGradientShader.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFGraphicStackState.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFGraphicState.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFMakeCIDGlyphWidthsArray.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFMakeToUnicodeCmap.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFMetadata.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFResourceDict.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFShader.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFSubsetFont.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFTag.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFType1Font.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFTypes.o $
+  $BUILDROOT/skia/pdf/pdf.SkPDFUtils.o $
   $BUILDROOT/skia/opts/avx.SkOpts_avx.o $
   $BUILDROOT/skia/opts/hsw.SkOpts_hsw.o $
   $BUILDROOT/skia/codec/jpeg_decode.SkJpegCodec.o $
@@ -1185,6 +1219,9 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/xml/xml.SkDOM.o $
   $BUILDROOT/skia/xml/xml.SkXMLParser.o $
   $BUILDROOT/skia/xml/xml.SkXMLWriter.o $
+  $BUILDROOT/skia/ports/typeface_freetype.SkFontHost_FreeType.o $
+  $BUILDROOT/skia/ports/typeface_freetype.SkFontHost_FreeType_common.o $
+  $BUILDROOT/skia/ports/fontmgr_custom.SkFontMgr_custom.o $
   $BUILDROOT/skia/gpu/gpu_shared.AtlasTypes.o $
   $BUILDROOT/skia/gpu/gpu_shared.Blend.o $
   $BUILDROOT/skia/gpu/gpu_shared.RectanizerPow2.o $
@@ -1210,13 +1247,15 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLSPIRVCodeGenerator.o $
   $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLSPIRVtoHLSL.o $
   $BUILDROOT/skia/sksl/codegen/gpu_shared.SkSLWGSLCodeGenerator.o $
-  $BUILDROOT/skia/ports/fontmgr_empty_factory.SkFontMgr_empty_factory.o $
+  $BUILDROOT/skia/ports/fontmgr_fontconfig_factory.SkFontMgr_fontconfig_factory.o $
   $BUILDROOT/skia/libskcms.a $
   $BUILDROOT/skia/libwuffs.a $
   | $
+  $SYSROOT/lib/libfontconfig.so $
+  $SYSROOT/lib/libfreetype.so $
+  $SYSROOT/lib/libexpat.so $
   $SYSROOT/lib/libz.so $
   $SYSROOT/lib/libjpeg.so $
   $SYSROOT/lib/libpng.so $
-  $SYSROOT/lib/libwebp.so $
-  $SYSROOT/lib/libexpat.so
-  libs = -Wl,--gc-sections -ldl -lpthread -lz -ljpeg -lpng -lwebp -lexpat -lc++
+  $SYSROOT/lib/libwebp.so
+  libs = -Wl,--gc-sections -lc++ -ldl -lpthread -lfontconfig -lfreetype -lexpat -lz -ljpeg -lpng -lwebp
