@@ -92,7 +92,6 @@ rule aidl
   command = mkdir -p "${headerDir}" && $HOSTAIDL --lang=${lang} ${optionalFlags} --structured --ninja -d ${out}.d -h ${headerDir} -o ${outDir} ${imports} ${in}
   generator = $HOSTAIDL
   depfile = ${out}.d
-  deps = gcc
   description = [HOST] AIDL ${lang} ${in}
 
 subninja build/protobuf_host.ninja
@@ -208,6 +207,9 @@ build $SYSROOT/lib/libcairo.so: copy $BUILDROOT/cairo/libcairo.so
 
 subninja build/expat.ninja
 build $SYSROOT/lib/libexpat.so: copy $BUILDROOT/expat/libexpat.so
+
+subninja build/fontconfig.ninja
+build $SYSROOT/lib/libfontconfig.so: copy $BUILDROOT/fontconfig/libfontconfig.so
 
 subninja build/freetype.ninja
 build $SYSROOT/lib/libfreetype.so: copy $BUILDROOT/freetype/libfreetype.so

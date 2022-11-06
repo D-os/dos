@@ -19,6 +19,7 @@ libs = -lpng -lz
 build $BUILDROOT/freetype/autofit.o: cc external/freetype/src/autofit/autofit.c
 build $BUILDROOT/freetype/ftbase.o: cc external/freetype/src/base/ftbase.c
 build $BUILDROOT/freetype/ftbbox.o: cc external/freetype/src/base/ftbbox.c
+build $BUILDROOT/freetype/ftbdf.o: cc external/freetype/src/base/ftbdf.c
 build $BUILDROOT/freetype/ftbitmap.o: cc external/freetype/src/base/ftbitmap.c
 build $BUILDROOT/freetype/ftdebug.o: cc external/freetype/src/base/ftdebug.c
 build $BUILDROOT/freetype/ftfstype.o: cc external/freetype/src/base/ftfstype.c
@@ -45,6 +46,7 @@ build $BUILDROOT/freetype/libfreetype.so: so $
   $BUILDROOT/freetype/autofit.o $
   $BUILDROOT/freetype/ftbase.o $
   $BUILDROOT/freetype/ftbbox.o $
+  $BUILDROOT/freetype/ftbdf.o $
   $BUILDROOT/freetype/ftbitmap.o $
   $BUILDROOT/freetype/ftdebug.o $
   $BUILDROOT/freetype/ftfstype.o $

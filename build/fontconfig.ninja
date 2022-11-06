@@ -1,0 +1,342 @@
+cflags = -fdiagnostics-color=always -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -fPIC -pthread $
+  -DHAVE_CONFIG_H
+
+includes = -Iexternal/fontconfig -Ibuild/fontconfig -I$BUILDROOT/fontconfig/generated $
+  -I$BUILDROOT/fontconfig/generated/fc-lang $
+  -Iexternal/expat/lib -Iexternal/freetype/include
+
+rule makealias
+  command = /bin/sh -c "external/fontconfig/src/makealias external/fontconfig/src $out $in"
+  generator = external/fontconfig/src
+  description = [HOST] makealias ${out}
+
+build $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcaliastail.h: makealias $
+  external/fontconfig/fontconfig/fontconfig.h $
+  external/fontconfig/src/fcdeprecate.h $
+  external/fontconfig/fontconfig/fcprivate.h
+
+build $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fcftaliastail.h: makealias $
+  external/fontconfig/fontconfig/fcfreetype.h
+
+rule fccase
+  command = external/fontconfig/fc-case/fc-case.py external/fontconfig/fc-case/CaseFolding.txt --template $in --output $out
+
+build $BUILDROOT/fontconfig/generated/fc-case/fccase.h: fccase external/fontconfig/fc-case/fccase.tmpl.h | external/fontconfig/fc-case/CaseFolding.txt
+
+ORTH = $
+  aa.orth $
+  ab.orth $
+  af.orth $
+  am.orth $
+  ar.orth $
+  as.orth $
+  ast.orth $
+  av.orth $
+  ay.orth $
+  az_az.orth $
+  az_ir.orth $
+  ba.orth $
+  bm.orth $
+  be.orth $
+  bg.orth $
+  bh.orth $
+  bho.orth $
+  bi.orth $
+  bin.orth $
+  bn.orth $
+  bo.orth $
+  br.orth $
+  bs.orth $
+  bua.orth $
+  ca.orth $
+  ce.orth $
+  ch.orth $
+  chm.orth $
+  chr.orth $
+  co.orth $
+  cs.orth $
+  cu.orth $
+  cv.orth $
+  cy.orth $
+  da.orth $
+  de.orth $
+  dz.orth $
+  el.orth $
+  en.orth $
+  eo.orth $
+  es.orth $
+  et.orth $
+  eu.orth $
+  fa.orth $
+  fi.orth $
+  fj.orth $
+  fo.orth $
+  fr.orth $
+  ff.orth $
+  fur.orth $
+  fy.orth $
+  ga.orth $
+  gd.orth $
+  gez.orth $
+  gl.orth $
+  gn.orth $
+  gu.orth $
+  gv.orth $
+  ha.orth $
+  haw.orth $
+  he.orth $
+  hi.orth $
+  ho.orth $
+  hr.orth $
+  hu.orth $
+  hy.orth $
+  ia.orth $
+  ig.orth $
+  id.orth $
+  ie.orth $
+  ik.orth $
+  io.orth $
+  is.orth $
+  it.orth $
+  iu.orth $
+  ja.orth $
+  ka.orth $
+  kaa.orth $
+  ki.orth $
+  kk.orth $
+  kl.orth $
+  km.orth $
+  kn.orth $
+  ko.orth $
+  kok.orth $
+  ks.orth $
+  ku_am.orth $
+  ku_ir.orth $
+  kum.orth $
+  kv.orth $
+  kw.orth $
+  ky.orth $
+  la.orth $
+  lb.orth $
+  lez.orth $
+  ln.orth $
+  lo.orth $
+  lt.orth $
+  lv.orth $
+  mg.orth $
+  mh.orth $
+  mi.orth $
+  mk.orth $
+  ml.orth $
+  mn_cn.orth $
+  mo.orth $
+  mr.orth $
+  mt.orth $
+  my.orth $
+  nb.orth $
+  nds.orth $
+  ne.orth $
+  nl.orth $
+  nn.orth $
+  no.orth $
+  nr.orth $
+  nso.orth $
+  ny.orth $
+  oc.orth $
+  om.orth $
+  or.orth $
+  os.orth $
+  pa.orth $
+  pl.orth $
+  ps_af.orth $
+  ps_pk.orth $
+  pt.orth $
+  rm.orth $
+  ro.orth $
+  ru.orth $
+  sa.orth $
+  sah.orth $
+  sco.orth $
+  se.orth $
+  sel.orth $
+  sh.orth $
+  shs.orth $
+  si.orth $
+  sk.orth $
+  sl.orth $
+  sm.orth $
+  sma.orth $
+  smj.orth $
+  smn.orth $
+  sms.orth $
+  so.orth $
+  sq.orth $
+  sr.orth $
+  ss.orth $
+  st.orth $
+  sv.orth $
+  sw.orth $
+  syr.orth $
+  ta.orth $
+  te.orth $
+  tg.orth $
+  th.orth $
+  ti_er.orth $
+  ti_et.orth $
+  tig.orth $
+  tk.orth $
+  tl.orth $
+  tn.orth $
+  to.orth $
+  tr.orth $
+  ts.orth $
+  tt.orth $
+  tw.orth $
+  tyv.orth $
+  ug.orth $
+  uk.orth $
+  ur.orth $
+  uz.orth $
+  ve.orth $
+  vi.orth $
+  vo.orth $
+  vot.orth $
+  wa.orth $
+  wen.orth $
+  wo.orth $
+  xh.orth $
+  yap.orth $
+  yi.orth $
+  yo.orth $
+  zh_cn.orth $
+  zh_hk.orth $
+  zh_mo.orth $
+  zh_sg.orth $
+  zh_tw.orth $
+  zu.orth $
+  ak.orth $
+  an.orth $
+  ber_dz.orth $
+  ber_ma.orth $
+  byn.orth $
+  crh.orth $
+  csb.orth $
+  dv.orth $
+  ee.orth $
+  fat.orth $
+  fil.orth $
+  hne.orth $
+  hsb.orth $
+  ht.orth $
+  hz.orth $
+  ii.orth $
+  jv.orth $
+  kab.orth $
+  kj.orth $
+  kr.orth $
+  ku_iq.orth $
+  ku_tr.orth $
+  kwm.orth $
+  lg.orth $
+  li.orth $
+  mai.orth $
+  mn_mn.orth $
+  ms.orth $
+  na.orth $
+  ng.orth $
+  nv.orth $
+  ota.orth $
+  pa_pk.orth $
+  pap_an.orth $
+  pap_aw.orth $
+  qu.orth $
+  quz.orth $
+  rn.orth $
+  rw.orth $
+  sc.orth $
+  sd.orth $
+  sg.orth $
+  sid.orth $
+  sn.orth $
+  su.orth $
+  ty.orth $
+  wal.orth $
+  za.orth $
+  lah.orth $
+  nqo.orth $
+  brx.orth $
+  sat.orth $
+  doi.orth $
+  mni.orth $
+  und_zsye.orth $
+  und_zmth.orth $
+
+rule fclang
+  command = external/fontconfig/fc-lang/fc-lang.py $ORTH --template $in --output $out --directory external/fontconfig/fc-lang
+  generator = external/fontconfig/fc-lang/fc-lang.py
+  description = [HOST] rc-lang ${out}
+
+build $BUILDROOT/fontconfig/generated/fc-lang/fclang.h: fclang external/fontconfig/fc-lang/fclang.tmpl.h
+
+build $BUILDROOT/fontconfig/fcatomic.o: cc external/fontconfig/src/fcatomic.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fccache.o: cc external/fontconfig/src/fccache.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fccfg.o: cc external/fontconfig/src/fccfg.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fccharset.o: cc external/fontconfig/src/fccharset.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fccompat.o: cc external/fontconfig/src/fccompat.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcdbg.o: cc external/fontconfig/src/fcdbg.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcdefault.o: cc external/fontconfig/src/fcdefault.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcdir.o: cc external/fontconfig/src/fcdir.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcformat.o: cc external/fontconfig/src/fcformat.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcfreetype.o: cc external/fontconfig/src/fcfreetype.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcfs.o: cc external/fontconfig/src/fcfs.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcptrlist.o: cc external/fontconfig/src/fcptrlist.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fchash.o: cc external/fontconfig/src/fchash.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcinit.o: cc external/fontconfig/src/fcinit.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fclang.o: cc external/fontconfig/src/fclang.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fclist.o: cc external/fontconfig/src/fclist.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcmatch.o: cc external/fontconfig/src/fcmatch.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcmatrix.o: cc external/fontconfig/src/fcmatrix.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcname.o: cc external/fontconfig/src/fcname.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcobjs.o: cc external/fontconfig/src/fcobjs.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcpat.o: cc external/fontconfig/src/fcpat.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcrange.o: cc external/fontconfig/src/fcrange.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcserialize.o: cc external/fontconfig/src/fcserialize.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcstat.o: cc external/fontconfig/src/fcstat.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcstr.o: cc external/fontconfig/src/fcstr.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcweight.o: cc external/fontconfig/src/fcweight.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/fcxml.o: cc external/fontconfig/src/fcxml.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+build $BUILDROOT/fontconfig/ftglue.o: cc external/fontconfig/src/ftglue.c | $BUILDROOT/fontconfig/generated/fcalias.h $BUILDROOT/fontconfig/generated/fcftalias.h $BUILDROOT/fontconfig/generated/fc-case/fccase.h $BUILDROOT/fontconfig/generated/fc-lang/fclang.h
+
+build $BUILDROOT/fontconfig/libfontconfig.so: so $
+  $BUILDROOT/fontconfig/fcatomic.o $
+  $BUILDROOT/fontconfig/fccache.o $
+  $BUILDROOT/fontconfig/fccfg.o $
+  $BUILDROOT/fontconfig/fccharset.o $
+  $BUILDROOT/fontconfig/fccompat.o $
+  $BUILDROOT/fontconfig/fcdbg.o $
+  $BUILDROOT/fontconfig/fcdefault.o $
+  $BUILDROOT/fontconfig/fcdir.o $
+  $BUILDROOT/fontconfig/fcformat.o $
+  $BUILDROOT/fontconfig/fcfreetype.o $
+  $BUILDROOT/fontconfig/fcfs.o $
+  $BUILDROOT/fontconfig/fcptrlist.o $
+  $BUILDROOT/fontconfig/fchash.o $
+  $BUILDROOT/fontconfig/fcinit.o $
+  $BUILDROOT/fontconfig/fclang.o $
+  $BUILDROOT/fontconfig/fclist.o $
+  $BUILDROOT/fontconfig/fcmatch.o $
+  $BUILDROOT/fontconfig/fcmatrix.o $
+  $BUILDROOT/fontconfig/fcname.o $
+  $BUILDROOT/fontconfig/fcobjs.o $
+  $BUILDROOT/fontconfig/fcpat.o $
+  $BUILDROOT/fontconfig/fcrange.o $
+  $BUILDROOT/fontconfig/fcserialize.o $
+  $BUILDROOT/fontconfig/fcstat.o $
+  $BUILDROOT/fontconfig/fcstr.o $
+  $BUILDROOT/fontconfig/fcweight.o $
+  $BUILDROOT/fontconfig/fcxml.o $
+  $BUILDROOT/fontconfig/ftglue.o $
+  | $
+  $SYSROOT/lib/libfreetype.so $
+  $SYSROOT/lib/libexpat.so
+  libs = -lfreetype -lexpat
