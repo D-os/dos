@@ -173,3 +173,6 @@
 [submodule "external/fontconfig"]
 	path = external/fontconfig
 	url = https://gitlab.freedesktop.org/fontconfig/fontconfig.git
+[submodule "external/strace"]
+	path = external/strace
+	url = https://github.com/strace/strace.git
