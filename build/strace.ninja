@@ -1,0 +1,109 @@
+cflags = $
+  -DIN_STRACE=1 $
+  -DHAVE_CONFIG_H $
+
+includes = -Ibuild/strace $
+  -Iexternal/strace/src/linux/${ARCH} -Iexternal/strace/src/linux/generic -Iexternal/strace/src $
+  -Iexternal/strace/bundled/linux/include/uapi $
+
+build $BUILDROOT/strace/block.o: cc external/strace/src/block.c
+build $BUILDROOT/strace/btrfs.o: cc external/strace/src/btrfs.c
+build $BUILDROOT/strace/dirent.o: cc external/strace/src/dirent.c
+build $BUILDROOT/strace/evdev_mpers.o: cc external/strace/src/evdev_mpers.c
+build $BUILDROOT/strace/fetch_bpf_fprog.o: cc external/strace/src/fetch_bpf_fprog.c
+build $BUILDROOT/strace/fetch_struct_flock.o: cc external/strace/src/fetch_struct_flock.c
+build $BUILDROOT/strace/fetch_struct_iovec.o: cc external/strace/src/fetch_struct_iovec.c
+build $BUILDROOT/strace/fetch_struct_keyctl_kdf_params.o: cc external/strace/src/fetch_struct_keyctl_kdf_params.c
+build $BUILDROOT/strace/fetch_struct_mmsghdr.o: cc external/strace/src/fetch_struct_mmsghdr.c
+build $BUILDROOT/strace/fetch_struct_msghdr.o: cc external/strace/src/fetch_struct_msghdr.c
+build $BUILDROOT/strace/fetch_struct_stat.o: cc external/strace/src/fetch_struct_stat.c
+build $BUILDROOT/strace/fetch_struct_stat64.o: cc external/strace/src/fetch_struct_stat64.c
+build $BUILDROOT/strace/fetch_struct_statfs.o: cc external/strace/src/fetch_struct_statfs.c
+build $BUILDROOT/strace/fetch_struct_xfs_quotastat.o: cc external/strace/src/fetch_struct_xfs_quotastat.c
+build $BUILDROOT/strace/hdio.o: cc external/strace/src/hdio.c
+build $BUILDROOT/strace/ipc_msgctl.o: cc external/strace/src/ipc_msgctl.c
+build $BUILDROOT/strace/ipc_semctl.o: cc external/strace/src/ipc_semctl.c
+build $BUILDROOT/strace/ipc_shmctl.o: cc external/strace/src/ipc_shmctl.c
+build $BUILDROOT/strace/kd_mpers_ioctl.o: cc external/strace/src/kd_mpers_ioctl.c
+build $BUILDROOT/strace/loop.o: cc external/strace/src/loop.c
+build $BUILDROOT/strace/mtd.o: cc external/strace/src/mtd.c
+build $BUILDROOT/strace/perf_ioctl.o: cc external/strace/src/perf_ioctl.c
+build $BUILDROOT/strace/print_group_req.o: cc external/strace/src/print_group_req.c
+build $BUILDROOT/strace/print_kernel_sigset.o: cc external/strace/src/print_kernel_sigset.c
+build $BUILDROOT/strace/print_mq_attr.o: cc external/strace/src/print_mq_attr.c
+build $BUILDROOT/strace/print_msgbuf.o: cc external/strace/src/print_msgbuf.c
+build $BUILDROOT/strace/print_sg_req_info.o: cc external/strace/src/print_sg_req_info.c
+build $BUILDROOT/strace/print_sigevent.o: cc external/strace/src/print_sigevent.c
+build $BUILDROOT/strace/print_time.o: cc external/strace/src/print_time.c
+build $BUILDROOT/strace/print_timeval.o: cc external/strace/src/print_timeval.c
+build $BUILDROOT/strace/printrusage.o: cc external/strace/src/printrusage.c
+build $BUILDROOT/strace/printsiginfo.o: cc external/strace/src/printsiginfo.c
+build $BUILDROOT/strace/regset.o: cc external/strace/src/regset.c
+build $BUILDROOT/strace/rt_sigreturn.o: cc external/strace/src/rt_sigreturn.c
+build $BUILDROOT/strace/rtc.o: cc external/strace/src/rtc.c
+build $BUILDROOT/strace/sg_io_v3.o: cc external/strace/src/sg_io_v3.c
+build $BUILDROOT/strace/sigaltstack.o: cc external/strace/src/sigaltstack.c
+build $BUILDROOT/strace/sock.o: cc external/strace/src/sock.c
+build $BUILDROOT/strace/sysinfo.o: cc external/strace/src/sysinfo.c
+build $BUILDROOT/strace/times.o: cc external/strace/src/times.c
+build $BUILDROOT/strace/ustat.o: cc external/strace/src/ustat.c
+build $BUILDROOT/strace/utime.o: cc external/strace/src/utime.c
+build $BUILDROOT/strace/v4l2.o: cc external/strace/src/v4l2.c
+#gcc -E -P -DHAVE_CONFIG_H    -I./linux/${ARCH} -I./linux/${ARCH} -I./linux/generic -I./linux/generic -I. -I.   -include ../src/config.h ../src/linux/${ARCH}/syscallent.h
+build $BUILDROOT/strace/unwind.o: cc external/strace/src/unwind.c
+
+build $BUILDROOT/strace/demangle.o: cxx build/strace/demangle.cpp
+
+build $BUILDROOT/strace/libstrace.a: ar $
+  $BUILDROOT/strace/block.o $
+  $BUILDROOT/strace/btrfs.o $
+  $BUILDROOT/strace/dirent.o $
+  $BUILDROOT/strace/evdev_mpers.o $
+  $BUILDROOT/strace/fetch_bpf_fprog.o $
+  $BUILDROOT/strace/fetch_struct_flock.o $
+  $BUILDROOT/strace/fetch_struct_iovec.o $
+  $BUILDROOT/strace/fetch_struct_keyctl_kdf_params.o $
+  $BUILDROOT/strace/fetch_struct_mmsghdr.o $
+  $BUILDROOT/strace/fetch_struct_msghdr.o $
+  $BUILDROOT/strace/fetch_struct_stat.o $
+  $BUILDROOT/strace/fetch_struct_stat64.o $
+  $BUILDROOT/strace/fetch_struct_statfs.o $
+  $BUILDROOT/strace/fetch_struct_xfs_quotastat.o $
+  $BUILDROOT/strace/hdio.o $
+  $BUILDROOT/strace/ipc_msgctl.o $
+  $BUILDROOT/strace/ipc_semctl.o $
+  $BUILDROOT/strace/ipc_shmctl.o $
+  $BUILDROOT/strace/kd_mpers_ioctl.o $
+  $BUILDROOT/strace/loop.o $
+  $BUILDROOT/strace/mtd.o $
+  $BUILDROOT/strace/perf_ioctl.o $
+  $BUILDROOT/strace/print_group_req.o $
+  $BUILDROOT/strace/print_kernel_sigset.o $
+  $BUILDROOT/strace/print_mq_attr.o $
+  $BUILDROOT/strace/print_msgbuf.o $
+  $BUILDROOT/strace/print_sg_req_info.o $
+  $BUILDROOT/strace/print_sigevent.o $
+  $BUILDROOT/strace/print_time.o $
+  $BUILDROOT/strace/print_timeval.o $
+  $BUILDROOT/strace/printrusage.o $
+  $BUILDROOT/strace/printsiginfo.o $
+  $BUILDROOT/strace/regset.o $
+  $BUILDROOT/strace/rt_sigreturn.o $
+  $BUILDROOT/strace/rtc.o $
+  $BUILDROOT/strace/sg_io_v3.o $
+  $BUILDROOT/strace/sigaltstack.o $
+  $BUILDROOT/strace/sock.o $
+  $BUILDROOT/strace/sysinfo.o $
+  $BUILDROOT/strace/times.o $
+  $BUILDROOT/strace/ustat.o $
+  $BUILDROOT/strace/utime.o $
+  $BUILDROOT/strace/v4l2.o $
+  $BUILDROOT/strace/unwind.o $
+  $BUILDROOT/strace/demangle.o $
+
+build $BUILDROOT/strace/strace.o: cc external/strace/src/strace.c
+
+build strace: link $
+  $BUILDROOT/strace/libstrace.a $
+  (clock_LIBS) $
+  (timer_LIBS)
