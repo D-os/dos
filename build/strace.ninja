@@ -4,13 +4,51 @@ cflags = $
 
 includes = -Ibuild/strace $
   -Iexternal/strace/src/linux/${ARCH} -Iexternal/strace/src/linux/generic -Iexternal/strace/src $
-  -Iexternal/strace/bundled/linux/include/uapi $
+  -Iexternal/strace/bundled/linux/arch/${ARCH}/include/uapi -Iexternal/strace/bundled/linux/include/uapi $
 
+libs = -lc++abi
+
+build $BUILDROOT/strace/access.o: cc external/strace/src/access.c
+build $BUILDROOT/strace/affinity.o: cc external/strace/src/affinity.c
+build $BUILDROOT/strace/aio.o: cc external/strace/src/aio.c
+build $BUILDROOT/strace/basic_filters.o: cc external/strace/src/basic_filters.c
+build $BUILDROOT/strace/bind.o: cc external/strace/src/bind.c
+build $BUILDROOT/strace/bjm.o: cc external/strace/src/bjm.c
 build $BUILDROOT/strace/block.o: cc external/strace/src/block.c
+build $BUILDROOT/strace/bpf.o: cc external/strace/src/bpf.c
+build $BUILDROOT/strace/bpf_filter.o: cc external/strace/src/bpf_filter.c
+build $BUILDROOT/strace/bpf_seccomp_filter.o: cc external/strace/src/bpf_seccomp_filter.c
+build $BUILDROOT/strace/bpf_sock_filter.o: cc external/strace/src/bpf_sock_filter.c
 build $BUILDROOT/strace/btrfs.o: cc external/strace/src/btrfs.c
+build $BUILDROOT/strace/capability.o: cc external/strace/src/capability.c
+build $BUILDROOT/strace/chdir.o: cc external/strace/src/chdir.c
+build $BUILDROOT/strace/chmod.o: cc external/strace/src/chmod.c
+build $BUILDROOT/strace/clone.o: cc external/strace/src/clone.c
+build $BUILDROOT/strace/close_range.o: cc external/strace/src/close_range.c
+build $BUILDROOT/strace/copy_file_range.o: cc external/strace/src/copy_file_range.c
+build $BUILDROOT/strace/count.o: cc external/strace/src/count.c
+build $BUILDROOT/strace/counter_ioctl.o: cc external/strace/src/counter_ioctl.c
+build $BUILDROOT/strace/delay.o: cc external/strace/src/delay.c
+build $BUILDROOT/strace/desc.o: cc external/strace/src/desc.c
+build $BUILDROOT/strace/dup.o: cc external/strace/src/dup.c
 build $BUILDROOT/strace/dirent.o: cc external/strace/src/dirent.c
+build $BUILDROOT/strace/dirent64.o: cc external/strace/src/dirent64.c
+build $BUILDROOT/strace/dirent_types.o: cc external/strace/src/dirent_types.c
+build $BUILDROOT/strace/dm.o: cc external/strace/src/dm.c
+build $BUILDROOT/strace/dyxlat.o: cc external/strace/src/dyxlat.c
+build $BUILDROOT/strace/epoll.o: cc external/strace/src/epoll.c
+build $BUILDROOT/strace/error_prints.o: cc external/strace/src/error_prints.c
+build $BUILDROOT/strace/evdev.o: cc external/strace/src/evdev.c
 build $BUILDROOT/strace/evdev_mpers.o: cc external/strace/src/evdev_mpers.c
+build $BUILDROOT/strace/eventfd.o: cc external/strace/src/eventfd.c
+build $BUILDROOT/strace/execve.o: cc external/strace/src/execve.c
+build $BUILDROOT/strace/fallocate.o: cc external/strace/src/fallocate.c
+build $BUILDROOT/strace/fanotify.o: cc external/strace/src/fanotify.c
+build $BUILDROOT/strace/fadvise.o: cc external/strace/src/fadvise.c
+build $BUILDROOT/strace/fchownat.o: cc external/strace/src/fchownat.c
+build $BUILDROOT/strace/fcntl.o: cc external/strace/src/fcntl.c
 build $BUILDROOT/strace/fetch_bpf_fprog.o: cc external/strace/src/fetch_bpf_fprog.c
+build $BUILDROOT/strace/fetch_indirect_syscall_args.o: cc external/strace/src/fetch_indirect_syscall_args.c
 build $BUILDROOT/strace/fetch_struct_flock.o: cc external/strace/src/fetch_struct_flock.c
 build $BUILDROOT/strace/fetch_struct_iovec.o: cc external/strace/src/fetch_struct_iovec.c
 build $BUILDROOT/strace/fetch_struct_keyctl_kdf_params.o: cc external/strace/src/fetch_struct_keyctl_kdf_params.c
@@ -20,46 +58,250 @@ build $BUILDROOT/strace/fetch_struct_stat.o: cc external/strace/src/fetch_struct
 build $BUILDROOT/strace/fetch_struct_stat64.o: cc external/strace/src/fetch_struct_stat64.c
 build $BUILDROOT/strace/fetch_struct_statfs.o: cc external/strace/src/fetch_struct_statfs.c
 build $BUILDROOT/strace/fetch_struct_xfs_quotastat.o: cc external/strace/src/fetch_struct_xfs_quotastat.c
+build $BUILDROOT/strace/file_handle.o: cc external/strace/src/file_handle.c
+build $BUILDROOT/strace/filter_qualify.o: cc external/strace/src/filter_qualify.c
+build $BUILDROOT/strace/filter_seccomp.o: cc external/strace/src/filter_seccomp.c
+build $BUILDROOT/strace/flock.o: cc external/strace/src/flock.c
+build $BUILDROOT/strace/fsconfig.o: cc external/strace/src/fsconfig.c
+build $BUILDROOT/strace/fsmount.o: cc external/strace/src/fsmount.c
+build $BUILDROOT/strace/fsopen.o: cc external/strace/src/fsopen.c
+build $BUILDROOT/strace/fspick.o: cc external/strace/src/fspick.c
+build $BUILDROOT/strace/fstatfs.o: cc external/strace/src/fstatfs.c
+build $BUILDROOT/strace/fs_0x94_ioctl.o: cc external/strace/src/fs_0x94_ioctl.c
+build $BUILDROOT/strace/fs_x_ioctl.o: cc external/strace/src/fs_x_ioctl.c
+build $BUILDROOT/strace/fs_f_ioctl.o: cc external/strace/src/fs_f_ioctl.c
+build $BUILDROOT/strace/futex.o: cc external/strace/src/futex.c
+build $BUILDROOT/strace/futex_waitv.o: cc external/strace/src/futex_waitv.c
+build $BUILDROOT/strace/getcpu.o: cc external/strace/src/getcpu.c
+build $BUILDROOT/strace/getcwd.o: cc external/strace/src/getcwd.c
+build $BUILDROOT/strace/getpid.o: cc external/strace/src/getpid.c
+build $BUILDROOT/strace/getrandom.o: cc external/strace/src/getrandom.c
+build $BUILDROOT/strace/get_robust_list.o: cc external/strace/src/get_robust_list.c
+build $BUILDROOT/strace/gpio_ioctl.o: cc external/strace/src/gpio_ioctl.c
 build $BUILDROOT/strace/hdio.o: cc external/strace/src/hdio.c
+build $BUILDROOT/strace/hostname.o: cc external/strace/src/hostname.c
+build $BUILDROOT/strace/inotify.o: cc external/strace/src/inotify.c
+build $BUILDROOT/strace/inotify_ioctl.o: cc external/strace/src/inotify_ioctl.c
+build $BUILDROOT/strace/io.o: cc external/strace/src/io.c
+build $BUILDROOT/strace/io_uring.o: cc external/strace/src/io_uring.c
+build $BUILDROOT/strace/ioctl.o: cc external/strace/src/ioctl.c
+build $BUILDROOT/strace/ioperm.o: cc external/strace/src/ioperm.c
+build $BUILDROOT/strace/ioprio.o: cc external/strace/src/ioprio.c
+build $BUILDROOT/strace/ipc_msg.o: cc external/strace/src/ipc_msg.c
 build $BUILDROOT/strace/ipc_msgctl.o: cc external/strace/src/ipc_msgctl.c
+build $BUILDROOT/strace/ipc_sem.o: cc external/strace/src/ipc_sem.c
 build $BUILDROOT/strace/ipc_semctl.o: cc external/strace/src/ipc_semctl.c
+build $BUILDROOT/strace/ipc_shm.o: cc external/strace/src/ipc_shm.c
 build $BUILDROOT/strace/ipc_shmctl.o: cc external/strace/src/ipc_shmctl.c
+build $BUILDROOT/strace/kd_ioctl.o: cc external/strace/src/kd_ioctl.c
 build $BUILDROOT/strace/kd_mpers_ioctl.o: cc external/strace/src/kd_mpers_ioctl.c
+build $BUILDROOT/strace/kcmp.o: cc external/strace/src/kcmp.c
+build $BUILDROOT/strace/kexec.o: cc external/strace/src/kexec.c
+build $BUILDROOT/strace/keyctl.o: cc external/strace/src/keyctl.c
+build $BUILDROOT/strace/kvm.o: cc external/strace/src/kvm.c
+build $BUILDROOT/strace/landlock.o: cc external/strace/src/landlock.c
+build $BUILDROOT/strace/ldt.o: cc external/strace/src/ldt.c
+build $BUILDROOT/strace/link.o: cc external/strace/src/link.c
+build $BUILDROOT/strace/lirc_ioctl.o: cc external/strace/src/lirc_ioctl.c
+build $BUILDROOT/strace/listen.o: cc external/strace/src/listen.c
+build $BUILDROOT/strace/lookup_dcookie.o: cc external/strace/src/lookup_dcookie.c
 build $BUILDROOT/strace/loop.o: cc external/strace/src/loop.c
+build $BUILDROOT/strace/lseek.o: cc external/strace/src/lseek.c
+build $BUILDROOT/strace/mem.o: cc external/strace/src/mem.c
+build $BUILDROOT/strace/membarrier.o: cc external/strace/src/membarrier.c
+build $BUILDROOT/strace/memfd_create.o: cc external/strace/src/memfd_create.c
+build $BUILDROOT/strace/memfd_secret.o: cc external/strace/src/memfd_secret.c
+build $BUILDROOT/strace/mknod.o: cc external/strace/src/mknod.c
+build $BUILDROOT/strace/mmap_cache.o: cc external/strace/src/mmap_cache.c
+build $BUILDROOT/strace/mmap_notify.o: cc external/strace/src/mmap_notify.c
+build $BUILDROOT/strace/mmsghdr.o: cc external/strace/src/mmsghdr.c
+build $BUILDROOT/strace/mount.o: cc external/strace/src/mount.c
+build $BUILDROOT/strace/mount_setattr.o: cc external/strace/src/mount_setattr.c
+build $BUILDROOT/strace/move_mount.o: cc external/strace/src/move_mount.c
+build $BUILDROOT/strace/mq.o: cc external/strace/src/mq.c
+build $BUILDROOT/strace/msghdr.o: cc external/strace/src/msghdr.c
 build $BUILDROOT/strace/mtd.o: cc external/strace/src/mtd.c
+build $BUILDROOT/strace/nbd_ioctl.o: cc external/strace/src/nbd_ioctl.c
+build $BUILDROOT/strace/net.o: cc external/strace/src/net.c
+build $BUILDROOT/strace/netlink.o: cc external/strace/src/netlink.c
+build $BUILDROOT/strace/netlink_crypto.o: cc external/strace/src/netlink_crypto.c
+build $BUILDROOT/strace/netlink_inet_diag.o: cc external/strace/src/netlink_inet_diag.c
+build $BUILDROOT/strace/netlink_kobject_uevent.o: cc external/strace/src/netlink_kobject_uevent.c
+build $BUILDROOT/strace/netlink_netfilter.o: cc external/strace/src/netlink_netfilter.c
+build $BUILDROOT/strace/netlink_netlink_diag.o: cc external/strace/src/netlink_netlink_diag.c
+build $BUILDROOT/strace/netlink_packet_diag.o: cc external/strace/src/netlink_packet_diag.c
+build $BUILDROOT/strace/netlink_route.o: cc external/strace/src/netlink_route.c
+build $BUILDROOT/strace/netlink_selinux.o: cc external/strace/src/netlink_selinux.c
+build $BUILDROOT/strace/netlink_smc_diag.o: cc external/strace/src/netlink_smc_diag.c
+build $BUILDROOT/strace/netlink_sock_diag.o: cc external/strace/src/netlink_sock_diag.c
+build $BUILDROOT/strace/netlink_unix_diag.o: cc external/strace/src/netlink_unix_diag.c
+build $BUILDROOT/strace/nlattr.o: cc external/strace/src/nlattr.c
+build $BUILDROOT/strace/nsfs.o: cc external/strace/src/nsfs.c
+build $BUILDROOT/strace/numa.o: cc external/strace/src/numa.c
+build $BUILDROOT/strace/number_set.o: cc external/strace/src/number_set.c
+build $BUILDROOT/strace/open.o: cc external/strace/src/open.c
+build $BUILDROOT/strace/open_tree.o: cc external/strace/src/open_tree.c
+build $BUILDROOT/strace/pathtrace.o: cc external/strace/src/pathtrace.c
+build $BUILDROOT/strace/perf.o: cc external/strace/src/perf.c
 build $BUILDROOT/strace/perf_ioctl.o: cc external/strace/src/perf_ioctl.c
+build $BUILDROOT/strace/personality.o: cc external/strace/src/personality.c
+build $BUILDROOT/strace/pidfd_getfd.o: cc external/strace/src/pidfd_getfd.c
+build $BUILDROOT/strace/pidfd_open.o: cc external/strace/src/pidfd_open.c
+build $BUILDROOT/strace/pidns.o: cc external/strace/src/pidns.c
+build $BUILDROOT/strace/pkeys.o: cc external/strace/src/pkeys.c
+build $BUILDROOT/strace/poke.o: cc external/strace/src/poke.c
+build $BUILDROOT/strace/poll.o: cc external/strace/src/poll.c
+build $BUILDROOT/strace/prctl.o: cc external/strace/src/prctl.c
+build $BUILDROOT/strace/print_dev_t.o: cc external/strace/src/print_dev_t.c
 build $BUILDROOT/strace/print_group_req.o: cc external/strace/src/print_group_req.c
+build $BUILDROOT/strace/print_ifindex.o: cc external/strace/src/print_ifindex.c
+build $BUILDROOT/strace/print_instruction_pointer.o: cc external/strace/src/print_instruction_pointer.c
 build $BUILDROOT/strace/print_kernel_sigset.o: cc external/strace/src/print_kernel_sigset.c
+build $BUILDROOT/strace/print_kernel_version.o: cc external/strace/src/print_kernel_version.c
+build $BUILDROOT/strace/print_mac.o: cc external/strace/src/print_mac.c
 build $BUILDROOT/strace/print_mq_attr.o: cc external/strace/src/print_mq_attr.c
 build $BUILDROOT/strace/print_msgbuf.o: cc external/strace/src/print_msgbuf.c
 build $BUILDROOT/strace/print_sg_req_info.o: cc external/strace/src/print_sg_req_info.c
 build $BUILDROOT/strace/print_sigevent.o: cc external/strace/src/print_sigevent.c
+build $BUILDROOT/strace/print_statfs.o: cc external/strace/src/print_statfs.c
+build $BUILDROOT/strace/print_struct_stat.o: cc external/strace/src/print_struct_stat.c
+build $BUILDROOT/strace/print_syscall_number.o: cc external/strace/src/print_syscall_number.c
 build $BUILDROOT/strace/print_time.o: cc external/strace/src/print_time.c
+build $BUILDROOT/strace/print_timespec64.o: cc external/strace/src/print_timespec64.c
 build $BUILDROOT/strace/print_timeval.o: cc external/strace/src/print_timeval.c
+build $BUILDROOT/strace/print_timeval64.o: cc external/strace/src/print_timeval64.c
+build $BUILDROOT/strace/print_timex.o: cc external/strace/src/print_timex.c
+build $BUILDROOT/strace/printmode.o: cc external/strace/src/printmode.c
 build $BUILDROOT/strace/printrusage.o: cc external/strace/src/printrusage.c
 build $BUILDROOT/strace/printsiginfo.o: cc external/strace/src/printsiginfo.c
+build $BUILDROOT/strace/process_vm.o: cc external/strace/src/process_vm.c
+build $BUILDROOT/strace/ptp.o: cc external/strace/src/ptp.c
+build $BUILDROOT/strace/ptrace.o: cc external/strace/src/ptrace.c
+build $BUILDROOT/strace/ptrace_syscall_info.o: cc external/strace/src/ptrace_syscall_info.c
+build $BUILDROOT/strace/quota.o: cc external/strace/src/quota.c
+build $BUILDROOT/strace/random_ioctl.o: cc external/strace/src/random_ioctl.c
+build $BUILDROOT/strace/readahead.o: cc external/strace/src/readahead.c
+build $BUILDROOT/strace/readlink.o: cc external/strace/src/readlink.c
+build $BUILDROOT/strace/reboot.o: cc external/strace/src/reboot.c
 build $BUILDROOT/strace/regset.o: cc external/strace/src/regset.c
+build $BUILDROOT/strace/renameat.o: cc external/strace/src/renameat.c
+build $BUILDROOT/strace/resource.o: cc external/strace/src/resource.c
+build $BUILDROOT/strace/retval.o: cc external/strace/src/retval.c
+build $BUILDROOT/strace/rt_sigframe.o: cc external/strace/src/rt_sigframe.c
 build $BUILDROOT/strace/rt_sigreturn.o: cc external/strace/src/rt_sigreturn.c
 build $BUILDROOT/strace/rtc.o: cc external/strace/src/rtc.c
+build $BUILDROOT/strace/rtnl_addr.o: cc external/strace/src/rtnl_addr.c
+build $BUILDROOT/strace/rtnl_addrlabel.o: cc external/strace/src/rtnl_addrlabel.c
+build $BUILDROOT/strace/rtnl_cachereport.o: cc external/strace/src/rtnl_cachereport.c
+build $BUILDROOT/strace/rtnl_dcb.o: cc external/strace/src/rtnl_dcb.c
+build $BUILDROOT/strace/rtnl_link.o: cc external/strace/src/rtnl_link.c
+build $BUILDROOT/strace/rtnl_mdb.o: cc external/strace/src/rtnl_mdb.c
+build $BUILDROOT/strace/rtnl_neigh.o: cc external/strace/src/rtnl_neigh.c
+build $BUILDROOT/strace/rtnl_neightbl.o: cc external/strace/src/rtnl_neightbl.c
+build $BUILDROOT/strace/rtnl_netconf.o: cc external/strace/src/rtnl_netconf.c
+build $BUILDROOT/strace/rtnl_nh.o: cc external/strace/src/rtnl_nh.c
+build $BUILDROOT/strace/rtnl_nsid.o: cc external/strace/src/rtnl_nsid.c
+build $BUILDROOT/strace/rtnl_route.o: cc external/strace/src/rtnl_route.c
+build $BUILDROOT/strace/rtnl_rule.o: cc external/strace/src/rtnl_rule.c
+build $BUILDROOT/strace/rtnl_stats.o: cc external/strace/src/rtnl_stats.c
+build $BUILDROOT/strace/rtnl_tc.o: cc external/strace/src/rtnl_tc.c
+build $BUILDROOT/strace/rtnl_tc_action.o: cc external/strace/src/rtnl_tc_action.c
+build $BUILDROOT/strace/seccomp.o: cc external/strace/src/seccomp.c
+build $BUILDROOT/strace/seccomp_ioctl.o: cc external/strace/src/seccomp_ioctl.c
+build $BUILDROOT/strace/sendfile.o: cc external/strace/src/sendfile.c
 build $BUILDROOT/strace/sg_io_v3.o: cc external/strace/src/sg_io_v3.c
+build $BUILDROOT/strace/sg_io_v4.o: cc external/strace/src/sg_io_v4.c
+build $BUILDROOT/strace/sched.o: cc external/strace/src/sched.c
+build $BUILDROOT/strace/scsi.o: cc external/strace/src/scsi.c
+build $BUILDROOT/strace/shutdown.o: cc external/strace/src/shutdown.c
 build $BUILDROOT/strace/sigaltstack.o: cc external/strace/src/sigaltstack.c
+build $BUILDROOT/strace/signal.o: cc external/strace/src/signal.c
+build $BUILDROOT/strace/signalfd.o: cc external/strace/src/signalfd.c
 build $BUILDROOT/strace/sock.o: cc external/strace/src/sock.c
+build $BUILDROOT/strace/sockaddr.o: cc external/strace/src/sockaddr.c
+build $BUILDROOT/strace/socketutils.o: cc external/strace/src/socketutils.c
+build $BUILDROOT/strace/stage_output.o: cc external/strace/src/stage_output.c
+build $BUILDROOT/strace/stat.o: cc external/strace/src/stat.c
+build $BUILDROOT/strace/statfs.o: cc external/strace/src/statfs.c
+build $BUILDROOT/strace/statx.o: cc external/strace/src/statx.c
+build $BUILDROOT/strace/strauss.o: cc external/strace/src/strauss.c
+build $BUILDROOT/strace/string_to_uint.o: cc external/strace/src/string_to_uint.c
+build $BUILDROOT/strace/swapon.o: cc external/strace/src/swapon.c
+build $BUILDROOT/strace/sync_file_range.o: cc external/strace/src/sync_file_range.c
+build $BUILDROOT/strace/syscall.o: cc external/strace/src/syscall.c
+build $BUILDROOT/strace/syscall_name.o: cc external/strace/src/syscall_name.c
+build $BUILDROOT/strace/sysctl.o: cc external/strace/src/sysctl.c
 build $BUILDROOT/strace/sysinfo.o: cc external/strace/src/sysinfo.c
+build $BUILDROOT/strace/syslog.o: cc external/strace/src/syslog.c
+build $BUILDROOT/strace/tee.o: cc external/strace/src/tee.c
+build $BUILDROOT/strace/term.o: cc external/strace/src/term.c
+build $BUILDROOT/strace/time.o: cc external/strace/src/time.c
 build $BUILDROOT/strace/times.o: cc external/strace/src/times.c
+build $BUILDROOT/strace/trie.o: cc external/strace/src/trie.c
+build $BUILDROOT/strace/truncate.o: cc external/strace/src/truncate.c
+build $BUILDROOT/strace/ubi.o: cc external/strace/src/ubi.c
+build $BUILDROOT/strace/ucopy.o: cc external/strace/src/ucopy.c
+build $BUILDROOT/strace/umask.o: cc external/strace/src/umask.c
+build $BUILDROOT/strace/umount.o: cc external/strace/src/umount.c
+build $BUILDROOT/strace/uid.o: cc external/strace/src/uid.c
+build $BUILDROOT/strace/uname.o: cc external/strace/src/uname.c
+build $BUILDROOT/strace/upoke.o: cc external/strace/src/upoke.c
+build $BUILDROOT/strace/userfaultfd.o: cc external/strace/src/userfaultfd.c
 build $BUILDROOT/strace/ustat.o: cc external/strace/src/ustat.c
+build $BUILDROOT/strace/util.o: cc external/strace/src/util.c
 build $BUILDROOT/strace/utime.o: cc external/strace/src/utime.c
+build $BUILDROOT/strace/utimes.o: cc external/strace/src/utimes.c
 build $BUILDROOT/strace/v4l2.o: cc external/strace/src/v4l2.c
-#gcc -E -P -DHAVE_CONFIG_H    -I./linux/${ARCH} -I./linux/${ARCH} -I./linux/generic -I./linux/generic -I. -I.   -include ../src/config.h ../src/linux/${ARCH}/syscallent.h
-build $BUILDROOT/strace/unwind.o: cc external/strace/src/unwind.c
-
-build $BUILDROOT/strace/demangle.o: cxx build/strace/demangle.cpp
+build $BUILDROOT/strace/wait.o: cc external/strace/src/wait.c
+build $BUILDROOT/strace/watchdog_ioctl.o: cc external/strace/src/watchdog_ioctl.c
+build $BUILDROOT/strace/xattr.o: cc external/strace/src/xattr.c
+build $BUILDROOT/strace/xgetdents.o: cc external/strace/src/xgetdents.c
+build $BUILDROOT/strace/xlat.o: cc external/strace/src/xlat.c
+build $BUILDROOT/strace/xmalloc.o: cc external/strace/src/xmalloc.c
+build $BUILDROOT/strace/gen_hdio.o: cc external/strace/src/gen/gen_hdio.c
 
 build $BUILDROOT/strace/libstrace.a: ar $
+  $BUILDROOT/strace/access.o $
+  $BUILDROOT/strace/affinity.o $
+  $BUILDROOT/strace/aio.o $
+  $BUILDROOT/strace/basic_filters.o $
+  $BUILDROOT/strace/bind.o $
+  $BUILDROOT/strace/bjm.o $
   $BUILDROOT/strace/block.o $
+  $BUILDROOT/strace/bpf.o $
+  $BUILDROOT/strace/bpf_filter.o $
+  $BUILDROOT/strace/bpf_seccomp_filter.o $
+  $BUILDROOT/strace/bpf_sock_filter.o $
   $BUILDROOT/strace/btrfs.o $
+  $BUILDROOT/strace/capability.o $
+  $BUILDROOT/strace/chdir.o $
+  $BUILDROOT/strace/chmod.o $
+  $BUILDROOT/strace/clone.o $
+  $BUILDROOT/strace/close_range.o $
+  $BUILDROOT/strace/copy_file_range.o $
+  $BUILDROOT/strace/count.o $
+  $BUILDROOT/strace/counter_ioctl.o $
+  $BUILDROOT/strace/delay.o $
+  $BUILDROOT/strace/desc.o $
+  $BUILDROOT/strace/dup.o $
   $BUILDROOT/strace/dirent.o $
+  $BUILDROOT/strace/dirent64.o $
+  $BUILDROOT/strace/dirent_types.o $
+  $BUILDROOT/strace/dm.o $
+  $BUILDROOT/strace/dyxlat.o $
+  $BUILDROOT/strace/epoll.o $
+  $BUILDROOT/strace/error_prints.o $
+  $BUILDROOT/strace/evdev.o $
   $BUILDROOT/strace/evdev_mpers.o $
+  $BUILDROOT/strace/eventfd.o $
+  $BUILDROOT/strace/execve.o $
+  $BUILDROOT/strace/fallocate.o $
+  $BUILDROOT/strace/fanotify.o $
+  $BUILDROOT/strace/fadvise.o $
+  $BUILDROOT/strace/fchownat.o $
+  $BUILDROOT/strace/fcntl.o $
   $BUILDROOT/strace/fetch_bpf_fprog.o $
+  $BUILDROOT/strace/fetch_indirect_syscall_args.o $
   $BUILDROOT/strace/fetch_struct_flock.o $
   $BUILDROOT/strace/fetch_struct_iovec.o $
   $BUILDROOT/strace/fetch_struct_keyctl_kdf_params.o $
@@ -69,41 +311,211 @@ build $BUILDROOT/strace/libstrace.a: ar $
   $BUILDROOT/strace/fetch_struct_stat64.o $
   $BUILDROOT/strace/fetch_struct_statfs.o $
   $BUILDROOT/strace/fetch_struct_xfs_quotastat.o $
+  $BUILDROOT/strace/file_handle.o $
+  $BUILDROOT/strace/filter_qualify.o $
+  $BUILDROOT/strace/filter_seccomp.o $
+  $BUILDROOT/strace/flock.o $
+  $BUILDROOT/strace/fsconfig.o $
+  $BUILDROOT/strace/fsmount.o $
+  $BUILDROOT/strace/fsopen.o $
+  $BUILDROOT/strace/fspick.o $
+  $BUILDROOT/strace/fstatfs.o $
+  $BUILDROOT/strace/fs_0x94_ioctl.o $
+  $BUILDROOT/strace/fs_f_ioctl.o $
+  $BUILDROOT/strace/fs_x_ioctl.o $
+  $BUILDROOT/strace/futex.o $
+  $BUILDROOT/strace/futex_waitv.o $
+  $BUILDROOT/strace/getcpu.o $
+  $BUILDROOT/strace/getcwd.o $
+  $BUILDROOT/strace/getpid.o $
+  $BUILDROOT/strace/getrandom.o $
+  $BUILDROOT/strace/get_robust_list.o $
+  $BUILDROOT/strace/gpio_ioctl.o $
   $BUILDROOT/strace/hdio.o $
+  $BUILDROOT/strace/hostname.o $
+  $BUILDROOT/strace/inotify.o $
+  $BUILDROOT/strace/inotify_ioctl.o $
+  $BUILDROOT/strace/io.o $
+  $BUILDROOT/strace/io_uring.o $
+  $BUILDROOT/strace/ioctl.o $
+  $BUILDROOT/strace/ioperm.o $
+  $BUILDROOT/strace/ioprio.o $
+  $BUILDROOT/strace/ipc_msg.o $
   $BUILDROOT/strace/ipc_msgctl.o $
+  $BUILDROOT/strace/ipc_sem.o $
   $BUILDROOT/strace/ipc_semctl.o $
+  $BUILDROOT/strace/ipc_shm.o $
   $BUILDROOT/strace/ipc_shmctl.o $
+  $BUILDROOT/strace/kd_ioctl.o $
   $BUILDROOT/strace/kd_mpers_ioctl.o $
+  $BUILDROOT/strace/kcmp.o $
+  $BUILDROOT/strace/kexec.o $
+  $BUILDROOT/strace/keyctl.o $
+  $BUILDROOT/strace/kvm.o $
+  $BUILDROOT/strace/landlock.o $
+  $BUILDROOT/strace/ldt.o $
+  $BUILDROOT/strace/link.o $
+  $BUILDROOT/strace/lirc_ioctl.o $
+  $BUILDROOT/strace/listen.o $
+  $BUILDROOT/strace/lookup_dcookie.o $
   $BUILDROOT/strace/loop.o $
+  $BUILDROOT/strace/lseek.o $
+  $BUILDROOT/strace/mem.o $
+  $BUILDROOT/strace/membarrier.o $
+  $BUILDROOT/strace/memfd_create.o $
+  $BUILDROOT/strace/memfd_secret.o $
+  $BUILDROOT/strace/mknod.o $
+  $BUILDROOT/strace/mmap_cache.o $
+  $BUILDROOT/strace/mmap_notify.o $
+  $BUILDROOT/strace/mmsghdr.o $
+  $BUILDROOT/strace/mount.o $
+  $BUILDROOT/strace/mount_setattr.o $
+  $BUILDROOT/strace/move_mount.o $
+  $BUILDROOT/strace/mq.o $
+  $BUILDROOT/strace/msghdr.o $
   $BUILDROOT/strace/mtd.o $
+  $BUILDROOT/strace/nbd_ioctl.o $
+  $BUILDROOT/strace/net.o $
+  $BUILDROOT/strace/netlink.o $
+  $BUILDROOT/strace/netlink_crypto.o $
+  $BUILDROOT/strace/netlink_inet_diag.o $
+  $BUILDROOT/strace/netlink_kobject_uevent.o $
+  $BUILDROOT/strace/netlink_netfilter.o $
+  $BUILDROOT/strace/netlink_netlink_diag.o $
+  $BUILDROOT/strace/netlink_packet_diag.o $
+  $BUILDROOT/strace/netlink_route.o $
+  $BUILDROOT/strace/netlink_selinux.o $
+  $BUILDROOT/strace/netlink_smc_diag.o $
+  $BUILDROOT/strace/netlink_sock_diag.o $
+  $BUILDROOT/strace/netlink_unix_diag.o $
+  $BUILDROOT/strace/nlattr.o $
+  $BUILDROOT/strace/nsfs.o $
+  $BUILDROOT/strace/numa.o $
+  $BUILDROOT/strace/number_set.o $
+  $BUILDROOT/strace/open.o $
+  $BUILDROOT/strace/open_tree.o $
+  $BUILDROOT/strace/pathtrace.o $
+  $BUILDROOT/strace/perf.o $
   $BUILDROOT/strace/perf_ioctl.o $
+  $BUILDROOT/strace/personality.o $
+  $BUILDROOT/strace/pidfd_getfd.o $
+  $BUILDROOT/strace/pidfd_open.o $
+  $BUILDROOT/strace/pidns.o $
+  $BUILDROOT/strace/pkeys.o $
+  $BUILDROOT/strace/poke.o $
+  $BUILDROOT/strace/poll.o $
+  $BUILDROOT/strace/prctl.o $
   $BUILDROOT/strace/print_group_req.o $
+  $BUILDROOT/strace/print_dev_t.o $
+  $BUILDROOT/strace/print_ifindex.o $
+  $BUILDROOT/strace/print_instruction_pointer.o $
   $BUILDROOT/strace/print_kernel_sigset.o $
+  $BUILDROOT/strace/print_kernel_version.o $
+  $BUILDROOT/strace/print_mac.o $
   $BUILDROOT/strace/print_mq_attr.o $
   $BUILDROOT/strace/print_msgbuf.o $
   $BUILDROOT/strace/print_sg_req_info.o $
   $BUILDROOT/strace/print_sigevent.o $
+  $BUILDROOT/strace/print_statfs.o $
+  $BUILDROOT/strace/print_struct_stat.o $
+  $BUILDROOT/strace/print_syscall_number.o $
   $BUILDROOT/strace/print_time.o $
+  $BUILDROOT/strace/print_timespec64.o $
   $BUILDROOT/strace/print_timeval.o $
+  $BUILDROOT/strace/print_timeval64.o $
+  $BUILDROOT/strace/print_timex.o $
+  $BUILDROOT/strace/printmode.o $
   $BUILDROOT/strace/printrusage.o $
   $BUILDROOT/strace/printsiginfo.o $
+  $BUILDROOT/strace/process_vm.o $
+  $BUILDROOT/strace/ptp.o $
+  $BUILDROOT/strace/ptrace.o $
+  $BUILDROOT/strace/ptrace_syscall_info.o $
+  $BUILDROOT/strace/quota.o $
+  $BUILDROOT/strace/random_ioctl.o $
+  $BUILDROOT/strace/readahead.o $
+  $BUILDROOT/strace/readlink.o $
+  $BUILDROOT/strace/reboot.o $
   $BUILDROOT/strace/regset.o $
+  $BUILDROOT/strace/renameat.o $
+  $BUILDROOT/strace/resource.o $
+  $BUILDROOT/strace/retval.o $
+  $BUILDROOT/strace/rt_sigframe.o $
   $BUILDROOT/strace/rt_sigreturn.o $
   $BUILDROOT/strace/rtc.o $
+  $BUILDROOT/strace/rtnl_addr.o $
+  $BUILDROOT/strace/rtnl_addrlabel.o $
+  $BUILDROOT/strace/rtnl_cachereport.o $
+  $BUILDROOT/strace/rtnl_dcb.o $
+  $BUILDROOT/strace/rtnl_link.o $
+  $BUILDROOT/strace/rtnl_mdb.o $
+  $BUILDROOT/strace/rtnl_neigh.o $
+  $BUILDROOT/strace/rtnl_neightbl.o $
+  $BUILDROOT/strace/rtnl_netconf.o $
+  $BUILDROOT/strace/rtnl_nh.o $
+  $BUILDROOT/strace/rtnl_nsid.o $
+  $BUILDROOT/strace/rtnl_route.o $
+  $BUILDROOT/strace/rtnl_rule.o $
+  $BUILDROOT/strace/rtnl_stats.o $
+  $BUILDROOT/strace/rtnl_tc.o $
+  $BUILDROOT/strace/rtnl_tc_action.o $
+  $BUILDROOT/strace/seccomp.o $
+  $BUILDROOT/strace/seccomp_ioctl.o $
+  $BUILDROOT/strace/sendfile.o $
   $BUILDROOT/strace/sg_io_v3.o $
+  $BUILDROOT/strace/sg_io_v4.o $
+  $BUILDROOT/strace/sched.o $
+  $BUILDROOT/strace/scsi.o $
+  $BUILDROOT/strace/shutdown.o $
   $BUILDROOT/strace/sigaltstack.o $
+  $BUILDROOT/strace/signal.o $
+  $BUILDROOT/strace/signalfd.o $
   $BUILDROOT/strace/sock.o $
+  $BUILDROOT/strace/socketutils.o $
+  $BUILDROOT/strace/sockaddr.o $
+  $BUILDROOT/strace/stage_output.o $
+  $BUILDROOT/strace/stat.o $
+  $BUILDROOT/strace/statfs.o $
+  $BUILDROOT/strace/statx.o $
+  $BUILDROOT/strace/strauss.o $
+  $BUILDROOT/strace/string_to_uint.o $
+  $BUILDROOT/strace/swapon.o $
+  $BUILDROOT/strace/sync_file_range.o $
+  $BUILDROOT/strace/syscall.o $
+  $BUILDROOT/strace/syscall_name.o $
+  $BUILDROOT/strace/sysctl.o $
   $BUILDROOT/strace/sysinfo.o $
+  $BUILDROOT/strace/syslog.o $
+  $BUILDROOT/strace/tee.o $
+  $BUILDROOT/strace/term.o $
+  $BUILDROOT/strace/time.o $
   $BUILDROOT/strace/times.o $
+  $BUILDROOT/strace/trie.o $
+  $BUILDROOT/strace/truncate.o $
+  $BUILDROOT/strace/ubi.o $
+  $BUILDROOT/strace/ucopy.o $
+  $BUILDROOT/strace/uid.o $
+  $BUILDROOT/strace/uname.o $
+  $BUILDROOT/strace/umask.o $
+  $BUILDROOT/strace/umount.o $
+  $BUILDROOT/strace/upoke.o $
+  $BUILDROOT/strace/userfaultfd.o $
   $BUILDROOT/strace/ustat.o $
+  $BUILDROOT/strace/util.o $
   $BUILDROOT/strace/utime.o $
+  $BUILDROOT/strace/utimes.o $
   $BUILDROOT/strace/v4l2.o $
-  $BUILDROOT/strace/unwind.o $
-  $BUILDROOT/strace/demangle.o $
+  $BUILDROOT/strace/wait.o $
+  $BUILDROOT/strace/watchdog_ioctl.o $
+  $BUILDROOT/strace/xattr.o $
+  $BUILDROOT/strace/xgetdents.o $
+  $BUILDROOT/strace/xlat.o $
+  $BUILDROOT/strace/xmalloc.o $
+  $BUILDROOT/strace/gen_hdio.o $
 
 build $BUILDROOT/strace/strace.o: cc external/strace/src/strace.c
 
-build strace: link $
+build $BUILDROOT/strace/strace: link $
+  $BUILDROOT/strace/strace.o $
   $BUILDROOT/strace/libstrace.a $
-  (clock_LIBS) $
-  (timer_LIBS)
+

@@ -275,4 +275,5 @@ out/system.content: \
   out/system/system/data/icons/default \
   out/system/bin/lldb \
   out/system/bin/lldb-server \
+  out/system/bin/strace \
   

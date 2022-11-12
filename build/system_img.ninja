@@ -115,3 +115,4 @@ build $SYSTEMDIR/lib/libz.so.1: symlink
 
 build $SYSTEMDIR/bin/lldb: copy $BUILDROOT/llvm/bin/lldb
 build $SYSTEMDIR/bin/lldb-server: copy $BUILDROOT/llvm/bin/lldb-server
+build $SYSTEMDIR/bin/strace: copy $BUILDROOT/strace/strace

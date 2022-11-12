@@ -38,10 +38,10 @@
 #define ENABLE_ARM_OABI 0
 
 /* Define to enable SELinux security contexts support */
-#define ENABLE_SECONTEXT 1
+/* #undef ENABLE_SECONTEXT */
 
 /* Define to enable stack tracing support */
-#define ENABLE_STACKTRACE 1
+/* #undef ENABLE_STACKTRACE */
 
 /* Define to 1 if you have the `accept4' function. */
 #define HAVE_ACCEPT4 1
@@ -326,7 +326,7 @@
 
 /* Define to 1 if you have the declaration of `KERN_PANIC_PRINT', and to 0 if
    you don't. */
-#define HAVE_DECL_KERN_PANIC_PRINT 1
+/* #undef HAVE_DECL_KERN_PANIC_PRINT */
 
 /* Define to 1 if you have the declaration of `KERN_PIDMAX', and to 0 if you
    don't. */
@@ -654,7 +654,7 @@
 
 /* Define to 1 if you have the declaration of
    `NET_IPV4_CONF_ARP_EVICT_NOCARRIER', and to 0 if you don't. */
-#define HAVE_DECL_NET_IPV4_CONF_ARP_EVICT_NOCARRIER 1
+/* #undef HAVE_DECL_NET_IPV4_CONF_ARP_EVICT_NOCARRIER */
 
 /* Define to 1 if you have the declaration of `NET_IPV4_CONF_ARP_IGNORE', and
    to 0 if you don't. */
@@ -1370,11 +1370,11 @@
 
 /* Define to 1 if you have the declaration of `TCA_ACT_FLAGS', and to 0 if you
    don't. */
-#define HAVE_DECL_TCA_ACT_FLAGS 1
+/* #undef HAVE_DECL_TCA_ACT_FLAGS */
 
 /* Define to 1 if you have the declaration of `TCA_ACT_HW_STATS', and to 0 if
    you don't. */
-#define HAVE_DECL_TCA_ACT_HW_STATS 1
+/* #undef HAVE_DECL_TCA_ACT_HW_STATS */
 
 /* Define to 1 if you have the declaration of `TCA_ACT_INDEX', and to 0 if you
    don't. */
@@ -1382,7 +1382,7 @@
 
 /* Define to 1 if you have the declaration of `TCA_ACT_IN_HW_COUNT', and to 0
    if you don't. */
-#define HAVE_DECL_TCA_ACT_IN_HW_COUNT 1
+/* #undef HAVE_DECL_TCA_ACT_IN_HW_COUNT */
 
 /* Define to 1 if you have the declaration of `TCA_ACT_KIND', and to 0 if you
    don't. */
@@ -1406,7 +1406,7 @@
 
 /* Define to 1 if you have the declaration of `TCA_ACT_USED_HW_STATS', and to
    0 if you don't. */
-#define HAVE_DECL_TCA_ACT_USED_HW_STATS 1
+/* #undef HAVE_DECL_TCA_ACT_USED_HW_STATS */
 
 /* Define to 1 if you have the declaration of `VM_BLOCK_DUMP', and to 0 if you
    don't. */
@@ -1594,7 +1594,7 @@
 
 /* Define to 1 if you have the declaration of `XFRM_MSG_GETDEFAULT', and to 0
    if you don't. */
-#define HAVE_DECL_XFRM_MSG_GETDEFAULT 1
+/* #undef HAVE_DECL_XFRM_MSG_GETDEFAULT */
 
 /* Define to 1 if you have the declaration of `XFRM_MSG_GETPOLICY', and to 0
    if you don't. */
@@ -1650,7 +1650,7 @@
 
 /* Define to 1 if you have the declaration of `XFRM_MSG_SETDEFAULT', and to 0
    if you don't. */
-#define HAVE_DECL_XFRM_MSG_SETDEFAULT 1
+/* #undef HAVE_DECL_XFRM_MSG_SETDEFAULT */
 
 /* Define to 1 if you have the declaration of `XFRM_MSG_UPDPOLICY', and to 0
    if you don't. */
@@ -1863,10 +1863,10 @@
 #define HAVE_SCSI_SG_H 1
 
 /* Define to enable SELinux security contexts testing */
-#define HAVE_SELINUX_RUNTIME 1
+/* #undef HAVE_SELINUX_RUNTIME 0 */
 
 /* Define to 1 if you have the <selinux/selinux.h> header file. */
-#define HAVE_SELINUX_SELINUX_H 1
+/* #undef HAVE_SELINUX_SELINUX_H */
 
 /* Define to 1 if `si_addr_lsb' is a member of `siginfo_t'. */
 #define HAVE_SIGINFO_T_SI_ADDR_LSB 1
@@ -2123,7 +2123,7 @@
 /* #undef HAVE_STRUCT_PTRACE_PEEKSIGINFO_ARGS */
 
 /* Define to 1 if the system has the type `struct ptrace_syscall_info'. */
-#define HAVE_STRUCT_PTRACE_SYSCALL_INFO 1
+/* #undef HAVE_STRUCT_PTRACE_SYSCALL_INFO */
 
 /* Define to 1 if the system has the type `struct pt_all_user_regs'. */
 /* #undef HAVE_STRUCT_PT_ALL_USER_REGS */
@@ -2797,7 +2797,7 @@
 /* #undef USE_LIBDW */
 
 /* Whether to use libunwind for stack tracing */
-#define USE_LIBUNWIND 1
+/* #undef USE_LIBUNWIND */
 
 /* Enable extensions on AIX 3, Interix.  */
 #ifndef _ALL_SOURCE
@@ -2888,7 +2888,7 @@
 
 
 /* The unwinder to use for stack tracing support */
-#define USE_UNWINDER "libunwind"
+/* #undef USE_UNWINDER */
 
 /* Version number of package */
 #define VERSION "6.0.0.6.2ab6c"
