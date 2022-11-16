@@ -340,3 +340,53 @@ build $BUILDROOT/fontconfig/libfontconfig.so: so $
   $SYSROOT/lib/libfreetype.so $
   $SYSROOT/lib/libexpat.so
   libs = -lfreetype -lexpat
+
+build $BUILDROOT/fontconfig/fc-conflist.o: cc external/fontconfig/fc-conflist/fc-conflist.c
+
+build $BUILDROOT/fontconfig/fc-conflist: link $
+  $BUILDROOT/fontconfig/fc-conflist.o $
+  | $SYSROOT/lib/libfontconfig.so
+  libs = -lfontconfig
+
+build $BUILDROOT/fontconfig/fc-list.o: cc external/fontconfig/fc-list/fc-list.c
+
+build $BUILDROOT/fontconfig/fc-list: link $
+  $BUILDROOT/fontconfig/fc-list.o $
+  | $SYSROOT/lib/libfontconfig.so
+  libs = -lfontconfig
+
+build $BUILDROOT/fontconfig/fc-match.o: cc external/fontconfig/fc-match/fc-match.c
+
+build $BUILDROOT/fontconfig/fc-match: link $
+  $BUILDROOT/fontconfig/fc-match.o $
+  | $SYSROOT/lib/libfontconfig.so
+  libs = -lfontconfig
+
+build $BUILDROOT/fontconfig/fc-pattern.o: cc external/fontconfig/fc-pattern/fc-pattern.c
+
+build $BUILDROOT/fontconfig/fc-pattern: link $
+  $BUILDROOT/fontconfig/fc-pattern.o $
+  | $SYSROOT/lib/libfontconfig.so
+  libs = -lfontconfig
+
+build $BUILDROOT/fontconfig/fc-query.o: cc external/fontconfig/fc-query/fc-query.c
+
+build $BUILDROOT/fontconfig/fc-query: link $
+  $BUILDROOT/fontconfig/fc-query.o $
+  | $SYSROOT/lib/libfontconfig.so
+  libs = -lfontconfig
+
+build $BUILDROOT/fontconfig/fc-scan.o: cc external/fontconfig/fc-scan/fc-scan.c
+
+build $BUILDROOT/fontconfig/fc-scan: link $
+  $BUILDROOT/fontconfig/fc-scan.o $
+  | $SYSROOT/lib/libfontconfig.so
+  libs = -lfontconfig
+
+build $BUILDROOT/fontconfig/fc-validate.o: cc external/fontconfig/fc-validate/fc-validate.c
+
+build $BUILDROOT/fontconfig/fc-validate: link $
+  $BUILDROOT/fontconfig/fc-validate.o $
+  | $SYSROOT/lib/libfontconfig.so $
+    $SYSROOT/lib/libfreetype.so
+  libs = -lfontconfig -lfreetype

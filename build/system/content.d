@@ -274,7 +274,13 @@ out/system.content: \
   out/system/system/data/xkb \
   out/system/system/data/libinput \
   out/system/system/data/icons/default \
+  out/system/system/bin/fc-conflist \
+  out/system/system/bin/fc-list \
+  out/system/system/bin/fc-match \
+  out/system/system/bin/fc-pattern \
+  out/system/system/bin/fc-query \
+  out/system/system/bin/fc-scan \
+  out/system/system/bin/fc-validate \
   out/system/bin/lldb \
   out/system/bin/lldb-server \
   out/system/bin/strace \
-  
