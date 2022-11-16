@@ -176,3 +176,6 @@
 [submodule "external/strace"]
 	path = external/strace
 	url = https://github.com/strace/strace.git
+[submodule "external/inter"]
+	path = external/inter
+	url = https://github.com/rsms/inter.git
