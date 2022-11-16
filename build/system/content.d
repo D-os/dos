@@ -248,6 +248,7 @@ out/system.content: \
   out/system/tests/app_application \
   out/system/tests/app_message \
   out/system/tests/interface_window \
+  out/system/tests/interface_drawing \
   out/system/tests/sampservice \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \
