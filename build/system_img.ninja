@@ -117,6 +117,7 @@ build $SYSTEMDIR/bin/lldb: copy $BUILDROOT/llvm/bin/lldb
 build $SYSTEMDIR/bin/lldb-server: copy $BUILDROOT/llvm/bin/lldb-server
 build $SYSTEMDIR/bin/strace: copy $BUILDROOT/strace/strace
 
+build $SYSTEMDIR/system/data/fonts/Inter.ttf: copy external/inter/docs/font-files/Inter.var.ttf
 build $SYSTEMDIR/system/bin/fc-conflist: copy $BUILDROOT/fontconfig/fc-conflist
 build $SYSTEMDIR/system/bin/fc-list: copy $BUILDROOT/fontconfig/fc-list
 build $SYSTEMDIR/system/bin/fc-match: copy $BUILDROOT/fontconfig/fc-match

@@ -274,6 +274,7 @@ out/system.content: \
   out/system/system/data/xkb \
   out/system/system/data/libinput \
   out/system/system/data/icons/default \
+  out/system/system/data/fonts/Inter.ttf \
   out/system/system/bin/fc-conflist \
   out/system/system/bin/fc-list \
   out/system/system/bin/fc-match \

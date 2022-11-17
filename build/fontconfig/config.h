@@ -4,22 +4,22 @@
 
 #define ALIGNOF_VOID_P 8
 
-#define CONFIGDIR "/etc/fonts/conf.d"
+#define CONFIGDIR "/system/etc/fonts/conf.d"
 
 #define FC_CACHEDIR "/var/cache/fontconfig"
 
-#define FC_DEFAULT_FONTS "\t<dir>/usr/share/fonts</dir>\n\t<dir>/usr/local/share/fonts</dir>\n"
+#define FC_DEFAULT_FONTS "<dir>/system/data/fonts</dir>\n"
 
 #define FC_FONTPATH ""
 
 /* The type of gperf "len" parameter */
 #define FC_GPERF_SIZE_T size_t
 
-#define FC_TEMPLATEDIR "/share/fontconfig/conf.avail"
+#define FC_TEMPLATEDIR "/system/data/fontconfig/conf.avail"
 
 #define FLEXIBLE_ARRAY_MEMBER
 
-#define FONTCONFIG_PATH "/etc/fonts"
+#define FONTCONFIG_PATH "/system/etc/fonts"
 
 #define GETTEXT_PACKAGE "fontconfig"
 
