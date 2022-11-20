@@ -179,3 +179,6 @@
 [submodule "external/inter"]
 	path = external/inter
 	url = https://github.com/rsms/inter.git
+[submodule "resources"]
+	path = resources
+	url = https://github.com/D-os/resources.git
