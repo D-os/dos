@@ -292,6 +292,8 @@ build $SYSTEMDIR/tests/app_application: copy $BUILDROOT/os/tests/app_application
 build $SYSTEMDIR/tests/app_message: copy $BUILDROOT/os/tests/app_message
 build $SYSTEMDIR/tests/interface_window: copy $BUILDROOT/os/tests/interface_window
 build $SYSTEMDIR/tests/interface_drawing: copy $BUILDROOT/os/tests/interface_drawing
+build $SYSTEMDIR/tests/interface_hello: copy $BUILDROOT/os/tests/interface_hello
+build $SYSTEMDIR/tests/interface_button: copy $BUILDROOT/os/tests/interface_button
 build $SYSTEMDIR/tests/sampservice: copy $BUILDROOT/os/services/sampservice/sampservice
 build $SYSTEMDIR/system/libexec/app_server: copy $BUILDROOT/os/services/app/app_server
 

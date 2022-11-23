@@ -40,7 +40,7 @@
       "label": "🗃️ Update compilation database",
       "type": "process",
       "command": "make",
-      "args": ["compdb"],
+      "args": ["compdb_debug"],
       "options": {
         "cwd": "${workspaceFolder}"
       },
