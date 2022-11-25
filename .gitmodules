@@ -182,3 +182,6 @@
 [submodule "resources"]
 	path = resources
 	url = https://github.com/D-os/resources.git
+[submodule "external/noto-cjk"]
+	path = external/noto-cjk
+	url = https://github.com/googlefonts/noto-cjk.git
