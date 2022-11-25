@@ -120,6 +120,9 @@ build $SYSTEMDIR/bin/strace: copy $BUILDROOT/strace/strace
 build $SYSTEMDIR/system/data/fonts/Inter.ttf: copy external/inter/docs/font-files/Inter.var.ttf
 build $SYSTEMDIR/system/data/fonts/CascadiaMono.ttf: copy resources/fonts/cascadia-code/CascadiaMono.ttf
 build $SYSTEMDIR/system/data/fonts/CascadiaMonoItalic.ttf: copy resources/fonts/cascadia-code/CascadiaMonoItalic.ttf
+build $SYSTEMDIR/system/data/fonts/NotoSansCJK.ttf.ttc: copy external/noto-cjk/Sans/Variable/OTC/NotoSansCJK-VF.ttf.ttc
+build $SYSTEMDIR/system/data/fonts/NotoSansMonoCJK.ttf.ttc: copy external/noto-cjk/Sans/Variable/OTC/NotoSansMonoCJK-VF.ttf.ttc
+build $SYSTEMDIR/system/data/fonts/NotoSerifCJK-VF.ttf.ttc: copy external/noto-cjk/Serif/Variable/OTC/NotoSerifCJK-VF.ttf.ttc
 build $SYSTEMDIR/system/bin/fc-conflist: copy $BUILDROOT/fontconfig/fc-conflist
 build $SYSTEMDIR/system/bin/fc-list: copy $BUILDROOT/fontconfig/fc-list
 build $SYSTEMDIR/system/bin/fc-match: copy $BUILDROOT/fontconfig/fc-match

@@ -279,6 +279,9 @@ out/system.content: \
   out/system/system/data/fonts/Inter.ttf \
   out/system/system/data/fonts/CascadiaMono.ttf \
   out/system/system/data/fonts/CascadiaMonoItalic.ttf \
+  out/system/system/data/fonts/NotoSansCJK.ttf.ttc \
+  out/system/system/data/fonts/NotoSansMonoCJK.ttf.ttc \
+  out/system/system/data/fonts/NotoSerifCJK-VF.ttf.ttc \
   out/system/system/bin/fc-conflist \
   out/system/system/bin/fc-list \
   out/system/system/bin/fc-match \
