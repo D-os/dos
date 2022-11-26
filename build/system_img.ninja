@@ -124,6 +124,7 @@ build $SYSTEMDIR/system/data/fonts/NotoSansCJK.ttf.ttc: copy external/noto-cjk/S
 build $SYSTEMDIR/system/data/fonts/NotoSansMonoCJK.ttf.ttc: copy external/noto-cjk/Sans/Variable/OTC/NotoSansMonoCJK-VF.ttf.ttc
 build $SYSTEMDIR/system/data/fonts/NotoSerifCJK.ttf.ttc: copy external/noto-cjk/Serif/Variable/OTC/NotoSerifCJK-VF.ttf.ttc
 build $SYSTEMDIR/system/data/fonts/NotoEmoji.ttf: copy resources/fonts/noto-emoji/NotoEmoji-VariableFont_wght.ttf
+build $SYSTEMDIR/system/data/fonts/NotoColorEmoji.ttf: copy external/noto-emoji/fonts/NotoColorEmoji.ttf
 build $SYSTEMDIR/system/bin/fc-conflist: copy $BUILDROOT/fontconfig/fc-conflist
 build $SYSTEMDIR/system/bin/fc-list: copy $BUILDROOT/fontconfig/fc-list
 build $SYSTEMDIR/system/bin/fc-match: copy $BUILDROOT/fontconfig/fc-match

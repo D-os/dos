@@ -284,6 +284,7 @@ out/system.content: \
   out/system/system/data/fonts/NotoSansMonoCJK.ttf.ttc \
   out/system/system/data/fonts/NotoSerifCJK.ttf.ttc \
   out/system/system/data/fonts/NotoEmoji.ttf \
+  out/system/system/data/fonts/NotoColorEmoji.ttf \
   out/system/system/bin/fc-conflist \
   out/system/system/bin/fc-list \
   out/system/system/bin/fc-match \
