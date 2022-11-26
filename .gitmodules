@@ -185,3 +185,6 @@
 [submodule "external/noto-cjk"]
 	path = external/noto-cjk
 	url = https://github.com/googlefonts/noto-cjk.git
+[submodule "external/noto-emoji"]
+	path = external/noto-emoji
+	url = https://github.com/googlefonts/noto-emoji.git
