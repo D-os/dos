@@ -28,6 +28,8 @@ See `tools/tc-build/README.md` for a list of required host tools.
 
 > :warning: This repository makes heavy use of git submodules, so you need to `git clone --recursive`
 
+> :warning: Some of submodules store copious amount of data. You are advised to clone `--depth 1`
+
 ```sh
 make toolchain sysroot compdb kernel kernel_modules
 ninja && qemu.sh
