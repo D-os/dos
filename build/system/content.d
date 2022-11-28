@@ -284,6 +284,10 @@ out/system.content: \
   out/system/system/data/fonts/PublicSans.ttf \
   out/system/system/data/fonts/PublicSansItalic.ttf \
   out/system/system/data/fonts/Recursive.ttf.ttc \
+  out/system/system/data/fonts/GaramondLibre-Regular.otf \
+  out/system/system/data/fonts/GaramondLibre-Bold.otf \
+  out/system/system/data/fonts/GaramondLibre-Italic.otf \
+  out/system/system/data/fonts/GaramondLibre-BoldItalic.otf \
   out/system/system/data/fonts/NotoSansCJK.ttf.ttc \
   out/system/system/data/fonts/NotoSansMonoCJK.ttf.ttc \
   out/system/system/data/fonts/NotoSerifCJK.ttf.ttc \

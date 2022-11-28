@@ -123,6 +123,10 @@ build $SYSTEMDIR/system/data/fonts/CascadiaMonoItalic.ttf: copy resources/fonts/
 build $SYSTEMDIR/system/data/fonts/PublicSans.ttf: copy external/public-sans/fonts/variable/PublicSans[wght].ttf
 build $SYSTEMDIR/system/data/fonts/PublicSansItalic.ttf: copy external/public-sans/fonts/variable/PublicSans-Italic[wght].ttf
 build $SYSTEMDIR/system/data/fonts/Recursive.ttf.ttc: copy external/recursive/fonts/ArrowType-Recursive-1.085/Recursive_Desktop/recursive-static-TTFs.ttc
+build $SYSTEMDIR/system/data/fonts/GaramondLibre-Regular.otf: copy resources/fonts/garamond-libre/GaramondLibre-Regular.otf
+build $SYSTEMDIR/system/data/fonts/GaramondLibre-Bold.otf: copy resources/fonts/garamond-libre/GaramondLibre-Bold.otf
+build $SYSTEMDIR/system/data/fonts/GaramondLibre-Italic.otf: copy resources/fonts/garamond-libre/GaramondLibre-Italic.otf
+build $SYSTEMDIR/system/data/fonts/GaramondLibre-BoldItalic.otf: copy resources/fonts/garamond-libre/GaramondLibre-BoldItalic.otf
 build $SYSTEMDIR/system/data/fonts/NotoSansCJK.ttf.ttc: copy external/noto-cjk/Sans/Variable/OTC/NotoSansCJK-VF.ttf.ttc
 build $SYSTEMDIR/system/data/fonts/NotoSansMonoCJK.ttf.ttc: copy external/noto-cjk/Sans/Variable/OTC/NotoSansMonoCJK-VF.ttf.ttc
 build $SYSTEMDIR/system/data/fonts/NotoSerifCJK.ttf.ttc: copy external/noto-cjk/Serif/Variable/OTC/NotoSerifCJK-VF.ttf.ttc
