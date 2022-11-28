@@ -293,6 +293,18 @@ out/system.content: \
   out/system/system/data/fonts/NotoSerifCJK.ttf.ttc \
   out/system/system/data/fonts/NotoEmoji.ttf \
   out/system/system/data/fonts/NotoColorEmoji.ttf \
+  out/system/system/data/fonts/LiberationSans-Regular.ttf \
+  out/system/system/data/fonts/LiberationSans-Bold.ttf \
+  out/system/system/data/fonts/LiberationSans-Italic.ttf \
+  out/system/system/data/fonts/LiberationSans-BoldItalic.ttf \
+  out/system/system/data/fonts/LiberationSerif-Regular.ttf \
+  out/system/system/data/fonts/LiberationSerif-Bold.ttf \
+  out/system/system/data/fonts/LiberationSerif-Italic.ttf \
+  out/system/system/data/fonts/LiberationSerif-BoldItalic.ttf \
+  out/system/system/data/fonts/LiberationMono-Regular.ttf \
+  out/system/system/data/fonts/LiberationMono-Bold.ttf \
+  out/system/system/data/fonts/LiberationMono-Italic.ttf \
+  out/system/system/data/fonts/LiberationMono-BoldItalic.ttf \
   out/system/system/bin/fc-conflist \
   out/system/system/bin/fc-list \
   out/system/system/bin/fc-match \
