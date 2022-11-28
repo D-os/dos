@@ -188,3 +188,6 @@
 [submodule "external/noto-emoji"]
 	path = external/noto-emoji
 	url = https://github.com/googlefonts/noto-emoji.git
+[submodule "external/public-sans"]
+	path = external/public-sans
+	url = https://github.com/uswds/public-sans.git
