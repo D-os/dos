@@ -281,6 +281,9 @@ out/system.content: \
   out/system/system/data/fonts/Inter.ttf \
   out/system/system/data/fonts/CascadiaMono.ttf \
   out/system/system/data/fonts/CascadiaMonoItalic.ttf \
+  out/system/system/data/fonts/PublicSans.ttf \
+  out/system/system/data/fonts/PublicSansItalic.ttf \
+  out/system/system/data/fonts/Recursive.ttf.ttc \
   out/system/system/data/fonts/NotoSansCJK.ttf.ttc \
   out/system/system/data/fonts/NotoSansMonoCJK.ttf.ttc \
   out/system/system/data/fonts/NotoSerifCJK.ttf.ttc \
