@@ -191,3 +191,6 @@
 [submodule "external/public-sans"]
 	path = external/public-sans
 	url = https://github.com/uswds/public-sans.git
+[submodule "external/recursive"]
+	path = external/recursive
+	url = https://github.com/arrowtype/recursive.git
