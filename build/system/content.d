@@ -252,6 +252,7 @@ out/system.content: \
   out/system/tests/interface_hello \
   out/system/tests/interface_button \
   out/system/tests/interface_views \
+  out/system/tests/interface_minimal-app \
   out/system/tests/sampservice \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \
