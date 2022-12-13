@@ -254,6 +254,10 @@ out/system.content: \
   out/system/tests/interface_views \
   out/system/tests/interface_minimal-app \
   out/system/tests/interface_checkbox \
+  out/system/tests/interface_clipping \
+  out/system/tests/interface_pulse \
+  out/system/tests/interface_boxes \
+  out/system/tests/interface_radios \
   out/system/tests/sampservice \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \

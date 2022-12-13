@@ -297,6 +297,10 @@ build $SYSTEMDIR/tests/interface_button: copy $BUILDROOT/os/tests/interface_butt
 build $SYSTEMDIR/tests/interface_views: copy $BUILDROOT/os/tests/interface_views
 build $SYSTEMDIR/tests/interface_minimal-app: copy $BUILDROOT/os/tests/interface_minimal-app
 build $SYSTEMDIR/tests/interface_checkbox: copy $BUILDROOT/os/tests/interface_checkbox
+build $SYSTEMDIR/tests/interface_clipping: copy $BUILDROOT/os/tests/interface_clipping
+build $SYSTEMDIR/tests/interface_pulse: copy $BUILDROOT/os/tests/interface_pulse
+build $SYSTEMDIR/tests/interface_boxes: copy $BUILDROOT/os/tests/interface_boxes
+build $SYSTEMDIR/tests/interface_radios: copy $BUILDROOT/os/tests/interface_radios
 build $SYSTEMDIR/tests/sampservice: copy $BUILDROOT/os/services/sampservice/sampservice
 build $SYSTEMDIR/system/libexec/app_server: copy $BUILDROOT/os/services/app/app_server
 
