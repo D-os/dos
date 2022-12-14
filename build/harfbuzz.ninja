@@ -1,0 +1,132 @@
+cflags = $
+  -D_FILE_OFFSET_BITS=64 $
+  -Wall $
+  -Winvalid-pch $
+  -Wnon-virtual-dtor $
+  -fno-exceptions $
+  -fno-rtti $
+  -fno-threadsafe-statics $
+  -fvisibility-inlines-hidden $
+  -Wno-non-virtual-dtor $
+  -DHAVE_ATEXIT=1 $
+  -DHAVE_FREETYPE=1 $
+  -DHAVE_FT_DONE_MM_VAR=1 $
+  -DHAVE_FT_GET_TRANSFORM=1 $
+  -DHAVE_FT_GET_VAR_BLEND_COORDINATES=1 $
+  -DHAVE_FT_SET_VAR_BLEND_COORDINATES=1 $
+  -DHAVE_GETPAGESIZE=1 $
+  -DHAVE_ISATTY=1 $
+  -DHAVE_MMAP=1 $
+  -DHAVE_MPROTECT=1 $
+  -DHAVE_NEWLOCALE=1 $
+  -DHAVE_PTHREAD=1 $
+  -DHAVE_STDBOOL_H=1 $
+  -DHAVE_SYSCONF=1 $
+  -DHAVE_SYS_MMAN_H=1 $
+  -DHAVE_UNISTD_H=1 $
+  -DHAVE_USELOCALE=1 $
+
+build $BUILDROOT/harfbuzz/hb-aat-layout.o: cxx external/harfbuzz/src/hb-aat-layout.cc
+build $BUILDROOT/harfbuzz/hb-aat-map.o: cxx external/harfbuzz/src/hb-aat-map.cc
+build $BUILDROOT/harfbuzz/hb-blob.o: cxx external/harfbuzz/src/hb-blob.cc
+build $BUILDROOT/harfbuzz/hb-buffer-serialize.o: cxx external/harfbuzz/src/hb-buffer-serialize.cc
+build $BUILDROOT/harfbuzz/hb-buffer-verify.o: cxx external/harfbuzz/src/hb-buffer-verify.cc
+build $BUILDROOT/harfbuzz/hb-buffer.o: cxx external/harfbuzz/src/hb-buffer.cc
+build $BUILDROOT/harfbuzz/hb-common.o: cxx external/harfbuzz/src/hb-common.cc
+build $BUILDROOT/harfbuzz/hb-draw.o: cxx external/harfbuzz/src/hb-draw.cc
+build $BUILDROOT/harfbuzz/hb-face.o: cxx external/harfbuzz/src/hb-face.cc
+build $BUILDROOT/harfbuzz/hb-fallback-shape.o: cxx external/harfbuzz/src/hb-fallback-shape.cc
+build $BUILDROOT/harfbuzz/hb-font.o: cxx external/harfbuzz/src/hb-font.cc
+build $BUILDROOT/harfbuzz/hb-map.o: cxx external/harfbuzz/src/hb-map.cc
+build $BUILDROOT/harfbuzz/hb-number.o: cxx external/harfbuzz/src/hb-number.cc
+build $BUILDROOT/harfbuzz/hb-ot-cff1-table.o: cxx external/harfbuzz/src/hb-ot-cff1-table.cc
+build $BUILDROOT/harfbuzz/hb-ot-cff2-table.o: cxx external/harfbuzz/src/hb-ot-cff2-table.cc
+build $BUILDROOT/harfbuzz/hb-ot-color.o: cxx external/harfbuzz/src/hb-ot-color.cc
+build $BUILDROOT/harfbuzz/hb-ot-face.o: cxx external/harfbuzz/src/hb-ot-face.cc
+build $BUILDROOT/harfbuzz/hb-ot-font.o: cxx external/harfbuzz/src/hb-ot-font.cc
+build $BUILDROOT/harfbuzz/hb-ot-layout.o: cxx external/harfbuzz/src/hb-ot-layout.cc
+build $BUILDROOT/harfbuzz/hb-ot-map.o: cxx external/harfbuzz/src/hb-ot-map.cc
+build $BUILDROOT/harfbuzz/hb-ot-math.o: cxx external/harfbuzz/src/hb-ot-math.cc
+build $BUILDROOT/harfbuzz/hb-ot-meta.o: cxx external/harfbuzz/src/hb-ot-meta.cc
+build $BUILDROOT/harfbuzz/hb-ot-metrics.o: cxx external/harfbuzz/src/hb-ot-metrics.cc
+build $BUILDROOT/harfbuzz/hb-ot-name.o: cxx external/harfbuzz/src/hb-ot-name.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-arabic.o: cxx external/harfbuzz/src/hb-ot-shaper-arabic.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-default.o: cxx external/harfbuzz/src/hb-ot-shaper-default.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-hangul.o: cxx external/harfbuzz/src/hb-ot-shaper-hangul.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-hebrew.o: cxx external/harfbuzz/src/hb-ot-shaper-hebrew.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-indic-table.o: cxx external/harfbuzz/src/hb-ot-shaper-indic-table.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-indic.o: cxx external/harfbuzz/src/hb-ot-shaper-indic.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-khmer.o: cxx external/harfbuzz/src/hb-ot-shaper-khmer.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-myanmar.o: cxx external/harfbuzz/src/hb-ot-shaper-myanmar.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-syllabic.o: cxx external/harfbuzz/src/hb-ot-shaper-syllabic.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-thai.o: cxx external/harfbuzz/src/hb-ot-shaper-thai.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-use.o: cxx external/harfbuzz/src/hb-ot-shaper-use.cc
+build $BUILDROOT/harfbuzz/hb-ot-shaper-vowel-constraints.o: cxx external/harfbuzz/src/hb-ot-shaper-vowel-constraints.cc
+build $BUILDROOT/harfbuzz/hb-ot-shape-fallback.o: cxx external/harfbuzz/src/hb-ot-shape-fallback.cc
+build $BUILDROOT/harfbuzz/hb-ot-shape-normalize.o: cxx external/harfbuzz/src/hb-ot-shape-normalize.cc
+build $BUILDROOT/harfbuzz/hb-ot-shape.o: cxx external/harfbuzz/src/hb-ot-shape.cc
+build $BUILDROOT/harfbuzz/hb-ot-tag.o: cxx external/harfbuzz/src/hb-ot-tag.cc
+build $BUILDROOT/harfbuzz/hb-ot-var.o: cxx external/harfbuzz/src/hb-ot-var.cc
+build $BUILDROOT/harfbuzz/hb-set.o: cxx external/harfbuzz/src/hb-set.cc
+build $BUILDROOT/harfbuzz/hb-shape-plan.o: cxx external/harfbuzz/src/hb-shape-plan.cc
+build $BUILDROOT/harfbuzz/hb-shape.o: cxx external/harfbuzz/src/hb-shape.cc
+build $BUILDROOT/harfbuzz/hb-shaper.o: cxx external/harfbuzz/src/hb-shaper.cc
+build $BUILDROOT/harfbuzz/hb-static.o: cxx external/harfbuzz/src/hb-static.cc
+build $BUILDROOT/harfbuzz/hb-style.o: cxx external/harfbuzz/src/hb-style.cc
+build $BUILDROOT/harfbuzz/hb-ucd.o: cxx external/harfbuzz/src/hb-ucd.cc
+build $BUILDROOT/harfbuzz/hb-unicode.o: cxx external/harfbuzz/src/hb-unicode.cc
+build $BUILDROOT/harfbuzz/hb-ft.o: cxx external/harfbuzz/src/hb-ft.cc
+
+build $BUILDROOT/harfbuzz/libharfbuzz.so: so $
+  $BUILDROOT/harfbuzz/hb-aat-layout.o $
+  $BUILDROOT/harfbuzz/hb-aat-map.o $
+  $BUILDROOT/harfbuzz/hb-blob.o $
+  $BUILDROOT/harfbuzz/hb-buffer-serialize.o $
+  $BUILDROOT/harfbuzz/hb-buffer-verify.o $
+  $BUILDROOT/harfbuzz/hb-buffer.o $
+  $BUILDROOT/harfbuzz/hb-common.o $
+  $BUILDROOT/harfbuzz/hb-draw.o $
+  $BUILDROOT/harfbuzz/hb-face.o $
+  $BUILDROOT/harfbuzz/hb-fallback-shape.o $
+  $BUILDROOT/harfbuzz/hb-font.o $
+  $BUILDROOT/harfbuzz/hb-map.o $
+  $BUILDROOT/harfbuzz/hb-number.o $
+  $BUILDROOT/harfbuzz/hb-ot-cff1-table.o $
+  $BUILDROOT/harfbuzz/hb-ot-cff2-table.o $
+  $BUILDROOT/harfbuzz/hb-ot-color.o $
+  $BUILDROOT/harfbuzz/hb-ot-face.o $
+  $BUILDROOT/harfbuzz/hb-ot-font.o $
+  $BUILDROOT/harfbuzz/hb-ot-layout.o $
+  $BUILDROOT/harfbuzz/hb-ot-map.o $
+  $BUILDROOT/harfbuzz/hb-ot-math.o $
+  $BUILDROOT/harfbuzz/hb-ot-meta.o $
+  $BUILDROOT/harfbuzz/hb-ot-metrics.o $
+  $BUILDROOT/harfbuzz/hb-ot-name.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-arabic.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-default.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-hangul.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-hebrew.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-indic-table.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-indic.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-khmer.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-myanmar.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-syllabic.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-thai.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-use.o $
+  $BUILDROOT/harfbuzz/hb-ot-shaper-vowel-constraints.o $
+  $BUILDROOT/harfbuzz/hb-ot-shape-fallback.o $
+  $BUILDROOT/harfbuzz/hb-ot-shape-normalize.o $
+  $BUILDROOT/harfbuzz/hb-ot-shape.o $
+  $BUILDROOT/harfbuzz/hb-ot-tag.o $
+  $BUILDROOT/harfbuzz/hb-ot-var.o $
+  $BUILDROOT/harfbuzz/hb-set.o $
+  $BUILDROOT/harfbuzz/hb-shape-plan.o $
+  $BUILDROOT/harfbuzz/hb-shape.o $
+  $BUILDROOT/harfbuzz/hb-shaper.o $
+  $BUILDROOT/harfbuzz/hb-static.o $
+  $BUILDROOT/harfbuzz/hb-style.o $
+  $BUILDROOT/harfbuzz/hb-ucd.o $
+  $BUILDROOT/harfbuzz/hb-unicode.o $
+  $BUILDROOT/harfbuzz/hb-ft.o $
+  | /usr/lib64/libfreetype.so
+  libs = -lc++ -lunwind -lfreetype

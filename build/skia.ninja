@@ -31,7 +31,25 @@ subninja build/skia/gpu_shared.ninja
 subninja build/skia/skcms.ninja
 subninja build/skia/wuffs_c.ninja
 
-defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 -DSK_ENABLE_SKSL -DSK_ENABLE_PRECOMPILE -DSK_USE_PERFETTO -DSK_GAMMA_APPLY_TO_A8 -DSKIA_IMPLEMENTATION=1 -DSK_SUPPORT_GPU=1 -DSK_SUPPORT_PDF -DSK_CODEC_DECODES_JPEG -DSK_ENCODE_JPEG -DSK_CODEC_DECODES_PNG -DSK_ENCODE_PNG -DSK_CODEC_DECODES_WEBP -DSK_ENCODE_WEBP -DSK_HAS_WUFFS_LIBRARY -DSK_XML
+defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 $
+  -DSK_ENABLE_SKSL $
+  -DSK_ENABLE_PRECOMPILE $
+  -DSK_USE_PERFETTO $
+  -DSK_GAMMA_APPLY_TO_A8 $
+  -DSKIA_IMPLEMENTATION=1 $
+  -DSK_SUPPORT_GPU=1 $
+  -DSK_SUPPORT_PDF $
+  -DSK_CODEC_DECODES_JPEG $
+  -DSK_ENCODE_JPEG $
+  -DSK_CODEC_DECODES_PNG $
+  -DSK_ENCODE_PNG $
+  -DSK_CODEC_DECODES_WEBP $
+  -DSK_ENCODE_WEBP $
+  -DSK_HAS_WUFFS_LIBRARY $
+  -DSK_XML $
+  -DSK_UNICODE_AVAILABLE $
+  -DSK_SHAPER_HARFBUZZ_AVAILABLE $
+
 includes = -Iexternal/skia
 cflags = $defines -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
 cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -Wno-psabi
