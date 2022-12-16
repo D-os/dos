@@ -390,3 +390,37 @@ build $BUILDROOT/fontconfig/fc-validate: link $
   | $SYSROOT/lib/libfontconfig.so $
     $SYSROOT/lib/libfreetype.so
   libs = -lfontconfig -lfreetype
+
+rule fillplaceholders
+  command = /bin/sh -c "sed $$(sed -n "/^.define /s/.*define \([^ ]\+\) \"*\([^\"]*\).*/-e 's!@\1@!\2!' /p" < build/fontconfig/config.h | tr -d "\n") >$out <$in"
+  description = [HOST] fillplaceholders ${out}
+
+build $SYSTEMDIR/system/etc/fonts/fonts.conf: fillplaceholders external/fontconfig/fonts.conf.in
+
+build $SYSTEMDIR/system/etc/fonts/conf.d/10-hinting-slight.conf: copy external/fontconfig/conf.d/10-hinting-slight.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/10-sub-pixel-rgb.conf: copy external/fontconfig/conf.d/10-sub-pixel-rgb.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/10-yes-antialias.conf: copy external/fontconfig/conf.d/10-yes-antialias.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/11-lcdfilter-default.conf: copy external/fontconfig/conf.d/11-lcdfilter-default.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/25-unhint-nonlatin.conf: copy external/fontconfig/conf.d/25-unhint-nonlatin.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/30-metric-aliases.conf: copy external/fontconfig/conf.d/30-metric-aliases.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/40-nonlatin.conf: copy external/fontconfig/conf.d/40-nonlatin.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/45-generic.conf: copy external/fontconfig/conf.d/45-generic.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/45-latin.conf: copy external/fontconfig/conf.d/45-latin.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/48-spacing.conf: copy external/fontconfig/conf.d/48-spacing.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/49-sansserif.conf: copy external/fontconfig/conf.d/49-sansserif.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/50-user.conf: copy external/fontconfig/conf.d/50-user.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/51-local.conf: copy external/fontconfig/conf.d/51-local.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/59-liberation-mono.conf: copy resources/fonts/59-liberation-mono.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/59-liberation-sans.conf: copy resources/fonts/59-liberation-sans.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/59-liberation-serif.conf: copy resources/fonts/59-liberation-serif.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/60-generic.conf: copy external/fontconfig/conf.d/60-generic.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/60-latin.conf: copy external/fontconfig/conf.d/60-latin.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/65-0-google-noto-sans-cjk-ttc.conf: copy resources/fonts/65-0-google-noto-sans-cjk-ttc.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/65-0-google-noto-serif-cjk-ttc.conf: copy resources/fonts/65-0-google-noto-serif-cjk-ttc.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/65-fonts-persian.conf: copy external/fontconfig/conf.d/65-fonts-persian.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/65-google-noto-cjk-fonts.conf: copy resources/fonts/65-google-noto-cjk-fonts.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/65-nonlatin.conf: copy external/fontconfig/conf.d/65-nonlatin.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/69-unifont.conf: copy external/fontconfig/conf.d/69-unifont.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/70-no-bitmaps.conf: copy external/fontconfig/conf.d/70-no-bitmaps.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/80-delicious.conf: copy external/fontconfig/conf.d/80-delicious.conf
+build $SYSTEMDIR/system/etc/fonts/conf.d/90-synthetic.conf: copy external/fontconfig/conf.d/90-synthetic.conf

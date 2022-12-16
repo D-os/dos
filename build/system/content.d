@@ -237,7 +237,6 @@ out/system.content: \
   out/system/lib/libEGL.so \
   out/system/lib/libGLESv2.so \
   out/system/lib/libfreetype.so \
-  out/system/lib/libharfbuzz.so \
   out/system/lib/libcairo.so \
   out/system/lib/libbe.so \
   out/system/tests/kits \
@@ -311,6 +310,34 @@ out/system.content: \
   out/system/system/data/fonts/LiberationMono-Bold.ttf \
   out/system/system/data/fonts/LiberationMono-Italic.ttf \
   out/system/system/data/fonts/LiberationMono-BoldItalic.ttf \
+  out/system/system/etc/fonts/fonts.conf \
+  out/system/system/etc/fonts/conf.d/10-hinting-slight.conf \
+  out/system/system/etc/fonts/conf.d/10-sub-pixel-rgb.conf \
+  out/system/system/etc/fonts/conf.d/10-yes-antialias.conf \
+  out/system/system/etc/fonts/conf.d/11-lcdfilter-default.conf \
+  out/system/system/etc/fonts/conf.d/25-unhint-nonlatin.conf \
+  out/system/system/etc/fonts/conf.d/30-metric-aliases.conf \
+  out/system/system/etc/fonts/conf.d/40-nonlatin.conf \
+  out/system/system/etc/fonts/conf.d/45-generic.conf \
+  out/system/system/etc/fonts/conf.d/45-latin.conf \
+  out/system/system/etc/fonts/conf.d/48-spacing.conf \
+  out/system/system/etc/fonts/conf.d/49-sansserif.conf \
+  out/system/system/etc/fonts/conf.d/50-user.conf \
+  out/system/system/etc/fonts/conf.d/51-local.conf \
+  out/system/system/etc/fonts/conf.d/59-liberation-mono.conf \
+  out/system/system/etc/fonts/conf.d/59-liberation-sans.conf \
+  out/system/system/etc/fonts/conf.d/59-liberation-serif.conf \
+  out/system/system/etc/fonts/conf.d/60-generic.conf \
+  out/system/system/etc/fonts/conf.d/60-latin.conf \
+  out/system/system/etc/fonts/conf.d/65-0-google-noto-sans-cjk-ttc.conf \
+  out/system/system/etc/fonts/conf.d/65-0-google-noto-serif-cjk-ttc.conf \
+  out/system/system/etc/fonts/conf.d/65-fonts-persian.conf \
+  out/system/system/etc/fonts/conf.d/65-google-noto-cjk-fonts.conf \
+  out/system/system/etc/fonts/conf.d/65-nonlatin.conf \
+  out/system/system/etc/fonts/conf.d/69-unifont.conf \
+  out/system/system/etc/fonts/conf.d/70-no-bitmaps.conf \
+  out/system/system/etc/fonts/conf.d/80-delicious.conf \
+  out/system/system/etc/fonts/conf.d/90-synthetic.conf \
   out/system/system/bin/fc-conflist \
   out/system/system/bin/fc-list \
   out/system/system/bin/fc-match \
