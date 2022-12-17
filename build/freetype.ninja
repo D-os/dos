@@ -2,6 +2,7 @@ cflags = $
   -W $
   -Wall $
   -Werror $
+  -DDARWIN_NO_CARBON $
   -DFT2_BUILD_LIBRARY=1 $
   -O2 $
   -Wno-unused-parameter $
@@ -12,6 +13,8 @@ cflags = $
   -DFT_CONFIG_OPTION_SYSTEM_ZLIB $
   -DFT_CONFIG_OPTION_SUBPIXEL_RENDERING $
   -DTT_CONFIG_OPTION_SUBPIXEL_HINTING=2 $
+  -DPCF_CONFIG_OPTION_LONG_FAMILY_NAMES $
+  -DFT_CONFIG_OPTION_ENVIRONMENT_PROPERTIES $
   -DHAVE_UNISTD_H=1 $
   -DHAVE_FCNTL_H $
   -fPIC $
@@ -24,7 +27,6 @@ libs = -lpng -lz
 build $BUILDROOT/freetype/autofit.o: cc external/freetype/src/autofit/autofit.c
 build $BUILDROOT/freetype/ftbase.o: cc external/freetype/src/base/ftbase.c
 build $BUILDROOT/freetype/ftbbox.o: cc external/freetype/src/base/ftbbox.c
-build $BUILDROOT/freetype/ftbdf.o: cc external/freetype/src/base/ftbdf.c
 build $BUILDROOT/freetype/ftbitmap.o: cc external/freetype/src/base/ftbitmap.c
 build $BUILDROOT/freetype/ftdebug.o: cc external/freetype/src/base/ftdebug.c
 build $BUILDROOT/freetype/ftfstype.o: cc external/freetype/src/base/ftfstype.c
@@ -42,6 +44,7 @@ build $BUILDROOT/freetype/psaux.o: cc external/freetype/src/psaux/psaux.c
 build $BUILDROOT/freetype/pshinter.o: cc external/freetype/src/pshinter/pshinter.c
 build $BUILDROOT/freetype/psnames.o: cc external/freetype/src/psnames/psnames.c
 build $BUILDROOT/freetype/raster.o: cc external/freetype/src/raster/raster.c
+build $BUILDROOT/freetype/sdf.o: cc external/freetype/src/sdf/sdf.c
 build $BUILDROOT/freetype/sfnt.o: cc external/freetype/src/sfnt/sfnt.c
 build $BUILDROOT/freetype/smooth.o: cc external/freetype/src/smooth/smooth.c
 build $BUILDROOT/freetype/truetype.o: cc external/freetype/src/truetype/truetype.c
@@ -51,7 +54,6 @@ build $BUILDROOT/freetype/libfreetype.so: so $
   $BUILDROOT/freetype/autofit.o $
   $BUILDROOT/freetype/ftbase.o $
   $BUILDROOT/freetype/ftbbox.o $
-  $BUILDROOT/freetype/ftbdf.o $
   $BUILDROOT/freetype/ftbitmap.o $
   $BUILDROOT/freetype/ftdebug.o $
   $BUILDROOT/freetype/ftfstype.o $
@@ -69,6 +71,7 @@ build $BUILDROOT/freetype/libfreetype.so: so $
   $BUILDROOT/freetype/pshinter.o $
   $BUILDROOT/freetype/psnames.o $
   $BUILDROOT/freetype/raster.o $
+  $BUILDROOT/freetype/sdf.o $
   $BUILDROOT/freetype/sfnt.o $
   $BUILDROOT/freetype/smooth.o $
   $BUILDROOT/freetype/truetype.o $
