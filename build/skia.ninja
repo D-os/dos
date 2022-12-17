@@ -1,6 +1,6 @@
-# bin/gn gen out/Shared --args='is_official_build=true is_component_build=true cc="clang" cxx="clang++" skia_use_dng_sdk=false skia_use_fontconfig=true skia_use_freetype=true skia_use_system_freetype2=true skia_use_gl=false skia_use_harfbuzz=false skia_use_icu=false skia_use_x11=false skia_use_xps=false'
+# bin/gn gen out/Shared --args='is_official_build=true is_component_build=true cc="clang" cxx="clang++" skia_use_dng_sdk=false skia_use_fontconfig=true skia_use_freetype=true skia_use_system_freetype2=true skia_use_gl=false skia_use_harfbuzz=true skia_use_icu=true skia_use_x11=false skia_use_xps=false'
 # cp out/Shared/obj/skia.ninja ../../build/skia.ninja
-# cp out/Shared/obj/{avx,hsw,jpeg_decode,jpeg_encode,png_decode,png_encode,skx,sse42,ssse3,webp_decode,webp_encode,wuffs,xml,fontmgr_fontconfig_factory}.ninja ../../build/skia/
+# cp out/Shared/obj/{avx,hsw,jpeg_decode,jpeg_encode,png_decode,png_encode,skx,sse42,ssse3,webp_decode,webp_encode,wuffs,xml,fontmgr_fontconfig_factory,fontmgr_custom,gpu}.ninja ../../build/skia/
 # cp out/Shared/obj/modules/skcms/skcms.ninja ../../build/skia/
 # cp out/Shared/obj/third_party/wuffs/wuffs.ninja ../../build/skia/wuffs_c.ninja
 # edit!
@@ -31,7 +31,11 @@ subninja build/skia/gpu_shared.ninja
 subninja build/skia/skcms.ninja
 subninja build/skia/wuffs_c.ninja
 
-defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 $
+defines = $
+  -DSK_HAS_ANDROID_CODEC $
+  -DNDEBUG $
+  -DSKIA_DLL $
+  -DSK_R32_SHIFT=16 $
   -DSK_ENABLE_SKSL $
   -DSK_ENABLE_PRECOMPILE $
   -DSK_USE_PERFETTO $
@@ -47,12 +51,13 @@ defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 $
   -DSK_ENCODE_WEBP $
   -DSK_HAS_WUFFS_LIBRARY $
   -DSK_XML $
-  -DSK_UNICODE_AVAILABLE $
-  -DSK_SHAPER_HARFBUZZ_AVAILABLE $
 
+framework_dirs =
 includes = -Iexternal/skia
 cflags = $defines -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
 cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -Wno-psabi
+root_out_dir = .
+target_output_name = libskia
 
 build $BUILDROOT/skia/core/libskia.SkAAClip.o: cxx external/skia/src/core/SkAAClip.cpp
 build $BUILDROOT/skia/core/libskia.SkATrace.o: cxx external/skia/src/core/SkATrace.cpp
@@ -140,8 +145,6 @@ build $BUILDROOT/skia/core/libskia.SkImageFilterCache.o: cxx external/skia/src/c
 build $BUILDROOT/skia/core/libskia.SkImageFilterTypes.o: cxx external/skia/src/core/SkImageFilterTypes.cpp
 build $BUILDROOT/skia/core/libskia.SkImageGenerator.o: cxx external/skia/src/core/SkImageGenerator.cpp
 build $BUILDROOT/skia/core/libskia.SkImageInfo.o: cxx external/skia/src/core/SkImageInfo.cpp
-build $BUILDROOT/skia/core/libskia.SkKeyContext.o: cxx external/skia/src/core/SkKeyContext.cpp
-build $BUILDROOT/skia/core/libskia.SkKeyHelpers.o: cxx external/skia/src/core/SkKeyHelpers.cpp
 build $BUILDROOT/skia/core/libskia.SkLatticeIter.o: cxx external/skia/src/core/SkLatticeIter.cpp
 build $BUILDROOT/skia/core/libskia.SkLineClipper.o: cxx external/skia/src/core/SkLineClipper.cpp
 build $BUILDROOT/skia/core/libskia.SkLocalMatrixImageFilter.o: cxx external/skia/src/core/SkLocalMatrixImageFilter.cpp
@@ -165,15 +168,14 @@ build $BUILDROOT/skia/core/libskia.SkOpts.o: cxx external/skia/src/core/SkOpts.c
 build $BUILDROOT/skia/core/libskia.SkOpts_erms.o: cxx external/skia/src/core/SkOpts_erms.cpp
 build $BUILDROOT/skia/core/libskia.SkOverdrawCanvas.o: cxx external/skia/src/core/SkOverdrawCanvas.cpp
 build $BUILDROOT/skia/core/libskia.SkPaint.o: cxx external/skia/src/core/SkPaint.cpp
-build $BUILDROOT/skia/core/libskia.SkPaintParamsKey.o: cxx external/skia/src/core/SkPaintParamsKey.cpp
 build $BUILDROOT/skia/core/libskia.SkPaintPriv.o: cxx external/skia/src/core/SkPaintPriv.cpp
 build $BUILDROOT/skia/core/libskia.SkPath.o: cxx external/skia/src/core/SkPath.cpp
 build $BUILDROOT/skia/core/libskia.SkPathBuilder.o: cxx external/skia/src/core/SkPathBuilder.cpp
 build $BUILDROOT/skia/core/libskia.SkPathEffect.o: cxx external/skia/src/core/SkPathEffect.cpp
 build $BUILDROOT/skia/core/libskia.SkPathMeasure.o: cxx external/skia/src/core/SkPathMeasure.cpp
 build $BUILDROOT/skia/core/libskia.SkPathRef.o: cxx external/skia/src/core/SkPathRef.cpp
+build $BUILDROOT/skia/core/libskia.SkPathUtils.o: cxx external/skia/src/core/SkPathUtils.cpp
 build $BUILDROOT/skia/core/libskia.SkPath_serial.o: cxx external/skia/src/core/SkPath_serial.cpp
-build $BUILDROOT/skia/core/libskia.SkPipelineData.o: cxx external/skia/src/core/SkPipelineData.cpp
 build $BUILDROOT/skia/core/libskia.SkPixelRef.o: cxx external/skia/src/core/SkPixelRef.cpp
 build $BUILDROOT/skia/core/libskia.SkPixmap.o: cxx external/skia/src/core/SkPixmap.cpp
 build $BUILDROOT/skia/core/libskia.SkPoint.o: cxx external/skia/src/core/SkPoint.cpp
@@ -186,6 +188,7 @@ build $BUILDROOT/skia/core/libskia.SkRTree.o: cxx external/skia/src/core/SkRTree
 build $BUILDROOT/skia/core/libskia.SkRasterClip.o: cxx external/skia/src/core/SkRasterClip.cpp
 build $BUILDROOT/skia/core/libskia.SkRasterPipeline.o: cxx external/skia/src/core/SkRasterPipeline.cpp
 build $BUILDROOT/skia/core/libskia.SkRasterPipelineBlitter.o: cxx external/skia/src/core/SkRasterPipelineBlitter.cpp
+build $BUILDROOT/skia/core/libskia.SkRasterPipelineUtils.o: cxx external/skia/src/core/SkRasterPipelineUtils.cpp
 build $BUILDROOT/skia/core/libskia.SkReadBuffer.o: cxx external/skia/src/core/SkReadBuffer.cpp
 build $BUILDROOT/skia/core/libskia.SkRecord.o: cxx external/skia/src/core/SkRecord.cpp
 build $BUILDROOT/skia/core/libskia.SkRecordDraw.o: cxx external/skia/src/core/SkRecordDraw.cpp
@@ -207,7 +210,6 @@ build $BUILDROOT/skia/core/libskia.SkScan_Antihair.o: cxx external/skia/src/core
 build $BUILDROOT/skia/core/libskia.SkScan_Hairline.o: cxx external/skia/src/core/SkScan_Hairline.cpp
 build $BUILDROOT/skia/core/libskia.SkScan_Path.o: cxx external/skia/src/core/SkScan_Path.cpp
 build $BUILDROOT/skia/core/libskia.SkSemaphore.o: cxx external/skia/src/core/SkSemaphore.cpp
-build $BUILDROOT/skia/core/libskia.SkShaderCodeDictionary.o: cxx external/skia/src/core/SkShaderCodeDictionary.cpp
 build $BUILDROOT/skia/core/libskia.SkSharedMutex.o: cxx external/skia/src/core/SkSharedMutex.cpp
 build $BUILDROOT/skia/core/libskia.SkSpecialImage.o: cxx external/skia/src/core/SkSpecialImage.cpp
 build $BUILDROOT/skia/core/libskia.SkSpecialSurface.o: cxx external/skia/src/core/SkSpecialSurface.cpp
@@ -370,8 +372,6 @@ build $BUILDROOT/skia/effects/libskia.SkShaderMaskFilter.o: cxx external/skia/sr
 build $BUILDROOT/skia/effects/libskia.SkTableColorFilter.o: cxx external/skia/src/effects/SkTableColorFilter.cpp
 build $BUILDROOT/skia/effects/libskia.SkTableMaskFilter.o: cxx external/skia/src/effects/SkTableMaskFilter.cpp
 build $BUILDROOT/skia/effects/libskia.SkTrimPathEffect.o: cxx external/skia/src/effects/SkTrimPathEffect.cpp
-build $BUILDROOT/skia/shaders/gradients/libskia.Sk4fGradientBase.o: cxx external/skia/src/shaders/gradients/Sk4fGradientBase.cpp
-build $BUILDROOT/skia/shaders/gradients/libskia.Sk4fLinearGradient.o: cxx external/skia/src/shaders/gradients/Sk4fLinearGradient.cpp
 build $BUILDROOT/skia/shaders/gradients/libskia.SkGradientShader.o: cxx external/skia/src/shaders/gradients/SkGradientShader.cpp
 build $BUILDROOT/skia/shaders/gradients/libskia.SkGradientShaderBase.o: cxx external/skia/src/shaders/gradients/SkGradientShaderBase.cpp
 build $BUILDROOT/skia/shaders/gradients/libskia.SkLinearGradient.o: cxx external/skia/src/shaders/gradients/SkLinearGradient.cpp
@@ -398,6 +398,8 @@ build $BUILDROOT/skia/effects/imagefilters/libskia.SkPictureImageFilter.o: cxx e
 build $BUILDROOT/skia/effects/imagefilters/libskia.SkRuntimeImageFilter.o: cxx external/skia/src/effects/imagefilters/SkRuntimeImageFilter.cpp
 build $BUILDROOT/skia/effects/imagefilters/libskia.SkShaderImageFilter.o: cxx external/skia/src/effects/imagefilters/SkShaderImageFilter.cpp
 build $BUILDROOT/skia/effects/imagefilters/libskia.SkTileImageFilter.o: cxx external/skia/src/effects/imagefilters/SkTileImageFilter.cpp
+build $BUILDROOT/skia/android/libskia.SkAndroidFrameworkUtils.o: cxx external/skia/src/android/SkAndroidFrameworkUtils.cpp
+build $BUILDROOT/skia/android/libskia.SkAnimatedImage.o: cxx external/skia/src/android/SkAnimatedImage.cpp
 build $BUILDROOT/skia/codec/libskia.SkAndroidCodec.o: cxx external/skia/src/codec/SkAndroidCodec.cpp
 build $BUILDROOT/skia/codec/libskia.SkAndroidCodecAdapter.o: cxx external/skia/src/codec/SkAndroidCodecAdapter.cpp
 build $BUILDROOT/skia/codec/libskia.SkBmpBaseCodec.o: cxx external/skia/src/codec/SkBmpBaseCodec.cpp
@@ -455,6 +457,8 @@ build $BUILDROOT/skia/sksl/analysis/libskia.SkSLIsTrivialExpression.o: cxx exter
 build $BUILDROOT/skia/sksl/analysis/libskia.SkSLProgramUsage.o: cxx external/skia/src/sksl/analysis/SkSLProgramUsage.cpp
 build $BUILDROOT/skia/sksl/analysis/libskia.SkSLSwitchCaseContainsExit.o: cxx external/skia/src/sksl/analysis/SkSLSwitchCaseContainsExit.cpp
 build $BUILDROOT/skia/sksl/analysis/libskia.SkSLSymbolTableStackBuilder.o: cxx external/skia/src/sksl/analysis/SkSLSymbolTableStackBuilder.cpp
+build $BUILDROOT/skia/sksl/codegen/libskia.SkSLRasterPipelineBuilder.o: cxx external/skia/src/sksl/codegen/SkSLRasterPipelineBuilder.cpp
+build $BUILDROOT/skia/sksl/codegen/libskia.SkSLRasterPipelineCodeGenerator.o: cxx external/skia/src/sksl/codegen/SkSLRasterPipelineCodeGenerator.cpp
 build $BUILDROOT/skia/sksl/codegen/libskia.SkSLVMCodeGenerator.o: cxx external/skia/src/sksl/codegen/SkSLVMCodeGenerator.cpp
 build $BUILDROOT/skia/sksl/dsl/libskia.DSLBlock.o: cxx external/skia/src/sksl/dsl/DSLBlock.cpp
 build $BUILDROOT/skia/sksl/dsl/libskia.DSLCase.o: cxx external/skia/src/sksl/dsl/DSLCase.cpp
@@ -496,6 +500,7 @@ build $BUILDROOT/skia/sksl/ir/libskia.SkSLLiteral.o: cxx external/skia/src/sksl/
 build $BUILDROOT/skia/sksl/ir/libskia.SkSLModifiers.o: cxx external/skia/src/sksl/ir/SkSLModifiers.cpp
 build $BUILDROOT/skia/sksl/ir/libskia.SkSLPostfixExpression.o: cxx external/skia/src/sksl/ir/SkSLPostfixExpression.cpp
 build $BUILDROOT/skia/sksl/ir/libskia.SkSLPrefixExpression.o: cxx external/skia/src/sksl/ir/SkSLPrefixExpression.cpp
+build $BUILDROOT/skia/sksl/ir/libskia.SkSLProgram.o: cxx external/skia/src/sksl/ir/SkSLProgram.cpp
 build $BUILDROOT/skia/sksl/ir/libskia.SkSLSetting.o: cxx external/skia/src/sksl/ir/SkSLSetting.cpp
 build $BUILDROOT/skia/sksl/ir/libskia.SkSLSwitchStatement.o: cxx external/skia/src/sksl/ir/SkSLSwitchStatement.cpp
 build $BUILDROOT/skia/sksl/ir/libskia.SkSLSwizzle.o: cxx external/skia/src/sksl/ir/SkSLSwizzle.cpp
@@ -506,6 +511,7 @@ build $BUILDROOT/skia/sksl/ir/libskia.SkSLTypeReference.o: cxx external/skia/src
 build $BUILDROOT/skia/sksl/ir/libskia.SkSLVarDeclarations.o: cxx external/skia/src/sksl/ir/SkSLVarDeclarations.cpp
 build $BUILDROOT/skia/sksl/ir/libskia.SkSLVariable.o: cxx external/skia/src/sksl/ir/SkSLVariable.cpp
 build $BUILDROOT/skia/sksl/ir/libskia.SkSLVariableReference.o: cxx external/skia/src/sksl/ir/SkSLVariableReference.cpp
+build $BUILDROOT/skia/sksl/tracing/libskia.SkRPDebugTrace.o: cxx external/skia/src/sksl/tracing/SkRPDebugTrace.cpp
 build $BUILDROOT/skia/sksl/tracing/libskia.SkVMDebugTrace.o: cxx external/skia/src/sksl/tracing/SkVMDebugTrace.cpp
 build $BUILDROOT/skia/sksl/transform/libskia.SkSLAddConstToVarModifiers.o: cxx external/skia/src/sksl/transform/SkSLAddConstToVarModifiers.cpp
 build $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateDeadFunctions.o: cxx external/skia/src/sksl/transform/SkSLEliminateDeadFunctions.cpp
@@ -517,8 +523,6 @@ build $BUILDROOT/skia/sksl/transform/libskia.SkSLFindAndDeclareBuiltinFunctions.
 build $BUILDROOT/skia/sksl/transform/libskia.SkSLFindAndDeclareBuiltinVariables.o: cxx external/skia/src/sksl/transform/SkSLFindAndDeclareBuiltinVariables.cpp
 build $BUILDROOT/skia/sksl/transform/libskia.SkSLRenamePrivateSymbols.o: cxx external/skia/src/sksl/transform/SkSLRenamePrivateSymbols.cpp
 build $BUILDROOT/skia/sksl/transform/libskia.SkSLReplaceConstVarsWithLiterals.o: cxx external/skia/src/sksl/transform/SkSLReplaceConstVarsWithLiterals.cpp
-build $BUILDROOT/skia/gpu/graphite/libskia.CombinationBuilder.o: cxx external/skia/src/gpu/graphite/CombinationBuilder.cpp
-build $BUILDROOT/skia/gpu/graphite/libskia.FactoryFunctions.o: cxx external/skia/src/gpu/graphite/FactoryFunctions.cpp
 build $BUILDROOT/skia/ports/libskia.SkOSFile_posix.o: cxx external/skia/src/ports/SkOSFile_posix.cpp
 build $BUILDROOT/skia/ports/libskia.SkOSLibrary_posix.o: cxx external/skia/src/ports/SkOSLibrary_posix.cpp
 build $BUILDROOT/skia/ports/libskia.SkDebug_stdio.o: cxx external/skia/src/ports/SkDebug_stdio.cpp
@@ -610,8 +614,6 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/core/libskia.SkImageFilterTypes.o $
   $BUILDROOT/skia/core/libskia.SkImageGenerator.o $
   $BUILDROOT/skia/core/libskia.SkImageInfo.o $
-  $BUILDROOT/skia/core/libskia.SkKeyContext.o $
-  $BUILDROOT/skia/core/libskia.SkKeyHelpers.o $
   $BUILDROOT/skia/core/libskia.SkLatticeIter.o $
   $BUILDROOT/skia/core/libskia.SkLineClipper.o $
   $BUILDROOT/skia/core/libskia.SkLocalMatrixImageFilter.o $
@@ -635,15 +637,14 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/core/libskia.SkOpts_erms.o $
   $BUILDROOT/skia/core/libskia.SkOverdrawCanvas.o $
   $BUILDROOT/skia/core/libskia.SkPaint.o $
-  $BUILDROOT/skia/core/libskia.SkPaintParamsKey.o $
   $BUILDROOT/skia/core/libskia.SkPaintPriv.o $
   $BUILDROOT/skia/core/libskia.SkPath.o $
   $BUILDROOT/skia/core/libskia.SkPathBuilder.o $
   $BUILDROOT/skia/core/libskia.SkPathEffect.o $
   $BUILDROOT/skia/core/libskia.SkPathMeasure.o $
   $BUILDROOT/skia/core/libskia.SkPathRef.o $
+  $BUILDROOT/skia/core/libskia.SkPathUtils.o $
   $BUILDROOT/skia/core/libskia.SkPath_serial.o $
-  $BUILDROOT/skia/core/libskia.SkPipelineData.o $
   $BUILDROOT/skia/core/libskia.SkPixelRef.o $
   $BUILDROOT/skia/core/libskia.SkPixmap.o $
   $BUILDROOT/skia/core/libskia.SkPoint.o $
@@ -656,6 +657,7 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/core/libskia.SkRasterClip.o $
   $BUILDROOT/skia/core/libskia.SkRasterPipeline.o $
   $BUILDROOT/skia/core/libskia.SkRasterPipelineBlitter.o $
+  $BUILDROOT/skia/core/libskia.SkRasterPipelineUtils.o $
   $BUILDROOT/skia/core/libskia.SkReadBuffer.o $
   $BUILDROOT/skia/core/libskia.SkRecord.o $
   $BUILDROOT/skia/core/libskia.SkRecordDraw.o $
@@ -677,7 +679,6 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/core/libskia.SkScan_Hairline.o $
   $BUILDROOT/skia/core/libskia.SkScan_Path.o $
   $BUILDROOT/skia/core/libskia.SkSemaphore.o $
-  $BUILDROOT/skia/core/libskia.SkShaderCodeDictionary.o $
   $BUILDROOT/skia/core/libskia.SkSharedMutex.o $
   $BUILDROOT/skia/core/libskia.SkSpecialImage.o $
   $BUILDROOT/skia/core/libskia.SkSpecialSurface.o $
@@ -840,8 +841,6 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/effects/libskia.SkTableColorFilter.o $
   $BUILDROOT/skia/effects/libskia.SkTableMaskFilter.o $
   $BUILDROOT/skia/effects/libskia.SkTrimPathEffect.o $
-  $BUILDROOT/skia/shaders/gradients/libskia.Sk4fGradientBase.o $
-  $BUILDROOT/skia/shaders/gradients/libskia.Sk4fLinearGradient.o $
   $BUILDROOT/skia/shaders/gradients/libskia.SkGradientShader.o $
   $BUILDROOT/skia/shaders/gradients/libskia.SkGradientShaderBase.o $
   $BUILDROOT/skia/shaders/gradients/libskia.SkLinearGradient.o $
@@ -868,6 +867,8 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/effects/imagefilters/libskia.SkRuntimeImageFilter.o $
   $BUILDROOT/skia/effects/imagefilters/libskia.SkShaderImageFilter.o $
   $BUILDROOT/skia/effects/imagefilters/libskia.SkTileImageFilter.o $
+  $BUILDROOT/skia/android/libskia.SkAndroidFrameworkUtils.o $
+  $BUILDROOT/skia/android/libskia.SkAnimatedImage.o $
   $BUILDROOT/skia/codec/libskia.SkAndroidCodec.o $
   $BUILDROOT/skia/codec/libskia.SkAndroidCodecAdapter.o $
   $BUILDROOT/skia/codec/libskia.SkBmpBaseCodec.o $
@@ -925,6 +926,8 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/sksl/analysis/libskia.SkSLProgramUsage.o $
   $BUILDROOT/skia/sksl/analysis/libskia.SkSLSwitchCaseContainsExit.o $
   $BUILDROOT/skia/sksl/analysis/libskia.SkSLSymbolTableStackBuilder.o $
+  $BUILDROOT/skia/sksl/codegen/libskia.SkSLRasterPipelineBuilder.o $
+  $BUILDROOT/skia/sksl/codegen/libskia.SkSLRasterPipelineCodeGenerator.o $
   $BUILDROOT/skia/sksl/codegen/libskia.SkSLVMCodeGenerator.o $
   $BUILDROOT/skia/sksl/dsl/libskia.DSLBlock.o $
   $BUILDROOT/skia/sksl/dsl/libskia.DSLCase.o $
@@ -966,6 +969,7 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/sksl/ir/libskia.SkSLModifiers.o $
   $BUILDROOT/skia/sksl/ir/libskia.SkSLPostfixExpression.o $
   $BUILDROOT/skia/sksl/ir/libskia.SkSLPrefixExpression.o $
+  $BUILDROOT/skia/sksl/ir/libskia.SkSLProgram.o $
   $BUILDROOT/skia/sksl/ir/libskia.SkSLSetting.o $
   $BUILDROOT/skia/sksl/ir/libskia.SkSLSwitchStatement.o $
   $BUILDROOT/skia/sksl/ir/libskia.SkSLSwizzle.o $
@@ -976,6 +980,7 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/sksl/ir/libskia.SkSLVarDeclarations.o $
   $BUILDROOT/skia/sksl/ir/libskia.SkSLVariable.o $
   $BUILDROOT/skia/sksl/ir/libskia.SkSLVariableReference.o $
+  $BUILDROOT/skia/sksl/tracing/libskia.SkRPDebugTrace.o $
   $BUILDROOT/skia/sksl/tracing/libskia.SkVMDebugTrace.o $
   $BUILDROOT/skia/sksl/transform/libskia.SkSLAddConstToVarModifiers.o $
   $BUILDROOT/skia/sksl/transform/libskia.SkSLEliminateDeadFunctions.o $
@@ -987,8 +992,6 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/sksl/transform/libskia.SkSLFindAndDeclareBuiltinVariables.o $
   $BUILDROOT/skia/sksl/transform/libskia.SkSLRenamePrivateSymbols.o $
   $BUILDROOT/skia/sksl/transform/libskia.SkSLReplaceConstVarsWithLiterals.o $
-  $BUILDROOT/skia/gpu/graphite/libskia.CombinationBuilder.o $
-  $BUILDROOT/skia/gpu/graphite/libskia.FactoryFunctions.o $
   $BUILDROOT/skia/ports/libskia.SkOSFile_posix.o $
   $BUILDROOT/skia/ports/libskia.SkOSLibrary_posix.o $
   $BUILDROOT/skia/ports/libskia.SkDebug_stdio.o $
@@ -1081,6 +1084,7 @@ build $BUILDROOT/skia/libskia.so: so $
   $BUILDROOT/skia/gpu/ganesh/gpu.GrSurface.o $
   $BUILDROOT/skia/gpu/ganesh/gpu.GrSurfaceInfo.o $
   $BUILDROOT/skia/gpu/ganesh/gpu.GrSurfaceProxy.o $
+  $BUILDROOT/skia/gpu/ganesh/gpu.GrSurfaceProxyView.o $
   $BUILDROOT/skia/gpu/ganesh/gpu.GrTestUtils.o $
   $BUILDROOT/skia/gpu/ganesh/gpu.GrTexture.o $
   $BUILDROOT/skia/gpu/ganesh/gpu.GrTextureProxy.o $
@@ -1273,7 +1277,12 @@ build $BUILDROOT/skia/libskia.so: so $
   $SYSROOT/lib/libfreetype.so $
   $SYSROOT/lib/libexpat.so $
   $SYSROOT/lib/libz.so $
+  $SYSROOT/lib/libharfbuzz.so $
   $SYSROOT/lib/libjpeg.so $
   $SYSROOT/lib/libpng.so $
   $SYSROOT/lib/libwebp.so
-  libs = -Wl,--gc-sections -lc++ -ldl -lpthread -lfontconfig -lfreetype -lexpat -lz -ljpeg -lpng -lwebp
+  libs = -Wl,--gc-sections -lc++ -ldl -lpthread -lfontconfig -lfreetype -lexpat -lz -lharfbuzz -ljpeg -lpng -lwebp
+  frameworks =
+  swiftmodules =
+  output_extension = .so
+  output_dir = 

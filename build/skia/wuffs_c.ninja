@@ -1,6 +1,14 @@
 defines = -DWUFFS_IMPLEMENTATION -DWUFFS_CONFIG__MODULES -DWUFFS_CONFIG__MODULE__BASE -DWUFFS_CONFIG__MODULE__GIF -DWUFFS_CONFIG__MODULE__LZW -DNDEBUG
-cflags = $defines -w -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
+framework_dirs =
+includes =
+cflags = $defines -w -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections -isystem /home/smoku/devel/Dos/skia/third_party/externals/wuffs/release/c
+cflags_c =
+root_out_dir = .
+target_output_name = libwuffs
 
 build $BUILDROOT/skia/third_party/externals/wuffs/release/c/libwuffs.wuffs-v0.3.o: cc build/skia/wuffs-v0.3.c
 
 build $BUILDROOT/skia/libwuffs.a: ar $BUILDROOT/skia/third_party/externals/wuffs/release/c/libwuffs.wuffs-v0.3.o
+  arflags =
+  output_extension = .a
+  output_dir = 

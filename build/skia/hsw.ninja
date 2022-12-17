@@ -1,6 +1,9 @@
 defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 -DSK_ENABLE_SKSL -DSK_ENABLE_PRECOMPILE -DSK_USE_PERFETTO -DSK_GAMMA_APPLY_TO_A8 -DSKIA_IMPLEMENTATION=1
+framework_dirs =
 includes = -Iexternal/skia
-cflags = $defines -march=haswell -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
+cflags = $defines -march=haswell -fomit-frame-pointer -momit-leaf-frame-pointer -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
 cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -Wno-psabi
+root_out_dir = .
+target_output_name = hsw
 
 build $BUILDROOT/skia/opts/hsw.SkOpts_hsw.o: cxx external/skia/src/opts/SkOpts_hsw.cpp

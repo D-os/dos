@@ -237,7 +237,9 @@ out/system.content: \
   out/system/lib/libEGL.so \
   out/system/lib/libGLESv2.so \
   out/system/lib/libfreetype.so \
+  out/system/lib/libharfbuzz.so \
   out/system/lib/libcairo.so \
+  out/system/lib/libskia.so \
   out/system/lib/libbe.so \
   out/system/tests/kits \
   out/system/tests/kernel_area \

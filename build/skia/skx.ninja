@@ -1,6 +1,9 @@
 defines = -DNDEBUG -DSKIA_DLL -DSK_R32_SHIFT=16 -DSK_ENABLE_SKSL -DSK_ENABLE_PRECOMPILE -DSK_USE_PERFETTO -DSK_GAMMA_APPLY_TO_A8 -DSKIA_IMPLEMENTATION=1
+framework_dirs =
 includes = -Iexternal/skia
-cflags = $defines -march=skylake-avx512 -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
+cflags = $defines -march=skylake-avx512 -fomit-frame-pointer -momit-leaf-frame-pointer -Wno-attributes -ffp-contract=off -fstrict-aliasing -fPIC -fvisibility=hidden -O3 -fdata-sections -ffunction-sections
 cxxflags = $defines -std=c++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -Wno-psabi
+root_out_dir = .
+target_output_name = skx
 
 build $BUILDROOT/skia/opts/skx.SkOpts_skx.o: cxx external/skia/src/opts/SkOpts_skx.cpp
