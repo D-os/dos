@@ -260,6 +260,7 @@ out/system.content: \
   out/system/tests/interface_pulse \
   out/system/tests/interface_boxes \
   out/system/tests/interface_radios \
+  out/system/tests/interface_sliders \
   out/system/tests/sampservice \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \

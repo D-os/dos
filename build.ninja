@@ -283,27 +283,6 @@ build $SYSROOT/lib/libzstd.so: copy $BUILDROOT/zstd/libzstd.so
 
 subninja system/os/build.ninja
 build $SYSROOT/lib/libbe.so: copy $BUILDROOT/os/libbe.so
-build $SYSTEMDIR/tests/kits: copy $BUILDROOT/os/tests/kits
-build $SYSTEMDIR/tests/kernel_area: copy $BUILDROOT/os/tests/kernel_area
-build $SYSTEMDIR/tests/kernel_image: copy $BUILDROOT/os/tests/kernel_image
-build $SYSTEMDIR/tests/kernel_port: copy $BUILDROOT/os/tests/kernel_port
-build $SYSTEMDIR/tests/kernel_sem: copy $BUILDROOT/os/tests/kernel_sem
-build $SYSTEMDIR/tests/kernel_team: copy $BUILDROOT/os/tests/kernel_team
-build $SYSTEMDIR/tests/kernel_thread: copy $BUILDROOT/os/tests/kernel_thread
-build $SYSTEMDIR/tests/kernel_debug: copy $BUILDROOT/os/tests/kernel_debug
-build $SYSTEMDIR/tests/app_application: copy $BUILDROOT/os/tests/app_application
-build $SYSTEMDIR/tests/app_message: copy $BUILDROOT/os/tests/app_message
-build $SYSTEMDIR/tests/interface_window: copy $BUILDROOT/os/tests/interface_window
-build $SYSTEMDIR/tests/interface_drawing: copy $BUILDROOT/os/tests/interface_drawing
-build $SYSTEMDIR/tests/interface_hello: copy $BUILDROOT/os/tests/interface_hello
-build $SYSTEMDIR/tests/interface_button: copy $BUILDROOT/os/tests/interface_button
-build $SYSTEMDIR/tests/interface_views: copy $BUILDROOT/os/tests/interface_views
-build $SYSTEMDIR/tests/interface_minimal-app: copy $BUILDROOT/os/tests/interface_minimal-app
-build $SYSTEMDIR/tests/interface_checkbox: copy $BUILDROOT/os/tests/interface_checkbox
-build $SYSTEMDIR/tests/interface_clipping: copy $BUILDROOT/os/tests/interface_clipping
-build $SYSTEMDIR/tests/interface_pulse: copy $BUILDROOT/os/tests/interface_pulse
-build $SYSTEMDIR/tests/interface_boxes: copy $BUILDROOT/os/tests/interface_boxes
-build $SYSTEMDIR/tests/interface_radios: copy $BUILDROOT/os/tests/interface_radios
 build $SYSTEMDIR/tests/sampservice: copy $BUILDROOT/os/services/sampservice/sampservice
 build $SYSTEMDIR/system/libexec/app_server: copy $BUILDROOT/os/services/app/app_server
 
