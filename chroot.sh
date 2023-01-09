@@ -10,8 +10,13 @@
 
 DIR=$1
 if [ -z "$DIR" ] || [ ! -d "$DIR" ]; then
-  sed -n '/^## /{s/^## //p}' "$0"
+  sed -n '/^## /{s/^## //p}' "$0" 2>&1
   exit 1
+fi
+
+if mount | grep -q $DIR; then
+  echo "$DIR is already chrooted" 2>&1
+  exit 2
 fi
 
 echo chrooting into $DIR
