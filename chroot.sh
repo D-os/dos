@@ -5,7 +5,7 @@
 #
 # put the following lines in /etc/sudoers.d/
 # if you do not want to have to type the password
-#Cmnd_Alias BUILD_COMMANDS = /usr/bin/mount,/usr/bin/umount,/usr/sbin/chroot
+#Cmnd_Alias BUILD_COMMANDS = /usr/bin/mount,/usr/bin/umount,/usr/sbin/chroot,/usr/bin/ln
 #%users ALL = NOPASSWD: BUILD_COMMANDS
 
 DIR=$1
@@ -14,23 +14,7 @@ if [ -z "$DIR" ] || [ ! -d "$DIR" ]; then
   exit 1
 fi
 
-if mount | grep -q $DIR; then
-  echo "$DIR is already chrooted" 2>&1
-  exit 2
-fi
-
 echo chrooting into $DIR
-
-NEED_CLEANUP=1
-mkdir -p $DIR/etc
-cp /etc/resolv.conf $DIR/etc
-mkdir -p $DIR/proc
-sudo mount --read-only --bind /proc $DIR/proc
-mkdir -p $DIR/sys
-sudo mount --read-only --bind /sys $DIR/sys
-mkdir -p $DIR/dev
-sudo mount --read-only --bind /dev $DIR/dev
-sudo mount --read-only --bind /dev/pts $DIR/dev/pts
 
 cleanup_chroot() {
   grep -o "[^ ]*$DIR[^ ]*" /proc/self/mountinfo | sort -r | xargs sudo umount --recursive --lazy
@@ -38,8 +22,26 @@ cleanup_chroot() {
   NEED_CLEANUP=0
 }
 
-trap cleanup_chroot INT
-stty -echoctl 2>/dev/null # hide ^C
+if mount | grep -q $DIR; then
+  echo "$DIR is already configured" 2>&1
+else
+  NEED_CLEANUP=1
+
+  mkdir -p $DIR/etc
+  cp /etc/resolv.conf $DIR/etc
+  mkdir -p $DIR/proc
+  sudo mount --read-only --bind /proc $DIR/proc
+  mkdir -p $DIR/sys
+  sudo mount --read-only --bind /sys $DIR/sys
+  mkdir -p $DIR/dev
+  sudo mount --bind /dev $DIR/dev
+  sudo mount --read-only --bind /dev/pts $DIR/dev/pts
+  sudo mount -t binder binder $DIR/dev/binderfs
+  sudo ln -sf binderfs/binder $DIR/dev/binder
+
+  trap cleanup_chroot INT
+  stty -echoctl 2>/dev/null # hide ^C
+fi
 
 shift
 CMD=${1:=/bin/init}

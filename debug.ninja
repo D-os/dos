@@ -1,4 +1,4 @@
-system_os_build_flags = -DRUN_WITHOUT_APP_SERVER -UNDEBUG -DDEBUG
+system_os_build_flags = -UNDEBUG -DDEBUG
 libbinder_build_flags = -UNDEBUG
 
 include build.ninja

@@ -26,6 +26,8 @@ using best available open source components._
 
 See `tools/tc-build/README.md` for a list of required host tools.
 
+You need to be running Linux kernel with KVM and `binderfs` support.
+
 > :warning: This repository makes heavy use of git submodules, so you need to `git clone --recursive`
 
 > :warning: Some of submodules store copious amount of data. You are advised to clone `--depth 1`
@@ -40,7 +42,7 @@ ninja && qemu.sh
 #### Unit tests
 
 ```sh
-ninja -f debug.ninja out/system.content && ./chroot.sh out/system /tests/kits
+ninja -f chroot.ninja out/system.content && ./chroot.sh out/system /tests/kits
 ```
 
 #### Interactive tests
@@ -55,7 +57,7 @@ XDG_RUNTIME_DIR=$DOS_DIR/out/system/run build/compositor/weston
 Having Weston window open run in another terminal window:
 
 ```sh
-ninja -f debug.ninja out/system.content && ./chroot.sh out/system env XDG_RUNTIME_DIR=/run WAYLAND_DISPLAY=wayland-1 WAYLAND_DEBUG=1 /tests/interface_window
+ninja -f chroot.ninja out/system.content && ./chroot.sh out/system env XDG_RUNTIME_DIR=/run WAYLAND_DISPLAY=wayland-1 WAYLAND_DEBUG=1 /tests/interface_window
 ```
 
 [1]: https://github.com/D-os/weston.git

@@ -1,0 +1,4 @@
+system_os_build_flags = -DRUN_WITHOUT_REGISTRAR -UNDEBUG -DDEBUG
+libbinder_build_flags = -UNDEBUG
+
+include build.ninja
