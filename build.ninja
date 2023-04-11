@@ -90,7 +90,7 @@ subninja build/aidl_host.ninja
 build out/host/bin/aidl: copy $BUILDROOT/_host/aidl/aidl
 HOSTAIDL = out/host/bin/aidl
 rule aidl
-  command = mkdir -p "${headerDir}" && $HOSTAIDL --lang=${lang} ${optionalFlags} --structured --ninja -d ${out}.d -h ${headerDir} -o ${outDir} ${imports} ${in}
+  command = mkdir -p "${headerDir}" && $HOSTAIDL --lang=${lang} ${optionalFlags} --ninja -d ${out}.d -h ${headerDir} -o ${outDir} ${imports} ${in}
   generator = $HOSTAIDL
   depfile = ${out}.d
   description = [HOST] AIDL ${lang} ${in}

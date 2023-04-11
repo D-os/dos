@@ -61,3 +61,22 @@ ninja -f chroot.ninja out/system.content && ./chroot.sh out/system env XDG_RUNTI
 ```
 
 [1]: https://github.com/D-os/weston.git
+
+#### System integration tests
+
+To run tests that require system services you need to build using `-f debug.ninja`
+and run the following services on dedicated terminals:
+
+```sh
+ninja -f debug.ninja out/system.content && ./chroot.sh out/system /system/bin/servicemanager
+```
+
+```sh
+ninja -f debug.ninja out/system.content && ./chroot.sh out/system /system/libexec/app_server
+```
+
+then run test:
+
+```sh
+ninja -f debug.ninja out/system.content && ./chroot.sh out/system /tests/app_message_runner
+```

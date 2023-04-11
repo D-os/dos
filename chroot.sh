@@ -50,4 +50,4 @@ CMD=${CMD#$DIR}
 
 sudo chroot $DIR "$CMD" "$@"
 
-[ $NEED_CLEANUP = 1 ] && cleanup_chroot
+[ "$NEED_CLEANUP" = 1 ] && cleanup_chroot

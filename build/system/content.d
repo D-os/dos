@@ -249,6 +249,7 @@ out/system.content: \
   out/system/tests/kernel_thread \
   out/system/tests/app_application \
   out/system/tests/app_message \
+  out/system/tests/app_message_runner \
   out/system/tests/interface_window \
   out/system/tests/interface_drawing \
   out/system/tests/interface_hello \
