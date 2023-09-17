@@ -200,3 +200,6 @@
 [submodule "external/backward-cpp"]
 	path = external/backward-cpp
 	url = https://github.com/bombela/backward-cpp.git
+[submodule "external/elfutils"]
+	path = external/elfutils
+	url = git://sourceware.org/git/elfutils.git
