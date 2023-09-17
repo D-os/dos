@@ -1,0 +1,1083 @@
+cflags = $
+  -std=gnu99 -Wall -Wshadow -Wformat=2 $
+  -Wold-style-definition -Wstrict-prototypes $
+  -Werror -Wunused -Wextra $
+  -pthread $
+  -D_GNU_SOURCE $
+  -DHAVE_CONFIG_H $
+  -DSYMBOL_VERSIONING $
+  -DUSE_LOCKS $
+  -DUSE_ZSTD $
+  -DHAVE_STDATOMIC_H $
+  -DHAVE_VISIBILITY $
+  -DHAVE_FALLTHROUGH $
+  -DPIC -fpic $
+  -DHAVE_ERR_H $
+  -DHAVE_DECL_POWEROF2 $
+  -DHAVE_DECL_MEMPCPY $
+  -DHAVE_DECL_REALLOCARRAY $
+
+includes = -Ibuild/elfutils $
+  -Iexternal/elfutils/libasm -Iexternal/elfutils/libebl $
+  -Iexternal/elfutils/libcpu $
+  -Iexternal/elfutils/libelf -Iexternal/elfutils/lib $
+  -Iexternal/elfutils/libdw -Iexternal/elfutils/libdwelf -Iexternal/elfutils/libdwfl $
+  -Iexternal/zlib -Iexternal/zstd/lib $
+
+build $BUILDROOT/elfutils/libeu/xasprintf.o: cc external/elfutils/lib/xasprintf.c
+build $BUILDROOT/elfutils/libeu/xstrdup.o: cc external/elfutils/lib/xstrdup.c
+build $BUILDROOT/elfutils/libeu/xstrndup.o: cc external/elfutils/lib/xstrndup.c
+build $BUILDROOT/elfutils/libeu/xmalloc.o: cc external/elfutils/lib/xmalloc.c
+build $BUILDROOT/elfutils/libeu/next_prime.o: cc external/elfutils/lib/next_prime.c
+build $BUILDROOT/elfutils/libeu/crc32.o: cc external/elfutils/lib/crc32.c
+build $BUILDROOT/elfutils/libeu/crc32_file.o: cc external/elfutils/lib/crc32_file.c
+build $BUILDROOT/elfutils/libeu/color.o: cc external/elfutils/lib/color.c
+build $BUILDROOT/elfutils/libeu/error.o: cc external/elfutils/lib/error.c
+build $BUILDROOT/elfutils/libeu/printversion.o: cc external/elfutils/lib/printversion.c
+
+build $BUILDROOT/elfutils/libeu.a: ar $
+  $BUILDROOT/elfutils/libeu/xasprintf.o $
+  $BUILDROOT/elfutils/libeu/xstrdup.o $
+  $BUILDROOT/elfutils/libeu/xstrndup.o $
+  $BUILDROOT/elfutils/libeu/xmalloc.o $
+  $BUILDROOT/elfutils/libeu/next_prime.o $
+  $BUILDROOT/elfutils/libeu/crc32.o $
+  $BUILDROOT/elfutils/libeu/crc32_file.o $
+  $BUILDROOT/elfutils/libeu/error.o $
+
+build $BUILDROOT/elfutils/libebl/eblopenbackend.o: cc external/elfutils/libebl/eblopenbackend.c
+build $BUILDROOT/elfutils/libebl/eblclosebackend.o: cc external/elfutils/libebl/eblclosebackend.c
+build $BUILDROOT/elfutils/libebl/eblreloctypename.o: cc external/elfutils/libebl/eblreloctypename.c
+build $BUILDROOT/elfutils/libebl/eblsegmenttypename.o: cc external/elfutils/libebl/eblsegmenttypename.c
+build $BUILDROOT/elfutils/libebl/eblsectiontypename.o: cc external/elfutils/libebl/eblsectiontypename.c
+build $BUILDROOT/elfutils/libebl/eblmachineflagname.o: cc external/elfutils/libebl/eblmachineflagname.c
+build $BUILDROOT/elfutils/libebl/eblsymboltypename.o: cc external/elfutils/libebl/eblsymboltypename.c
+build $BUILDROOT/elfutils/libebl/ebldynamictagname.o: cc external/elfutils/libebl/ebldynamictagname.c
+build $BUILDROOT/elfutils/libebl/eblsectionname.o: cc external/elfutils/libebl/eblsectionname.c
+build $BUILDROOT/elfutils/libebl/eblsymbolbindingname.o: cc external/elfutils/libebl/eblsymbolbindingname.c
+build $BUILDROOT/elfutils/libebl/eblbackendname.o: cc external/elfutils/libebl/eblbackendname.c
+build $BUILDROOT/elfutils/libebl/eblosabiname.o: cc external/elfutils/libebl/eblosabiname.c
+build $BUILDROOT/elfutils/libebl/eblmachineflagcheck.o: cc external/elfutils/libebl/eblmachineflagcheck.c
+build $BUILDROOT/elfutils/libebl/eblmachinesectionflagcheck.o: cc external/elfutils/libebl/eblmachinesectionflagcheck.c
+build $BUILDROOT/elfutils/libebl/eblreloctypecheck.o: cc external/elfutils/libebl/eblreloctypecheck.c
+build $BUILDROOT/elfutils/libebl/eblrelocvaliduse.o: cc external/elfutils/libebl/eblrelocvaliduse.c
+build $BUILDROOT/elfutils/libebl/eblrelocsimpletype.o: cc external/elfutils/libebl/eblrelocsimpletype.c
+build $BUILDROOT/elfutils/libebl/ebldynamictagcheck.o: cc external/elfutils/libebl/ebldynamictagcheck.c
+build $BUILDROOT/elfutils/libebl/eblcorenotetypename.o: cc external/elfutils/libebl/eblcorenotetypename.c
+build $BUILDROOT/elfutils/libebl/eblobjnotetypename.o: cc external/elfutils/libebl/eblobjnotetypename.c
+build $BUILDROOT/elfutils/libebl/eblcorenote.o: cc external/elfutils/libebl/eblcorenote.c
+build $BUILDROOT/elfutils/libebl/eblobjnote.o: cc external/elfutils/libebl/eblobjnote.c
+build $BUILDROOT/elfutils/libebl/ebldebugscnp.o: cc external/elfutils/libebl/ebldebugscnp.c
+build $BUILDROOT/elfutils/libebl/eblgotpcreloccheck.o: cc external/elfutils/libebl/eblgotpcreloccheck.c
+build $BUILDROOT/elfutils/libebl/eblcopyrelocp.o: cc external/elfutils/libebl/eblcopyrelocp.c
+build $BUILDROOT/elfutils/libebl/eblsectionstripp.o: cc external/elfutils/libebl/eblsectionstripp.c
+build $BUILDROOT/elfutils/libebl/eblelfclass.o: cc external/elfutils/libebl/eblelfclass.c
+build $BUILDROOT/elfutils/libebl/eblelfdata.o: cc external/elfutils/libebl/eblelfdata.c
+build $BUILDROOT/elfutils/libebl/eblelfmachine.o: cc external/elfutils/libebl/eblelfmachine.c
+build $BUILDROOT/elfutils/libebl/ebl_check_special_symbol.o: cc external/elfutils/libebl/ebl_check_special_symbol.c
+build $BUILDROOT/elfutils/libebl/eblbsspltp.o: cc external/elfutils/libebl/eblbsspltp.c
+build $BUILDROOT/elfutils/libebl/eblretval.o: cc external/elfutils/libebl/eblretval.c
+build $BUILDROOT/elfutils/libebl/eblreginfo.o: cc external/elfutils/libebl/eblreginfo.c
+build $BUILDROOT/elfutils/libebl/eblnonerelocp.o: cc external/elfutils/libebl/eblnonerelocp.c
+build $BUILDROOT/elfutils/libebl/eblrelativerelocp.o: cc external/elfutils/libebl/eblrelativerelocp.c
+build $BUILDROOT/elfutils/libebl/eblsysvhashentrysize.o: cc external/elfutils/libebl/eblsysvhashentrysize.c
+build $BUILDROOT/elfutils/libebl/eblauxvinfo.o: cc external/elfutils/libebl/eblauxvinfo.c
+build $BUILDROOT/elfutils/libebl/eblcheckobjattr.o: cc external/elfutils/libebl/eblcheckobjattr.c
+build $BUILDROOT/elfutils/libebl/ebl_check_special_section.o: cc external/elfutils/libebl/ebl_check_special_section.c
+build $BUILDROOT/elfutils/libebl/eblabicfi.o: cc external/elfutils/libebl/eblabicfi.c
+build $BUILDROOT/elfutils/libebl/eblstother.o: cc external/elfutils/libebl/eblstother.c
+build $BUILDROOT/elfutils/libebl/eblinitreg.o: cc external/elfutils/libebl/eblinitreg.c
+build $BUILDROOT/elfutils/libebl/ebldwarftoregno.o: cc external/elfutils/libebl/ebldwarftoregno.c
+build $BUILDROOT/elfutils/libebl/eblnormalizepc.o: cc external/elfutils/libebl/eblnormalizepc.c
+build $BUILDROOT/elfutils/libebl/eblunwind.o: cc external/elfutils/libebl/eblunwind.c
+build $BUILDROOT/elfutils/libebl/eblresolvesym.o: cc external/elfutils/libebl/eblresolvesym.c
+build $BUILDROOT/elfutils/libebl/eblcheckreloctargettype.o: cc external/elfutils/libebl/eblcheckreloctargettype.c
+build $BUILDROOT/elfutils/libebl/ebl_data_marker_symbol.o: cc external/elfutils/libebl/ebl_data_marker_symbol.c
+
+build $BUILDROOT/elfutils/libebl.a: ar $
+  $BUILDROOT/elfutils/libebl/eblopenbackend.o $
+  $BUILDROOT/elfutils/libebl/eblclosebackend.o $
+  $BUILDROOT/elfutils/libebl/eblreloctypename.o $
+  $BUILDROOT/elfutils/libebl/eblsegmenttypename.o $
+  $BUILDROOT/elfutils/libebl/eblsectiontypename.o $
+  $BUILDROOT/elfutils/libebl/eblmachineflagname.o $
+  $BUILDROOT/elfutils/libebl/eblsymboltypename.o $
+  $BUILDROOT/elfutils/libebl/ebldynamictagname.o $
+  $BUILDROOT/elfutils/libebl/eblsectionname.o $
+  $BUILDROOT/elfutils/libebl/eblsymbolbindingname.o $
+  $BUILDROOT/elfutils/libebl/eblbackendname.o $
+  $BUILDROOT/elfutils/libebl/eblosabiname.o $
+  $BUILDROOT/elfutils/libebl/eblmachineflagcheck.o $
+  $BUILDROOT/elfutils/libebl/eblmachinesectionflagcheck.o $
+  $BUILDROOT/elfutils/libebl/eblreloctypecheck.o $
+  $BUILDROOT/elfutils/libebl/eblrelocvaliduse.o $
+  $BUILDROOT/elfutils/libebl/eblrelocsimpletype.o $
+  $BUILDROOT/elfutils/libebl/ebldynamictagcheck.o $
+  $BUILDROOT/elfutils/libebl/eblcorenotetypename.o $
+  $BUILDROOT/elfutils/libebl/eblobjnotetypename.o $
+  $BUILDROOT/elfutils/libebl/eblcorenote.o $
+  $BUILDROOT/elfutils/libebl/eblobjnote.o $
+  $BUILDROOT/elfutils/libebl/ebldebugscnp.o $
+  $BUILDROOT/elfutils/libebl/eblgotpcreloccheck.o $
+  $BUILDROOT/elfutils/libebl/eblcopyrelocp.o $
+  $BUILDROOT/elfutils/libebl/eblsectionstripp.o $
+  $BUILDROOT/elfutils/libebl/eblelfclass.o $
+  $BUILDROOT/elfutils/libebl/eblelfdata.o $
+  $BUILDROOT/elfutils/libebl/eblelfmachine.o $
+  $BUILDROOT/elfutils/libebl/ebl_check_special_symbol.o $
+  $BUILDROOT/elfutils/libebl/eblbsspltp.o $
+  $BUILDROOT/elfutils/libebl/eblretval.o $
+  $BUILDROOT/elfutils/libebl/eblreginfo.o $
+  $BUILDROOT/elfutils/libebl/eblnonerelocp.o $
+  $BUILDROOT/elfutils/libebl/eblrelativerelocp.o $
+  $BUILDROOT/elfutils/libebl/eblsysvhashentrysize.o $
+  $BUILDROOT/elfutils/libebl/eblauxvinfo.o $
+  $BUILDROOT/elfutils/libebl/eblcheckobjattr.o $
+  $BUILDROOT/elfutils/libebl/ebl_check_special_section.o $
+  $BUILDROOT/elfutils/libebl/eblabicfi.o $
+  $BUILDROOT/elfutils/libebl/eblstother.o $
+  $BUILDROOT/elfutils/libebl/eblinitreg.o $
+  $BUILDROOT/elfutils/libebl/ebldwarftoregno.o $
+  $BUILDROOT/elfutils/libebl/eblnormalizepc.o $
+  $BUILDROOT/elfutils/libebl/eblunwind.o $
+  $BUILDROOT/elfutils/libebl/eblresolvesym.o $
+  $BUILDROOT/elfutils/libebl/eblcheckreloctargettype.o $
+  $BUILDROOT/elfutils/libebl/ebl_data_marker_symbol.o $
+
+build $BUILDROOT/elfutils/backends/i386_init.o: cc external/elfutils/backends/i386_init.c
+build $BUILDROOT/elfutils/backends/i386_symbol.o: cc external/elfutils/backends/i386_symbol.c
+build $BUILDROOT/elfutils/backends/i386_corenote.o: cc external/elfutils/backends/i386_corenote.c
+build $BUILDROOT/elfutils/backends/i386_cfi.o: cc external/elfutils/backends/i386_cfi.c
+build $BUILDROOT/elfutils/backends/i386_retval.o: cc external/elfutils/backends/i386_retval.c
+build $BUILDROOT/elfutils/backends/i386_regs.o: cc external/elfutils/backends/i386_regs.c
+build $BUILDROOT/elfutils/backends/i386_auxv.o: cc external/elfutils/backends/i386_auxv.c
+build $BUILDROOT/elfutils/backends/i386_initreg.o: cc external/elfutils/backends/i386_initreg.c
+build $BUILDROOT/elfutils/backends/i386_unwind.o: cc external/elfutils/backends/i386_unwind.c
+build $BUILDROOT/elfutils/backends/sh_init.o: cc external/elfutils/backends/sh_init.c
+build $BUILDROOT/elfutils/backends/sh_symbol.o: cc external/elfutils/backends/sh_symbol.c
+build $BUILDROOT/elfutils/backends/sh_corenote.o: cc external/elfutils/backends/sh_corenote.c
+build $BUILDROOT/elfutils/backends/sh_regs.o: cc external/elfutils/backends/sh_regs.c
+build $BUILDROOT/elfutils/backends/sh_retval.o: cc external/elfutils/backends/sh_retval.c
+build $BUILDROOT/elfutils/backends/x86_64_init.o: cc external/elfutils/backends/x86_64_init.c
+build $BUILDROOT/elfutils/backends/x86_64_symbol.o: cc external/elfutils/backends/x86_64_symbol.c
+build $BUILDROOT/elfutils/backends/x86_64_corenote.o: cc external/elfutils/backends/x86_64_corenote.c
+build $BUILDROOT/elfutils/backends/x86_64_cfi.o: cc external/elfutils/backends/x86_64_cfi.c
+build $BUILDROOT/elfutils/backends/x86_64_retval.o: cc external/elfutils/backends/x86_64_retval.c
+build $BUILDROOT/elfutils/backends/x86_64_regs.o: cc external/elfutils/backends/x86_64_regs.c
+build $BUILDROOT/elfutils/backends/x86_64_initreg.o: cc external/elfutils/backends/x86_64_initreg.c
+build $BUILDROOT/elfutils/backends/x86_64_unwind.o: cc external/elfutils/backends/x86_64_unwind.c
+build $BUILDROOT/elfutils/backends/x32_corenote.o: cc external/elfutils/backends/x32_corenote.c
+build $BUILDROOT/elfutils/backends/ia64_init.o: cc external/elfutils/backends/ia64_init.c
+build $BUILDROOT/elfutils/backends/ia64_symbol.o: cc external/elfutils/backends/ia64_symbol.c
+build $BUILDROOT/elfutils/backends/ia64_regs.o: cc external/elfutils/backends/ia64_regs.c
+build $BUILDROOT/elfutils/backends/ia64_retval.o: cc external/elfutils/backends/ia64_retval.c
+build $BUILDROOT/elfutils/backends/alpha_init.o: cc external/elfutils/backends/alpha_init.c
+build $BUILDROOT/elfutils/backends/alpha_symbol.o: cc external/elfutils/backends/alpha_symbol.c
+build $BUILDROOT/elfutils/backends/alpha_retval.o: cc external/elfutils/backends/alpha_retval.c
+build $BUILDROOT/elfutils/backends/alpha_regs.o: cc external/elfutils/backends/alpha_regs.c
+build $BUILDROOT/elfutils/backends/alpha_corenote.o: cc external/elfutils/backends/alpha_corenote.c
+build $BUILDROOT/elfutils/backends/alpha_auxv.o: cc external/elfutils/backends/alpha_auxv.c
+build $BUILDROOT/elfutils/backends/arm_init.o: cc external/elfutils/backends/arm_init.c
+build $BUILDROOT/elfutils/backends/arm_symbol.o: cc external/elfutils/backends/arm_symbol.c
+build $BUILDROOT/elfutils/backends/arm_regs.o: cc external/elfutils/backends/arm_regs.c
+build $BUILDROOT/elfutils/backends/arm_corenote.o: cc external/elfutils/backends/arm_corenote.c
+build $BUILDROOT/elfutils/backends/arm_auxv.o: cc external/elfutils/backends/arm_auxv.c
+build $BUILDROOT/elfutils/backends/arm_attrs.o: cc external/elfutils/backends/arm_attrs.c
+build $BUILDROOT/elfutils/backends/arm_retval.o: cc external/elfutils/backends/arm_retval.c
+build $BUILDROOT/elfutils/backends/arm_cfi.o: cc external/elfutils/backends/arm_cfi.c
+build $BUILDROOT/elfutils/backends/arm_initreg.o: cc external/elfutils/backends/arm_initreg.c
+build $BUILDROOT/elfutils/backends/arm_machineflagname.o: cc external/elfutils/backends/arm_machineflagname.c
+build $BUILDROOT/elfutils/backends/aarch64_init.o: cc external/elfutils/backends/aarch64_init.c
+build $BUILDROOT/elfutils/backends/aarch64_regs.o: cc external/elfutils/backends/aarch64_regs.c
+build $BUILDROOT/elfutils/backends/aarch64_symbol.c.o: cc external/elfutils/backends/aarch64_symbol.c
+build $BUILDROOT/elfutils/backends/aarch64_corenote.o: cc external/elfutils/backends/aarch64_corenote.c
+build $BUILDROOT/elfutils/backends/aarch64_retval.o: cc external/elfutils/backends/aarch64_retval.c
+build $BUILDROOT/elfutils/backends/aarch64_cfi.o: cc external/elfutils/backends/aarch64_cfi.c
+build $BUILDROOT/elfutils/backends/aarch64_initreg.o: cc external/elfutils/backends/aarch64_initreg.c
+build $BUILDROOT/elfutils/backends/aarch64_unwind.o: cc external/elfutils/backends/aarch64_unwind.c
+build $BUILDROOT/elfutils/backends/sparc_init.o: cc external/elfutils/backends/sparc_init.c
+build $BUILDROOT/elfutils/backends/sparc_symbol.o: cc external/elfutils/backends/sparc_symbol.c
+build $BUILDROOT/elfutils/backends/sparc_regs.o: cc external/elfutils/backends/sparc_regs.c
+build $BUILDROOT/elfutils/backends/sparc_retval.o: cc external/elfutils/backends/sparc_retval.c
+build $BUILDROOT/elfutils/backends/sparc_corenote.o: cc external/elfutils/backends/sparc_corenote.c
+build $BUILDROOT/elfutils/backends/sparc64_corenote.o: cc external/elfutils/backends/sparc64_corenote.c
+build $BUILDROOT/elfutils/backends/sparc_auxv.o: cc external/elfutils/backends/sparc_auxv.c
+build $BUILDROOT/elfutils/backends/sparc_attrs.o: cc external/elfutils/backends/sparc_attrs.c
+build $BUILDROOT/elfutils/backends/sparc_cfi.o: cc external/elfutils/backends/sparc_cfi.c
+build $BUILDROOT/elfutils/backends/sparc_initreg.o: cc external/elfutils/backends/sparc_initreg.c
+build $BUILDROOT/elfutils/backends/ppc_init.o: cc external/elfutils/backends/ppc_init.c
+build $BUILDROOT/elfutils/backends/ppc_symbol.o: cc external/elfutils/backends/ppc_symbol.c
+build $BUILDROOT/elfutils/backends/ppc_retval.o: cc external/elfutils/backends/ppc_retval.c
+build $BUILDROOT/elfutils/backends/ppc_regs.o: cc external/elfutils/backends/ppc_regs.c
+build $BUILDROOT/elfutils/backends/ppc_corenote.o: cc external/elfutils/backends/ppc_corenote.c
+build $BUILDROOT/elfutils/backends/ppc_auxv.o: cc external/elfutils/backends/ppc_auxv.c
+build $BUILDROOT/elfutils/backends/ppc_attrs.o: cc external/elfutils/backends/ppc_attrs.c
+build $BUILDROOT/elfutils/backends/ppc_cfi.o: cc external/elfutils/backends/ppc_cfi.c
+build $BUILDROOT/elfutils/backends/ppc_initreg.o: cc external/elfutils/backends/ppc_initreg.c
+build $BUILDROOT/elfutils/backends/ppc64_init.o: cc external/elfutils/backends/ppc64_init.c
+build $BUILDROOT/elfutils/backends/ppc64_symbol.o: cc external/elfutils/backends/ppc64_symbol.c
+build $BUILDROOT/elfutils/backends/ppc64_retval.o: cc external/elfutils/backends/ppc64_retval.c
+build $BUILDROOT/elfutils/backends/ppc64_corenote.o: cc external/elfutils/backends/ppc64_corenote.c
+build $BUILDROOT/elfutils/backends/ppc64_unwind.o: cc external/elfutils/backends/ppc64_unwind.c
+build $BUILDROOT/elfutils/backends/ppc64_resolve_sym.o: cc external/elfutils/backends/ppc64_resolve_sym.c
+build $BUILDROOT/elfutils/backends/s390_init.o: cc external/elfutils/backends/s390_init.c
+build $BUILDROOT/elfutils/backends/s390_symbol.o: cc external/elfutils/backends/s390_symbol.c
+build $BUILDROOT/elfutils/backends/s390_regs.o: cc external/elfutils/backends/s390_regs.c
+build $BUILDROOT/elfutils/backends/s390_retval.o: cc external/elfutils/backends/s390_retval.c
+build $BUILDROOT/elfutils/backends/s390_corenote.o: cc external/elfutils/backends/s390_corenote.c
+build $BUILDROOT/elfutils/backends/s390x_corenote.o: cc external/elfutils/backends/s390x_corenote.c
+build $BUILDROOT/elfutils/backends/s390_cfi.o: cc external/elfutils/backends/s390_cfi.c
+build $BUILDROOT/elfutils/backends/s390_initreg.o: cc external/elfutils/backends/s390_initreg.c
+build $BUILDROOT/elfutils/backends/s390_unwind.o: cc external/elfutils/backends/s390_unwind.c
+build $BUILDROOT/elfutils/backends/m68k_init.o: cc external/elfutils/backends/m68k_init.c
+build $BUILDROOT/elfutils/backends/m68k_symbol.o: cc external/elfutils/backends/m68k_symbol.c
+build $BUILDROOT/elfutils/backends/m68k_regs.o: cc external/elfutils/backends/m68k_regs.c
+build $BUILDROOT/elfutils/backends/m68k_retval.o: cc external/elfutils/backends/m68k_retval.c
+build $BUILDROOT/elfutils/backends/m68k_corenote.o: cc external/elfutils/backends/m68k_corenote.c
+build $BUILDROOT/elfutils/backends/m68k_cfi.o: cc external/elfutils/backends/m68k_cfi.c
+build $BUILDROOT/elfutils/backends/m68k_initreg.o: cc external/elfutils/backends/m68k_initreg.c
+build $BUILDROOT/elfutils/backends/bpf_init.o: cc external/elfutils/backends/bpf_init.c
+build $BUILDROOT/elfutils/backends/bpf_regs.o: cc external/elfutils/backends/bpf_regs.c
+build $BUILDROOT/elfutils/backends/bpf_symbol.o: cc external/elfutils/backends/bpf_symbol.c
+build $BUILDROOT/elfutils/backends/riscv_init.o: cc external/elfutils/backends/riscv_init.c
+build $BUILDROOT/elfutils/backends/riscv_symbol.o: cc external/elfutils/backends/riscv_symbol.c
+build $BUILDROOT/elfutils/backends/riscv_cfi.o: cc external/elfutils/backends/riscv_cfi.c
+build $BUILDROOT/elfutils/backends/riscv_regs.o: cc external/elfutils/backends/riscv_regs.c
+build $BUILDROOT/elfutils/backends/riscv_initreg.o: cc external/elfutils/backends/riscv_initreg.c
+build $BUILDROOT/elfutils/backends/riscv_corenote.o: cc external/elfutils/backends/riscv_corenote.c
+build $BUILDROOT/elfutils/backends/riscv64_corenote.o: cc external/elfutils/backends/riscv64_corenote.c
+build $BUILDROOT/elfutils/backends/riscv_retval.o: cc external/elfutils/backends/riscv_retval.c
+build $BUILDROOT/elfutils/backends/csky_attrs.o: cc external/elfutils/backends/csky_attrs.c
+build $BUILDROOT/elfutils/backends/csky_init.o: cc external/elfutils/backends/csky_init.c
+build $BUILDROOT/elfutils/backends/csky_symbol.o: cc external/elfutils/backends/csky_symbol.c
+build $BUILDROOT/elfutils/backends/csky_cfi.o: cc external/elfutils/backends/csky_cfi.c
+build $BUILDROOT/elfutils/backends/csky_regs.o: cc external/elfutils/backends/csky_regs.c
+build $BUILDROOT/elfutils/backends/csky_initreg.o: cc external/elfutils/backends/csky_initreg.c
+build $BUILDROOT/elfutils/backends/csky_corenote.o: cc external/elfutils/backends/csky_corenote.c
+build $BUILDROOT/elfutils/backends/loongarch_init.o: cc external/elfutils/backends/loongarch_init.c
+build $BUILDROOT/elfutils/backends/loongarch_symbol.o: cc external/elfutils/backends/loongarch_symbol.c
+build $BUILDROOT/elfutils/backends/loongarch_cfi.o: cc external/elfutils/backends/loongarch_cfi.c
+build $BUILDROOT/elfutils/backends/loongarch_regs.o: cc external/elfutils/backends/loongarch_regs.c
+build $BUILDROOT/elfutils/backends/loongarch_retval.o: cc external/elfutils/backends/loongarch_retval.c
+build $BUILDROOT/elfutils/backends/loongarch_initreg.o: cc external/elfutils/backends/loongarch_initreg.c
+build $BUILDROOT/elfutils/backends/loongarch_unwind.o: cc external/elfutils/backends/loongarch_unwind.c
+build $BUILDROOT/elfutils/backends/loongarch_corenote.o: cc external/elfutils/backends/loongarch_corenote.c
+build $BUILDROOT/elfutils/backends/arc_init.o: cc external/elfutils/backends/arc_init.c
+build $BUILDROOT/elfutils/backends/arc_symbol.o: cc external/elfutils/backends/arc_symbol.c
+
+build $BUILDROOT/elfutils/libebl_backends.a: ar $
+  $BUILDROOT/elfutils/backends/i386_init.o $
+  $BUILDROOT/elfutils/backends/i386_symbol.o $
+  $BUILDROOT/elfutils/backends/i386_corenote.o $
+  $BUILDROOT/elfutils/backends/i386_cfi.o $
+  $BUILDROOT/elfutils/backends/i386_retval.o $
+  $BUILDROOT/elfutils/backends/i386_regs.o $
+  $BUILDROOT/elfutils/backends/i386_auxv.o $
+  $BUILDROOT/elfutils/backends/i386_initreg.o $
+  $BUILDROOT/elfutils/backends/i386_unwind.o $
+  $BUILDROOT/elfutils/backends/sh_init.o $
+  $BUILDROOT/elfutils/backends/sh_symbol.o $
+  $BUILDROOT/elfutils/backends/sh_corenote.o $
+  $BUILDROOT/elfutils/backends/sh_regs.o $
+  $BUILDROOT/elfutils/backends/sh_retval.o $
+  $BUILDROOT/elfutils/backends/x86_64_init.o $
+  $BUILDROOT/elfutils/backends/x86_64_symbol.o $
+  $BUILDROOT/elfutils/backends/x86_64_corenote.o $
+  $BUILDROOT/elfutils/backends/x86_64_cfi.o $
+  $BUILDROOT/elfutils/backends/x86_64_retval.o $
+  $BUILDROOT/elfutils/backends/x86_64_regs.o $
+  $BUILDROOT/elfutils/backends/x86_64_initreg.o $
+  $BUILDROOT/elfutils/backends/x86_64_unwind.o $
+  $BUILDROOT/elfutils/backends/x32_corenote.o $
+  $BUILDROOT/elfutils/backends/ia64_init.o $
+  $BUILDROOT/elfutils/backends/ia64_symbol.o $
+  $BUILDROOT/elfutils/backends/ia64_regs.o $
+  $BUILDROOT/elfutils/backends/ia64_retval.o $
+  $BUILDROOT/elfutils/backends/alpha_init.o $
+  $BUILDROOT/elfutils/backends/alpha_symbol.o $
+  $BUILDROOT/elfutils/backends/alpha_retval.o $
+  $BUILDROOT/elfutils/backends/alpha_regs.o $
+  $BUILDROOT/elfutils/backends/alpha_corenote.o $
+  $BUILDROOT/elfutils/backends/alpha_auxv.o $
+  $BUILDROOT/elfutils/backends/arm_init.o $
+  $BUILDROOT/elfutils/backends/arm_symbol.o $
+  $BUILDROOT/elfutils/backends/arm_regs.o $
+  $BUILDROOT/elfutils/backends/arm_corenote.o $
+  $BUILDROOT/elfutils/backends/arm_auxv.o $
+  $BUILDROOT/elfutils/backends/arm_attrs.o $
+  $BUILDROOT/elfutils/backends/arm_retval.o $
+  $BUILDROOT/elfutils/backends/arm_cfi.o $
+  $BUILDROOT/elfutils/backends/arm_initreg.o $
+  $BUILDROOT/elfutils/backends/arm_machineflagname.o $
+  $BUILDROOT/elfutils/backends/aarch64_init.o $
+  $BUILDROOT/elfutils/backends/aarch64_regs.o $
+  $BUILDROOT/elfutils/backends/aarch64_symbol.c.o $
+  $BUILDROOT/elfutils/backends/aarch64_corenote.o $
+  $BUILDROOT/elfutils/backends/aarch64_retval.o $
+  $BUILDROOT/elfutils/backends/aarch64_cfi.o $
+  $BUILDROOT/elfutils/backends/aarch64_initreg.o $
+  $BUILDROOT/elfutils/backends/aarch64_unwind.o $
+  $BUILDROOT/elfutils/backends/sparc_init.o $
+  $BUILDROOT/elfutils/backends/sparc_symbol.o $
+  $BUILDROOT/elfutils/backends/sparc_regs.o $
+  $BUILDROOT/elfutils/backends/sparc_retval.o $
+  $BUILDROOT/elfutils/backends/sparc_corenote.o $
+  $BUILDROOT/elfutils/backends/sparc64_corenote.o $
+  $BUILDROOT/elfutils/backends/sparc_auxv.o $
+  $BUILDROOT/elfutils/backends/sparc_attrs.o $
+  $BUILDROOT/elfutils/backends/sparc_cfi.o $
+  $BUILDROOT/elfutils/backends/sparc_initreg.o $
+  $BUILDROOT/elfutils/backends/ppc_init.o $
+  $BUILDROOT/elfutils/backends/ppc_symbol.o $
+  $BUILDROOT/elfutils/backends/ppc_retval.o $
+  $BUILDROOT/elfutils/backends/ppc_regs.o $
+  $BUILDROOT/elfutils/backends/ppc_corenote.o $
+  $BUILDROOT/elfutils/backends/ppc_auxv.o $
+  $BUILDROOT/elfutils/backends/ppc_attrs.o $
+  $BUILDROOT/elfutils/backends/ppc_cfi.o $
+  $BUILDROOT/elfutils/backends/ppc_initreg.o $
+  $BUILDROOT/elfutils/backends/ppc64_init.o $
+  $BUILDROOT/elfutils/backends/ppc64_symbol.o $
+  $BUILDROOT/elfutils/backends/ppc64_retval.o $
+  $BUILDROOT/elfutils/backends/ppc64_corenote.o $
+  $BUILDROOT/elfutils/backends/ppc64_unwind.o $
+  $BUILDROOT/elfutils/backends/ppc64_resolve_sym.o $
+  $BUILDROOT/elfutils/backends/s390_init.o $
+  $BUILDROOT/elfutils/backends/s390_symbol.o $
+  $BUILDROOT/elfutils/backends/s390_regs.o $
+  $BUILDROOT/elfutils/backends/s390_retval.o $
+  $BUILDROOT/elfutils/backends/s390_corenote.o $
+  $BUILDROOT/elfutils/backends/s390x_corenote.o $
+  $BUILDROOT/elfutils/backends/s390_cfi.o $
+  $BUILDROOT/elfutils/backends/s390_initreg.o $
+  $BUILDROOT/elfutils/backends/s390_unwind.o $
+  $BUILDROOT/elfutils/backends/m68k_init.o $
+  $BUILDROOT/elfutils/backends/m68k_symbol.o $
+  $BUILDROOT/elfutils/backends/m68k_regs.o $
+  $BUILDROOT/elfutils/backends/m68k_retval.o $
+  $BUILDROOT/elfutils/backends/m68k_corenote.o $
+  $BUILDROOT/elfutils/backends/m68k_cfi.o $
+  $BUILDROOT/elfutils/backends/m68k_initreg.o $
+  $BUILDROOT/elfutils/backends/bpf_init.o $
+  $BUILDROOT/elfutils/backends/bpf_regs.o $
+  $BUILDROOT/elfutils/backends/bpf_symbol.o $
+  $BUILDROOT/elfutils/backends/riscv_init.o $
+  $BUILDROOT/elfutils/backends/riscv_symbol.o $
+  $BUILDROOT/elfutils/backends/riscv_cfi.o $
+  $BUILDROOT/elfutils/backends/riscv_regs.o $
+  $BUILDROOT/elfutils/backends/riscv_initreg.o $
+  $BUILDROOT/elfutils/backends/riscv_corenote.o $
+  $BUILDROOT/elfutils/backends/riscv64_corenote.o $
+  $BUILDROOT/elfutils/backends/riscv_retval.o $
+  $BUILDROOT/elfutils/backends/csky_attrs.o $
+  $BUILDROOT/elfutils/backends/csky_init.o $
+  $BUILDROOT/elfutils/backends/csky_symbol.o $
+  $BUILDROOT/elfutils/backends/csky_cfi.o $
+  $BUILDROOT/elfutils/backends/csky_regs.o $
+  $BUILDROOT/elfutils/backends/csky_initreg.o $
+  $BUILDROOT/elfutils/backends/csky_corenote.o $
+  $BUILDROOT/elfutils/backends/loongarch_init.o $
+  $BUILDROOT/elfutils/backends/loongarch_symbol.o $
+  $BUILDROOT/elfutils/backends/loongarch_cfi.o $
+  $BUILDROOT/elfutils/backends/loongarch_regs.o $
+  $BUILDROOT/elfutils/backends/loongarch_retval.o $
+  $BUILDROOT/elfutils/backends/loongarch_initreg.o $
+  $BUILDROOT/elfutils/backends/loongarch_unwind.o $
+  $BUILDROOT/elfutils/backends/loongarch_corenote.o $
+  $BUILDROOT/elfutils/backends/arc_init.o $
+  $BUILDROOT/elfutils/backends/arc_symbol.o $
+
+build $BUILDROOT/elfutils/libcpu/i386_disasm.o: cc external/elfutils/libcpu/i386_disasm.c
+build $BUILDROOT/elfutils/libcpu/x86_64_disasm.o: cc external/elfutils/libcpu/x86_64_disasm.c
+build $BUILDROOT/elfutils/libcpu/bpf_disasm.o: cc external/elfutils/libcpu/bpf_disasm.c
+  cflags = $cflags -Wno-format-nonliteral
+build $BUILDROOT/elfutils/libcpu/riscv_disasm.o: cc external/elfutils/libcpu/riscv_disasm.c
+
+build $BUILDROOT/elfutils/libcpu.a: ar $
+  $BUILDROOT/elfutils/libcpu/i386_disasm.o $
+  $BUILDROOT/elfutils/libcpu/x86_64_disasm.o $
+  $BUILDROOT/elfutils/libcpu/bpf_disasm.o $
+  $BUILDROOT/elfutils/libcpu/riscv_disasm.o $
+
+build $BUILDROOT/elfutils/libelf/elf_version.o: cc external/elfutils/libelf/elf_version.c
+build $BUILDROOT/elfutils/libelf/elf_hash.o: cc external/elfutils/libelf/elf_hash.c
+build $BUILDROOT/elfutils/libelf/elf_error.o: cc external/elfutils/libelf/elf_error.c
+build $BUILDROOT/elfutils/libelf/elf_fill.o: cc external/elfutils/libelf/elf_fill.c
+build $BUILDROOT/elfutils/libelf/elf_begin.o: cc external/elfutils/libelf/elf_begin.c
+build $BUILDROOT/elfutils/libelf/elf_next.o: cc external/elfutils/libelf/elf_next.c
+build $BUILDROOT/elfutils/libelf/elf_rand.o: cc external/elfutils/libelf/elf_rand.c
+build $BUILDROOT/elfutils/libelf/elf_end.o: cc external/elfutils/libelf/elf_end.c
+build $BUILDROOT/elfutils/libelf/elf_kind.o: cc external/elfutils/libelf/elf_kind.c
+build $BUILDROOT/elfutils/libelf/gelf_getclass.o: cc external/elfutils/libelf/gelf_getclass.c
+build $BUILDROOT/elfutils/libelf/elf_getbase.o: cc external/elfutils/libelf/elf_getbase.c
+build $BUILDROOT/elfutils/libelf/elf_getident.o: cc external/elfutils/libelf/elf_getident.c
+build $BUILDROOT/elfutils/libelf/elf32_fsize.o: cc external/elfutils/libelf/elf32_fsize.c
+build $BUILDROOT/elfutils/libelf/elf64_fsize.o: cc external/elfutils/libelf/elf64_fsize.c
+build $BUILDROOT/elfutils/libelf/gelf_fsize.o: cc external/elfutils/libelf/gelf_fsize.c
+build $BUILDROOT/elfutils/libelf/elf32_xlatetof.o: cc external/elfutils/libelf/elf32_xlatetof.c
+build $BUILDROOT/elfutils/libelf/elf32_xlatetom.o: cc external/elfutils/libelf/elf32_xlatetom.c
+build $BUILDROOT/elfutils/libelf/elf64_xlatetof.o: cc external/elfutils/libelf/elf64_xlatetof.c
+build $BUILDROOT/elfutils/libelf/elf64_xlatetom.o: cc external/elfutils/libelf/elf64_xlatetom.c
+build $BUILDROOT/elfutils/libelf/gelf_xlate.o: cc external/elfutils/libelf/gelf_xlate.c
+build $BUILDROOT/elfutils/libelf/elf32_getehdr.o: cc external/elfutils/libelf/elf32_getehdr.c
+build $BUILDROOT/elfutils/libelf/elf64_getehdr.o: cc external/elfutils/libelf/elf64_getehdr.c
+build $BUILDROOT/elfutils/libelf/gelf_getehdr.o: cc external/elfutils/libelf/gelf_getehdr.c
+build $BUILDROOT/elfutils/libelf/elf32_newehdr.o: cc external/elfutils/libelf/elf32_newehdr.c
+build $BUILDROOT/elfutils/libelf/elf64_newehdr.o: cc external/elfutils/libelf/elf64_newehdr.c
+build $BUILDROOT/elfutils/libelf/gelf_newehdr.o: cc external/elfutils/libelf/gelf_newehdr.c
+build $BUILDROOT/elfutils/libelf/gelf_update_ehdr.o: cc external/elfutils/libelf/gelf_update_ehdr.c
+build $BUILDROOT/elfutils/libelf/elf32_getphdr.o: cc external/elfutils/libelf/elf32_getphdr.c
+build $BUILDROOT/elfutils/libelf/elf64_getphdr.o: cc external/elfutils/libelf/elf64_getphdr.c
+build $BUILDROOT/elfutils/libelf/gelf_getphdr.o: cc external/elfutils/libelf/gelf_getphdr.c
+build $BUILDROOT/elfutils/libelf/elf32_newphdr.o: cc external/elfutils/libelf/elf32_newphdr.c
+build $BUILDROOT/elfutils/libelf/elf64_newphdr.o: cc external/elfutils/libelf/elf64_newphdr.c
+build $BUILDROOT/elfutils/libelf/gelf_newphdr.o: cc external/elfutils/libelf/gelf_newphdr.c
+build $BUILDROOT/elfutils/libelf/gelf_update_phdr.o: cc external/elfutils/libelf/gelf_update_phdr.c
+build $BUILDROOT/elfutils/libelf/elf_getarhdr.o: cc external/elfutils/libelf/elf_getarhdr.c
+build $BUILDROOT/elfutils/libelf/elf_getarsym.o: cc external/elfutils/libelf/elf_getarsym.c
+build $BUILDROOT/elfutils/libelf/elf_rawfile.o: cc external/elfutils/libelf/elf_rawfile.c
+build $BUILDROOT/elfutils/libelf/elf_readall.o: cc external/elfutils/libelf/elf_readall.c
+build $BUILDROOT/elfutils/libelf/elf_cntl.o: cc external/elfutils/libelf/elf_cntl.c
+build $BUILDROOT/elfutils/libelf/elf_getscn.o: cc external/elfutils/libelf/elf_getscn.c
+build $BUILDROOT/elfutils/libelf/elf_nextscn.o: cc external/elfutils/libelf/elf_nextscn.c
+build $BUILDROOT/elfutils/libelf/elf_ndxscn.o: cc external/elfutils/libelf/elf_ndxscn.c
+build $BUILDROOT/elfutils/libelf/elf_newscn.o: cc external/elfutils/libelf/elf_newscn.c
+build $BUILDROOT/elfutils/libelf/elf32_getshdr.o: cc external/elfutils/libelf/elf32_getshdr.c
+build $BUILDROOT/elfutils/libelf/elf64_getshdr.o: cc external/elfutils/libelf/elf64_getshdr.c
+build $BUILDROOT/elfutils/libelf/gelf_getshdr.o: cc external/elfutils/libelf/gelf_getshdr.c
+build $BUILDROOT/elfutils/libelf/gelf_update_shdr.o: cc external/elfutils/libelf/gelf_update_shdr.c
+build $BUILDROOT/elfutils/libelf/elf_strptr.o: cc external/elfutils/libelf/elf_strptr.c
+build $BUILDROOT/elfutils/libelf/elf_rawdata.o: cc external/elfutils/libelf/elf_rawdata.c
+build $BUILDROOT/elfutils/libelf/elf_getdata.o: cc external/elfutils/libelf/elf_getdata.c
+build $BUILDROOT/elfutils/libelf/elf_newdata.o: cc external/elfutils/libelf/elf_newdata.c
+build $BUILDROOT/elfutils/libelf/elf_getdata_rawchunk.o: cc external/elfutils/libelf/elf_getdata_rawchunk.c
+build $BUILDROOT/elfutils/libelf/elf_flagelf.o: cc external/elfutils/libelf/elf_flagelf.c
+build $BUILDROOT/elfutils/libelf/elf_flagehdr.o: cc external/elfutils/libelf/elf_flagehdr.c
+build $BUILDROOT/elfutils/libelf/elf_flagphdr.o: cc external/elfutils/libelf/elf_flagphdr.c
+build $BUILDROOT/elfutils/libelf/elf_flagscn.o: cc external/elfutils/libelf/elf_flagscn.c
+build $BUILDROOT/elfutils/libelf/elf_flagshdr.o: cc external/elfutils/libelf/elf_flagshdr.c
+build $BUILDROOT/elfutils/libelf/elf_flagdata.o: cc external/elfutils/libelf/elf_flagdata.c
+build $BUILDROOT/elfutils/libelf/elf_memory.o: cc external/elfutils/libelf/elf_memory.c
+build $BUILDROOT/elfutils/libelf/elf_update.o: cc external/elfutils/libelf/elf_update.c
+build $BUILDROOT/elfutils/libelf/elf32_updatenull.o: cc external/elfutils/libelf/elf32_updatenull.c
+build $BUILDROOT/elfutils/libelf/elf64_updatenull.o: cc external/elfutils/libelf/elf64_updatenull.c
+build $BUILDROOT/elfutils/libelf/elf32_updatefile.o: cc external/elfutils/libelf/elf32_updatefile.c
+build $BUILDROOT/elfutils/libelf/elf64_updatefile.o: cc external/elfutils/libelf/elf64_updatefile.c
+build $BUILDROOT/elfutils/libelf/gelf_getsym.o: cc external/elfutils/libelf/gelf_getsym.c
+build $BUILDROOT/elfutils/libelf/gelf_update_sym.o: cc external/elfutils/libelf/gelf_update_sym.c
+build $BUILDROOT/elfutils/libelf/gelf_getversym.o: cc external/elfutils/libelf/gelf_getversym.c
+build $BUILDROOT/elfutils/libelf/gelf_getverneed.o: cc external/elfutils/libelf/gelf_getverneed.c
+build $BUILDROOT/elfutils/libelf/gelf_getvernaux.o: cc external/elfutils/libelf/gelf_getvernaux.c
+build $BUILDROOT/elfutils/libelf/gelf_getverdef.o: cc external/elfutils/libelf/gelf_getverdef.c
+build $BUILDROOT/elfutils/libelf/gelf_getverdaux.o: cc external/elfutils/libelf/gelf_getverdaux.c
+build $BUILDROOT/elfutils/libelf/gelf_getrel.o: cc external/elfutils/libelf/gelf_getrel.c
+build $BUILDROOT/elfutils/libelf/gelf_getrela.o: cc external/elfutils/libelf/gelf_getrela.c
+build $BUILDROOT/elfutils/libelf/gelf_update_rel.o: cc external/elfutils/libelf/gelf_update_rel.c
+build $BUILDROOT/elfutils/libelf/gelf_update_rela.o: cc external/elfutils/libelf/gelf_update_rela.c
+build $BUILDROOT/elfutils/libelf/gelf_getdyn.o: cc external/elfutils/libelf/gelf_getdyn.c
+build $BUILDROOT/elfutils/libelf/gelf_update_dyn.o: cc external/elfutils/libelf/gelf_update_dyn.c
+build $BUILDROOT/elfutils/libelf/gelf_getmove.o: cc external/elfutils/libelf/gelf_getmove.c
+build $BUILDROOT/elfutils/libelf/gelf_update_move.o: cc external/elfutils/libelf/gelf_update_move.c
+build $BUILDROOT/elfutils/libelf/gelf_getsyminfo.o: cc external/elfutils/libelf/gelf_getsyminfo.c
+build $BUILDROOT/elfutils/libelf/gelf_update_syminfo.o: cc external/elfutils/libelf/gelf_update_syminfo.c
+build $BUILDROOT/elfutils/libelf/gelf_getauxv.o: cc external/elfutils/libelf/gelf_getauxv.c
+build $BUILDROOT/elfutils/libelf/gelf_update_auxv.o: cc external/elfutils/libelf/gelf_update_auxv.c
+build $BUILDROOT/elfutils/libelf/gelf_getnote.o: cc external/elfutils/libelf/gelf_getnote.c
+build $BUILDROOT/elfutils/libelf/gelf_xlatetof.o: cc external/elfutils/libelf/gelf_xlatetof.c
+build $BUILDROOT/elfutils/libelf/gelf_xlatetom.o: cc external/elfutils/libelf/gelf_xlatetom.c
+build $BUILDROOT/elfutils/libelf/nlist.o: cc external/elfutils/libelf/nlist.c
+build $BUILDROOT/elfutils/libelf/gelf_getsymshndx.o: cc external/elfutils/libelf/gelf_getsymshndx.c
+build $BUILDROOT/elfutils/libelf/gelf_update_symshndx.o: cc external/elfutils/libelf/gelf_update_symshndx.c
+build $BUILDROOT/elfutils/libelf/gelf_update_versym.o: cc external/elfutils/libelf/gelf_update_versym.c
+build $BUILDROOT/elfutils/libelf/gelf_update_verneed.o: cc external/elfutils/libelf/gelf_update_verneed.c
+build $BUILDROOT/elfutils/libelf/gelf_update_vernaux.o: cc external/elfutils/libelf/gelf_update_vernaux.c
+build $BUILDROOT/elfutils/libelf/gelf_update_verdef.o: cc external/elfutils/libelf/gelf_update_verdef.c
+build $BUILDROOT/elfutils/libelf/gelf_update_verdaux.o: cc external/elfutils/libelf/gelf_update_verdaux.c
+build $BUILDROOT/elfutils/libelf/elf_getphdrnum.o: cc external/elfutils/libelf/elf_getphdrnum.c
+build $BUILDROOT/elfutils/libelf/elf_getshdrnum.o: cc external/elfutils/libelf/elf_getshdrnum.c
+build $BUILDROOT/elfutils/libelf/elf_getshdrstrndx.o: cc external/elfutils/libelf/elf_getshdrstrndx.c
+build $BUILDROOT/elfutils/libelf/gelf_checksum.o: cc external/elfutils/libelf/gelf_checksum.c
+build $BUILDROOT/elfutils/libelf/elf32_checksum.o: cc external/elfutils/libelf/elf32_checksum.c
+build $BUILDROOT/elfutils/libelf/elf64_checksum.o: cc external/elfutils/libelf/elf64_checksum.c
+build $BUILDROOT/elfutils/libelf/libelf_crc32.o: cc external/elfutils/libelf/libelf_crc32.c
+build $BUILDROOT/elfutils/libelf/libelf_next_prime.o: cc external/elfutils/libelf/libelf_next_prime.c
+build $BUILDROOT/elfutils/libelf/elf_clone.o: cc external/elfutils/libelf/elf_clone.c
+build $BUILDROOT/elfutils/libelf/gelf_getlib.o: cc external/elfutils/libelf/gelf_getlib.c
+build $BUILDROOT/elfutils/libelf/gelf_update_lib.o: cc external/elfutils/libelf/gelf_update_lib.c
+build $BUILDROOT/elfutils/libelf/elf32_offscn.o: cc external/elfutils/libelf/elf32_offscn.c
+build $BUILDROOT/elfutils/libelf/elf64_offscn.o: cc external/elfutils/libelf/elf64_offscn.c
+build $BUILDROOT/elfutils/libelf/gelf_offscn.o: cc external/elfutils/libelf/gelf_offscn.c
+build $BUILDROOT/elfutils/libelf/elf_getaroff.o: cc external/elfutils/libelf/elf_getaroff.c
+build $BUILDROOT/elfutils/libelf/elf_gnu_hash.o: cc external/elfutils/libelf/elf_gnu_hash.c
+build $BUILDROOT/elfutils/libelf/elf_scnshndx.o: cc external/elfutils/libelf/elf_scnshndx.c
+build $BUILDROOT/elfutils/libelf/elf32_getchdr.o: cc external/elfutils/libelf/elf32_getchdr.c
+build $BUILDROOT/elfutils/libelf/elf64_getchdr.o: cc external/elfutils/libelf/elf64_getchdr.c
+build $BUILDROOT/elfutils/libelf/gelf_getchdr.o: cc external/elfutils/libelf/gelf_getchdr.c
+build $BUILDROOT/elfutils/libelf/elf_compress.o: cc external/elfutils/libelf/elf_compress.c
+build $BUILDROOT/elfutils/libelf/elf_compress_gnu.o: cc external/elfutils/libelf/elf_compress_gnu.c
+
+build $BUILDROOT/elfutils/libelf.a: ar $
+  $BUILDROOT/elfutils/libelf/elf_version.o $
+  $BUILDROOT/elfutils/libelf/elf_hash.o $
+  $BUILDROOT/elfutils/libelf/elf_error.o $
+  $BUILDROOT/elfutils/libelf/elf_fill.o $
+  $BUILDROOT/elfutils/libelf/elf_begin.o $
+  $BUILDROOT/elfutils/libelf/elf_next.o $
+  $BUILDROOT/elfutils/libelf/elf_rand.o $
+  $BUILDROOT/elfutils/libelf/elf_end.o $
+  $BUILDROOT/elfutils/libelf/elf_kind.o $
+  $BUILDROOT/elfutils/libelf/gelf_getclass.o $
+  $BUILDROOT/elfutils/libelf/elf_getbase.o $
+  $BUILDROOT/elfutils/libelf/elf_getident.o $
+  $BUILDROOT/elfutils/libelf/elf32_fsize.o $
+  $BUILDROOT/elfutils/libelf/elf64_fsize.o $
+  $BUILDROOT/elfutils/libelf/gelf_fsize.o $
+  $BUILDROOT/elfutils/libelf/elf32_xlatetof.o $
+  $BUILDROOT/elfutils/libelf/elf32_xlatetom.o $
+  $BUILDROOT/elfutils/libelf/elf64_xlatetof.o $
+  $BUILDROOT/elfutils/libelf/elf64_xlatetom.o $
+  $BUILDROOT/elfutils/libelf/gelf_xlate.o $
+  $BUILDROOT/elfutils/libelf/elf32_getehdr.o $
+  $BUILDROOT/elfutils/libelf/elf64_getehdr.o $
+  $BUILDROOT/elfutils/libelf/gelf_getehdr.o $
+  $BUILDROOT/elfutils/libelf/elf32_newehdr.o $
+  $BUILDROOT/elfutils/libelf/elf64_newehdr.o $
+  $BUILDROOT/elfutils/libelf/gelf_newehdr.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_ehdr.o $
+  $BUILDROOT/elfutils/libelf/elf32_getphdr.o $
+  $BUILDROOT/elfutils/libelf/elf64_getphdr.o $
+  $BUILDROOT/elfutils/libelf/gelf_getphdr.o $
+  $BUILDROOT/elfutils/libelf/elf32_newphdr.o $
+  $BUILDROOT/elfutils/libelf/elf64_newphdr.o $
+  $BUILDROOT/elfutils/libelf/gelf_newphdr.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_phdr.o $
+  $BUILDROOT/elfutils/libelf/elf_getarhdr.o $
+  $BUILDROOT/elfutils/libelf/elf_getarsym.o $
+  $BUILDROOT/elfutils/libelf/elf_rawfile.o $
+  $BUILDROOT/elfutils/libelf/elf_readall.o $
+  $BUILDROOT/elfutils/libelf/elf_cntl.o $
+  $BUILDROOT/elfutils/libelf/elf_getscn.o $
+  $BUILDROOT/elfutils/libelf/elf_nextscn.o $
+  $BUILDROOT/elfutils/libelf/elf_ndxscn.o $
+  $BUILDROOT/elfutils/libelf/elf_newscn.o $
+  $BUILDROOT/elfutils/libelf/elf32_getshdr.o $
+  $BUILDROOT/elfutils/libelf/elf64_getshdr.o $
+  $BUILDROOT/elfutils/libelf/gelf_getshdr.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_shdr.o $
+  $BUILDROOT/elfutils/libelf/elf_strptr.o $
+  $BUILDROOT/elfutils/libelf/elf_rawdata.o $
+  $BUILDROOT/elfutils/libelf/elf_getdata.o $
+  $BUILDROOT/elfutils/libelf/elf_newdata.o $
+  $BUILDROOT/elfutils/libelf/elf_getdata_rawchunk.o $
+  $BUILDROOT/elfutils/libelf/elf_flagelf.o $
+  $BUILDROOT/elfutils/libelf/elf_flagehdr.o $
+  $BUILDROOT/elfutils/libelf/elf_flagphdr.o $
+  $BUILDROOT/elfutils/libelf/elf_flagscn.o $
+  $BUILDROOT/elfutils/libelf/elf_flagshdr.o $
+  $BUILDROOT/elfutils/libelf/elf_flagdata.o $
+  $BUILDROOT/elfutils/libelf/elf_memory.o $
+  $BUILDROOT/elfutils/libelf/elf_update.o $
+  $BUILDROOT/elfutils/libelf/elf32_updatenull.o $
+  $BUILDROOT/elfutils/libelf/elf64_updatenull.o $
+  $BUILDROOT/elfutils/libelf/elf32_updatefile.o $
+  $BUILDROOT/elfutils/libelf/elf64_updatefile.o $
+  $BUILDROOT/elfutils/libelf/gelf_getsym.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_sym.o $
+  $BUILDROOT/elfutils/libelf/gelf_getversym.o $
+  $BUILDROOT/elfutils/libelf/gelf_getverneed.o $
+  $BUILDROOT/elfutils/libelf/gelf_getvernaux.o $
+  $BUILDROOT/elfutils/libelf/gelf_getverdef.o $
+  $BUILDROOT/elfutils/libelf/gelf_getverdaux.o $
+  $BUILDROOT/elfutils/libelf/gelf_getrel.o $
+  $BUILDROOT/elfutils/libelf/gelf_getrela.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_rel.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_rela.o $
+  $BUILDROOT/elfutils/libelf/gelf_getdyn.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_dyn.o $
+  $BUILDROOT/elfutils/libelf/gelf_getmove.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_move.o $
+  $BUILDROOT/elfutils/libelf/gelf_getsyminfo.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_syminfo.o $
+  $BUILDROOT/elfutils/libelf/gelf_getauxv.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_auxv.o $
+  $BUILDROOT/elfutils/libelf/gelf_getnote.o $
+  $BUILDROOT/elfutils/libelf/gelf_xlatetof.o $
+  $BUILDROOT/elfutils/libelf/gelf_xlatetom.o $
+  $BUILDROOT/elfutils/libelf/nlist.o $
+  $BUILDROOT/elfutils/libelf/gelf_getsymshndx.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_symshndx.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_versym.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_verneed.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_vernaux.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_verdef.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_verdaux.o $
+  $BUILDROOT/elfutils/libelf/elf_getphdrnum.o $
+  $BUILDROOT/elfutils/libelf/elf_getshdrnum.o $
+  $BUILDROOT/elfutils/libelf/elf_getshdrstrndx.o $
+  $BUILDROOT/elfutils/libelf/gelf_checksum.o $
+  $BUILDROOT/elfutils/libelf/elf32_checksum.o $
+  $BUILDROOT/elfutils/libelf/elf64_checksum.o $
+  $BUILDROOT/elfutils/libelf/libelf_crc32.o $
+  $BUILDROOT/elfutils/libelf/libelf_next_prime.o $
+  $BUILDROOT/elfutils/libelf/elf_clone.o $
+  $BUILDROOT/elfutils/libelf/gelf_getlib.o $
+  $BUILDROOT/elfutils/libelf/gelf_update_lib.o $
+  $BUILDROOT/elfutils/libelf/elf32_offscn.o $
+  $BUILDROOT/elfutils/libelf/elf64_offscn.o $
+  $BUILDROOT/elfutils/libelf/gelf_offscn.o $
+  $BUILDROOT/elfutils/libelf/elf_getaroff.o $
+  $BUILDROOT/elfutils/libelf/elf_gnu_hash.o $
+  $BUILDROOT/elfutils/libelf/elf_scnshndx.o $
+  $BUILDROOT/elfutils/libelf/elf32_getchdr.o $
+  $BUILDROOT/elfutils/libelf/elf64_getchdr.o $
+  $BUILDROOT/elfutils/libelf/gelf_getchdr.o $
+  $BUILDROOT/elfutils/libelf/elf_compress.o $
+  $BUILDROOT/elfutils/libelf/elf_compress_gnu.o $
+
+build $BUILDROOT/elfutils/libdw/dwarf_begin.o: cc external/elfutils/libdw/dwarf_begin.c
+build $BUILDROOT/elfutils/libdw/dwarf_begin_elf.o: cc external/elfutils/libdw/dwarf_begin_elf.c
+build $BUILDROOT/elfutils/libdw/dwarf_end.o: cc external/elfutils/libdw/dwarf_end.c
+build $BUILDROOT/elfutils/libdw/dwarf_getelf.o: cc external/elfutils/libdw/dwarf_getelf.c
+build $BUILDROOT/elfutils/libdw/dwarf_getpubnames.o: cc external/elfutils/libdw/dwarf_getpubnames.c
+build $BUILDROOT/elfutils/libdw/dwarf_getabbrev.o: cc external/elfutils/libdw/dwarf_getabbrev.c
+build $BUILDROOT/elfutils/libdw/dwarf_tag.o: cc external/elfutils/libdw/dwarf_tag.c
+build $BUILDROOT/elfutils/libdw/dwarf_error.o: cc external/elfutils/libdw/dwarf_error.c
+build $BUILDROOT/elfutils/libdw/dwarf_nextcu.o: cc external/elfutils/libdw/dwarf_nextcu.c
+build $BUILDROOT/elfutils/libdw/dwarf_diename.o: cc external/elfutils/libdw/dwarf_diename.c
+build $BUILDROOT/elfutils/libdw/dwarf_offdie.o: cc external/elfutils/libdw/dwarf_offdie.c
+build $BUILDROOT/elfutils/libdw/dwarf_attr.o: cc external/elfutils/libdw/dwarf_attr.c
+build $BUILDROOT/elfutils/libdw/dwarf_formstring.o: cc external/elfutils/libdw/dwarf_formstring.c
+build $BUILDROOT/elfutils/libdw/dwarf_abbrev_hash.o: cc external/elfutils/libdw/dwarf_abbrev_hash.c
+build $BUILDROOT/elfutils/libdw/dwarf_sig8_hash.o: cc external/elfutils/libdw/dwarf_sig8_hash.c
+build $BUILDROOT/elfutils/libdw/dwarf_attr_integrate.o: cc external/elfutils/libdw/dwarf_attr_integrate.c
+build $BUILDROOT/elfutils/libdw/dwarf_hasattr_integrate.o: cc external/elfutils/libdw/dwarf_hasattr_integrate.c
+build $BUILDROOT/elfutils/libdw/dwarf_child.o: cc external/elfutils/libdw/dwarf_child.c
+build $BUILDROOT/elfutils/libdw/dwarf_haschildren.o: cc external/elfutils/libdw/dwarf_haschildren.c
+build $BUILDROOT/elfutils/libdw/dwarf_formaddr.o: cc external/elfutils/libdw/dwarf_formaddr.c
+build $BUILDROOT/elfutils/libdw/dwarf_formudata.o: cc external/elfutils/libdw/dwarf_formudata.c
+build $BUILDROOT/elfutils/libdw/dwarf_formsdata.o: cc external/elfutils/libdw/dwarf_formsdata.c
+build $BUILDROOT/elfutils/libdw/dwarf_lowpc.o: cc external/elfutils/libdw/dwarf_lowpc.c
+build $BUILDROOT/elfutils/libdw/dwarf_entrypc.o: cc external/elfutils/libdw/dwarf_entrypc.c
+build $BUILDROOT/elfutils/libdw/dwarf_haspc.o: cc external/elfutils/libdw/dwarf_haspc.c
+build $BUILDROOT/elfutils/libdw/dwarf_highpc.o: cc external/elfutils/libdw/dwarf_highpc.c
+build $BUILDROOT/elfutils/libdw/dwarf_ranges.o: cc external/elfutils/libdw/dwarf_ranges.c
+build $BUILDROOT/elfutils/libdw/dwarf_formref.o: cc external/elfutils/libdw/dwarf_formref.c
+build $BUILDROOT/elfutils/libdw/dwarf_formref_die.o: cc external/elfutils/libdw/dwarf_formref_die.c
+build $BUILDROOT/elfutils/libdw/dwarf_siblingof.o: cc external/elfutils/libdw/dwarf_siblingof.c
+build $BUILDROOT/elfutils/libdw/dwarf_dieoffset.o: cc external/elfutils/libdw/dwarf_dieoffset.c
+build $BUILDROOT/elfutils/libdw/dwarf_cuoffset.o: cc external/elfutils/libdw/dwarf_cuoffset.c
+build $BUILDROOT/elfutils/libdw/dwarf_diecu.o: cc external/elfutils/libdw/dwarf_diecu.c
+build $BUILDROOT/elfutils/libdw/dwarf_hasattr.o: cc external/elfutils/libdw/dwarf_hasattr.c
+build $BUILDROOT/elfutils/libdw/dwarf_hasform.o: cc external/elfutils/libdw/dwarf_hasform.c
+build $BUILDROOT/elfutils/libdw/dwarf_whatform.o: cc external/elfutils/libdw/dwarf_whatform.c
+build $BUILDROOT/elfutils/libdw/dwarf_whatattr.o: cc external/elfutils/libdw/dwarf_whatattr.c
+build $BUILDROOT/elfutils/libdw/dwarf_bytesize.o: cc external/elfutils/libdw/dwarf_bytesize.c
+build $BUILDROOT/elfutils/libdw/dwarf_arrayorder.o: cc external/elfutils/libdw/dwarf_arrayorder.c
+build $BUILDROOT/elfutils/libdw/dwarf_bitsize.o: cc external/elfutils/libdw/dwarf_bitsize.c
+build $BUILDROOT/elfutils/libdw/dwarf_bitoffset.o: cc external/elfutils/libdw/dwarf_bitoffset.c
+build $BUILDROOT/elfutils/libdw/dwarf_srclang.o: cc external/elfutils/libdw/dwarf_srclang.c
+build $BUILDROOT/elfutils/libdw/dwarf_getabbrevtag.o: cc external/elfutils/libdw/dwarf_getabbrevtag.c
+build $BUILDROOT/elfutils/libdw/dwarf_getabbrevcode.o: cc external/elfutils/libdw/dwarf_getabbrevcode.c
+build $BUILDROOT/elfutils/libdw/dwarf_abbrevhaschildren.o: cc external/elfutils/libdw/dwarf_abbrevhaschildren.c
+build $BUILDROOT/elfutils/libdw/dwarf_getattrcnt.o: cc external/elfutils/libdw/dwarf_getattrcnt.c
+build $BUILDROOT/elfutils/libdw/dwarf_getabbrevattr.o: cc external/elfutils/libdw/dwarf_getabbrevattr.c
+build $BUILDROOT/elfutils/libdw/dwarf_getsrclines.o: cc external/elfutils/libdw/dwarf_getsrclines.c
+build $BUILDROOT/elfutils/libdw/dwarf_getsrc_die.o: cc external/elfutils/libdw/dwarf_getsrc_die.c
+build $BUILDROOT/elfutils/libdw/dwarf_getscopes.o: cc external/elfutils/libdw/dwarf_getscopes.c
+build $BUILDROOT/elfutils/libdw/dwarf_getscopes_die.o: cc external/elfutils/libdw/dwarf_getscopes_die.c
+build $BUILDROOT/elfutils/libdw/dwarf_getscopevar.o: cc external/elfutils/libdw/dwarf_getscopevar.c
+build $BUILDROOT/elfutils/libdw/dwarf_linesrc.o: cc external/elfutils/libdw/dwarf_linesrc.c
+build $BUILDROOT/elfutils/libdw/dwarf_lineno.o: cc external/elfutils/libdw/dwarf_lineno.c
+build $BUILDROOT/elfutils/libdw/dwarf_lineaddr.o: cc external/elfutils/libdw/dwarf_lineaddr.c
+build $BUILDROOT/elfutils/libdw/dwarf_linecol.o: cc external/elfutils/libdw/dwarf_linecol.c
+build $BUILDROOT/elfutils/libdw/dwarf_linebeginstatement.o: cc external/elfutils/libdw/dwarf_linebeginstatement.c
+build $BUILDROOT/elfutils/libdw/dwarf_lineendsequence.o: cc external/elfutils/libdw/dwarf_lineendsequence.c
+build $BUILDROOT/elfutils/libdw/dwarf_lineblock.o: cc external/elfutils/libdw/dwarf_lineblock.c
+build $BUILDROOT/elfutils/libdw/dwarf_linecontext.o: cc external/elfutils/libdw/dwarf_linecontext.c
+build $BUILDROOT/elfutils/libdw/dwarf_linefunctionname.o: cc external/elfutils/libdw/dwarf_linefunctionname.c
+build $BUILDROOT/elfutils/libdw/dwarf_lineprologueend.o: cc external/elfutils/libdw/dwarf_lineprologueend.c
+build $BUILDROOT/elfutils/libdw/dwarf_lineepiloguebegin.o: cc external/elfutils/libdw/dwarf_lineepiloguebegin.c
+build $BUILDROOT/elfutils/libdw/dwarf_lineisa.o: cc external/elfutils/libdw/dwarf_lineisa.c
+build $BUILDROOT/elfutils/libdw/dwarf_linediscriminator.o: cc external/elfutils/libdw/dwarf_linediscriminator.c
+build $BUILDROOT/elfutils/libdw/dwarf_lineop_index.o: cc external/elfutils/libdw/dwarf_lineop_index.c
+build $BUILDROOT/elfutils/libdw/dwarf_line_file.o: cc external/elfutils/libdw/dwarf_line_file.c
+build $BUILDROOT/elfutils/libdw/dwarf_onesrcline.o: cc external/elfutils/libdw/dwarf_onesrcline.c
+build $BUILDROOT/elfutils/libdw/dwarf_formblock.o: cc external/elfutils/libdw/dwarf_formblock.c
+build $BUILDROOT/elfutils/libdw/dwarf_getsrcfiles.o: cc external/elfutils/libdw/dwarf_getsrcfiles.c
+build $BUILDROOT/elfutils/libdw/dwarf_filesrc.o: cc external/elfutils/libdw/dwarf_filesrc.c
+build $BUILDROOT/elfutils/libdw/dwarf_getsrcdirs.o: cc external/elfutils/libdw/dwarf_getsrcdirs.c
+build $BUILDROOT/elfutils/libdw/dwarf_getlocation.o: cc external/elfutils/libdw/dwarf_getlocation.c
+build $BUILDROOT/elfutils/libdw/dwarf_getstring.o: cc external/elfutils/libdw/dwarf_getstring.c
+build $BUILDROOT/elfutils/libdw/dwarf_offabbrev.o: cc external/elfutils/libdw/dwarf_offabbrev.c
+build $BUILDROOT/elfutils/libdw/dwarf_getaranges.o: cc external/elfutils/libdw/dwarf_getaranges.c
+build $BUILDROOT/elfutils/libdw/dwarf_onearange.o: cc external/elfutils/libdw/dwarf_onearange.c
+build $BUILDROOT/elfutils/libdw/dwarf_getarangeinfo.o: cc external/elfutils/libdw/dwarf_getarangeinfo.c
+build $BUILDROOT/elfutils/libdw/dwarf_getarange_addr.o: cc external/elfutils/libdw/dwarf_getarange_addr.c
+build $BUILDROOT/elfutils/libdw/dwarf_getattrs.o: cc external/elfutils/libdw/dwarf_getattrs.c
+build $BUILDROOT/elfutils/libdw/dwarf_formflag.o: cc external/elfutils/libdw/dwarf_formflag.c
+build $BUILDROOT/elfutils/libdw/dwarf_getmacros.o: cc external/elfutils/libdw/dwarf_getmacros.c
+build $BUILDROOT/elfutils/libdw/dwarf_macro_getparamcnt.o: cc external/elfutils/libdw/dwarf_macro_getparamcnt.c
+build $BUILDROOT/elfutils/libdw/dwarf_macro_opcode.o: cc external/elfutils/libdw/dwarf_macro_opcode.c
+build $BUILDROOT/elfutils/libdw/dwarf_macro_param.o: cc external/elfutils/libdw/dwarf_macro_param.c
+build $BUILDROOT/elfutils/libdw/dwarf_macro_param1.o: cc external/elfutils/libdw/dwarf_macro_param1.c
+build $BUILDROOT/elfutils/libdw/dwarf_macro_param2.o: cc external/elfutils/libdw/dwarf_macro_param2.c
+build $BUILDROOT/elfutils/libdw/dwarf_macro_getsrcfiles.o: cc external/elfutils/libdw/dwarf_macro_getsrcfiles.c
+build $BUILDROOT/elfutils/libdw/dwarf_addrdie.o: cc external/elfutils/libdw/dwarf_addrdie.c
+build $BUILDROOT/elfutils/libdw/dwarf_getfuncs.o: cc external/elfutils/libdw/dwarf_getfuncs.c
+build $BUILDROOT/elfutils/libdw/dwarf_decl_file.o: cc external/elfutils/libdw/dwarf_decl_file.c
+build $BUILDROOT/elfutils/libdw/dwarf_decl_line.o: cc external/elfutils/libdw/dwarf_decl_line.c
+build $BUILDROOT/elfutils/libdw/dwarf_decl_column.o: cc external/elfutils/libdw/dwarf_decl_column.c
+build $BUILDROOT/elfutils/libdw/dwarf_func_inline.o: cc external/elfutils/libdw/dwarf_func_inline.c
+build $BUILDROOT/elfutils/libdw/dwarf_getsrc_file.o: cc external/elfutils/libdw/dwarf_getsrc_file.c
+build $BUILDROOT/elfutils/libdw/libdw_findcu.o: cc external/elfutils/libdw/libdw_findcu.c
+build $BUILDROOT/elfutils/libdw/libdw_form.o: cc external/elfutils/libdw/libdw_form.c
+build $BUILDROOT/elfutils/libdw/libdw_alloc.o: cc external/elfutils/libdw/libdw_alloc.c
+build $BUILDROOT/elfutils/libdw/libdw_visit_scopes.o: cc external/elfutils/libdw/libdw_visit_scopes.c
+build $BUILDROOT/elfutils/libdw/dwarf_entry_breakpoints.o: cc external/elfutils/libdw/dwarf_entry_breakpoints.c
+build $BUILDROOT/elfutils/libdw/dwarf_next_cfi.o: cc external/elfutils/libdw/dwarf_next_cfi.c
+build $BUILDROOT/elfutils/libdw/cie.o: cc external/elfutils/libdw/cie.c
+build $BUILDROOT/elfutils/libdw/fde.o: cc external/elfutils/libdw/fde.c
+build $BUILDROOT/elfutils/libdw/cfi.o: cc external/elfutils/libdw/cfi.c
+build $BUILDROOT/elfutils/libdw/frame-cache.o: cc external/elfutils/libdw/frame-cache.c
+build $BUILDROOT/elfutils/libdw/dwarf_frame_info.o: cc external/elfutils/libdw/dwarf_frame_info.c
+build $BUILDROOT/elfutils/libdw/dwarf_frame_cfa.o: cc external/elfutils/libdw/dwarf_frame_cfa.c
+build $BUILDROOT/elfutils/libdw/dwarf_frame_register.o: cc external/elfutils/libdw/dwarf_frame_register.c
+build $BUILDROOT/elfutils/libdw/dwarf_cfi_addrframe.o: cc external/elfutils/libdw/dwarf_cfi_addrframe.c
+build $BUILDROOT/elfutils/libdw/dwarf_getcfi.o: cc external/elfutils/libdw/dwarf_getcfi.c
+build $BUILDROOT/elfutils/libdw/dwarf_getcfi_elf.o: cc external/elfutils/libdw/dwarf_getcfi_elf.c
+build $BUILDROOT/elfutils/libdw/dwarf_cfi_end.o: cc external/elfutils/libdw/dwarf_cfi_end.c
+build $BUILDROOT/elfutils/libdw/dwarf_aggregate_size.o: cc external/elfutils/libdw/dwarf_aggregate_size.c
+build $BUILDROOT/elfutils/libdw/dwarf_getlocation_implicit_pointer.o: cc external/elfutils/libdw/dwarf_getlocation_implicit_pointer.c
+build $BUILDROOT/elfutils/libdw/dwarf_getlocation_die.o: cc external/elfutils/libdw/dwarf_getlocation_die.c
+build $BUILDROOT/elfutils/libdw/dwarf_getlocation_attr.o: cc external/elfutils/libdw/dwarf_getlocation_attr.c
+build $BUILDROOT/elfutils/libdw/dwarf_getalt.o: cc external/elfutils/libdw/dwarf_getalt.c
+build $BUILDROOT/elfutils/libdw/dwarf_setalt.o: cc external/elfutils/libdw/dwarf_setalt.c
+build $BUILDROOT/elfutils/libdw/dwarf_cu_getdwarf.o: cc external/elfutils/libdw/dwarf_cu_getdwarf.c
+build $BUILDROOT/elfutils/libdw/dwarf_cu_die.o: cc external/elfutils/libdw/dwarf_cu_die.c
+build $BUILDROOT/elfutils/libdw/dwarf_peel_type.o: cc external/elfutils/libdw/dwarf_peel_type.c
+build $BUILDROOT/elfutils/libdw/dwarf_default_lower_bound.o: cc external/elfutils/libdw/dwarf_default_lower_bound.c
+build $BUILDROOT/elfutils/libdw/dwarf_die_addr_die.o: cc external/elfutils/libdw/dwarf_die_addr_die.c
+build $BUILDROOT/elfutils/libdw/dwarf_get_units.o: cc external/elfutils/libdw/dwarf_get_units.c
+build $BUILDROOT/elfutils/libdw/libdw_find_split_unit.o: cc external/elfutils/libdw/libdw_find_split_unit.c
+build $BUILDROOT/elfutils/libdw/dwarf_cu_info.o: cc external/elfutils/libdw/dwarf_cu_info.c
+build $BUILDROOT/elfutils/libdw/dwarf_next_lines.o: cc external/elfutils/libdw/dwarf_next_lines.c
+
+build $BUILDROOT/elfutils/libdw.a: ar $
+  $BUILDROOT/elfutils/libdw/dwarf_begin.o $
+  $BUILDROOT/elfutils/libdw/dwarf_begin_elf.o $
+  $BUILDROOT/elfutils/libdw/dwarf_end.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getelf.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getpubnames.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getabbrev.o $
+  $BUILDROOT/elfutils/libdw/dwarf_tag.o $
+  $BUILDROOT/elfutils/libdw/dwarf_error.o $
+  $BUILDROOT/elfutils/libdw/dwarf_nextcu.o $
+  $BUILDROOT/elfutils/libdw/dwarf_diename.o $
+  $BUILDROOT/elfutils/libdw/dwarf_offdie.o $
+  $BUILDROOT/elfutils/libdw/dwarf_attr.o $
+  $BUILDROOT/elfutils/libdw/dwarf_formstring.o $
+  $BUILDROOT/elfutils/libdw/dwarf_abbrev_hash.o $
+  $BUILDROOT/elfutils/libdw/dwarf_sig8_hash.o $
+  $BUILDROOT/elfutils/libdw/dwarf_attr_integrate.o $
+  $BUILDROOT/elfutils/libdw/dwarf_hasattr_integrate.o $
+  $BUILDROOT/elfutils/libdw/dwarf_child.o $
+  $BUILDROOT/elfutils/libdw/dwarf_haschildren.o $
+  $BUILDROOT/elfutils/libdw/dwarf_formaddr.o $
+  $BUILDROOT/elfutils/libdw/dwarf_formudata.o $
+  $BUILDROOT/elfutils/libdw/dwarf_formsdata.o $
+  $BUILDROOT/elfutils/libdw/dwarf_lowpc.o $
+  $BUILDROOT/elfutils/libdw/dwarf_entrypc.o $
+  $BUILDROOT/elfutils/libdw/dwarf_haspc.o $
+  $BUILDROOT/elfutils/libdw/dwarf_highpc.o $
+  $BUILDROOT/elfutils/libdw/dwarf_ranges.o $
+  $BUILDROOT/elfutils/libdw/dwarf_formref.o $
+  $BUILDROOT/elfutils/libdw/dwarf_formref_die.o $
+  $BUILDROOT/elfutils/libdw/dwarf_siblingof.o $
+  $BUILDROOT/elfutils/libdw/dwarf_dieoffset.o $
+  $BUILDROOT/elfutils/libdw/dwarf_cuoffset.o $
+  $BUILDROOT/elfutils/libdw/dwarf_diecu.o $
+  $BUILDROOT/elfutils/libdw/dwarf_hasattr.o $
+  $BUILDROOT/elfutils/libdw/dwarf_hasform.o $
+  $BUILDROOT/elfutils/libdw/dwarf_whatform.o $
+  $BUILDROOT/elfutils/libdw/dwarf_whatattr.o $
+  $BUILDROOT/elfutils/libdw/dwarf_bytesize.o $
+  $BUILDROOT/elfutils/libdw/dwarf_arrayorder.o $
+  $BUILDROOT/elfutils/libdw/dwarf_bitsize.o $
+  $BUILDROOT/elfutils/libdw/dwarf_bitoffset.o $
+  $BUILDROOT/elfutils/libdw/dwarf_srclang.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getabbrevtag.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getabbrevcode.o $
+  $BUILDROOT/elfutils/libdw/dwarf_abbrevhaschildren.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getattrcnt.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getabbrevattr.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getsrclines.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getsrc_die.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getscopes.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getscopes_die.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getscopevar.o $
+  $BUILDROOT/elfutils/libdw/dwarf_linesrc.o $
+  $BUILDROOT/elfutils/libdw/dwarf_lineno.o $
+  $BUILDROOT/elfutils/libdw/dwarf_lineaddr.o $
+  $BUILDROOT/elfutils/libdw/dwarf_linecol.o $
+  $BUILDROOT/elfutils/libdw/dwarf_linebeginstatement.o $
+  $BUILDROOT/elfutils/libdw/dwarf_lineendsequence.o $
+  $BUILDROOT/elfutils/libdw/dwarf_lineblock.o $
+  $BUILDROOT/elfutils/libdw/dwarf_linecontext.o $
+  $BUILDROOT/elfutils/libdw/dwarf_linefunctionname.o $
+  $BUILDROOT/elfutils/libdw/dwarf_lineprologueend.o $
+  $BUILDROOT/elfutils/libdw/dwarf_lineepiloguebegin.o $
+  $BUILDROOT/elfutils/libdw/dwarf_lineisa.o $
+  $BUILDROOT/elfutils/libdw/dwarf_linediscriminator.o $
+  $BUILDROOT/elfutils/libdw/dwarf_lineop_index.o $
+  $BUILDROOT/elfutils/libdw/dwarf_line_file.o $
+  $BUILDROOT/elfutils/libdw/dwarf_onesrcline.o $
+  $BUILDROOT/elfutils/libdw/dwarf_formblock.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getsrcfiles.o $
+  $BUILDROOT/elfutils/libdw/dwarf_filesrc.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getsrcdirs.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getlocation.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getstring.o $
+  $BUILDROOT/elfutils/libdw/dwarf_offabbrev.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getaranges.o $
+  $BUILDROOT/elfutils/libdw/dwarf_onearange.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getarangeinfo.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getarange_addr.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getattrs.o $
+  $BUILDROOT/elfutils/libdw/dwarf_formflag.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getmacros.o $
+  $BUILDROOT/elfutils/libdw/dwarf_macro_getparamcnt.o $
+  $BUILDROOT/elfutils/libdw/dwarf_macro_opcode.o $
+  $BUILDROOT/elfutils/libdw/dwarf_macro_param.o $
+  $BUILDROOT/elfutils/libdw/dwarf_macro_param1.o $
+  $BUILDROOT/elfutils/libdw/dwarf_macro_param2.o $
+  $BUILDROOT/elfutils/libdw/dwarf_macro_getsrcfiles.o $
+  $BUILDROOT/elfutils/libdw/dwarf_addrdie.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getfuncs.o $
+  $BUILDROOT/elfutils/libdw/dwarf_decl_file.o $
+  $BUILDROOT/elfutils/libdw/dwarf_decl_line.o $
+  $BUILDROOT/elfutils/libdw/dwarf_decl_column.o $
+  $BUILDROOT/elfutils/libdw/dwarf_func_inline.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getsrc_file.o $
+  $BUILDROOT/elfutils/libdw/libdw_findcu.o $
+  $BUILDROOT/elfutils/libdw/libdw_form.o $
+  $BUILDROOT/elfutils/libdw/libdw_alloc.o $
+  $BUILDROOT/elfutils/libdw/libdw_visit_scopes.o $
+  $BUILDROOT/elfutils/libdw/dwarf_entry_breakpoints.o $
+  $BUILDROOT/elfutils/libdw/dwarf_next_cfi.o $
+  $BUILDROOT/elfutils/libdw/cie.o $
+  $BUILDROOT/elfutils/libdw/fde.o $
+  $BUILDROOT/elfutils/libdw/cfi.o $
+  $BUILDROOT/elfutils/libdw/frame-cache.o $
+  $BUILDROOT/elfutils/libdw/dwarf_frame_info.o $
+  $BUILDROOT/elfutils/libdw/dwarf_frame_cfa.o $
+  $BUILDROOT/elfutils/libdw/dwarf_frame_register.o $
+  $BUILDROOT/elfutils/libdw/dwarf_cfi_addrframe.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getcfi.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getcfi_elf.o $
+  $BUILDROOT/elfutils/libdw/dwarf_cfi_end.o $
+  $BUILDROOT/elfutils/libdw/dwarf_aggregate_size.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getlocation_implicit_pointer.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getlocation_die.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getlocation_attr.o $
+  $BUILDROOT/elfutils/libdw/dwarf_getalt.o $
+  $BUILDROOT/elfutils/libdw/dwarf_setalt.o $
+  $BUILDROOT/elfutils/libdw/dwarf_cu_getdwarf.o $
+  $BUILDROOT/elfutils/libdw/dwarf_cu_die.o $
+  $BUILDROOT/elfutils/libdw/dwarf_peel_type.o $
+  $BUILDROOT/elfutils/libdw/dwarf_default_lower_bound.o $
+  $BUILDROOT/elfutils/libdw/dwarf_die_addr_die.o $
+  $BUILDROOT/elfutils/libdw/dwarf_get_units.o $
+  $BUILDROOT/elfutils/libdw/libdw_find_split_unit.o $
+  $BUILDROOT/elfutils/libdw/dwarf_cu_info.o $
+  $BUILDROOT/elfutils/libdw/dwarf_next_lines.o $
+
+build $BUILDROOT/elfutils/include/elfutils/libdw.h: copy $
+  external/elfutils/libdw/libdw.h $
+
+build $BUILDROOT/elfutils/libdwfl/dwfl_begin.o: cc external/elfutils/libdwfl/dwfl_begin.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_end.o: cc external/elfutils/libdwfl/dwfl_end.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_error.o: cc external/elfutils/libdwfl/dwfl_error.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_version.o: cc external/elfutils/libdwfl/dwfl_version.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module.o: cc external/elfutils/libdwfl/dwfl_module.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_report_elf.o: cc external/elfutils/libdwfl/dwfl_report_elf.c
+build $BUILDROOT/elfutils/libdwfl/relocate.o: cc external/elfutils/libdwfl/relocate.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_build_id.o: cc external/elfutils/libdwfl/dwfl_module_build_id.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_report_build_id.o: cc external/elfutils/libdwfl/dwfl_module_report_build_id.c
+build $BUILDROOT/elfutils/libdwfl/derelocate.o: cc external/elfutils/libdwfl/derelocate.c
+build $BUILDROOT/elfutils/libdwfl/offline.o: cc external/elfutils/libdwfl/offline.c
+build $BUILDROOT/elfutils/libdwfl/segment.o: cc external/elfutils/libdwfl/segment.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_info.o: cc external/elfutils/libdwfl/dwfl_module_info.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_getmodules.o: cc external/elfutils/libdwfl/dwfl_getmodules.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_getdwarf.o: cc external/elfutils/libdwfl/dwfl_getdwarf.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_getdwarf.o: cc external/elfutils/libdwfl/dwfl_module_getdwarf.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_getelf.o: cc external/elfutils/libdwfl/dwfl_module_getelf.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_validate_address.o: cc external/elfutils/libdwfl/dwfl_validate_address.c
+build $BUILDROOT/elfutils/libdwfl/argp-std.o: cc external/elfutils/libdwfl/argp-std.c
+build $BUILDROOT/elfutils/libdwfl/find-debuginfo.o: cc external/elfutils/libdwfl/find-debuginfo.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_build_id_find_elf.o: cc external/elfutils/libdwfl/dwfl_build_id_find_elf.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_build_id_find_debuginfo.o: cc external/elfutils/libdwfl/dwfl_build_id_find_debuginfo.c
+build $BUILDROOT/elfutils/libdwfl/linux-kernel-modules.o: cc external/elfutils/libdwfl/linux-kernel-modules.c
+build $BUILDROOT/elfutils/libdwfl/linux-proc-maps.o: cc external/elfutils/libdwfl/linux-proc-maps.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_addrmodule.o: cc external/elfutils/libdwfl/dwfl_addrmodule.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_addrdwarf.o: cc external/elfutils/libdwfl/dwfl_addrdwarf.c
+build $BUILDROOT/elfutils/libdwfl/cu.o: cc external/elfutils/libdwfl/cu.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_nextcu.o: cc external/elfutils/libdwfl/dwfl_module_nextcu.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_nextcu.o: cc external/elfutils/libdwfl/dwfl_nextcu.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_cumodule.o: cc external/elfutils/libdwfl/dwfl_cumodule.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_addrdie.o: cc external/elfutils/libdwfl/dwfl_module_addrdie.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_addrdie.o: cc external/elfutils/libdwfl/dwfl_addrdie.c
+build $BUILDROOT/elfutils/libdwfl/lines.o: cc external/elfutils/libdwfl/lines.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_lineinfo.o: cc external/elfutils/libdwfl/dwfl_lineinfo.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_line_comp_dir.o: cc external/elfutils/libdwfl/dwfl_line_comp_dir.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_linemodule.o: cc external/elfutils/libdwfl/dwfl_linemodule.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_linecu.o: cc external/elfutils/libdwfl/dwfl_linecu.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_dwarf_line.o: cc external/elfutils/libdwfl/dwfl_dwarf_line.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_getsrclines.o: cc external/elfutils/libdwfl/dwfl_getsrclines.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_onesrcline.o: cc external/elfutils/libdwfl/dwfl_onesrcline.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_getsrc.o: cc external/elfutils/libdwfl/dwfl_module_getsrc.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_getsrc.o: cc external/elfutils/libdwfl/dwfl_getsrc.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_getsrc_file.o: cc external/elfutils/libdwfl/dwfl_module_getsrc_file.c
+build $BUILDROOT/elfutils/libdwfl/libdwfl_crc32.o: cc external/elfutils/libdwfl/libdwfl_crc32.c
+build $BUILDROOT/elfutils/libdwfl/libdwfl_crc32_file.o: cc external/elfutils/libdwfl/libdwfl_crc32_file.c
+build $BUILDROOT/elfutils/libdwfl/elf-from-memory.o: cc external/elfutils/libdwfl/elf-from-memory.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_dwarf_cfi.o: cc external/elfutils/libdwfl/dwfl_module_dwarf_cfi.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_eh_cfi.o: cc external/elfutils/libdwfl/dwfl_module_eh_cfi.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_getsym.o: cc external/elfutils/libdwfl/dwfl_module_getsym.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_addrname.o: cc external/elfutils/libdwfl/dwfl_module_addrname.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_addrsym.o: cc external/elfutils/libdwfl/dwfl_module_addrsym.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_return_value_location.o: cc external/elfutils/libdwfl/dwfl_module_return_value_location.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_module_register_names.o: cc external/elfutils/libdwfl/dwfl_module_register_names.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_segment_report_module.o: cc external/elfutils/libdwfl/dwfl_segment_report_module.c
+build $BUILDROOT/elfutils/libdwfl/link_map.o: cc external/elfutils/libdwfl/link_map.c
+build $BUILDROOT/elfutils/libdwfl/core-file.o: cc external/elfutils/libdwfl/core-file.c
+build $BUILDROOT/elfutils/libdwfl/open.o: cc external/elfutils/libdwfl/open.c
+build $BUILDROOT/elfutils/libdwfl/image-header.o: cc external/elfutils/libdwfl/image-header.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_frame.o: cc external/elfutils/libdwfl/dwfl_frame.c
+build $BUILDROOT/elfutils/libdwfl/frame_unwind.o: cc external/elfutils/libdwfl/frame_unwind.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_frame_pc.o: cc external/elfutils/libdwfl/dwfl_frame_pc.c
+build $BUILDROOT/elfutils/libdwfl/linux-pid-attach.o: cc external/elfutils/libdwfl/linux-pid-attach.c
+build $BUILDROOT/elfutils/libdwfl/linux-core-attach.o: cc external/elfutils/libdwfl/linux-core-attach.c
+build $BUILDROOT/elfutils/libdwfl/dwfl_frame_regs.o: cc external/elfutils/libdwfl/dwfl_frame_regs.c
+build $BUILDROOT/elfutils/libdwfl/gzip.o: cc external/elfutils/libdwfl/gzip.c
+build $BUILDROOT/elfutils/libdwfl/debuginfod-client.o: cc external/elfutils/libdwfl/debuginfod-client.c
+build $BUILDROOT/elfutils/libdwfl/zstd.o: cc external/elfutils/libdwfl/zstd.c
+
+build $BUILDROOT/elfutils/libdwfl.a: ar $
+  $BUILDROOT/elfutils/libdwfl/dwfl_begin.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_end.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_error.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_report_elf.o $
+  $BUILDROOT/elfutils/libdwfl/relocate.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_build_id.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_report_build_id.o $
+  $BUILDROOT/elfutils/libdwfl/derelocate.o $
+  $BUILDROOT/elfutils/libdwfl/offline.o $
+  $BUILDROOT/elfutils/libdwfl/segment.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_info.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_getmodules.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_getdwarf.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_getdwarf.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_getelf.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_validate_address.o $
+  $BUILDROOT/elfutils/libdwfl/find-debuginfo.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_build_id_find_elf.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_build_id_find_debuginfo.o $
+  $BUILDROOT/elfutils/libdwfl/linux-proc-maps.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_addrmodule.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_addrdwarf.o $
+  $BUILDROOT/elfutils/libdwfl/cu.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_nextcu.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_nextcu.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_cumodule.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_addrdie.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_addrdie.o $
+  $BUILDROOT/elfutils/libdwfl/lines.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_lineinfo.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_line_comp_dir.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_linemodule.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_linecu.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_dwarf_line.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_getsrclines.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_onesrcline.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_getsrc.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_getsrc.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_getsrc_file.o $
+  $BUILDROOT/elfutils/libdwfl/libdwfl_crc32.o $
+  $BUILDROOT/elfutils/libdwfl/libdwfl_crc32_file.o $
+  $BUILDROOT/elfutils/libdwfl/elf-from-memory.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_dwarf_cfi.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_eh_cfi.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_getsym.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_addrname.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_addrsym.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_return_value_location.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_module_register_names.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_segment_report_module.o $
+  $BUILDROOT/elfutils/libdwfl/link_map.o $
+  $BUILDROOT/elfutils/libdwfl/core-file.o $
+  $BUILDROOT/elfutils/libdwfl/open.o $
+  $BUILDROOT/elfutils/libdwfl/image-header.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_frame.o $
+  $BUILDROOT/elfutils/libdwfl/frame_unwind.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_frame_pc.o $
+  $BUILDROOT/elfutils/libdwfl/linux-pid-attach.o $
+  $BUILDROOT/elfutils/libdwfl/linux-core-attach.o $
+  $BUILDROOT/elfutils/libdwfl/dwfl_frame_regs.o $
+  $BUILDROOT/elfutils/libdwfl/gzip.o $
+  $BUILDROOT/elfutils/libdwfl/debuginfod-client.o $
+  $BUILDROOT/elfutils/libdwfl/zstd.o $
+
+build $BUILDROOT/elfutils/include/elfutils/libdwfl.h: copy $
+  external/elfutils/libdwfl/libdwfl.h $
+
+build $BUILDROOT/elfutils/libdwelf/dwelf_elf_gnu_debuglink.o: cc external/elfutils/libdwelf/dwelf_elf_gnu_debuglink.c
+build $BUILDROOT/elfutils/libdwelf/dwelf_dwarf_gnu_debugaltlink.o: cc external/elfutils/libdwelf/dwelf_dwarf_gnu_debugaltlink.c
+build $BUILDROOT/elfutils/libdwelf/dwelf_elf_gnu_build_id.o: cc external/elfutils/libdwelf/dwelf_elf_gnu_build_id.c
+build $BUILDROOT/elfutils/libdwelf/dwelf_scn_gnu_compressed_size.o: cc external/elfutils/libdwelf/dwelf_scn_gnu_compressed_size.c
+build $BUILDROOT/elfutils/libdwelf/dwelf_strtab.o: cc external/elfutils/libdwelf/dwelf_strtab.c
+build $BUILDROOT/elfutils/libdwelf/dwelf_elf_begin.o: cc external/elfutils/libdwelf/dwelf_elf_begin.c
+build $BUILDROOT/elfutils/libdwelf/dwelf_elf_e_machine_string.o: cc external/elfutils/libdwelf/dwelf_elf_e_machine_string.c
+
+build $BUILDROOT/elfutils/libdwelf.a: ar $
+  $BUILDROOT/elfutils/libdwelf/dwelf_elf_gnu_debuglink.o $
+  $BUILDROOT/elfutils/libdwelf/dwelf_dwarf_gnu_debugaltlink.o $
+  $BUILDROOT/elfutils/libdwelf/dwelf_elf_gnu_build_id.o $
+  $BUILDROOT/elfutils/libdwelf/dwelf_scn_gnu_compressed_size.o $
+  $BUILDROOT/elfutils/libdwelf/dwelf_strtab.o $
+  $BUILDROOT/elfutils/libdwelf/dwelf_elf_begin.o $
+  $BUILDROOT/elfutils/libdwelf/dwelf_elf_e_machine_string.o $
+
+build $BUILDROOT/elfutils/libelf.so: soa $
+  $BUILDROOT/elfutils/libelf.a $
+| external/elfutils/libelf/libelf.map $
+  $BUILDROOT/elfutils/libeu.a $
+  $SYSROOT/lib/libz.so $
+  $SYSROOT/lib/libzstd.so
+  libs = -Wl,--version-script,external/elfutils/libelf/libelf.map $
+    -lz -lzstd -pthread $
+    $BUILDROOT/elfutils/libeu.a
+
+build $BUILDROOT/elfutils/libdw.so: soa $
+  $BUILDROOT/elfutils/libebl.a $
+  $BUILDROOT/elfutils/libebl_backends.a $
+  $BUILDROOT/elfutils/libcpu.a $
+  $BUILDROOT/elfutils/libdw.a $
+  $BUILDROOT/elfutils/libdwelf.a $
+  $BUILDROOT/elfutils/libdwfl.a $
+| external/elfutils/libdw/libdw.map $
+  $BUILDROOT/elfutils/libeu.a $
+  $SYSROOT/lib/libelf.so $
+  $SYSROOT/lib/libz.so $
+  $SYSROOT/lib/libzstd.so
+  libs = -Wl,--version-script,external/elfutils/libdw/libdw.map $
+    -ldl -lelf -lz -lzstd -pthread $
+    $BUILDROOT/elfutils/libeu.a
+
+#  $BUILDROOT/elfutils/libeu.a $
+#  $BUILDROOT/elfutils/libebl.a $
+#  $BUILDROOT/elfutils/libebl_backends.a $
+#  $BUILDROOT/elfutils/libcpu.a $
+#  $BUILDROOT/elfutils/libelf.a $
+#  $BUILDROOT/elfutils/libdw.a $
+#  $BUILDROOT/elfutils/libdwfl.a $

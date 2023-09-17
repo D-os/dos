@@ -206,6 +206,10 @@ build $SYSROOT/lib/libcrypto.so: copy $BUILDROOT/boringssl/libcrypto.so
 subninja build/cairo.ninja
 build $SYSROOT/lib/libcairo.so: copy $BUILDROOT/cairo/libcairo.so
 
+subninja build/elfutils.ninja
+build $SYSROOT/lib/libelf.so: copy $BUILDROOT/elfutils/libelf.so
+build $SYSROOT/lib/libdw.so: copy $BUILDROOT/elfutils/libdw.so
+
 subninja build/expat.ninja
 build $SYSROOT/lib/libexpat.so: copy $BUILDROOT/expat/libexpat.so
 
