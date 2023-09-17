@@ -26,7 +26,7 @@ using best available open source components._
 
 See `tools/tc-build/README.md` for a list of required host tools.
 
-You need to be running Linux kernel with KVM and `binderfs` support.
+You need to be running Linux kernel with KVM support.
 
 > :warning: This repository makes heavy use of git submodules, so you need to `git clone --recursive`
 
@@ -38,6 +38,8 @@ ninja && qemu.sh
 ```
 
 ### Testing
+
+You need to be running Linux kernel with `binderfs` support.
 
 #### Unit tests
 

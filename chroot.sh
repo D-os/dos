@@ -5,7 +5,7 @@
 #
 # put the following lines in /etc/sudoers.d/
 # if you do not want to have to type the password
-#Cmnd_Alias BUILD_COMMANDS = /usr/bin/mount,/usr/bin/umount,/usr/sbin/chroot,/usr/bin/ln
+#Cmnd_Alias BUILD_COMMANDS = /usr/bin/mount,/usr/bin/umount,/usr/sbin/chroot,/usr/bin/ln,/usr/bin/mkdir
 #%users ALL = NOPASSWD: BUILD_COMMANDS
 
 DIR=$1
@@ -36,6 +36,7 @@ else
   mkdir -p $DIR/dev
   sudo mount --bind /dev $DIR/dev
   sudo mount --read-only --bind /dev/pts $DIR/dev/pts
+  sudo mkdir -p $DIR/dev/binderfs
   sudo mount -t binder binder $DIR/dev/binderfs
   sudo ln -sf binderfs/binder $DIR/dev/binder
 
