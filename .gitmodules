@@ -197,3 +197,6 @@
 [submodule "external/harfbuzz"]
 	path = external/harfbuzz
 	url = https://github.com/harfbuzz/harfbuzz.git
+[submodule "external/backward-cpp"]
+	path = external/backward-cpp
+	url = https://github.com/bombela/backward-cpp.git
