@@ -128,5 +128,5 @@ build $BUILDROOT/harfbuzz/libharfbuzz.so: so $
   $BUILDROOT/harfbuzz/hb-ucd.o $
   $BUILDROOT/harfbuzz/hb-unicode.o $
   $BUILDROOT/harfbuzz/hb-ft.o $
-  | /usr/lib64/libfreetype.so
+  | $SYSROOT/lib/libfreetype.so
   libs = -lc++ -lunwind -lfreetype
