@@ -24,9 +24,9 @@ using best available open source components._
 
 ## Build && Run
 
-See `tools/tc-build/README.md` for a list of required host tools.
-
-You need to be running Linux kernel with KVM support.
+- See `tools/tc-build/README.md` for a list of required host tools.
+- Additionally a [D language](https://dlang.org/download.html) compiler is also required on host computer.
+- You need to be running Linux kernel with KVM support.
 
 > :warning: This repository makes heavy use of git submodules, so you need to `git clone --recursive`
 

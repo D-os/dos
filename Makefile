@@ -8,9 +8,9 @@ BUILD_DIR := $(OUT_DIR)/build
 TARGET := x86_64-unknown-linux-musl
 SYSROOT_DIR := $(OUT_DIR)/target/$(TARGET)
 
-.PHONY: toolchain sysroot clean compdb toolchain-host toolchain-target mold samurai kati libc libcxx llvm kernel-headers kernel kernel_modules
+.PHONY: toolchain sysroot clean compdb toolchain-host toolchain-target ldc mold samurai kati libc libcxx llvm kernel-headers kernel kernel_modules
 
-toolchain: toolchain-host toolchain-target yasm samurai kati
+toolchain: toolchain-host toolchain-target ldc yasm samurai kati
 
 sysroot: $(SYSROOT_DIR) kernel-headers libc libcxx llvm
 
@@ -39,7 +39,7 @@ $(OUT_DIR)/target/bin: | $(OUT_DIR)/host/bin/mold $(OUT_DIR)/host/bin/ckati $(OU
 	cd $(BUILD_DIR)/_host/tc && ln -sf ../../../../tools/Makefile.litecross ./Makefile
 	cd $(BUILD_DIR)/_host/tc && PATH=$(OUT_DIR)/host/bin:${PATH} CC=clang CXX=clang++ $(MAKE) \
 		LLVM_CONFIG='-DCLANG_VENDOR=D/os -DLLVM_CCACHE_BUILD=ON' \
-		LLVM_VER='15.0.0' \
+		LLVM_VER='15.0.7' \
 		LINUX_SRCDIR=$(ROOT_DIR)/external/kernel-headers \
 		LLVM_SRCDIR=$(ROOT_DIR)/external/llvm-project \
 		MUSL_SRCDIR=$(ROOT_DIR)/external/musl \
@@ -79,6 +79,19 @@ $(OUT_DIR)/host/bin/yasm: | $(OUT_DIR)/host/bin
 		-DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(OUT_DIR)/host \
 		-DCMAKE_INSTALL_RPATH=$(OUT_DIR)/host/lib
 	cd $(BUILD_DIR)/_host/yasm && PATH=$(OUT_DIR)/host/bin:${PATH} ninja install
+
+ldc: $(OUT_DIR)/host/bin/ldc2
+
+$(OUT_DIR)/host/bin/ldc2: | $(OUT_DIR)/host/bin
+	rm -rf $(BUILD_DIR)/_host/ldc
+	PATH=$(OUT_DIR)/host/bin:${PATH} CC=clang CXX=clang++ cmake -G Ninja \
+		-S external/ldc -B $(BUILD_DIR)/_host/ldc \
+		-DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(OUT_DIR)/host \
+		-DLLVM_ROOT_DIR=$(OUT_DIR)/host \
+		-DBUILD_SHARED_LIBS=OFF \
+		-DCMAKE_C_FLAGS="-Wno-deprecated-non-prototype" \
+		-DD_COMPILER_FLAGS="-fPIC"
+	cd $(BUILD_DIR)/_host/ldc && PATH=$(OUT_DIR)/host/bin:${PATH} ninja install
 
 libc: $(SYSROOT_DIR)/lib/libc.so
 

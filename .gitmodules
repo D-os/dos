@@ -203,3 +203,6 @@
 [submodule "external/elfutils"]
 	path = external/elfutils
 	url = git://sourceware.org/git/elfutils.git
+[submodule "external/ldc"]
+	path = external/ldc
+	url = https://github.com/ldc-developers/ldc.git
