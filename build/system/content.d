@@ -262,6 +262,8 @@ out/system.content: \
   out/system/tests/interface_boxes \
   out/system/tests/interface_radios \
   out/system/tests/interface_sliders \
+  out/system/tests/interface_menu \
+  out/system/tests/interface_menu-trigger \
   out/system/tests/sampservice \
   out/system/system/bin/su \
   out/system/system/bin/servicemanager \
