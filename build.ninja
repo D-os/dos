@@ -16,7 +16,7 @@ STRIP = out/target/bin/${TARGET}-strip
 
 SYSTEMDIR = out/system
 
-KERNEL_VERSION = 5.16.11-zen-gfbc389882a61
+KERNEL_VERSION = 6.5.4-zen-g0538f11f294f
 
 HOSTCC = out/host/bin/clang
 HOSTCXX = out/host/bin/clang++ -stdlib++-isystem out/host/include/c++/v1

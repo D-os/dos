@@ -25,8 +25,11 @@ using best available open source components._
 ## Build && Run
 
 - See `tools/tc-build/README.md` for a list of required host tools.
-- Additionally a [D language](https://dlang.org/download.html) compiler is also required on host computer.
-- You need to be running Linux kernel with KVM support.
+- Additionall host tools:
+  - [D language](https://dlang.org/download.html) compiler
+  - pahole (`dnf install dwarves`)
+  - expat headers (`dnf install expat-devel`)
+- QEmu needs you to be running Linux kernel with KVM support.
 
 > :warning: This repository makes heavy use of git submodules, so you need to `git clone --recursive`
 
@@ -34,7 +37,7 @@ using best available open source components._
 
 ```sh
 make toolchain sysroot compdb kernel kernel_modules
-ninja && qemu.sh
+ninja && ./qemu.sh
 ```
 
 ### Testing
