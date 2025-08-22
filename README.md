@@ -31,9 +31,11 @@ using best available open source components._
   - expat headers (`dnf install expat-devel`)
 - QEmu needs you to be running Linux kernel with KVM support.
 
-> :warning: This repository makes heavy use of git submodules, so you need to `git clone --recursive`
+> [!WARNING]
+> This repository makes heavy use of git submodules, so you need to `git clone --recursive`
 
-> :warning: Some of submodules store copious amount of data. You are advised to clone `--depth 1`
+> [!TIP]
+> Some of submodules store copious amount of data. You are advised to clone `--depth 1`
 
 ```sh
 make toolchain sysroot compdb kernel kernel_modules
